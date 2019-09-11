@@ -1,0 +1,270 @@
+@charset "UTF-8";
+
+.header-background-cover {
+	height: 95px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.madang-section {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	font-weight: 400;
+	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+		sans-serif;
+}
+
+.madang-section div {
+	display: block;
+}
+
+.madang-section a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.madang-section table {
+	width: 100%;
+	position: relative;
+	word-wrap: break-word;
+	word-break: break-word;
+	table-layout: fixed;
+	border-collapse: collapse;
+	display: table;
+	border-spacing: 2px;
+	border-color: grey;
+}
+
+.madang-section tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+
+.madang-section th {
+	border-top-color: #333;
+	border-bottom-color: #f2f2f2;
+	color: #4e4e4e;
+	height: 40px;
+	padding: 2px;
+	border-top: 1px solid #666;
+	border-bottom: 1px solid #f2f2f2;
+	text-align: center;
+}
+
+.madang-section thead {
+	display: table-header-group;
+	vertical-align: middle;
+	border-color: inherit;
+}
+
+.madang-section span {
+	display: block;
+	padding-right: 18px;
+	text-align: center;
+}
+
+.madang-section colgroup {
+	display: table-column-group;
+}
+
+.madang-section .article-board {
+	position: relative;
+}
+
+.madang-section .article-board tbody td {
+	height: 28px;
+	padding: 4px 7px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.madang-section .article-board .td_article {
+	padding-left: 12px;
+	padding-right: 18px;
+}
+
+.madang-section .article-board tbody td {
+	border-bottom-color: #f2f2f2;
+}
+
+.madang-section .article-board .th_name {
+	padding: 0 6px;
+	text-align: left;
+}
+
+.madang-section .article-board p-nick {
+	text-align: left;
+	margin: 0;
+	padding: 0 !important;
+}
+
+.madang-section .article-board tbody td {
+	height: 28px;
+	padding: 4px 7px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.madang-section .article-board .board-tag {
+	display: table-cell;
+	width: 56px;
+	padding-right: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.madang-section .article-board .board-name .inner_name .link_name {
+	display: inline-block;
+	max-width: 100%;
+	font-size: 11px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.madang-section .article-board .board-list .inner_list {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.madang-section .article-board table {
+	width: 100%;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-word;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+.madang-section .article-board .board-list .inner_list {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.madang-section .inner {
+	line-height: 11px !important;
+    color: #333 !important;
+}
+.madang-section .article {
+	line-height: 18px;
+    color: #333 !important;
+}
+
+.madang-section .article-board tbody td {
+	border-bottom-color: #f2f2f2;
+}
+
+.madang-section .board-notice.type_main .board-tag-txt {
+	border: 1px solid #ffc6c9;
+	background-color: #ffe3e4;
+	color: #ff4e59;
+	vertical-align: middle;
+}
+
+.madang-section .article-board .board-notice .board-tag-txt {
+	display: block;
+	width: 56px;
+	height: 21px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 3px;
+	font-size: 11px;
+	font-weight: 800;
+	line-height: 19px;
+}
+
+.madang-section .mem-level {
+	display: inline;
+}
+
+.madang-section .td_view, .madang-section .td_like {
+	text-align: center;
+}
+
+.madang-section .th_like::after {
+	content: '';
+	position: absolute;
+	top: 20px;
+	right: 5px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 4px;
+	border-color: #777 transparent transparent transparent;
+}
+
+.madang-section input[type=checkbox]+label {
+	display: block;
+	margin: 0.2em;
+	cursor: pointer;
+	padding: 0.2em;;
+}
+
+.madang-section input[type=checkbox] {
+	display: none;
+	font-size: 10px;
+}
+
+.madang-section input[type=checkbox]+label:before {
+	content: "\2714";
+	border: 0.1em solid #ccc;
+	border-radius: 0.2em;
+	/* display: inline-block; */
+	width: 1.2em;
+	height: 1.2em;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+	/* padding-bottom: 0.5em; */
+	margin-right: 0.2em;
+	vertical-align: bottom;
+	color: transparent;
+	transition: .3s;
+}
+
+.madang-section input[type=checkbox]+label:active:before {
+	transform: scale(0);
+}
+
+.madang-section input[type=checkbox]:checked+label:before {
+	background-color: #ef6c00;
+	border-color: #ef6c00;
+	color: #fff;
+}
+
+.madang-section .sub-tit {
+	position: relative;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.madang-section .title-area {
+	/* display: table-cell; */
+	width: 50%;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.madang-section .list-title {
+	display: inline;
+	magine: 40px;
+	font-weight: 600;
+	font-size: 22px;
+	line-height: 24px;
+	vertical-align: sub;
+}
+
+.madang-section .list-sub {
+	margin-top: 8px;
+	font-size: 13px;
+	line-height: 15px;
+	color: #999;
+}
