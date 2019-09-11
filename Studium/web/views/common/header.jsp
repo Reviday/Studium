@@ -149,7 +149,7 @@
 					</ul>
 
 					<ul class="navbar-nav ml-auto">
-
+					
 						<% 
 						  	//관리자 로그인
 							if(loginMember!=null && loginMember.getMemCode()=='M') {
@@ -197,7 +197,8 @@
 			</div>
 		</nav>
 		
-		 <!--마이페이지 메뉴-->
+		<!--마이페이지 메뉴-->
+		<%if(loginMember!=null) { %>
         <div id="myP-index">
             <nav class="nav-item nav-menu">
                 <a class="nav-link" href="<%=request.getContextPath()%>/regular/myPage?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
@@ -209,7 +210,7 @@
                 <a class="nav-link" href="#">환경설정</a>
             </nav>
         </div>
-       
+       	<%} %>
         <script>
         //마이페이지버튼  호버 시 애니메이션
             var flag = true;
