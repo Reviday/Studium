@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 
 <!-- jQuery -->
+<script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 </head>
 
@@ -142,7 +143,7 @@
 							id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">커뮤니티</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="services.html">공유마당</a> 
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/shareMadangList">공유마당</a> 
 								<a class="dropdown-item" href="services.html">공부마당</a> 
 								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/freeMadangList">자유마당</a>
 							</div></li>

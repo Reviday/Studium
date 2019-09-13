@@ -68,7 +68,7 @@
         stroke="#cf1d16" /></svg></div>
 
   <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
-  <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
+  
   <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/jquery.waypoints.min.js"></script>
