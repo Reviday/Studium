@@ -135,41 +135,67 @@ create table ta_qborad(
 
 
 -- 공유마당
-create table ta_sborad(
-    board_no number constraint board_no_pk primary key, -- 글번호
-    board_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
-    board_writer_id varchar2(20), -- 글쓴이 아이디
-    board_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
-    board_title varchar2(100) constraint board_title_nn not null, -- 글 제목
-    board_content clob constraint board_content_nn not null, -- 글 내용
-    board_register_datetime date, -- 글 작성 일시
---  board_register_ip varchar2(20) -- 글 작성 ip 주소
-    board_rec_count number default 0, -- 글 추천 수(recommand)
-    board_fork_count number default 0, -- 글 포크 수    
-    board_rep_count number default 0 -- 글 댓글 수
-);
-
-
--- 자유마당(포크 없음)
-create table ta_free_madang(
-    madang_no number constraint madang_no_pk primary key, -- 글번호
+create table ta_share_madang(
+    madang_no number constraint smadang_no_pk primary key, -- 글번호
     madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
     madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
     madang_writer_email varchar2(20), -- 글쓴이 이메일
     madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
-    madang_title varchar2(100) constraint madang_title_nn not null, -- 글 제목
-    madang_content clob constraint madang_content_nn not null, -- 글 내용
+    madang_title varchar2(100) constraint smadang_title_nn not null, -- 글 제목
+    madang_content clob constraint smadang_content_nn not null, -- 글 내용
     madang_register_datetime date, -- 글 작성 일시
     madang_register_ip varchar2(20), -- 글 작성 ip 주소
     madang_rec_count number default 0, -- 글 추천 수(recommand)
     madang_rep_count number default 0, -- 글 댓글 수
     madang_read_count number default 0, -- 조회수
-    madang_file_presence char(1) default 'N' constraint madang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
-    madang_img_presence char(1) default 'N' constraint madang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
-    madang_status char(1) default 'Y' constraint madang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+    madang_fork_count number default 0, -- 글 포크 수    
+    madang_file_presence char(1) default 'N' constraint smadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint smadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint smadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+
+-- 자유마당(포크 없음)
+create table ta_free_madang(
+    madang_no number constraint fmadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint fmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint fmadang_content_nn not null, -- 글 내용
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_file_presence char(1) default 'N' constraint fmadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint fmadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint fmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
 );
 drop table ta_free_madang;
 drop sequence fboard_seq;
+
+/* 게시글넘버용 시퀀스 */
+
+-- 공부마당(풀이마당)
+create sequence qboard_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 공유마당
+create sequence sboard_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 자유마당
+create sequence fboard_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 
 select * from ta_free_madang;
 select * from ta_free_madang where madang_status='Y' ORDER BY DECODE(madang_parent,NULL,madang_no,madang_parent) DESC, madang_no DESC;
@@ -216,6 +242,51 @@ insert into ta_free_madang values(fboard_seq.nextval, 10, 1,'admin@studium.com',
 insert into ta_free_madang values(fboard_seq.nextval, 10, 2,'admin@studium.com', '관리자', '테스트 글 입니다.10-답글2', '테스트 글 입니다.10-답글2',sysdate, null, default,default, default, default, default, default);
 commit;
 
+
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.1', '테스트 글 입니다.1',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.2', '테스트 글 입니다.2',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.3', '테스트 글 입니다.3',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.4', '테스트 글 입니다.3',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.5', '테스트 글 입니다.4',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.6', '테스트 글 입니다.5',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.7', '테스트 글 입니다.6',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.8', '테스트 글 입니다.7',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.9', '테스트 글 입니다.8',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.10', '테스트 글 입니다.10',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.11', '테스트 글 입니다.11',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.12', '테스트 글 입니다.12',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.13', '테스트 글 입니다.13',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.14', '테스트 글 입니다.14',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.15', '테스트 글 입니다.15',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.16', '테스트 글 입니다.16',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.17', '테스트 글 입니다.17',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.18', '테스트 글 입니다.18',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.19', '테스트 글 입니다.19',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.20', '테스트 글 입니다.20',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.21', '테스트 글 입니다.21',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.22', '테스트 글 입니다.22',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.23', '테스트 글 입니다.23',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.24', '테스트 글 입니다.24',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.25', '테스트 글 입니다.25',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.26', '테스트 글 입니다.26',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.27', '테스트 글 입니다.27',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.28', '테스트 글 입니다.28',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.29', '테스트 글 입니다.29',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.30', '테스트 글 입니다.39',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.1', '삭제된 글입니다. 출력되면 안됩니다.1',sysdate, null, default,default, default, default, default, default, 'N');
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.2', '삭제된 글입니다. 출력되면 안됩니다.2',sysdate, null, default,default, default, default, default, default, 'N');
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.3', '삭제된 글입니다. 출력되면 안됩니다.3',sysdate, null, default,default, default, default, default, default, 'N');
+insert into ta_share_madang values(sboard_seq.nextval, default, default,'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.4', '삭제된 글입니다. 출력되면 안됩니다.4',sysdate, null, default,default, default, default, default, default, 'N');
+insert into ta_share_madang values(sboard_seq.nextval, 8, 1,'admin@studium.com', '관리자', '테스트 글 입니다.8-답글1', '테스트 글 입니다.8-답글1',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, 8, 2,'admin@studium.com', '관리자', '테스트 글 입니다.8-답글2', '테스트 글 입니다.8-답글2',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, 8, 3,'admin@studium.com', '관리자', '테스트 글 입니다.8-답글3', '테스트 글 입니다.8-답글3',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, 8, 4,'admin@studium.com', '관리자', '테스트 글 입니다.8-답글4', '테스트 글 입니다.8-답글4',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, 10, 1,'admin@studium.com', '관리자', '테스트 글 입니다.10-답글1', '테스트 글 입니다.10-답글1',sysdate, null, default,default, default, default, default, default, default);
+insert into ta_share_madang values(sboard_seq.nextval, 10, 2,'admin@studium.com', '관리자', '테스트 글 입니다.10-답글2', '테스트 글 입니다.10-답글2',sysdate, null, default,default, default, default, default, default, default);
+commit;
+
+
+
 create table free_madang_file (
     fmf_no number fmf_id_pk primary key,-- 파일 번호 
     madang_no number constraint madang_no_fk foreign key references ta_free_madang(madang_no), -- 마당글 번호
@@ -233,25 +304,7 @@ create table free_madang_file (
 );
 
 
-/* 게시글넘버용 시퀀스 */
 
--- 공부마당(풀이마당)
-create sequence qboard_seq 
-start with 1
-increment by 1
-maxvalue 999999;
-
--- 공유마당
-create sequence sboard_seq 
-start with 1
-increment by 1
-maxvalue 999999;
-
--- 자유마당
-create sequence fboard_seq 
-start with 1
-increment by 1
-maxvalue 999999;
 
 
 
