@@ -8,160 +8,16 @@
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.dd.MM.");
 %>
 <%@ include file="/views/common/header.jsp"%>
-
-<style>
-.madang-section {
-	position: relative;
-	height: 1800px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-decoration: none;
-}
-
-.wrapper {
-	position: relative;
-	height: 1800px;
-}
-/*
-.middle {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 300px;
-	margin: 0 !important;
-} */
-.madang-list {
-	position: absolute;
-	top: 0;
-	left: 300px;
-	margin: 0 !important;
-}
-<!--
--->
-</style>
 <!-- 마당에 적용할  css -->
-<link href="<%=request.getContextPath()%>/css/madang.css"
-	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/sidemenubar.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/madang.css" rel="stylesheet">
 
-<div class="header-background"
-	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
 </div>
 <section class="madang-section">
+<%@ include file="/views/common/sideMenuBar.jsp"%>	
 	<div class="container">
 		<div class="wrapper">
-			<div class="nav-side-menu">
-				<div class="brand" style="height:57px">
-					<a href="index.html"> <img style="margin:5px"
-						src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'
-						onmouseover="this.src='<%=request.getContextPath()%>/img/studium_ko_logo_white.png'"
-						onmouseout="this.src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'"
-						alt="Studium" width="50px;">
-					</a>
-				</div>
-				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
-					data-target="#menu-content"></i>
-
-				<div class="menu-list">
-
-					<ul id="menu-content" class="menu-content collapse out">
-						<li><a href="#"> <i class="fas fa-tachometer-alt fa-lg"></i>
-								마당소개
-						</a></li>
-
-						<li data-toggle="collapse" data-target="#products"
-							class="collapsed active"><a href="#"> <i
-								class="fab fa-studiovinari fa-lg"></i> 공부마당 <span
-								class="arrow"></span></a></li>
-						<ul class="sub-menu collapse" id="products">
-							<li class="active"><a href="#">CSS3 Animation</a></li>
-							<li><a href="#">General</a></li>
-							<li><a href="#">Buttons</a></li>
-							<li><a href="#">Tabs & Accordions</a></li>
-							<li><a href="#">Typography</a></li>
-							<li><a href="#">FontAwesome</a></li>
-							<li><a href="#">Slider</a></li>
-							<li><a href="#">Panels</a></li>
-							<li><a href="#">Widgets</a></li>
-							<li><a href="#">Bootstrap Model</a></li>
-						</ul>
-
-
-						<li data-toggle="collapse" data-target="#service"
-							class="collapsed"><a href="#"> <i
-								class="fab fa-fort-awesome-alt fa-lg"></i> 자유마당 <span
-								class="arrow"></span></a></li>
-						<ul class="sub-menu collapse" id="service">
-							<li>New Service 1</li>
-							<li>New Service 2</li>
-							<li>New Service 3</li>
-						</ul>
-
-
-						<li data-toggle="collapse" data-target="#new" class="collapsed">
-							<a href="#"> <i class="fab fa-pagelines fa-lg"></i> 공유마당 <span
-								class="arrow"></span></a>
-						</li>
-						<ul class="sub-menu collapse" id="new">
-							<li>New New 1</li>
-							<li>New New 2</li>
-							<li>New New 3</li>
-						</ul>
-
-
-						<li><a href="#"> <i class="fas fa-user-tie fa-lg"></i>
-								자랑마당
-						</a></li>
-
-						<li><a href="#"> <i class="fa fa-users fa-lg"></i> 질문마당
-						</a></li>
-					</ul>
-				</div>
-			</div>
-
-			<!-- <div class="middle">
-			        <div class="menu">
-			            <li class="item" id="intro">
-			                <a href="#intro" class="btn"><i class="fas fa-book-reader"></i>소개</a>
-			                <div class="smenu">
-			                    <a href="#">대분류 1</a>
-			                    <a href="#">대분류 2</a>
-			                    <a href="#">대분류 3</a>
-			                </div>
-			            </li>
-			
-			            <li class="item" id="free-madang">
-			                <a href="#free-madang" class="btn"><i class="fas fa-user-friends"></i>자유마당</a>
-			                <div class="smenu">
-			                    <a href="#">대분류 1</a>
-			                    <a href="#">대분류 2</a>
-			                    <a href="#">대분류 3</a>
-			                </div>
-			            </li>
-			
-			            <li class="item" id="share-madang">
-			                <a href="#share-madang" class="btn"><i class="fas fa-clone"></i>공유마당</a>
-			                <div class="smenu">
-			                    <a href="#">대분류 1</a>
-			                    <a href="#">대분류 2</a>
-			                    <a href="#">대분류 3</a>
-			                </div>
-			            </li>
-			
-			            <li class="item" id="question-madang">
-			                <a href="#question-madang" class="btn"><i class="fas fa-edit"></i>풀이마당</a>
-			                <div class="smenu">
-			                    <a href="#">대분류 1</a>
-			                    <a href="#">대분류 2</a>
-			                    <a href="#">대분류 3</a>
-			                </div>
-			            </li>
-			        </div>
-			    </div> -->
 			<div class="madang-list">
 				<div class="sub-tit">
 					<div class="title-area">
