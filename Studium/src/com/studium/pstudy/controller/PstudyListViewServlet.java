@@ -34,7 +34,9 @@ public class PstudyListViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PstudyService service=new PstudyService();
 		List<Pstudy> pList=service.selectPstudy();
+		List<Pstudy> bestList=service.bestPstudy();
 		request.setAttribute("pList", pList);
+		request.setAttribute("bestList",  bestList);
 		request.getRequestDispatcher("/views/pstudy/pstudy.jsp").forward(request, response);
 	}
 

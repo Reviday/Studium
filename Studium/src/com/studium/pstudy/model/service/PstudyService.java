@@ -58,4 +58,10 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public List<Pstudy> bestPstudy(){
+		Connection conn=getConnection();
+		List<Pstudy> list=dao.bestPstudy(conn);
+		close(conn);
+		return list;
+	}
 }
