@@ -125,11 +125,11 @@
 	<header class="page-header" role="banner">
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<div class="container">
-				<a href="index.html"> <img src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'
+				<a href="<%=request.getContextPath()%>"> <img src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'
 					onmouseover="this.src='<%=request.getContextPath()%>/img/studium_ko_logo_white.png'"
 					onmouseout="this.src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'" alt="Studium"
 					width="50px;">
-				</a> <a class="navbar-brand" href="index.html"> <span>Studium</span></a>
+				</a> <a class="navbar-brand" href="<%=request.getContextPath()%>"> <span>Studium</span></a>
 
 				<div class="collapse navbar-collapse" id="navbarsExample05">
 					<ul class="navbar-nav ml-auto pl-lg-5 pl-0">
