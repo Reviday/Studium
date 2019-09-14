@@ -1,7 +1,6 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class DibsServlet
  */
-@WebServlet("/myPage/myInfo")
-public class MypageServlet extends HttpServlet {
+@WebServlet("/myPage/dibs")
+public class DibsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public DibsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +32,8 @@ public class MypageServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
 		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-		.forward(request,response);
-		
-		
+		request.getRequestDispatcher("/views/myPage/dibs.jsp")
+		.forward(request,response);	
 	
 	}
 

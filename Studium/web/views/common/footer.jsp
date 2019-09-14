@@ -78,6 +78,9 @@
 
 
   <script src="<%=request.getContextPath() %>/js/main.js"></script>
+   <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

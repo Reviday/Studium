@@ -29,6 +29,11 @@
 
 <!-- Theme Style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
+ <!--애니메이션-->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+ <!-- aos 애니메이션-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+   
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
@@ -120,11 +125,11 @@
 	<header class="page-header" role="banner">
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<div class="container">
-				<a href="index.html"> <img src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'
+				<a href="<%=request.getContextPath()%>"> <img src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'
 					onmouseover="this.src='<%=request.getContextPath()%>/img/studium_ko_logo_white.png'"
 					onmouseout="this.src='<%=request.getContextPath()%>/img/studium_en_logo_white.png'" alt="Studium"
 					width="50px;">
-				</a> <a class="navbar-brand" href="index.html"> <span>Studium</span></a>
+				</a> <a class="navbar-brand" href="<%=request.getContextPath()%>"> <span>Studium</span></a>
 
 				<div class="collapse navbar-collapse" id="navbarsExample05">
 					<ul class="navbar-nav ml-auto pl-lg-5 pl-0">
@@ -202,12 +207,12 @@
 		<%if(loginMember!=null) { %>
         <div id="myP-index">
             <nav class="nav-item nav-menu">
-                <a class="nav-link" href="<%=request.getContextPath()%>/regular/myPage?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
-                <a class="nav-link" href="#">일정관리</a>
-                <a class="nav-link" href="#">내 스터디</a>
-                <a class="nav-link" href="#">찜</a>
-                <a class="nav-link" href="#">결제</a>
-                <a class="nav-link" href="#">일정관리</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfo?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/mySchedule?memberNo=<%=loginMember.getMemNo()%>">일정관리</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>">내 스터디</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>">찜</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>">결제</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myFork?memberNo=<%=loginMember.getMemNo()%>">내 포크</a>
                 <a class="nav-link" href="#">환경설정</a>
             </nav>
         </div>
@@ -218,7 +223,7 @@
             $(function() {
                 $('#myM').hover(function() {
                     $('#myP-index').animate({
-                        'left': '-90px'
+                        'left': '-100px'
                     }); console.log("hover");
                 }, function() {
                     if(flag) {

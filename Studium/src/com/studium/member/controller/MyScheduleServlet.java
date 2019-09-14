@@ -14,14 +14,14 @@ import com.studium.member.model.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet("/myPage/myInfo")
-public class MypageServlet extends HttpServlet {
+@WebServlet("/myPage/mySchedule")
+public class MyScheduleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public MyScheduleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class MypageServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
 		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+		request.getRequestDispatcher("/views/myPage/mySchedulejsp")
 		.forward(request,response);
 		
 		
