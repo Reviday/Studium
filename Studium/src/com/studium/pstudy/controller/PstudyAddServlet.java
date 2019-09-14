@@ -97,7 +97,8 @@ public class PstudyAddServlet extends HttpServlet {
 		Date endstart;
 		endstart = Date.valueOf(mr.getParameter("p_dateend"));
 		String teachername=mr.getParameter("p_teachername");
-
+		int like=Integer.parseInt(mr.getParameter("star-input"));
+		
 
 	      PstudyService service=new PstudyService();
 	      
@@ -120,6 +121,7 @@ public class PstudyAddServlet extends HttpServlet {
 	      p.setpDatestart(datestart);
 	      p.setpDateend(endstart);
 	      p.setpTeachername(teachername);
+	      p.setpLike(like);
 	     
 	   
 	      int result=service.inserPstudy(p);

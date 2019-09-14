@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -26,8 +26,103 @@
             vertical-align: middle;
             cursor: pointer;
         }
+
+        .star-input>.input,
+        .star-input>.input>label:hover,
+        .star-input>.input>input:focus+label,
+        .star-input>.input>input:checked+label {
+            display: inline-block;
+            vertical-align: middle;
+            background: url('<%=request.getContextPath()%>/img/grade_img.png')no-repeat;
+        }
+
+        .star-input {
+            display: inline-block;
+            white-space: nowrap;
+            width: 225px;
+            height: 40px;
+            padding: 25px;
+            line-height: 30px;
+        }
+
+        .star-input>.input {
+            display: inline-block;
+            width: 150px;
+            background-size: 150px;
+            height: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .star-input>.input>input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        star-input>.input.focus {
+            outline: 1px dotted #ddd;
+        }
+
+        .star-input>.input>label {
+            width: 30px;
+            height: 0;
+            padding: 28px 0 0 0;
+            overflow: hidden;
+            float: left;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .star-input>.input>label:hover,
+        .star-input>.input>input:focus+label,
+        .star-input>.input>input:checked+label {
+            background-size: 150px;
+            background-position: 0 bottom;
+        }
+
+        .star-input>.input>label:hover~label {
+            background-image: none;
+        }
+
+        .star-input>.input>label[for="p1"] {
+            width: 30px;
+            z-index: 5;
+        }
+
+        .star-input>.input>label[for="p2"] {
+            width: 60px;
+            z-index: 4;
+        }
+
+        .star-input>.input>label[for="p3"] {
+            width: 90px;
+            z-index: 3;
+        }
+
+        .star-input>.input>label[for="p4"] {
+            width: 120px;
+            z-index: 2;
+        }
+
+        .star-input>.input>label[for="p5"] {
+            width: 150px;
+            z-index: 1;
+        }
+
+        .star-input>output {
+            display: inline-block;
+            width: 60px;
+            font-size: 18px;
+            text-align: right;
+            vertical-align: middle;
+        }
     </style>
-     <script>
+    <script>
         $(function () {
 
 
@@ -77,7 +172,7 @@
 
 <body>
 
- 
+
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td align="center" valign="top">
@@ -91,8 +186,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <FORM NAME="pstudyfrm1" ACTION="<%=request.getContextPath()%>/pstudy/studyAdd" METHOD="post"
-                                        enctype="multipart/form-data">
+                                    <FORM NAME="pstudyfrm1" ACTION="<%=request.getContextPath()%>/pstudy/studyAdd"
+                                        METHOD="post" enctype="multipart/form-data">
                                         <td align="center">
                                             <table width="100%" border="0" cellspacing="1" cellpadding="7"
                                                 bgcolor="#D7D7D7">
@@ -100,12 +195,12 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
-                                                            SIZE="30" MAXLENGTH="50" NAME="p_title" required/></td>
+                                                            SIZE="30" MAXLENGTH="50" NAME="p_title" required /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
-                                                            SIZE="30" MAXLENGTH="50" NAME="p_name" required/></td>
+                                                            SIZE="30" MAXLENGTH="50" NAME="p_name" required /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디지역</td>
@@ -134,18 +229,18 @@
                                                         </select>
                                                     </td>
                                                 </tr>
-                                              
+
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디비용</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
                                                             SIZE="10" MAXLENGTH="7" NAME="p_price"
-                                                            onKeyDown="KeyNumber()"/></td>
+                                                            onKeyDown="KeyNumber()" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">인원</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="number"SIZE="10" min="1" max="15" NAME="p_stupyperson"
-                                                            onKeyDown="KeyNumber()"/></td>
+                                                        <INPUT TYPE="number" SIZE="10" min="1" max="15"
+                                                            NAME="p_stupyperson" onKeyDown="KeyNumber()" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">분류</td>
@@ -182,33 +277,38 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/></td>
-                                                    
+                                                        <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50 />
+                                                    </td>
+
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file"NAME="p_img1" size=50/></td>
+                                                        <INPUT TYPE="file" NAME="p_img1" size=50 /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img2" size=50/></td>
+                                                        <INPUT TYPE="file" NAME="p_img2" size=50 /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img3" size=50/></td>
+                                                        <INPUT TYPE="file" NAME="p_img3" size=50 /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
-                                                    <td width="76%" align="left" bgcolor="#FFFFFF"  >
-                                     <input type="text" name="p_timestart"  placeholder="시간선택" id="time1" class="time1" required size="8" maxlength="5">~
-                                     <input type="text" name="p_timeend"  placeholder="시간선택"  class="time1" required size="8" maxlength="5">
-													<link rel="stylesheet" type="text/css" href="../css/jquery.timepicker.css">
-													<script type="text/javascript" src="../js/jquery.timepicker.min.js"></script>											
+                                                    <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                        <input type="text" name="p_timestart" placeholder="시간선택"
+                                                            id="time1" class="time1" required size="8" maxlength="5">~
+                                                        <input type="text" name="p_timeend" placeholder="시간선택"
+                                                            class="time1" required size="8" maxlength="5">
+                                                        <link rel="stylesheet" type="text/css"
+                                                            href="../css/jquery.timepicker.css">
+                                                        <script type="text/javascript"
+                                                            src="../js/jquery.timepicker.min.js"></script>
                                                 </tr>
-                                               
+
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 날짜</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
@@ -223,11 +323,33 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">강사이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="text" NAME="p_teachername" size=50/></td>
+                                                        <INPUT TYPE="text" NAME="p_teachername" size=50 /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="24%" align="left" bgcolor="#EEEEEE">별점</td>
+                                                    <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                        <span class="star-input">
+                                                            <span class="input">
+                                                                <input type="radio" name="star-input" value="1" id="p1">
+                                                                <label for="p1">1</label>
+                                                                <input type="radio" name="star-input" value="2" id="p2">
+                                                                <label for="p2">2</label>
+                                                                <input type="radio" name="star-input" value="3" id="p3">
+                                                                <label for="p3">3</label>
+                                                                <input type="radio" name="star-input" value="4" id="p4">
+                                                                <label for="p4">4</label>
+                                                                <input type="radio" name="star-input" value="5" id="p5">
+                                                                <label for="p5">5</label>
+                                                            </span>
+                                                            <output for="star-input"><b>0</b>점</output>
+                                                        </span>
+
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan=2 align=center bgcolor="#FFFFFF"><INPUT TYPE="submit"
-                                                            VALUE="등록" ></td>
+                                                            VALUE="등록"></td>
                                                 </tr>
                                     </FORM>
                                 <tr>
@@ -237,15 +359,16 @@
             </td>
         </tr>
     </table>
-     <script>
-     $(".time1").timepicker({
-    		step: 30,            //시간간격 : 30분
-    		timeFormat: "H:i"  //시간:분 으로표시
-    		
-    	});
+    <script>
+        $(".time1").timepicker({
+            step: 30, //시간간격 : 30분
+            timeFormat: "H:i" //시간:분 으로표시
 
-        </script>
-        
+        });
+    </script>
+    <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/star.js"></script>
+
 </body>
 
 </html>

@@ -108,31 +108,17 @@
       
     </div>
      <div class="a">
+ <div class="a_title">강사 스터디 </div>
     <%if(pList.size()!=0) {%>
     <% for(Pstudy p :pList){ %>
-   
-      <div class="a_title"><%=p.getpTitle() %></div>
-      <div class="a_cnt1" style="cursor:pointer" window.open('product.html' toolbar=no, menubar=no, scrollbars=no,
-        resizable=yes');return false;">
-         <%if(p.getpImg1()!=null){ %>
-        <a href="<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>"> 
-        <img src='<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>'></a>
-        <%} %>
-          <div>
-          <%if(p.getpImgtitle()!=null){ %>
-        <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImgtitle()%>" alt="" class="leader-photo">
-        <%} %>
-      </div>
-      <div style="height: 50px"></div>
-        <div class='list_name'> <%=p.getpName() %></div>
-        <div class="list_type"><%=p.getpArea() %></div>
-        <div class="most_border"> </div>
-      </div>
-      <div class="study-list">
-                    <h5>강사 스터디</h5>
+    
+   					
+     			  <div class="study-list">
+    
+                    
                     <div class="row ">
                         <div data-aos="fade-up" class="col-3 study-card">
-                            <div class="card-top">
+                            <div class="card-top" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'" style="cursor:pointer;">
                                 <p><%=p.getpArea() %> | <%=p.getpDay() %></p>
                                 <h5><%=p.getpTitle() %></h5>
                                 <p class="card-price"><%=p.getpPrice() %></p>
@@ -142,18 +128,19 @@
                                      <%} %>
                                 </div>
                             </div>
-                            <div class="card-bottom">
+                            <div class="card-bottom" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'" style="cursor:pointer;">
                                 <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
                             </div>
-                        </div>
-
-                    </div>
-	
+                      
+				  </div>
+  						</div>
                 </div>
-  
    
    <%} 
     }%>
+    
+                  
+  
      </div>
 
   </div>
@@ -231,7 +218,7 @@
             padding-left: 0px;
             width:300px;
             height: 300px;
-            /* box-shadow: 3px 3px 20px 1px #999; */
+            box-shadow: 3px 3px 15px 1px #999;
             transform: scale(1);
             -webkit-transform: scale(1);
             -moz-transform: scale(1);

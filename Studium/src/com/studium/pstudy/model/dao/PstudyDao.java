@@ -225,7 +225,8 @@ public class PstudyDao {
 			pstmt.setString(15, p.getpTimeend());
 			pstmt.setDate(16, p.getpDatestart());
 			pstmt.setDate(17, p.getpDateend());
-			pstmt.setString(18, p.getpTeachername());
+			pstmt.setInt(18, p.getpLike());
+			pstmt.setString(19, p.getpTeachername());
             result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -24,6 +24,32 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style type="text/css">
+   
+.star-input>.input,
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('<%=request.getContextPath()%>/img/grade_img.png')no-repeat;}
+.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
+.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
+.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+star-input>.input.focus{outline:1px dotted #ddd;}
+.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
+.star-input>.input>label:hover~label{background-image: none;}
+.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
+.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
+.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
+.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
+.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
+.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
+</style>
+    
+    
+ 
+    
 </head>
 
 <body>
@@ -113,20 +139,34 @@
                     <!-- 스터디 후기 -->
                     <div class="review-1">
                         <h2>리더에 대한 후기</h2>
-                        <div>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span>4.9</span>
-                        </div>
+                        
                     </div>
+                   
+		<div>
+			<%if(p.getpLike()==1){ %>
+				<img src="<%=request.getContextPath()%>/img/star1.png" width=200px>
+			<%}else if(p.getpLike()==2) {%>
+			<img src="<%=request.getContextPath()%>/img/star2.png" width=200px>
+			<%}else if(p.getpLike()==3){ %>
+			<img src="<%=request.getContextPath()%>/img/star3.png" width=200px>
+			<%}else if(p.getpLike()==4){ %>
+			<img src="<%=request.getContextPath()%>/img/star4.png" width=200px>
+			<%}else if(p.getpLike()==5){ %>
+			<img src="<%=request.getContextPath()%>/img/star5.png" width=200px>
+			<%} else{%>
+			
+			<%} %>
+		
+		<b><%=p.getpLike() %></b>점
+		</div>
+	
                     <div>
                         <div class="review-2">
                             <img src="https://cdn.studysearch.co.kr/images/users/201907/profile/1561957236" alt=""
                                 style="width:76px; height: 76px;">
                             <div class="review-content">
+  
+
                                 <h2>김민주</h2>
                                 <textarea name="" id="" cols="60" rows="6" readonly>
 실제로 유용하게 쓰이는 문장들을 자주 읽고 반복하여 쉽고 재미있게 접근할수 있었습니다. 평소 영어로 말하기에 어려움을 겪고있던터라, 말하기 연습은 저에게 정말 유용했습니다. 영어에 어떻게 접근해야할지, 저에게 필요한 영어공부법은 무엇인지 깨닫게 해주는 소중한 경험이었습니다. 제이슨 감사합니당>__< bb
@@ -242,6 +282,8 @@
         }
     </script>
      <%@ include file="../../views/common/footer.jsp" %> 
+     <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/star.js"></script>
 </body>
 
 </html>

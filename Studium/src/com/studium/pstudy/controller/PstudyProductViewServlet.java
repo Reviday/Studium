@@ -33,6 +33,7 @@ public class PstudyProductViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int no =Integer.parseInt(request.getParameter("pNo"));
 		Pstudy p=new PstudyService().selectpStudyVIew(no);
+		System.out.println(p.getpLike());
 		request.setAttribute("pstudy", p);
 		request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 	}
