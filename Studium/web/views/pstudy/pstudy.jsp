@@ -122,7 +122,7 @@
     <%if(pList.size()!=0) {%>
     <% for(Pstudy p :pList){ %>
     					<div class="a_cnt1"  >
-                        <div data-aos="fade-up" class="col-3 study-card">
+                        <div data-aos="fade-up" class="col-3 pstudy-card">
                        
                             <div class="card-top" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'" style="cursor:pointer;">
                                 <p><%=p.getpArea() %> | <%=p.getpDay() %></p>
@@ -215,7 +215,7 @@
             box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
         }
 
-        .study-card {
+        .pstudy-card {
             cursor: pointer;
           
             width:100%;
@@ -257,7 +257,6 @@
     </script>
 
 
- <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
 </html>
