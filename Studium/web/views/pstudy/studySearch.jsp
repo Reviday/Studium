@@ -3,7 +3,7 @@
     <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy" %>
     <%
      List<Pstudy> pList=(List)request.getAttribute("pList");
-    List<Pstudy> bestList =(List)request.getAttribute("bestList");
+  
     
     %>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/pstudy.css">
@@ -88,46 +88,7 @@ body{
      
     </div>
     <div style="height: 210px;"></div>
-    <% if(bestList.size()!=0){%>
-<div class="a">
-	<div class="a_title">평점 높은 스터디 </div>
-	<div class="study-list">
-		<div class="row ">
-			
-			<% for(Pstudy p :bestList){ %>
-			<div class="a_cnt1">
-				<div data-aos="fade-up" class="col-3 pstudy-card">
-
-					<div class="card-top"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
-						style="cursor:pointer;">
-						<p><%=p.getpArea() %> | <%=p.getpDay() %></p>
-						<h5><%=p.getpTitle() %></h5>
-						<p class="card-price"><%=p.getpPrice() %></p>
-
-						<div class="circle">
-							<%if(p.getpImgtitle()!=null){ %>
-							<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImgtitle()%>"
-								class="img-category ">
-							<%} %>
-						</div>
-					</div>
-					<div class="card-bottom"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
-						style="cursor:pointer;">
-						<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
-					</div>
-				</div>
-			</div>
-
-			<%} 
-	   %>
-		</div>
-
-	</div>
-</div>
-<% } else {%>
-<%} %>
+   
 <div class="a">
 	<div class="a_title">강사 스터디 </div>
 	<div class="study-list">
