@@ -14,7 +14,69 @@
 }
 </style>
 <section>
-	내 스터디
+	
+
+    <div class="section-content" style="background-color: rgb(240, 240, 240)">
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8" style=" margin-top:20px">
+                <img src="img/book.jpg " alt=" " class="img-category ">
+                <div class="myShopping ">
+                    <h3>ㅇㅇㅇ 님의 스터디</h3>
+                    <div class="shopping-1 ">
+                        <p class="sort studyM ">진행중인 스터디</p>
+                        <span> | </span>
+                        <p class="sort studyN ">지난 스터디</p>
+                    </div>
+                </div>
+
+
+
+
+                <div class="study-list">
+                    <h5>진행중인 스터디</h5>
+
+                    <div data-aos="fade-up" class="study-card">
+                        <div class="study">
+                            <img src="img/s1.jpg" class="study-main-img">
+                        </div>
+
+                        <img src="img/3.jpg" class="study-reader-img">
+                        <div class="study-context">
+
+                            <h3>강동원과 함께하는 스터디</h3>
+                            <p>2019년 12월 1일<span>진행중</span></p>
+                            <p>강동원</p>
+                            <button class="btn btn-gotochat">채팅방 가기</button>
+                            <button class="btn btn-gotochat">후기 작성</button>
+                        </div>
+                    </div>
+
+
+                    <div data-aos="fade-up" class="study-card">
+                        <div class="study">
+                            <img src="img/s1.jpg" class="study-main-img">
+                        </div>
+
+                        <img src="img/3.jpg" class="study-reader-img">
+                        <div class="study-context">
+
+                            <h3>강동원과 함께하는 스터디</h3>
+                            <p>2019년 12월 1일<span>진행중</span></p>
+                            <p>강동원</p>
+                            <button class="btn btn-gotochat">채팅방 가기</button>
+                            <button class="btn btn-gotochat">후기 작성</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-sm-2 "></div>
+        </div>
+    </div>
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>

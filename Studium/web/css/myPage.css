@@ -356,18 +356,18 @@ div .img-category {
 
 .study-context {
     position: absolute;
-    left: 300px;
     height: 300px;
-    width: 60%;
+    width: 65%;
     padding: 50px;
     padding-left: 150px;
     color: #000;
+    float: left;
 }
 
 .study-reader-img {
     position: absolute;
+    left: -75px;
     top: 75px;
-    left: 225px;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -387,12 +387,13 @@ div .img-category {
 }
 
 .btn-gotochat {
-    font-size: 13px;
+    padding: 8px;
+    font-size: 0.8emx;
     background-color: orangered;
     color: white;
     border: 1px solid white;
-    border-radius: 0px;
-    margin-top: 50px;
+    border-radius: 0;
+    margin: 50px 3px;
 }
 
 .btn-gotochat:hover {
@@ -403,6 +404,7 @@ div .img-category {
     -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
     box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
 }
+
 
 
 /* pay */
