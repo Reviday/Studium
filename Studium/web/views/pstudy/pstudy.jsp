@@ -5,8 +5,9 @@
      List<Pstudy> pList=(List)request.getAttribute("pList");
     
     %>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/pstudy.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/pstudy.css">
   <style>
   
 .leader-photo {
@@ -26,6 +27,13 @@
          height: 95px;
          background-color: rgba(0,0,0,0.8);
       }
+     .study-card:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
   </style>
 
 <body >
@@ -35,10 +43,11 @@
       </div>
     </div>
   <!-- END header -->
-  
+ 
   
   <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
-  <div class="wrap">
+    
+  <div class="wrap" style="margin-left:100px;">
     <div class="category" style="margin-top: 20px;">
       <div class="sidebar">
         <div id="leftside-navigation" class="nano">
@@ -67,7 +76,7 @@
         </div>
       </div>
     </div>
-    <div style="width: 800px; padding-top: 50px;">
+    <div style="width: 900px; padding-top: 50px;">
       <div class="a_title">스터디 지역 찾기</div>
       <form method=post action="<%=request.getContextPath()%>/pstudy/search">
         <select class=input1 name="p_area" style="width: 120px; height: 30px;">
@@ -93,9 +102,8 @@
      
     </div>
     <div class="a">
-      <div class="a_title">좋아요 높은 스터디 </div>
-      <div class="a_cnt1" style="cursor:pointer" window.open('product.html' toolbar=no, menubar=no, scrollbars=no,
-        resizable=yes');return false;">
+      <div class="a_title">평점 높은 스터디 </div>
+      <div class="a_cnt1" style="cursor:pointer" >
         <a href="product.html"> <img src='img/img2.jpg'></a>
         <div>
         <img src="https://cdn.studysearch.co.kr/images/users/94097/profile/1565326044" alt="" class="leader-photo">
@@ -109,19 +117,18 @@
     </div>
      <div class="a">
  <div class="a_title">강사 스터디 </div>
+ <div class="study-list">
+    <div class="row ">
     <%if(pList.size()!=0) {%>
     <% for(Pstudy p :pList){ %>
-    
-   					
-     			  <div class="study-list">
-    
-                    
-                    <div class="row ">
+    					<div class="a_cnt1"  >
                         <div data-aos="fade-up" class="col-3 study-card">
+                       
                             <div class="card-top" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'" style="cursor:pointer;">
                                 <p><%=p.getpArea() %> | <%=p.getpDay() %></p>
                                 <h5><%=p.getpTitle() %></h5>
                                 <p class="card-price"><%=p.getpPrice() %></p>
+                                 
                                 <div class="circle">
                                    <%if(p.getpImgtitle()!=null){ %>
                                     <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImgtitle()%>" class="img-category ">
@@ -129,18 +136,16 @@
                                 </div>
                             </div>
                             <div class="card-bottom" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'" style="cursor:pointer;">
-                                <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
+                                <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">    
                             </div>
-                      
-				  </div>
   						</div>
-                </div>
-   
+  						</div>
+  						
    <%} 
     }%>
-    
+      </div>
                   
-  
+   </div>
      </div>
 
   </div>
@@ -171,6 +176,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+              width: 100%;
             height: 100%;
             margin-left: 0px;
             margin-right: 0px;
@@ -211,28 +217,10 @@
 
         .study-card {
             cursor: pointer;
-            background-color: white;
-            margin: 4.1%;
-            margin-bottom: 30px;
-            padding-right: 0px;
-            padding-left: 0px;
-            width:300px;
-            height: 300px;
-            box-shadow: 3px 3px 15px 1px #999;
-            transform: scale(1);
-            -webkit-transform: scale(1);
-            -moz-transform: scale(1);
-            -ms-transform: scale(1);
-            -o-transform: scale(1);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .study-card:hover {
-            transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -o-transform: scale(1.1);
+          
+            width:100%;
+            height: 100%;
+          
         }
 
         .study-list h5 {
@@ -245,92 +233,7 @@
             border-bottom: 1px solid;
         }
 
-        .myShopping h3 {
-            margin-top: 80px;
-        }
-
-        .myShopping {
-            margin-top: 20%;
-            padding: 50px 0px;
-            text-align: center;
-        }
-
-        .myShopping i {
-            margin-top: 20%;
-            padding: 50px 0px;
-            text-align: center;
-            border-bottom: 1px solid black;
-        }
-
-        div .img-category {
-            position: absolute;
-            top: 8%;
-            left: 42.5%;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-
-        .myName {
-            margin-top: 20px;
-            padding-left: 10%;
-            padding-right: 10%;
-            border-bottom: 1px solid black;
-        }
-
-        #myP,
-        #myMenu {
-            margin-top: 75px;
-            position: fixed;
-            float: left;
-            background-color: rgba(255, 255, 255, 0.7);
-            width: 150px;
-            height: 96%;
-            border: 1px solid black;
-        }
-
-        .nav-link {
-            color: black;
-            /* border-bottom: 1px solid black; */
-        }
-
-        .nav-link:hover {
-            color: orangered;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-
-        .navbar-myMenu {
-            /* background-color: orangered !important; */
-        }
-
-        .cta-btn div {
-            /*마이페이지버튼 효과적용*/
-            color: #000 !important;
-            text-transform: uppercase;
-            padding: 10px 20px !important;
-            margin-right: 2px;
-            line-height: 1;
-            font-weight: bold;
-            -webkit-transition: .3s all ease;
-            -o-transition: .3s all ease;
-            transition: .3s all ease;
-        }
-
-        .cta-btn div:hover {
-            background: #fff;
-            color: #cf1d16 !important;
-            -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
-            box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
-        }
-
-        .section-content {
-            font-family: 'Nanum Gothic', sans-serif;
-            /* font-family: '맑은 고딕', sans-serif; */
-        }
-
-        #loader {
-            display: none;
-        }
+       
     </style>
 
 
@@ -347,10 +250,14 @@
     	location.href="<%=request.getContextPath()%>/pstudy/pstudyListAdd";
     }
   </script>
+<!-- aos 애니메이션-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 
-
-
+ <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
 </html>
