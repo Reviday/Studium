@@ -14,7 +14,7 @@ import com.studium.member.model.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet("/regular/myPage")
+@WebServlet("/myPage/myInfo")
 public class MypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,6 @@ public class MypageServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
 		request.setAttribute("member", m);
-		System.out.println(m);
 		request.getRequestDispatcher("/views/myPage/myInfo.jsp")
 		.forward(request,response);
 		

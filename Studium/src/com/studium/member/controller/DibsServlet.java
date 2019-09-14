@@ -1,28 +1,26 @@
-package com.studium.pstudy.controller;
+package com.studium.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.pstudy.model.service.PstudyService;
-import com.studium.pstudy.model.vo.Pstudy;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 
 /**
- * Servlet implementation class PstudyViewServlet
+ * Servlet implementation class DibsServlet
  */
-@WebServlet("/pstudyListView")
-public class PstudyListViewServlet extends HttpServlet {
+@WebServlet("/myPage/dibs")
+public class DibsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PstudyListViewServlet() {
+    public DibsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +29,12 @@ public class PstudyListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PstudyService service=new PstudyService();
-		List<Pstudy> pList=service.selectPstudy();
-		List<Pstudy> bestList=service.bestPstudy();
-		request.setAttribute("pList", pList);
-		request.setAttribute("bestList",  bestList);
-		request.getRequestDispatcher("/views/pstudy/pstudy.jsp").forward(request, response);
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		Member m=new MemberService().selectNo(memberNo);
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/views/myPage/dibs.jsp")
+		.forward(request,response);	
+	
 	}
 
 	/**

@@ -22,17 +22,7 @@
     <div class="section-content">
         <div class="row">
             <div class="col-sm-2">
-                <div id="myP">
-                    <nav class="nav-item nav-menu">
-                        <a class="nav-link" href="#">마이페이지</a>
-                        <a class="nav-link" href="#">일정관리</a>
-                        <a class="nav-link" href="#">내 스터디</a>
-                        <a class="nav-link" href="#">찜</a>
-                        <a class="nav-link" href="#">결제</a>
-                        <a class="nav-link" href="#">일정관리</a>
-                        <a class="nav-link" href="#">환경설정</a>
-                    </nav>
-                </div>
+                
             </div>
             <div class="col-sm-8 navbar-myMenu" style=" margin-top:20px">
                 <div class="myName">

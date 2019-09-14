@@ -220,3 +220,235 @@
     font-family: 'Nanum Gothic', sans-serif;
     /* font-family: '맑은 고딕', sans-serif; */
 }
+
+
+
+
+/* 찜페이지 */
+
+.card-price {
+    color: orange;
+}
+
+.card-top {
+    margin: 0;
+    padding-top: 30px;
+    width: 100%;
+    height: 50%;
+}
+
+.card-bottom {
+    border-top: 2px solid white;
+    width: 100%;
+    height: 50%;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-bottom: 1px solid;
+    overflow: hidden;
+}
+
+.card-bottom img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.card-top p {
+    z-index: initial;
+    text-align: center;
+    margin: 0px;
+    font-size: 0.8em;
+}
+
+.card-top .img-category {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 30%;
+    height: 25%;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.studyM {
+    color: #000;
+    font-weight: bolder;
+}
+
+.sort {
+    text-align: center;
+    display: inline-block;
+}
+
+.sort:hover {
+    color: black;
+    -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+}
+
+.study-card {
+    cursor: pointer;
+    background-color: white;
+    margin: 4.1%;
+    margin-bottom: 30px;
+    padding-right: 0px;
+    padding-left: 0px;
+    height: 300px;
+    /* box-shadow: 3px 3px 20px 1px #999; */
+}
+
+.study-list h5 {
+    padding-top: 3px;
+    text-align: center;
+}
+
+.shopping-1 {
+    text-align: center;
+    margin: 2%;
+    border-bottom: 1px solid;
+}
+
+.myShopping h3 {
+    margin-top: 80px;
+}
+
+.myShopping {
+    margin-top: 20%;
+    padding: 50px 0px;
+    text-align: center;
+}
+
+.myShopping i {
+    margin-top: 20%;
+    padding: 50px 0px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+div .img-category {
+    position: absolute;
+    top: 8%;
+    left: 42.5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.myName {
+    margin-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-bottom: 1px solid black;
+}
+
+
+/* myStudy css */
+
+.study-main-img {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    float: left;
+}
+
+.study-context {
+    position: absolute;
+    left: 300px;
+    height: 300px;
+    width: 60%;
+    padding: 50px;
+    padding-left: 150px;
+    color: #000;
+}
+
+.study-reader-img {
+    position: absolute;
+    top: 75px;
+    left: 225px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.study-context span {
+    padding: 2px;
+    margin-left: 10px;
+    color: white;
+    font-size: 0.7em;
+    background-color: orangered;
+}
+
+.study-context button {
+    float: right;
+}
+
+.btn-gotochat {
+    font-size: 13px;
+    background-color: orangered;
+    color: white;
+    border: 1px solid white;
+    border-radius: 0px;
+    margin-top: 50px;
+}
+
+.btn-gotochat:hover {
+    background-color: white;
+    color: black;
+    transition: all 0.3s ease 0s;
+    border: 1px solid orangered;
+    -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* pay */
+
+.myPay {
+    margin-top: 20%;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.payment {
+    margin: 50px;
+    padding: 50px;
+    background-color: white;
+}
+
+.payment table {
+    width: 100%;
+    position: relative;
+    word-wrap: break-word;
+    word-break: break-word;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: table;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.payment tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.payment th {
+    background-color: #e9e9e9;
+    color: black;
+    height: 40px;
+    padding: 2px;
+    text-align: left;
+}
+
+.payment td {
+    border-bottom-color: #f2f2f2;
+    color: black;
+    font-size: 0.8em;
+    height: 40px;
+    padding: 2px;
+}
