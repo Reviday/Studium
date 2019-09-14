@@ -44,7 +44,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae hic maiores. Velit nisi, reprehenderit, nobis officia.</p>
           </div>
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
-            <span class="display-4 text-black d-block mb-4"></span>
+       	     <span class="display-4 text-black d-block mb-4"></span>
             <h4 class="mb-4 text-primary">스터디2</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae hic maiores. Velit nisi, reprehenderit, nobis officia.</p>
           </div>

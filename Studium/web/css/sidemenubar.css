@@ -16,7 +16,15 @@
 }
 
 .nav-side-menu {
-	
+  position: absolute;
+  background-color: #2e353d;
+  width: 250px;
+  height: 100%;
+  top: 0;
+}
+
+.nav-side-menu .side-menu {
+  position: absolute;
   overflow: auto;
   font-family: verdana;
   font-size: 12px;
@@ -25,11 +33,20 @@
   padding-left: 0px;
   height: 100%;
   color: #e1ffff;
-  position: absolute;
   top: 0;
   left: 0;
-  width: 230px;
+  width: 250px;
   margin: 0 !important;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.nav-side-menu .stop {
+  position: absolute !important;
+  top: 1800px !important;
 }
 
 .nav-side-menu .brand {
