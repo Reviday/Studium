@@ -184,21 +184,10 @@
 							%>
 						</tbody>
 					</table>
+				
 					<div class="page">
 						<ul class="pagination num-modal">
-							<li><a>처음 페이지</a></li>
-							<li><a href="#"><<</a></li>
-							<li><a href="#" class="active num">1</a></li>
-							<li><a href="#" class="num">2</a></li>
-							<li><a href="#" class="num">3</a></li>
-							<li><a href="#" class="num">4</a></li>
-							<li><a href="#" class="num">5</a></li>
-							<li><a href="#" class="num">6</a></li>
-							<li><a href="#" class="num">7</a></li>
-							<li><a href="#" class="num">8</a></li>
-							<li><a href="#" class="num">9</a></li>
-							<li><a href="#" class="arrow right">>></a></li>
-							<li><a href="#" class="last">끝 페이지</a></li>
+							<%=request.getAttribute("pageBar")%>
 						</ul>
 					</div>
 

@@ -1,6 +1,7 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studium.madang.model.service.FreeMadangService;
+import com.studium.madang.model.vo.FreeMadang;
 
 import common.template.PaginationTemplate;
 
@@ -35,18 +37,15 @@ public class FreeMadangListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FreeMadangService serivce=new FreeMadangService();
-
-		PaginationTemplate pt=new PaginationTemplate(
-						request.getAttribute("cPage"),
-						request.getAttribute("numPerPage"),
-						serivce.selectCountList()
-				);
-		
+		int totalData=serivce.selectCountList(); // 총 데이터 개수
+		String URLmapping="/madang/freeMadangList"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		List<FreeMadang> list=serivce.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
 		
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
-		request.setAttribute("freeMadangList", serivce.selectMadangList(pt.getcPage(), pt.getNumPerPage()));
 		request.setAttribute("numPerPage", pt.getNumPerPage());
+		request.setAttribute("freeMadangList", list);
 
 		request.getRequestDispatcher("/views/madang/freeMadangList.jsp").forward(request, response);
 	}
