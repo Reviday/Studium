@@ -51,7 +51,9 @@ public class MemberDao {
 				m.setMemPhone(rs.getString("mem_phone"));
 				m.setMemGender(rs.getString("mem_gender").charAt(0));
 				m.setMemPoint(rs.getInt("mem_point"));
-				m.setMemCategory(rs.getString("mem_category").charAt(0));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
 				m.setMemZipCode(rs.getString("mem_zipcode"));
 				m.setMemAddress1(rs.getString("mem_address1"));
 				m.setMemAddress2(rs.getString("mem_address2"));
@@ -102,7 +104,9 @@ public class MemberDao {
 				m.setMemPhone(rs.getString("mem_phone"));
 				m.setMemGender(rs.getString("mem_gender").charAt(0));
 				m.setMemPoint(rs.getInt("mem_point"));
-				m.setMemCategory(rs.getString("mem_category").charAt(0));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
 				m.setMemZipCode(rs.getString("mem_zipcode"));
 				m.setMemAddress1(rs.getString("mem_address1"));
 				m.setMemAddress2(rs.getString("mem_address2"));
@@ -151,7 +155,9 @@ public class MemberDao {
 				m.setMemPhone(rs.getString("mem_phone"));
 				m.setMemGender(rs.getString("mem_gender").charAt(0));
 				m.setMemPoint(rs.getInt("mem_point"));
-				m.setMemCategory(rs.getString("mem_category").charAt(0));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
 				m.setMemZipCode(rs.getString("mem_zipcode"));
 				m.setMemAddress1(rs.getString("mem_address1"));
 				m.setMemAddress2(rs.getString("mem_address2"));
