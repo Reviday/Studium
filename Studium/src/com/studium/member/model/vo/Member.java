@@ -17,7 +17,9 @@ public class Member {
 	private String memPhone; // 회원전화번호
 	private char memGender; // 회원 성별
 	private int memPoint; // 회원 포인트
-	private char memCategory; // 회원의 선호 카테고리 => 어떤형식으로 받을지 고민좀 해봐야할 듯.
+	private String memCategory1; // 회원의 선호 카테고리 (최대 3개)
+	private String memCategory2;
+	private String memCategory3;
 	private String memZipCode; // 우편번호
 	private String memAddress1; // 회원 주소 앞부분
 	private String memAddress2; // 회원 상세주소
@@ -48,24 +50,28 @@ public class Member {
 		this.memName = memName;
 	}
 
-	public Member(int memNo, String memUserEmail, String memPassword, char memCode, String memName, Date memBirth,
-			String memPhoen, char gender, int point, char memCategory, String memZipCode, String mem_address1,
-			String mem_address2, char memReceiveEmail, char memUseNote, char memReceiveSms, char memOpenProfile,
-			char memDenied, char memEmailCert, Timestamp memEnrollDatetime, String memEnrollIp, Timestamp memLastloginDatetime,
-			String memLastloginIp, String memProfileContent, String memAdminmemo, String memIcon, String memPhoto) {
+	public Member(int memNo, String memUserEmail, String memPassword, String memName, char memCode, Date memBirth,
+			String memPhone, char memGender, int memPoint, String memCategory1, String memCategory2,
+			String memCategory3, String memZipCode, String memAddress1, String memAddress2, char memReceiveEmail,
+			char memUseNote, char memReceiveSms, char memOpenProfile, char memDenied, char memEmailCert,
+			Timestamp memEnrollDatetime, String memEnrollIp, Timestamp memLastloginDatetime, String memLastloginIp,
+			String memProfileContent, String memAdminmemo, String memIcon, String memPhoto) {
+		super();
 		this.memNo = memNo;
 		this.memUserEmail = memUserEmail;
 		this.memPassword = memPassword;
-		this.memCode = memCode;
 		this.memName = memName;
+		this.memCode = memCode;
 		this.memBirth = memBirth;
-		this.memPhone = memPhoen;
-		this.memGender = gender;
-		this.memPoint = point;
-		this.memCategory = memCategory;
+		this.memPhone = memPhone;
+		this.memGender = memGender;
+		this.memPoint = memPoint;
+		this.memCategory1 = memCategory1;
+		this.memCategory2 = memCategory2;
+		this.memCategory3 = memCategory3;
 		this.memZipCode = memZipCode;
-		this.memAddress1 = mem_address1;
-		this.memAddress2 = mem_address2;
+		this.memAddress1 = memAddress1;
+		this.memAddress2 = memAddress2;
 		this.memReceiveEmail = memReceiveEmail;
 		this.memUseNote = memUseNote;
 		this.memReceiveSms = memReceiveSms;
@@ -106,20 +112,20 @@ public class Member {
 		this.memPassword = memPassword;
 	}
 
-	public char getMemCode() {
-		return memCode;
-	}
-
-	public void setMemCode(char memCode) {
-		this.memCode = memCode;
-	}
-
 	public String getMemName() {
 		return memName;
 	}
 
 	public void setMemName(String memName) {
 		this.memName = memName;
+	}
+
+	public char getMemCode() {
+		return memCode;
+	}
+
+	public void setMemCode(char memCode) {
+		this.memCode = memCode;
 	}
 
 	public Date getMemBirth() {
@@ -134,32 +140,48 @@ public class Member {
 		return memPhone;
 	}
 
-	public void setMemPhone(String memPhoen) {
-		this.memPhone = memPhoen;
+	public void setMemPhone(String memPhone) {
+		this.memPhone = memPhone;
 	}
 
 	public char getMemGender() {
 		return memGender;
 	}
 
-	public void setMemGender(char gender) {
-		this.memGender = gender;
+	public void setMemGender(char memGender) {
+		this.memGender = memGender;
 	}
 
 	public int getMemPoint() {
 		return memPoint;
 	}
 
-	public void setMemPoint(int point) {
-		this.memPoint = point;
+	public void setMemPoint(int memPoint) {
+		this.memPoint = memPoint;
 	}
 
-	public char getMemCategory() {
-		return memCategory;
+	public String getMemCategory1() {
+		return memCategory1;
 	}
 
-	public void setMemCategory(char memCategory) {
-		this.memCategory = memCategory;
+	public void setMemCategory1(String memCategory1) {
+		this.memCategory1 = memCategory1;
+	}
+
+	public String getMemCategory2() {
+		return memCategory2;
+	}
+
+	public void setMemCategory2(String memCategory2) {
+		this.memCategory2 = memCategory2;
+	}
+
+	public String getMemCategory3() {
+		return memCategory3;
+	}
+
+	public void setMemCategory3(String memCategory3) {
+		this.memCategory3 = memCategory3;
 	}
 
 	public String getMemZipCode() {
@@ -174,16 +196,16 @@ public class Member {
 		return memAddress1;
 	}
 
-	public void setMemAddress1(String mem_address1) {
-		this.memAddress1 = mem_address1;
+	public void setMemAddress1(String memAddress1) {
+		this.memAddress1 = memAddress1;
 	}
 
 	public String getMemAddress2() {
 		return memAddress2;
 	}
 
-	public void setMemAddress2(String mem_address2) {
-		this.memAddress2 = mem_address2;
+	public void setMemAddress2(String memAddress2) {
+		this.memAddress2 = memAddress2;
 	}
 
 	public char getMemReceiveEmail() {
@@ -296,6 +318,21 @@ public class Member {
 
 	public void setMemPhoto(String memPhoto) {
 		this.memPhoto = memPhoto;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memNo=" + memNo + ", memUserEmail=" + memUserEmail + ", memPassword=" + memPassword
+				+ ", memName=" + memName + ", memCode=" + memCode + ", memBirth=" + memBirth + ", memPhone=" + memPhone
+				+ ", memGender=" + memGender + ", memPoint=" + memPoint + ", memCategory1=" + memCategory1
+				+ ", memCategory2=" + memCategory2 + ", memCategory3=" + memCategory3 + ", memZipCode=" + memZipCode
+				+ ", memAddress1=" + memAddress1 + ", memAddress2=" + memAddress2 + ", memReceiveEmail="
+				+ memReceiveEmail + ", memUseNote=" + memUseNote + ", memReceiveSms=" + memReceiveSms
+				+ ", memOpenProfile=" + memOpenProfile + ", memDenied=" + memDenied + ", memEmailCert=" + memEmailCert
+				+ ", memEnrollDatetime=" + memEnrollDatetime + ", memEnrollIp=" + memEnrollIp
+				+ ", memLastloginDatetime=" + memLastloginDatetime + ", memLastloginIp=" + memLastloginIp
+				+ ", memProfileContent=" + memProfileContent + ", memAdminmemo=" + memAdminmemo + ", memIcon=" + memIcon
+				+ ", memPhoto=" + memPhoto + "]";
 	}
 	
 }
