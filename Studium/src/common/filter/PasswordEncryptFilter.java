@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter(servletNames = {
 					"LoginServlet",
 					"RegisterServlet",
-					"MyInfoServlet"
+					"MyInfoServlet",
+					"ModifyMemberServlet"
 					
 			})
 public class PasswordEncryptFilter implements Filter {

@@ -14,6 +14,7 @@ public class MemberService {
 	private MemberDao dao=new MemberDao();
 
 
+	
 	public Member selectNo(int no) {
 		Connection conn=getConnection();
 		Member m=dao.selectNo(conn, no);
@@ -41,6 +42,15 @@ public class MemberService {
 			if(result>0) commit(conn);
 			else rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+	
+	public int modifyMember(Member m, String id) {
+		Connection conn=getConnection();
+		int result=dao.modifyMember(conn, m,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

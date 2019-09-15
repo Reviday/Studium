@@ -193,8 +193,29 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemUserEmail());
+			pstmt.setString(1, m.getMemUserEmail());
 			pstmt.setString(2, m.getMemPassword());
 			pstmt.setString(3, m.getMemName());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+		
+	}
+	
+	public int modifyMember(Connection conn, Member m,String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql= prop.getProperty("updateMember");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemPhone());
+			pstmt.setString(2, m.getMemAddress1());
+			pstmt.setString(3, m.getMemPassword());
+			pstmt.setString(4, id);
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

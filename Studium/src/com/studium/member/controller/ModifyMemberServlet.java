@@ -14,14 +14,15 @@ import com.studium.member.model.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet("/myPage/mySchedule")
-public class MyScheduleServlet extends HttpServlet {
+@WebServlet(name="ModifyMemberServlet", urlPatterns="/myPage/modifyMember")
+
+public class ModifyMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyScheduleServlet() {
+    public ModifyMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +31,38 @@ public class MyScheduleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		Member m=new MemberService().selectNo(memberNo);
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/myPage/mySchedule.jsp")
-		.forward(request,response);
+		String id=request.getParameter("loginMember");
+		String phone=request.getParameter("phone");
+		String address=request.getParameter("address");
+		String password=request.getParameter("password");
+	
+		// 수정한 내용
+		Member m=new Member();
+		m.setMemPhone(phone);
+		m.setMemAddress1(address);
+		m.setMemPassword(password);
+		
+		
+		int result=new MemberService().modifyMember(m,id);
+		String msg="";
+		String loc="/";
+		String view="";
+		
+		if(result>0) {
+			//회원정보수정성공
+			request.setAttribute("member", m);
+			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+			.forward(request,response);
+			
+		} else {
+			//회원정보수정 실패
+			msg="회원 정보 수정이 실패하였습니다.";
+			view="/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+		
 		
 		
 	

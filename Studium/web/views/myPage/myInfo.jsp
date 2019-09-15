@@ -56,15 +56,16 @@
                             <p class="myI-0">관심목록</p>
                         </div>
                         <div class="col-7">
-                            <form>
+                            <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member"  method="post">
                                 <div class="inputForm">
-                                    <input type="text" name="name" id="name" class="myI-1" autocomplete=off placeholder="<%=m.getMemName()%>" readonly>
+                                    <input type="text" name="name" id="name" class="myI-1-f" autocomplete=off placeholder="<%=m.getMemName()%>" readonly>
+                               		<input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
                                 </div>
                                 <div class="inputForm">
                                     <input type="text" name="phone" id="phone" class="myI-1" autocomplete=off placeholder="<%=m.getMemPhone()%>" required>
                                 </div>
                                 <div class="inputForm">
-                                    <input type="email" name="email" id="email" class="myI-1" autocomplete=off placeholder="<%=m.getMemUserEmail()%>" readonly>
+                                    <input type="email" name="email" id="email" class="myI-1-f" autocomplete=off placeholder="<%=m.getMemUserEmail()%>" readonly>
                                 </div>
                                 <div class="inputForm">
                                     <input type="text" name="address" id="address" class="myI-1" autocomplete=off placeholder="<%=m.getMemAddress1()%>" required>
@@ -88,25 +89,12 @@
                                         <li>
                                             <a href="#">JavaScript</a>
                                         </li>
-                                        <li>
-                                            <a href="#">DataBase</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">정처기실기</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">중국어</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">경찰공무원</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">photoshop</a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <div>
-                                    <button class="btn-sm btn-changeInfo">수정하기</button>
+                                    <input type="submit" class="btn-sm btn-changeInfo" value="수정하기">
+                                    
                                 </div>
                             </form>
                         </div>

@@ -14,11 +14,22 @@
     padding: 5px 10px;
     display: block;
     margin: 9px 10px;
-    background-color: #e4e4e4;
 }
-
+.myI-1-f {
+    font-size: 0.8em;
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+    height: 38px;
+    width: 300px;
+    padding: 5px 10px;
+    display: block;
+    margin: 9px 10px;
+    background-color: #e4e4e4;
+    pointer-events:none;
+}
 .myI-1:focus {
-    background-color: white;
+    background-color:rgba(239,108,0,0.2) ;
+    border: 1px solid black;
 }
 
 .myInfo>h5 {
@@ -121,7 +132,7 @@
     margin-right: 250px;
     color: white;
     border: 1px solid white;
-    border-radius: 0px;
+    border-radius: 3px;
     margin-top: 50px;
 }
 

@@ -50,8 +50,8 @@ public class MyInfoServlet extends HttpServlet {
 			.forward(request,response);
 			
 		} else {
-			//로그인 실패
-			msg="아이디나 패스워드가 일치하지 않습니다";
+			//비밀번호 틀렸을 때
+			msg="패스워드가 일치하지 않습니다";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
