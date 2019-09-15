@@ -13,10 +13,18 @@ public class FreeMadangService {
 
 	private FreeMadangDao dao=new FreeMadangDao();
 	
-	public List<FreeMadang> selectMadangList() {
+	public int selectCountList() {
 		Connection conn=getConnection();
-		List<FreeMadang> list=dao.selectMadangList(conn);
+		int result=dao.selectCountList(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<FreeMadang> selectMadangList(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<FreeMadang> list=dao.selectMadangList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
+	
 }

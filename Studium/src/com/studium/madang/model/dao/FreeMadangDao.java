@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.FreeMadang;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import static common.template.JDBCTemplate.close;
 
 public class FreeMadangDao {
@@ -31,13 +33,35 @@ public class FreeMadangDao {
 		}
 	}
 	
-	public List<FreeMadang> selectMadangList(Connection conn) {
+	public int selectCountList(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountList");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return result;
+	}
+	
+	public List<FreeMadang> selectMadangList(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<FreeMadang> list=new ArrayList<FreeMadang>();
 		String sql=prop.getProperty("selectMadangList");
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				FreeMadang fm=new FreeMadang();

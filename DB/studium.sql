@@ -42,7 +42,9 @@ create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력
     mem_phone varchar2(11), -- 회원 전화번호(없을 경우 집전화/ '-' 없이 입력받는다.),
     mem_gender char(1) default 'U' constraint mem_gender_ck check (mem_gender in ('M','F','U')), -- 회원 성별(必)(U-Undefined)
     mem_point number default 0, -- 회원 포인트
-    mem_category char(3),-- 숫자나 알파벳으로 받아서 외부테이블연결
+    mem_category1 varchar2(30), -- 회원 선호 카테고리(최대 3개)
+    mem_category2 varchar2(30), 
+    mem_category3 varchar2(30), 
     
     -- 집주소 입력 API 사용시, 2~3개 // 없으면 1개만 
     mem_zipcode varchar2(10), -- 우편번호 (자릿수가 가물해서 10)
@@ -79,11 +81,10 @@ maxvalue 999999;
 
 select * from ta_member;
 update ta_member set mem_email='admin@studium.com';
-update ta_member set mem_category='A';
 commit;
 select * from ta_member where mem_email='admin@studium.com' and mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==';
-insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,'A','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
-insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,'A','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
+insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
+insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
 /*
 테이블이름 (tb_board)
 1. 고유번호(b_idx) : 자동증가로 만들어 지는 회원의 고유번호
@@ -289,8 +290,8 @@ commit;
 
 create table free_madang_file (
     fmf_no number fmf_id_pk primary key,-- 파일 번호 
-    madang_no number constraint madang_no_fk foreign key references ta_free_madang(madang_no), -- 마당글 번호
-    member_no number constraint member_no_fk foreign key references ta_member(mem_no), -- 회원 번호
+    madang_no number constraint madang_no_fk references ta_free_madang(madang_no), -- 마당글 번호
+    member_no number constraint member_no_fk references ta_member(mem_no), -- 회원 번호
     fmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
     fmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
     fmf_download_count number, -- 다운로드 회수
@@ -320,7 +321,7 @@ create table free_madang_file (
     3. 첫번째 정렬 조건에서 값이 같을 경우 cmt_seq로 정렬한다.
 */
 create table ta_qboard_rep (
-    board_no number constraint board_no_fk foreign key references ta_qborad(board_no), -- 게시글 번호(외래키)
+    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
     cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
     cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
     parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
@@ -329,7 +330,7 @@ create table ta_qboard_rep (
 
 -- 공유마당 댓글 테이블
 create table ta_sboard_rep (
-    board_no number constraint board_no_fk foreign key references ta_qborad(board_no), -- 게시글 번호(외래키)
+    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
     cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
     cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
     parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
@@ -337,8 +338,8 @@ create table ta_sboard_rep (
 );
 
 -- 자유마당 댓글 테이블
-create table ta_fboard_rep (
-    board_no number constraint board_no_fk foreign key references ta_qborad(board_no), -- 게시글 번호(외래키)
+create table ta_fmadang_rep (
+    madang_no number constraint madang_no_fk references ta_free_madang(madang_no), -- 게시글 번호(외래키)
     cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
     cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
     parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
@@ -402,3 +403,4 @@ FROM ta_qboard_rep
 ORDER BY DECODE(parent,NULL,cmt_no,parent), cmt_seq;
 
 SELECT * FROM TABS;
+SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FREE_MADANG WHERE MADANG_STATUS='Y' ORDER BY DECODE(MADANG_PARENT,NULL,MADANG_NO,MADANG_PARENT) DESC, MADANG_NO) A) WHERE RNUM BETWEEN 1 AND 10; 

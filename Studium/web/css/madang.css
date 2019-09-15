@@ -10,7 +10,7 @@
 	padding: 0;
 	font-size: 13px;
 	font-weight: 400;
-	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+	/*font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;*/
 	position: relative;
 	height: 1800px;
 	list-style: none;
@@ -28,7 +28,7 @@
 	margin: 0 !important;
 }
 
-.madang-section div {
+.madang-list .mldiv {
 	display: block;
 }
 
