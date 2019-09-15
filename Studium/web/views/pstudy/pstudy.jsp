@@ -83,8 +83,12 @@ body{
         <div class="psutdysearch_btn2"><input type="image" src="<%=request.getContextPath()%>/img/search_btn1.png"></div>
          
       </form>
+      
+      <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
       <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();"> </div>
-     
+     <%}else{ %>
+     	
+     <%} %>
      
     </div>
     <div style="height: 210px;"></div>

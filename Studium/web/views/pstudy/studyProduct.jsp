@@ -132,8 +132,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div>
                 </div>
                 <div>
+                 <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
                  	<input type="image" src="<%=request.getContextPath()%>/img/delete.png" onclick="fn_delete();"/>
                  	<input type="image" src="<%=request.getContextPath()%>/img/update.png" onclick="fn_update();"/>
+                 	<%}else{ %>
+                 	<%} %>
                 </div>
                 <div class="line-information-bottom"></div> <!-- 파트를 구분하는 선 div -->
                 <div class="review">
@@ -283,13 +286,14 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         	return false;
         }
         function fn_pay(){
-        	if(<%=loginMember==null%>){
+        	if(<%=loginMember!=null%>){
+        		location.href="<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>";
+    		}else{
     			fn_loginAlert();
     			return false;
-    		}else{
-    			
     		
-        	location.href="<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>";
+        	
+  
     		}
         }
     </script>
