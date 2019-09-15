@@ -37,9 +37,7 @@ section{
 img{
 	width: 100%;
 }
-.regist>a>img {
-	float:right;
-}
+
 .category {
   float:left;
   left: -200px;
@@ -49,7 +47,7 @@ img{
 .cat_title {
 	width:240px;
 	height:120px;
-	background-color:#4167b2;
+	background-color:#ffffff;
 	margin-top:-3px;
 	color:orangered;
 	font-size:30px;
@@ -65,29 +63,22 @@ img{
 	margin-right: 250px;
 }
 	
-.plist {
-	float:right;
-	background-color:#eeeeee;
+.plist { /* 애매 */
+	
+	background-color:#ffffff;
 	width:900;
 	height:auto;
 	margin-top:50px;
+	margin-left:320px;
 	
 }
-.a_title {
+.a_title { /* 애매  */
 	font-size:21px;
 	font-weight:1000;
 	color:#333;
 	margin-bottom:12px;
 }
-.a_sec{
-	width:400px;
-	height:30px;
-	float:left;
-	font-size:21px;
-	font-weight:1000;
-	color:#333;
-}
-.a_cnt1 {
+.a_cnt1 { /*진짜ㄴ  */
 	float:left;
 	margin-top:10px;
 	margin :10px;
@@ -96,7 +87,14 @@ img{
 	height:300px;
 	box-shadow: 3px 3px 15px 1px #999;
 }
-.a_cnt1 {
+.a_cnt1 {/*ㄴ  */
+float:left;
+	margin-top:10px;
+	margin :10px;
+	background-color:#f8f8f8;
+	width:280px;
+	height:300px;
+	box-shadow: 3px 3px 15px 1px #999;
   transform: scale(1);
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -104,24 +102,24 @@ img{
   -o-transform: scale(1);
   transition: all 0.3s ease-in-out;
 }
-.a_cnt1:hover {
+.a_cnt1:hover {/*ㄴ  */
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
 }
-.a_cnt1>a>img {
+.a_cnt1>a>img { /*ㄴ  */
 	object-fit: cover;
 	width:280px;
 	height:170px;
 }
-.most_border{
+.most_border{ /*아님  */
 	width: 280px;
 	border-top: 1px solid #CCC;
 }
 
-.most_name{
+.most_name{ /*아님ㄴ  */
 	padding-left: 15px;
 	font-size: 18px;
 	font-weight: bold;
@@ -136,13 +134,6 @@ img{
 	font-weight: bold;
 	margin-bottom: 17px;
 	
-}
-.most_star {
-	padding-left: 15px;
-	padding-top:12px;
-}
-.most_star>img {
-	height:25px;
 }
 
 

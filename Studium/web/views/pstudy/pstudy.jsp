@@ -18,7 +18,7 @@
       }
 
 body{
-	background-color: #eeeeee !important;
+	background-color: #ffffff !important;
 }
   </style>
 
@@ -32,7 +32,7 @@ body{
  
   
   <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
-    <section>
+    <section >
   <div class="wrap" style="margin-left:100px;">
     <div class="category" style="margin-top: 20px;">
       <div class="sidebar">
@@ -189,7 +189,7 @@ body{
         AOS.init();
     </script>
 </section>
-
+<%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
 </html>

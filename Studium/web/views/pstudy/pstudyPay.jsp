@@ -126,12 +126,19 @@
 	function fn_pay() {
 		var msg = "결제하시겠습니까";
 		var flag = confirm(msg);
+		var resultPay =<%=resultPay%>;
 		if(flag==true) {
+			if(resultPay>0){
 		location.href="<%=request.getContextPath()%>/pstudy/psutdyPayment?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo()%>&mPoint=<%= resultPay%>";
+			}else{
+				alert("포인트 충전 후  결제하세요 ");
+				return false;
+			}
 		}
 		else alert("취소하였습니다.");
 		
 	}
+	
 
 
 </script>
