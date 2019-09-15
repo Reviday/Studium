@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
@@ -14,14 +15,15 @@ import com.studium.member.model.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet("/myPage/myInfo")
-public class MypageServlet extends HttpServlet {
+@WebServlet(name="MyInfoServlet", urlPatterns="/myPage/myInfo")
+
+public class MyInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public MyInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +32,32 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		Member m=new MemberService().selectNo(memberNo);
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-		.forward(request,response);
+		
+		String email=request.getParameter("loginMember");
+		String password=request.getParameter("password");
+		System.out.println(email+"email, password"+password);
+	
+		// Member 객체 확인 후 받아오기
+		Member m=new MemberService().selectEmail(email, password);	
+		String msg="";
+		String loc="/";
+		String view="";
+		
+		if(m!=null) {
+			//비밀번호 확인 성공
+			request.setAttribute("member", m);
+			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+			.forward(request,response);
+			
+		} else {
+			//로그인 실패
+			msg="아이디나 패스워드가 일치하지 않습니다";
+			view="/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+		
 		
 		
 	

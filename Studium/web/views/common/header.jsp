@@ -207,7 +207,7 @@
 		<%if(loginMember!=null) { %>
         <div id="myP-index">
             <nav class="nav-item nav-menu">
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfo?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/mySchedule?memberNo=<%=loginMember.getMemNo()%>">일정관리</a>
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>">내 스터디</a>
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>">찜</a>
