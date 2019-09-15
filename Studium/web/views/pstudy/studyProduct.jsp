@@ -1,3 +1,4 @@
+<%@page import="javafx.scene.control.Alert"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy" %>
@@ -204,7 +205,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 </div>
                 <div class="sinchung">
                     <!-- 신청 버튼 -->
-                    <input type="button" value="참여 신청하기">
+                    <input type="button" value="참여 신청하기" onclick="fn_pay();">
                 </div>
                 <div class="zzim">
                     <!-- 찜하기 버튼 -->
@@ -274,16 +275,28 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     		else alert("취소하였습니다.");
         }
         function fn_update(){
+        	
         	location.href="<%=request.getContextPath()%>/pstudy/pstudyUpdate?pNo=<%=p.getpNo()%>";
         }
         function fn_loginAlert(){
         	alert("로그인후 이용하세요 ");
-        	$("#userId").focus();
+        	return false;
+        }
+        function fn_pay(){
+        	if(<%=loginMember==null%>){
+    			fn_loginAlert();
+    			return false;
+    		}else{
+    			
+    		
+        	location.href="<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>";
+    		}
         }
     </script>
-     <%@ include file="../../views/common/footer.jsp" %> 
+    
      <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/star.js"></script>
+ <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
 </html>

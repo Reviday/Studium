@@ -1,0 +1,258 @@
+body {
+    font-family: "Do Hyeon", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #868e96;
+}
+
+
+
+section.studyIntro {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    background-color: #EBEBEB;
+    box-sizing: border-box;
+    margin-top: 100px;
+}
+
+div {
+    display: block;
+}
+
+.progress-bar {
+    height: 72px;
+    background: #5f6b7a !important;
+    border-radius: 4px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#product-order-section #order-form {
+    margin-top: 24px;
+}
+
+form {
+    display: block;
+}
+
+table {
+    width: 100%;
+    display: block;
+    background: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+#product-info-columns {
+    height: 60px;
+    line-height: 60px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc;
+    color: #a0a0a0;
+}
+
+.product {
+    padding-left: 24px;
+    width: 600px;
+    text-align: left;
+}
+
+.item {
+    text-align: left;
+    width: 300px;
+}
+
+.price {
+    width: 100px;
+}
+
+.product2 {
+    padding-left: 24px;
+    width: 600px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.item2 {
+    text-align: left;
+    width: 300px;
+    vertical-align: middle;
+}
+
+.price2 {
+    width: 100px;
+    vertical-align: middle;
+}
+
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    color: #000000;
+}
+
+dt {
+    width: 372px;
+    font-size: 16pt;
+    padding-left: 24px;
+    line-height: 1.6em;
+    font-weight: 700;
+}
+
+dt {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 50px 0;
+    border-top: 1px solid #f2f2f2;
+}
+
+.fields {
+    margin-top: 60px;
+    font-size: 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+#page-wrap {
+    margin-top: 24px;
+    padding: 24px;
+    background: #fff;
+}
+
+dd {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 50px 0;
+    border-top: 1px solid #f2f2f2;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+#product-info-content {
+    box-sizing: border-box;
+}
+
+.product-image {
+    display: inline-block;
+    width: 9pc;
+    height: 9pc;
+    background-size: cover;
+    border-radius: 2px;
+    vertical-align: top;
+    float: left;
+}
+
+.product-texts {
+    position: relative;
+    width: 276px;
+    height: 9pc;
+    box-sizing: border-box;
+    padding-left: 50px;
+    display: inline-block;
+    margin-left: 60px;
+    padding-top: 20px;
+
+}
+
+.area {
+    position: absolute;
+    top: 36px;
+    font-size: 10pt;
+    color: #ef6c00;
+}
+
+.title {
+    position: absolute;
+    bottom: 30px;
+    font-size: 13pt;
+    line-height: 1.3em;
+}
+
+#product-order-section #stage1 .fields dd,
+#product-order-section #stage1 .fields dt {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 50px 0;
+    border-top: 1px solid #f2f2f2;
+}
+
+.product-item {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1pc;
+    font-size: 10pt;
+    border-radius: 2px;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+}
+
+.confirmed {
+    margin-top: 10px;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px;
+    height: 50px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.confirmed #mark {
+    vertical-align: middle;
+    margin-bottom: 20px;
+    margin-right: 9px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: transparent url(https://cdn.studysearch.co.kr/static/images/icon_asset_3.340e69ee1287.png)no-repeat -4px -1186px;
+    cursor: pointer;
+}
+
+.confirmed .checked {
+    background: transparent url(https://cdn.studysearch.co.kr/static/images/icon_asset_3.340e69ee1287.png)no-repeat -4px -858pt !important;
+}
+.next {
+    width: 170px;
+    height: 60px;
+    line-height: 60px;
+    color: #fff;
+    text-align: center;
+    font-family: 'Apple SD Gothic Neo';
+    background: #ef6c00;
+    border-radius: 4px;
+    font-size: 20pt;
+    font-weight: 700;
+    outline: 0;
+    border: none;
+    display: block;
+    margin: 36px auto 9pt;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}

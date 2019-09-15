@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.studium.member.model.dao.MemberDao;
+import com.studium.member.model.vo.Member;
 import com.studium.pstudy.model.vo.Pstudy;
 
 
@@ -30,6 +31,23 @@ public class PstudyDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public int paymentMember(Connection conn , Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("paymentMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,m.getMemPoint());
+			pstmt.setInt(2,m.getMemNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
 	}
 	public List<Pstudy> bestPstudy(Connection conn){
 		PreparedStatement pstmt=null;

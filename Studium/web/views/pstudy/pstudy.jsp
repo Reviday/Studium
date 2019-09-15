@@ -32,7 +32,7 @@ body{
  
   
   <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
-    
+    <section>
   <div class="wrap" style="margin-left:100px;">
     <div class="category" style="margin-top: 20px;">
       <div class="sidebar">
@@ -89,7 +89,7 @@ body{
     </div>
     <div style="height: 210px;"></div>
     <% if(bestList.size()!=0){%>
-<div class="a">
+<div class="plist">
 	<div class="a_title">평점 높은 스터디 </div>
 	<div class="study-list">
 		<div class="row ">
@@ -128,7 +128,7 @@ body{
 </div>
 <% } else {%>
 <%} %>
-<div class="a">
+<div class="plist">
 	<div class="a_title">강사 스터디 </div>
 	<div class="study-list">
 		<div class="row ">
@@ -167,10 +167,7 @@ body{
 </div>
 
   </div>
-   <style>
-   
-       
-    </style>
+
 
 
   <script type="text/javascript" src=""></script>
@@ -191,7 +188,7 @@ body{
     <script>
         AOS.init();
     </script>
-
+</section>
 
 </body>
 

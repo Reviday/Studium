@@ -7,6 +7,7 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.studium.member.model.vo.Member;
 import com.studium.pstudy.model.dao.PstudyDao;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -14,6 +15,7 @@ import com.studium.pstudy.model.vo.Pstudy;
 public class PstudyService {
 	
 	private PstudyDao dao=new PstudyDao();
+	
 	
 	public int inserPstudy(Pstudy p) {
 		Connection conn =getConnection();
@@ -23,6 +25,14 @@ public class PstudyService {
 		close(conn);
 		return result;
 		
+	}
+	public int paymentMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.paymentMember(conn,m);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
 	}
 	public Pstudy selectpStudyVIew(int no) {
 		Connection conn=getConnection();

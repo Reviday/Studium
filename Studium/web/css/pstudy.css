@@ -11,10 +11,20 @@ html, body {
     padding: 0px;
 
     font-size: 12px;
-	height:100%;
+
+
+    min-height: 100%;
+
+
 }
 
 .wrap {
+	width:1200px;
+	min-height:100%;
+	
+}
+section{
+	display: block;
 	width:1200px;
 	min-height:100%;
 }
@@ -23,8 +33,9 @@ html, body {
 .main_study>img {
     width: 100%;
     height: 140px;
-	
-
+}
+img{
+	width: 100%;
 }
 .regist>a>img {
 	float:right;
@@ -54,12 +65,13 @@ html, body {
 	margin-right: 250px;
 }
 	
-.a {
+.plist {
 	float:right;
 	background-color:#eeeeee;
 	width:900;
 	height:auto;
 	margin-top:50px;
+	
 }
 .a_title {
 	font-size:21px;
@@ -104,65 +116,6 @@ html, body {
 	width:280px;
 	height:170px;
 }
-.a_cnt2 {
-	float:left;
-	margin-top:10px;
-	margin-left:30px;
-	background-color:#f8f8f8;
-	width:280px;
-	height:300px;
-	box-shadow: 3px 3px 15px 1px #999;
-}
-.a_cnt2 {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;
-}
-.a_cnt2:hover {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
-}
-.a_cnt2>a>img {
-	object-fit: cover;
-	width:280px;
-	height:170px;
-}
-.a_cnt3 {
-	float:left;
-	margin-top:10px;
-	margin-left:30px;
-	background-color:#f8f8f8;
-	width:280px;
-	height:300px;
-	box-shadow: 3px 3px 15px 1px #999;
-}
-.a_cnt3 {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;
-}
-.a_cnt3:hover {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
-}
-.a_cnt3>a>img {
-	object-fit: cover;
-	width:280px;
-	height:170px;
-}
-
 .most_border{
 	width: 280px;
 	border-top: 1px solid #CCC;
@@ -191,126 +144,12 @@ html, body {
 .most_star>img {
 	height:25px;
 }
-.most_cou {
-	float:right;
-	margin-right:103px;
-	margin-top:10px;
-}
-.list_contents{
-	word-break:break-all;
-	width:290px;
-	margin-right:10px;
-	margin-top: 25px;
-	margin-bottome:30px;
-	height:500px;
-	float:left;
-	background-color: #f8f8f8;
-	box-shadow: 3px 3px 8px 1px #999;
-}
-.list_contents {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;
-}
-.list_contents:hover {
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
-}
-.list_contents>a>img {
-	object-fit: cover;
-	width:290px;
-	max-height:170px;
-	padding-top:0px;
-}
-.list_more{
-	width:400px;
-	height:30px;
-	float:right;
-	text-align:right;
-	padding-top:10px;
-	font-size:12px;
-	font-weight:bold;
-	color:#333;
-}
-.list_name{
 
-	font-size: 18px;
-	font-weight: bold;
-	margin-left: 0px;
-	margin-top: 10px;
-  margin-bottom: 2px;
-  text-align: center;
-	
-}
-.list_type{
-	padding-left: 15px;
-	font-size: 14px;
-	font-weight: bold;
-	margin-bottom: 17px;
-	
-}
-.list_title	{
-	font-size:13.5px;
-}
-.list_con	{
-	font-size:13px;
-	padding-left:4px;
-}
-.list_addr_out{
-	width: 290px;
-	border-top: 1px solid #CCC;
-}
-.list_addr_in{
-	padding-left: 15px;
-	padding-right: 15px;
-	width: 220px;
-	font-size: 14px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	margin-left: 0px;
-	
-}
-.list_time{
-	padding-left: 15px;
-	padding-right: 15px;
-	width:290px;
-	font-size: 14px;
-	margin-bottom: 10px;
-	
-}
-.list_tel{
-	padding-left: 15px;
-	padding-right: 15px;
-	width:290px;
-	font-size: 14px;
-	margin-bottom: 10px;
-	
-}
-.list_site{
-	padding-left: 15px;
-	padding-right: 15px;
-	width:290px;
-	font-size: 14px;
-	margin-bottom: 10px;
-	
-}
+
+
 /* leftside */
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-        body {
-          color: #5D5F63;
-          font-family: 'Open Sans', sans-serif;
-          padding: 0;
-          margin: 0;
-          text-rendering: optimizeLegibility;
-          -webkit-font-smoothing: antialiased;
-          height:100%;
-        }
+
+      
         .sidebar-toggle {
           margin-left: -240px;
           height:100%;
