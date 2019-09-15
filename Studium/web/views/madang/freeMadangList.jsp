@@ -4,136 +4,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	List<FreeMadang> fmlist = (List)request.getAttribute("freeMadangList");
-	int cPage = (int)request.getAttribute("cPage");
+	List<FreeMadang> fmlist = (List) request.getAttribute("freeMadangList");
+	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.dd.MM.");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
-<link href="<%=request.getContextPath()%>/css/madang.css" rel="stylesheet">
-    <style>
-        @import url('https://rsms.me/inter/inter-ui.css');
+<link href="<%=request.getContextPath()%>/css/madang.css"
+	rel="stylesheet">
+<style>
+.page {
+	height: 100px;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
 
-        .pageBar-container {
-            align-items: center;
-            color: #555;
-            font-family: 'Inter UI', sans-serif;
-            font-size: 1.25em;
-            justify-content: center;
-            /* height: 100vh; */
-            margin: 0 auto;
-            display: flex;
-        }
+.pagination {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin-top: 20px;
+}
 
-        .pageBar {
-            display: inline-block;
-            position: relative;
-        }
+.pagination li {
+	display: inline;
+	text-align: center;
+}
 
-        .index {
-            cursor: pointer;
-            display: inline;
-            margin-right: 30px;
-            padding: 5px;
-            user-select: none;
-            -moz-user-select: none;
-        }
+.pagination a {
+	float: left;
+	display: block;
+	font-size: 14px;
+	text-decoration: none;
+	padding: 5px 12px;
+	color: #96a0ad;
+	line-height: 1.5;
+}
 
-        .index:last-child {
-            margin: 0;
-        }
+.first {
+	margin-right: 15px;
+}
 
-        svg {
-            left: -13px;
-            position: absolute;
-            top: -11px;
-            transition: transform 500ms;
-            width: 46px;
-        }
+.last {
+	margin-left: 15px;
+}
 
-        path {
-            fill: none;
-            stroke: #2FB468;
-            stroke-dasharray: 150 150;
-            stroke-width: 15;
-        }
+.first:hover, .last:hover, .left:hover, .right:hover {
+	color: #2e9cdf;
+}
 
-        .pageBar.open:not(.flip) path {
-            animation: OpenRight 500ms;
-        }
+.pagination a.active {
+	cursor: default;
+	color: #ffffff;
+}
 
-        .pageBar.open.flip path {
-            animation: OpenLeft 500ms;
-        }
+.pagination a:active {
+	outline: none;
+}
 
-        .pageBar.i1 svg {
-            transform: translateX(0);
-        }
+.num-modal .num {
+	margin-left: 3px;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	-moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border-radius: 100%;
+}
 
-        .pageBar.i2 svg {
-            transform: translateX(50px);
-        }
+.num-modal .num:hover {
+	background-color: #ef6c00;
+	color: #ffffff;
+}
 
-        .pageBar.i3 svg {
-            transform: translateX(105px);
-        }
+.num-modal .num.active, .num-modal .num:active {
+	background-color: #ef6c00;
+	cursor: pointer;
+}
 
-        .pageBar.i4 svg {
-            transform: translateX(160px);
-        }
-
-        .pageBar.i5 svg {
-            transform: translateX(215px);
-        }
-
-		.pageBar.i6 svg {
-            transform: translateX(265px);
-        }
-        .pageBar.i7 svg {
-            transform: translateX(315px);
-        }
-        .pageBar.i8 svg {
-            transform: translateX(365px);
-        }
-        .pageBar.i9 svg {
-            transform: translateX(425px);
-        }
-        .pageBar.i10 svg {
-            transform: translateX(440px);
-        }
-        @keyframes OpenRight {
-            25% {
-                stroke-dasharray: 100 150;
-            }
-
-            60% {
-                stroke-dasharray: 100 150;
-            }
-
-            100% {
-                stroke-dasharray: 150 150;
-            }
-        }
-
-        @keyframes OpenLeft {
-            25% {
-                stroke-dashoffset: -50px;
-            }
-
-            60% {
-                stroke-dashoffset: -50px;
-            }
-
-            100% {
-                stroke-dashoffset: 0;
-            }
-        }
-    </style>
-<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+.arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid blue;
+}
+</style>
+<div class="header-background"
+	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
 </div>
 <section class="madang-section">
-<%@ include file="/views/common/sideMenuBar.jsp"%>	
+	<%@ include file="/views/common/sideMenuBar.jsp"%>
 	<div class="container">
 		<div class="wrapper">
 			<div class="madang-list mldiv">
@@ -220,55 +184,31 @@
 							%>
 						</tbody>
 					</table>
-		<div class="pageBar-container">
-	<div class="pageBar">
-        <span>
-            <div class="index">1</div>
-            <div class="index">2</div>
-            <div class="index">3</div>
-            <div class="index">4</div>
-            <div class="index">5</div>
-            <div class="index">6</div>
-            <div class="index">7</div>
-            <div class="index">8</div>
-            <div class="index">9</div>
-            <div class="index">10</div>
-        </span>
-        <svg viewBox="0 0 100 100">
-            <path
-                d="m 7.1428558,49.999998 c -1e-7,-23.669348 19.1877962,-42.8571447 42.8571442,-42.8571446 23.669347,0 42.857144,19.1877966 42.857144,42.8571446" />
-        </svg>
-        <svg viewBox="0 0 100 100">
-            <path
-                d="m 7.1428558,49.999998 c -1e-7,23.669347 19.1877962,42.857144 42.8571442,42.857144 23.669347,0 42.857144,-19.187797 42.857144,-42.857144" />
-        </svg>
-    </div>
-			</div>
-    
-      </div>
+					<div class="page">
+						<ul class="pagination num-modal">
+							<li><a>처음 페이지</a></li>
+							<li><a href="#"><<</a></li>
+							<li><a href="#" class="active num">1</a></li>
+							<li><a href="#" class="num">2</a></li>
+							<li><a href="#" class="num">3</a></li>
+							<li><a href="#" class="num">4</a></li>
+							<li><a href="#" class="num">5</a></li>
+							<li><a href="#" class="num">6</a></li>
+							<li><a href="#" class="num">7</a></li>
+							<li><a href="#" class="num">8</a></li>
+							<li><a href="#" class="num">9</a></li>
+							<li><a href="#" class="arrow right">>></a></li>
+							<li><a href="#" class="last">끝 페이지</a></li>
+						</ul>
+					</div>
+
 				</div>
-					
+			</div>
+
+		</div>
+
 	</div>
 
-</div>
-    <script>
-        const c = document.querySelector('.pageBar')
-        const indexs = Array.from(document.querySelectorAll('.index'))
-        let cur = -1
-        indexs.forEach((index, i) => {
-            index.addEventListener('click', (e) => {
-                // clear
-                c.className = 'pageBar'
-                void c.offsetWidth; // Reflow
-                c.classList.add('open')
-                c.classList.add( 'i'+(i + 1))
-                if (cur > i) {
-                    c.classList.add('flip')
-                }
-                cur = i
-            })
-        })
-    </script>
 </section>
 
 
