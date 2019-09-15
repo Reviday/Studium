@@ -18,8 +18,7 @@
 		<div class="header-background-cover">
       </div>
     </div>
-	
-    <div class="section-content" style="background-color: rgb(240, 240, 240)">
+	  <div class="section-content" style="background-color: rgb(240, 240, 240)">
         <div class="row">
             <div class="col-sm-2">
             </div>
@@ -50,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="card-bottom">
-                                <img src="img/1.jpg">
+                                <img src="<%=request.getContextPath()%>/img/1.jpg">
                             </div>
                         </div>
 
@@ -64,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="card-bottom">
-                                <img src="img/1.jpg">
+                                <img src="<%=request.getContextPath()%>/img/1.jpg">
                             </div>
                         </div>
 
@@ -79,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="card-bottom">
-                                <img src="img/1.jpg">
+                                <img src="<%=request.getContextPath()%>/img/1.jpg">
                             </div>
                         </div>
 
@@ -95,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="card-bottom">
-                                <img src="img/1.jpg">
+                                <img src="<%=request.getContextPath()%>/img/1.jpg">
                             </div>
                         </div>
 
@@ -109,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="card-bottom">
-                                <img src="img/1.jpg">
+                                <img src="<%=request.getContextPath()%>/img/1.jpg">
                             </div>
                         </div>
 
@@ -135,6 +134,7 @@
             <div class="col-sm-2 "></div>
         </div>
     </div>
+	
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>
