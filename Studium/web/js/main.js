@@ -373,5 +373,57 @@ function registation_validate() {
 };
 
 
+//전화번호 정규표현식
+var modiPhone =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/;
+
+
+//회원정보수정 유효성 검사
+function modifyMember_validate() {
+	console.log('함수들어감');
+	//전화번호검사
+	var phone = $('#phone');
+	if(!name.val()) {
+		alert('전화번호를 입력해주세요.');
+		phone.focus();
+		return false;
+	} else {
+		if(!phone.test(phone.val().trim())) {
+			alert('전화번호 형식이 유효하지 않습니다.');
+			phone.focus();
+			return false;
+		}
+	}
+	
+	//비밀번호 검사
+	var pwd = $('#modipwd');
+	if(!pwd.val()) {
+		alert("비밀번호를 입력해주세요.");
+		pwd.focus();
+		return false;
+	} else if(pwd.val().length<8 && pwd.val().length>16){
+		alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
+		pwd.focus();
+		return false;
+	} else {
+		if(!regPwd.test(pwd.val().trim())) {
+			alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
+			pwd.focus();
+			return false;
+		}
+	}
+	
+	// 비밀번호 일치 확인
+	var pwdck = $('#modipwdck');
+	if(pwd.val()!=pwdck.val()) {
+		alert("비밀번호가 일치하지 않습니다.");
+		pwdck.focus();
+		return false;
+	}
+	
+	//모든사항 통과 
+	return true;
+	
+}
+
 
 	

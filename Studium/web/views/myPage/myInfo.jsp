@@ -56,7 +56,7 @@
                             <p class="myI-0">관심목록</p>
                         </div>
                         <div class="col-7">
-                            <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member"  method="post">
+                            <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member"   method="post">
                                 <div class="inputForm">
                                     <input type="text" name="name" id="name" class="myI-1-f" autocomplete=off placeholder="<%=m.getMemName()%>" readonly>
                                		<input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
@@ -72,11 +72,11 @@
                                 </div>
 
                                 <div class="inputForm">
-                                    <input type="password" name="pwd" id="pwd" class="myI-1" required>
+                                    <input type="password" name="password" id="modipwd" class="myI-1" required>
                                 </div>
 
                                 <div class="inputForm">
-                                    <input type="password" name="pwdck" id="pwdck" class="myI-1" required>
+                                    <input type="password" name="passwordck" id="modipwdck" class="myI-1" required>
                                 </div>
                                 <div class="tag_cloud_widget">
                                     <ul class="list">
@@ -93,7 +93,7 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <input type="submit" class="btn-sm btn-changeInfo" value="수정하기">
+                                    <input type="submit" onclick="modifyMember_validate()"class="btn-sm btn-changeInfo" value="수정하기" >
                                     
                                 </div>
                             </form>
@@ -111,6 +111,10 @@
 
 
     </div>
+    <script>
+    
+    
+    </script>
 
 </section>
 
