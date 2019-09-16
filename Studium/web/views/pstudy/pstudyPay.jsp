@@ -20,7 +20,64 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/main.js"></script>
 </head>
-
+<style>
+	body{
+	background-color: #eeeeee !important;
+}
+	.progressimg{
+		align-content: left;
+	}
+	
+	.progress-bar{
+	     justify-content: left !important;
+	}
+	.confirmed #con-text {
+    vertical-align: left;
+    display: inline-block;
+    width: 500px !important;
+    height: 50px;
+}
+.confirmed {
+    margin-top: 10px;
+    background-color: #fff !important;
+    border: none !important;
+    border-radius: 3px;
+    font-size: 16px !important;
+    font-weight: 600;
+    padding: 5px;
+    height: 50px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+	#memberPrice{
+     font-size: 20px !important;
+      color: #ef6c00;
+   }
+   #studyPricePrice{
+     font-size: 20px !important;
+      color: #ef6c00;
+   }
+   #resultPrice{
+     font-size: 20px !important;
+      color: #ef6c00;
+   }
+  
+  #product-order-section #stage1 .fields dd .first-meeting-guide .first-meeting-value {
+    margin-top: 9pt;
+    width: 70%;
+    height: 3pc;
+    line-height: 3pc;
+    padding-left: 14px;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    font-size: 9pt;
+}
+.header-background-cover {
+         height: 95px;
+         background-color: rgba(0,0,0,0.8);
+      }
+</style>
 <body>
 	<%@ include file="../../views/common/header.jsp" %> 
 
@@ -28,7 +85,11 @@
         <form action="" id="order-form" class="stage1">
             <article>
                 <div id="page-wrap">
-                    <div class="progress-bar"> <img src="<%=request.getContextPath()%>/img/studium_logo.png" alt=""> 스터디 서치 </div>
+                    <div class="progress-bar"> <img src="<%=request.getContextPath()%>/img/studium_ko_logo_white.png" alt="" class="progressimg"> 
+                    &nbsp;&nbsp;&nbsp;	<span>스터디움        </span> 
+                    <div style="margin-left: 450px;"> 참여 신청</div>
+                      <div style="margin-left: 250px;"> 결제</div>
+                    </div>
                     <table>
                         <tr id="product-info-columns">
                             <th class="product">스터디 </th>
@@ -48,7 +109,7 @@
                                 <%=p.getpDateend() %>
                             </td>
                           
-                            <td class="price2"> <%=p.getpPrice() %> </td>
+                            <td class="price2" > <%=p.getpPrice() %> </td>
                         </tr>
                     
                        
@@ -60,10 +121,10 @@
                         	<th class="price">결제 후 포인트 </th>
                         </tr>
                         <tr id="product-info-content">
-                        <td class="product2">  <%=loginMember.getMemPoint() %> </td>
-                        <td class="item2">  <%=p.getpPrice() %> </td>
-                        <td class="price2"> 
-                        
+                        <td class="product2" id="memberPrice">  <%=loginMember.getMemPoint() %> </td>
+                        <td class="item2" id="studyPrice">  <%=p.getpPrice() %> </td>
+                        <td class="price2" id="resultPrice"> 
+                       
                         	<%= resultPay %> 
                       
                          
@@ -76,8 +137,9 @@
                             어느 일정에 참여하세요 ?
                         </dt>
                         <dd>
+                        
                             <div class="product-item">
-                               <%=p.getpDatestart() %>~
+                               <%=p.getpDatestart() %> <span>~</span>
                                 <%=p.getpDateend() %>
                             </div>
                         </dd>
@@ -87,9 +149,28 @@
                             언제부터 참여 하시나요 ?
                         </dt>
                         <dd>
-                            <div class="product-item">
+                     
+                           <div class="first-meeting-guide">
+                           <div class="first-meeting-label">첫 스터디 시작일</div>
+                           <div class="first-meeting-value">  
+                           <div class="product-item">
                                <%=p.getpDatestart() %>
+                            </div> 
                             </div>
+                           <div class="alert">
+                            <span class="highlight"> <%=p.getpDatestart() %> </span>
+                             부터 첫 스터디를 시작합니다.<br>
+                             일정을 고려해 신중하게 신청해주세요.</div>
+                             <div class="absence-alert-wrap">
+                             <a href="#" class="absence-alert-toggle opened">결석시 안내</a>
+                             <div class="absence-alert">스터디에 참여를 못하는 경우 결석한 부분에 대한 환불은 불가능합니다.<br>
+                             하지만 스터디서치 내에 있는 다른 스터디로 스터디 종료전까지 대체참여신청을 할 수 있습니다.<br>
+                             대체 참여 신청 방법은 신청 후 문자로 발송되는 참가자 안내문 내용을 참고해주세요.
+                             </div>
+                             </div>
+                             </div>
+                          
+                            
                         </dd>
                     </dl>
            
@@ -98,7 +179,7 @@
                             약관 동의 하십니까 ?
                         </dt>
                         <dd>
-                            <div class="confirmed" style="border: 1px solid rgb(204, 204, 204)" ;>
+                            <div class="confirmed" >
                                 <span id="mark"></span>
                                 <span id="con-text">
                                     스터디움의 <a href="#">이용약관</a>,
@@ -124,6 +205,13 @@
 </body>
 <script>
 	function fn_pay() {
+		if(!confirmed) {
+			console.log(confirmed);
+			$('.confirmed').css("border","1px solid #e74c3c");
+			$('.required-ck').show();
+			alert("약관의 동의를 해주세요 ");
+			return false;
+		}
 		var msg = "결제하시겠습니까";
 		var flag = confirm(msg);
 		var resultPay =<%=resultPay%>;
@@ -138,6 +226,7 @@
 		else alert("취소하였습니다.");
 		
 	}
+	
 	
 
 

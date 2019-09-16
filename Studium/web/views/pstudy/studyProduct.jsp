@@ -46,6 +46,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p4"]{width:120px;z-index:2;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
+.header-background-cover {
+         height: 95px;
+         background-color: rgba(0,0,0,0.8);
+      }
 </style>
     
     
@@ -61,6 +65,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
             <!-- 가운데 위치배치를 위한 article -->
             <div class="intro">
                 <!-- 왼쪽에 위치한 메인 소개 div -->
+                <div id="toast" ><span class="icon"></span><span class="message"></span></div>
                 <div class="intro-img">
                     <!-- 이미지슬라이드 div -->
                     <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>" alt="">
@@ -212,7 +217,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 </div>
                 <div class="zzim">
                     <!-- 찜하기 버튼 -->
-                    <input type="button" value="찜하기">
+                    <span class="icon"></span>
+                    <input type="button" value="찜하기" onclick="fn_zzim();">
                 </div>
                 <div class="pay-line"></div> <!-- 구분 선 -->
                 <div class="hugi">
@@ -226,6 +232,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         </article>
     </section>
     <script>
+    	function fn_zzim(){
+    		
+    	}
         $(function () {
             $(window).scroll(function () { 
                 var num = $(this).scrollTop();
@@ -296,6 +305,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
   
     		}
         }
+        
     </script>
     
      <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
