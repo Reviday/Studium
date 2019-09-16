@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, java.util.ArrayList , com.studium.util.model.vo.SideMenuElement"%>
+<% 
+	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elemnents");
+	// 요소의 순서 정하기(각 요소의 순서는 order에 의해 정해져 있고
+	// order는 관리자에 의해 수정 가능한 부분이다.)
+	List<SideMenuElement> useElements=new ArrayList(); //정렬된 요소가 저장될 리스트 
+	for(SideMenuElement element : elements) {
+		//parent값이 null일 경우 
+		if(element.getSmParent()==null) {
+			//
+		}
+	}
+%>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/sidemenubar.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/sidemenubar.js"></script>
@@ -16,7 +29,17 @@
 		</div>
 		<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
 			data-target="#menu-content"></i>
-
+			
+			
+	<%
+		for(SideMenuElement element : elements) {
+			
+			
+	%>
+	
+	<% 		
+		}
+	%>
 		<div class="menu-list">
 
 			<ul id="menu-content" class="menu-content collapse out">
