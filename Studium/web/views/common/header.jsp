@@ -31,8 +31,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
  <!--애니메이션-->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
- <!-- aos 애니메이션-->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<!-- aos 애니메이션-->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
    
 
 <!-- jQuery -->

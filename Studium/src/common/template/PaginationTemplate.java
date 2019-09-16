@@ -24,7 +24,6 @@ public class PaginationTemplate {
 	 ************************************/
 	private int cPage;
 	private int numPerPage;
-	private int totalData;
 	private String pageBar;
 	private int totalPage;
 	private int pageBarSize;
@@ -53,7 +52,6 @@ public class PaginationTemplate {
 		}
 		
 		// 페이징 처리
-		this.totalData=totalData;
 		totalPage=(int) Math.ceil((double) totalData / this.numPerPage);
 		this.pageBarSize=10;
 		pageNo=((this.cPage - 1) / pageBarSize) * pageBarSize + 1;

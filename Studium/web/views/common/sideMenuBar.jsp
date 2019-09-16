@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/sidemenubar.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/sidemenubar.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/sidemenubar.js"></script>
 <!-- Side Menu -->
 <div class="nav-side-menu">
 	<div class="side-menu">
@@ -23,7 +23,6 @@
 				<li><a href="#"> <i class="fas fa-tachometer-alt fa-lg"></i>
 						마당소개
 				</a></li>
-
 				<li data-toggle="collapse" data-target="#products"
 					class="collapsed active"><a href="#"> <i
 						class="fab fa-studiovinari fa-lg"></i> 공부마당 <span class="arrow"></span></a></li>
@@ -71,25 +70,3 @@
 		</div>
 	</div>
 </div>
-<!-- Side Menu -->
-<script>
-	$(function() {
-		var $window = $(window), $sidemenu = $('.side-menu'), 
-		$footer = $('footer').offset().top, 
-		$pageheader = $('.page-header').outerHeight(), 
-		$menusize = $('.brand').outerHeight() + $('.menu-list').outerHeight();
-		$sidemenu.css("height", $menusize);
-
-		$window.scroll(function() {
-			if (($(this).scrollTop() + ($pageheader - 20) + $menusize) <= $footer) {
-				if ($(this).scrollTop() <= $pageheader) {
-					$sidemenu.css("top", "0px");
-				} else {
-					$sidemenu.css("top", ($(this).scrollTop() - 20) + "px");
-				}
-			} else {
-				$sidemenu.css("top",($footer - $menusize - $pageheader) + "px");
-			}
-		});
-	});
-</script>
