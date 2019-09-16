@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, java.util.ArrayList , com.studium.util.model.vo.SideMenuElement"%>
+<% 
+	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elemnents");
+	// 요소의 순서 정하기(각 요소의 순서는 order에 의해 정해져 있고
+	// order는 관리자에 의해 수정 가능한 부분이다.)
+	List<SideMenuElement> useElements=new ArrayList(); //정렬된 요소가 저장될 리스트 
+	for(SideMenuElement element : elements) {
+		//parent값이 null일 경우 
+		if(element.getSmParent()==null) {
+			//
+		}
+	}
+%>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/sidemenubar.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/sidemenubar.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/sidemenubar.js"></script>
 <!-- Side Menu -->
 <div class="nav-side-menu">
 	<div class="side-menu">
@@ -16,14 +29,23 @@
 		</div>
 		<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
 			data-target="#menu-content"></i>
-
+			
+			
+	<%
+		for(SideMenuElement element : elements) {
+			
+			
+	%>
+	
+	<% 		
+		}
+	%>
 		<div class="menu-list">
 
 			<ul id="menu-content" class="menu-content collapse out">
 				<li><a href="#"> <i class="fas fa-tachometer-alt fa-lg"></i>
 						마당소개
 				</a></li>
-
 				<li data-toggle="collapse" data-target="#products"
 					class="collapsed active"><a href="#"> <i
 						class="fab fa-studiovinari fa-lg"></i> 공부마당 <span class="arrow"></span></a></li>
@@ -71,25 +93,3 @@
 		</div>
 	</div>
 </div>
-<!-- Side Menu -->
-<script>
-	$(function() {
-		var $window = $(window), $sidemenu = $('.side-menu'), 
-		$footer = $('footer').offset().top, 
-		$pageheader = $('.page-header').outerHeight(), 
-		$menusize = $('.brand').outerHeight() + $('.menu-list').outerHeight();
-		$sidemenu.css("height", $menusize);
-
-		$window.scroll(function() {
-			if (($(this).scrollTop() + ($pageheader - 20) + $menusize) <= $footer) {
-				if ($(this).scrollTop() <= $pageheader) {
-					$sidemenu.css("top", "0px");
-				} else {
-					$sidemenu.css("top", ($(this).scrollTop() - 20) + "px");
-				}
-			} else {
-				$sidemenu.css("top",($footer - $menusize - $pageheader) + "px");
-			}
-		});
-	});
-</script>

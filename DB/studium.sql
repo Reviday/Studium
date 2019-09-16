@@ -23,7 +23,7 @@
 drop table ta_member;
 drop sequence mem_seq;
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==';
-insert into ta_member values(mem_seq.NEXTVAL,'admin@studium.com','x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==','관리자','M','1990/01/01','','M',99999999,'A','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
+insert into ta_member values(mem_seq.NEXTVAL,'admin@studium.com','x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==','관리자','M','1990/01/01','','M',99999999,'','','','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','');
 
 -- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
 -- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
@@ -474,4 +474,50 @@ FROM ta_qboard_rep
 ORDER BY DECODE(parent,NULL,cmt_no,parent), cmt_seq;
 
 SELECT * FROM TABS;
-SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FREE_MADANG WHERE MADANG_STATUS='Y' ORDER BY DECODE(MADANG_PARENT,NULL,MADANG_NO,MADANG_PARENT) DESC, MADANG_NO) A) WHERE RNUM BETWEEN 1 AND 10; 
+SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FREE_MADANG WHERE MADANG_STATUS='Y' ORDER BY DECODE(MADANG_PARENT,NULL,MADANG_NO,MADANG_PARENT) DESC, MADANG_NO) A) WHERE RNUM BETWEEN 1 AND 10;
+
+drop table ta_sidemenu;
+drop sequence ta_sidemenu_seq;
+-- 사이드 메뉴 바 요소를 위한 테이블
+create table ta_sidemenu (
+    sm_uid number constraint sm_uid_pk primary key, 
+    sm_category varchar2(20) not null, -- 사이드 메뉴 요소를 적용할 최상단 카테고리(해당 명칭을 기준으로 각 페이지의 사이드메뉴 요소를 불러온다)
+    sm_menu_name varchar2(30), -- 사이드 메뉴 요소의 이름
+    sm_parent number default null, -- 하위 요소의 경우, 상위 요소의 이름이 저장된다. 상위 요소의 경우 null값
+    sm_order number -- 요소들의 정렬 순서
+);
+
+create sequence ta_sidemenu_seq 
+start with 1
+increment by 1
+maxvalue 9999;
+
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '마당소개', default, 1);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '공부마당', default, 2);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '자유마당', default, 3);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '공유마당', default, 4);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '자랑마당', default, 5);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '질문마당', default, 6);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', 4, 1);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', 4, 2);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', 4, 3);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', '질문마당', 1);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', '질문마당', 2);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', '질문마당', 3);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', '공부마당', 1);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', '공부마당', 2);
+insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', '공부마당', 3);
+commit;
+
+select * from ta_sidemenu where sm_category='madang' order by sm_order; 
+select * from ta_sidemenu where sm_category='madang' order by case when sm_parent is null then sm_order
+                                                                   else sm_order
+                                                                end, sm_order; 
+
+
+
+
+
+
+
+

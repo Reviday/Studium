@@ -12,14 +12,13 @@
 	font-weight: 400;
 	/*font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;*/
 	position: relative;
-	height: 1800px;
 	list-style: none;
 	text-decoration: none;
 }
 
 .madang-section .wrapper {
 	position: relative;
-	height: 1800px;
+	height: 1000px;
 }
 .madang-list {
 	position: absolute;
@@ -95,6 +94,11 @@
 .madang-section .article-board .td_article {
 	padding-left: 12px;
 	padding-right: 18px;
+	/* 한 줄 효과 */
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	/* --------- */
 }
 
 .madang-section .article-board tbody td {
@@ -106,10 +110,11 @@
 	text-align: left;
 }
 
-.madang-section .article-board p-nick {
+.madang-section .article-board .p-nick {
 	text-align: left;
 	margin: 0;
 	padding: 0 !important;
+	border: none !important;
 }
 
 .madang-section .article-board tbody td {
@@ -166,6 +171,7 @@
 .madang-section .inner {
 	line-height: 11px !important;
     color: #333 !important;
+    width: 100%;
 }
 .madang-section .article {
 	line-height: 18px;
