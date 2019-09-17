@@ -316,7 +316,7 @@
                   <input type="submit" class="btn btn-primary btn-block" value="Subscribe">
                 </div>
               </div>
-            </form>
+         	`14`123   </form>
           </div>
         </div>
       </div>

@@ -33,15 +33,19 @@ public class ModifyMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("loginMember");
 		String phone=request.getParameter("phone");
-		String address=request.getParameter("address");
+		String address1=request.getParameter("address1");
+		String address2=request.getParameter("address2");
+		String zipcode=request.getParameter("zipcode");
 		String password=request.getParameter("password");
 	
 		// 수정한 내용
 		Member m=new Member();
 		m.setMemPhone(phone);
-		m.setMemAddress1(address);
+		m.setMemAddress1(zipcode);
+		m.setMemAddress1(address1);
+		m.setMemAddress1(address2);
 		m.setMemPassword(password);
-		
+		System.out.println("우편번호"+zipcode);
 		
 		int result=new MemberService().modifyMember(m,id);
 		String msg="";

@@ -213,9 +213,11 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemPhone());
-			pstmt.setString(2, m.getMemAddress1());
-			pstmt.setString(3, m.getMemPassword());
-			pstmt.setString(4, id);
+			pstmt.setString(2, m.getMemZipCode());
+			pstmt.setString(3, m.getMemAddress1());
+			pstmt.setString(4, m.getMemAddress2());
+			pstmt.setString(5, m.getMemPassword());
+			pstmt.setString(6, id);
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
