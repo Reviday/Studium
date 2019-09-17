@@ -476,21 +476,50 @@ ORDER BY DECODE(parent,NULL,cmt_no,parent), cmt_seq;
 SELECT * FROM TABS;
 SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FREE_MADANG WHERE MADANG_STATUS='Y' ORDER BY DECODE(MADANG_PARENT,NULL,MADANG_NO,MADANG_PARENT) DESC, MADANG_NO) A) WHERE RNUM BETWEEN 1 AND 10;
 
-drop table ta_sidemenu;
+
+
+drop table ta_sidemenu_elements;
 drop sequence ta_sidemenu_seq;
 -- 사이드 메뉴 바 요소를 위한 테이블
-create table ta_sidemenu (
-    sm_uid number constraint sm_uid_pk primary key, 
-    sm_category varchar2(20) not null, -- 사이드 메뉴 요소를 적용할 최상단 카테고리(해당 명칭을 기준으로 각 페이지의 사이드메뉴 요소를 불러온다)
-    sm_menu_name varchar2(30), -- 사이드 메뉴 요소의 이름
-    sm_parent number default null, -- 하위 요소의 경우, 상위 요소의 이름이 저장된다. 상위 요소의 경우 null값
-    sm_order number -- 요소들의 정렬 순서
+create table ta_sidemenu_elements (
+    menu_id number constraint menu_id_pk primary key, -- 기본키
+    menu_category varchar2(30) not null, -- 메뉴가 사용될 위치
+    menu_name varchar2(30) not null, -- 메뉴 이름
+    menu_url varchar2(30) not null, -- 이동시킬 경로
+    menu_class varchar2(50) default null, -- 메뉴에 설정할 class (아이콘 설정용//하위메뉴는 null)
+    use_down char(1) default 'N' constraint use_down_ck check(use_down in ('Y','N')), -- 하위 메뉴 사용 여부
+    sort_no number not null, -- 정렬 순서
+    parent_id number default null -- 부모 메뉴의 id
 );
 
 create sequence ta_sidemenu_seq 
 start with 1
 increment by 1
 maxvalue 9999;
+
+select * from ta_sidemenu_elements;
+select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
+SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공부마당', '/madang/studyMadangList', 'fab fa-studiovinari fa-lg', 'Y', 2, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자유마당', '/madang/freeMadangList', 'fab fa-fort-awesome-alt fa-lg', default, 3, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공유마당', '/madang/shareMadangList', 'fab fa-pagelines fa-lg', 'Y', 4, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자랑마당', '/madang/boastMadangList', 'fas fa-user-tie fa-lg', 'Y', 5, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','질문마당', '/madang/questionMadang', 'fa fa-users fa-lg', 'Y', 6, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/studyMadangList', default, default, 7, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/studyMadangList', default, default, 8, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/studyMadangList', default, default, 9, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/shareMadangList', default, default, 10, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/shareMadangList', default, default, 11, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/shareMadangList', default, default, 12, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/questionMadang', default, default, 13, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/questionMadang', default, default, 14, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/questionMadang', default, default, 15, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/boastMadangList', default, default, 16, 5);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/boastMadangList', default, default, 17, 5);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/boastMadangList', default, default, 18, 5);
+commit;
+
 
 insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '마당소개', default, 1);
 insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '공부마당', default, 2);

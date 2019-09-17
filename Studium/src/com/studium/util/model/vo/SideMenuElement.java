@@ -2,68 +2,101 @@ package com.studium.util.model.vo;
 
 public class SideMenuElement {	
 	
-	private int smUid; // PK
-	private String smCategory; // 사이드 메뉴 요소를 적용할 최상단 카테고리(해당 명칭을 기준으로 각 페이지의 사이드메뉴 요소를 불러온다)
-	private String smMenuName; // 사이드 메뉴 요소의 이름 
-	private String smParent; // 하위 요소의 경우, 상위 요소의 이름이 저장된다. 상위 요소의 경우 null값
-	private int smOrder; // 요소들의 정렬 순서
+	private int menuId; // 기본키
+	private String menuCategory; // 메뉴가 사용될 위치
+	private String menuName; // 메뉴 이름
+	private String menuUrl; // 이동시킬 경로
+	private String menuClass; // 메뉴에 설정할 class (아이콘 설정용//하위메뉴는 null)
+	private char useDown; // 하위 메뉴 사용 여부
+	private int sortNo; // 정렬 순서
+	private int parentId; // 부모 메뉴의 id
 	
 	public SideMenuElement() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SideMenuElement(int smUid, String smCategory, String smMenuName, String smParent, int smOrder) {
-		this.smUid = smUid;
-		this.smCategory = smCategory;
-		this.smMenuName = smMenuName;
-		this.smParent = smParent;
-		this.smOrder = smOrder;
+	public SideMenuElement(int menuId, String menuCategory, String menuName, String menuUrl, String menuClass,
+			char useDown, int sortNo, int parentId) {
+		super();
+		this.menuId = menuId;
+		this.menuCategory = menuCategory;
+		this.menuName = menuName;
+		this.menuUrl = menuUrl;
+		this.menuClass = menuClass;
+		this.useDown = useDown;
+		this.sortNo = sortNo;
+		this.parentId = parentId;
 	}
 
-	public int getSmUid() {
-		return smUid;
+	public int getMenuId() {
+		return menuId;
 	}
 
-	public void setSmUid(int smUid) {
-		this.smUid = smUid;
+	public void setMenuId(int menuId) {
+		this.menuId = menuId;
 	}
 
-	public String getSmCategory() {
-		return smCategory;
+	public String getMenuCategory() {
+		return menuCategory;
 	}
 
-	public void setSmCategory(String smCategory) {
-		this.smCategory = smCategory;
+	public void setMenuCategory(String menuCategory) {
+		this.menuCategory = menuCategory;
 	}
 
-	public String getSmMenuName() {
-		return smMenuName;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public void setSmMenuName(String smMenuName) {
-		this.smMenuName = smMenuName;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
-	public String getSmParent() {
-		return smParent;
+	public String getMenuUrl() {
+		return menuUrl;
 	}
 
-	public void setSmParent(String smPrent) {
-		this.smParent = smPrent;
+	public void setMenuUrl(String menuUrl) {
+		this.menuUrl = menuUrl;
 	}
 
-	public int getSmOrder() {
-		return smOrder;
+	public String getMenuClass() {
+		return menuClass;
 	}
 
-	public void setSmOrder(int smOrder) {
-		this.smOrder = smOrder;
+	public void setMenuClass(String menuClass) {
+		this.menuClass = menuClass;
+	}
+
+	public char getUseDown() {
+		return useDown;
+	}
+
+	public void setUseDown(char useDown) {
+		this.useDown = useDown;
+	}
+
+	public int getSortNo() {
+		return sortNo;
+	}
+
+	public void setSortNo(int sortNo) {
+		this.sortNo = sortNo;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	@Override
 	public String toString() {
-		return "SideMenuElement [smUid=" + smUid + ", smCategory=" + smCategory + ", smMenuName=" + smMenuName
-				+ ", smParent=" + smParent + ", smOrder=" + smOrder + "]";
+		return "SideMenuElement [menuId=" + menuId + ", menuCategory=" + menuCategory + ", menuName=" + menuName
+				+ ", menuUrl=" + menuUrl + ", menuClass=" + menuClass + ", useDown=" + useDown + ", sortNo=" + sortNo
+				+ ", parentId=" + parentId + "]";
 	}
-
+	
 }

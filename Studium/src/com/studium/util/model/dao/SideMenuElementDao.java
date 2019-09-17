@@ -42,11 +42,14 @@ public class SideMenuElementDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				SideMenuElement element=new SideMenuElement();
-				element.setSmUid(rs.getInt("sm_uid"));
-				element.setSmCategory(rs.getString("sm_category"));
-				element.setSmMenuName(rs.getString("sm_menu_name"));
-				element.setSmParent(rs.getString("sm_parent"));
-				element.setSmOrder(rs.getInt("sm_order"));
+				element.setMenuId(rs.getInt("menu_id"));
+				element.setMenuCategory(rs.getString("menu_category"));
+				element.setMenuName(rs.getString("menu_name"));
+				element.setMenuUrl(rs.getString("menu_url"));
+				element.setMenuClass(rs.getString("menu_class"));
+				element.setUseDown(rs.getString("use_down").charAt(0));
+				element.setSortNo(rs.getInt("sort_no"));
+				element.setParentId(rs.getInt("parent_id"));
 				elements.add(element);
 			}
 		} catch(SQLException e) {
