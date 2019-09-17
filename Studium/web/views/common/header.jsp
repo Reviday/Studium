@@ -141,7 +141,7 @@
 						<li class="nav-item"><a class="nav-link" href="review.html">스터디후기</a>
 
 						</li>
-						<li class="nav-item"><a class="nav-link" href="story.html">스토리</a>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/story">스토리</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
