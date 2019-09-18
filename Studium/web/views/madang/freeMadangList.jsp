@@ -185,11 +185,7 @@
 						</tbody>
 					</table>
 				
-					<div class="page">
-						<ul class="pagination num-modal">
-							<%=request.getAttribute("pageBar")%>
-						</ul>
-					</div>
+					<%@ include file="/views/common/pagination.jsp"%>
 
 				</div>
 			</div>
