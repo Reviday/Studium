@@ -48,7 +48,17 @@
 					uCount++;
 		%>
 					<li data-toggle="collapse" data-target="#element<%=uCount %>" class="collapsed"> <!-- li의 active 처리 필요 -->
-						<a href="<%=request.getContextPath()%><%=element.getMenuUrl()%>"> <!-- 하위메뉴 없는 상위메뉴 처리에 고민좀 해야할듯 -->
+						<a class="top-menu" 
+						<%
+							//만약 하위메뉴가 존재하면 href 설정을 주지 않고,
+							//하위메뉴가 존재하지 않는다면, 상위 메뉴가 href를 갖는다. 
+							if(element.getUseDown()=='N') {
+						%>
+								href="<%=request.getContextPath()%><%=element.getMenuUrl()%>"
+						<%
+							}
+						%>	
+						>
 							<i class="<%=element.getMenuClass()%>"></i>
 							<%=element.getMenuName()%>
 							<%
@@ -71,7 +81,7 @@
 		%>
 						<ul class="sub-menu collapse" id="element<%=uCount %>">
 							<li>
-								<a href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
+								<a class="down-menu" href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
 									<%=element.getMenuName()%>
 								</a>
 							</li>
@@ -82,7 +92,7 @@
 						// 일반 요소는 ul을 열거나 닫지 않는다.
 		%>
 						<li>
-							<a href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
+							<a class="down-menu" href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
 								<%=element.getMenuName()%>
 							</a>
 						</li>

@@ -97,7 +97,7 @@
 	<div class="header-background-cover"></div>
 </div>
 <section class="madang-section">
-	<%@ include file="/views/common/sideMenuBar.jsp"%>
+<%@ include file="/views/common/sideMenuBar.jsp"%>	
 	<div class="container">
 		<div class="wrapper">
 			<div class="madang-list mldiv">
