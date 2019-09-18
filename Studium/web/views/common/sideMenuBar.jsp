@@ -4,6 +4,7 @@
 	import="java.util.List, java.util.ArrayList , com.studium.util.model.vo.SideMenuElement"%>
 <% 
 	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elemnents");
+	String choice=(String)request.getAttribute("choice");
 %>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/sidemenubar.css"
@@ -50,8 +51,8 @@
 					uCount++;
 		%>
 			<li data-toggle="collapse" data-target="#element<%=uCount %>"
-				class="collapsed">
-				<!-- li의 active 처리 필요 --> <a class="top-menu"
+				class="collapsed <%=choice!=null&&choice.equals(element.getMenuName())?"choice":""%>">
+				<a class="top-menu"
 				<%
 							//만약 하위메뉴가 존재하면 href 설정을 주지 않고,
 							//하위메뉴가 존재하지 않는다면, 상위 메뉴가 href를 갖는다. 

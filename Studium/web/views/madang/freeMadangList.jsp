@@ -6,92 +6,12 @@
 <%
 	List<FreeMadang> fmlist = (List) request.getAttribute("freeMadangList");
 	int cPage = (int) request.getAttribute("cPage");
-	SimpleDateFormat format = new SimpleDateFormat("yyyy.dd.MM.");
+	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
 <link href="<%=request.getContextPath()%>/css/madang.css"
 	rel="stylesheet">
-<style>
-.page {
-	height: 100px;
-	display: inline-block;
-	text-align: center;
-	width: 100%;
-}
-
-.pagination {
-	list-style: none;
-	display: inline-block;
-	padding: 0;
-	margin-top: 20px;
-}
-
-.pagination li {
-	display: inline;
-	text-align: center;
-}
-
-.pagination a {
-	float: left;
-	display: block;
-	font-size: 14px;
-	text-decoration: none;
-	padding: 5px 12px;
-	color: #96a0ad;
-	line-height: 1.5;
-}
-
-.first {
-	margin-right: 15px;
-}
-
-.last {
-	margin-left: 15px;
-}
-
-.first:hover, .last:hover, .left:hover, .right:hover {
-	color: #2e9cdf;
-}
-
-.pagination a.active {
-	cursor: default;
-	color: #ffffff;
-}
-
-.pagination a:active {
-	outline: none;
-}
-
-.num-modal .num {
-	margin-left: 3px;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	-moz-border-radius: 100%;
-	-webkit-border-radius: 100%;
-	border-radius: 100%;
-}
-
-.num-modal .num:hover {
-	background-color: #ef6c00;
-	color: #ffffff;
-}
-
-.num-modal .num.active, .num-modal .num:active {
-	background-color: #ef6c00;
-	cursor: pointer;
-}
-
-.arrow-left {
-	width: 0;
-	height: 0;
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-	border-right: 10px solid blue;
-}
-</style>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
@@ -154,7 +74,8 @@
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a href="#" onclick="" class="article"> <%=fm.getMadangTitle()%>
+											<a class="article" href="<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=fm.getMadangNo() %>&cPage=<%=cPage%>">
+												 <%=fm.getMadangTitle()%>
 											</a>
 										</div>
 									</div>

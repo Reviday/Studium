@@ -48,14 +48,13 @@ public class FreeMadangListServlet extends HttpServlet {
 		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
-		System.out.println(elements.get(1).getParentId());
-		System.out.println(elements.get(13).getParentId());
 		
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("freeMadangList", list);
 		request.setAttribute("elemnents", elements);
+		request.setAttribute("choice", "");
 
 		request.getRequestDispatcher("/views/madang/freeMadangList.jsp").forward(request, response);
 	}

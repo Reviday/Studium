@@ -88,4 +88,39 @@ public class FreeMadangDao {
 			close(pstmt);
 		} return list;
 	}
+	
+	public FreeMadang selectMadang(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		FreeMadang fm=null;
+		String sql=prop.getProperty("selectMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				fm=new FreeMadang();
+				fm.setMadangNo(rs.getInt("madang_no"));
+				fm.setMadangParent(rs.getInt("madang_parent"));
+				fm.setMadangOrder(rs.getInt("madang_order"));
+				fm.setMadangWriterEmail(rs.getString("madang_writer_email"));
+				fm.setMadangWriterName(rs.getString("madang_writer_name"));
+				fm.setMadangTitle(rs.getString("madang_title"));
+				fm.setMadangContent(rs.getString("madang_content"));
+				fm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
+				fm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				fm.setMadangRecCount(rs.getInt("madang_rec_count"));
+				fm.setMadangRepCount(rs.getInt("madang_rep_count"));
+				fm.setMadangReadCount(rs.getInt("madang_read_count"));
+				fm.setMadangFilePresence(rs.getString("madang_file_presence").charAt(0));
+				fm.setMadangImgPresence(rs.getString("madang_img_presence").charAt(0));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return fm;
+	}
 }

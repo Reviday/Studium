@@ -27,4 +27,11 @@ public class FreeMadangService {
 		return list;
 	}
 	
+	public FreeMadang selectMadang(int no) {
+		Connection conn=getConnection();
+		FreeMadang fm=dao.selectMadang(conn, no);
+		close(conn);
+		return fm;
+	}
+	
 }

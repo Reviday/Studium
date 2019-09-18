@@ -18,12 +18,10 @@
 
 .madang-section .wrapper {
 	position: relative;
-	height: 1000px;
 }
 .madang-list {
-	position: absolute;
+	position: relative;
 	top: 0;
-	left: 200px;
 	margin: 0 !important;
 }
 
@@ -176,6 +174,7 @@
 .madang-section .article {
 	line-height: 18px;
     color: #333 !important;
+    cursor: pointer;
 }
 
 .madang-section .article-board tbody td {
@@ -261,7 +260,6 @@
 
 .madang-section .sub-tit {
 	position: relative;
-	margin-top: 30px;
 	margin-bottom: 10px;
 }
 
