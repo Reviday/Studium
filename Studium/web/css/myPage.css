@@ -5,14 +5,6 @@
     text-align: right;
 }
 
-.myI-0-address {
-    color: #000;
-    padding: 5px 10px;
-    margin: 10px 10px;
-    text-align: right;
-    margin-bottom: 110px;
-}
-
 .myI-1 {
     font-size: 0.8em;
     border: 1px solid #c1c1c1;
@@ -23,7 +15,13 @@
     display: block;
     margin: 9px 10px;
 }
+.myI-1-info{
+	width:300px;
+}
 
+.myI-1-info div{
+	margin-bottom:20px;
+}
 .myI-1-f {
     font-size: 0.8em;
     border: 1px solid #c1c1c1;
@@ -39,8 +37,41 @@
 
 .myI-1:focus {
     background-color: rgba(239, 108, 0, 0.2);
-    border: 1px solid black;
+    border: 1px solid white;
     outline-style: none;
+}
+
+.myInfo>h5 {
+    padding-bottom: 30px;
+}
+
+.myInfo {
+    padding-top: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+}
+
+.inputForm {
+    height: 38px;
+    width: 300px;
+}
+
+
+/* 추가정보 입력 */
+
+.btn-address {
+    cursor: pointer;
+    background-color: #c1c1c1;
+    text-align: center;
+}
+
+.myI-0-address {
+    color: #000;
+    padding: 5px 10px;
+    margin: 10px 10px;
+    text-align: right;
+    margin-bottom: 110px;
 }
 
 .myI-1-add {
@@ -55,20 +86,12 @@
     float: left;
 }
 
-.myInfo>h5 {
-    padding-bottom: 30px;
-}
-
-.myInfo {
-    padding-top: 50px;
-    padding-left: 0px;
-    padding-right: 0px;
-    text-align: center;
-}
-
 .addMoreInfo {
     padding: 50px 0px;
     text-align: center;
+}
+.addMoreInfo>p{
+	margin-bottom:50px;
 }
 
 .btn-withStudium {
@@ -78,7 +101,6 @@
     color: white;
     border: 1px solid white;
     border-radius: 3px;
-    margin-top: 50px;
     margin-left: 9px;
     float: left;
 }
@@ -92,72 +114,94 @@
     box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
 }
 
+.input-icon {
+    position: relative;
+    font-size: 18px !important;
+    color: #ccc;
+    right: -45%;
+    top: -30px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
 
 /* 체크박스 */
 
 .inputInteresting {
     width: 300px;
-}
-
-.inputInteresting>div {
-    display: inline-block;
-    color: rgb(96, 96, 96);
-}
-
-input[type=checkbox]+label {
     text-align: left;
-    margin: 0.2em;
-    cursor: pointer;
-    padding: 0.2em;
+    margin-left: 9px;
 }
 
-input[type=checkbox] {
-    display: none;
+.check-label {
+    margin-right: 10px;
 }
 
-input[type=checkbox]+label:before {
-    content: "\2714";
-    border: 1px solid rgb(96, 96, 96);
-    border-radius: 0.3em;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    padding-left: 0.2em;
-    padding-bottom: 0.3em;
-    margin-right: 0.2em;
-    vertical-align: bottom;
-    color: transparent;
-    transition: .2s;
-}
-
-input[type=checkbox]+label:active:before {
-    transform: scale(0);
-}
-
-input[type=checkbox]:checked+label:before {
-    background-color: rgb(255, 127, 80);
-    border-color: rgb(255, 127, 80);
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 5px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
     color: #fff;
-    font-size: 0.8em;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 3px;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+}
+
+.option-input+label {
+    margin-right: 10px;
+}
+
+.option-input:hover {
+    background: #9faab7;
+}
+
+.option-input:checked {
+    background: orangered;
+}
+
+input:checked::before {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    content: '✔';
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    line-height: 17px;
+}
+
+.option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: orangered;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
 }
 
 
-/* 체크박스 disable일때
-input[type=checkbox]:disabled+label:before {
-    transform: scale(1);
-    border-color: #aaa;
-}
-
-input[type=checkbox]:checked:disabled+label:before {
-    transform: scale(1);
-    background-color: #bfb;
-    border-color: #bfb;
-} */
-
-.section-content {
-    /* position: absolute; */
-    /* top: 300px !important; */
-}
+/* 관심list */
 
 .tag_cloud_widget {
     width: 300px;
@@ -168,9 +212,6 @@ input[type=checkbox]:checked:disabled+label:before {
     float: left;
     /* display: inline-block; */
 }
-
-
-/* line 831, E:/169 Dingo Restaurant/169 Dingo Restaurant/169_Dingo_Restautent_html/sass/_blog.scss */
 
 .tag_cloud_widget ul li a {
     /* display: inline-block; */

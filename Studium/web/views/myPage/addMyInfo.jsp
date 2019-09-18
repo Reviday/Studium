@@ -13,12 +13,15 @@
 	background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
+    <!-- 달력 -->
+    <link href="<%=request.getContextPath()%>/css/daterangepicker.css" rel="stylesheet" media="all">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <section>
 	<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 		<div class="header-background-cover">
       </div>
     </div>
+
 
     <div class="section-content">
 
@@ -28,71 +31,161 @@
             </div>
             <div class="col-sm-8 navbar-myMenu" style=" margin-top:20px">
                 <div class="addMoreInfo" id="addMoreInfo">
-                    <h5>추가 정보를 입력해주세요!</h5>
-                    <br>
+                    <h5>추가 정보 입력</h5>
                     <p>추가정보를 입력하면 더 많은 스터디움의 기능을 누릴 수 있습니다!</p>
 
                     <div class="row">
                         <div class="col-5">
                             <p class="myI-0">생년월일</p>
+                            <p class="myI-0">성별</p>
                             <p class="myI-0">전화번호</p>
                             <p class="myI-0-address">주소</p>
                             <p class="myI-0">관심사</p>
                         </div>
                         <div class="col-7">
-                            <form action="<%=request.getContextPath() %>/myPage/addMoreInformation" id="update-member" method="post">
+                            <form action="<%=request.getContextPath() %>/myPage/addmyInfoEntered?no=<%=loginMember.getMemNo()%>" id="update-member" method="post">
+                                <div class="inputForm">
+                                <input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
+                                    <input class="js-datepicker myI-1" type="text" placeholder="Birthdate" id="birthday" name="birthday" readonly>
+                                    <i class="fa fa-calendar input-icon js-btn-calendar " style="color:rgb(110, 110, 110)"></i>
+                                </div>
+                                <div class="inputForm ">
+                                    <div>
+                                        <select name="gender" id="gender" class="myI-1 ">
+                                            <option disabled="disabled" selected="selected">Gender</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                        <div class="select-dropdown "></div>
+                                    </div>
+                                </div>
 
-                                <div class="inputForm">
-                                    <input type="text" name="birth" id="phone" class="myI-1" autocomplete=off placeholder="생년월일" required>
+                                <div class="inputForm ">
+                                    <input type="phone" name="phone" id="phone" class="myI-1 " autocomplete=off placeholder="전화번호 " required>
                                 </div>
-                                <div class="inputForm">
-                                    <input type="phone" name="phone" id="phone" class="myI-1" autocomplete=off placeholder="전화번호" required>
+                                <div class="inputAddress ">
+                                    <input type="text" id="sample6_postcode" class="myI-1-add " placeholder="우편번호 " readonly>
+                                    <input type="button" onclick="sample6_execDaumPostcode() " class="myI-1-add btn-address " value="우편번호 찾기 ">
+                                    <input type="text" id="sample6_address" class="myI-1 " placeholder="주소 " readonly>
+                                    <input type="text" id="sample6_detailAddress" class="myI-1 " placeholder="상세주소 ">
                                 </div>
-                                <div class="inputAddress">
-                                    <input type="text" id="sample6_postcode" class="myI-1-add" placeholder="우편번호">
-                                    <input type="button" onclick="sample6_execDaumPostcode()" class="myI-1-add btn-address" value="우편번호 찾기">
-                                    <input type="text" id="sample6_address" class="myI-1" placeholder="주소">
-                                    <input type="text" id="sample6_detailAddress" class="myI-1" placeholder="상세주소">
-                                </div>
+
                                 <div class="inputInteresting">
-
-                                    <div> <input type="checkbox" id="프라이머리값" name="CB1" value="값넣기">
-                                        <label for="프라이머리값">foreignLanguage</label></div>
-
-                                    <div> <input type="checkbox" id="프라이머리값" name="CB2" value="값넣기">
-                                        <label for="프라이머리값">programming</label></div>
-                                    <div> <input type="checkbox" id="프라이머리값" name="CB3" value="값넣기">
-                                        <label for="프라이머리값">공무원</label></div>
-                                    <div> <input type="checkbox" id="프라이머리값" name="CB4" value="값넣기">
-                                        <label for="프라이머리값">자격증</label></div>
-                                    <div> <input type="checkbox" id="프라이머리값" name="CB5" value="값넣기">
-                                        <label for="프라이머리값">취준</label></div>
-
+                                    <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                        foreignLanguage
+                                     </label>
+                                    <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                        programming
+                                     </label>
+                                    <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                     	   공무원
+                                     </label>
+                                    <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                      	  자격증
+                                     </label>
+                                    <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                     	   취준
+                                     </label>
                                 </div>
-
-                                <button class="btn-sm btn-withStudium">더 많은 기능 함께하기!</button>
-
-
-                            </form>
+								<input type="submit" class="btn-sm btn-withStudium" onclick="add_moreInformation();" value="작성완료">
+                                
                         </div>
-                    </div>
 
+
+
+                        </form>
+                    </div>
                 </div>
 
-
-
             </div>
-            <div class="col-sm-2"></div>
+
+
 
         </div>
-
-
+        <div class="col-sm-2 "></div>
 
     </div>
 
 
 
+
+
+
     <script>
+        //전화번호 정규표현식
+        var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/;
+
+        // 이름 정규식(한글이름, 영문이름)
+        var regName = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+        // 이메일 정규식
+        var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        // 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+        var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+
+        //회원정보수정 유효성 검사
+        function add_moreInformation() {
+            //생년월일
+            var birth = $("#birthday");
+            if (!birth.val()) {
+                alert('생년월일을 입력해주세요.');
+                birth.click();
+                return false;
+            }
+            //성별
+            var gender = $("#gender");
+            if (!gender.val()) {
+                alert('성별을 입력해주세요.');
+                gender.click();
+                return false;
+            }
+            //전화번호검사
+            var phone = $('#phone');
+            if (!phone.val()) {
+                alert('전화번호를 입력해주세요.');
+                phone.focus();
+                return false;
+            } else {
+                if (!regPhone.test(phone.val().trim())) {
+                    alert('전화번호 형식이 유효하지 않습니다.');
+                    phone.focus();
+                    return false;
+                }
+            }
+            //주소
+            var postcode = $('#sample6_postcode');
+            //상세주소
+            var detailAddress = $('#sample6_detailAddress');
+            if (!postcode.val()) {
+                alert('주소를 입력해주세요.');
+                postcode.focus();
+                return false;
+            }
+            if (!detailAddress.val()) {
+                alert('상세주소를 입력해주세요.');
+                detailAddress.focus();
+                return false;
+            }
+
+            //관심사 체크여부확인
+            if (!$('input:checkbox[name="inter"]').is(":checked")) {
+                return false;
+            }
+
+
+            //모든사항 통과 
+            return true;
+
+        }
+
+
+		//주소api스크립트
         function sample6_execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -113,7 +206,7 @@
                     // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
                     if (data.userSelectedType === 'R') {
                         // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                        // 법정동의 경우 마지막 문자가 "동/로/가 "로 끝난다.
                         if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
                             extraAddr += data.bname;
                         }
@@ -126,10 +219,10 @@
                             extraAddr = ' (' + extraAddr + ')';
                         }
                         // 조합된 참고항목을 해당 필드에 넣는다.
-                        //document.getElementById("sample6_extraAddress").value = extraAddr;
+                        //document.getElementById("sample6_extraAddress ").value = extraAddr;
 
                     } else {
-                        // document.getElementById("sample6_extraAddress").value = '';
+                        // document.getElementById("sample6_extraAddress ").value = '';
                     }
 
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -140,15 +233,12 @@
                 }
             }).open();
         }
-        
-        
-        
-
     </script>
 
-
-
-
+    <!--달력 추가-->
+    <script src="<%=request.getContextPath() %>/js/moment.min.js "></script>
+    <script src="<%=request.getContextPath() %>/js/daterangepicker.js "></script>
+    <script src="<%=request.getContextPath() %>/js/global.js "></script>
 
 </section>
 

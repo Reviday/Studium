@@ -7,13 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.member.model.service.MemberService;
-import com.studium.member.model.vo.Member;
 
 /**
  * Servlet implementation class AddmyInfo
  */
-@WebServlet("/addMyInfo")
+@WebServlet("/myPage/addMyInfo")
 public class AddmyInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

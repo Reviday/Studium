@@ -14,6 +14,7 @@
 }
 </style>
 
+	<!--다음 주소 API -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <section>
 	<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -56,11 +57,13 @@
                             <p class="myI-0">이메일</p>
                             <p class="myI-0">비밀번호</p>
                             <p class="myI-0">비밀번호 확인</p>
-                            <!--여기 분기문-->
+                            <!--하나라도 null이면 안보이게 처리-->
+                              <%if(m.getMemBirth()!=null&&m.getMemPhone()!=null&&m.getMemZipCode()!=null&&m.getMemCategory1()!=null){ %>
                             <p class="myI-0">전화번호</p>
                             <p class="myI-0">생년월일</p>
                             <p class="myI-0-address">주소</p>
                             <p class="myI-0">관심목록</p>
+                             <%} %>
                         </div>
                         <div class="col-7">
                             <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member" method="post">
@@ -77,7 +80,7 @@
                                 <div class="inputForm">
                                     <input type="password" name="passwordck" id="modipwdck" class="myI-1" required>
                                 </div>
-                                <!--여기 분기문-->
+                                <%if(m.getMemBirth()!=null&&m.getMemPhone()!=null&&m.getMemZipCode()!=null&&m.getMemCategory1()!=null){ %>
                                 <div class="inputForm">
                                     <input type="phone" name="phone" id="phone" class="myI-1" autocomplete=off value="<%=m.getMemPhone()%>" required>
                                 </div>
@@ -92,14 +95,8 @@
                                     <input type="text" id="sample6_address" name="address1" class="myI-1" value="<%=m.getMemAddress1()%>">
                                     <input type="text" id="sample6_detailAddress" name="address2" class="myI-1" value="<%=m.getMemAddress2()%>">
                                 </div>
-
-
-                                <div class="tag_cloud_widget">
-
-                                    <div>
-                                        <img src="<%=request.getContextPath() %>/img/peep.jpg">
-                                    </div>
-                                    <%if(m.getMemCategory1()!=null){ %>
+]								
+                                     <div class="tag_cloud_widget">
                                    <ul class="list">
                                         <li>
                                             <a href="#"><%=m.getMemCategory1() %></a>
@@ -112,13 +109,18 @@
                                         </li>
                                         
                                     </ul>
-                                     <%}else{%>
-                                      <a href="<%=request.getContextPath() %>/addMyInfo">아직 관심정보가 없습니다ㅠㅅ ㅠ <br>추가정보를 입력해주세요!</a>
-                                    
-                                    <%}%>
-                                </div>
                                 <div>
-                                    <input type="submit" onclick="modifyMember_validate()" class="btn-sm btn-changeInfo" value="수정하기">
+                                     <%}else{%>
+                                     <div class="myI-1-info">
+                                         <div >
+                                            <img src="<%=request.getContextPath() %>/img/peep.jpg">
+                                   		 </div>
+                                      <a href="<%=request.getContextPath() %>/myPage/addMyInfo">입력된 추가정보가 없습니다ㅠㅅ ㅠ <br>추가정보를 입력해주세요!</a>
+                                    </div>
+                                    <%}%>
+                                     <input type="submit" onclick="modifyMember_validate()" class="btn-sm btn-changeInfo" value="수정하기">
+                                </div>
+                                   
 
                                 </div>
                             </form>

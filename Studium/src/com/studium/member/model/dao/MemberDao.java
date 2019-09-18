@@ -218,6 +218,7 @@ public class MemberDao {
 			pstmt.setString(4, m.getMemAddress2());
 			pstmt.setString(5, m.getMemPassword());
 			pstmt.setString(6, id);
+			System.out.println("dao멤버객체"+m);
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
