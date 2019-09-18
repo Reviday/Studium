@@ -1,0 +1,145 @@
+body {
+    font-family: "Nanum Gothic";
+    /* background-color: #ebebeb; */
+    
+}
+
+.header-background-cover {
+	height: 95px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+a {
+    outline-style: none;
+    text-decoration: none;
+    color: black;
+}
+
+section {
+    display: flex;
+}
+
+.leftmenu {
+	display: inline-block;
+}
+
+.leftmenu ul {
+	list-style: none;
+}
+
+.leftmenu li {
+    width: 180px;
+    height: 55px;
+    background-color: #ebebeb;
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.leftmenu li:hover {
+    background-color: #ef6c00;
+    font-weight: bold;
+}
+
+.leftmenu a {
+    display: block;
+    line-height: 3.3;
+    text-align: center;
+}
+
+.leftmenu li a:hover {
+    color: white;
+}
+
+.qandaList, .qandaList>a {
+	background-color: #ef6c00;
+	color: white;	
+}
+
+.qanda {
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.qanda > div:first-child {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-left: 80px;
+}
+
+#alldelete {
+    padding-top: 20px;
+    margin-left: 95px;
+    width: 17px;
+    height: 17px;  
+ 	visibility: visible;
+}
+
+#deletebtn {
+    
+    margin-top: 18px;
+    margin-left: 10px;
+    background-color: white;
+    color: #ef6c00;
+    border: none;
+    outline-style: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.qandaTable {
+    margin-top: 10px;
+    margin-left: 80px;
+    box-sizing: border-box;
+    text-align: center;
+    width: 750px;
+    font-size: 13px;
+}
+
+.qandaTable tr th {
+    padding:10px;
+    border-top: 3px solid black;
+    background-color: #ebebeb;
+    font-weight: bold;
+}
+
+.qandaTable tr td{
+    border-top: 1px solid #d6d3d3;
+    border-bottom: 1px solid #d6d3d3;
+    padding:5px;
+    padding-bottom: 10px;
+    
+}
+
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+ 	visibility: visible;
+}
+
+.qandaTable tr td:nth-of-type(1) {
+    width: 35px;
+}
+
+.qandaTable tr td:nth-of-type(2) {
+    color: blue;
+    width: 200px;
+}
+
+.qandaTable tr td:nth-of-type(3) {
+    width: 183px;
+}
+
+.qandaTable tr td:nth-of-type(4) {
+    width: 75px;
+}
+
+.qandaTable tr td:nth-of-type(5) {
+    width: 64px;
+} 
+
+.qandaTable tr td:nth-of-type(6) {
+    width: 47px;
+} 
+

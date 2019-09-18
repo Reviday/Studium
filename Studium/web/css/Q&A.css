@@ -1,0 +1,235 @@
+body {
+    font-family: "Nanum Gothic";
+    background-color: #ebebeb;
+}
+
+a {
+    text-decoration: none;
+    outline-style: none;
+}
+
+.picture {
+    z-index: -9999999;
+}
+
+.back {
+    width: 100%;
+    height: 300px;
+}
+
+#question {
+    position: absolute;
+    top: 130px;
+    left: 325px;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+}
+
+.QandA {
+    box-sizing: border-box;
+    width: 960px;
+    margin: -20px auto 20px;
+    background-color: white;
+    padding: 40px;
+    z-index: 99999999;
+}
+
+.QandA div:first-child {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 40px;
+
+}
+
+a {
+    background: #f5f5f5 url(https://cdn.studysearch.co.kr/static/images/icon_asset_faq.2908876c9d2a.png)842px -270px no-repeat;
+    display: block; 
+    padding: 0 -36px;
+    height: 56px;
+    line-height: 56px;
+    position: relative;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+
+a:hover {
+    background-color: #f0ebebb6;
+}
+
+a span:nth-of-type(1) {
+    color: #ef6c00;
+    font-size: 18px;
+    font-weight: bold;
+    left: 36px;
+    position: absolute;
+}
+
+a span:nth-of-type(2) {
+    color: #ef6c00;
+    font-size: 14px;
+    position: absolute;
+    left: 75px;
+}
+
+a span:nth-of-type(3) {
+    font-size: 14px;
+    position: absolute;
+    left: 200px;
+    color: black;
+}
+
+.show {
+    display: block !important;
+}
+
+.showw {
+    background-color: #ef6c00 !important; 
+    color: white !important;
+    font-weight: bold;  
+}
+
+.bt {
+    margin: auto;
+    margin-top: 100px;
+    font-size: 23px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.consult-link {
+    display: block;
+    margin: auto;
+    width: 156px;
+    height: 3pc;
+    line-height: 3pc;
+    background: #ef6c00;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.consult-link:hover {
+    background: #ef6c00;
+}
+
+.line {
+    margin: 50px auto;
+    width: 960px;
+    height: 1px;
+    border: 0.1px solid lightgray;
+}
+
+.helf {
+    width: 960px;
+    margin: auto;
+    height: 500px;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 40px;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.helf-left {
+    width: 394px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.helf-left div:nth-of-type(1) {
+    font-weight: bold;
+    font-size: 22px; 
+}
+
+.helf-left div:nth-of-type(2) {
+    margin-top: 30px; 
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.helf-left div:nth-of-type(2) span {
+    color: #ef6c00;
+}
+
+.helf-right {
+    width: 490px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.helf-right textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    font-size: 11pt;
+    resize: none;
+    padding: 20px;
+    padding: 30px 25px;
+    font-size: 14px;
+    outline-style: none;
+    line-height: 1.6;
+}
+
+.helf-right input:nth-of-type(1) {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    font-size: 11pt;
+    margin: 13px 0;
+    padding: 0 20px;
+    outline-style: none;
+    font-size: 14px;
+}
+
+.helf-right input:nth-of-type(2) {
+    width: 90pt;
+    height: 3pc;
+    background: #ef6c00;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 10pt;
+    font-weight: 700;
+    float: right;
+}
+
+.answer {
+    box-sizing: border-box;
+    margin: 20px 0;
+    font-size: 14px;
+    display: none;
+    position: relative;
+}
+
+.answer span:nth-of-type(1) {
+    font-weight: bold;
+    font-size: 18px;
+    left: 36px;
+    top: 40px;
+    position: absolute;
+ 
+}
+
+.answer span:nth-of-type(2) {
+    padding-left: 250px;
+    line-height: 1.6;
+    margin: auto 0;
+    padding: 30px;
+    padding-left: 180px;
+    display: inline-block;
+    text-align: left;
+}
+
+.submit {
+    cursor: pointer;
+}
+
