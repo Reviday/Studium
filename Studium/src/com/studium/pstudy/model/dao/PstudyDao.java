@@ -33,6 +33,38 @@ public class PstudyDao {
 		}
 	}
 	
+	public int pstudyDibs(Connection conn,int mno,int pno) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("pstudyDibs");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+			pstmt.setInt(2,pno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int pstudyDibsDelete(Connection conn,int mno,int pno) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("pstudyDibsDelete");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+			pstmt.setInt(2,pno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+
+	
 	public int paymentMember(Connection conn , Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;

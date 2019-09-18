@@ -26,6 +26,7 @@ public class PstudyService {
 		return result;
 		
 	}
+	
 	public int paymentMember(Member m) {
 		Connection conn=getConnection();
 		int result=dao.paymentMember(conn,m);
@@ -74,4 +75,21 @@ public class PstudyService {
 		close(conn);
 		return list;
 	}
+	public int pstudyDibs(int pno,int mno) {
+		Connection conn=getConnection();
+		int result=dao.pstudyDibs(conn,pno,mno);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int pstudyDibsDelete(int pno,int mno) {
+		Connection conn=getConnection();
+		int result=dao.pstudyDibsDelete(conn,pno,mno);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+
 }

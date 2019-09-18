@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   
     <style type="text/css">
    
 .star-input>.input,
@@ -213,12 +214,34 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 </div>
                 <div class="sinchung">
                     <!-- 신청 버튼 -->
-                    <input type="button" value="참여 신청하기" onclick="fn_pay();">
+                    
+                    <input type="button" value="참여 신청하기" 
+                    <%
+                    	if(loginMember!=null) {
+                    %>
+                    	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
+                    <% 		
+                    	} else {
+                    %>		
+                 		onclick="fn_loginAlert();"
+                 	<%
+                    	}
+                    %>
+                    />
+                    
                 </div>
                 <div class="zzim">
                     <!-- 찜하기 버튼 -->
                     <span class="icon"></span>
-                    <input type="button" value="찜하기" onclick="fn_zzim();">
+                   <form id="dibs_form">
+                	<%if(loginMember!=null) {%>
+                   <input type="hidden" name="mNo" id="mNo" value="<%=loginMember.getMemNo()%>"/>
+                 	<%}else{ } %>
+                   <input type="hidden" name="pNo" id="pNo" value="<%=p.getpNo()%>"/>
+                   <input type="hidden" id="A" value="1" name="A"/>
+                   <div id="dibscon"><i class="fa fa-heart input-icon js-btn-calendar " style="color:rgb(110, 110, 110)"></i> </div>
+                     <input type=button onclick="fn_dibs2();" value="찜하기"/> 
+                     </form>
                 </div>
                 <div class="pay-line"></div> <!-- 구분 선 -->
                 <div class="hugi">
@@ -231,10 +254,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
             </div>
         </article>
     </section>
-    <script>
-    	function fn_zzim(){
-    		
-    	}
+    <script type="text/javascript" >
+  
         $(function () {
             $(window).scroll(function () { 
                 var num = $(this).scrollTop();
@@ -247,7 +268,6 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 }
             });
         });
-
         var slideIndex = 1;
         showSlides(slideIndex);
 
@@ -278,6 +298,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
         }
+	 
         function fn_delete(){
         	var msg = "삭제하시겠습니까";
     		var flag = confirm(msg);
@@ -289,27 +310,102 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         function fn_update(){
         	
         	location.href="<%=request.getContextPath()%>/pstudy/pstudyUpdate?pNo=<%=p.getpNo()%>";
+        	
         }
         function fn_loginAlert(){
-        	alert("로그인후 이용하세요 ");
-        	return false;
-        }
-        function fn_pay(){
-        	if(<%=loginMember!=null%>){
-        		location.href="<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>";
-    		}else{
-    			fn_loginAlert();
-    			return false;
-    		
-        	
-  
-    		}
+        	return alert("로그인후 이용하세요 ");
         }
         
+      	function fn_pay(){
+      		   
+        }    
+      	
+		//1. 추가한 input a값 기준으로 파라미터로 보내
+		//2. 컨트롤러 에서 a 값에 따라 찜하기, 찜하기 풀기(?) 상태 변경
+		//3. 각각 경우에 따라 return값 다르게
+		//4. ajax success에 data 값에따라 alert 처리 다르게 변경		
+		 function fn_dibs2(){
+        	/* var mno = $("#mNo").val();
+			var pno = $("#pNo").val();*/
+			var A = $("#A").val();	 //a값을 받아서 a에 넣기		
+			var params = jQuery("#dibs_form").serialize();
+				if(<%=loginMember!=null%>){
+				$.ajax({
+				url: "<%=request.getContextPath()%>/pstudy/pstudyDibss",  //doGet3 만들어서 찜하기 아닌상태 컨트롤러 만들어서 사용
+				type: "POST",
+				cache: false,
+				dataType: "json",
+				// data 이렇게 했을때 파라티머 받는지 확인 
+				// 보내는 방법 ex) 컨트롤러파라미터변수이름 : 니가보낼데이터   {mno : mno}
+				//data: {"mno":mno, "pno" : pno, "A" : A }, 
+				data: params , 
+				//아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌
+				success:
+				function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+				console.log(data+"ajax데이터 들어오는거");
+				if(data==("1")){ //넘어온 데이터 값이 1이면 찜하기 구현
+					$("#A").val("0");
+					console.log($("#A").val()+"val");
+					alert("찜하기 성공");
+					console.log(data);
+					console.log($("A").val()+"찜하기성공");
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs2.png"}));
+					$("#dibscon").css("width","100px;");
+				}else {//
+					alert("찜하기 취소");
+					$("#A").val("1");
+					console.log($("A").val()+"찜하기취소성공");
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs1.png"}));
+					$("#dibscon").css("width","100px;");
+				}
+				
+				},
+				error:
+				function (request, status, error){
+				alert("ajax실패");
+				$("#A").val("0");
+				$("#dibscon").html(data);
+				}
+				});
+        	}
+				else{
+					fn_loginAlert();
+					return false;
+				}      
+        }
+       <%--  function fn_dibs(){
+        	
+        	var params = jQuery("#dibs_form").serialize();
+        	if(<%=loginMember!=null%>){
+        	$.ajax({
+        	url: "<%=request.getContextPath()%>/pstudy/pstudyDibss",
+        	type: "POST",
+        	cache: false,
+        	dataType: "json",
+        	data:params , 
+        	//아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌
+        	success:
+        	function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+        	alert("'찜하기'가 반영되었습니다!") ; // data중 put한 것의 이름 like
+        
+        	},
+        	error:
+        	function (request, status, error){
+        	alert("ajax실패");
+        	
+        	}
+        	});
+        	}
+        	else{
+            	fn_loginAlert();
+            	return false;
+            }
+        }    --%>
+
+       
+
     </script>
     
-     <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/star.js"></script>
  <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
