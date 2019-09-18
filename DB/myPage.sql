@@ -140,10 +140,12 @@ select * from tab;
 
 
 -- category 대분류 테이블
+drop table category_s;
+drop table category_m;
 DROP TABLE CATEGORY_B;
 CREATE TABLE CATEGORY_B(
     CATEGORY_B_ID VARCHAR2(10) PRIMARY KEY, --카테고리아이디
-    TITLE VARCHAR2(30) DEFAULT 'N' NOT NULL--카테고리 이름
+    TITLE_B VARCHAR2(30) DEFAULT 'N' NOT NULL--카테고리 이름
 );
 --대분류 데이터
 INSERT INTO CATEGORY_B VALUES('CB1','외국어');
@@ -191,7 +193,7 @@ INSERT INTO CATEGORY_M VALUES('CM21','CB5','서류');
 CREATE TABLE CATEGORY_S(
     CATEGORY_S_ID NUMBER PRIMARY KEY, --카테고리아이디
     CATEGORY_M_ID VARCHAR2(10) REFERENCES CATEGORY_M(CATEGORY_M_ID),--중분류 테이블 참조
-    TITLE_M VARCHAR2(30) DEFAULT 'N' NOT NULL UNIQUE --카테고리 이름
+    TITLE_S VARCHAR2(30) DEFAULT 'N' NOT NULL UNIQUE --카테고리 이름
 );
 --소분류 테이블 시퀀스
 CREATE SEQUENCE SEQ_CATEGORY
@@ -240,6 +242,11 @@ SELECT * FROM CATEGORY_M;
 SELECT * FROM CATEGORY_S;
 SELECT * FROM ta_member;
 
+--모두조회
+select * 
+from category_s
+join category_m using(category_m_id)
+join category_B using(category_b_id);
 
 
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==' where mem_email='aaa@naver.com';
