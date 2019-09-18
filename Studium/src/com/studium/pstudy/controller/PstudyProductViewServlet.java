@@ -1,6 +1,7 @@
 package com.studium.pstudy.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.mypage.model.service.MyDibsService;
+import com.studium.mypage.model.vo.MyDibs;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -31,9 +34,12 @@ public class PstudyProductViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no =Integer.parseInt(request.getParameter("pNo"));
-		Pstudy p=new PstudyService().selectpStudyVIew(no);
+		int pNo =Integer.parseInt(request.getParameter("pNo"));
+		int mNo=Integer.parseInt(request.getParameter("mNo"));
+		Pstudy p=new PstudyService().selectpStudyVIew(pNo);
+		MyDibs md=new MyDibsService().selectDibs(mNo,pNo);
 		request.setAttribute("pstudy", p);
+		request.setAttribute("md", md);
 		request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 	}
 
