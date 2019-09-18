@@ -1,9 +1,10 @@
 <%@page import="javafx.scene.control.Alert"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy" %>
+ <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs" %>
  <%
  	Pstudy p=(Pstudy)request.getAttribute("pstudy");
+    MyDibs md=(MyDibs)request.getAttribute("MyDibs");
  %>
 <!DOCTYPE html>
 <html>
@@ -239,7 +240,19 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                  	<%}else{ } %>
                    <input type="hidden" name="pNo" id="pNo" value="<%=p.getpNo()%>"/>
                    <input type="hidden" id="A" value="1" name="A"/>
-                   <div id="dibscon"><i class="fa fa-heart input-icon js-btn-calendar " style="color:rgb(110, 110, 110)"></i> </div>
+                   
+                   <div id="dibscon">
+                   <%if(md==null){ %>
+                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
+                   <% }else if(md.getpNo()==p.getpNo()){ %>
+                   <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png">
+                    <%}else if(md.getpNo()!=p.getpNo()){ %>
+                    <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
+                    <%}else {%>
+                     <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
+                    <%} %>
+                    </div>
+                  
                      <input type=button onclick="fn_dibs2();" value="찜하기"/> 
                      </form>
                 </div>

@@ -16,10 +16,11 @@
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
 </div>
-<section class="madang-section">
+<section class="madang-section row">
+<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3" style="padding-left:0">
 <%@ include file="/views/common/sideMenuBar.jsp"%>	
-	<div class="container">
-		<div class="wrapper">
+</div>
+		<div class="wrapper col-xs-6 col-sm-6 col-md-9 col-lg-8">
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">
@@ -113,7 +114,7 @@
 
 		</div>
 
-	</div>
+
 
 </section>
 

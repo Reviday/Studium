@@ -103,7 +103,7 @@ body{
 				<div data-aos="fade-up" class="col-3 pstudy-card">
 
 					<div class="card-top"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
 						<p><%=p.getpArea() %> | <%=p.getpDay() %></p>
 						<h5><%=p.getpTitle() %></h5>

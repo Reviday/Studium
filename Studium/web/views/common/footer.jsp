@@ -35,7 +35,7 @@
         <div class="col-md-3 mb-5">
           <h3>Quick Links</h3>
           <ul class="list-unstyled footer-link">
-            <li><a href="#">About</a></li>
+            <li><a href="<%=request.getContextPath()%>/views/Q&A/Q&A.jsp">자주묻는 질문</a></li>
             <li><a href="#">Terms of Use</a></li>
             <li><a href="#">Disclaimers</a></li>
             <li><a href="#">Contact</a></li>
