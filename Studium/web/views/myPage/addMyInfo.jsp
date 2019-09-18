@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%@ page import="com.studium.member.model.vo.Member"%>
-<% 
-	Member m=(Member)request.getAttribute("member");
+<%@ page import="com.studium.category.model.vo.Category,
+				java.util.ArrayList,
+				java.util.List;"%>
+<% List<Category> list=(List)request.getAttribute("categoryList");
 
 %>
  
@@ -72,12 +73,21 @@
                                 </div>
 
                                 <div class="inputInteresting">
-                                    <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                
+                                
+                                
+								<%
+								if(list.size()!=0){
+									for(Category c : list){ %>
+                                    	<label class="check-label">
+                                       	 <input type="checkbox" class="option-input checkbox"  name="inter" id="<%=c.getCategoryMId()%>" value="<%=c.getTitleM()%>">
                                         foreignLanguage
                                      </label>
-                                    <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
+                                     
+								<%} 
+								}%>
+                                   <!--  <label class="check-label">
+                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value=" ">
                                         programming
                                      </label>
                                     <label class="check-label">
@@ -91,7 +101,7 @@
                                     <label class="check-label">
                                         <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
                                      	   취준
-                                     </label>
+                                     </label> -->
                                 </div>
 								<input type="submit" class="btn-sm btn-withStudium" onclick="add_moreInformation();" value="작성완료">
                                 

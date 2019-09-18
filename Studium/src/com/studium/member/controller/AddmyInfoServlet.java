@@ -1,11 +1,17 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 
 
 /**
@@ -28,6 +34,12 @@ public class AddmyInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		List<Category> list=new CategoryService().selectAll();
+		System.out.println(list);
+		if(list.size()==0) {
+		System.out.println("리스트 널");
+		}
+		request.setAttribute("categoryList", list);
 		request.getRequestDispatcher("/views/myPage/addMyInfo.jsp")
 		.forward(request,response);	
 	}
