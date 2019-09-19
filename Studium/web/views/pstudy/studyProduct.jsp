@@ -243,13 +243,13 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                    
                    <div id="dibscon">
                    <%if(md==null){ %>
-                   mdnull
+                  
                       <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
                    <% }else if(loginMember.getMemNo()==md.getMemberNo()){ %>
-                   md.getMemberNo()==loginMember.getMemNo()
+                  
                    <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png">
                     <%}else {%>
-                    else
+                  
                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
                     <%} %>
                     
