@@ -34,12 +34,12 @@ public class PstudyProductViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int pNo =Integer.parseInt(request.getParameter("pNo"));
-		int mNo=Integer.parseInt(request.getParameter("mNo"));
-		Pstudy p=new PstudyService().selectpStudyVIew(pNo);
-		MyDibs md=new MyDibsService().selectDibs(mNo,pNo);
+		int no =Integer.parseInt(request.getParameter("pNo"));
+		/* int mNo=Integer.parseInt(request.getParameter("mNo")); */
+		Pstudy p=new PstudyService().selectpStudyVIew(no);
+		/* MyDibs md=new MyDibsService().selectDibs(mNo,pNo); */
 		request.setAttribute("pstudy", p);
-		request.setAttribute("md", md);
+		/* request.setAttribute("md", md); */
 		request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 	}
 

@@ -4,7 +4,7 @@
  <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs" %>
  <%
  	Pstudy p=(Pstudy)request.getAttribute("pstudy");
-    MyDibs md=(MyDibs)request.getAttribute("MyDibs");
+ /*    MyDibs md=(MyDibs)request.getAttribute("MyDibs"); */
  %>
 <!DOCTYPE html>
 <html>
@@ -242,7 +242,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                    <input type="hidden" id="A" value="1" name="A"/>
                    
                    <div id="dibscon">
-                   <%if(md==null){ %>
+                <%--    <%if(md==null){ %>
                       <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
                    <% }else if(md.getpNo()==p.getpNo()){ %>
                    <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png">
@@ -250,7 +250,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
                     <%}else {%>
                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
-                    <%} %>
+                    <%} %> --%>
                     </div>
                   
                      <input type=button onclick="fn_dibs2();" value="찜하기"/> 
