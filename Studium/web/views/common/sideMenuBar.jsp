@@ -3,7 +3,7 @@
 <%@ page
 	import="java.util.List, java.util.ArrayList , com.studium.util.model.vo.SideMenuElement"%>
 <% 
-	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elemnents");
+	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elements");
 	String choice=(String)request.getAttribute("choice");
 %>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">

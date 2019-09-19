@@ -41,6 +41,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 		
 		FreeMadang fm=new FreeMadangService().selectMadang(no);
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
+		System.out.println(elements);
 		String view="";
 		if(fm!=null)
 		{
