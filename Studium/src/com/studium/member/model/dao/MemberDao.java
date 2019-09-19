@@ -218,7 +218,6 @@ public class MemberDao {
 			pstmt.setString(4, m.getMemAddress2());
 			pstmt.setString(5, m.getMemPassword());
 			pstmt.setString(6, id);
-			System.out.println("dao멤버객체"+m);
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -231,23 +230,27 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql= prop.getProperty("addMemberInfo");
-		
+
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, String.valueOf(m.getMemGender()));
-			pstmt.setString(2, m.getMemPhone());
-			pstmt.setString(3, m.getMemZipCode());
-			pstmt.setString(4, m.getMemAddress1());
-			pstmt.setString(5, m.getMemAddress2());
-			pstmt.setString(6, m.getMemCategory1());
-			pstmt.setString(7, m.getMemCategory2());
-			pstmt.setString(8, m.getMemCategory3());
-			pstmt.setInt(9, no);
+			pstmt.setDate(1, m.getMemBirth());
+			pstmt.setString(2, String.valueOf(m.getMemGender()));
+			pstmt.setString(3, m.getMemPhone());
+			pstmt.setString(4, m.getMemZipCode());
+			pstmt.setString(5, m.getMemAddress1());
+			pstmt.setString(6, m.getMemAddress2());
+			pstmt.setString(7, m.getMemCategory1());
+			pstmt.setString(8, m.getMemCategory2());
+			pstmt.setString(9, m.getMemCategory3());
+			pstmt.setInt(10, no);
+			
 			result=pstmt.executeUpdate();
+			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+			
 		} return result;
 		
 	}

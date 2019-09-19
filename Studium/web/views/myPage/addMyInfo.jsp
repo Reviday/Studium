@@ -71,10 +71,10 @@
                                     <input type="text" name="phone" id="phone" class="myI-1 " autocomplete=off placeholder="전화번호 " required>
                                 </div>
                                 <div class="inputAddress ">
-                                    <input type="text" id="sample6_postcode" class="myI-1-add " placeholder="우편번호 " readonly>
-                                    <input type="button" onclick="sample6_execDaumPostcode() " class="myI-1-add btn-address " value="우편번호 찾기 ">
-                                    <input type="text" id="sample6_address" class="myI-1 " placeholder="주소 " readonly>
-                                    <input type="text" id="sample6_detailAddress" class="myI-1 " placeholder="상세주소 ">
+                                    <input type="text" id="sample6_postcode" name="zipcode" class="myI-1-add " placeholder="우편번호 " readonly>
+                                    <input type="button" onclick="sample6_execDaumPostcode() "  class="myI-1-add btn-address " value="우편번호 찾기 ">
+                                    <input type="text" id="sample6_address" name="address1" class="myI-1 " placeholder="주소 " readonly>
+                                    <input type="text" id="sample6_detailAddress" name="address2" class="myI-1 " placeholder="상세주소 ">
                                 </div>
 
                                 <div class="inputInteresting">

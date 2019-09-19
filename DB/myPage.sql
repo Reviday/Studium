@@ -257,3 +257,6 @@ group by category_m_id;
 
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==' where mem_email='aaa@naver.com';
 commit;
+
+
+update ta_member set mem_birth='2019-09-10';

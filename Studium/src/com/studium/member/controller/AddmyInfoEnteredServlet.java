@@ -35,10 +35,10 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int no=Integer.parseInt(request.getParameter("no"));
-//생일 빼고 처리
-//		String birthDay=request.getParameter("birthday");
-//		System.out.println(birthDay);
-		
+		//생일 멤버객체에서 sql로 해놔서 parse방법이 다름
+		String birthDay=request.getParameter("birthday");
+		java.sql.Date d = java.sql.Date.valueOf(birthDay);
+
 		
 		String gender=request.getParameter("gender");
 		String phone=request.getParameter("phone");
@@ -46,21 +46,21 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String zipcode=request.getParameter("zipcode");
 		String address1=request.getParameter("address1");
 		String address2=request.getParameter("address2");
+		System.out.println(zipcode);
 		String [] inter =request.getParameterValues("inter");
 		System.out.println(inter[0]);
 	
 		// 수정한 내용
 		Member m=new Member();
-//		m.setMemBirth(birth);
+		m.setMemBirth(d);
 		m.setMemGender(gender.charAt(0));
 		m.setMemPhone(phone);
 		m.setMemZipCode(zipcode);
 		m.setMemAddress1(address1);
 		m.setMemAddress2(address2);
 		m.setMemCategory1(inter[0]);
-		m.setMemCategory1(inter[1]);
-		m.setMemCategory1(inter[2]);
-		System.out.println("멤버객체"+m);
+		m.setMemCategory2(inter[1]);
+		m.setMemCategory3(inter[2]);
 		
 		MemberService ms=new MemberService();
 		//회원정보 수정
@@ -70,7 +70,6 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String view="";
 		//해당 아이디로  수정된 멤버객체 가지고옴
 		m=ms.selectNo(no);
-		
 		if(result>0) {
 			//회원정보수정성공
 			request.setAttribute("member", m);
