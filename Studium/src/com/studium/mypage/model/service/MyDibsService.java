@@ -11,9 +11,9 @@ import com.studium.mypage.model.vo.MyDibs;
 public class MyDibsService {
 	private MyDibsDao dao=new MyDibsDao();
 	
-	public MyDibs selectDibs(int mNo,int pNo){
+	public MyDibs selectDibs(int mNo,int no){
 		Connection conn=getConnection();
-		MyDibs mydibs =dao.selectDibs(conn,mNo,pNo);
+		MyDibs mydibs =dao.selectDibs(conn,mNo,no);
 		close(conn);
 		return mydibs;
 	}
