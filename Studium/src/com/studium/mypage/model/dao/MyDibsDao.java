@@ -32,7 +32,7 @@ public class MyDibsDao {
 			e.printStackTrace();
 		}
 	}
-	public MyDibs selectDibs(Connection conn,int mNo,int pNo){
+	public MyDibs selectDibs(Connection conn,int mNo,int no){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("selectDibs");
@@ -40,7 +40,7 @@ public class MyDibsDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, mNo);
-			pstmt.setInt(2, pNo);
+			pstmt.setInt(2, no);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 			m.setDibsId(rs.getInt("dibs_id"));
