@@ -1,7 +1,6 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,13 +32,14 @@ public class AddmyInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//중분류
+		List<Category> listM=new CategoryService().selectTitleM();
+		//대분류
+		List<Category> listB=new CategoryService().selectTitleB();
 		
-		List<Category> list=new CategoryService().selectAll();
-		System.out.println(list);
-		if(list.size()==0) {
-		System.out.println("리스트 널");
-		}
-		request.setAttribute("categoryList", list);
+		
+		request.setAttribute("categoryM", listM);
+		request.setAttribute("categoryB", listB);
 		request.getRequestDispatcher("/views/myPage/addMyInfo.jsp")
 		.forward(request,response);	
 	}

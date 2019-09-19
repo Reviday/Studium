@@ -95,8 +95,10 @@
 }
 
 .btn-withStudium {
+	
     font-size: 13px;
     background-color: orangered;
+    margin-top:50px;
     margin-right: 250px;
     color: white;
     border: 1px solid white;
@@ -137,7 +139,16 @@
     margin-left: 9px;
 }
 
+.inputInteresting p{
+	font-size:0.9em;
+	width:300px;
+	margin-top:20px;
+	margin-bottom:0px;
+	color: black !important;
+	border-bottom:1px solid;
+}
 .check-label {
+	font-size:0.8em;
     margin-right: 10px;
 }
 
@@ -163,7 +174,6 @@
     margin-right: 3px;
     outline: none;
     position: relative;
-    z-index: 1000;
 }
 
 .option-input+label {

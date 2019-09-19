@@ -1,12 +1,15 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.studium.category.model.vo.Category,
-				java.util.ArrayList,
-				java.util.List;"%>
-<% List<Category> list=(List)request.getAttribute("categoryList");
+				java.util.List"%>
+<% 
+	List<Category> listM=(List)request.getAttribute("categoryM");
 
+	List<Category> listB=(List)request.getAttribute("categoryB");
+	
 %>
+<%@ include file="/views/common/header.jsp"%>
  
 <style>
 .header-background-cover {
@@ -16,6 +19,7 @@
 </style>
     <!-- 달력 -->
     <link href="<%=request.getContextPath()%>/css/daterangepicker.css" rel="stylesheet" media="all">
+    
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <section>
 	<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -44,7 +48,8 @@
                             <p class="myI-0">관심사</p>
                         </div>
                         <div class="col-7">
-                            <form action="<%=request.getContextPath() %>/myPage/addmyInfoEntered?no=<%=loginMember.getMemNo()%>" id="update-member" method="post">
+                            <form action="<%=request.getContextPath() %>/myPage/addmyInfoEntered?no=<%=loginMember.getMemNo()%>" 
+                            	id="update-member" method="post"  onsubmit="return add_moreInformation();">
                                 <div class="inputForm">
                                 <input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
                                     <input class="js-datepicker myI-1" type="text" placeholder="Birthdate" id="birthday" name="birthday" readonly>
@@ -54,16 +59,16 @@
                                     <div>
                                         <select name="gender" id="gender" class="myI-1 ">
                                             <option disabled="disabled" selected="selected">Gender</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
+                                            <option value="M">남성</option>
+                                            <option value="F">여성</option>
+                                            <option value="U">선택안함</option>
                                         </select>
                                         <div class="select-dropdown "></div>
                                     </div>
                                 </div>
 
                                 <div class="inputForm ">
-                                    <input type="phone" name="phone" id="phone" class="myI-1 " autocomplete=off placeholder="전화번호 " required>
+                                    <input type="text" name="phone" id="phone" class="myI-1 " autocomplete=off placeholder="전화번호 " required>
                                 </div>
                                 <div class="inputAddress ">
                                     <input type="text" id="sample6_postcode" class="myI-1-add " placeholder="우편번호 " readonly>
@@ -73,41 +78,31 @@
                                 </div>
 
                                 <div class="inputInteresting">
-                                
-                                
-                                
-								<%
-								if(list.size()!=0){
-									for(Category c : list){ %>
-                                    	<label class="check-label">
-                                       	 <input type="checkbox" class="option-input checkbox"  name="inter" id="<%=c.getCategoryMId()%>" value="<%=c.getTitleM()%>">
-                                        foreignLanguage
-                                     </label>
-                                     
-								<%} 
+								<% if(!listM.isEmpty()&&!listB.isEmpty()){
+									//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
+									//<%-- for(Category cb : listB){
+										
+									for(int i=0;i<listB.size();i++){%>
+									<div><p><%=listB.get(i).getTitleB()%></p></div>
+									
+										<% for(int j=0;j<listM.size();j++){
+											if(listB.get(i).getCategoryBId().equals(listM.get(j).getCategoryBId())){%>
+												<label class="check-label">
+		                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="<%=listM.get(j).getCategoryMId()%>" value="<%=listM.get(j).getTitleM() %>">
+		                                        <%=listM.get(j).getTitleM() %>
+		                                     </label>
+											<%}
+										
+									}
+									
+								}
 								}%>
-                                   <!--  <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value=" ">
-                                        programming
-                                     </label>
-                                    <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
-                                     	   공무원
-                                     </label>
-                                    <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
-                                      	  자격증
-                                     </label>
-                                    <label class="check-label">
-                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="프라이머리값" value="값넣기 ">
-                                     	   취준
-                                     </label> -->
+								
+									
                                 </div>
-								<input type="submit" class="btn-sm btn-withStudium" onclick="add_moreInformation();" value="작성완료">
+								<input type="submit" class="btn-sm btn-withStudium" value="작성완료">
                                 
                         </div>
-
-
 
                         </form>
                     </div>
@@ -128,8 +123,15 @@
 
 
     <script>
+    //관심사 개수제한
+    $('input[type=checkbox]').on('change', function (e) {
+        if ($('input[type=checkbox]:checked').length > 3) {
+            $(this).prop('checked', false);
+            alert("관심사는 세 개만 선택 가능합니다.");
+        }
+    });
         //전화번호 정규표현식
-        var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/;
+        var regPhone = /^\d{3}\d{3,4}\d{4}$/;
 
         // 이름 정규식(한글이름, 영문이름)
         var regName = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
@@ -188,7 +190,7 @@
                 return false;
             }
 
-
+			console.log("여기까지 와버렸네??");
             //모든사항 통과 
             return true;
 

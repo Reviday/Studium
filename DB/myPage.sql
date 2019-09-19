@@ -243,11 +243,17 @@ SELECT * FROM CATEGORY_S;
 SELECT * FROM ta_member;
 
 --모두조회
-select * 
+select *
 from category_s
 join category_m using(category_m_id)
 join category_B using(category_b_id);
 
+select * 
+from category_s
+join category_m using(category_m_id)
+join category_B using(category_b_id)
+
+group by category_m_id;
 
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==' where mem_email='aaa@naver.com';
 commit;

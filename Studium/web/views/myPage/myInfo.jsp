@@ -113,7 +113,7 @@
                                      <%}else{%>
                                      <div class="myI-1-info">
                                          <div >
-                                            <img src="<%=request.getContextPath() %>/img/peep.jpg">
+                                            <img src="<%=request.getContextPath() %>/img/peep.png">
                                    		 </div>
                                       <a href="<%=request.getContextPath() %>/myPage/addMyInfo">입력된 추가정보가 없습니다ㅠㅅ ㅠ <br>추가정보를 입력해주세요!</a>
                                     </div>

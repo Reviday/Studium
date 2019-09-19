@@ -35,14 +35,16 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("loginMember");
 		int no=Integer.parseInt(request.getParameter("no"));
-		String phone=request.getParameter("phone");
+
 		String birth=request.getParameter("birthday");
 		String gender=request.getParameter("gender");
+		String phone=request.getParameter("phone");
 		
 		String zipcode=request.getParameter("zipcode");
 		String address1=request.getParameter("address1");
 		String address2=request.getParameter("address2");
-
+		String [] inter =request.getParameterValues("inter");
+		System.out.println(inter[0]);
 	
 		// 수정한 내용
 		Member m=new Member();
@@ -54,27 +56,28 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		
 		MemberService ms=new MemberService();
 		//회원정보 수정
-		int result=ms.modifyMember(m, id);
+//		int result=ms.addMemberInfo(m, id);
 		String msg="";
 		String loc="/";
 		String view="";
 		//해당 아이디로  수정된 멤버객체 가지고옴
 		m=ms.selectNo(no);
-		
-		if(result>0) {
-			//회원정보수정성공
-			request.setAttribute("member", m);
-			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-			.forward(request,response);
-			
-		} else {
-			//회원정보수정 실패
-			msg="회원 정보 수정이 실패하였습니다.";
-			view="/views/common/msg.jsp";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+//		
+//		if(result>0) {
+//			//회원정보수정성공
+//			request.setAttribute("member", m);
+//			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+//			.forward(request,response);
+//			
+//		} else {
+//			//회원정보수정 실패
+//			msg="회원 정보 수정이 실패하였습니다.";
+//			view="/views/common/msg.jsp";
+//			loc="/views/myPage/addMyInfo.jsp";
+//			request.setAttribute("msg", msg);
+//			request.setAttribute("loc", loc);
+//			request.getRequestDispatcher(view).forward(request, response);
+//		}
 	}
 
 	/**
