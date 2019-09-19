@@ -29,6 +29,11 @@
    
     <style type="text/css">
    
+.header-background-cover {
+         height: 95px;
+         background-color: rgba(0,0,0,0.8);
+      }
+   
 .star-input>.input,
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
@@ -61,7 +66,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 </head>
 
 <body>
-	 <%@ include file="../../views/common/header.jsp" %> 
+	  <%@ include file="../../views/common/header.jsp" %> 
+    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
     <section class="studyIntro">
         <!--스터디소개페이지-섹션 -->
        
