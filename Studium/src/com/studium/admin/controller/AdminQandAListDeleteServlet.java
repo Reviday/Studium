@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminQandAServlet
+ * Servlet implementation class AdminQandAListDeleteServlet
  */
-@WebServlet("/qandA")
-public class AdminQandAServlet extends HttpServlet {
+@WebServlet("/AdminQandAListDelete")
+public class AdminQandAListDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQandAServlet() {
+    public AdminQandAListDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +28,13 @@ public class AdminQandAServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String content = request.getParameter("content");
-		String email = request.getParameter("email");
+		String[] deList = request.getParameterValues("checkQ&A");
+		int result = new AdminService().deleteQnAList(deList);
 		
-		AdminService service = new AdminService();
-		int result = service.insertQandA(content, email);
-		
-		request.getRequestDispatcher("/views/Q&A/Q&A.jsp")
-		.forward(request,response);
-		
+		if(result > 0 ) {
+			
+			request.getRequestDispatcher("/AdminQandAList").forward(request,response);
+		}
 	}
 
 	/**

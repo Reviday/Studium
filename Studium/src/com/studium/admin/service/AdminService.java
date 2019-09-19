@@ -39,4 +39,14 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	
+	public int deleteQnAList(String[] deList) {
+		Connection conn = getConnection();
+		int result = dao.deleteQnAList(conn, deList);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;	 
+	}
+	
 }

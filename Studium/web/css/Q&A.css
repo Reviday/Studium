@@ -42,7 +42,7 @@ a {
 
 }
 
-a {
+.QandA a {
     background: #f5f5f5 url(https://cdn.studysearch.co.kr/static/images/icon_asset_faq.2908876c9d2a.png)842px -270px no-repeat;
     display: block; 
     padding: 0 -36px;
@@ -53,11 +53,11 @@ a {
     margin-bottom: 8px;
 }
 
-a:hover {
+.QandA a:hover {
     background-color: #f0ebebb6;
 }
 
-a span:nth-of-type(1) {
+.QandA a span:nth-of-type(1) {
     color: #ef6c00;
     font-size: 18px;
     font-weight: bold;
@@ -65,14 +65,14 @@ a span:nth-of-type(1) {
     position: absolute;
 }
 
-a span:nth-of-type(2) {
+.QandA a span:nth-of-type(2) {
     color: #ef6c00;
     font-size: 14px;
     position: absolute;
     left: 75px;
 }
 
-a span:nth-of-type(3) {
+.QandA a span:nth-of-type(3) {
     font-size: 14px;
     position: absolute;
     left: 200px;

@@ -13,10 +13,21 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Q&A.css">
     <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+    	
+			.header-background-cover {
+				height: 95px;
+         		background-color: rgba(0,0,0,0.8);
+			}	
+    </style>
 </head>
 
 <body>
 <%@ include file="/views/common/header.jsp" %>
+ <div class="header-background"
+	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+	<div class="header-background-cover"></div>
+</div>  
     <section>
         <div class="back" style="background-image: url('https://cdn.studysearch.co.kr/static/images/faq/image_header_faq.814e6778c4cd.jpg')">
         </div>
@@ -172,7 +183,7 @@
     </section>
 
     <script>
-        var choiceClick;
+        
          $(function() {
              $('.choice').click(function(e) {
                 var classVal=e.target.className;

@@ -78,7 +78,12 @@ public class AdminDao {
 				QandA q=new QandA();
 				q.setcNo(rs.getInt("no"));
 				q.setEmail(rs.getString("email"));
-				q.setContent(rs.getString("content"));
+				if(rs.getString("content").length() < 20) {
+					q.setContent(rs.getString("content"));
+				}else {
+					q.setContent(rs.getString("content").substring(0, 17)+"...");					
+				}
+				q.setFullContent(rs.getString("content"));
 				q.setEnrollDate(rs.getDate("enroll_date"));
 				
 				
@@ -102,6 +107,24 @@ public class AdminDao {
 			close(rs);
 			close(pstmt);
 		}return list;
+	}
+	
+	public int deleteQnAList(Connection conn, String[] deList) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteQandAList");
+		for(String s : deList) {
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, s);				
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		}
+		return result;
 	}
 	
 }

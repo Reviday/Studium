@@ -15,6 +15,10 @@
 </head>
 <body>
     <%@ include file="/views/common/header.jsp" %>
+     <div class="header-background"
+	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+	<div class="header-background-cover"></div>
+</div>  
     <section>
         <article class="leftmenu">
             <ul>
@@ -32,6 +36,7 @@
                 </li>
             </ul>
         </article>
+        <article class="mainArticle"></article>
         <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
