@@ -4,7 +4,7 @@
  <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs" %>
  <%
  	Pstudy p=(Pstudy)request.getAttribute("pstudy");
-     MyDibs md=(MyDibs)request.getAttribute("MyDibs"); 
+     MyDibs md=(MyDibs)request.getAttribute("md"); 
  %>
 <!DOCTYPE html>
 <html>
@@ -245,12 +245,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                    <%if(md==null){ %>
                    mdnull
                       <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
-                   <% }else if(md.getMemberNo()==loginMember.getMemNo()){ %>
+                   <% }else if(loginMember.getMemNo()==md.getMemberNo()){ %>
                    md.getMemberNo()==loginMember.getMemNo()
                    <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png">
-                    <%}else if(md.getpNo()!=p.getpNo()){ %>
-                    md.getpNo()!=p.getpNo()
-                    <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
                     <%}else {%>
                     else
                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">

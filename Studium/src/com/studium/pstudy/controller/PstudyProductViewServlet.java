@@ -39,7 +39,7 @@ public class PstudyProductViewServlet extends HttpServlet {
 		Pstudy p=new PstudyService().selectpStudyVIew(no);
 		 MyDibs md=new MyDibsService().selectDibs(mNo,no); 
 		request.setAttribute("pstudy", p);
-		/* request.setAttribute("md", md); */
+		request.setAttribute("md", md); 
 		request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 	}
 

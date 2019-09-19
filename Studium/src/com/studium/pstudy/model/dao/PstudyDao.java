@@ -39,8 +39,8 @@ public class PstudyDao {
 		String sql=prop.getProperty("pstudyDibs");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,mno);
-			pstmt.setInt(2,pno);
+			pstmt.setInt(1,pno);
+			pstmt.setInt(2,mno);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
