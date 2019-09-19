@@ -51,6 +51,8 @@ public class PstudyService {
 	public int deletePstudy(int pNo) {
 		Connection conn=getConnection();
 		int result=dao.deletePstudy(conn,pNo);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
 		close(conn);
 		return result;
 	
