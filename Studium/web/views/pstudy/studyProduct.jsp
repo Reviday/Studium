@@ -239,21 +239,30 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                    <input type="hidden" name="mNo" id="mNo" value="<%=loginMember.getMemNo()%>"/>
                  	<%}else{ } %>
                    <input type="hidden" name="pNo" id="pNo" value="<%=p.getpNo()%>"/>
-                   <input type="hidden" id="A" value="1" name="A"/>
+                	<div id="dibsimg">
+                	 <%if(md==null){ %>
+                	<input type="hidden" id="A" value="1" name="A"/>
+                	   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getpNo()==md.getpNo()){ %>
+                	    <input type="hidden" id="A" value="0" name="A"/>
+                	   <%}else {%>
+                	   <input type="hidden" id="A" value="1" name="A"/>
+                	   <%} %>
+                	 </div>
                    
                    <div id="dibscon">
                    <%if(md==null){ %>
                   
-                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
-                   <% }else if(loginMember.getMemNo()==md.getMemberNo()){ %>
+                      <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png" style="width:100px">
+                      
+                   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getpNo()==md.getpNo()){ %>
                   
-                   <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png">
+                   <img alt="" src="<%=request.getContextPath()%>/img/dibs2.png" style="width:100px">
                     <%}else {%>
-                  
-                     <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png">
+                
+                     <img alt="" src="<%=request.getContextPath()%>/img/dibs1.png" style="width:100px">
                     <%} %>
-                    
                     </div>
+                
                   
                      <input type=button onclick="fn_dibs2();" value="찜하기"/> 
                      </form>
@@ -363,14 +372,24 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 					alert("찜하기 성공");
 					console.log(data);
 					console.log($("A").val()+"찜하기성공");
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs2.png"}));
-					$("#dibscon").css("width","100px;");
+					$("#dibscon").html($("<input>").attr({"value":"0",
+						"type":"hidden",
+						"id":"A",
+						"name":"A"}));
+					$("#dibsimg").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs2.png"}))
+					.css('width','50px;');
+					
+				
 				}else {//
 					alert("찜하기 취소");
 					$("#A").val("1");
 					console.log($("A").val()+"찜하기취소성공");
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs1.png"}));
-					$("#dibscon").css("width","100px;");
+					$("#dibscon").html($("<input>").attr({"value":"1","type":"hidden",
+						"id":"A",
+						"name":"A"}));
+					$("#dibsimg").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibs1.png"}))
+					.css('width','50px;');
+					
 				}
 				
 				},

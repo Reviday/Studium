@@ -124,9 +124,16 @@ body{
 							<%} %>
 						</div>
 					</div>
-					<div class="card-bottom"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+					
+							 <%
+                    	if(loginMember!=null) {
+                    %>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
+					<%}else {%>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=0'"
+						style="cursor:pointer;">
+					<% } %>
 						<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
 					</div>
 				</div>
@@ -149,9 +156,15 @@ body{
 			<div class="a_cnt1">
 				<div data-aos="fade-up" class="col-3 pstudy-card">
 
-					<div class="card-top"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+					 <%
+                    	if(loginMember!=null) {
+                    %>
+					<div class="card-top"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
+					<%}else {%>
+					<div class="card-top"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=0'"
+						style="cursor:pointer;">
+					<% } %>
 						<p><%=p.getpArea() %> | <%=p.getpDay() %></p>
 						<h5><%=p.getpTitle() %></h5>
 						<p class="card-price"><%=p.getpPrice() %></p>
@@ -163,9 +176,15 @@ body{
 							<%} %>
 						</div>
 					</div>
-					<div class="card-bottom"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+						 <%
+                    	if(loginMember!=null) {
+                    %>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
+					<%}else {%>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=0'"
+						style="cursor:pointer;">
+					<% } %>
 						<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
 					</div>
 				</div>

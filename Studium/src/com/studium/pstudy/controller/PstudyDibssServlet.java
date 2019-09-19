@@ -34,26 +34,24 @@ public class PstudyDibssServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 //		찜하기 서블릿
-		int pNo=Integer.parseInt(request.getParameter("pNo"));
+		int no=Integer.parseInt(request.getParameter("pNo"));
 		int mNo=Integer.parseInt(request.getParameter("mNo"));
 		String  A= request.getParameter("A"); //새로운 값 넣어서 다른값이면 추가 0이면 삭제
 		PstudyService service=new PstudyService(); 
 		JSONObject obj = new JSONObject();
 		if(A.equals("0")){
 			// 찜하기 풀기 쿼리
-			System.out.println(A+"풀기되나");
-			int result=service.pstudyDibsDelete(pNo,mNo);
+			int result=service.pstudyDibsDelete(no,mNo);
 			String a="0";
-			System.out.println(A+"찜하기 풀기");
 			obj.put("result",a);
+			System.out.println(result +"찜하기풀기 삭제되니"+no+"NO"+mNo+"mNo");
 			response.setContentType("application/x-json; charset=UTF-8");
-			response.getWriter().print(A);
-			
+			response.getWriter().print(a);
 
 		}else{
 			// 찜하기 쿼리
 		
-		int result=service.pstudyDibs(pNo,mNo);
+		int result=service.pstudyDibs(no,mNo);
 		
 		System.out.println(result+"짐하기쿼리");
 		String b="1";
@@ -61,7 +59,7 @@ public class PstudyDibssServlet extends HttpServlet {
 		//request.setAttribute("json", json);
 		System.out.println(obj+"찜하기 ");
 		response.setContentType("application/x-json; charset=UTF-8");
-		response.getWriter().print(A);
+		response.getWriter().print(b);
 		
 		
 		}

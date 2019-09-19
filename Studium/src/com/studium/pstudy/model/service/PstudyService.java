@@ -75,17 +75,17 @@ public class PstudyService {
 		close(conn);
 		return list;
 	}
-	public int pstudyDibs(int pno,int mno) {
+	public int pstudyDibs(int no,int mNo) {
 		Connection conn=getConnection();
-		int result=dao.pstudyDibs(conn,pno,mno);
+		int result=dao.pstudyDibs(conn,no,mNo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
 		close(conn);
 		return result;
 	}
-	public int pstudyDibsDelete(int pno,int mno) {
+	public int pstudyDibsDelete(int no,int mNo) {
 		Connection conn=getConnection();
-		int result=dao.pstudyDibsDelete(conn,pno,mno);
+		int result=dao.pstudyDibsDelete(conn,no,mNo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
 		close(conn);

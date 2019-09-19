@@ -33,14 +33,14 @@ public class PstudyDao {
 		}
 	}
 	
-	public int pstudyDibs(Connection conn,int mno,int pno) {
+	public int pstudyDibs(Connection conn,int mNo,int no) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("pstudyDibs");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,pno);
-			pstmt.setInt(2,mno);
+			pstmt.setInt(1,no);
+			pstmt.setInt(2,mNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -48,20 +48,21 @@ public class PstudyDao {
 			close(pstmt);
 		}return result;
 	}
-	public int pstudyDibsDelete(Connection conn,int mno,int pno) {
+	public int pstudyDibsDelete(Connection conn,int mNo,int no) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("pstudyDibsDelete");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,mno);
-			pstmt.setInt(2,pno);
+			pstmt.setInt(1,no);
+			pstmt.setInt(2,mNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
 
 	
