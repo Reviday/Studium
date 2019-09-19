@@ -54,4 +54,13 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public int addMemberInfo(Member m,int no) {
+		Connection conn=getConnection();
+		int result=dao.addMemberInfo(conn, m,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	
+	}
 }

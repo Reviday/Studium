@@ -1,9 +1,9 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,10 +33,13 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("loginMember");
+		
 		int no=Integer.parseInt(request.getParameter("no"));
-
-		String birth=request.getParameter("birthday");
+//생일 빼고 처리
+//		String birthDay=request.getParameter("birthday");
+//		System.out.println(birthDay);
+		
+		
 		String gender=request.getParameter("gender");
 		String phone=request.getParameter("phone");
 		
@@ -48,36 +51,41 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	
 		// 수정한 내용
 		Member m=new Member();
+//		m.setMemBirth(birth);
+		m.setMemGender(gender.charAt(0));
 		m.setMemPhone(phone);
 		m.setMemZipCode(zipcode);
 		m.setMemAddress1(address1);
 		m.setMemAddress2(address2);
+		m.setMemCategory1(inter[0]);
+		m.setMemCategory1(inter[1]);
+		m.setMemCategory1(inter[2]);
 		System.out.println("멤버객체"+m);
 		
 		MemberService ms=new MemberService();
 		//회원정보 수정
-//		int result=ms.addMemberInfo(m, id);
+		int result=ms.addMemberInfo(m, no);
 		String msg="";
 		String loc="/";
 		String view="";
 		//해당 아이디로  수정된 멤버객체 가지고옴
 		m=ms.selectNo(no);
-//		
-//		if(result>0) {
-//			//회원정보수정성공
-//			request.setAttribute("member", m);
-//			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-//			.forward(request,response);
-//			
-//		} else {
-//			//회원정보수정 실패
-//			msg="회원 정보 수정이 실패하였습니다.";
-//			view="/views/common/msg.jsp";
-//			loc="/views/myPage/addMyInfo.jsp";
-//			request.setAttribute("msg", msg);
-//			request.setAttribute("loc", loc);
-//			request.getRequestDispatcher(view).forward(request, response);
-//		}
+		
+		if(result>0) {
+			//회원정보수정성공
+			request.setAttribute("member", m);
+			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+			.forward(request,response);
+			
+		} else {
+			//회원정보수정 실패
+			msg="회원 정보 수정이 실패하였습니다.";
+			view="/views/common/msg.jsp";
+			loc="/views/myPage/addMyInfo.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 	}
 
 	/**

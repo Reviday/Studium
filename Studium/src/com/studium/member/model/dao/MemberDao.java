@@ -227,4 +227,28 @@ public class MemberDao {
 		} return result;
 		
 	}
+	public int addMemberInfo(Connection conn, Member m,int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql= prop.getProperty("addMemberInfo");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(m.getMemGender()));
+			pstmt.setString(2, m.getMemPhone());
+			pstmt.setString(3, m.getMemZipCode());
+			pstmt.setString(4, m.getMemAddress1());
+			pstmt.setString(5, m.getMemAddress2());
+			pstmt.setString(6, m.getMemCategory1());
+			pstmt.setString(7, m.getMemCategory2());
+			pstmt.setString(8, m.getMemCategory3());
+			pstmt.setInt(9, no);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+		
+	}
 }
