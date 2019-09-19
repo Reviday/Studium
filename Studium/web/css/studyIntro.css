@@ -373,28 +373,4 @@ section.studyIntro article {
     color: black;
     font-size: 13px;
 }
-/* 찜하기*/
-#toast {
-    display: none;
-    position: fixed;
-    top: 5pc;
-    left: 50%;
-    margin-left: -5in;
-    width: 60pc;
-    height: 50px;
-    line-height: 50px;
-    background: #2595d5;
-    text-align: center;
-    color: #fff;
-    z-index: 9999;
-    border-radius: 2px;
-}
-#toast .icon {
-    text-indent: -9999em;
-    margin-right: 24px;
-    display: inline-block;
-    width: 24px;
-    height: 100%;
-    background: transparent url(https://cdn.studysearch.co.kr/static/images/base/icon_toast_confirmed.6f9750454287.png)0 11px no-repeat;
-}
 
