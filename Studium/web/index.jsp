@@ -303,20 +303,16 @@
           <div class="row">
             <div class="col-md-12">
               <h3>스터디 상담받기</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore ex temporibus magni ipsam inventore
-                dolorum sunt, amet vel.</p>
+              <p style="font-size:22px;">혹시 어떤 스터디가 나에게 맞을지, 고민되시는 거라면?</p>
             </div>
 
-            <form action="" class="col-12">
+           <form action="https://pf.kakao.com/_PqxlWT" class="col-12">
               <div class="row align-items-center">
-                <div class="col-md-8 mb-3 mb-md-0">
-                  <input type="text" class="form-control" placeholder="Enter Email Address">
-                </div>
+                
                 <div class="col-md-4">
-                  <input type="submit" class="btn btn-primary btn-block" value="Subscribe">
+                  <input type="submit" class="btn btn-primary btn-block" value="카톡상담하러가기" style="margin-left:192px;">
                 </div>
-              </div>
-         	`14`123   </form>
+              </div></form>
           </div>
         </div>
       </div>

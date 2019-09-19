@@ -29,13 +29,11 @@
                     <a href="">적립금 관리</a>
                 </li>
                 <li>
-                    <a href="">게시글 관리</a>
-                </li>
-                <li>
                     <a href="<%=request.getContextPath()%>/AdminQandAList">1:1문의 관리</a>
                 </li>
             </ul>
         </article>
+       
         <article class="mainArticle"></article>
         <%@ include file="/views/common/footer.jsp" %>
 </body>

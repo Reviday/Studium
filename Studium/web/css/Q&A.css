@@ -103,7 +103,7 @@ a {
     width: 156px;
     height: 3pc;
     line-height: 3pc;
-    background: #ef6c00;
+    background: #ef6c00 !important;
     border-radius: 2px;
     font-size: 14px;
     font-weight: 700;
@@ -113,7 +113,7 @@ a {
 }
 
 .consult-link:hover {
-    background: #ef6c00;
+    background: #ef6c00 !important;
 }
 
 .line {
@@ -231,5 +231,9 @@ a {
 
 .submit {
     cursor: pointer;
+}
+
+.submit:hover {
+	color: #cf1d16 !important;
 }
 
