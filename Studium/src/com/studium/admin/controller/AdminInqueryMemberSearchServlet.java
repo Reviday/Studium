@@ -40,6 +40,8 @@ public class AdminInqueryMemberSearchServlet extends HttpServlet {
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminInquerySearch"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		pt.setQueryString("gradeList", grade);
+		pt.setQueryString("statusList", status);
 		List<Member> list=service.selectMemberSearchList(pt.getcPage(),pt.getNumPerPage(), grade, status);
 		
 		

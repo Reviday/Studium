@@ -1,7 +1,6 @@
 package com.studium.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studium.admin.service.AdminService;
-import com.studium.member.model.vo.Member;
-
-import common.template.PaginationTemplate;
 
 /**
- * Servlet implementation class AdminInqueryListServlet
+ * Servlet implementation class AdminInqueryDeleteMemberServlet
  */
-@WebServlet("/AdminInqueryList")
-public class AdminInqueryListServlet extends HttpServlet {
+@WebServlet("/adminDeleteMember")
+public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInqueryListServlet() {
+    public AdminInqueryDeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +29,11 @@ public class AdminInqueryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String memNo = request.getParameter("memNo");
+		int result=new AdminService().deleteMember(memNo);
+			
+		request.getRequestDispatcher("/AdminInqueryList").forward(request,response);
 		
-		AdminService service=new AdminService();
-		int totalData=service.selectCountMember();
-		String URLmapping="/AdminInqueryList"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-		List<Member> list=service.selectMemberList(pt.getcPage(),pt.getNumPerPage());
-		request.setAttribute("list",list);
-		request.setAttribute("cPage", pt.getcPage());
-		request.setAttribute("pageBar", pt.getPageBar());
-		request.setAttribute("numPerPage", pt.getNumPerPage());
-		
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
-				.forward(request,response);
 	}
 
 	/**

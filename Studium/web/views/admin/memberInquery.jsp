@@ -6,6 +6,8 @@
 	int cPage = (int) request.getAttribute("cPage");
 	String grade = (String)request.getAttribute("grade");
 	String status = (String)request.getAttribute("status");
+	request.setAttribute("setGrade", grade);
+	request.setAttribute("setStatus", status);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,7 +49,7 @@
                 <!--헤더div-->
                 <div>
                     <!--왼쪽 상단에 위치함-->
-                   	 회원정보
+                    회원정보
                 </div>
                 <div>
                     <!--오른쪽 상단에 위치하는 검색기능-->
@@ -110,12 +112,16 @@
                         </select>
                     </td>
                     <td>
-                        <button>탈퇴</button>
+                        <form action="<%=request.getContextPath()%>/adminDeleteMember" 
+                        	  onsubmit="return delete_validate();">
+                            <input type="hidden" value="<%=m.getMemNo() %>" name="memNo">
+                            <input type="submit" value="탈퇴" class="deleteSubmit">
+                        </form>
                     </td>
                 </tr>
                 <%} %>
             </table>
-            <%@ include file="/views/common/pagination.jsp"%>	
+            <%@ include file="/views/common/pagination.jsp"%>
         </div>
 
     </section>
@@ -126,6 +132,15 @@
                 alert("선택된 이름이 없습니다.");
                 return false;
             }
+        }
+
+        function delete_validate() {
+        	var result = confirm("정말 탈퇴하시겠습니까?");
+        	if(result){
+        		return true;
+        	}else{
+        		return false;
+        	}
         }
     </script>
 

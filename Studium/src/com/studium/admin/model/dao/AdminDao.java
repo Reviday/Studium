@@ -124,7 +124,7 @@ public class AdminDao {
 				close(rs);
 				close(pstmt);
 			}
-			
+
 		}
 
 		if(grade.equals("allGrade") && !status.equals("allStatus")) {
@@ -142,9 +142,9 @@ public class AdminDao {
 				close(rs);
 				close(pstmt);
 			}
-			
+
 		}
-		
+
 		if(!grade.equals("allGrade") && status.equals("allStatus")) {
 			String sql=prop.getProperty("selectCountGradeMember") + " '" + grade + "'";
 			try {
@@ -159,9 +159,9 @@ public class AdminDao {
 				close(rs);
 				close(pstmt);
 			}
-			
+
 		}
-		
+
 		if(!grade.equals("allGrade") && !status.equals("allStatus")) {
 			String sql=prop.getProperty("selectCountGradeMember") + " '" + grade + "'"
 					+ " MEM_DENIED =" + " '" + status + "'";
@@ -178,7 +178,7 @@ public class AdminDao {
 				close(pstmt);
 			}
 		}
-		
+
 		return result;
 
 	}
@@ -286,13 +286,13 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	
+
 	public List<Member> selectMemberSearchList(Connection conn,int cPage, int numPerPage, String grade, String status) {
-		
+
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
-		
+
 		if(grade.equals("allGrade") && status.equals("allStatus")) {
 			String sql=prop.getProperty("selectMemberList");
 			try {
@@ -345,7 +345,7 @@ public class AdminDao {
 				close(pstmt);
 			}
 		}
-		
+
 		if(grade.equals("allGrade") && !status.equals("allStatus")) {
 			String sql=prop.getProperty("selectMemberStatusList");
 			try {
@@ -400,7 +400,7 @@ public class AdminDao {
 			}
 
 		}
-		
+
 		if(!grade.equals("allGrade") && status.equals("allStatus")) {
 			String sql=prop.getProperty("selectMemberGradeList");
 			try {
@@ -455,9 +455,9 @@ public class AdminDao {
 			}
 
 		}
-		
+
 		if(!grade.equals("allGrade") && !status.equals("allStatus")) {
-			
+
 			String sql=prop.getProperty("selectMemberSearchList");
 			try {
 				pstmt=conn.prepareStatement(sql);
@@ -511,11 +511,11 @@ public class AdminDao {
 				close(pstmt);
 			}
 
-			
+
 		}
-		
+
 		return list;
-		
+
 	}
 
 	public List<Member> selectMemberNameList(Connection conn,int cPage, int numPerPage, String memberName){
@@ -591,6 +591,26 @@ public class AdminDao {
 			}
 		}
 		return result;
+	}
+
+	public int deleteMember(Connection conn, String memNo) {
+
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteMember");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memNo);				
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+
 	}
 
 }

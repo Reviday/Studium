@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setAttribute("setGrade", "allGrade");
+	request.setAttribute("setStatus", "allStatus");
+%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,5 +40,6 @@
        
         <article class="mainArticle"></article>
         <%@ include file="/views/common/footer.jsp" %>
+        
 </body>
 </html>
