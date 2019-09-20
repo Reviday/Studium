@@ -21,7 +21,7 @@
 <!-- 게시글 View Section -->
 <section id="content-area" class="row">
 	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"
-		style="padding-left: 0">
+		style="padding-left: 0; margin-left:0;">
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
 	</div>
@@ -134,13 +134,13 @@
 									<td class="m-tcol-c step"><span> <img
 											class="levelico"
 											src="<%=request.getContextPath()%>/img/manager_icon.png"
-											width="20" height="20" border="0">
+											width="15" height="15" border="0">
 									</span></td>
 
 									<td class="m-tcol-c chat"><span> <a href="#"
 											onclick=""> <img
 												src="<%=request.getContextPath()%>/img/chatting_icon.png"
-												width="25" height="25" alt="1:1대화" class="ico">
+												width="20" height="20" alt="1:1대화" class="ico">
 										</a>
 									</span></td>
 
@@ -238,10 +238,7 @@
 											</tbody>
 										</table>
 									</div>
-									<i class="fa fa-clock-o"></i><span
-										class="date m-tcol-c filter-50">2019.09.19. 17:13</span> <span
-										class="dsc_comm"><a href="#"
-										class="m-tcol-c  _btnReply">답글</a></span>
+									
 									<p class="btn_edit m-tcol-c">
 										<a href="#" class="filter-70 m-tcol-c _btnNoti">신고</a>
 									</p>
@@ -250,6 +247,13 @@
 									<div class="comm_body">
 										<span class="comm_body">안녕하세요~</span>
 									</div>
+								</div>
+								<div class="comm m-tcol-c">
+										<span
+										class="dsc_comm"><a href="#"
+										class="m-tcol-c  _btnReply">답글</a></span>
+										<i class="fa fa-clock-o"></i><span
+										class="date m-tcol-c filter-50">2019.09.19. 17:13</span> 
 								</div>
 								<div>
 									<input type="hidden" name="cmtid" value="32239728"> <input

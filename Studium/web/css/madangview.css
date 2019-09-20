@@ -4,6 +4,8 @@
 	position: relative;
 	width: 100%;
 	font-size: 12px;
+	margin: 0;
+	padding: 0;
 }
 
 #content-area * {
@@ -127,6 +129,10 @@
 	margin-right: 5px;
 	margin-bottom: 2px;
 	vertical-align: middle;
+}
+
+.step .levelico {
+	border-radius: 50px;
 }
 
 #content-area .fr {
@@ -445,7 +451,7 @@
 	float: left;
 	font-size: 11px;
 	font-family: '돋움', dotum, Helvetica, sans-serif;
-	margin: 2px 0 0 1px;
+	margin: 4px 0 0px 10px;
 }
 
 #content-area .cmlist .dsc_comm {
@@ -479,9 +485,11 @@
 }
 
 #content-area .comm div.comm_body {
-	border: 1px solid  rgba(239, 108, 0, 0.4);
-	width: 100%;
-	
+	border: 1px solid  rgba(239, 108, 0, 0.1);
+	border-radius: 20px;
+	background-color: rgba(239, 108, 0, 0.05);
+	float: left;
+	padding: 10px 20px;
 }
 
 #content-area .cminput {

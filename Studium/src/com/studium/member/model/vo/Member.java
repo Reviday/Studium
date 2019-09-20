@@ -29,7 +29,7 @@ public class Member {
 	private char memUseNote; //쪽지 사용여부(기본값 N)
 	private char memReceiveSms; // 문자 수신 여부(기본값 N)
 	private char memOpenProfile; // 프로필 공개 여부(기본값 N)
-	private char memDenied; // 해당 회원 차단 여부(기본값 N) - 관리자 설정
+	private char memDenied; // 해당 회원 차단 여부(기본값 N/ 영구정지 P) - 관리자 설정
 	private char memEmailCert; // 이메일 인증 여부(기본값 N)
 	private Timestamp memEnrollDatetime; // 회원 가입일(시간 포함)
 	private String memEnrollIp; // 회원 가입 ip(ip 받아오는게 가능하면 넣을까 싶음)
@@ -39,6 +39,9 @@ public class Member {
 	private String memAdminmemo; // 회원에 대한 관리자용 메모
 	private String memIcon; // 회원 아이콘 경로(댓글 사용할때 이미지 정도)
 	private String memPhoto; // 회원 프로필 사진 경로
+	private char memStatus; // 회원 계정 상태
+	private Timestamp memWithdrawalDate; // 회원 탈퇴 일시
+	private Timestamp memDeniedDate; // 회원 차단 일시
 	
 	// 기본 생성자
 	public Member() { }
@@ -55,7 +58,8 @@ public class Member {
 			String memCategory3, String memZipCode, String memAddress1, String memAddress2, char memReceiveEmail,
 			char memUseNote, char memReceiveSms, char memOpenProfile, char memDenied, char memEmailCert,
 			Timestamp memEnrollDatetime, String memEnrollIp, Timestamp memLastloginDatetime, String memLastloginIp,
-			String memProfileContent, String memAdminmemo, String memIcon, String memPhoto) {
+			String memProfileContent, String memAdminmemo, String memIcon, String memPhoto, char memStatus,
+			Timestamp memWithdrawalDate, Timestamp memDeniedDate) {
 		super();
 		this.memNo = memNo;
 		this.memUserEmail = memUserEmail;
@@ -86,6 +90,9 @@ public class Member {
 		this.memAdminmemo = memAdminmemo;
 		this.memIcon = memIcon;
 		this.memPhoto = memPhoto;
+		this.memStatus = memStatus;
+		this.memWithdrawalDate = memWithdrawalDate;
+		this.memDeniedDate = memDeniedDate;
 	}
 
 	public int getMemNo() {
@@ -320,6 +327,30 @@ public class Member {
 		this.memPhoto = memPhoto;
 	}
 
+	public char getMemStatus() {
+		return memStatus;
+	}
+
+	public void setMemStatus(char memStatus) {
+		this.memStatus = memStatus;
+	}
+
+	public Timestamp getMemWithdrawalDate() {
+		return memWithdrawalDate;
+	}
+
+	public void setMemWithdrawalDate(Timestamp memWithdrawalDate) {
+		this.memWithdrawalDate = memWithdrawalDate;
+	}
+
+	public Timestamp getMemDeniedDate() {
+		return memDeniedDate;
+	}
+
+	public void setMemDeniedDate(Timestamp memDeniedDate) {
+		this.memDeniedDate = memDeniedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", memUserEmail=" + memUserEmail + ", memPassword=" + memPassword
@@ -332,7 +363,8 @@ public class Member {
 				+ ", memEnrollDatetime=" + memEnrollDatetime + ", memEnrollIp=" + memEnrollIp
 				+ ", memLastloginDatetime=" + memLastloginDatetime + ", memLastloginIp=" + memLastloginIp
 				+ ", memProfileContent=" + memProfileContent + ", memAdminmemo=" + memAdminmemo + ", memIcon=" + memIcon
-				+ ", memPhoto=" + memPhoto + "]";
+				+ ", memPhoto=" + memPhoto + ", memStatus=" + memStatus + ", memWithdrawalDate=" + memWithdrawalDate
+				+ ", memDeniedDate=" + memDeniedDate + "]";
 	}
-	
+
 }

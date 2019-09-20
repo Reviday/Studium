@@ -40,7 +40,7 @@
   color: #e1ffff;
   top: 0;
   left: 0;
-  width: 255px;
+  width: 100%;
   margin: 0 !important;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -132,7 +132,7 @@
 
 .nav-side-menu .top-menu {
   display:inline-block;
-  width: 250px;
+  width: 100%;
   height: 36px;
 }
 

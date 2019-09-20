@@ -71,6 +71,9 @@ public class MemberDao {
 				m.setMemAdminmemo(rs.getString("mem_adminmemo"));
 				m.setMemIcon(rs.getString("mem_icon"));
 				m.setMemPhoto(rs.getString("mem_photo"));
+				m.setMemStatus(rs.getString("mem_status").charAt(0));
+				m.setMemWithdrawalDate(rs.getTimestamp("mem_withdrawal_date"));
+				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
