@@ -78,7 +78,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
             <!-- 가운데 위치배치를 위한 article -->
             <div class="intro">
                 <!-- 왼쪽에 위치한 메인 소개 div -->
-                <div id="toast" ><span class="icon"></span><span class="message"></span></div>
+                <div id="toast" >
+                <span class="icon"></span>
+                <span id="message" class="message"></span>
+                </div>
                 <div class="intro-img">
                     <!-- 이미지슬라이드 div -->
                     <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>" alt="">
@@ -266,15 +269,15 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 	
                 	  <%if(md==null){ %>
                   
-                      <img alt="" src="<%=request.getContextPath()%>/img/dibsempty.png"  style="width:100px" >
+                      <img alt="" src="<%=request.getContextPath()%>/img/dibsoff.png"  style="width:150px" >
                      		
                    <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getpNo()==md.getpNo()){ %>
                   
-                   <img alt=""  src="<%=request.getContextPath()%>/img/dibsfull.png" style="width:100px">
+                   <img alt=""  src="<%=request.getContextPath()%>/img/dibson.png" style="width:150px">
                    	 	
                     <%}else {%>
                 
-                     <img alt="" src="<%=request.getContextPath()%>/img/dibsempty.png" style="width:100px">
+                     <img alt="" src="<%=request.getContextPath()%>/img/dibsoff.png" style="width:150px">
                    			 
                     <%} %>
                 	
@@ -300,7 +303,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     #toast {
     display: none;
     position: fixed;
-    top: 5pc;
+    top: 8pc;
     left: 50%;
     margin-left: -5in;
     width: 60pc;
@@ -320,6 +323,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     height: 100%;
     background: transparent url(https://cdn.studysearch.co.kr/static/images/base/icon_toast_confirmed.6f9750454287.png)0 11px no-repeat;
 }
+#toast .message {
+    display: inline-block;
+    vertical-align: top;
+}
     
     
     
@@ -330,10 +337,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 var num = $(this).scrollTop();
                 if (num > 40) { 
                     $(".pay").css("position", "fixed");
-                    $(".pay").css("top", "0");
+                    $(".pay").css("top", "94px");
                 } else {
                     $(".pay").css("position", "absolute");
-                    $(".pay").css("top", "39px");
+                    $(".pay").css("top", "95px");
                 }
             });
         });
@@ -414,29 +421,31 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				console.log(data+"ajax데이터 들어오는거");
 				if(data==("1")){ //넘어온 데이터 값이 1이면 찜하기 구현
 					$("#A").val("0");
-					console.log($("#A").val()+"val");
-					alert("찜하기 성공");
-					console.log(data);
-					console.log($("A").val()+"찜하기성공");
 					$("#dibscon").html($("<input>").attr({"value":"0",
 						"type":"hidden",
 						"id":"A",
 						"name":"A"}));
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibsfull.png",
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibson.png",
 														"class":"dibs",
-														"style":"width:100px"
+														"style":"width:150px"
 															}));
-					
+					$('#toast').animate({opacity: '1'}, 100);
+					$("#toast").css("display","block");
+					$("#message").html(("찜하기 성공"));
+					$('#toast').animate({opacity: '0'}, 1000);
 				}else {//
-					alert("찜하기 취소");
+					
 					$("#A").val("1");
-					console.log($("A").val()+"찜하기취소성공");
 					$("#dibscon").html($("<input>").attr({"value":"1","type":"hidden",
 						"id":"A",
 						"name":"A"}));
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibsempty.png",
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibsoff.png",
 														"class":"dibs",
-														"style":"width:100px"}));
+														"style":"width:150px"}));
+					$('#toast').animate({opacity: '1'}, 100);
+					$("#toast").css("display","block");
+					$("#message").html(("찜하기 취소"));
+					$('#toast').animate({opacity: '0'}, 1000);
 					
 				}
 				

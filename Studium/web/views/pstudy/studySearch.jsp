@@ -18,7 +18,7 @@
       }
 
 body{
-	background-color: #eeeeee !important;
+	background-color: #ffffff !important;
 }
   </style>
 
@@ -32,7 +32,7 @@ body{
  
   
   <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
-    
+    <section >
   <div class="wrap" style="margin-left:100px;">
     <div class="category" style="margin-top: 20px;">
       <div class="sidebar">
@@ -83,13 +83,18 @@ body{
         <div class="psutdysearch_btn2"><input type="image" src="<%=request.getContextPath()%>/img/search_btn1.png"></div>
          
       </form>
+      
+      <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
       <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();"> </div>
+     <%}else{ %>
+     	
+     <%} %>
      
      
     </div>
     <div style="height: 210px;"></div>
    
-<div class="a">
+<div class="plist">
 	<div class="a_title">강사 스터디 </div>
 	<div class="study-list">
 		<div class="row ">
@@ -98,9 +103,15 @@ body{
 			<div class="a_cnt1">
 				<div data-aos="fade-up" class="col-3 pstudy-card">
 
-					<div class="card-top"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+					 <%
+                    	if(loginMember!=null) {
+                    %>
+					<div class="card-top"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
+					<%}else {%>
+					<div class="card-top"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=0'"
+						style="cursor:pointer;">
+					<% } %>
 						<p><%=p.getpArea() %> | <%=p.getpDay() %></p>
 						<h5><%=p.getpTitle() %></h5>
 						<p class="card-price"><%=p.getpPrice() %></p>
@@ -112,9 +123,15 @@ body{
 							<%} %>
 						</div>
 					</div>
-					<div class="card-bottom"
-						OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>'"
+						 <%
+                    	if(loginMember!=null) {
+                    %>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"
 						style="cursor:pointer;">
+					<%}else {%>
+					<div class="card-bottom"	OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=0'"
+						style="cursor:pointer;">
+					<% } %>
 						<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
 					</div>
 				</div>
@@ -123,6 +140,8 @@ body{
 			<%} 
 	  %>
 		</div>
+</div>
+</div>
 
 	</div>
 </div>
@@ -152,8 +171,8 @@ body{
     <script>
         AOS.init();
     </script>
-
-
+</section>
+<%@ include file="../../views/common/footer.jsp" %> 
 </body>
 
 </html>
