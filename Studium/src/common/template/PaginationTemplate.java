@@ -1,5 +1,8 @@
 package common.template;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class PaginationTemplate {
@@ -30,6 +33,11 @@ public class PaginationTemplate {
 	private int pageNo;
 	private int pageEnd;
 	
+	// 페이지 번호로 Parameter를 넘기기 위해 사용한다.
+	private Map<String, String> attributes=new HashMap<String, String>();
+	// 매핑용 변수
+	private String URLmapping; 
+	
 	/*
 	 * 페이징 처리를 template을 만들어 사용하기위해
 	 * 기본적인 인수로 서블렛으로부터 request를 전달받고
@@ -58,18 +66,28 @@ public class PaginationTemplate {
 		pageEnd=pageNo + pageBarSize - 1;
 		pageBar="";
 		
-		// 페이지 바 만들기
-		pageBar=setPageBar(request.getContextPath()+URLmapping);
+		// URLmapping
+		this.URLmapping = request.getContextPath()+URLmapping;
 	}
 	
-	private String setPageBar(String URLmapping) {
+	private String setPageBar(String URLmapping, Map<String, String> attributes) 
+	{
 		// pageBar 소스코드 작성!
+		String queryString=""; // QueryString 누적용 변수
+		
+		// 우선, attributes에 설정된 QueryString이 있는지 확인하고, 있으면 QueryString으로 만들어준다.
+		if(!attributes.isEmpty()) {
+			for(String key : attributes.keySet()) {
+				queryString+="&"+key+"="+attributes.get(key);
+			}
+		}
+		
 		// 처음페이지 pagination
 		if(pageNo <= pageBarSize) {
 			pageBar += "<li><a>처음 페이지</a></li>";
 		} else {
 			pageBar += "<li><a href='"+ URLmapping +"?cPage=1&numPerPage=" 
-						+ numPerPage + " class='first'>처음 페이지</a></li>";
+						+ numPerPage + queryString + " class='first'>처음 페이지</a></li>";
 		}
 		
 		// 이전 pagination
@@ -77,7 +95,7 @@ public class PaginationTemplate {
 			pageBar += "<li><a><<</a></li>";
 		} else {
 			pageBar += "<li><a href='" + URLmapping +"?cPage=" + (pageNo - 1) 
-						+ "&numPerPage=" + numPerPage + "' class='arrow left'><<</a></li>";
+						+ "&numPerPage=" + numPerPage + queryString + "' class='arrow left'><<</a></li>";
 		}
 		
 		// 페이지 pagination
@@ -86,7 +104,7 @@ public class PaginationTemplate {
 				pageBar += "<li><a class='active num'>" + pageNo + "</a></li>";
 			} else {
 				pageBar += "<li><a href='"+ URLmapping + "?cPage=" + pageNo 
-							+ "&numPerPage=" + numPerPage + "' class='num'>"+pageNo+"</a></li>";
+							+ "&numPerPage=" + numPerPage + queryString + "' class='num'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
@@ -96,7 +114,7 @@ public class PaginationTemplate {
 			pageBar += "<li><a>>></a></li>";
 		} else {
 			pageBar += "<li><a href='"+ URLmapping + "?cPage=" + pageNo 
-						+ "&numPerPage=" + numPerPage + "' class='arrow right'>>></a></li>";
+						+ "&numPerPage=" + numPerPage + queryString + "' class='arrow right'>>></a></li>";
 		}
 		
 		
@@ -105,12 +123,19 @@ public class PaginationTemplate {
 			pageBar += "<li><a>끝 페이지</a></li>";
 		} else {
 			pageBar += "<li><a href='"+ URLmapping +"?cPage=" + totalPage
-						+ "&numPerPage=" + numPerPage + "' class='last'>끝 페이지</a></li>";
+						+ "&numPerPage=" + numPerPage + queryString + "' class='last'>끝 페이지</a></li>";
 		}
 		
 		return pageBar;
 	}
-
+	
+	//넘겨줄 파라미터 값을 설정하는 함수
+	//넘겨줄 값이 없으면 추가하지 않아도 된다.
+	//쿼리스트링으로 넘겨주는 값은 무조건 String 이므로 유의하도록 한다.
+	public void setQueryString(String key, Object value) 
+	{
+		attributes.put(key, String.valueOf(value));
+	}
 	
 	//처리된 값을 반환 받을 getter
 	public int getcPage() {
@@ -122,6 +147,8 @@ public class PaginationTemplate {
 	}
 	
 	public String getPageBar() {
+		// 페이지 바 만들기
+		pageBar=setPageBar(URLmapping, attributes);
 		return pageBar;
 	}
 
