@@ -9,8 +9,10 @@
 %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
-<link href="<%=request.getContextPath()%>/css/madang.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/madangview.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/madang.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/madangview.css"
+	rel="stylesheet">
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
@@ -24,7 +26,7 @@
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
 	</div>
 	<!-- 게시글 View Main -->
-	<div id="main-area" class="col-sm-6 col-md-6 col-lg-6">
+	<div id="main-area" class="col-xs-6 col-sm-6 col-md-9 col-lg-8	">
 		<!-- 게시글 이전글/다음글, 목록 버튼 위치 -->
 		<div class="list-btn">
 			<!-- float:left 버튼 -->
@@ -130,13 +132,15 @@
 										</table>
 									</td>
 									<td class="m-tcol-c step"><span> <img
-											class="levelico" src="<%=request.getContextPath()%>/img/manager_icon.png" width="20"
-											height="20" border="0">
+											class="levelico"
+											src="<%=request.getContextPath()%>/img/manager_icon.png"
+											width="20" height="20" border="0">
 									</span></td>
 
 									<td class="m-tcol-c chat"><span> <a href="#"
-											onclick=""> <img src="<%=request.getContextPath()%>/img/chatting_icon.png" width="25"
-												height="25" alt="1:1대화" class="ico">
+											onclick=""> <img
+												src="<%=request.getContextPath()%>/img/chatting_icon.png"
+												width="25" height="25" alt="1:1대화" class="ico">
 										</a>
 									</span></td>
 
@@ -169,8 +173,9 @@
 									<!-- 댓글 수 -->
 									<td class="reply"><a href="javascript:"
 										class="reply_btn b m-tcol-c m-tcol-p _totalCnt" id="comment">댓글
-											1 <img class="new_icon" src="<%=request.getContextPath()%>/img/new_icon.png" width="20"
-											height="20" padding_bottom="2" alt="new">
+											1 <img class="new_icon"
+											src="<%=request.getContextPath()%>/img/new_icon.png"
+											width="20" height="20" padding_bottom="2" alt="new">
 
 									</a></td>
 									<!-- 조회 수 -->
@@ -182,8 +187,9 @@
 									<td><a href="#" class="b fork_btn">포크</a>
 										<div class="btn_module">
 											<a href="#" class="btn_cnt" aria-pressed="false"> <img
-												class="fork_icon" src="<%=request.getContextPath()%>/img/fork_icon.png" alt=""> <em
-												class="fork_count">10</em>
+												class="fork_icon"
+												src="<%=request.getContextPath()%>/img/fork_icon.png" alt="">
+												<em class="fork_count">10</em>
 											</a>
 										</div></td>
 									<!-- 좋아요 -->
@@ -191,8 +197,9 @@
 									<td><a href="#" class="b like_btn">좋아요</a>
 										<div class="btn_module">
 											<a href="#" class="btn_cnt" aria-pressed="false"> <img
-												class="dibs_icon" src="<%=request.getContextPath()%>/img/like_icon_click.png" alt=""> <em
-												class="like_count">100</em>
+												class="dibs_icon"
+												src="<%=request.getContextPath()%>/img/like_icon_click.png"
+												alt=""> <em class="like_count">100</em>
 											</a>
 										</div></td>
 								</tr>
@@ -239,9 +246,11 @@
 										<a href="#" class="filter-70 m-tcol-c _btnNoti">신고</a>
 									</p>
 								</div>
-								<p class="comm m-tcol-c">
-									<span class="comm_body">안녕하세요~</span>
-								</p>
+								<div class="comm m-tcol-c">
+									<div class="comm_body">
+										<span class="comm_body">안녕하세요~</span>
+									</div>
+								</div>
 								<div>
 									<input type="hidden" name="cmtid" value="32239728"> <input
 										type="hidden" name="writerid" value="wlgml3145"> <input
@@ -316,11 +325,11 @@
 					</ul>
 					<div style="clear: both; height: 0pt; font: 0pt/0pt arial;"></div>
 					<div style="display: none;" class="cc_paginate cmt"
-						id="cmt_paginate"></div>
+						id="cmt_paginate">
+						<!-- 댓글 페이징 처리 -->
+					</div>
 
-
-
-
+					<!-- 댓글 작성 테이블 -->
 					<table cellspacing="0" class="cminput">
 						<tbody>
 							<tr>
@@ -331,8 +340,18 @@
 											style="overflow: hidden; line-height: 14px; height: 39px;"
 											title="댓글입력"></textarea>
 
+										<!-- 이미지 삽입 시 표시 -->
 										<div class="u_cbox_upload_image" style="display: none">
+											<span class="u_cbox_upload_image_wrap "> <a href="#"
+												class="u_cbox_upload_thumb_link"><img
+													src="https://cafethumb.pstatic.net/MjAxOTA5MjBfMTIg/MDAxNTY4OTU1Njg4NDU1.IcoYKAWcXxJqBq1IMq2SAm2_upI2caLSbau1tLrmLKsg.LBo7aZPDD5Y-p1V8jnDnzy8iRF-T9wKQiwZ2IJwk7sYg.JPEG/externalFile.jpg?type=ff80_80"
+													alt="첨부이미지" class="u_cbox_upload_thumb" width="80"
+													height="80"> <span class="u_cbox_upload_thumb_mask"></span>
+													<span class="u_cbox_ico_delete_thumb _cancelAttach">사진
+														업로드 취소</span> </a>
+											</span>
 										</div>
+										
 									</div>
 								</td>
 								<td class="i3">
@@ -342,56 +361,24 @@
 									</div>
 								</td>
 							</tr>
-							<!--
-                                <tr>
-                                    <td colspan="3">
+							<tr>
+								<td colspan="3">
 
-
-
-
-                                        <ul class="u_cbox_addition">
-                                            <li>
-                                                <div class="_stickerBtn u_cbox_btn_upload_sticker">
-                                                    <span class="u_cbox_ico_upload_sticker"></span>
-                                                    <span class="m-tcol-c u_cbox_txt_upload_sticker">스티커</span>
-                                                    <a href="#" class="u_cbox_link_wrap"
-                                                        onclick="clickcr(this,'cmt.sticker', '', '', event)">스티커 레이어
-                                                        팝업</a>
-                                                </div>
-
-                                                <div class="line_stc_sec">
-                                                    <div class="se2_line_layer">
-                                                        <div class="se2_in_layer">
-                                                            <div class="se2_line_sticker">
-                                                                <button type="button" title="이전" class="se2_prev"
-                                                                    disabled=""><span>이전</span></button>
-                                                                <ul class="se2_line_sticker_set">
-                                                                </ul>
-                                                                <button type="button" title="다음"
-                                                                    class="se2_next"><span>다음</span></button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="u_cbox_btn_upload_photo">
-                                                    <div class="_imageBtn u_cbox_btn_file"><label
-                                                            for="attachImageBtn258118"
-                                                            onclick="clickcr(this,'cmt.image', '', '', event);">업로드</label><input
-                                                            type="file" id="attachImageBtn258118" accept="Image/*">
-                                                    </div>
-                                                    <span class="u_cbox_ico_upload_photo"></span>
-                                                    <span class="m-tcol-c u_cbox_txt_upload_photo">사진</span>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-                                    </td>
-                                </tr>
-                                -->
+									<ul class="u_cbox_addition">
+										<li>
+											<div class="u_cbox_btn_upload_photo">
+												<div class="_imageBtn u_cbox_btn_file">
+													<label for="attachImageBtn258153"
+														onclick="clickcr(this,'cmt.image', '', '', event);">업로드</label><input
+														type="file" id="attachImageBtn258153" accept="Image/*">
+												</div>
+												<span class="u_cbox_ico_upload_photo"></span> <span
+													class="m-tcol-c u_cbox_txt_upload_photo">사진</span>
+											</div>
+										</li>
+									</ul> 
+								</td>
+							</tr>
 						</tbody>
 					</table>
 
