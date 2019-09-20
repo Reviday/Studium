@@ -7,8 +7,10 @@ import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+
 import com.studium.admin.model.dao.AdminDao;
 import com.studium.admin.model.vo.QandA;
+import com.studium.member.model.vo.Member;
 
 public class AdminService {
 
@@ -33,9 +35,51 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountMember(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountMemberName(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountMemberName(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountMemberSearch(String grade, String status) {
+		Connection conn=getConnection();
+		int result=dao.selectCountMemberSearch(conn, grade, status);
+		close(conn);
+		return result;
+	}
+	
 	public List<QandA> selectQandAList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<QandA> list=dao.selectQandAList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Member> selectMemberList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Member> list=dao.selectMemberList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Member> selectMemberSearchList(int cPage, int numPerPage, String grade, String status) {
+		Connection conn = getConnection();
+		List<Member> list = dao.selectMemberSearchList(conn, cPage, numPerPage, grade, status);
+		close(conn);
+		return list;
+	}
+	
+	public List<Member> selectMemberNameList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<Member> list=dao.selectMemberNameList(conn,cPage,numPerPage, memberName);
 		close(conn);
 		return list;
 	}

@@ -23,7 +23,7 @@
         <article class="leftmenu">
             <ul>
                 <li>
-                    <a href="">인쿼리</a>  
+                    <a href="<%=request.getContextPath()%>/AdminInqueryList">인쿼리</a>  
                 </li>
                 <li>
                     <a href="">적립금 관리</a>
