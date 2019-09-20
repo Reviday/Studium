@@ -17,6 +17,8 @@
 	background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
+<!-- 폰트어썸-->
+<link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
     <!-- 달력 -->
     <link href="<%=request.getContextPath()%>/css/daterangepicker.css" rel="stylesheet" media="all">
     

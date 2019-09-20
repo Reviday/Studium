@@ -15,13 +15,15 @@
     display: block;
     margin: 9px 10px;
 }
-.myI-1-info{
-	width:300px;
+
+.myI-1-info {
+    width: 300px;
 }
 
-.myI-1-info div{
-	margin-bottom:20px;
+.myI-1-info div {
+    margin-bottom: 20px;
 }
+
 .myI-1-f {
     font-size: 0.8em;
     border: 1px solid #c1c1c1;
@@ -90,15 +92,15 @@
     padding: 50px 0px;
     text-align: center;
 }
-.addMoreInfo>p{
-	margin-bottom:50px;
+
+.addMoreInfo>p {
+    margin-bottom: 50px;
 }
 
 .btn-withStudium {
-	
     font-size: 13px;
     background-color: orangered;
-    margin-top:50px;
+    margin-top: 50px;
     margin-right: 250px;
     color: white;
     border: 1px solid white;
@@ -139,16 +141,17 @@
     margin-left: 9px;
 }
 
-.inputInteresting p{
-	font-size:0.9em;
-	width:300px;
-	margin-top:20px;
-	margin-bottom:0px;
-	color: black !important;
-	border-bottom:1px solid;
+.inputInteresting p {
+    font-size: 0.9em;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: black !important;
+    border-bottom: 1px solid;
 }
+
 .check-label {
-	font-size:0.8em;
+    font-size: 0.8em;
     margin-right: 10px;
 }
 
@@ -642,4 +645,82 @@ div .img-category {
     text-align: center;
     font-size: 13px;
     margin-bottom: 30px;
+}
+
+
+/* 환경설정 */
+
+.setting {
+    padding: 80px 0px;
+    text-align: center;
+}
+
+.setting h5 {
+	text-align:center;
+	border-radius:5px;
+    margin:0px auto;
+    margin-bottom:50px;
+    padding:10px;
+    width:200px;
+    background-color:#d8d8d8;
+}
+
+
+.setting-divide {
+    /* border-bottom: 1px solid black; */
+    /* width: 80%; */
+    margin: 0px auto;
+}
+
+
+/* 밑줄 */
+
+.setting-divide:after {
+    height: 10px;
+    margin: 0px auto;
+    content: "";
+    display: block;
+    width: 50%;
+    border-bottom: 1px solid #9faab7;
+}
+
+.switchForm {
+    width: 80px;
+    padding: 5px 10px;
+    margin: 14px 40px;
+    text-align: right;
+}
+
+.check-i {
+    width: 50%;
+    color: #000;
+    padding: 5px 10px;
+    margin: 10px 10px;
+    text-align: left;
+    float: right;
+}
+
+.check-i span {
+    height: 1px;
+    font-size: 0.8em;
+    color: rgb(255, 71, 71);
+    line-height: 10% !important;
+}
+
+.btn-changeSetting {
+    font-size: 13px;
+    background-color: orangered;
+    color: white;
+    border: 1px solid white;
+    border-radius: 3px;
+    margin-top: 50px;
+}
+
+.btn-changeSetting:hover {
+    background-color: white;
+    color: black;
+    transition: all 0.3s ease 0s;
+    border: 1px solid orangered;
+    -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
 }
