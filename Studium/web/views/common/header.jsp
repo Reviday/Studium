@@ -136,7 +136,7 @@
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/pstudyListView">강사스터디</a>
 						</li>
 
-						<li class="nav-item"><a class="nav-link" href="study02.html">일반스터디</a>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/fstudyListView">일반스터디</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="review.html">스터디후기</a>
 

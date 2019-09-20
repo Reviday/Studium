@@ -1,9 +1,9 @@
 <%@page import="javafx.scene.control.Alert"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs" %>
+ <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy,com.studium.mypage.model.vo.MyDibs" %>
  <%
- 	Pstudy p=(Pstudy)request.getAttribute("pstudy");
+ 	Fstudy p=(Fstudy)request.getAttribute("fstudy");
      MyDibs md=(MyDibs)request.getAttribute("md"); 
  %>
 <!DOCTYPE html>
@@ -84,18 +84,18 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 </div>
                 <div class="intro-img">
                     <!-- 이미지슬라이드 div -->
-                    <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>" alt="">
+                    <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg1()%>" alt="">
                 </div>
 
                 <div class="intro-img">
                     <!-- 이미지슬라이드 div -->
-                    <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg2()%>"
+                    <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg2()%>"
                         alt="">
                 </div>
 
                 <div class="intro-img">
                     <!-- 이미지슬라이드 div -->
-                    <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg3()%>" alt="">
+                    <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg3()%>" alt="">
                 </div>
 
                 <div style="text-align:center">
@@ -107,19 +107,19 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 
                 <div class="intro-title">
-                    <!-- 소개 title --> <%=p.getpTitle() %>
+                    <!-- 소개 title --> <%=p.getfTitle() %>
                     <div>
                         <!-- 스터디지역 -->
-                       	<%=p.getpArea() %>
+                       	<%=p.getfArea() %>
                     </div>
                     <div>
                         <!-- 스터디 타이틀 -->
-                       <%=p.getpTitle() %>
+                       <%=p.getfTitle() %>
                     </div>
                 </div>
                 <div class="intro-category">
                     <!-- 카테고리 div (fix) -->
-                   	<%=p.getpCategory() %>
+                   	<%=p.getfCategory() %>
                 </div>
                 <div class="line-title-bottom"></div> <!-- 파트를 구분하는 선 div -->
                 <div class="intro-content">
@@ -129,8 +129,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div> <!-- 스터디 소개 텍스트 -->
                     <div>
                         <textarea cols="70" rows="40" readonly>
-                       <%=p.getpIntro1() %><br><br>
-                       <%=p.getpIntro2() %>
+                       <%=p.getfIntro1() %><br><br>
+                       <%=p.getfIntro2() %>
 					</textarea>
                     </div> <!-- 스터디 소개 content -->
                 </div>
@@ -142,14 +142,14 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div>
                     <div>
                         <span class="info-left"><span style="color:#a0a0a0">지역:</span>
-                            &nbsp;&nbsp;<span><%=p.getpArea() %></span></span>
+                            &nbsp;&nbsp;<span><%=p.getfArea() %></span></span>
                         <span class="info-right"><span style="color:#a0a0a0">인원:</span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><%=p.getpStudypserson() %></span></span> <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><%=p.getfStudypserson() %></span></span> <br>
                         <span class="info-right"><span style="color:#a0a0a0">장소비:</span>
                             &nbsp;&nbsp;<span>포함</span></span> <br>
                         <span class="info-left"><span style="color:#a0a0a0">시간:</span>
-                            &nbsp;&nbsp;<span>A그룹(화)</span></span> <span class="info-time"><%=p.getpDay() %></span> <br>
-                        <span class="info">지금 신청하면&nbsp; <p><%=p.getpDatestart() %></p>&nbsp; 첫 스터디 시작!</span>
+                            &nbsp;&nbsp;<span>A그룹(화)</span></span> <span class="info-time"><%=p.getfDay() %></span> <br>
+                        <span class="info">지금 신청하면&nbsp; <p><%=p.getfDatestart() %></p>&nbsp; 첫 스터디 시작!</span>
                     </div>
                 </div>
                 <div>
@@ -168,21 +168,21 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div>
                    
 		<div>
-			<%if(p.getpLike()==1){ %>
+			<%if(p.getfLike()==1){ %>
 				<img src="<%=request.getContextPath()%>/img/star1.png" width=200px>
-			<%}else if(p.getpLike()==2) {%>
+			<%}else if(p.getfLike()==2) {%>
 			<img src="<%=request.getContextPath()%>/img/star2.png" width=200px>
-			<%}else if(p.getpLike()==3){ %>
+			<%}else if(p.getfLike()==3){ %>
 			<img src="<%=request.getContextPath()%>/img/star3.png" width=200px>
-			<%}else if(p.getpLike()==4){ %>
+			<%}else if(p.getfLike()==4){ %>
 			<img src="<%=request.getContextPath()%>/img/star4.png" width=200px>
-			<%}else if(p.getpLike()==5){ %>
+			<%}else if(p.getfLike()==5){ %>
 			<img src="<%=request.getContextPath()%>/img/star5.png" width=200px>
 			<%} else{%>
 			
 			<%} %>
 		
-		<b><%=p.getpLike() %></b>점
+		<b><%=p.getfLike() %></b>점
 		</div>
 	
                     <div>
@@ -211,7 +211,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 <!-- 오른쪽에 위치한 신청 고정 div -->
                 <div>
                     <!-- 신청 타이틀 -->
-                   <%=p.getpTitle() %>
+                   <%=p.getfTitle() %>
                 </div>
                 <div class="pay-line"></div> <!-- 구분 선 -->
                 <div class="pay-date">
@@ -219,13 +219,12 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     <img src="https://cdn.studysearch.co.kr/static/images/purchase/item_radio_checked.1f99efef95e3.png"
                         alt="">
                         
-                    <span>~<%=p.getpDateend() %></span>
+                    <span>~<%=p.getfDateend() %></span>
                 </div>
                 <div class="pay-line1"></div> <!-- 구분 선 -->
                 <div class="pay-pay">
                     <!-- 참가비용 -->
-                    <span>참가비</span>
-                    <span><%=p.getpPrice() %></span>
+              
                 </div>
                 <div class="sinchung">
                     <!-- 신청 버튼 -->
@@ -234,7 +233,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     <%
                     	if(loginMember!=null) {
                     %>
-                    	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
+                    	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getfNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
                     <% 		
                     	} else {
                     %>		
@@ -252,11 +251,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 	<%if(loginMember!=null) {%>
                    <input type="hidden" name="mNo" id="mNo" value="<%=loginMember.getMemNo()%>"/>
                  	<%}else{ } %>
-                   <input type="hidden" name="pNo" id="pNo" value="<%=p.getpNo()%>"/>
+                   <input type="hidden" name="pNo" id="pNo" value="<%=p.getfNo()%>"/>
                 	<div id="dibsimg">
                 	 <%if(md==null){ %>
                 	<input type="hidden" id="A" value="1" name="A"/>
-                	   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getpNo()==md.getpNo()){ %>
+                	   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getfNo()==md.getfNo()){ %>
                 	    <input type="hidden" id="A" value="0" name="A"/>
                 	   <%}else {%>
                 	   <input type="hidden" id="A" value="1" name="A"/>
@@ -271,7 +270,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                   
                       <img alt="" src="<%=request.getContextPath()%>/img/dibsoff.png"  style="width:150px" >
                      		
-                   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getpNo()==md.getpNo()){ %>
+                   <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getfNo()==md.getfNo()){ %>
                   
                    <img alt=""  src="<%=request.getContextPath()%>/img/dibson.png" style="width:150px">
                    	 	
@@ -379,13 +378,13 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         	var msg = "삭제하시겠습니까";
     		var flag = confirm(msg);
     		if(flag==true) {
-    		location.href="<%=request.getContextPath()%>/pstudy/pstudyDelete?pNo=<%=p.getpNo()%>";
+    		location.href="<%=request.getContextPath()%>/fstudy/fstudyDelete?pNo=<%=p.getfNo()%>";
     		}
     		else alert("취소하였습니다.");
         }
         function fn_update(){
         	
-        	location.href="<%=request.getContextPath()%>/pstudy/pstudyUpdate?pNo=<%=p.getpNo()%>";
+        	location.href="<%=request.getContextPath()%>/fstudy/fstudyUpdate?pNo=<%=p.getfNo()%>";
         	
         }
         function fn_loginAlert(){

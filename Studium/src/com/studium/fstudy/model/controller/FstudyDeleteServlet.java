@@ -1,7 +1,6 @@
-package com.studium.pstudy.controller;
+package com.studium.fstudy.model.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.pstudy.model.service.PstudyService;
-import com.studium.pstudy.model.vo.Pstudy;
+import com.studium.fstudy.model.service.FstudyService;
 
 /**
- * Servlet implementation class PstudySearchServlet
+ * Servlet implementation class PstudyDeleteServlet
  */
-@WebServlet("/pstudy/search")
-public class PstudySearchServlet extends HttpServlet {
+@WebServlet("/fstudy/fstudyDelete")
+public class FstudyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PstudySearchServlet() {
+    public FstudyDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +30,20 @@ public class PstudySearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String area=request.getParameter("p_area");
-		String day=request.getParameter("p_day");
-		System.out.println(area+day);
-		
-		List<Pstudy>pList=new PstudyService().searchPstudy(area, day);
-		request.setAttribute("pList", pList);
-		
-		System.out.println(pList);
-		request.getRequestDispatcher("/views/pstudy/studySearch.jsp").forward(request, response);
-		
-		
+		int fNo=Integer.parseInt(request.getParameter("fNo"));
+		FstudyService service=new FstudyService();
+		int result=service.deleteFstudy(fNo);
+		  String msg=result>0?"삭제성공!":"삭제실패!";
+	      String loc="";
+	      if(result>0) {
+	    	  loc="/";
+	      }else {
+	    	  loc="/";
+	      }
+	      request.setAttribute("msg", msg);
+	      request.setAttribute("loc", loc);
+	      request.getRequestDispatcher("/views/common/msg.jsp")
+	      .forward(request,response);   
 	}
 
 	/**

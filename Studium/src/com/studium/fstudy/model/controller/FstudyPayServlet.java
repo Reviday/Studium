@@ -1,7 +1,6 @@
-package com.studium.pstudy.controller;
+package com.studium.fstudy.model.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.pstudy.model.service.PstudyService;
-import com.studium.pstudy.model.vo.Pstudy;
+import com.studium.fstudy.model.service.FstudyService;
+import com.studium.fstudy.model.vo.Fstudy;
 
 /**
- * Servlet implementation class PstudySearchServlet
+ * Servlet implementation class PstudyPayServlet
  */
-@WebServlet("/pstudy/search")
-public class PstudySearchServlet extends HttpServlet {
+@WebServlet("/fstudy/fstudyPay")
+public class FstudyPayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PstudySearchServlet() {
+    public FstudyPayServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +31,12 @@ public class PstudySearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String area=request.getParameter("p_area");
-		String day=request.getParameter("p_day");
-		System.out.println(area+day);
+		int no =Integer.parseInt(request.getParameter("fNo"));
 		
-		List<Pstudy>pList=new PstudyService().searchPstudy(area, day);
-		request.setAttribute("pList", pList);
-		
-		System.out.println(pList);
-		request.getRequestDispatcher("/views/pstudy/studySearch.jsp").forward(request, response);
-		
-		
+		Fstudy f=new FstudyService().selectpStudyVIew(no);
+
+		request.setAttribute("fstudy", f);
+		request.getRequestDispatcher("/views/pstudy/pstudyPay.jsp").forward(request, response);
 	}
 
 	/**
