@@ -58,6 +58,31 @@ public class MyDibsDao {
 		}return m;
 		
 	}
+	public MyDibs selectFstudyDibs(Connection conn,int mNo,int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFstudyDibs");
+		MyDibs m =new MyDibs();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mNo);
+			pstmt.setInt(2, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			m.setDibsId(rs.getInt("dibs_id"));
+			m.setMemberNo(rs.getInt("mem_no"));
+			m.setpNo(rs.getInt("p_no"));
+			m.setfNo(rs.getInt("f_no"));
+			m.setScrDateTime(rs.getDate("scr_datetime"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return m;
+	}
 	
 
 }

@@ -1,0 +1,107 @@
+body .dribbble {
+    position: fixed;
+    display: block;
+    right: 20px;
+    bottom: 20px;
+}
+
+body .dribbble img {
+    display: block;
+    height: 28px;
+}
+
+.switch {
+    --background: rgb(247, 216, 196);
+    --background-active: #ef6c00;
+    --shadow: rgba(18, 22, 33, .04);
+    --shadow-dark: rgba(18, 22, 33, .32);
+    cursor: pointer;
+    display: flex;
+    -webkit-tap-highlight-color: transparent;
+    zoom: 1.5;
+}
+
+.switch input[type=checkbox] {
+    display: none;
+}
+
+.switch input[type=checkbox]+div {
+    width: 30px;
+    /*버튼사이즈*/
+    height: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    background: var(--background);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.switch input[type=checkbox]+div:before,
+.switch input[type=checkbox]+div canvas {
+    /*동그라미 위치*/
+    left: 3px;
+    top: 3px;
+    display: block;
+    position: absolute;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.switch input[type=checkbox]+div:before {
+    --x: -120%;
+    --s: 1;
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--background-active);
+    transform: translateX(var(--x)) scale(var(--s));
+}
+
+.switch input[type=checkbox]+div canvas {
+    --x: -8px;
+    display: block;
+    filter: drop-shadow(0 1px 2px var(--shadow));
+    transform: translate(var(--x), -8px);
+}
+
+.switch input[type=checkbox]:checked+div:before {
+    --s: 3;
+    --x: 0;
+}
+
+.switch input[type=checkbox]:checked+div canvas {
+    --x: 8px;
+    filter: drop-shadow(0 1px 2px var(--shadow-dark));
+}
+
+.switch:active input[type=checkbox]+div {
+    transform: scale(0.92);
+}
+
+.switch span {
+    line-height: 24px;
+    font-size: 8px;
+    font-weight: 500;
+    display: block;
+}
+
+body .switch:not(:last-child) {
+    width: 70px;
+}
+
+body .dribbble {
+    position: fixed;
+    display: block;
+    right: 20px;
+    bottom: 20px;
+}
+
+body .dribbble img {
+    display: block;
+    height: 28px;
+}
+
+label {
+    margin-bottom: 0px !important;
+}

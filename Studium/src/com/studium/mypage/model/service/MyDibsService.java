@@ -17,5 +17,11 @@ public class MyDibsService {
 		close(conn);
 		return mydibs;
 	}
+	public MyDibs selectFstudyDibs(int mNo,int no) {
+		Connection conn=getConnection();
+		MyDibs mydibs=dao.selectFstudyDibs(conn,mNo,no);
+		close(conn);
+		return mydibs;
+	}
 
 }

@@ -214,7 +214,7 @@
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>">찜</a>
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>">결제</a>
                 <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myFork?memberNo=<%=loginMember.getMemNo()%>">내 포크</a>
-                <a class="nav-link" href="#">환경설정</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/setting?memberNo=<%=loginMember.getMemNo()%>"">환경설정</a>
             </nav>
         </div>
        	<%} %>

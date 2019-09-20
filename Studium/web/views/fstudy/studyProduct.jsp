@@ -153,7 +153,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div>
                 </div>
                 <div>
-                 <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
+                 <% if(loginMember!=null&&loginMember.getMemUserEmail().equals("admin@studium.com")){ %>
                  	<input type="image" src="<%=request.getContextPath()%>/img/delete.png" onclick="fn_delete();"/>
                  	<input type="image" src="<%=request.getContextPath()%>/img/update.png" onclick="fn_update();"/>
                  	<%}else{ %>
@@ -233,7 +233,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     <%
                     	if(loginMember!=null) {
                     %>
-                    	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getfNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
+                    	onclick="location.href='<%=request.getContextPath()%>/fstudy/fstudyPay?pNo=<%=p.getfNo()%>';"
                     <% 		
                     	} else {
                     %>		
@@ -271,11 +271,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                       <img alt="" src="<%=request.getContextPath()%>/img/dibsoff.png"  style="width:150px" >
                      		
                    <% }else if(loginMember.getMemNo()==md.getMemberNo()&&p.getfNo()==md.getfNo()){ %>
-                  
+                 
                    <img alt=""  src="<%=request.getContextPath()%>/img/dibson.png" style="width:150px">
                    	 	
                     <%}else {%>
-                
+               
                      <img alt="" src="<%=request.getContextPath()%>/img/dibsoff.png" style="width:150px">
                    			 
                     <%} %>
@@ -378,13 +378,13 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         	var msg = "삭제하시겠습니까";
     		var flag = confirm(msg);
     		if(flag==true) {
-    		location.href="<%=request.getContextPath()%>/fstudy/fstudyDelete?pNo=<%=p.getfNo()%>";
+    		location.href="<%=request.getContextPath()%>/fstudy/fstudyDelete?fNo=<%=p.getfNo()%>";
     		}
     		else alert("취소하였습니다.");
         }
         function fn_update(){
         	
-        	location.href="<%=request.getContextPath()%>/fstudy/fstudyUpdate?pNo=<%=p.getfNo()%>";
+        	location.href="<%=request.getContextPath()%>/fstudy/fstudyUpdate?fNo=<%=p.getfNo()%>";
         	
         }
         function fn_loginAlert(){
@@ -406,7 +406,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			var params = jQuery("#dibs_form").serialize();
 				if(<%=loginMember!=null%>){
 				$.ajax({
-				url: "<%=request.getContextPath()%>/pstudy/pstudyDibss",  //doGet3 만들어서 찜하기 아닌상태 컨트롤러 만들어서 사용
+				url: "<%=request.getContextPath()%>/fstudy/fstudyDibss",  //doGet3 만들어서 찜하기 아닌상태 컨트롤러 만들어서 사용
 				type: "POST",
 				cache: false,
 				dataType: "json",
