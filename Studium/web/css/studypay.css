@@ -14,7 +14,7 @@ section.studyIntro {
     display: flex;
     background-color: #EBEBEB;
     box-sizing: border-box;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 div {
@@ -30,7 +30,7 @@ div {
 }
 
 #product-order-section #order-form {
-    margin-top: 24px;
+
 }
 
 form {
@@ -242,16 +242,15 @@ li {
     background: transparent url(https://cdn.studysearch.co.kr/static/images/icon_asset_3.340e69ee1287.png)no-repeat -4px -858pt !important;
 }
 .next {
-    width: 170px;
-    height: 60px;
-    line-height: 60px;
+    width: 150px;
+    height: 45px;
     color: #fff;
     text-align: center;
     font-family: 'Apple SD Gothic Neo';
     background: #ef6c00;
     border-radius: 4px;
-    font-size: 20pt;
-    font-weight: 700;
+    font-size: 15pt;
+    font-weight: 600;
     outline: 0;
     border: none;
     display: block;
@@ -298,7 +297,7 @@ a {
 }
 
 #product-order-section #stage1 .fields dd .absence-alert {
-    margin-top: 1pc;
+
     font-size: 9pt;
     line-height: 1.6em;
     color: #787878;

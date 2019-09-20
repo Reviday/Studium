@@ -166,23 +166,26 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                         <h2>리더에 대한 후기</h2>
                         
                     </div>
-                   
-		<div>
-			<%if(p.getfLike()==1){ %>
-				<img src="<%=request.getContextPath()%>/img/star1.png" width=200px>
+                    <div class="star1">
+		         <%if(p.getfLike()==1){ %>
+				<img src="<%=request.getContextPath()%>/img/star1.png" width=100px; class="star1">
 			<%}else if(p.getfLike()==2) {%>
-			<img src="<%=request.getContextPath()%>/img/star2.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star2.png" width=100px; class="star1">
 			<%}else if(p.getfLike()==3){ %>
-			<img src="<%=request.getContextPath()%>/img/star3.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star3.png" width=100px; class="star1">
 			<%}else if(p.getfLike()==4){ %>
-			<img src="<%=request.getContextPath()%>/img/star4.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star4.png" width=100px; class="star1">
 			<%}else if(p.getfLike()==5){ %>
-			<img src="<%=request.getContextPath()%>/img/star5.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star5.png" width=100px; class="star1">
 			<%} else{%>
 			
 			<%} %>
-		
+                   
 		<b><%=p.getfLike() %></b>점
+		</div>
+                   
+		<div>
+		
 		</div>
 	
                     <div>
@@ -299,6 +302,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     
     
     <style>
+    .star1{
+			padding-left : 20px;
+			}
+    
     #toast {
     display: none;
     position: fixed;

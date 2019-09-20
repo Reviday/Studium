@@ -31,12 +31,11 @@ public class FstudyPayServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no =Integer.parseInt(request.getParameter("fNo"));
-		
+		int no =Integer.parseInt(request.getParameter("pNo"));
 		Fstudy f=new FstudyService().selectpStudyVIew(no);
-
+		System.out.println(no);
 		request.setAttribute("fstudy", f);
-		request.getRequestDispatcher("/views/pstudy/pstudyPay.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/fstudy/fstudyPay.jsp").forward(request, response);
 	}
 
 	/**

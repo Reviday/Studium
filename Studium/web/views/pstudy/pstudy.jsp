@@ -186,6 +186,7 @@ body{
 						style="cursor:pointer;">
 					<% } %>
 						<img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>">
+						
 					</div>
 				</div>
 			</div>

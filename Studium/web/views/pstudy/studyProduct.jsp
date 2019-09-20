@@ -104,7 +104,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
 
-
+						
+						<br><br><br>
 
                 <div class="intro-title">
                     <!-- 소개 title --> <%=p.getpTitle() %>
@@ -125,7 +126,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                 <div class="intro-content">
                     <!-- 소개 content -->
                     <div class="intro-content-study">
-                        스터디소개
+                    	    스터디소개
                     </div> <!-- 스터디 소개 텍스트 -->
                     <div>
                         <textarea cols="70" rows="40" readonly>
@@ -166,23 +167,29 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                         <h2>리더에 대한 후기</h2>
                         
                     </div>
-                   
+                    
+           
 		<div>
-			<%if(p.getpLike()==1){ %>
-				<img src="<%=request.getContextPath()%>/img/star1.png" width=200px>
+		<div class="star1">
+		         <%if(p.getpLike()==1){ %>
+				<img src="<%=request.getContextPath()%>/img/star1.png" width=100px; class="star1">
 			<%}else if(p.getpLike()==2) {%>
-			<img src="<%=request.getContextPath()%>/img/star2.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star2.png" width=100px; class="star1">
 			<%}else if(p.getpLike()==3){ %>
-			<img src="<%=request.getContextPath()%>/img/star3.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star3.png" width=100px; class="star1">
 			<%}else if(p.getpLike()==4){ %>
-			<img src="<%=request.getContextPath()%>/img/star4.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star4.png" width=100px; class="star1">
 			<%}else if(p.getpLike()==5){ %>
-			<img src="<%=request.getContextPath()%>/img/star5.png" width=200px>
+			<img src="<%=request.getContextPath()%>/img/star5.png" width=100px; class="star1">
 			<%} else{%>
 			
 			<%} %>
-		
+                   
 		<b><%=p.getpLike() %></b>점
+		</div>
+			
+		
+		
 		</div>
 	
                     <div>
@@ -300,6 +307,12 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     
     
     <style>
+
+    	
+			.star1{
+			padding-left : 20px;
+			}
+
     #toast {
     display: none;
     position: fixed;

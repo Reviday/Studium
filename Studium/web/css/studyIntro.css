@@ -47,6 +47,7 @@ section.studyIntro article {
 .intro-title {
     height: 220px;
     box-sizing: border-box;
+    padding-left:20px;
 }
 
 .intro-title div:first-child {

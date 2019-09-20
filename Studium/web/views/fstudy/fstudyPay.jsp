@@ -3,7 +3,7 @@
     <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy" %>
  <%
  	Fstudy p=(Fstudy)request.getAttribute("fstudy");
-  	int resultPay=(int)request.getAttribute("resultPay");
+
  %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -80,6 +80,10 @@
 </style>
 <body>
 	<%@ include file="../../views/common/header.jsp" %> 
+    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
 
     <section class="studyIntro">
         <form action="" id="order-form" class="stage1">

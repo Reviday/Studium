@@ -80,7 +80,10 @@
 </style>
 <body>
 	<%@ include file="../../views/common/header.jsp" %> 
-
+    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
     <section class="studyIntro">
         <form action="" id="order-form" class="stage1">
             <article>

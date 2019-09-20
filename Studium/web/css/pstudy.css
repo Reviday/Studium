@@ -21,6 +21,7 @@ html, body {
 .wrap {
 	width:1200px;
 	min-height:100%;
+
 	
 }
 section{
@@ -82,6 +83,7 @@ img{
 	float:left;
 	margin-top:10px;
 	margin :10px;
+	margin-bottom: 50px;
 	background-color:#f8f8f8;
 	width:280px;
 	height:300px;
@@ -90,7 +92,8 @@ img{
 .a_cnt1 {/*ㄴ  */
 float:left;
 	margin-top:10px;
-	margin :10px;
+	margin :15px;
+	margin-bottom: 50px;
 	background-color:#f8f8f8;
 	width:280px;
 	height:300px;
@@ -154,7 +157,7 @@ float:left;
           -o-transition: all 0.3s ease-in-out;
           -ms-transition: all 0.3s ease-in-out;
           transition: all 0.3s ease-in-out;
-          z-index: 100;
+          z-index: 9999;
           margin-left: 40px;
           margin-right: 50px;
         }

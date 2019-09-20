@@ -91,7 +91,7 @@ body{
      <%} %>
      
     </div>
-    <div style="height: 210px;"></div>
+
     <% if(bestList.size()!=0){%>
 <div class="plist">
 	<div class="a_title">평점 높은 스터디 </div>
@@ -115,6 +115,7 @@ body{
 					
 						<p><%=p.getfArea() %> | <%=p.getfDay() %></p>
 						<h5><%=p.getfTitle() %></h5>
+						
 						<p class="card-price"></p>
 
 						<div class="circle">
@@ -135,6 +136,9 @@ body{
 						style="cursor:pointer;">
 					<% } %>
 						<img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg1()%>">
+						
+						
+						
 					</div>
 				</div>
 			</div>
