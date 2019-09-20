@@ -17,10 +17,11 @@
 	<div class="header-background-cover"></div>
 </div>
 <section class="madang-section row">
-<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3" style="padding-left:0">
+<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left:0">
 <%@ include file="/views/common/sideMenuBar.jsp"%>	
 </div>
-		<div class="wrapper col-xs-6 col-sm-6 col-md-9 col-lg-8">
+<div class="col-lg-1"></div>
+		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9">
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">

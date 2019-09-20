@@ -20,50 +20,24 @@
 <!-- 네이버 카페의 게시글 View를 상당히 많이 참고하였음.(이뻐서) -->
 <!-- 게시글 View Section -->
 <section id="content-area" class="row">
-	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"
-		style="padding-left: 0; margin-left:0;">
+	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2"
+		style="padding-left: 0">
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
 	</div>
+	<div class="col-lg-1">
+	</div>
 	<!-- 게시글 View Main -->
-	<div id="main-area" class="col-xs-6 col-sm-6 col-md-9 col-lg-8	">
-		<!-- 게시글 이전글/다음글, 목록 버튼 위치 -->
-		<div class="list-btn">
-			<!-- float:left 버튼 -->
-			<div class="fl">
-				<!-- 윗글 -->
-				<div class="btn2 btn_upper">
-					<span></span>
-					<p>
-						<a href="#" class="m-tcol-c"> <img
-							src="https://cafe.pstatic.net/cafe4/ico-btn-pre_.gif" width="6px"
-							height="6px" alt=""> 이전글
-						</a>
-					</p>
-				</div>
-				<!-- 아랫글 -->
-				<div class="btn2 btn_lower">
-					<span></span>
-					<p>
-						<a href="#" class="m-tcol-c"> <img
-							src="https://cafe.pstatic.net/cafe4/ico-btn-pre_.gif" width="6px"
-							height="6px" alt=""> 다음글
-						</a>
-					</p>
-				</div>
-			</div>
-			<!-- float:right 버튼 -->
-			<div class="fr">
-				<div class="btn_list">
-					<div class="btn2" onclick="goList();">
-						<span></span>
-						<p>
-							<a href="#" class="m-tcol-c">목록</a>
-						</p>
-					</div>
+	<div id="main-area" class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
+		<div class="madang-list mldiv">
+			<div class="sub-tit row mldiv">
+				<div class="title-area mldiv">
+					<h3 class="list-title">자유마당</h3>
+					<p class="list-sub">자유롭게 글을 올리는 공간입니다.</p>
 				</div>
 			</div>
 		</div>
+
 
 		<!-- 게시글 View -->
 		<div class="madang-view">
@@ -233,14 +207,23 @@
 														</div>
 													</td>
 													<td class="p-nick"><a href="#"
-														class="m-tcol-c _rosRestrict _nickUI">시각디자인</a></td>
+														class="m-tcol-c _rosRestrict _nickUI">시각디자인</a>
+														</td>
+														
 												</tr>
 											</tbody>
 										</table>
 									</div>
-									
+									<i class="fa fa-clock-o"></i><span
+														class="date m-tcol-c filter-50">2019.09.19. 17:13</span> 
 									<p class="btn_edit m-tcol-c">
-										<a href="#" class="filter-70 m-tcol-c _btnNoti">신고</a>
+										</span>
+										<!-- 자신의 댓글일 경우 -->
+										<p class="btn_edit m-tcol-c">
+											<a href="#" class="filter-70 m-tcol-c _btnEdit">수정</a>
+											<span class="filter-30 m-tcol-c">|</span>
+											<a href="#" class="filter-70 m-tcol-c _btnDelete">삭제</a>
+										</p>
 									</p>
 								</div>
 								<div class="comm m-tcol-c">
@@ -248,12 +231,20 @@
 										<span class="comm_body">안녕하세요~</span>
 									</div>
 								</div>
-								<div class="comm m-tcol-c">
+								<div class="comm-bottom ">
+										<div class="fl">
 										<span
 										class="dsc_comm"><a href="#"
-										class="m-tcol-c  _btnReply">답글</a></span>
-										<i class="fa fa-clock-o"></i><span
-										class="date m-tcol-c filter-50">2019.09.19. 17:13</span> 
+										class="m-tcol-c  _btnReply" style="padding:2px">답글 
+										<span style="font-weight:bold">15</span>
+										</a>
+										<span class="m-tcol-c filter-30" style="padding:2px">|</span>
+										<a href="#" class="filter-70 m-tcol-c _btnNoti" style="padding:2px">신고</a>
+										</div>
+										
+										<div class="fr">
+											하이
+										</div>
 								</div>
 								<div>
 									<input type="hidden" name="cmtid" value="32239728"> <input
@@ -399,5 +390,145 @@
 
 
 	</div>
+	<!-- 리모콘 -->
+	
+	<div id="remocon" class="col-lg-1" style="diplay:block"> 
+		<div class="remote-area">
+			<div class="remote-area-radi-top"></div>
+			<div class="remote-area-body">
+				<div class="btn btn_upper">
+					<span></span>
+					<p>
+						<a href="#" class="m-tcol-c" onclick="goPrev();">
+							<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						</a>
+					</p>
+				</div>
+				<div class="btn btn_lower">
+					<span></span>
+					<p>
+						<a href="#" class="m-tcol-c" onclick="goList();"> 
+							<img id="" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						</a>
+					</p>
+				</div>
+				<div class="btn">
+					<span></span>
+					<p>
+						<a href="#" class="m-tcol-c" onclick="goNext();">
+							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="remote-area-radi-bottom"></div>
+		</div>
+	</div> 
+	
+	<div class="col-lg-1"></div>
 </section>
+<style>
+	#remocon {
+		position:relative;
+		font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+		sans-serif !important;
+		margin: 5px ;
+	}
+	
+	#remocon .remote-area {
+		position: fixed;
+		z-index:100;
+		display: grid;
+	}
+	
+	#remocon .remote-area-radi-top {
+		background-color: #fff;
+		border: 1px solid rgba(239, 108, 0, 0.4);
+		border-radius:100%;
+		position:absolute;
+		width: 60px;
+		height: 48px;
+	}
+	
+	#remocon .remote-area-radi-bottom {
+		background-color: #fff;	
+		border: 1px solid rgba(239, 108, 0, 0.4);
+		border-radius:100%;
+		position:absolute;
+		top: 176px;
+		width: 60px;
+		height: 48px;
+		
+	}
+	
+	#remocon .remote-area-body {
+		background-color: #fff;
+		position:absolute;
+		top:24px;
+		border: 1px solid rgba(239, 108, 0, 0.4);
+		width: 60px;
+		z-index:1000;
+		border-top: none;
+		border-bottom: none;
+	}
+	
+	#remocon .m-tcol-c {
+	word-wrap: break-word;
+	text-decoration: none;
+    color: #666 !important;
+    display: block;
+    position: relative;
+    float: none;
+    width: 45px;
+    height: 45px;
+    margin: auto;
+    font-size: 13px;
+    line-height: 16px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+	}
+	#remocon .btn span {
+    display: none;
+    width: 7px;
+    height: 20px;
+    margin: 0;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+	#remocon .btn p {
+    display: block;
+    float: none;
+    height: auto;
+    padding: 0;
+    background-image: none !important;
+    background-position: top right;
+    background-repeat: no-repeat;
+    }
+    #remocon .btn {
+    width: 48px;
+	/*#ddd*/
+	background-color: #fff;
+	display: inline-block;
+	margin: 5px;
+	height: 48px;
+	text-align: center;
+	vertical-align: top;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+#remocon #upper-arrow {
+	 transform: rotate(-90deg);
+}
+
+#remocon #lower-arrow {
+	transform: rotate(90deg);
+}	
+
+#remocon .btn p img {
+	margin: 1px;
+}
+
+</style>
 <%@ include file="/views/common/footer.jsp"%>

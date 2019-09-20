@@ -18,7 +18,9 @@
 .nav-side-menu {
   position: absolute;
   background-color: #2e353d;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
+  min-width: 220px;
   height: 100%;
   top: 0;
   overflow: hidden;
@@ -141,9 +143,9 @@ display:block;
 }
 
 .nav-side-menu li a i {
-  padding-left: 10px;
-  width: 20px;
-  padding-right: 20px;
+  padding-left: 10px !important;
+  width: 20px !important;
+  padding-right: 20px !important;
 }
 .nav-side-menu li:hover {
   border-left: 3px solid #d19b3d;

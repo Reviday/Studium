@@ -18,6 +18,7 @@
 
 .madang-section .wrapper {
 	position: relative;
+	max-width: 1000px;
 }
 .madang-list {
 	position: relative;
@@ -258,20 +259,21 @@
 	color: #fff;
 }
 
-.madang-section .sub-tit {
+.madang-list .sub-tit {
 	position: relative;
 	margin-bottom: 10px;
 }
 
-.madang-section .title-area {
+.madang-list .title-area {
 	/* display: table-cell; */
 	width: 50%;
 	word-break: break-all;
 	word-wrap: break-word;
 	word-break: break-word;
+	font-family: "Do Hyeon", Arial, sans-serif !important;
 }
 
-.madang-section .list-title {
+.madang-list .list-title {
 	display: inline;
 	magine: 40px;
 	font-weight: 600;
