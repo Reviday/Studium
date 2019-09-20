@@ -34,7 +34,7 @@ public class FstudyDibssServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 //		찜하기 서블릿
-		int no=Integer.parseInt(request.getParameter("fNo"));
+		int no=Integer.parseInt(request.getParameter("pNo"));
 		int mNo=Integer.parseInt(request.getParameter("mNo"));
 		String  A= request.getParameter("A"); //새로운 값 넣어서 다른값이면 추가 0이면 삭제
 		FstudyService service=new FstudyService(); 

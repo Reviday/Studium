@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy" %>
+ <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy" %>
  <%
- 	Pstudy p=(Pstudy)request.getAttribute("pstudy");
+ 	Fstudy p=(Fstudy)request.getAttribute("fstudy");
  %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -94,7 +94,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <FORM NAME="pstudyfrm1" ACTION="<%=request.getContextPath()%>/pstudy/studyUpdate" METHOD="post"
+                                    <FORM NAME="pstudyfrm1" ACTION="<%=request.getContextPath()%>/fstudy/studyUpdate" METHOD="post"
                                         enctype="multipart/form-data">
                                         <td align="center">
                                             <table width="100%" border="0" cellspacing="1" cellpadding="7"
@@ -103,17 +103,17 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
-                                                            SIZE="30" MAXLENGTH="50" NAME="p_title" value="<%=p.getpTitle() %>" required/></td>
+                                                            SIZE="30" MAXLENGTH="50" NAME="p_title" value="<%=p.getfTitle() %>" required/></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
-                                                         value="<%=p.getpName() %>"   SIZE="30" MAXLENGTH="50" NAME="p_name" required/></td>
+                                                         value="<%=p.getfName() %>"   SIZE="30" MAXLENGTH="50" NAME="p_name" required/></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디지역</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <select class=input1 name=p_area value="<%=p.getpArea() %>"
+                                                        <select class=input1 name=p_area value="<%=p.getfArea() %>"
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>지역 선택</option>
                                                             <option value='강남'>강남</option>
@@ -130,31 +130,25 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 요일</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <select class=input1 name=p_day
-                                                            style="width: 120px; height: 30px;" value="<%=p.getpDay()%>">
+                                                            style="width: 120px; height: 30px;" value="<%=p.getfDay()%>">
                                                             <option value=''>요일 선택</option>
                                                             <option value='평일'>평일</option>
                                                             <option value='주말'>주말</option>
                                                         </select>
                                                     </td>
                                                 </tr>
-                                              
-                                                <tr>
-                                                    <td width="24%" align="left" bgcolor="#EEEEEE">스터디비용</td>
-                                                    <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"
-                                                            SIZE="10" MAXLENGTH="7" NAME="p_price" value="<%=p.getpPrice() %>"
-                                                            onKeyDown="KeyNumber()"/></td>
-                                                </tr>
+                                       
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">인원</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <INPUT TYPE="number"SIZE="10" min="1" max="15" NAME="p_stupyperson"
-                                                            onKeyDown="KeyNumber()" value="<%=p.getpStudypserson() %>" /></td>
+                                                            onKeyDown="KeyNumber()" value="<%=p.getfStudypserson() %>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">분류</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <select class=input1 name=p_category
-                                                            style="width: 120px; height: 30px;" value="<%=p.getpCategory()%>">
+                                                            style="width: 120px; height: 30px;" value="<%=p.getfCategory()%>">
                                                             <option value=''>분류 선택</option>
                                                             <option value='영어'>영어</option>
                                                             <option value='코딩'>코딩</option>
@@ -170,7 +164,7 @@
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <textarea name="p_intro1" id="p_intro1" cols="30"
-                                                            rows="10"><%=p.getpIntro1() %></textarea>
+                                                            rows="10"><%=p.getfIntro1() %></textarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -179,7 +173,7 @@
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <textarea name="p_intro2" id="p_intro2" cols="30"
-                                                            rows="10"><%=p.getpIntro2() %></textarea>
+                                                            rows="10"><%=p.getfIntro2() %></textarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -206,8 +200,8 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"  >
-                                     <input type="text" name="p_timestart"  placeholder="시간선택" id="time1" value="<%=p.getpTimestart()%>" class="time1" required size="8" maxlength="5">~
-                                     <input type="text" name="p_timeend"  placeholder="시간선택"   value="<%=p.getpTimeend()%>" class="time1" required size="8" maxlength="5">
+                                     <input type="text" name="p_timestart"  placeholder="시간선택" id="time1" value="<%=p.getfTimestart()%>" class="time1" required size="8" maxlength="5">~
+                                     <input type="text" name="p_timeend"  placeholder="시간선택"   value="<%=p.getfTimeend()%>" class="time1" required size="8" maxlength="5">
 													<link rel="stylesheet" type="text/css" href="../css/jquery.timepicker.css">
 													<script type="text/javascript" src="../js/jquery.timepicker.min.js"></script>											
                                                 </tr>
@@ -217,19 +211,19 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         오늘 날짜 : <span id="today"></span><br>
                                                         <label for="fromDate">시작일</label>
-                                                        <input type="text" name="p_datestart" id="fromDate" value="<%=p.getpDatestart() %>" >
+                                                        <input type="text" name="p_datestart" id="fromDate" value="<%=p.getfDatestart() %>" >
                                                         ~
                                                         <label for="toDate">종료일</label>
-                                                        <input type="text" name="p_dateend" id="toDate" value="<%=p.getpDateend() %>" >
+                                                        <input type="text" name="p_dateend" id="toDate" value="<%=p.getfDateend() %>" >
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">강사이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="text" NAME="p_teachername" size=50 value="<%=p.getpTeachername()%>"/></td>
+                                                    <INPUT TYPE="text" NAME="p_teachername" size=50 value="<%=p.getfReadername()%>"/></td>
                                                 </tr>
                                                 <tr>
-                                                <input type="hidden" name="p_no" value="<%=p.getpNo()%>"/>
+                                                <input type="hidden" name="p_no" value="<%=p.getfNo()%>"/>
                                                     <td colspan=2 align=center bgcolor="#FFFFFF"><INPUT TYPE="submit"
                                                             VALUE="등록" ></td>
                                                 </tr>

@@ -38,13 +38,13 @@ public class FstudyProductViewServlet extends HttpServlet {
 		
 		Fstudy f=new FstudyService().selectpStudyVIew(no);
 		if(mNo!=0) {
-			 MyDibs md=new MyDibsService().selectDibs(mNo,no); 
+			 MyDibs md=new MyDibsService().selectFstudyDibs(mNo,no); 
 				request.setAttribute("fstudy", f);
 				request.setAttribute("md", md); 
-				request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/fstudy/studyProduct.jsp").forward(request, response);
 		}else {
 			request.setAttribute("fstudy", f);
-			request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/fstudy/studyProduct.jsp").forward(request, response);
 		}
 		
 	}

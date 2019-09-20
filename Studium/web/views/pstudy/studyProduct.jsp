@@ -153,7 +153,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
                     </div>
                 </div>
                 <div>
-                 <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
+                 <% if(loginMember!=null&&loginMember.getMemUserEmail().equals("admin@studium.com")){ %>
                  	<input type="image" src="<%=request.getContextPath()%>/img/delete.png" onclick="fn_delete();"/>
                  	<input type="image" src="<%=request.getContextPath()%>/img/update.png" onclick="fn_update();"/>
                  	<%}else{ %>

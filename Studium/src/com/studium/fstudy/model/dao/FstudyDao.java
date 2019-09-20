@@ -109,7 +109,7 @@ private Properties prop=new Properties();
 				p.setfDatestart(rs.getDate("f_datestart"));
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
-				p.setfReadername(rs.getString("f_teachername"));
+				p.setfReadername(rs.getString("f_readername"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -124,7 +124,7 @@ private Properties prop=new Properties();
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Fstudy>list=new ArrayList();
-		String sql=prop.getProperty("searchPstudy");
+		String sql=prop.getProperty("searchFstudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, area);
@@ -150,7 +150,7 @@ private Properties prop=new Properties();
 				p.setfDatestart(rs.getDate("f_datestart"));
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
-				p.setfReadername(rs.getString("f_teachername"));
+				p.setfReadername(rs.getString("f_readername"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -166,6 +166,7 @@ private Properties prop=new Properties();
 		int result=0;
 		String sql=prop.getProperty("updateFstudy");
 		try {
+			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,p.getfTitle());
 			pstmt.setString(2, p.getfName());
@@ -183,8 +184,8 @@ private Properties prop=new Properties();
 			pstmt.setString(14, p.getfTimeend());
 			pstmt.setDate(15, p.getfDatestart());
 			pstmt.setDate(16, p.getfDateend());
-			pstmt.setInt(17, p.getfLike());
-			pstmt.setString(18, p.getfReadername());
+			pstmt.setString(17, p.getfReadername());
+			pstmt.setInt(18, p.getfNo());
             result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -196,7 +197,7 @@ private Properties prop=new Properties();
 	public int deleteFstudy(Connection conn,int pNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("deletePstudy");
+		String sql=prop.getProperty("deleteFstudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, pNo);
@@ -213,7 +214,7 @@ private Properties prop=new Properties();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Fstudy p= new Fstudy();
-		String sql=prop.getProperty("selectpStudyVIew");
+		String sql=prop.getProperty("selectFStudyVIew");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -238,7 +239,7 @@ private Properties prop=new Properties();
 				p.setfDatestart(rs.getDate("f_datestart"));
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
-				p.setfReadername(rs.getString("f_teachername"));
+				p.setfReadername(rs.getString("f_readername"));
 			
 			}
 			
@@ -278,7 +279,7 @@ private Properties prop=new Properties();
 				p.setfDatestart(rs.getDate("f_datestart"));
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
-				p.setfReadername(rs.getString("f_teachername"));
+				p.setfReadername(rs.getString("f_readername"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -291,7 +292,7 @@ private Properties prop=new Properties();
 	public int insertFstudy(Connection conn,Fstudy p) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("insertPstudy");
+		String sql=prop.getProperty("insertFstudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,p.getfTitle());
