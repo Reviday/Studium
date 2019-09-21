@@ -56,9 +56,9 @@ public class FstudyService {
 		return result;
 	
 	}
-	public List<Fstudy> searchFstudy(String area,String day){
+	public List<Fstudy> searchFstudy(String area,String day,String category){
 		Connection conn=getConnection();
-		List<Fstudy> list=dao.searchFstudy(conn,area,day);
+		List<Fstudy> list=dao.searchFstudy(conn,area,day,category);
 		close(conn);
 		return list;
 	}

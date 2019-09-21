@@ -120,7 +120,7 @@ private Properties prop=new Properties();
 		}return list;
 	}
 	
-	public List<Fstudy> searchFstudy(Connection conn,String area,String day){
+	public List<Fstudy> searchFstudy(Connection conn,String area,String day,String category){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Fstudy>list=new ArrayList();
@@ -129,6 +129,7 @@ private Properties prop=new Properties();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, area);
 			pstmt.setString(2, day);
+			pstmt.setString(3, category);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Fstudy p=new Fstudy();

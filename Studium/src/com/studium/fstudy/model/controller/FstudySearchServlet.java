@@ -34,11 +34,14 @@ public class FstudySearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String area=request.getParameter("p_area");
 		String day=request.getParameter("p_day");
+		String category= request.getParameter("p_category");
 		System.out.println(area+day);
 		
-		List<Fstudy>fList=new FstudyService().searchFstudy(area, day);
+		List<Fstudy>fList=new FstudyService().searchFstudy(area, day,category);
 		request.setAttribute("fList", fList);
-
+		request.setAttribute("area", area);
+		request.setAttribute("day", day);
+		request.setAttribute("category",category);
 		request.getRequestDispatcher("/views/fstudy/studySearch.jsp").forward(request, response);
 		
 		

@@ -65,12 +65,12 @@ img{
 }
 	
 .plist { /* 애매 */
-	
 	background-color:#ffffff;
 	width:900;
 	height:auto;
 	margin-top:50px;
-	margin-left:320px;
+	margin-left:60px;
+	
 	
 }
 .a_title { /* 애매  */
@@ -88,6 +88,8 @@ img{
 	width:280px;
 	height:300px;
 	box-shadow: 3px 3px 15px 1px #999;
+	overflow: hidden;
+	border-radius: 10px;
 }
 .a_cnt1 {/*ㄴ  */
 float:left;
@@ -233,3 +235,106 @@ float:left;
           margin-bottom: 10px;
         }
 /* leftside  끝 */
+/* 신규모집 마감임박 */
+
+studycon{
+	max-width:3000px ;
+	min-width:800px;
+}
+ .recruiting-status.new {
+   background: rgba(239, 108, 0);
+      position: absolute;
+    left:-60;
+    top:8;
+    width: 80%;
+    height: 3pc;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+	
+}
+.drawing-near {
+    background: rgba(220,0,0,.6);
+    position: absolute;
+    left:-60;
+    top:8;
+    width: 80%;
+    height: 3pc;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+
+/*검색창*/
+.filter-form {
+    position: relative;
+    margin: 30px 0;
+    padding: 15px;
+
+    border-radius: 3px;
+}
+#filter {
+    display: inline-block;
+    position: relative;
+    z-index: 201;
+    box-sizing: border-box;
+    margin-right: 15px;
+    padding-left: 20px;
+    width: 230px;
+    height: 3pc;
+    line-height: 50px;
+    background: #fff;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+}
+#filter2 {
+    display: inline-block;
+    position: relative;
+    z-index: 201;
+    box-sizing: border-box;
+    margin-right: 15px;
+    padding-left: 20px;
+    width: 230px;
+    height: 3pc;
+    line-height: 50px;
+    background: #fff;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+}
+#filter3 {
+    display: inline-block;
+    position: relative;
+    z-index: 201;
+    box-sizing: border-box;
+    margin-right: 15px;
+    padding-left: 20px;
+    width: 230px;
+    height: 3pc;
+    line-height: 50px;
+    background: #fff;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+}
+.submit {
+    box-sizing: border-box;
+    padding: 0 20px;
+    height: 2pc;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: #ef6c00;
+    border: none;
+    border-radius: 3px;
+}

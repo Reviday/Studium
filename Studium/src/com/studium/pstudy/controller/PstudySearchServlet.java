@@ -34,12 +34,14 @@ public class PstudySearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String area=request.getParameter("p_area");
 		String day=request.getParameter("p_day");
+		String category=request.getParameter("p_category");
 		System.out.println(area+day);
 		
-		List<Pstudy>pList=new PstudyService().searchPstudy(area, day);
+		List<Pstudy>pList=new PstudyService().searchPstudy(area, day,category);
 		request.setAttribute("pList", pList);
-		
-		System.out.println(pList);
+		request.setAttribute("area", area);
+		request.setAttribute("day", day);
+		request.setAttribute("category",category);
 		request.getRequestDispatcher("/views/pstudy/studySearch.jsp").forward(request, response);
 		
 		

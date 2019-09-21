@@ -88,8 +88,11 @@
         <form action="" id="order-form" class="stage1">
             <article>
                 <div id="page-wrap">
-                    <div class="progress-bar"> <img src="<%=request.getContextPath()%>/img/studium_ko_logo_white.png" alt="" class="progressimg"> 
-                    &nbsp;&nbsp;&nbsp;	<span>스터디움        </span> 
+                    <div class="progress-bar"> 
+                    &nbsp;&nbsp;&nbsp;	<span>스터디움        </span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;
                     <div style="margin-left: 450px;"> 참여 신청</div>
                       <div style="margin-left: 250px;"> 결제</div>
                     </div>

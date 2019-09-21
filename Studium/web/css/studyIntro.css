@@ -26,11 +26,13 @@ section.studyIntro article {
     margin-bottom: 40px;
     position: relative;
     background-color: white;
+    margin-left:20px;
 }
 
 .intro-img img {
     width: 700px;
     height: 360px;
+    
 }
 
 .dot {
@@ -131,7 +133,7 @@ section.studyIntro article {
     border: 0.1px solid lightgray;
     position: absolute;
     top: 100px;
-    right: 270px;
+    right: 10px;
 }
 
 .pay > div:first-child {

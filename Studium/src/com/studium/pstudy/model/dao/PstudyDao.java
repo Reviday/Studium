@@ -122,7 +122,7 @@ public class PstudyDao {
 		}return list;
 	}
 	
-	public List<Pstudy> searchPstudy(Connection conn,String area,String day){
+	public List<Pstudy> searchPstudy(Connection conn,String area,String day,String category){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Pstudy>list=new ArrayList();
@@ -131,6 +131,7 @@ public class PstudyDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, area);
 			pstmt.setString(2, day);
+			pstmt.setString(3,category);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Pstudy p=new Pstudy();
