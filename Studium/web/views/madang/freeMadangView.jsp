@@ -5,7 +5,7 @@
 <%
 	FreeMadang fm = (FreeMadang) request.getAttribute("fm");
 	int cPage = (int) request.getAttribute("cPage");
-	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
+	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. kk:mm:ss");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
@@ -25,8 +25,7 @@
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
 	</div>
-	<div class="col-lg-1">
-	</div>
+	<div class="col-lg-1"></div>
 	<!-- 게시글 View Main -->
 	<div id="main-area" class="col-xs-6 col-sm-6 col-md-7 col-lg-7">
 		<div class="madang-list mldiv">
@@ -51,7 +50,7 @@
 							border="0">
 							<tbody>
 								<tr valign="top">
-									<td><span class="b m-tcol-c">글 제목</span></td>
+									<td><span class="b m-tcol-c"><%=fm.getMadangTitle()%></span></td>
 									<td nowrap="" class="m-tcol-c" style="opacity: 0.3">|</td>
 									<td nowrap="" class="m-tcol-c"><a href="#" onclick=""
 										class="m-tcol-c" style="color: #ccc">[현재 메뉴 위치]</a></td>
@@ -66,7 +65,7 @@
 							<tbody>
 								<tr>
 									<td></td>
-									<td class="m-tcol-c date">2019.09.19. 06:36</td>
+									<td class="m-tcol-c date"><%=format.format(fm.getMadangRegisterDatetime())%></td>
 								</tr>
 							</tbody>
 						</table>
@@ -99,22 +98,25 @@
 													</a></td>
 													<td class="p-nick">
 														<!-- 이름/이메일 클릭 시, 해당 유저의 게시글보기/1:1채팅/쪽지보내기 등을 드롭다운 박스로 표시 -->
-														<a href="#" class="m-tcol-c b">이름(이메일/일부 *** 표시)</a>
+														<a href="#" class="m-tcol-c b"><%=fm.getMadangWriterName()%>
+															<!-- 아이디 별표(*)처리 --> (<%=fm.getMadangWriterEmail().substring(0, 4)%>****)</a>
 													</td>
 												</tr>
 											</tbody>
 										</table>
 									</td>
-									<td class="m-tcol-c step"><span> <img
-											class="levelico"
-											src="<%=request.getContextPath()%>/img/manager_icon.png"
-											width="15" height="15" border="0">
-									</span></td>
+									<td class="m-tcol-c step"><span class="filter-50">
+											매니저 <%
+										
+									%>
+									</span> <img class="levelico"
+										src="<%=request.getContextPath()%>/img/manager_icon.png"
+										width="11" height="11" border="0"></td>
 
 									<td class="m-tcol-c chat"><span> <a href="#"
 											onclick=""> <img
 												src="<%=request.getContextPath()%>/img/chatting_icon.png"
-												width="20" height="20" alt="1:1대화" class="ico">
+												width="20" height="20" alt="1:1대화" class="ico" title="1:1대화">
 										</a>
 									</span></td>
 
@@ -131,7 +133,7 @@
 				<!-- 실제 작성 내용 -->
 				<div class="tbody m-tcol-c" id="tbody"
 					style="padding-left: 43px; padding-right: 43px; margin-right: 0px;">
-					<p>다들 화이팅</p>
+					<pre><%=fm.getMadangContent()%></pre>
 				</div>
 
 				<div class="h40"></div>
@@ -185,350 +187,258 @@
 				<div class="h10"></div>
 
 				<!-- 댓글 -->
-				<div class="box-reply2 bg-color u_cbox" id="adSDC"
-					style="display: block;">
-					<!-- 댓글 리스트  -->
-					<ul class="cmlist" id="cmt_list">
-						<li class="">
-							<div class="comm_cont">
-								<div class="h">
-									<div class="pers_nick_area">
-										<table role="presentation" cellspacing="0">
-											<tbody>
-												<tr>
-													<td class="pc2w">
-														<div class="box_profile">
-															<a
-																href="/CafeMemberNetworkView.nhn?m=view&amp;clubid=12566436&amp;memberid=wlgml3145"
-																class="link_profile"><img
-																src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png"
-																width="32" height="32" alt="프로필"
-																onerror="this.onerror=''; this.src='https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png'"></a>
-														</div>
-													</td>
-													<td class="p-nick"><a href="#"
-														class="m-tcol-c _rosRestrict _nickUI">시각디자인</a>
-														</td>
-														
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<i class="fa fa-clock-o"></i><span
-														class="date m-tcol-c filter-50">2019.09.19. 17:13</span> 
-									<p class="btn_edit m-tcol-c">
-										</span>
-										<!-- 자신의 댓글일 경우 -->
-										<p class="btn_edit m-tcol-c">
-											<a href="#" class="filter-70 m-tcol-c _btnEdit">수정</a>
-											<span class="filter-30 m-tcol-c">|</span>
-											<a href="#" class="filter-70 m-tcol-c _btnDelete">삭제</a>
-										</p>
-									</p>
-								</div>
-								<div class="comm m-tcol-c">
-									<div class="comm_body">
-										<span class="comm_body">안녕하세요~</span>
-									</div>
-								</div>
-								<div class="comm-bottom ">
-										<div class="fl">
-										<span
-										class="dsc_comm"><a href="#"
-										class="m-tcol-c  _btnReply" style="padding:2px">답글 
-										<span style="font-weight:bold">15</span>
-										</a>
-										<span class="m-tcol-c filter-30" style="padding:2px">|</span>
-										<a href="#" class="filter-70 m-tcol-c _btnNoti" style="padding:2px">신고</a>
+				<div class="box-reply2 bg-color u_cbox" id="comment" style="display: block;">
+					<h3 class="ir_su">댓글 작성</h3>
+					<!-- 댓글 폼 -->
+					<div class="tab_container">
+						<!-- 댓글 작성 테이블 -->
+						<table cellspacing="0" class="cminput">
+							<tbody>
+								<tr>
+									<td class="i2">
+										<div class="comm_write_wrap border-sub skin-bgcolor">
+											<textarea id="comment_text" cols="50" rows="2"
+												class="textarea m-tcol-c" maxlength="6000"
+												style="overflow: hidden; line-height: 14px; height: 39px;"
+												title="댓글입력"></textarea>
 										</div>
-										
-										<div class="fr">
-											하이
+									</td>
+									<td class="i3">
+
+										<div class="u_cbox_btn_upload _submitBtn">
+											<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
 										</div>
-								</div>
-								<div>
-									<input type="hidden" name="cmtid" value="32239728"> <input
-										type="hidden" name="writerid" value="wlgml3145"> <input
-										type="hidden" name="refcmtid" value="32239728"> <input
-										type="hidden" name="replytonick" value=""> <input
-										type="hidden" name="replytomemberid" value=""> <input
-										type="hidden" name="stickerId" value=""> <input
-										type="hidden" name="stickerOriginUrl" value=""> <input
-										type="hidden" name="imagePath" value=""> <input
-										type="hidden" name="imageFileName" value=""> <input
-										type="hidden" name="imageWidth" value=""> <input
-										type="hidden" name="imageHeight" value=""> <input
-										type="hidden" name="articleId" value="258118">
-								</div>
-							</div>
-						</li>
-						<li class="filter-30 board-box-line-dashed"></li>
-						<li class="">
-							<div class="comm_cont">
-								<div class="h">
-									<div class="pers_nick_area">
-										<table role="presentation" cellspacing="0">
-											<tbody>
-												<tr>
-													<td class="pc2w">
-														<div class="box_profile">
-															<a
-																href="/CafeMemberNetworkView.nhn?m=view&amp;clubid=12566436&amp;memberid=ysm_0405"
-																class="link_profile"><img
-																src="https://blogpfthumb-phinf.pstatic.net/MjAxOTA2MDZfMTA2/MDAxNTU5NzU2MTgxMDIz.YenKHOQC7-z32--eb1XukffptIRELx_3uIr0S-8gxiYg.lw_vHBW23dUPEtkfnbg-8zLu4-5uM2vR2qH7EkqUzhAg.PNG.ysm_0405/profileImage.png"
-																alt="프로필"
-																onerror="this.onerror=''; this.src='img/nonProfile.png'"></a>
-														</div>
-													</td>
-													<td class="p-nick"><a href="#"
-														class="m-tcol-c _rosRestrict _nickUI">꽃윤e</a></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<i class="fa fa-clock-o"></i><span
-										class="date m-tcol-c filter-50">2019.09.19. 17:14</span> <span
-										class="dsc_comm"><a href="#"
-										class="m-tcol-c  _btnReply">답글</a></span>
-									<p class="btn_edit m-tcol-c">
-										<a href="#" class="filter-70 m-tcol-c _btnNoti">신고</a>
-									</p>
-								</div>
-								<p class="comm m-tcol-c">
-									<span class="comm_body">안녕하세요!</span>
-								</p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3"></td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- 탭 : 댓글 -->
+						<div id="tab1C" class="tab_content">
+							<div id="entry361Comment">
+								<div id="comment">
 
-								<!-- hidden 데이터 -->
-								<div>
-									<input type="hidden" name="cmtid" value="32239735"> <input
-										type="hidden" name="writerid" value="ysm_0405"> <input
-										type="hidden" name="refcmtid" value="32239735"> <input
-										type="hidden" name="replytonick" value=""> <input
-										type="hidden" name="replytomemberid" value=""> <input
-										type="hidden" name="stickerId" value=""> <input
-										type="hidden" name="stickerOriginUrl" value=""> <input
-										type="hidden" name="imagePath" value=""> <input
-										type="hidden" name="imageFileName" value=""> <input
-										type="hidden" name="imageWidth" value=""> <input
-										type="hidden" name="imageHeight" value=""> <input
-										type="hidden" name="articleId" value="258118">
-								</div>
-
-							</div>
-						</li>
-						<li class="filter-30 board-box-line-dashed"></li>
-					</ul>
-					<div style="clear: both; height: 0pt; font: 0pt/0pt arial;"></div>
-					<div style="display: none;" class="cc_paginate cmt"
-						id="cmt_paginate">
-						<!-- 댓글 페이징 처리 -->
-					</div>
-
-					<!-- 댓글 작성 테이블 -->
-					<table cellspacing="0" class="cminput">
-						<tbody>
-							<tr>
-								<td class="i2">
-									<div class="comm_write_wrap border-sub skin-bgcolor">
-										<textarea id="comment_text" cols="50" rows="2"
-											class="textarea m-tcol-c" maxlength="6000"
-											style="overflow: hidden; line-height: 14px; height: 39px;"
-											title="댓글입력"></textarea>
-
-										<!-- 이미지 삽입 시 표시 -->
-										<div class="u_cbox_upload_image" style="display: none">
-											<span class="u_cbox_upload_image_wrap "> <a href="#"
-												class="u_cbox_upload_thumb_link"><img
-													src="https://cafethumb.pstatic.net/MjAxOTA5MjBfMTIg/MDAxNTY4OTU1Njg4NDU1.IcoYKAWcXxJqBq1IMq2SAm2_upI2caLSbau1tLrmLKsg.LBo7aZPDD5Y-p1V8jnDnzy8iRF-T9wKQiwZ2IJwk7sYg.JPEG/externalFile.jpg?type=ff80_80"
-													alt="첨부이미지" class="u_cbox_upload_thumb" width="80"
-													height="80"> <span class="u_cbox_upload_thumb_mask"></span>
-													<span class="u_cbox_ico_delete_thumb _cancelAttach">사진
-														업로드 취소</span> </a>
-											</span>
-										</div>
-										
-									</div>
-								</td>
-								<td class="i3">
-
-									<div class="u_cbox_btn_upload _submitBtn">
-										<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-
-									<ul class="u_cbox_addition">
-										<li>
-											<div class="u_cbox_btn_upload_photo">
-												<div class="_imageBtn u_cbox_btn_file">
-													<label for="attachImageBtn258153"
-														onclick="clickcr(this,'cmt.image', '', '', event);">업로드</label><input
-														type="file" id="attachImageBtn258153" accept="Image/*">
+									<!-- } comment-form -->
+									<ol id="comment-list" class="cng-list list-unstyled">
+										<li id="comment9743709" class="has-reply">
+											<div class="rp_general cng-container">
+												<div class="cng-header">
+													<span class="blogicon"></span> <span class="name ie-nanum"><img
+														src="https://sonylove.tistory.com/index.gif"
+														alt="BlogIcon" width="64" height="64"
+														onerror="this.parentNode.removeChild(this)"> <a
+														href="https://sonylove.tistory.com"
+														onclick="return openLinkInNewWindow(this)">강병민</a></span> <span
+														class="timeago dt-published ie-dotum" title="">2016.02.22
+														00:27 <a
+														href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
+														onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+													</span>
 												</div>
-												<span class="u_cbox_ico_upload_photo"></span> <span
-													class="m-tcol-c u_cbox_txt_upload_photo">사진</span>
+												<div class="cng-content">
+													<div class="speech">
+														<div class="comm_body">
+															<span>굉장히 어려울줄 알았는데 설명을 쉽게 해주셔서 따라해볼수 있을거 같은데요. <br>
+																유용한 정보 감사합니다. ㅎㅎ
+															</span>
+														</div>
+													</div>
+												</div>
+												<a href="#" onclick="deleteComment(9743709);return false"
+													class="modify" title="수정/삭제"><i
+													class="icon icon-cancel_circle"></i></a>
+
+												<div class="comm-bottom">
+													<div class="fl">
+														<button onclick="fn_reComment(9749318); return false"
+															class="btn-init ie-dotum write">
+															<span class="arrow-symbol dsc_comm">답글달기</span>
+
+														</button>
+													</div>
+													<table cellspacing="0" class="cminput" style="display:none">
+														<tbody>
+															<tr>
+																<td class="i2">
+																	<div class="comm_write_wrap border-sub skin-bgcolor">
+																		<textarea id="comment_text" cols="50" rows="2"
+																			class="textarea m-tcol-c" maxlength="6000"
+																			style="overflow: hidden; line-height: 14px; height: 39px;"
+																			title="댓글입력"></textarea>
+																	</div>
+																</td>
+																<td class="i3">
+
+																	<div class="u_cbox_btn_upload _submitBtn">
+																		<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="3"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
 											</div>
+
+
+											<ul class="reply-list list-unstyled">
+
+												<li id="comment9743723">
+													<div class="rp_admin cng-container">
+														<div class="cng-header">
+															<span class="blogicon"></span> <span
+																class="name ie-nanum"><img
+																src="https://cocosoft.kr/index.gif" alt="BlogIcon"
+																width="64" height="64"
+																onerror="this.parentNode.removeChild(this)"> <a
+																href="https://cocosoft.kr"
+																onclick="return openLinkInNewWindow(this)">관리자</a></span> <span
+																class="timeago dt-published ie-dotum" title="">2016.02.22
+																00:38 <a
+																href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
+																onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+															</span>
+														</div>
+														<div class="cng-content">
+															<div class="speech">
+																<div class="comm_body">
+																	<span> 넵! ㅎㅎ 감사합니다. ㅎㅎ 저도 직접 ㅠ 스크립트나 직접 만들수있으면 더
+																		많은 정보를 알수있을텐데 저도 공개된 소스를 수정하면서 ㅠ 작성하고 있어서.. 시간이 되면
+																		부트스트랩이나 제이쿼리등등을 배워서 꾸미기하는데 활용하고싶네요!ㅎㅎ 요즘은 스킨 꾸미는 재미로
+																		취미생활 다하는 것 같아요 ㅎㅎ</span>
+																</div>
+															</div>
+														</div>
+														<a href="#"
+															onclick="deleteComment(9743723); return false;"
+															class="modify" title="수정/삭제"><i
+															class="icon icon-cancel_circle"></i></a>
+
+														<div class="dropdown">
+															<button class="btn-init" data-toggle="dropdown"
+																aria-expanded="true">
+																<i class="icon icon-more-vert"></i>
+															</button>
+															<ul class="dropdown-menu">
+																<li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
+																<li><a href="#"
+																	onclick="deleteComment(9743723); return false;"
+																	tabindex="-1">수정/삭제</a></li>
+															</ul>
+														</div>
+													</div>
+												</li>
+
+												<li id="comment9743724">
+													<div class="rp_general cng-container">
+														<div class="cng-header">
+															<span class="blogicon"></span> <span
+																class="name ie-nanum"><img
+																src="https://sonylove.tistory.com/index.gif"
+																alt="BlogIcon" width="64" height="64"
+																onerror="this.parentNode.removeChild(this)"> <a
+																href="https://sonylove.tistory.com"
+																onclick="return openLinkInNewWindow(this)">강병민</a></span> <span
+																class="timeago dt-published ie-dotum" title="">2016.02.22
+																00:41 <a
+																href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743724"
+																onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+															</span>
+														</div>
+														<div class="cng-content">
+															<div class="speech">
+																<div class="comm_body">저도 비슷하다는... 이제 그만 정착하고 싶어요.
+																	ㅠ.ㅠ</div>
+															</div>
+														</div>
+														<div class="dropdown">
+															<button class="btn-init" data-toggle="dropdown"
+																aria-expanded="true"></button>
+															<ul class="dropdown-menu">
+																<li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
+																<li><a href="#"
+																	onclick="deleteComment(9743724); return false;"
+																	tabindex="-1">수정/삭제</a></li>
+															</ul>
+														</div>
+													</div>
+												</li>
+
+											</ul>
+
 										</li>
-									</ul> 
-								</td>
-							</tr>
-						</tbody>
-					</table>
+									</ol>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="clear: both; height: 0pt; font: 0pt/0pt arial;"></div>
+				<div style="display: none;" class="cc_paginate cmt"
+					id="cmt_paginate">
+					<!-- 댓글 페이징 처리 -->
+				</div>
 
 
-					<!--
+
+
+				<!--
                         <div class="m-tcol-c reply_error" style="display:none;">
                             <strong>죄송합니다. 댓글 시스템 오류로 댓글을 읽거나 쓸 수 없습니다.</strong>
                             문제가 지속될 경우 <a href="http://help.naver.com/" target="_blank" class="m-tcol-c">고객센터</a>에 알려주시면
                             친절하게 안내해 드리겠습니다.
                         </div>-->
-				</div>
 			</div>
 		</div>
 
 
 	</div>
 	<!-- 리모콘 -->
-	
-	<div id="remocon" class="col-lg-1" style="diplay:block"> 
+
+	<div id="remocon" class="col-lg-1" style="diplay: block">
 		<div class="remote-area">
 			<div class="remote-area-radi-top"></div>
 			<div class="remote-area-body">
 				<div class="btn btn_upper">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goPrev();">
-							<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						<a href="#" class="m-tcol-c" onclick="goPrev();"> <img
+							id="upper-arrow"
+							src="<%=request.getContextPath()%>/img/arrow_icon.png"
+							width="30px" height="30px" alt="" />
 						</a>
 					</p>
 				</div>
 				<div class="btn btn_lower">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goList();"> 
-							<img id="" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						<a href="#" class="m-tcol-c" onclick="goList();"> <img id=""
+							src="<%=request.getContextPath()%>/img/list_icon.png"
+							width="30px" height="30px" alt="" />
 						</a>
 					</p>
 				</div>
 				<div class="btn">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goNext();">
-							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" width="45px" height="45px" alt=""/>
+						<a href="#" class="m-tcol-c" onclick="goNext();"> <img
+							id="lower-arrow"
+							src="<%=request.getContextPath()%>/img/arrow_icon.png"
+							width="30px" height="30px" alt="" />
 						</a>
 					</p>
 				</div>
 			</div>
 			<div class="remote-area-radi-bottom"></div>
 		</div>
-	</div> 
-	
+	</div>
+
 	<div class="col-lg-1"></div>
 </section>
-<style>
-	#remocon {
-		position:relative;
-		font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
-		sans-serif !important;
-		margin: 5px ;
-	}
-	
-	#remocon .remote-area {
-		position: fixed;
-		z-index:100;
-		display: grid;
-	}
-	
-	#remocon .remote-area-radi-top {
-		background-color: #fff;
-		border: 1px solid rgba(239, 108, 0, 0.4);
-		border-radius:100%;
-		position:absolute;
-		width: 60px;
-		height: 48px;
-	}
-	
-	#remocon .remote-area-radi-bottom {
-		background-color: #fff;	
-		border: 1px solid rgba(239, 108, 0, 0.4);
-		border-radius:100%;
-		position:absolute;
-		top: 176px;
-		width: 60px;
-		height: 48px;
-		
-	}
-	
-	#remocon .remote-area-body {
-		background-color: #fff;
-		position:absolute;
-		top:24px;
-		border: 1px solid rgba(239, 108, 0, 0.4);
-		width: 60px;
-		z-index:1000;
-		border-top: none;
-		border-bottom: none;
-	}
-	
-	#remocon .m-tcol-c {
-	word-wrap: break-word;
-	text-decoration: none;
-    color: #666 !important;
-    display: block;
-    position: relative;
-    float: none;
-    width: 45px;
-    height: 45px;
-    margin: auto;
-    font-size: 13px;
-    line-height: 16px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-	}
-	#remocon .btn span {
-    display: none;
-    width: 7px;
-    height: 20px;
-    margin: 0;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-}
-	#remocon .btn p {
-    display: block;
-    float: none;
-    height: auto;
-    padding: 0;
-    background-image: none !important;
-    background-position: top right;
-    background-repeat: no-repeat;
-    }
-    #remocon .btn {
-    width: 48px;
-	/*#ddd*/
-	background-color: #fff;
-	display: inline-block;
-	margin: 5px;
-	height: 48px;
-	text-align: center;
-	vertical-align: top;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	overflow: hidden;
-}
-
-#remocon #upper-arrow {
-	 transform: rotate(-90deg);
-}
-
-#remocon #lower-arrow {
-	transform: rotate(90deg);
-}	
-
-#remocon .btn p img {
-	margin: 1px;
-}
-
-</style>
 <%@ include file="/views/common/footer.jsp"%>
