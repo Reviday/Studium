@@ -41,14 +41,17 @@
                     <div class="row setting-divide">
                         <div class="col-7">
                             <p class="check-i">이메일 인증 상태<br>
+                            
+                        <%if(m.getMemEmailCert()=='N'){ %>
                                 <span>이메일 인증을 완료해주세요!</span>
+                                <%} %>
                             </p>
 
                         </div>
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                        <input type="checkbox">
+                                        <input type="checkbox" onclick="return false;" <%if(m.getMemEmailCert()=='Y'){ %> checked="checked" <%} %>>
                                             <div>
                                                 <canvas></canvas>
                                             </div>

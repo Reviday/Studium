@@ -58,6 +58,16 @@
     height: 38px;
     width: 300px;
 }
+.emailcert{
+	position:relative;
+	width:200px;
+	left:150px;
+	top:-38px;
+	margin-right:0px;
+	font-size:0.8em;
+	color:red;
+	
+}
 
 
 /* 추가정보 입력 */

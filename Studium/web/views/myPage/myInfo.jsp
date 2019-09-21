@@ -2,11 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.studium.member.model.vo.Member"%>
+ <%@ page import="com.studium.category.model.vo.Category,
+				java.util.List"%>
 <% 
 	Member m=(Member)request.getAttribute("member");
+	List<Category> listM=(List)request.getAttribute("categoryM");
+	List<Category> listB=(List)request.getAttribute("categoryB");
 
 %>
- 
+
 <style>
 .header-background-cover {
 	height: 95px;
@@ -68,12 +72,14 @@
                         <div class="col-7">
                             <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member" method="post">
                                 <div class="inputForm">
-                                    <input type="text" name="name" id="name" class="myI-1-f" autocomplete=off placeholder="<%=m.getMemName()%>" readonly>
+                                    <input type="text" name="name" id="name" class="myI-1-f" autocomplete=off value="<%=m.getMemName()%>" readonly>
                                     <input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
                                 </div>
                                 <div class="inputForm">
-                                    <input type="email" name="email" id="email" class="myI-1-f" autocomplete=off placeholder="<%=m.getMemUserEmail()%>" readonly>
+                                    <input type="email" name="email" id="email" class="myI-1-f" autocomplete=off value="<%=m.getMemUserEmail()%>" readonly>        
+                                	<div class="emailcert"><p>이메일 인증하기</p></div>
                                 </div>
+                                
                                 <div class="inputForm">
                                     <input type="password" name="password" id="modipwd" class="myI-1" required>
                                 </div>
@@ -94,26 +100,33 @@
                                     <input type="button" onclick="sample6_execDaumPostcode()" class="myI-1-add btn-address" value="우편번호 찾기">
                                     <input type="text" id="sample6_address" name="address1" class="myI-1" value="<%=m.getMemAddress1()%>">
                                     <input type="text" id="sample6_detailAddress" name="address2" class="myI-1" value="<%=m.getMemAddress2()%>">
-                                </div>
-]								
-                                     <div class="tag_cloud_widget">
-                                   <ul class="list">
-                                        <li>
-                                            <a href="#"><%=m.getMemCategory1() %></a>
-                                        </li>
-                                         <li>
-                                            <a href="#"><%=m.getMemCategory2() %></a>
-                                        </li>
-                                         <li>
-                                            <a href="#"><%=m.getMemCategory3() %></a>
-                                        </li>
-                                        
-                                    </ul>
-                                <div>
+                                </div>							
+                                    <div class="inputInteresting">
+								<% if(!listM.isEmpty()&&!listB.isEmpty()){
+										
+									for(int i=0;i<listB.size();i++){%>
+									<div><p><%=listB.get(i).getTitleB()%></p></div>
+									
+										<% for(int j=0;j<listM.size();j++){
+											if(listB.get(i).getCategoryBId().equals(listM.get(j).getCategoryBId())){%>
+												<label class="check-label">
+		                                        <input type="checkbox" class="option-input checkbox"  name="inter" 
+		                                        
+		                                        <% if(listM.get(j).getTitleM().equals(m.getMemCategory1())||listM.get(j).getTitleM().equals(m.getMemCategory2())||listM.get(j).getTitleM().equals(m.getMemCategory3())){%>
+		                                        checked<%}%>
+		                                        id="<%=listM.get(j).getCategoryMId()%>" value="<%=listM.get(j).getTitleM() %>">
+		                                        <%=listM.get(j).getTitleM() %>
+		                                     </label>
+											<%}
+										
+									}
+									
+								}
+								}%>
                                      <%}else{%>
                                      <div class="myI-1-info">
                                          <div >
-                                            <img src="<%=request.getContextPath() %>/img/peep.png">
+                                            <a href="<%=request.getContextPath() %>/myPage/addMyInfo"><img src="<%=request.getContextPath() %>/img/peep.png"></a>
                                    		 </div>
                                       <a href="<%=request.getContextPath() %>/myPage/addMyInfo">입력된 추가정보가 없습니다ㅠㅅ ㅠ <br>추가정보를 입력해주세요!</a>
                                     </div>
@@ -190,12 +203,19 @@
             }).open();
         }
         
-        
+        //관심사 개수제한
+        $('input[type=checkbox]').on('change', function (e) {
+            if ($('input[type=checkbox]:checked').length > 3) {
+                $(this).prop('checked', false);
+                alert("관심사는 세 개만 선택 가능합니다.");
+            }
+        });    
 
 
         //전화번호 정규표현식
-        var modiPhone =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/;
-
+        var regPhone = /^\d{3}\d{3,4}\d{4}$/; 
+		// 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+        var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
         //회원정보수정 유효성 검사
         function modifyMember_validate() {
@@ -213,7 +233,39 @@
         			return false;
         		}
         	}
-        	
+        	//전화번호검사
+            var phone = $('#phone');
+            if (!phone.val()) {
+                alert('전화번호를 입력해주세요.');
+                phone.focus();
+                return false;
+            } else {
+                if (!regPhone.test(phone.val().trim())) {
+                    alert('전화번호 형식이 유효하지 않습니다.');
+                    phone.focus();
+                    return false;
+                }
+            }
+            //주소
+            var postcode = $('#sample6_postcode');
+            //상세주소
+            var detailAddress = $('#sample6_detailAddress');
+            if (!postcode.val()) {
+                alert('주소를 입력해주세요.');
+                postcode.focus();
+                return false;
+            }
+            if (!detailAddress.val()) {
+                alert('상세주소를 입력해주세요.');
+                detailAddress.focus();
+                return false;
+            }
+
+            //관심사 체크여부확인
+            if (!$('input:checkbox[name="inter"]').is(":checked")) {
+                return false;
+            }
+
         	//비밀번호 검사
         	var pwd = $('#modipwd');
         	if(!pwd.val()) {
@@ -244,9 +296,7 @@
         	return true;
         	
         }
-     // 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
-        var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-    </script>
+      </script>
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>
