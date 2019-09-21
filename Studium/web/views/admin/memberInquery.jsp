@@ -56,7 +56,7 @@
 
                     <form action="<%=request.getContextPath() %>/admin/memberFinder"
                         onsubmit="return search_validate();">
-                        <input type="text" placeholder="이름 입력" name="memberName">
+                        <input type="text" placeholder="검색" name="memberName">
                         <input type="submit" value="" class="submitPicture">
                     </form>
                 </div>
@@ -78,7 +78,8 @@
                     <td><%=m.getMemName() %></td>
                     <td><%=m.getMemUserEmail() %></td>
                     <td><%=m.getMemEnrollDatetime() %></td>
-                    <form action="<%=request.getContextPath()%>/adminUpdateMember">
+                    <form action="<%=request.getContextPath()%>/adminUpdateMember"
+                    	  onsubmit="return update_validate();">
                     <input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo" class="memUpdateNo">
                     <td>
                         <select name="memberGradeList" id="memberGradeList">
@@ -115,23 +116,31 @@
     </section>
 
     <script>
+    	
+    	function update_validate() {
+        	var result = confirm("수정하시겠습니까?");
+        	if(result){return true;}
+        	else{return false;}
+        	
+    	}
+    
         function search_validate() {
             if ($('input:text[name="memberName"]').val().trim() == 0) {
-                alert("선택된 이름이 없습니다.");
+                alert("검색할 이름, 이메일을 입력하세요.");
                 return false;
             }
         }
 
-        function delete_validate() {
+/*         function delete_validate() {
         	var result = confirm("정말 탈퇴하시겠습니까?");
         	if(result){
         		return true;
         	}else{
         		return false;
         	}
-        }
+        } */
         
-        function deleteMember(){
+         function deleteMember(){
         	
         	var result = confirm("정말 탈퇴하시겠습니까?");
         	if(result){
@@ -151,19 +160,21 @@
         		error:
                     function (request, status, error){
                     alert("ajax실패");}
+        	})
         		return true;
         	}else{
         		
         		return false;
         	}
         	
+        	}
         	
-        }
+         
         
         
         
         
-        function fn_dibs2(){
+        <%-- function fn_dibs2(){
         	/* var mno = $("#mNo").val();
 			var pno = $("#pNo").val();*/
 			var A = $("#A").val();	 //a값을 받아서 a에 넣기		
@@ -225,7 +236,7 @@
 					fn_loginAlert();
 					return false;
 				}      
-        }
+        } --%>
         
     </script>
 

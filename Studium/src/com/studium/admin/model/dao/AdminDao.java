@@ -84,12 +84,12 @@ public class AdminDao {
 		}
 		return result;
 	}
-
-	public int selectCountMemberName(Connection conn, String memberName) {
+	
+	public int selectCountPointMember(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
-		String sql=prop.getProperty("selectCountMemberName") + " '" + memberName+"'";
+		String sql=prop.getProperty("selectCountPointMember");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -105,6 +105,46 @@ public class AdminDao {
 		return result;
 	}
 
+	public int selectCountMemberName(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountMemberName") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectCountMemberEmail(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountMemberEmail") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int selectCountMemberSearch(Connection conn, String grade, String status) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -287,6 +327,62 @@ public class AdminDao {
 		}return list;
 	}
 
+	public List<Member> selectMemberPointList(Connection conn,int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList();
+		String sql=prop.getProperty("selectMemberPointList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Member m = new Member();
+				m.setMemNo(rs.getInt("mem_no"));
+				m.setMemUserEmail(rs.getString("mem_email"));
+				m.setMemPassword(rs.getString("mem_password"));
+				m.setMemCode(rs.getString("mem_code").charAt(0));
+				m.setMemName(rs.getString("mem_name"));
+				m.setMemBirth(rs.getDate("mem_birth"));
+				m.setMemPhone(rs.getString("mem_phone"));
+				m.setMemGender(rs.getString("mem_gender").charAt(0));
+				m.setMemPoint(rs.getInt("mem_point"));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
+				m.setMemZipCode(rs.getString("mem_zipcode"));
+				m.setMemAddress1(rs.getString("mem_address1"));
+				m.setMemAddress2(rs.getString("mem_address2"));
+				m.setMemReceiveEmail(rs.getString("mem_receive_email").charAt(0));
+				m.setMemUseNote(rs.getString("mem_use_note").charAt(0));
+				m.setMemReceiveSms(rs.getString("mem_receive_sms").charAt(0));
+				m.setMemOpenProfile(rs.getString("mem_open_profile").charAt(0));
+				m.setMemDenied(rs.getString("mem_denied").charAt(0));
+				m.setMemEmailCert(rs.getString("mem_email_cert").charAt(0));
+				m.setMemEnrollDatetime(rs.getTimestamp("mem_enroll_datetime"));
+				m.setMemEnrollIp(rs.getString("mem_enroll_ip"));
+				m.setMemLastloginDatetime(rs.getTimestamp("mem_lastlogin_datetime"));
+				m.setMemLastloginIp(rs.getString("mem_lastlogin_ip"));
+				m.setMemProfileContent(rs.getString("mem_profile_content"));
+				m.setMemAdminmemo(rs.getString("mem_adminmemo"));
+				m.setMemIcon(rs.getString("mem_icon"));
+				m.setMemPhoto(rs.getString("mem_photo"));
+				m.setMemStatus(rs.getString("mem_status").charAt(0));
+				m.setMemWithdrawalDate(rs.getTimestamp("mem_withdrawal_date"));
+				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
+
+				list.add(m);				
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 	public List<Member> selectMemberSearchList(Connection conn,int cPage, int numPerPage, String grade, String status) {
 
 		PreparedStatement pstmt=null;
@@ -522,12 +618,132 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
-		String sql=prop.getProperty("selectMemberNameList");
+//		String sql=prop.getProperty("selectMemberNameList");
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_NAME LIKE '%"
+				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, memberName);
-			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-			pstmt.setInt(3, cPage*numPerPage);
+//			pstmt.setString(1, memberName);
+//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+//			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Member m = new Member();
+				m.setMemNo(rs.getInt("mem_no"));
+				m.setMemUserEmail(rs.getString("mem_email"));
+				m.setMemPassword(rs.getString("mem_password"));
+				m.setMemCode(rs.getString("mem_code").charAt(0));
+				m.setMemName(rs.getString("mem_name"));
+				m.setMemBirth(rs.getDate("mem_birth"));
+				m.setMemPhone(rs.getString("mem_phone"));
+				m.setMemGender(rs.getString("mem_gender").charAt(0));
+				m.setMemPoint(rs.getInt("mem_point"));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
+				m.setMemZipCode(rs.getString("mem_zipcode"));
+				m.setMemAddress1(rs.getString("mem_address1"));
+				m.setMemAddress2(rs.getString("mem_address2"));
+				m.setMemReceiveEmail(rs.getString("mem_receive_email").charAt(0));
+				m.setMemUseNote(rs.getString("mem_use_note").charAt(0));
+				m.setMemReceiveSms(rs.getString("mem_receive_sms").charAt(0));
+				m.setMemOpenProfile(rs.getString("mem_open_profile").charAt(0));
+				m.setMemDenied(rs.getString("mem_denied").charAt(0));
+				m.setMemEmailCert(rs.getString("mem_email_cert").charAt(0));
+				m.setMemEnrollDatetime(rs.getTimestamp("mem_enroll_datetime"));
+				m.setMemEnrollIp(rs.getString("mem_enroll_ip"));
+				m.setMemLastloginDatetime(rs.getTimestamp("mem_lastlogin_datetime"));
+				m.setMemLastloginIp(rs.getString("mem_lastlogin_ip"));
+				m.setMemProfileContent(rs.getString("mem_profile_content"));
+				m.setMemAdminmemo(rs.getString("mem_adminmemo"));
+				m.setMemIcon(rs.getString("mem_icon"));
+				m.setMemPhoto(rs.getString("mem_photo"));
+				m.setMemStatus(rs.getString("mem_status").charAt(0));
+				m.setMemWithdrawalDate(rs.getTimestamp("mem_withdrawal_date"));
+				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
+
+				list.add(m);	
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Member> selectMemberEmailList(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList();
+//		String sql=prop.getProperty("selectMemberNameList");
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_EMAIL LIKE '%"
+				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(1, memberName);
+//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+//			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Member m = new Member();
+				m.setMemNo(rs.getInt("mem_no"));
+				m.setMemUserEmail(rs.getString("mem_email"));
+				m.setMemPassword(rs.getString("mem_password"));
+				m.setMemCode(rs.getString("mem_code").charAt(0));
+				m.setMemName(rs.getString("mem_name"));
+				m.setMemBirth(rs.getDate("mem_birth"));
+				m.setMemPhone(rs.getString("mem_phone"));
+				m.setMemGender(rs.getString("mem_gender").charAt(0));
+				m.setMemPoint(rs.getInt("mem_point"));
+				m.setMemCategory1(rs.getString("mem_category1"));
+				m.setMemCategory2(rs.getString("mem_category2"));
+				m.setMemCategory3(rs.getString("mem_category3"));
+				m.setMemZipCode(rs.getString("mem_zipcode"));
+				m.setMemAddress1(rs.getString("mem_address1"));
+				m.setMemAddress2(rs.getString("mem_address2"));
+				m.setMemReceiveEmail(rs.getString("mem_receive_email").charAt(0));
+				m.setMemUseNote(rs.getString("mem_use_note").charAt(0));
+				m.setMemReceiveSms(rs.getString("mem_receive_sms").charAt(0));
+				m.setMemOpenProfile(rs.getString("mem_open_profile").charAt(0));
+				m.setMemDenied(rs.getString("mem_denied").charAt(0));
+				m.setMemEmailCert(rs.getString("mem_email_cert").charAt(0));
+				m.setMemEnrollDatetime(rs.getTimestamp("mem_enroll_datetime"));
+				m.setMemEnrollIp(rs.getString("mem_enroll_ip"));
+				m.setMemLastloginDatetime(rs.getTimestamp("mem_lastlogin_datetime"));
+				m.setMemLastloginIp(rs.getString("mem_lastlogin_ip"));
+				m.setMemProfileContent(rs.getString("mem_profile_content"));
+				m.setMemAdminmemo(rs.getString("mem_adminmemo"));
+				m.setMemIcon(rs.getString("mem_icon"));
+				m.setMemPhoto(rs.getString("mem_photo"));
+				m.setMemStatus(rs.getString("mem_status").charAt(0));
+				m.setMemWithdrawalDate(rs.getTimestamp("mem_withdrawal_date"));
+				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
+
+				list.add(m);	
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Member> selectCountMemberEmail(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList();
+//		String sql=prop.getProperty("selectMemberNameList");
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_EMAIL LIKE '%"
+				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(1, memberName);
+//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+//			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Member m = new Member();

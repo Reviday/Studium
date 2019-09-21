@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -37,7 +39,10 @@ public class AdminQandAListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//회원에 대한 페이지 설정
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		if(loginMember != null && loginMember.getMemCode() == 'M') {
 				
 		AdminService service=new AdminService();
 		int totalData=service.selectCountQandA();
@@ -54,6 +59,13 @@ public class AdminQandAListServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/admin/Q&AList.jsp")
 				.forward(request,response);
+		}else {
+			String msg = "로그인이 필요합니다.";
+			String loc = "/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

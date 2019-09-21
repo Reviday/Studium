@@ -39,9 +39,6 @@ public class AdminQandAServlet extends HttpServlet {
 		AdminService service = new AdminService();
 		int result = service.insertQandA(content, email);
 		
-		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-		request.setAttribute("elements", elements);
-		
 		request.getRequestDispatcher("/views/Q&A/Q&A.jsp")
 		.forward(request,response);
 		

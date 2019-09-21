@@ -2,6 +2,7 @@ package com.studium.admin.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +19,24 @@ import com.studium.util.model.vo.SideMenuElement;
 import common.template.PaginationTemplate;
 
 /**
- * Servlet implementation class AdminInqueryUpdateMemberServlet
+ * Servlet implementation class AdminPointManageFinder
  */
-@WebServlet("/adminUpdateMember")
-public class AdminInqueryUpdateMemberServlet extends HttpServlet {
+@WebServlet("/admin/memberPointFinder")
+public class AdminPointManageFinder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	public static boolean isEmail(String email) {
+        boolean b = Pattern.matches(
+            "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+", 
+            email.trim());
+        if(b == true) {return true;}
+        else {return false;}
+    }
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInqueryUpdateMemberServlet() {
+    public AdminPointManageFinder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,29 +50,46 @@ public class AdminInqueryUpdateMemberServlet extends HttpServlet {
 		
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
 		
-		String grade = request.getParameter("memberGradeList");
-		String status = request.getParameter("memberStatusList");
-		String memNo = request.getParameter("memUpdateNo");
+		String memberName = request.getParameter("memberName");
 		
-		AdminService service = new AdminService();
-
-		int result = service.updateMember(memNo, grade, status); 
+		if(isEmail(memberName) == true) {
+			AdminService service=new AdminService();
+			int totalData=service.selectCountMemberEmail(memberName);
+			String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
+			PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+			List<Member> list=service.selectMemberEmailList(pt.getcPage(),pt.getNumPerPage(), memberName);
+			
+			
+			request.setAttribute("list",list);
+			request.setAttribute("cPage", pt.getcPage());
+			request.setAttribute("pageBar", pt.getPageBar());
+			request.setAttribute("numPerPage", pt.getNumPerPage());
+			
+			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+			request.setAttribute("elements", elements);
+			
+			request.getRequestDispatcher("/views/admin/memberPoint.jsp")
+					.forward(request,response);
+		}else {
 		
-		int totalData=service.selectCountMemberSearch(grade, status);
-		String URLmapping="/adminUpdateMember"; // 패턴을 넘겨주기 위한 변수
+		AdminService service=new AdminService();
+		int totalData=service.selectCountMemberName(memberName);
+		String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-		List<Member> list=service.selectMemberList(pt.getcPage(),pt.getNumPerPage());
-		
-		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-		request.setAttribute("elements", elements);
+		List<Member> list=service.selectMemberNameList(pt.getcPage(),pt.getNumPerPage(), memberName);
 		
 		
 		request.setAttribute("list",list);
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
+		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
+		
+		request.getRequestDispatcher("/views/admin/memberPoint.jsp")
 				.forward(request,response);
+			}
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";

@@ -49,9 +49,23 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountMemberEmail(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountMemberEmail(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
 	public int selectCountMemberSearch(String grade, String status) {
 		Connection conn=getConnection();
 		int result=dao.selectCountMemberSearch(conn, grade, status);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountPointMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountPointMember(conn);
 		close(conn);
 		return result;
 	}
@@ -66,6 +80,13 @@ public class AdminService {
 	public List<Member> selectMemberList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Member> selectMemberPointList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Member> list=dao.selectMemberPointList(conn,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -89,6 +110,13 @@ public class AdminService {
 	public List<Member> selectMemberNameList(int cPage, int numPerPage, String memberName){
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberNameList(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
+	}
+	
+	public List<Member> selectMemberEmailList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<Member> list=dao.selectMemberEmailList(conn,cPage,numPerPage, memberName);
 		close(conn);
 		return list;
 	}
