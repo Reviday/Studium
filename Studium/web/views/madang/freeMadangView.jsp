@@ -187,7 +187,8 @@
 				<div class="h10"></div>
 
 				<!-- 댓글 -->
-				<div class="box-reply2 bg-color u_cbox" id="comment" style="display: block;">
+				<div class="box-reply2 bg-color u_cbox" id="comment"
+					style="display: block;">
 					<h3 class="ir_su">댓글 작성</h3>
 					<!-- 댓글 폼 -->
 					<div class="tab_container">
@@ -249,16 +250,35 @@
 												<a href="#" onclick="deleteComment(9743709);return false"
 													class="modify" title="수정/삭제"><i
 													class="icon icon-cancel_circle"></i></a>
+												<script>
+													$(function() {
+														function fn_ccss() {
+															if (fn_Logincheck()) {
+																$('#re_conmment').toggle();
+															}
+														}
+														;
 
+														function fn_Logincheck() {
+															if (loginMember != null) {
+																return true;
+															} else {
+																alert("로그인 후 이용해주시기 바랍니다.");
+																return false;
+															}
+														}
+														;
+													});
+												</script>
 												<div class="comm-bottom">
-													<div class="fl">
-														<button onclick="fn_reComment(9749318); return false"
-															class="btn-init ie-dotum write">
-															<span class="arrow-symbol dsc_comm">답글달기</span>
+													<button onclick="fn_ccss();"
+														class="btn-init ie-dotum write">
+														<span class="arrow-symbol dsc_comm">답글달기</span>
 
-														</button>
-													</div>
-													<table cellspacing="0" class="cminput" style="display:none">
+													</button>
+
+													<table cellspacing="0" class="cminput" id="re_conmment"
+														style="display: none">
 														<tbody>
 															<tr>
 																<td class="i2">

@@ -164,7 +164,7 @@
 	border-top-color: rgba(239, 108, 0, 0.4);
 	border-bottom-color: rgba(239, 108, 0, 0.4);
 	clear: both;
-	margin: 0;
+	margin-bottom: 200px !important;
 }
 
 .madang-view .inbox, .madang-view .tit-box, .madang-view .etc-box {
@@ -504,7 +504,7 @@
 
 #content-area .comm-bottom {
 	overflow: hidden;
-	padding: 5px 0 0px 20px;
+	padding: 5px 5px 5px 20px;
 	margin: 0;
 	line-height: 15px;
 	text-align: left;
