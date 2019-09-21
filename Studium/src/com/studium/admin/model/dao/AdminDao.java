@@ -612,5 +612,25 @@ public class AdminDao {
 		return result;
 
 	}
+	
+	public int updateMember(Connection conn, String memNo, String grade, String status) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMember");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, grade);
+			pstmt.setString(2, status);
+			pstmt.setString(3, memNo);	
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 
 }

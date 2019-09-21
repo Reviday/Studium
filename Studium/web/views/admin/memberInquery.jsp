@@ -54,7 +54,7 @@
                 <div>
                     <!--오른쪽 상단에 위치하는 검색기능-->
                     <form action="<%=request.getContextPath()%>/adminInquerySearch">
-                        <select name="gradeList" id="">
+                        <select name="gradeList" id="gradeList">
                             <option value="allGrade" <%="allGrade".equals(grade) ? "selected" : "" %>>전체</option>
                             <option value="M" <%="M".equals(grade) ? "selected" : "" %>>관리자</option>
                             <option value="T" <%="T".equals(grade) ? "selected" : "" %>>강사</option>
@@ -62,7 +62,7 @@
                             <option value="A" <%="A".equals(grade) ? "selected" : "" %>>준회원</option>
                         </select>
 
-                        <select name="statusList" id="">
+                        <select name="statusList" id="statusList">
                             <option value="allStatus" <%="allStatus".equals(status) ? "selected" : "" %>>전체</option>
                             <option value="N" <%="N".equals(status) ? "selected" : "" %>>정상</option>
                             <option value="Y" <%="Y".equals(status) ? "selected" : "" %>>일시정지</option>
@@ -88,6 +88,7 @@
                     <th>가입일시</th>
                     <th>등급</th>
                     <th>상태</th>
+                    <th>회원수정</th>
                     <th>회원탈퇴</th>
                 </tr>
                 <%for(Member m : list){ %>
@@ -96,27 +97,33 @@
                     <td><%=m.getMemName() %></td>
                     <td><%=m.getMemUserEmail() %></td>
                     <td><%=m.getMemEnrollDatetime() %></td>
+                    <form action="<%=request.getContextPath()%>/adminUpdateMember">
+                    <input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo" class="memUpdateNo">
                     <td>
-                        <select name="" id="">
-                            <option value="Manager" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
-                            <option value="Teacher" <%='T' == m.getMemCode() ? "selected" : "" %>>강사</option>
-                            <option value="Regular" <%='R' == m.getMemCode() ? "selected" : "" %>>정회원</option>
-                            <option value="Associate" <%='A' == m.getMemCode() ? "selected" : "" %>>준회원</option>
+                        <select name="memberGradeList" id="memberGradeList">
+                            <option value="M" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
+                            <option value="T" <%='T' == m.getMemCode() ? "selected" : "" %>>강사</option>
+                            <option value="R" <%='R' == m.getMemCode() ? "selected" : "" %>>정회원</option>
+                            <option value="A" <%='A' == m.getMemCode() ? "selected" : "" %>>준회원</option>
                         </select>
                     </td>
                     <td>
-                        <select name="" id="">
-                            <option value="normal" <%='N' == m.getMemDenied() ? "selected" : "" %>>정상</option>
-                            <option value="drop" <%='Y' == m.getMemDenied() ? "selected" : "" %>>일시정지</option>
-                            <option value="pass" <%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
+                        <select name="memberStatusList" id="memberStatusList">
+                            <option value="N" <%='N' == m.getMemDenied() ? "selected" : "" %>>정상</option>
+                            <option value="Y" <%='Y' == m.getMemDenied() ? "selected" : "" %>>일시정지</option>
+                            <option value="P" <%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
                         </select>
                     </td>
                     <td>
-                        <form action="<%=request.getContextPath()%>/adminDeleteMember" 
-                        	  onsubmit="return delete_validate();">
-                            <input type="hidden" value="<%=m.getMemNo() %>" name="memNo">
-                            <input type="submit" value="탈퇴" class="deleteSubmit">
-                        </form>
+                     <input type="submit" value="수정" class="memberUpdate">
+                    </td>
+                    </form>
+                    <td>
+                        <%-- <form action="<%=request.getContextPath()%>/adminDeleteMember"  --%>
+                        	  <!-- onsubmit="return delete_validate();"> -->
+                            <input type="hidden" value="<%=m.getMemNo() %>" name="memNo" class="memNo">
+                            <input type="button" value="탈퇴" class="deleteSubmit" onclick="deleteMember();">
+                        <!-- </form> -->
                     </td>
                 </tr>
                 <%} %>
@@ -142,6 +149,103 @@
         		return false;
         	}
         }
+        
+        function deleteMember(){
+        	
+        	var result = confirm("정말 탈퇴하시겠습니까?");
+        	if(result){
+        	var grade = $("#gradeList").val();
+        	var status = $("#statusList").val();
+        	var memNo = $(".memNo").val();
+        	$.ajax({
+        		url: "<%=request.getContextPath()%>/adminDeleteMember",
+        		type: "POST",
+        		cache: false,
+        		dataType: "json",
+        		data: {"grade": grade, "status": status, "memNo": memNo},
+        		success: function(data){
+        			if(data != null) {console.log(data);}
+        			else {console.log("안됨");}
+        		},
+        		error:
+                    function (request, status, error){
+                    alert("ajax실패");}
+        		return true;
+        	}else{
+        		
+        		return false;
+        	}
+        	
+        	
+        }
+        
+        
+        
+        
+        function fn_dibs2(){
+        	/* var mno = $("#mNo").val();
+			var pno = $("#pNo").val();*/
+			var A = $("#A").val();	 //a값을 받아서 a에 넣기		
+			var params = jQuery("#dibs_form").serialize();
+				if(<%=loginMember!=null%>){
+				$.ajax({
+				url: "<%=request.getContextPath()%>/fstudy/fstudyDibss",  //doGet3 만들어서 찜하기 아닌상태 컨트롤러 만들어서 사용
+				type: "POST",
+				cache: false,
+				dataType: "json",
+				// data 이렇게 했을때 파라티머 받는지 확인 
+				// 보내는 방법 ex) 컨트롤러파라미터변수이름 : 니가보낼데이터   {mno : mno}
+				//data: {"mno":mno, "pno" : pno, "A" : A }, 
+				data: params , 
+				//아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌
+				success:
+				function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+				console.log(data+"ajax데이터 들어오는거");
+				if(data==("1")){ //넘어온 데이터 값이 1이면 찜하기 구현
+					$("#A").val("0");
+					$("#dibscon").html($("<input>").attr({"value":"0",
+						"type":"hidden",
+						"id":"A",
+						"name":"A"}));
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibson.png",
+														"class":"dibs",
+														"style":"width:150px"
+															}));
+					$('#toast').animate({opacity: '1'}, 100);
+					$("#toast").css("display","block");
+					$("#message").html(("찜하기 성공"));
+					$('#toast').animate({opacity: '0'}, 1000);
+				}else {//
+					
+					$("#A").val("1");
+					$("#dibscon").html($("<input>").attr({"value":"1","type":"hidden",
+						"id":"A",
+						"name":"A"}));
+					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibsoff.png",
+														"class":"dibs",
+														"style":"width:150px"}));
+					$('#toast').animate({opacity: '1'}, 100);
+					$("#toast").css("display","block");
+					$("#message").html(("찜하기 취소"));
+					$('#toast').animate({opacity: '0'}, 1000);
+					
+				}
+				
+				},
+				error:
+				function (request, status, error){
+				alert("ajax실패");
+				$("#A").val("0");
+				$("#dibscon").html(data);
+				}
+				});
+        	}
+				else{
+					fn_loginAlert();
+					return false;
+				}      
+        }
+        
     </script>
 
 

@@ -168,3 +168,15 @@ a {
 .deleteSubmit:hover {
     background: #ef6c00;
 }
+
+.memberUpdate{
+	border-radius: 4px;
+    border: 1px solid #004cef;
+    cursor: pointer;
+    background: #004cef;
+    margin-top: 6px;
+}
+
+.memberUpdate:hover {
+    background: #2664eb;
+}

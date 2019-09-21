@@ -77,6 +77,15 @@ public class AdminService {
 		return list;
 	}
 	
+	public int updateMember(String memNo, String grade, String status) {
+		Connection conn = getConnection();
+		int result = dao.updateMember(conn, memNo, grade, status);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;	
+	}
+	
 	public List<Member> selectMemberNameList(int cPage, int numPerPage, String memberName){
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberNameList(conn,cPage,numPerPage, memberName);
