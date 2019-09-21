@@ -9,24 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.admin.service.AdminService;
-import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
-import common.template.PaginationTemplate;
-
 /**
- * Servlet implementation class AdminInqueryUpdateMemberServlet
+ * Servlet implementation class AdminManageViewServlet
  */
-@WebServlet("/adminUpdateMember")
-public class AdminInqueryUpdateMemberServlet extends HttpServlet {
+@WebServlet("/AdminManager")
+public class AdminManageViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInqueryUpdateMemberServlet() {
+    public AdminManageViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,29 +31,11 @@ public class AdminInqueryUpdateMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String grade = request.getParameter("memberGradeList");
-		String status = request.getParameter("memberStatusList");
-		String memNo = request.getParameter("memUpdateNo");
-		
-		AdminService service = new AdminService();
-
-		int result = service.updateMember(memNo, grade, status); 
-		
-		int totalData=service.selectCountMemberSearch(grade, status);
-		String URLmapping="/adminUpdateMember"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-		List<Member> list=service.selectMemberList(pt.getcPage(),pt.getNumPerPage());
-		
+		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 		request.setAttribute("elements", elements);
 		
-		
-		request.setAttribute("list",list);
-		request.setAttribute("cPage", pt.getcPage());
-		request.setAttribute("pageBar", pt.getPageBar());
-		request.setAttribute("numPerPage", pt.getNumPerPage());
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
-				.forward(request,response);
+		request.getRequestDispatcher("/views/admin/Q&AFirst.jsp").forward(request, response);
 	}
 
 	/**

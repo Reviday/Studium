@@ -16,12 +16,12 @@ a {
 }
 
 .mainArticle {
-	width: 900px;
-	height: 400px;
+	/* width: 900px; */
+	height: 700px;
 }
 
 section {
-    display: flex;
+    /* display: flex; */
 }
 
 .leftmenu {
@@ -62,19 +62,19 @@ section {
 
 .qanda {
     box-sizing: border-box;
-    display: inline-block;
+  /*   display: inline-block; */
 }
 
 .qanda > div:first-child {
     font-weight: bold;
     font-size: 20px;
     margin-top: 40px;
-    margin-left: 80px;
+    /* margin-left: 80px; */
 }
 
 #alldelete {
     padding-top: 20px;
-    margin-left: 95px;
+    margin-left: 15px; 
     width: 17px;
     height: 17px;  
  	visibility: visible;
@@ -83,7 +83,7 @@ section {
 #deletebtn {
     
     margin-top: 18px;
-    margin-left: 10px;
+    /* margin-left: 10px;  */
     background-color: white;
     color: #ef6c00;
     border: none;
@@ -95,7 +95,7 @@ section {
 
 .qandaTable {
     margin-top: 10px;
-    margin-left: 80px;
+    /* margin-left: 80px; */
     box-sizing: border-box;
     text-align: center;
     width: 750px;

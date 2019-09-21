@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
+import com.studium.util.model.service.SideMenuElementService;
+import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.PaginationTemplate;
 
@@ -44,6 +46,9 @@ public class AdminInqueryMemberSearchServlet extends HttpServlet {
 		pt.setQueryString("statusList", status);
 		List<Member> list=service.selectMemberSearchList(pt.getcPage(),pt.getNumPerPage(), grade, status);
 		
+		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
 		
 		request.setAttribute("list",list);
 		request.setAttribute("cPage", pt.getcPage());

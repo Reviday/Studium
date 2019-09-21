@@ -1,6 +1,8 @@
 package com.studium.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
+import com.studium.util.model.service.SideMenuElementService;
+import com.studium.util.model.vo.SideMenuElement;
 
 /**
  * Servlet implementation class AdminQandAServlet
@@ -34,6 +38,9 @@ public class AdminQandAServlet extends HttpServlet {
 		
 		AdminService service = new AdminService();
 		int result = service.insertQandA(content, email);
+		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
 		
 		request.getRequestDispatcher("/views/Q&A/Q&A.jsp")
 		.forward(request,response);

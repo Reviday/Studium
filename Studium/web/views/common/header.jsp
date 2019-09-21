@@ -162,7 +162,7 @@
 						%>
 							<li class="nav-item cta-btn">
 							<a class="btn btn-white btn-outline-white"style="border: 1px solid"
-							href="<%=request.getContextPath()%>/views/admin/Q&AFirst.jsp">회원관리</a>
+							href="<%=request.getContextPath()%>/AdminManager">회원관리</a>
 							</li>
 							<li class="nav-item cta-btn">
 							<a class="btn btn-white btn-outline-white" style="border: 1px solid">게시글관리</a></li>

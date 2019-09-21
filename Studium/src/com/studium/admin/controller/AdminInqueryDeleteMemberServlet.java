@@ -13,6 +13,8 @@ import org.json.simple.JSONObject;
 
 import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
+import com.studium.util.model.service.SideMenuElementService;
+import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.PaginationTemplate;
 
@@ -59,6 +61,9 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 		System.out.println(obj);
 		String a = "안받아져";
 		response.setContentType("application/x-json; charset=UTF-8");
+		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
 		
 		response.getWriter().print(obj);
 		response.getWriter().print(a);

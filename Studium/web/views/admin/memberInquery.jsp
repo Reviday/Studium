@@ -9,42 +9,23 @@
 	request.setAttribute("setGrade", grade);
 	request.setAttribute("setStatus", status);
 %>
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>관리자 1:1문의 페이지</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/inquery.css">
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
 
-<body>
+
     <%@ include file="/views/common/header.jsp"%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/inquery.css">
     <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
         <div class="header-background-cover"></div>
     </div>
 
-    <section class="inquerySection">
-        <div class="leftmenu">
-            <ul>
-                <li>
-                    <a href="<%=request.getContextPath()%>/AdminInqueryList">인쿼리</a>
-                </li>
-                <li>
-                    <a href="">적립금 관리</a>
-                </li>
-                <li class="qandaList">
-                    <a href="<%=request.getContextPath()%>/AdminQandAList">1:1문의 관리</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="inquery">
+    <section class="inquerySection row">
+        
+        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left:0">
+	    <%@ include file="/views/admin/adminSideMenuBar.jsp"%>	
+	    </div>
+<div class="col-lg-1"></div>
+        <div class="inquery col-xs-6 col-sm-6 col-md-7 col-lg-9">
             <div class="inquery-header">
                 <!--헤더div-->
                 <div>

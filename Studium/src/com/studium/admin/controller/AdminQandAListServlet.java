@@ -13,6 +13,8 @@ import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.util.model.service.SideMenuElementService;
+import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.PaginationTemplate;
 
@@ -47,6 +49,8 @@ public class AdminQandAListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
 		
 		request.getRequestDispatcher("/views/admin/Q&AList.jsp")
 				.forward(request,response);

@@ -10,24 +10,12 @@
 <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
     <div class="header-background-cover"></div>
 </div>
-<section>
-    <div class="leftmenu">
-        <ul>
-            <li>
-                <a href="<%=request.getContextPath()%>/AdminInqueryList">인쿼리</a>
-            </li>
-            <li>
-                <a href="">적립금 관리</a>
-            </li>
-            <li>
-                <a href="">게시글 관리</a>
-            </li>
-            <li class="qandaList">
-                <a href="<%=request.getContextPath()%>/AdminQandAList">1:1문의 관리</a>
-            </li>
-        </ul>
-    </div>
-
+<section class="row">
+    
+    <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left:0">
+	    <%@ include file="/views/admin/adminSideMenuBar.jsp"%>	
+	    </div>
+<div class="col-lg-1"></div>
     <div class="qanda">
         <div>
             1:1문의 관리
