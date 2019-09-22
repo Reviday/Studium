@@ -254,7 +254,7 @@
 													$(function() {
 														function fn_ccss() {
 															if (fn_Logincheck()) {
-																$('#re_conmment').toggle();
+																$(this).next().toggle();
 															}
 														}
 														;
