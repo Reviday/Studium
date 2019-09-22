@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.madang.model.service.FreeMadangCmtService;
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.madang.model.vo.FreeMadangCmt;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
+
+import common.template.PaginationTemplate;
 
 /**
  * Servlet implementation class FreeMadangViewServlet
@@ -40,14 +44,23 @@ public class FreeMadangViewServlet extends HttpServlet {
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		
 		FreeMadang fm=new FreeMadangService().selectMadang(no);
+		
+		//Pagination 
+		FreeMadangCmtService service=new FreeMadangCmtService();
+		int totalData=service.selectCountList(no); // 총 데이터 개수
+		String URLmapping="/madnag/freeMadangView"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
-		System.out.println(elements);
 		String view="";
 		if(fm!=null)
 		{
 			view="/views/madang/freeMadangView.jsp";
 			request.setAttribute("fm", fm);
 			request.setAttribute("cPage", cPage);
+			request.setAttribute("totalData", totalData);
+			request.setAttribute("cmtPageBar", pt.getPageBar());
+			request.setAttribute("cmtList", cmtList);
 		}
 		else
 		{

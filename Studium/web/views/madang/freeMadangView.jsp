@@ -6,6 +6,7 @@
 	FreeMadang fm = (FreeMadang) request.getAttribute("fm");
 	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. kk:mm:ss");
+	
 %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->

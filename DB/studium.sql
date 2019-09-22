@@ -427,6 +427,7 @@ create table ta_fmadang_cmt (
     cmt_register_datetime date, -- 댓글 작성 일시
     cmt_updated_datetime date, -- 댓글 최근 수정 일시
     cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
     cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
     cmt_blame number default 0, -- 신고 횟수
     cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
@@ -437,28 +438,29 @@ start with 1
 increment by 1
 maxvalue 9999999;
 
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.3', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 1, 110, '테스트 대댓글입니다.3-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.4', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 2, 110, '테스트 대댓글입니다.3-2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 5, 1, 110, '테스트 대댓글입니다.4-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.5', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, 'N', default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, 'N', default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, 'Y');
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, default, default, 'Y');
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.3', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 1, 110, '테스트 대댓글입니다.3-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.4', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 2, 110, '테스트 대댓글입니다.3-2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 5, 1, 110, '테스트 대댓글입니다.4-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.5', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, 'N', default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, 'N', default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, 'Y');
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, 'Y');
 SELECT NVL(MIN(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3';
 SELECT * FROM TA_FMADANG_CMT WHERE CMT_GROUP = '3';
-SELECT * FROM TA_FMADANG_CMT WHERE CMT_MADANG_NO=110 AND CMT_STATUS='Y' AND CMT_BLAME_ADMIN='N' ORDER BY CMT_GROUP ASC, CMT_SORT ASC;
+SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FMADANG_CMT WHERE CMT_MADANG_NO=110 AND CMT_STATUS='Y' AND CMT_BLAME_ADMIN='N' ORDER BY CMT_GROUP ASC, CMT_SORT ASC) A) WHERE RNUM BETWEEN 1 AND 50;
+SELECT COUNT(*) FROM TA_FMADANG_CMT WHERE CMT_MADANG_NO=110 AND CMT_STATUS='Y' AND CMT_BLAME_ADMIN='N';
 SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3';
 UPDATE TA_FMADANG_CMT SET CMT_SORT = CMT_SORT + 1 WHERE CMT_GROUP =  3  AND CMT_SORT >= 0;
 -- 댓글의 경우
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, FMADANG_CMT_SEQ.CURRVAL, DEFAULT, 110, '새로 추가된 댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, DEFAULT, DEFAULT, DEFAULT);
 -- 대댓글의 경우 
-INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 13, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '13')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 13, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '13')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 /*
 시퀀스 생성은 JDBC로 생성
 

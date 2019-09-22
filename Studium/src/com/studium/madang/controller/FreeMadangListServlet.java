@@ -40,11 +40,11 @@ public class FreeMadangListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//Pagination 
-		FreeMadangService serivce=new FreeMadangService();
-		int totalData=serivce.selectCountList(); // 총 데이터 개수
+		FreeMadangService service=new FreeMadangService();
+		int totalData=service.selectCountList(); // 총 데이터 개수
 		String URLmapping="/madang/freeMadangList"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-		List<FreeMadang> list=serivce.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
+		List<FreeMadang> list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
 		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
