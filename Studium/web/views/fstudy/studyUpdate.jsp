@@ -115,7 +115,7 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <select class=input1 name=p_area value="<%=p.getfArea() %>"
                                                             style="width: 120px; height: 30px;">
-                                                            <option value=''>지역 선택</option>
+                                                            <option value='<%=p.getfArea() %>'><%=p.getfArea() %></option>
                                                             <option value='강남'>강남</option>
                                                             <option value='건대'>건대</option>
                                                             <option value='잠실'>잠실</option>
@@ -131,7 +131,7 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <select class=input1 name=p_day
                                                             style="width: 120px; height: 30px;" value="<%=p.getfDay()%>">
-                                                            <option value=''>요일 선택</option>
+                                                            <option value='<%=p.getfDay()%>'><%=p.getfDay()%></option>
                                                             <option value='평일'>평일</option>
                                                             <option value='주말'>주말</option>
                                                         </select>
@@ -149,7 +149,7 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <select class=input1 name=p_category
                                                             style="width: 120px; height: 30px;" value="<%=p.getfCategory()%>">
-                                                            <option value=''>분류 선택</option>
+                                                            <option value='<%=p.getfCategory()%>'><%=p.getfCategory()%></option>
                                                             <option value='영어'>영어</option>
                                                             <option value='코딩'>코딩</option>
                                                             <option value='중국어'>중국어</option>
@@ -179,23 +179,27 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/></td>
+                                                    <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/>
+                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImgtitle()%>" width="100px" height="100px"> </div></td>
                                                     
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file"NAME="p_img1" size=50/></td>
+                                                    <INPUT TYPE="file"NAME="p_img1" size=50  id="p_img1" />
+                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg1()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img2" size=50/></td>
+                                                    <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
+                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg2()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img3" size=50/></td>
+                                                    <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=50/>
+                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg3()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
@@ -241,6 +245,67 @@
     		timeFormat: "H:i"  //시간:분 으로표시
     		
     	});
+     /*사진 미리보기 기능  */
+		$(function(){
+			$("#p_imgtitle").change(function(){
+				$("#preview").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img1").change(function(){
+				$("#preview1").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview1").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img2").change(function(){
+				$("#preview2").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview2").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img3").change(function(){
+				$("#preview3").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview3").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
 
         </script>
          

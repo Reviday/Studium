@@ -82,6 +82,15 @@ public class PstudyUpdateServlet extends HttpServlet {
 		 String intro1=mr.getParameter("p_intro1");
 		 String intro2=mr.getParameter("p_intro2");
 		 String imgtitle=mr.getFilesystemName("p_imgtitle");
+			String ori_p_imgtitle=mr.getParameter("ori_p_imgtitle");//파일 삭제용
+			File f=mr.getFile("up_file");//새로들어온 파일 
+			if(f!=null&&f.length()>0) {
+				File deleteFile=new File(saveDir+"\\"+ori_p_imgtitle);
+				boolean result=deleteFile.delete();
+				System.out.println(result);
+			}else {
+				imgtitle=ori_p_imgtitle;
+			}
 		 String img1=mr.getFilesystemName("p_img1");
 		 String img2=mr.getFilesystemName("p_img2");
 		 String img3=mr.getFilesystemName("p_img3");

@@ -14,6 +14,7 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <title>studyAdd</title>
     <style>
@@ -173,7 +174,7 @@
 <body>
 
 
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <table width="100%" border="0" >
         <tr>
             <td align="center" valign="top">
                 <table width="815" border="0" cellspacing="0" cellpadding="0">
@@ -278,23 +279,32 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50 />
+                                                         <div id="preview"> </div>
                                                     </td>
 
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img1" size=50 /></td>
+                                                        <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50 />
+                                                         <div id="preview1"> </div>
+                                                         </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img2" size=50 /></td>
+                                                        <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50 />
+                                                         <div id="preview2"> </div>
+                                                        </td>
+                                                        
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
-                                                    <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img3" size=50 /></td>
+                                                    <td width="76%"  align="left" bgcolor="#FFFFFF">
+                                                        <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=30 />
+                                                        <div id="preview3"> </div>
+                                                       
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
@@ -359,12 +369,75 @@
             </td>
         </tr>
     </table>
+     
     <script>
         $(".time1").timepicker({
             step: 30, //시간간격 : 30분
             timeFormat: "H:i" //시간:분 으로표시
 
         });
+        /*사진 미리보기 기능  */
+		$(function(){
+			$("#p_imgtitle").change(function(){
+				$("#preview").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img1").change(function(){
+				$("#preview1").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview1").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img2").change(function(){
+				$("#preview2").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview2").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+		$(function(){
+			$("#p_img3").change(function(){
+				$("#preview3").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						var img=$("<img>").attr({"src":e.target.result}).css({"width":"100px","height":"100px"});
+						$("#preview3").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+	
     </script>
     <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/star.js"></script>

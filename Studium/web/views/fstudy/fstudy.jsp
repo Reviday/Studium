@@ -64,7 +64,8 @@ body{
          
       </form>
       
-      <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
+      
+      <% if(loginMember!=null&&(loginMember.getMemCode()=='M'||loginMember.getMemCode()=='L')){ %>
       <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();"> </div>
      <%}else{ %>
      	
