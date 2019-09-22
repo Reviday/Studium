@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.studium.madang.model.vo.FreeMadangCmt"%>
 <%@page import="com.studium.madang.model.vo.FreeMadang"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -9,6 +10,9 @@
 	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. kk:mm:ss");
+	
+	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
+	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
 	
 	//댓글은 한 번에 다루는 양이 많으므로 한차례 걸러준다.
 	List<FreeMadangCmt> cmtList = new ArrayList<FreeMadangCmt>();
@@ -237,9 +241,6 @@
 						<div id="tab1C" class="tab_content">
 							<div id="entry361Comment">
 								<div id="comment">
-
-									
-				
 									<!-- } comment-form -->
 									<ol id="comment-list" class="cng-list list-unstyled">
 									<%
@@ -378,152 +379,6 @@
 										}
 									
 									%>
-										<li id="comment9743709" class="has-reply">
-											<div class="rp_general cng-container">
-												<div class="cng-header">
-													<span class="blogicon"></span> <span class="name ie-nanum"><img
-														src="https://sonylove.tistory.com/index.gif"
-														alt="BlogIcon" width="64" height="64"
-														onerror="this.parentNode.removeChild(this)"> <a
-														href="https://sonylove.tistory.com"
-														onclick="return openLinkInNewWindow(this)">강병민</a></span> <span
-														class="timeago dt-published ie-dotum" title="">2016.02.22
-														00:27 <a
-														href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
-														onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
-													</span>
-												</div>
-												<div class="cng-content">
-													<div class="speech">
-														<div class="comm_body">
-															<span>굉장히 어려울줄 알았는데 설명을 쉽게 해주셔서 따라해볼수 있을거 같은데요. <br>
-																유용한 정보 감사합니다. ㅎㅎ
-															</span>
-														</div>
-													</div>
-												</div>
-												<a href="#" onclick="deleteComment(9743709);return false"
-													class="modify" title="수정/삭제"><i
-													class="icon icon-cancel_circle"></i></a>
-												<div class="comm-bottom">
-													<button onclick="fn_ccss();"
-														class="btn-init ie-dotum write">
-														<span class="arrow-symbol dsc_comm">답글달기</span>
-													</button>
-													<table cellspacing="0" class="cminput" id="re_conmment"
-														style="display: none">
-														<tbody>
-															<tr>
-																<td class="i2">
-																	<div class="comm_write_wrap border-sub skin-bgcolor">
-																		<textarea id="comment_text" cols="50" rows="2"
-																			class="textarea m-tcol-c" maxlength="6000"
-																			style="overflow: hidden; line-height: 14px; height: 39px;"
-																			title="댓글입력"></textarea>
-																	</div>
-																</td>
-																<td class="i3">
-
-																	<div class="u_cbox_btn_upload _submitBtn">
-																		<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td colspan="3"></td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-
-
-											<ul class="reply-list list-unstyled">
-
-												<li id="comment9743723">
-													<div class="rp_admin cng-container">
-														<div class="cng-header">
-															<span class="blogicon"></span> <span
-																class="name ie-nanum"><img
-																src="https://cocosoft.kr/index.gif" alt="BlogIcon"
-																width="64" height="64"
-																onerror="this.parentNode.removeChild(this)"> <a
-																href="https://cocosoft.kr"
-																onclick="return openLinkInNewWindow(this)">관리자</a></span> <span
-																class="timeago dt-published ie-dotum" title="">2016.02.22
-																00:38 <a
-																href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
-																onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
-															</span>
-														</div>
-														<div class="cng-content">
-															<div class="speech">
-																<div class="comm_body">
-																	<span> 넵! ㅎㅎ 감사합니다. ㅎㅎ 저도 직접 ㅠ 스크립트나 직접 만들수있으면 더
-																		많은 정보를 알수있을텐데 저도 공개된 소스를 수정하면서 ㅠ 작성하고 있어서.. 시간이 되면
-																		부트스트랩이나 제이쿼리등등을 배워서 꾸미기하는데 활용하고싶네요!ㅎㅎ 요즘은 스킨 꾸미는 재미로
-																		취미생활 다하는 것 같아요 ㅎㅎ</span>
-																</div>
-															</div>
-														</div>
-														<a href="#"
-															onclick="deleteComment(9743723); return false;"
-															class="modify" title="수정/삭제"><i
-															class="icon icon-cancel_circle"></i></a>
-
-														<div class="dropdown">
-															<button class="btn-init" data-toggle="dropdown"
-																aria-expanded="true">
-																<i class="icon icon-more-vert"></i>
-															</button>
-															<ul class="dropdown-menu">
-																<li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
-																<li><a href="#"
-																	onclick="deleteComment(9743723); return false;"
-																	tabindex="-1">수정/삭제</a></li>
-															</ul>
-														</div>
-													</div>
-												</li>
-
-												<li id="comment9743724">
-													<div class="rp_general cng-container">
-														<div class="cng-header">
-															<span class="blogicon"></span> <span
-																class="name ie-nanum"><img
-																src="https://sonylove.tistory.com/index.gif"
-																alt="BlogIcon" width="64" height="64"
-																onerror="this.parentNode.removeChild(this)"> <a
-																href="https://sonylove.tistory.com"
-																onclick="return openLinkInNewWindow(this)">강병민</a></span> <span
-																class="timeago dt-published ie-dotum" title="">2016.02.22
-																00:41 <a
-																href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743724"
-																onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
-															</span>
-														</div>
-														<div class="cng-content">
-															<div class="speech">
-																<div class="comm_body">저도 비슷하다는... 이제 그만 정착하고 싶어요.
-																	ㅠ.ㅠ</div>
-															</div>
-														</div>
-														<div class="dropdown">
-															<button class="btn-init" data-toggle="dropdown"
-																aria-expanded="true"></button>
-															<ul class="dropdown-menu">
-																<li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
-																<li><a href="#"
-																	onclick="deleteComment(9743724); return false;"
-																	tabindex="-1">수정/삭제</a></li>
-															</ul>
-														</div>
-													</div>
-												</li>
-
-											</ul>
-
-										</li>
 									</ol>
 
 								</div>
@@ -536,6 +391,16 @@
 				<div style="display: none;" class="cc_paginate cmt"
 					id="cmt_paginate">
 					<!-- 댓글 페이징 처리 -->
+					<% 
+						//댓글 총 갯수가 30개를 초과한다면 (한 페이지당 30개)
+						//댓글 페이징 처리를 한다.
+						if(totalDate>30) {
+					%>
+							<%@ include file="/views/common/pagination.jsp"%>
+					<%
+						}
+					%>
+					
 				</div>
 
 
@@ -561,9 +426,9 @@
 				<div class="btn btn_upper">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goPrev();"> <img
-							id="upper-arrow"
-							src="<%=request.getContextPath()%>/img/arrow_icon.png"
+						<a href="#" class="m-tcol-c" 
+							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>'"> 
+						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -571,8 +436,8 @@
 				<div class="btn btn_lower">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goList();"> <img id=""
-							src="<%=request.getContextPath()%>/img/list_icon.png"
+						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/freeMadangList?cPage=<%=cPage%>'"> 
+						<img id="goList" src="<%=request.getContextPath()%>/img/list_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -580,9 +445,9 @@
 				<div class="btn">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="goNext();"> <img
-							id="lower-arrow"
-							src="<%=request.getContextPath()%>/img/arrow_icon.png"
+						<a href="#" class="m-tcol-c" 
+							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>'"> 
+							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -594,4 +459,5 @@
 
 	<div class="col-lg-1"></div>
 </section>
+<script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <%@ include file="/views/common/footer.jsp"%>

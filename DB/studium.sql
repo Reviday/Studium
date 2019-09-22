@@ -194,6 +194,19 @@ start with 1
 increment by 1
 maxvalue 999999;
 
+SELECT * FROM 
+( 
+SELECT MADANG_NO, MADANG_TITLE,
+LEAD(MADANG_TITLE,1,'다음글') OVER (ORDER BY MADANG_NO) NEXT_TITLE,
+LAG(MADANG_TITLE,1,'이전글') OVER (ORDER BY MADANG_NO) PRE_TITLE 
+FROM TA_FREE_MADANG 
+) 
+WHERE MADANG_NO=10;
+
+SELECT * FROM (SELECT MADANG_NO, LAG(MADANG_NO,1) OVER(ORDER BY MADANG_NO) PREV, LAG(MADANG_TITLE,1) OVER(ORDER BY MADANG_NO) PREV_TITLE, LEAD(MADANG_NO,1) OVER(ORDER BY MADANG_NO) NEXT, LEAD(MADANG_TITLE,1) OVER(ORDER BY MADANG_NO) NEXT_TITLE FROM TA_FREE_MADANG) WHERE MADANG_NO=1;
+
+
+
 -- 테스트용 더미 데이터(자유마당)
 insert into ta_free_madang values(fboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.1', '테스트 글 입니다.1',sysdate, null, default,default, default, default, default, default);
 insert into ta_free_madang values(fboard_seq.nextval, default, default,'admin@studium.com', '관리자', '테스트 글 입니다.2', '테스트 글 입니다.2',sysdate, null, default,default, default, default, default, default);
@@ -461,6 +474,7 @@ INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, FMADANG_CMT_SEQ.CURRV
 -- 대댓글의 경우 
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 13, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '13')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
+commit;
 /*
 시퀀스 생성은 JDBC로 생성
 
@@ -586,6 +600,7 @@ select * from ta_sidemenu where sm_category='madang' order by sm_order;
 select * from ta_sidemenu where sm_category='madang' order by case when sm_parent is null then sm_order
                                                                    else sm_order
                                                                 end, sm_order; 
+
 
 
 

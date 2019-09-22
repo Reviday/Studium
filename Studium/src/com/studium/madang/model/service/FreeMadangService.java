@@ -1,10 +1,11 @@
 package com.studium.madang.model.service;
 
-import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.studium.madang.model.dao.FreeMadangDao;
 import com.studium.madang.model.vo.FreeMadang;
@@ -34,4 +35,10 @@ public class FreeMadangService {
 		return fm;
 	}
 	
+	public Map<String, FreeMadang> selectPreNext(int madangNo) {
+		Connection conn=getConnection();
+		Map<String, FreeMadang> preNext=dao.selectPreNext(conn, madangNo);
+		close(conn);
+		return preNext;
+	}
 }

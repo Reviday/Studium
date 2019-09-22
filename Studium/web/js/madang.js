@@ -1,0 +1,4 @@
+// madangView 
+function goPrev() {
+		
+};

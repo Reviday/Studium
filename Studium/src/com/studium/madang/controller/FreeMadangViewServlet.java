@@ -2,6 +2,7 @@ package com.studium.madang.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,10 @@ public class FreeMadangViewServlet extends HttpServlet {
 		int no=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		
+		// View에 보여질 글을 가져온다.
 		FreeMadang fm=new FreeMadangService().selectMadang(no);
+		// 이전글/다음글의 no와 title을 가져온다.
+		Map<String, FreeMadang> preNext=new FreeMadangService().selectPreNext(no);
 		
 		//Pagination 
 		FreeMadangCmtService service=new FreeMadangCmtService();
@@ -52,11 +56,13 @@ public class FreeMadangViewServlet extends HttpServlet {
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
+		
 		String view="";
 		if(fm!=null)
 		{
 			view="/views/madang/freeMadangView.jsp";
 			request.setAttribute("fm", fm);
+			request.setAttribute("preNext", preNext);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());

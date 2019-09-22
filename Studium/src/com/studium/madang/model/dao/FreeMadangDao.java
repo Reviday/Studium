@@ -1,5 +1,7 @@
 package com.studium.madang.model.dao;
 
+import static common.template.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,13 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.FreeMadang;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
-import static common.template.JDBCTemplate.close;
 
 public class FreeMadangDao {
 
@@ -122,5 +123,33 @@ public class FreeMadangDao {
 			close(rs);
 			close(pstmt);
 		} return fm;
+	}
+	
+	public Map<String, FreeMadang> selectPreNext(Connection conn, int madangNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map<String, FreeMadang> preNext=new HashMap<String, FreeMadang>();
+		String sql=prop.getProperty("selectPreNext");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				FreeMadang prev=new FreeMadang();
+				prev.setMadangNo(rs.getInt("prev"));
+				prev.setMadangTitle(rs.getString("prev_title"));
+				preNext.put("prev", prev);
+				FreeMadang next=new FreeMadang();
+				next.setMadangNo(rs.getInt("next"));
+				next.setMadangTitle(rs.getString("next_title"));
+				preNext.put("next", next);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return preNext;
 	}
 }
