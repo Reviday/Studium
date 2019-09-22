@@ -2,9 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.studium.member.model.vo.Member"%>
+<%@ page import="com.studium.member.model.vo.MyPurchase"%>
+ <%@ page import="com.studium.category.model.vo.Category,
+				java.util.List"%>
+
 <% 
 	Member m=(Member)request.getAttribute("member");
-
+	List<MyPurchase> list=(List)request.getAttribute("purchaseL");
 %>
  
 <style>
@@ -42,19 +46,17 @@
                             <th>구매한 스터디</th>
                             <th>증빙서류</th>
                         </tr>
+                      <% if(!list.isEmpty()){
+							for(MyPurchase mp:list){%>
                         <tr>
-                            <td>2019.09.13</td>
-                            <td>진행중</td>
-                            <td>강동원과 함께하는 영어회화</td>
-                            <td>x</td>
+                            <td><%=mp.getPurchaseDate() %></td>
+                            <td><%=mp.getPurchaseStatus()%></td>
+                            <td><%=mp.getPurId()%> 이름가져와야함;</td>
+                            <td><%if(mp.getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
                         </tr>
-                        <tr>
-                            <td>2019.08.17</td>
-                            <td>완료</td>
-                            <td>코딩노예와 함께하는 자바스크립트</td>
-                            <td>o</td>
-                        </tr>
-
+                       
+					<%}
+							}%>
                     </table>
                 </div>
                 <div class="payment">

@@ -1,6 +1,7 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyPurchase;
 
 /**
  * Servlet implementation class MypageServlet
@@ -31,8 +33,13 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		Member m=new MemberService().selectNo(memberNo);
+		MemberService ms=new MemberService();
+		Member m=ms.selectNo(memberNo);
+		//구매목록 가지고 오기
+		List<MyPurchase>list=ms.selectPurchase(memberNo);
+		System.out.println("list");
 		request.setAttribute("member", m);
+		request.setAttribute("purchaseL", list);
 		request.getRequestDispatcher("/views/myPage/payment.jsp")
 		.forward(request,response);
 		

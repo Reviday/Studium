@@ -1,14 +1,16 @@
 package com.studium.member.model.service;
 
-import static common.template.JDBCTemplate.getConnection;
-import static common.template.JDBCTemplate.commit;
-import static common.template.JDBCTemplate.rollback;
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.studium.member.model.dao.MemberDao;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyPurchase;
 
 public class MemberService {
 	private MemberDao dao=new MemberDao();
@@ -63,4 +65,20 @@ public class MemberService {
 		return result;
 	
 	}
+	public int changeMyPhoto(String filePath,int no) {
+		Connection conn=getConnection();
+		int result=dao.changeMyPhoto(conn, filePath, no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public List<MyPurchase> selectPurchase(int no) {
+		Connection conn=getConnection();
+		List <MyPurchase> list=dao.selectPurchase(conn, no);
+		close(conn);
+		return list;
+		
+	}
 }
+

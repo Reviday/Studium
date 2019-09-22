@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.studium.category.model.vo.Category,
 				java.util.List"%>
 <% 
@@ -9,7 +10,8 @@
 	List<Category> listB=(List)request.getAttribute("categoryB");
 	
 %>
-<%@ include file="/views/common/header.jsp"%>
+
+<link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
  
 <style>
 .header-background-cover {
@@ -17,8 +19,7 @@
 	background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
-<!-- 폰트어썸-->
-<link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
+
     <!-- 달력 -->
     <link href="<%=request.getContextPath()%>/css/daterangepicker.css" rel="stylesheet" media="all">
     

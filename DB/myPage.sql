@@ -1,6 +1,54 @@
 select * from tab;
 drop table my_dibs;
 drop table my_purchase;
+drop table todo_list;
+drop table ta_member;
+create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
+    mem_no number constraint mem_no_pk primary key, -- 회원넘버(시퀀스넘버로 부여)
+--  mem_userid varchar2(20) constraint mem_userid_nn not null constraint mem_userid_uq unique, -- 회원 ID(必) 
+    mem_email varchar2(30) not null, -- 회원 이메일(추가정보 or 첫 가입시)
+    mem_password varchar2(300) constraint mem_password_nn not null , -- 회원 psssword(必)
+    mem_name varchar2(50) constraint mem_name_nn not null, -- 회원 이름(必)
+    mem_code char(1) constraint mem_code_ck check (mem_code in ('M','T','R','A')), -- 회원등급(Manager, Teacher, Regular, Associate)
+    mem_birth date, -- 회원 생년월일(必)
+    mem_phone varchar2(11), -- 회원 전화번호(없을 경우 집전화/ '-' 없이 입력받는다.),
+    mem_gender char(1) default 'U' constraint mem_gender_ck check (mem_gender in ('M','F','U')), -- 회원 성별(必)(U-Undefined)
+    mem_point number default 0, -- 회원 포인트
+    mem_category1 varchar2(30), -- 회원 선호 카테고리(최대 3개)
+    mem_category2 varchar2(30), 
+    mem_category3 varchar2(30), 
+    
+    -- 집주소 입력 API 사용시, 2~3개 // 없으면 1개만 
+    mem_zipcode varchar2(10), -- 우편번호 (자릿수가 가물해서 10)
+    mem_address1 varchar2(100), -- 회원 주소 앞부분
+    mem_address2 varchar2(100), -- 회원 상세주소
+    -----------------------------
+    
+    -- 이하는 부가정보
+    mem_receive_email char(1) default 'N' constraint mem_receive_email_ck check (mem_receive_email in ('Y','N')), -- 이메일 수신여부(기본값 N)
+    mem_use_note char(1) default 'N' constraint mem_use_note_ck check (mem_use_note in ('Y','N')), -- 쪽지 사용여부(기본값 N)
+    mem_receive_sms char(1) default 'N' constraint mem_receive_sms_ck check (mem_receive_sms in ('Y','N')), -- 문자 수신 여부(기본값 N)
+    mem_open_profile char(1) default 'N' constraint mem_open_profile_ck check (mem_open_profile in ('Y','N')), -- 프로필 공개 여부(기본값 N)
+    mem_denied char(1) default 'N' constraint mem_denied_ck check (mem_denied in ('Y','N','P')), -- 해당 회원 차단 여부(기본값 N/ 영구정지 P) 
+    mem_email_cert char(1) default 'N' constraint mem_email_cert_ck check (mem_email_cert in ('Y','N')), -- 이메일 인증 여부(기본값 N)
+    mem_enroll_datetime date , -- 회원 가입일(시간 포함)
+    mem_enroll_ip varchar2(20), -- 회원 가입 ip(ip 받아오는게 가능하면 넣을까 싶음)
+    mem_lastlogin_datetime date , -- 마지막 접속일 
+    mem_lastlogin_ip varchar2(20), -- 마지막 접속 ip
+    mem_profile_content varchar2(300), -- 자기소개(프로필용, 100자)
+    mem_adminmemo varchar2(1000),   -- 회원에 대한 관리자용 메모
+--  mem_following number default 0, -- 친구수
+--  mem_followed number default 0, -- 회원을 친구로 등록한 회원 수 => 이건 따로 테이블 만들어서 하는게 좋을듯 하다.
+    mem_icon varchar2(1000), -- 회원 아이콘 경로(댓글 사용할때 이미지 정도?, 경로를 어느 정도 범위로 주어야할지 몰라서 1000)
+    mem_photo varchar2(1000), -- 회원 프로필 사진 경로
+    mem_status char(1) default 'Y' constraint mem_status_ck check (mem_status in ('Y','N')), -- 회원 계정 상태
+    mem_withdrawal_date date default null, -- 회원 탈퇴 일시
+    mem_denied_date date default null -- 회원 차단 일시
+);
+
+insert into ta_member values(mem_seq.NEXTVAL,'admin@studium.com','x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==','관리자','M','1990/01/01','','M',99999999,'','','','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','',default,default,default);
+insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','',default,default,default);
+
 
 
 --무료스터디 db
@@ -116,10 +164,11 @@ create sequence seq_my_purchase
 start with 1
 increment by 1;
 --구매테이블 더미데이타
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10001,44,SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10002,44,SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10002,45,SYSDATE,'Y','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10003,46,SYSDATE,'Y','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10021,44,SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10022,44,SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10027,45,SYSDATE,'Y','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,46,SYSDATE,'Y','N');
+
 
 --TODOLIST테이블
 CREATE TABLE TODO_LIST(
@@ -134,7 +183,39 @@ CREATE TABLE TODO_LIST(
     TODO_DATE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT TODO_DATE_STATUS_CK CHECK (TODO_DATE_STATUS IN ('N','Y'))--마감일정이 지났는지에 따른 상태
     
 );
+--payment구매테이블
+
+--PURCHASE테이블
+CREATE TABLE MY_PURCHASE(
+    PUR_ID NUMBER PRIMARY KEY,--구매번호
+    mem_no number constraint PUR_MEM_FK references ta_member(mem_no), -- 회원의 번호
+    PUR_DATETIME DATE CONSTRAINT PUR_DATE_NN NOT NULL,--구매일시
+    PUR_STUDY_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PUR_STUDY_STATUS_CK CHECK (PUR_STUDY_STATUS IN ('N','Y')),--일정상태 완료Y,미완료N
+    SUBMIT_FILE CHAR(1) DEFAULT 'N' CONSTRAINT PUR_SUBMIT_FILE_CK CHECK (SUBMIT_FILE IN ('N','Y'))--마감일정이 지났는지에 따른 상태
+    
+);
+
+SELECT * FROM MY_PURCHASE;
+DROP TABLE MY_PURCHASE;
+
+
+
+
+create table my_purchase(
+    pur_id number primary key,--찜번호
+    mem_no number references ta_member(mem_no), -- 회원 번호
+    p p_no number default null constraint purchase_p_study_fk references p_study(p_no), -- 강사스터디 번호
+    f_no number default null constraint purchase_f_study_fk references f_study(f_no), -- 일반스터디 번호
+    purchase_date date, --구매일시
+    purchase_study_status char(1) default 'n' check(purchase_status in('N','Y')),--구매한 스터디 상태
+    submit_file char(1) default 'n' check(submit_file in('N','Y'))--제출서류발급유무
+);
+
+select * from p_study;
+select * from f_study;
 select * from ta_member;
+
+
 update ta_member set mem_email='aaa@naver.com' where mem_no=10001;
 select * from tab;
 
@@ -255,8 +336,12 @@ join category_B using(category_b_id)
 
 group by category_m_id;
 
+insert into ta_member values(mem_seq.NEXTVAL,'aaa@naver.com','x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==','테스트','R','1990/01/01','','F',99999999,'','','','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','',default,default,default);
+
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==' where mem_email='aaa@naver.com';
 commit;
 
 
 update ta_member set mem_birth='2019-09-10';
+select * from ta_member;
+

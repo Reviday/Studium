@@ -1,5 +1,7 @@
 package com.studium.member.model.dao;
 
+import static common.template.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,10 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.studium.member.model.vo.Member;
-import static common.template.JDBCTemplate.close;
+import com.studium.member.model.vo.MyPurchase;
 
 public class MemberDao {
 	
@@ -256,5 +260,54 @@ public class MemberDao {
 			
 		} return result;
 		
+	}
+	public int changeMyPhoto(Connection conn, String filePath, int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql= prop.getProperty("changeMyPhoto");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, filePath);//mem_photo
+			pstmt.setInt(2, no);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		} return result;
+		
+	}
+	public List<MyPurchase> selectPurchase(Connection conn, int no){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectPurchase");
+		List<MyPurchase> list= new ArrayList<MyPurchase>();
+		MyPurchase mp=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
+				mp=new MyPurchase();
+				mp.setPurId(rs.getInt("pur_id"));
+				mp.setMemberNo(rs.getInt("mem_no"));
+				mp.setpNo(rs.getInt("p_no"));
+				mp.setPurchaseDate(rs.getDate("purchase_date"));
+				mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
+				mp.setSubmitFile(rs.getString("submit_file").charAt(0));}
+				list.add(mp);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return list;
 	}
 }

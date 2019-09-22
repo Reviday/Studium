@@ -10,7 +10,7 @@
 	List<Category> listB=(List)request.getAttribute("categoryB");
 
 %>
-
+<link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
 <style>
 .header-background-cover {
 	height: 95px;
@@ -36,16 +36,22 @@
                 <div class="myName">
                     <blockquote class="testimonial">
                         <div class="d-flex author">
-                            <img src="<%=request.getContextPath()%>/img/3.jpg" alt="" class="mr-4">
+                       <%--  <%if(m.getMemPhoto()!=null) { %>
+                            <img src="<%=request.getContextPath()%>/<%=m.getMemPhoto()%>" alt="" id="myProfile" class="mr-4">
+                           <%}else{ %> --%>
+                            <img src="<%=request.getContextPath()%>/img/default_image.png" alt="" id="myProfile" class="mr-4">
+                           <%-- <%} %> --%>
                             <div class="author-info">
                                 <div>
                                     <h3 class="float-left ">
                                         <%=m.getMemName()%>
                                     </h3>
-                                    <div class="btn btn-sm btn-change" style="border:1px solid">사진변경</div>
-                                </div>
-
-
+                                    <form action="<%=request.getContextPath() %>/myPage/changeMyPhoto" id="frm_profile_img" method="post" enctype="multipart/form-data">
+										<input type="hidden" value="<%=m.getMemNo()%>" name="no"> 
+										<input type="file" id="file" class="fileinput" name="myPhoto" accept="image/png,image/jpg"/>
+											<label for="file" class="btn-2" onClick="">사진변경</label>
+										<input type="button" id="changePhoto" class="changePhoto" value="사진변경완료"/>
+									</form>
                                 <div style="margin-top:50px">
                                     스타디움은 사람들과 얼굴을 마주하고 오프라인에서 만남을 가지는 모임입니다. 사진을 통해 회원님에 대해 알려주세요. :)
                                 </div>
@@ -70,10 +76,10 @@
                              <%} %>
                         </div>
                         <div class="col-7">
-                            <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="update-member" method="post">
+                            <form action="<%=request.getContextPath() %>/myPage/modifyMember" id="changePhoto" method="post">
                                 <div class="inputForm">
                                     <input type="text" name="name" id="name" class="myI-1-f" autocomplete=off value="<%=m.getMemName()%>" readonly>
-                                    <input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
+                                    <input type="hidden" name="loginMember" value="<%=m.getMemUserEmail()%>">
                                 </div>
                                 <div class="inputForm">
                                     <input type="email" name="email" id="email" class="myI-1-f" autocomplete=off value="<%=m.getMemUserEmail()%>" readonly>        
@@ -155,6 +161,37 @@
 
 
     <script>
+    //업로드 파일체인지가 됬을경우 실행되는 이벤트  form태그에 fileProfile은 hidden으로 넣어줌
+ $(function() {   
+    $("input[name='myPhoto']").change(function(e){
+       console.log('스크립트 들어옴')
+        $( "#frm_profile_img" ).submit();
+        var filePath = document.getElementById('file');
+       
+        var fileData = new FormData(frm);
+     
+        // ajax
+        <%-- $.ajax({
+            type:'POST',
+            url:'<%=request.getContextPath()%>/myPage/changeMyPhoto',
+            data:fileData,
+            processData: false,
+            contentType: false,
+            success : function(data, textStatus, xhr) {
+                console.log('success');
+                $('#myProfile').attr('src',filePath);
+            },
+            error : function(request,status,error) {  
+               alert("code:"+request.status+"\n"+"error:"+error);
+            }
+        }); --%>
+    })
+});
+    
+    
+    
+    
+    
         function sample6_execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -296,6 +333,7 @@
         	return true;
         	
         }
+     
       </script>
 </section>
 
