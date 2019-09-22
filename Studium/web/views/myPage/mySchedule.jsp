@@ -31,12 +31,20 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<style>
+.header-background-cover {
+	height: 95px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+</style>
 </head>
 <%@ include file="../../views/common/header.jsp" %> 
 
 <body>
-
+	<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
     <div class="container">
 
         <!-- 일자 클릭시 메뉴오픈 -->
@@ -211,4 +219,4 @@
 </body>
 
 </html>
-<%-- <%@ include file="/views/common/footer.jsp"%> --%>
+ <%@ include file="/views/common/footer.jsp"%> 
