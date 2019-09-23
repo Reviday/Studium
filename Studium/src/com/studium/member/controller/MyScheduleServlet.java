@@ -1,6 +1,7 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
+import com.studium.mypage.model.service.MyDibsService;
+import com.studium.mypage.model.vo.MyCalendar;
 
 /**
  * Servlet implementation class MypageServlet
@@ -32,12 +35,12 @@ public class MyScheduleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
+		List<MyCalendar> mlist = new MyDibsService().selectCalendar(memberNo);
 		request.setAttribute("member", m);
+		request.setAttribute("mlist", mlist);
 		request.getRequestDispatcher("/views/myPage/mySchedule.jsp")
 		.forward(request,response);
-		
-		
-	
+
 	}
 
 	/**

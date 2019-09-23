@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.studium.member.model.dao.MemberDao;
@@ -92,8 +94,8 @@ public class MyDibsDao {
 			pstmt.setInt(1, m.getMemNo());
 			pstmt.setString(2, m.getMemberName());
 			pstmt.setString(3, m.getEditTitle());
-			pstmt.setString(4, m.getEditStart());
-			pstmt.setString(5, m.getEditEnd());
+			pstmt.setDate(4, (Date) m.getEditStart());
+			pstmt.setDate(5, (Date) m.getEditEnd());
 			pstmt.setString(6, m.getEditcolor());
 			pstmt.setString(7, m.getEditdesc());
 			result=pstmt.executeUpdate();
@@ -102,6 +104,34 @@ public class MyDibsDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public List<MyCalendar> selectCalendar(Connection conn,int memberNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MyCalendar> list = new ArrayList();
+		String sql=prop.getProperty("selectCalendar");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MyCalendar m=new MyCalendar();
+				m.setEditNo(rs.getInt("edit_no"));
+				m.setMemNo(rs.getInt("mem_no"));
+				m.setMemberName(rs.getString("mem_name"));
+				m.setEditTitle(rs.getString("edit_title"));
+				m.setEditStart(rs.getDate("edit_start"));
+				m.setEditEnd(rs.getDate("edit_end"));
+				m.setEditcolor(rs.getString("edit_color"));
+				m.setEditdesc(rs.getString("edit_desc"));
+				list.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 	
 

@@ -5,6 +5,7 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.studium.mypage.model.dao.MyDibsDao;
 import com.studium.mypage.model.vo.MyCalendar;
@@ -33,6 +34,12 @@ public class MyDibsService {
 		else {rollback(conn);}
 		close(conn);
 		return result;
+	}
+	public List<MyCalendar> selectCalendar(int memberNo){
+		Connection conn=getConnection();
+		List<MyCalendar> list=dao.selectCalendar(conn,memberNo);
+		close(conn);
+		return list;
 	}
 
 }

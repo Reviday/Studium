@@ -1,0 +1,202 @@
+body {
+    font-family: "Nanum Gothic";
+}
+
+a {
+    text-decoration: none;
+}
+
+.picture {
+    position: relative;
+}
+
+.picture img {
+    height: 480px;
+}
+
+.picture > div {
+    color: white;
+    font-size: 45px;
+    position: absolute;
+    text-align: left;
+    top: 100px;
+    left: 280px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.picture > a {
+    display: block;
+    margin-top: 3pc;
+    width: 15pc;
+    height: 72px;
+    line-height: 74px;
+    text-align: center;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #fff;
+    background: #4285f4;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+    border-radius: 4px;
+    position: absolute;
+    top: 230px;
+    left: 280px;
+}
+
+.picture > p {
+    position: absolute;
+    top: 365px;
+    left: 280px;
+    color: hsla(0,0%,100%,.5);
+    font-size: 10pt;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.marginAuto {
+    width: 960px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.marginAuto > p {
+    font-size: 36px;
+    margin: 100px 0;
+    font-weight: bold;
+}
+
+.positive {
+    display: flex;
+    width: 100%;
+}
+
+.picture1 {
+    margin: 0 auto;
+    width: 10pc;
+    height: 115px;
+    background: transparent url(https://cdn.studysearch.co.kr/static/images/host_apply/assets.dc3c660c8e44.png);
+}
+
+.picture2 {
+    margin: 0 auto;
+    width: 10pc;
+    height: 115px;
+    background: transparent url(https://cdn.studysearch.co.kr/static/images/host_apply/assets.dc3c660c8e44.png)-196px 0;
+}
+
+.picture3 {
+    margin: 0 auto;
+    width: 7pc;
+    height: 115px;
+    background: transparent url(https://cdn.studysearch.co.kr/static/images/host_apply/assets.dc3c660c8e44.png)-392px 0;
+}
+
+.positive1 {
+    width: 33.3%;
+}
+
+.positive1 > div:nth-of-type(2) {
+    font-size: 23px;
+    margin: 40px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.positive1 > div:nth-of-type(3) {
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+.positive2 {
+    margin-left: 100px;
+    width: 33.3%;
+}
+
+.positive2 > div:nth-of-type(2) {
+    font-size: 23px;
+    margin: 40px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.positive2 > div:nth-of-type(3) {
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+.positive3 {
+    width: 33.3%;
+    margin-left: 100px;
+}
+
+.positive3 > div:nth-of-type(2) {
+    font-size: 23px;
+    margin: 40px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.positive3 > div:nth-of-type(3) {
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+.rine {
+    width: 940px;
+    border: 0.1px solid lightgray;
+    margin: auto;
+    margin: 120px 0;
+    height: 1px;
+}
+
+.english {
+    display: flex;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.left {
+    width: 50%;
+}
+
+.left div:nth-of-type(1) {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.left div:nth-of-type(2) {
+    margin-top: 50px;
+    text-align: left;
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.left div:nth-of-type(2) span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.left div:nth-of-type(2) a {
+    color: #4285f4;
+    text-decoration: underline;
+}
+
+.left div:nth-of-type(3) {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 19px;
+    line-height: 1.6;
+    color: #a0a0a0;
+}
+
+.left div:nth-of-type(3) a {
+    color: #4285f4;
+    text-decoration: underline;
+}

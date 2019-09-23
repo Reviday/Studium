@@ -2,8 +2,6 @@ package com.studium.mypage.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -38,22 +36,41 @@ public class MyCalenderAddEvent extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JSONObject obj = new JSONObject();
+		MyCalendar m = new MyCalendar();
+		
 		System.out.println("여기 넘어옴 ??");
 		String title=request.getParameter("edit-title");
-		String editStart = (request.getParameter("edit-start"));
-		String editEnd =(request.getParameter("edit-end"));
+		java.sql.Date datestart = java.sql.Date.valueOf(request.getParameter("p_datestart"));
+		java.sql.Date dateend = java.sql.Date.valueOf(request.getParameter("p_dateend"));
+		System.out.println(datestart);
+		System.out.println(dateend);
+		/*
+		 * java.util.Date editStart; try { editStart = new
+		 * java.text.SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter(
+		 * "edit-start")); java.sql.Date sqlDateStart = new
+		 * java.sql.Date(editStart.getTime()); System.out.println(editStart+"형식이 어캐되냐");
+		 * System.out.println(sqlDateStart); m.setEditStart(sqlDateStart); } catch
+		 * (ParseException e) { // TODO Auto-generated catch block e.printStackTrace();
+		 * } java.util.Date editEnd; try { editEnd = new
+		 * java.text.SimpleDateFormat("yyyy-MM-DD").parse(request.getParameter(
+		 * "edit-end")); java.sql.Date sqlDateEnd = new
+		 * java.sql.Date(editEnd.getTime()); System.out.println(sqlDateEnd);
+		 * m.setEditEnd(sqlDateEnd); } catch (ParseException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); }
+		 */
 		String descsciption=request.getParameter("edit-desc");
 		String backgroundColor=request.getParameter("color");
 		System.out.println(title+descsciption+backgroundColor);
 		int mNo=Integer.parseInt(request.getParameter("mNo"));
 		String mName=request.getParameter("mName");
 		MyDibsService service =new MyDibsService();
-		MyCalendar m = new MyCalendar();
+		m.setEditStart(datestart);
 		m.setMemNo(mNo);
 		m.setMemberName(mName);
 		m.setEditTitle(title);
-		m.setEditStart(editStart);
-		m.setEditEnd(editEnd);
+		m.setEditStart(datestart);
+		m.setEditEnd(dateend);
+		
 		m.setEditcolor(backgroundColor);
 		m.setEditdesc(descsciption);
 		int result =service.insertCalendar(m);

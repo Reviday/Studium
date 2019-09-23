@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="com.studium.member.model.vo.Member"%>
+<%@ page import="com.studium.member.model.vo.Member,com.studium.mypage.model.vo.MyCalendar,java.util.*"%>
 <% 
 	Member m=(Member)request.getAttribute("member");
-
+	List<MyCalendar> mlist =(List)request.getAttribute("mlist");
 %>
- 
 <style>
 .header-background-cover {
 	height: 95px;
@@ -27,10 +26,58 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
+
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/calendar.css"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+	<script>
+	   $(function () {
+
+
+           //오늘 날짜를 출력
+           $("#today").text(new Date().toLocaleDateString());
+
+           //datepicker 한국어로 사용하기 위한 언어설정
+           $.datepicker.setDefaults($.datepicker.regional['ko']);
+
+           // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
+           // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
+
+           //시작일.
+           $('#fromDate').datepicker({
+               showOn: "both", // 달력을 표시할 타이밍 (both: focus or button)
+               buttonImage: "../img/favicon.ico", // 버튼 이미지
+               buttonImageOnly: true, // 버튼 이미지만 표시할지 여부
+               buttonText: "날짜선택", // 버튼의 대체 텍스트
+               dateFormat: "yy-mm-dd", // 날짜의 형식
+               changeMonth: true, // 월을 이동하기 위한 선택상자 표시여부
+               minDate: 0, // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+               onClose: function (selectedDate) {
+                   // 시작일(fromDate) datepicker가 닫힐때
+                   // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                   $("#toDate").datepicker("option", "minDate", selectedDate);
+               }
+           });
+
+           //종료일
+           $('#toDate').datepicker({
+               showOn: "both",
+               buttonImage: "../img/favicon.ico",
+               buttonImageOnly: true,
+               buttonText: "날짜선택",
+               dateFormat: "yy-mm-dd",
+               changeMonth: true,
+               minDate: 0, // 오늘 이전 날짜 선택 불가
+               onClose: function (selectedDate) {
+                   // 종료일(toDate) datepicker가 닫힐때
+                   // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+                   $("#fromDate").datepicker("option", "maxDate", selectedDate);
+               }
+           });
+       });
+   </script>
+	</script>
 <style>
 .header-background-cover {
 	height: 95px;
@@ -45,7 +92,7 @@
 		<div class="header-background-cover">
       </div>
     </div>
-    <div class="container">
+    <div class="container" style="margin-top:24px;">
 
         <!-- 일자 클릭시 메뉴오픈 -->
         <div id="contextMenu" class="dropdown clearfix">
@@ -92,13 +139,13 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-start">시작</label>
-                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
+                               <input type="text" name="p_datestart" id="fromDate"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-end">끝</label>
-                                <input class="inputModal" type="text" name="edit-end" id="edit-end" />
+                               <input type="text" name="p_dateend" id="toDate"/>
                             </div>
                         </div>
                         <input type="hidden" name="edit-type" id="edit-type" value="카테고리1">
@@ -176,13 +223,17 @@
     <script src="<%=request.getContextPath() %>/vendor/js/fullcalendar.min.js"></script>
     <script src="<%=request.getContextPath() %>/vendor/js/ko.js"></script>
     <script src="<%=request.getContextPath() %>/vendor/js/select2.min.js"></script>
-    <script src="<%=request.getContextPath() %>/vendor/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="<%=request.getContextPath() %>/vendor/js/bootstrap-datetimepicker.min.js"></script> 
     <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
+    	        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script> 
    <script src="<%=request.getContextPath() %>/js/addEvent.js"></script> 
 	<script>
-
+ 
 	function addevent(){
-
+	
     var id= $("#mNo").val();
     var title= $("#edit-title").val();
     var start= $("#edit-start").val();
@@ -193,6 +244,7 @@
     var params = jQuery("#edit_form").serialize();
     var eventModal =$("#eventModal");
      //새로운 일정 저장
+
      $.ajax({
          type: "post",
          url: "<%=request.getContextPath()%>/MyCalender",
@@ -208,11 +260,12 @@
      		
      });
 	}
+
 	
 	
 	</script>
 	
-	
+
 
     <script src="<%=request.getContextPath() %>/js/editEvent.js"></script>
     <script src="<%=request.getContextPath() %>/js/etcSetting.js"></script>

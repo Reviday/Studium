@@ -74,14 +74,12 @@ var newEvent = function (start, end, eventType) {
             //render시 날짜표기수정
             eventData.end = moment(eventData.end).add(1, 'days').format('YYYY-MM-DD');
             //DB에 넣을때(선택)
-            realEndDay = moment(eventData.end).format('YYYY-MM-DD');
+            realEndDay = moment(eventData.end).format('yyyy-mm-dd');
 
             eventData.allDay = true;
         }
 
-        $("#calendar").fullCalendar('renderEvent', eventData, true);
-        eventModal.find('input, textarea').val('');
-        editAllDay.prop('checked', false);
+
         eventModal.modal('hide');
         
      

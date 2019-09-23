@@ -1,8 +1,7 @@
 package com.studium.mypage.model.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
-
-import com.sun.jmx.snmp.Timestamp;
 
 public class MyCalendar {
 	
@@ -10,8 +9,8 @@ public class MyCalendar {
 		private int memNo;
 		private String memberName;
 		private String editTitle;
-		private String editStart;
-		private String editEnd;
+		private Date editStart;
+		private Date editEnd;
 		private String editcolor;
 		private String editdesc;
 		
@@ -21,7 +20,7 @@ public class MyCalendar {
 		}
 
 
-		public MyCalendar(int editNo, int memNo, String memberName, String editTitle, String editStart, String editEnd,
+		public MyCalendar(int editNo, int memNo, String memberName, String editTitle, Date editStart, Date editEnd,
 				String editcolor, String editdesc) {
 			super();
 			this.editNo = editNo;
@@ -75,22 +74,22 @@ public class MyCalendar {
 		}
 
 
-		public String getEditStart() {
+		public Date getEditStart() {
 			return editStart;
 		}
 
 
-		public void setEditStart(String editStart) {
+		public void setEditStart(Date editStart) {
 			this.editStart = editStart;
 		}
 
 
-		public String getEditEnd() {
+		public Date getEditEnd() {
 			return editEnd;
 		}
 
 
-		public void setEditEnd(String editEnd) {
+		public void setEditEnd(Date editEnd) {
 			this.editEnd = editEnd;
 		}
 
