@@ -43,7 +43,7 @@ public class AdminInqueryMemberSearchServlet extends HttpServlet {
 		
 		String grade = request.getParameter("gradeList");
 		String status = request.getParameter("statusList");
-		
+
 		AdminService service=new AdminService();
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminInquerySearch"; // 패턴을 넘겨주기 위한 변수
@@ -62,7 +62,7 @@ public class AdminInqueryMemberSearchServlet extends HttpServlet {
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("grade", grade);
 		request.setAttribute("status", status);
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
+		request.getRequestDispatcher("/views/admin/commonInquery.jsp")
 				.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";

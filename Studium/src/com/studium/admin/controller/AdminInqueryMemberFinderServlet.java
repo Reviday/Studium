@@ -69,7 +69,7 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 			request.setAttribute("elements", elements);
 			
-			request.getRequestDispatcher("/views/admin/memberInquery.jsp")
+			request.getRequestDispatcher("/views/admin/commonInquery.jsp")
 					.forward(request,response);
 		}else {
 		
@@ -89,7 +89,7 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 		request.setAttribute("elements", elements);
 		
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
+		request.getRequestDispatcher("/views/admin/commonInquery.jsp")
 				.forward(request,response);
 			}
 		}else {

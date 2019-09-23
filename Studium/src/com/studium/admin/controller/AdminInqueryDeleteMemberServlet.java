@@ -51,36 +51,27 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 		
 		AdminService service = new AdminService();
 		int totalData=service.selectCountMemberSearch(grade, status);
-		String URLmapping="/adminInquerySearch"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping="/adminDeleteMember"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		pt.setQueryString("gradeList", grade);
 		pt.setQueryString("statusList", status);
 		List<Member> list=service.selectMemberSearchList(pt.getcPage(),pt.getNumPerPage(), grade, status);
 		
-		JSONObject obj = new JSONObject();
-		obj.put("list",list);
-		obj.put("cPage", pt.getcPage());
-		obj.put("pageBar", pt.getPageBar());
-		obj.put("numPerPage", pt.getNumPerPage());
-		obj.put("grade", grade);
-		obj.put("status", status);
-		System.out.println(obj);
-		String a = "안받아져";
-		response.setContentType("application/x-json; charset=UTF-8");
+
+
 		
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 		request.setAttribute("elements", elements);
 		
-		response.getWriter().print(obj);
-		response.getWriter().print(a);
-//		request.setAttribute("list",list);
-//		request.setAttribute("cPage", pt.getcPage());
-//		request.setAttribute("pageBar", pt.getPageBar());
-//		request.setAttribute("numPerPage", pt.getNumPerPage());
-//		request.setAttribute("grade", grade);
-//		request.setAttribute("status", status);
-//		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
-//				.forward(request,response);
+
+		request.setAttribute("list",list);
+		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("pageBar", pt.getPageBar());
+		request.setAttribute("numPerPage", pt.getNumPerPage());
+		request.setAttribute("grade", grade);
+	    request.setAttribute("status", status);
+		request.getRequestDispatcher("/views/admin/commonInquery.jsp")
+				.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";

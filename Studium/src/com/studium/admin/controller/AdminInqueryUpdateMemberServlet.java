@@ -62,7 +62,7 @@ public class AdminInqueryUpdateMemberServlet extends HttpServlet {
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
-		request.getRequestDispatcher("/views/admin/memberInquery.jsp")
+		request.getRequestDispatcher("/views/admin/commonInquery.jsp")
 				.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";

@@ -42,8 +42,6 @@ public class AdminPointPageShowServlet extends HttpServlet {
 		
 		List<PointShow> pointShow = service.pointShow(memNo);
 
-		System.out.println(pointShow);
-
 		response.setContentType("application/json;charset=UTF-8");
 
 		new Gson().toJson(pointShow,response.getWriter());
