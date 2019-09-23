@@ -13,14 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.vo.MadangCmt;
+import com.studium.member.model.service.MemberService;
 
-public class FreeMadangCmtDao {
+public class MadangCmtDao {
 	
 private Properties prop=new Properties();
 	
-	public FreeMadangCmtDao() {
-		String path=FreeMadangDao.class.getResource("/sql/madang/freemadangcmt-query.properties").getPath();
+	public MadangCmtDao() {
+		String path=FreeMadangDao.class.getResource("/sql/madang/madangcmt-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (FileNotFoundException e) {
@@ -53,11 +54,12 @@ private Properties prop=new Properties();
 		} return result;
 	}
 	
-	public List<FreeMadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
+	public List<MadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<FreeMadangCmt> list = new ArrayList<FreeMadangCmt>();
+		List<MadangCmt> list = new ArrayList<MadangCmt>();
 		String sql=prop.getProperty("selectCmtList");
+		MemberService service= new MemberService();
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -66,7 +68,7 @@ private Properties prop=new Properties();
 			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				FreeMadangCmt cmt=new FreeMadangCmt();
+				MadangCmt cmt=new MadangCmt();
 				cmt.setCmtNo(rs.getInt("cmt_no"));
 				cmt.setCmtGroup(rs.getInt("cmt_group"));
 				cmt.setCmtSort(rs.getInt("cmt_sort"));
@@ -83,6 +85,7 @@ private Properties prop=new Properties();
 				cmt.setStatus(rs.getString("cmt_status").charAt(0));
 				cmt.setCmtBlame(rs.getInt("cmt_blame"));
 				cmt.setCmtBlameAdmin(rs.getString("cmt_blame_admin").charAt(0));
+				cmt.setProfilePath(service.selectNo(cmt.getCmtWriterUid()).getMemPhoto());
 				list.add(cmt);
 			}
 		} catch(SQLException e) {

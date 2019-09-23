@@ -1,5 +1,6 @@
+<%@page import="java.util.Locale"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.studium.madang.model.vo.FreeMadangCmt"%>
+<%@page import="com.studium.madang.model.vo.MadangCmt"%>
 <%@page import="com.studium.madang.model.vo.FreeMadang"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,19 +8,19 @@
 <%
 	FreeMadang fm = (FreeMadang) request.getAttribute("fm");
 	int cPage = (int)request.getAttribute("cPage");
-	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
+	List<MadangCmt> list = (List<MadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
-	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. kk:mm:ss");
+	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 	String REMOTE_ADDR = request.getRemoteAddr();
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
 	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
 	
 	//댓글은 한 번에 다루는 양이 많으므로 한차례 걸러준다.
-	List<FreeMadangCmt> cmtList = new ArrayList<FreeMadangCmt>();
-	List<FreeMadangCmt> replyList = new ArrayList<FreeMadangCmt>();
+	List<MadangCmt> cmtList = new ArrayList<MadangCmt>();
+	List<MadangCmt> replyList = new ArrayList<MadangCmt>();
 	if(!list.isEmpty()) {
-		for(FreeMadangCmt fmc : list ) {
+		for(MadangCmt fmc : list ) {
 			//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
 			if(fmc.getCmtSort()==0) {
 				cmtList.add(fmc);
@@ -117,7 +118,7 @@
 											<tbody>
 												<tr>
 													<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
-															<img src="img/없는파일일경우?" width="24" height="24"
+															<img src="<%=request.getContextPath()%>/upload/myPage/<%=fm.getProfilePath()%>" width="24" height="24"
 															onerror="this.onerror='';this.src='<%=request.getContextPath()%>/img/nonProfile.png'">
 													</a></td>
 													<td class="p-nick">
@@ -231,7 +232,25 @@
 									<td class="i3">
 
 										<div class="u_cbox_btn_upload _submitBtn">
-											<a href="#" class="u_cbox_txt_upload _submitCmt" onclick="fn_addComment('<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>')">등록</a>
+											
+											<%
+												if(loginMember!=null) {
+													//로그인 상태일때 	
+													%>
+														<a href="#" class="u_cbox_txt_upload _submitCmt" 
+														onclick="fn_addComment('<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>; return false;')">
+														등록</a>													
+													<%
+												} else {
+													//비로그인 상태일때
+													%>
+														<a href="#" class="u_cbox_txt_upload _submitCmt" 
+														onclick="fn_needLogin(); return false;">
+														등록</a>	
+													<%
+												}
+											%>
+											
 										</div>
 									</td>
 								</tr>
@@ -249,7 +268,7 @@
 									<%
 										if(!list.isEmpty()) {
 											//부모 댓글 처리 
-											for(FreeMadangCmt cmt : cmtList) {
+											for(MadangCmt cmt : cmtList) {
 												//부모 댓글 생성
 												%>
 													<li id="comment<%=cmt.getCmtNo() %>" class="<%=cmt.getCmtReply()=='Y'?"has-reply":""%>">
@@ -257,7 +276,7 @@
 															<div class="cng-header">
 																<span class="blogicon"></span>
 																<span class="name ie-nanum">
-																	<img src="https://sonylove.tistory.com/index.gif"
+																	<img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>"
 																		alt="BlogIcon" width="64" height="64"
 																		onerror="this.parentNode.removeChild(this)">
 																	<a href="https://sonylove.tistory.com"
@@ -266,7 +285,7 @@
 																	</a>
 																</span>
 																<span class="timeago dt-published ie-dotum" title="">
-																	<%=cmt.getCmtRegisterDatetime()%>
+																	<%=format.format(cmt.getCmtRegisterDatetime())%>
 																</span>
 																<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
 																	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
@@ -275,7 +294,7 @@
 																<div class="speech">
 																	<div class="comm_body">
 																		<span>
-																			<%=cmt.getCmtContent() %>
+																			<%=cmt.getCmtContent()%>
 																		</span>
 																	</div>
 																</div>
@@ -321,7 +340,7 @@
 														%>
 																	<ul class="reply-list list-unstyled">
 																<%
-																for(FreeMadangCmt reply : replyList) {
+																for(MadangCmt reply : replyList) {
 																	//부모댓글과 같은 group에 있는 대댓글만 불러온다.
 																	if(cmt.getCmtGroup()==reply.getCmtGroup()) {
 																		//대댓글 생성
@@ -331,7 +350,7 @@
 																						<div class="cng-header">
 																							<span class="blogicon"></span> 
 																							<span class="name ie-nanum">
-																								<img src="https://cocosoft.kr/index.gif" alt="BlogIcon"
+																								<img src="<%=request.getContextPath()%>/upload/myPage/<%=reply.getProfilePath()%>" alt="BlogIcon"
 																									width="64" height="64"
 																									onerror="this.parentNode.removeChild(this)"> 
 																								<a href="https://cocosoft.kr"

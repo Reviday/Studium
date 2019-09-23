@@ -19,10 +19,13 @@ function fn_writeComment(cmtNo) {
 	}
 };
 
-function fn_addComment(REMOTE_ADDR, madangNo) {
+function fn_needLogin() {
+	alert("로그인 후 이용바랍니다.");
+}
+
+function fn_addComment(REMOTE_ADDR, madangNo, memberNo, memEmail, memName) {
 	var commentArea=document.getElementById('comment_text');
-	console.log(commentArea.value);
 	var path = window.location.pathname;
-	console.log(REMOTE_ADDR);
-	//location.href=path+"/madang/addComment?madangNo="+ madangNo + "&content="+commentArea.value;
+	location.href=path+"/madang/addComment?madangNo="+ madangNo + "&memberNo=" + madangNo 
+	+ "&memEmail=" + memEmail + + "&memName=" + memName + "&content=" + commentArea.value + "&REMOTE_ADDR=" + REMOTE_ADDR;
 };

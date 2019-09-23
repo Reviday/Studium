@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.member.model.service.MemberService;
 
 public class FreeMadangDao {
 
@@ -69,6 +70,7 @@ public class FreeMadangDao {
 				fm.setMadangNo(rs.getInt("madang_no"));
 				fm.setMadangParent(rs.getInt("madang_parent"));
 				fm.setMadangOrder(rs.getInt("madang_order"));
+				fm.setMadangWriterUid(rs.getInt("madang_writer_uid"));
 				fm.setMadangWriterEmail(rs.getString("madang_writer_email"));
 				fm.setMadangWriterName(rs.getString("madang_writer_name"));
 				fm.setMadangTitle(rs.getString("madang_title"));
@@ -95,6 +97,7 @@ public class FreeMadangDao {
 		ResultSet rs=null;
 		FreeMadang fm=null;
 		String sql=prop.getProperty("selectMadang");
+		MemberService service= new MemberService();
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -105,6 +108,7 @@ public class FreeMadangDao {
 				fm.setMadangNo(rs.getInt("madang_no"));
 				fm.setMadangParent(rs.getInt("madang_parent"));
 				fm.setMadangOrder(rs.getInt("madang_order"));
+				fm.setMadangWriterUid(rs.getInt("madang_writer_uid"));
 				fm.setMadangWriterEmail(rs.getString("madang_writer_email"));
 				fm.setMadangWriterName(rs.getString("madang_writer_name"));
 				fm.setMadangTitle(rs.getString("madang_title"));
@@ -116,6 +120,7 @@ public class FreeMadangDao {
 				fm.setMadangReadCount(rs.getInt("madang_read_count"));
 				fm.setMadangFilePresence(rs.getString("madang_file_presence").charAt(0));
 				fm.setMadangImgPresence(rs.getString("madang_img_presence").charAt(0));
+				fm.setProfilePath(service.selectNo(fm.getMadangWriterUid()).getMemPhoto());
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
