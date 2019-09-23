@@ -46,9 +46,8 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 
 		
 		String root=getServletContext().getRealPath("/");
-//		String s=request.getContextPath();
-
-		 String saveDir=root+"\\upload\\myPage"; 
+//		String s=request.getContextPath();/////
+		String saveDir=root+"\\upload\\myPage"; 
 		int maxSize=1024*1024*1024; //1GB
 		  File isDir = new File(saveDir);
 		    if(!isDir.isDirectory()){

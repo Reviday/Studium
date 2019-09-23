@@ -293,16 +293,21 @@ public class MemberDao {
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
 				mp=new MyPurchase();
 				mp.setPurId(rs.getInt("pur_id"));
-				mp.setMemberNo(rs.getInt("mem_no"));
+				mp.setMemNo(rs.getInt("mem_no"));
 				mp.setpNo(rs.getInt("p_no"));
+				mp.setpTitle(rs.getString("p_title"));
 				mp.setPurchaseDate(rs.getDate("purchase_date"));
+				mp.setPurchaseCancelStatus(rs.getString("purchase_status").charAt(0));
+				mp.setCancelDate(rs.getDate("cancel_date"));
 				mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
-				mp.setSubmitFile(rs.getString("submit_file").charAt(0));}
+				mp.setSubmitFile(rs.getString("submit_file").charAt(0));
+				
 				list.add(mp);
+				}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

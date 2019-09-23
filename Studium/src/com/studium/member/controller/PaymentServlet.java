@@ -36,8 +36,9 @@ public class PaymentServlet extends HttpServlet {
 		MemberService ms=new MemberService();
 		Member m=ms.selectNo(memberNo);
 		//구매목록 가지고 오기
+		System.out.println(memberNo);
 		List<MyPurchase>list=ms.selectPurchase(memberNo);
-		System.out.println("list");
+		System.out.println("list"+list);
 		request.setAttribute("member", m);
 		request.setAttribute("purchaseL", list);
 		request.getRequestDispatcher("/views/myPage/payment.jsp")

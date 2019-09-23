@@ -47,16 +47,17 @@
                             <th>증빙서류</th>
                         </tr>
                       <% if(!list.isEmpty()){
-							for(MyPurchase mp:list){%>
+							for(int i=0;i<list.size();i++){
+								if(list.get(i).getPurchaseCancelStatus()=='N'){%>
                         <tr>
-                            <td><%=mp.getPurchaseDate() %></td>
-                            <td><%=mp.getPurchaseStatus()%></td>
-                            <td><%=mp.getPurId()%> 이름가져와야함;</td>
-                            <td><%if(mp.getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
+                            <td><%=list.get(i).getPurchaseDate() %></td>
+                            <td><%=list.get(i).getPurchaseStatus()%></td>
+                            <td><%=list.get(i).getpTitle()%></td>
+                            <td><%if(list.get(i).getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
                         </tr>
-                       
-					<%}
-							}%>
+					<%			}
+							}
+						}%>
                     </table>
                 </div>
                 <div class="payment">
@@ -68,19 +69,18 @@
                             <th>취소한 스터디</th>
                             <th>증빙서류</th>
                         </tr>
+                      <% if(!list.isEmpty()){
+							for(int i=0;i<list.size();i++){
+								if(list.get(i).getPurchaseCancelStatus()=='Y'){%>
                         <tr>
-                            <td>2019.09.13</td>
-                            <td>진행중</td>
-                            <td>강동원과 함께하는 영어회화</td>
-                            <td>x</td>
+                            <td><%=list.get(i).getCancelDate() %></td>
+                            <td><%=list.get(i).getPurchaseStatus()%></td>
+                            <td><%=list.get(i).getpTitle()%></td>
+                            <td><%if(list.get(i).getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
                         </tr>
-                        <tr>
-                            <td>2019.08.17</td>
-                            <td>완료</td>
-                            <td>코딩노예와 함께하는 자바스크립트</td>
-                            <td>o</td>
-                        </tr>
-
+					<%			}
+							}
+						}%>
                     </table>
                 </div>
             </div>
