@@ -76,7 +76,16 @@
                 <tr>
                     <td><%=m.getMemNo() %></td>
                     <td><%=m.getMemName() %></td>
-                    <td><%=m.getMemUserEmail() %></td>
+                    <td>
+                    	<span class="momoClick"><%=m.getMemUserEmail() %></span>
+                    	<div class="adminMemo">
+                    		<form id="memoUpdate">
+                    		<textarea name="memo" id="memotextarea" cols="30" rows="10" placeholder="회원에 대한 메모를 작성하세요." value=<%=m.getMemAdminmemo() != null ? m.getMemAdminmemo() : "" %>><%=m.getMemAdminmemo()%></textarea>
+                    		<input type="hidden" name="memNo" value="<%=m.getMemNo() %>">  
+                    		</form>
+                    		<button type="submit" onclick="memoUpdate();">수정</button>
+                    	</div>	
+                    </td>
                     <td><%=m.getMemEnrollDatetime() %></td>
                     <form action="<%=request.getContextPath()%>/adminUpdateMember"
                     	  onsubmit="return update_validate();">
@@ -182,73 +191,25 @@
         		});
         	}
          
-        
-        
-        
-        
-        <%-- function fn_dibs2(){
-        	/* var mno = $("#mNo").val();
-			var pno = $("#pNo").val();*/
-			var A = $("#A").val();	 //a값을 받아서 a에 넣기		
-			var params = jQuery("#dibs_form").serialize();
-				if(<%=loginMember!=null%>){
-				$.ajax({
-				url: "<%=request.getContextPath()%>/fstudy/fstudyDibss",  //doGet3 만들어서 찜하기 아닌상태 컨트롤러 만들어서 사용
-				type: "POST",
-				cache: false,
-				dataType: "json",
-				// data 이렇게 했을때 파라티머 받는지 확인 
-				// 보내는 방법 ex) 컨트롤러파라미터변수이름 : 니가보낼데이터   {mno : mno}
-				//data: {"mno":mno, "pno" : pno, "A" : A }, 
-				data: params , 
-				//아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌
-				success:
-				function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
-				console.log(data+"ajax데이터 들어오는거");
-				if(data==("1")){ //넘어온 데이터 값이 1이면 찜하기 구현
-					$("#A").val("0");
-					$("#dibscon").html($("<input>").attr({"value":"0",
-						"type":"hidden",
-						"id":"A",
-						"name":"A"}));
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibson.png",
-														"class":"dibs",
-														"style":"width:150px"
-															}));
-					$('#toast').animate({opacity: '1'}, 100);
-					$("#toast").css("display","block");
-					$("#message").html(("찜하기 성공"));
-					$('#toast').animate({opacity: '0'}, 1000);
-				}else {//
-					
-					$("#A").val("1");
-					$("#dibscon").html($("<input>").attr({"value":"1","type":"hidden",
-						"id":"A",
-						"name":"A"}));
-					$("#dibscon").html($("<img>").attr({"src":"<%=request.getContextPath()%>/img/dibsoff.png",
-														"class":"dibs",
-														"style":"width:150px"}));
-					$('#toast').animate({opacity: '1'}, 100);
-					$("#toast").css("display","block");
-					$("#message").html(("찜하기 취소"));
-					$('#toast').animate({opacity: '0'}, 1000);
-					
-				}
-				
-				},
-				error:
-				function (request, status, error){
-				alert("ajax실패");
-				$("#A").val("0");
-				$("#dibscon").html(data);
-				}
-				});
+        	$(function() {
+                $('.momoClick').click(function(e) {
+                   $(this).next().toggleClass("show");
+                });
+
+            })
+            
+            function memoUpdate() {
+        		var memo  = jQuery("#memoUpdate").serialize();
+        		$.ajax({
+        			url: "<%=request.getContextPath()%>/adminMemoUpdate",
+        			type: "POST",
+        			dataType: "json",
+        			data: memo,
+        			success: function(data){
+        				$("#memotextarea").text(data);
+        			}
+        		})
         	}
-				else{
-					fn_loginAlert();
-					return false;
-				}      
-        } --%>
         
     </script>
 
