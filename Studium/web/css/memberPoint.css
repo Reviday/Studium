@@ -219,6 +219,10 @@ input[type="checkbox"] {
 	text-align: center;
 }
 
+.PointTable table {
+	width:440px;
+}
+
 .PointTable tr th {
 	padding: 3px;
 	border-top: 3px solid black;
