@@ -68,6 +68,13 @@
         if ($('input:checkbox[name="checkQ&A"]').is(":checked") == false) {
             alert("선택된 글이 없습니다.");
             return false;
+        }else{
+        	if(confirm("정말 삭제하시겠습니까?")){
+        		return true;
+        	}else{
+        		return false;
+        	}
+        	
         }
     }
 

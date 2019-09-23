@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.studium.admin.model.dao.AdminDao;
+import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
 
@@ -137,6 +138,45 @@ public class AdminService {
 		else {rollback(conn);}
 		close(conn);
 		return result;	 
+	}
+	
+	public List<Integer> memberPoint(String[] memberNo) {
+		Connection conn = getConnection();
+		List<Integer> result = dao.memberPoint(conn, memberNo);
+		close(conn);
+		return result;
+	}
+	
+	public int memberPointUp(String[] memberNo, List<Integer> memberPoint) {
+		Connection conn = getConnection();
+		int result = dao.memberPointUp(conn, memberNo, memberPoint);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;	
+	}
+	
+	public void pointUpContent(String point, String[] memberNo, String[] memName, String[] memEmail) {
+		Connection conn = getConnection();
+		int result = dao.pointUpContent(conn, point, memberNo, memName, memEmail);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);	
+	}
+	
+	public void pointDownContent(String point, String[] memberNo, String[] memName, String[] memEmail) {
+		Connection conn = getConnection();
+		int result = dao.pointDownContent(conn, point, memberNo, memName, memEmail);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);	
+	} 
+	
+	public List<PointShow> pointShow(String memNo) {
+		Connection conn=getConnection();
+		List<PointShow> list=dao.pointShow(conn, memNo);
+		close(conn);
+		return list;
 	}
 	
 }

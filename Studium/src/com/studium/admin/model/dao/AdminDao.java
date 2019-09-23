@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
 
@@ -84,7 +85,7 @@ public class AdminDao {
 		}
 		return result;
 	}
-	
+
 	public int selectCountPointMember(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -144,7 +145,7 @@ public class AdminDao {
 		}
 		return result;
 	}
-	
+
 	public int selectCountMemberSearch(Connection conn, String grade, String status) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -382,7 +383,7 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	
+
 	public List<Member> selectMemberSearchList(Connection conn,int cPage, int numPerPage, String grade, String status) {
 
 		PreparedStatement pstmt=null;
@@ -618,14 +619,14 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
-//		String sql=prop.getProperty("selectMemberNameList");
+		//		String sql=prop.getProperty("selectMemberNameList");
 		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_NAME LIKE '%"
-				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+				+ memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
 		try {
 			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, memberName);
-//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-//			pstmt.setInt(3, cPage*numPerPage);
+			//			pstmt.setString(1, memberName);
+			//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			//			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Member m = new Member();
@@ -672,19 +673,19 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	
+
 	public List<Member> selectMemberEmailList(Connection conn,int cPage, int numPerPage, String memberName){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
-//		String sql=prop.getProperty("selectMemberNameList");
+		//		String sql=prop.getProperty("selectMemberNameList");
 		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_EMAIL LIKE '%"
-				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+				+ memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
 		try {
 			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, memberName);
-//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-//			pstmt.setInt(3, cPage*numPerPage);
+			//			pstmt.setString(1, memberName);
+			//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			//			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Member m = new Member();
@@ -731,19 +732,19 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	
+
 	public List<Member> selectCountMemberEmail(Connection conn,int cPage, int numPerPage, String memberName){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
-//		String sql=prop.getProperty("selectMemberNameList");
+		//		String sql=prop.getProperty("selectMemberNameList");
 		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER WHERE MEM_STATUS = 'Y' AND MEM_EMAIL LIKE '%"
-				   + memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+				+ memberName + "%' ORDER BY MEM_NO DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
 		try {
 			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, memberName);
-//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-//			pstmt.setInt(3, cPage*numPerPage);
+			//			pstmt.setString(1, memberName);
+			//			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			//			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Member m = new Member();
@@ -828,7 +829,7 @@ public class AdminDao {
 		return result;
 
 	}
-	
+
 	public int updateMember(Connection conn, String memNo, String grade, String status) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -849,4 +850,124 @@ public class AdminDao {
 		return result;
 	}
 
+	public List<Integer> memberPoint(Connection conn, String[] memberNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Integer> result = new ArrayList<Integer>();
+		
+		for(int i = 0; i < memberNo.length; i++) {
+		String sql=prop.getProperty("selectMemberPoint") + " '" + memberNo[i] + "'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result.add(rs.getInt(1));
+				
+			}
+//			for(int j : result) {
+//				System.out.println(result.get(j) + "리스트");
+//			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		}
+		return result;
+	}
+
+	public int memberPointUp(Connection conn, String[] memberNo, List<Integer> memberPoint) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("memberPointUp");
+		for(int i = 0; i < memberNo.length; i++) {
+			try {
+
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, memberPoint.get(i));
+				pstmt.setString(2, memberNo[i]);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		}
+		return result;
+	}
+	
+	public int pointUpContent(Connection conn, String point, String[] memberNo, String[] memName, String[] memEmail) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("pointUpContent");
+		for(int i = 0; i < memberNo.length; i++) {
+			try {
+
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(memberNo[i]));
+				pstmt.setString(2, memName[i]);
+				pstmt.setString(3, memEmail[i]);
+				pstmt.setInt(4, Integer.parseInt(point));
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		}
+		return result;
+	}
+	
+	public int pointDownContent(Connection conn, String point, String[] memberNo, String[] memName, String[] memEmail) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("pointDownContent");
+		for(int i = 0; i < memberNo.length; i++) {
+			try {
+
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(memberNo[i]));
+				pstmt.setString(2, memName[i]);
+				pstmt.setString(3, memEmail[i]);
+				pstmt.setInt(4, Integer.parseInt(point));
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		}
+		return result;
+	}
+
+	public List<PointShow> pointShow(Connection conn, String memNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PointShow> list=new ArrayList();
+		String sql=prop.getProperty("pointShow");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(memNo));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PointShow p = new PointShow();
+				p.setMemId(memNo);
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemEmail(rs.getString("mem_email"));
+				p.setPoint(rs.getInt("mem_point"));
+				p.setPointStatus(rs.getString("point_status").charAt(0));
+				p.setPointEnrollDate(rs.getDate("point_enrolldate"));
+
+				list.add(p);				
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 }

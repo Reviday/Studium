@@ -58,8 +58,8 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 			int totalData=service.selectCountMemberEmail(memberName);
 			String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
 			PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+			pt.setQueryString("memberName", memberName);
 			List<Member> list=service.selectMemberEmailList(pt.getcPage(),pt.getNumPerPage(), memberName);
-			
 			
 			request.setAttribute("list",list);
 			request.setAttribute("cPage", pt.getcPage());
@@ -77,6 +77,7 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 		int totalData=service.selectCountMemberName(memberName);
 		String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		pt.setQueryString("memberName", memberName);
 		List<Member> list=service.selectMemberNameList(pt.getcPage(),pt.getNumPerPage(), memberName);
 		
 		
