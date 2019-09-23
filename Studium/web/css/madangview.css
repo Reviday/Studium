@@ -530,7 +530,7 @@
 }
 
 #content-area .cminput .i2 {
-	*padding-right: 2px;
+	padding-right: 2px;
 	width: 100%;
 }
 
@@ -651,6 +651,8 @@
 
 #content-area .cminput .u_cbox_btn_upload {
 	border-color: #ccc;
+	display: block;
+    position: relative;
 }
 
 .u_cbox .u_cbox_btn_upload {
@@ -660,7 +662,7 @@
 	right: 0;
 	z-index: 10;
 	width: 84px;
-	height: 61px;
+	height: 64px;
 	border: 1px solid rgba(239, 108, 0, 0.4) !important;
 	font-size: 13px;
 	font-weight: bold;
@@ -698,6 +700,17 @@
 .madang-list {
 	padding-bottom: 20px !important;
 }
+
+img.sepia {
+	filter:sepia(100%);-webkit-filter:sepia(100%);
+}
+
+a.disabled {
+	pointer-events: none;
+	cursor: default;
+}
+
+
 
 /* 리모콘 */
 #remocon {
@@ -897,6 +910,7 @@
 	border: 1px solid rgba(239, 108, 0, 0.1);
 	border-radius: 10px;
 	font-size: .95em;
+	outline: none;
 }
 
 #comment .cng-list .arrow-symbol {

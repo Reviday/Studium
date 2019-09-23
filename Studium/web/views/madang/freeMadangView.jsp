@@ -10,6 +10,7 @@
 	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. kk:mm:ss");
+	String REMOTE_ADDR = request.getRemoteAddr();
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
 	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
@@ -28,12 +29,14 @@
 		}	
 	}
 %>
+
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
 <link href="<%=request.getContextPath()%>/css/madang.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/madangview.css"
 	rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
@@ -228,7 +231,7 @@
 									<td class="i3">
 
 										<div class="u_cbox_btn_upload _submitBtn">
-											<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
+											<a href="#" class="u_cbox_txt_upload _submitCmt" onclick="fn_addComment('<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>')">등록</a>
 										</div>
 									</td>
 								</tr>
@@ -281,17 +284,17 @@
 																class="modify" title="수정/삭제"><i
 																class="icon icon-cancel_circle"></i></a>
 															<div class="comm-bottom">
-																<button onclick="fn_ccss(<%=cmt.getCmtNo() %>);"
+																<button onclick="fn_writeComment(<%=cmt.getCmtNo()%>);"
 																	class="btn-init ie-dotum write">
 																	<span class="arrow-symbol dsc_comm">답글달기</span>
 																</button>
-																<table cellspacing="0" class="cminput" id="re_conmment"
+																<table cellspacing="0" class="cminput _cminputRep" id="re_conmmentRep<%=cmt.getCmtNo()%>"
 																	style="display: none">
 																	<tbody>
 																		<tr>
 																			<td class="i2">
 																				<div class="comm_write_wrap border-sub skin-bgcolor">
-																					<textarea id="comment_text" cols="50" rows="2"
+																					<textarea id="comment_text_rep" cols="50" rows="2"
 																						class="textarea m-tcol-c" maxlength="6000"
 																						style="overflow: hidden; line-height: 14px; height: 39px;"
 																						title="댓글입력"></textarea>
@@ -299,8 +302,8 @@
 																			</td>
 																			<td class="i3">
 			
-																				<div class="u_cbox_btn_upload _submitBtn">
-																					<a href="#" class="u_cbox_txt_upload _submitCmt">등록</a>
+																				<div class="u_cbox_btn_upload _submitBtnRep">
+																					<a href="#" class="u_cbox_txt_upload _submitCmtRep">등록</a>
 																				</div>
 																			</td>
 																		</tr>
@@ -404,10 +407,6 @@
 					%>
 					
 				</div>
-
-
-
-
 				<!--
                         <div class="m-tcol-c reply_error" style="display:none;">
                             <strong>죄송합니다. 댓글 시스템 오류로 댓글을 읽거나 쓸 수 없습니다.</strong>
@@ -428,9 +427,9 @@
 				<div class="btn btn_upper">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" 
+						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
 							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>'"> 
-						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png"
+						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -447,9 +446,9 @@
 				<div class="btn">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" 
+						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
 							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>'"> 
-							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png"
+							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -461,5 +460,4 @@
 
 	<div class="col-lg-1"></div>
 </section>
-<script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <%@ include file="/views/common/footer.jsp"%>
