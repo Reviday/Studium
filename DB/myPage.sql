@@ -93,31 +93,8 @@ select * from p_study;
 select * from tab;
 drop sequence seq_pstudy;
 
-);
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
-insert into p_study values(seq_pstudy.nextval,'1','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+--강사스터디 더미데이터
+insert into p_study values(seq_pstudy.nextval,'TEST P STUDY','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
 
@@ -149,27 +126,38 @@ maxvalue 999;
 --찜테이블 더미데이터
 insert into my_dibs values(seq_my_dibs.nextval,10001,44,null,sysdate);
 insert into my_dibs values(seq_my_dibs.nextval,10001,null,1,sysdate);
---구매목록
+
 DROP TABLE MY_PURCHASE;
+--구매목록
 CREATE TABLE MY_PURCHASE(
     PUR_ID NUMBER PRIMARY KEY,--구매번호
     mem_no number constraint PUR_mem_no_fk references ta_member(mem_no), -- 구매한 회원 번호
     p_no number default null constraint PUR_p_study_fk references p_study(p_no), -- 구매한 강사스터디 번호
     PURCHASE_DATE DATE, --구매 날짜
+    PURCHASE_CANCEL_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PURCHASE_CANCEL_STATUS_CK CHECK (PURCHASE_CANCEL_STATUS IN ('N','Y')), --취소여부
+    CANCEL_DATE DATE, --취소 날짜
     PURCHASE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PURCHASE_CK CHECK (PURCHASE_STATUS IN ('N','Y')),--스터디 진행여부/진행중Y, 완료N
     SUBMIT_FILE CHAR(1) DEFAULT 'N' CONSTRAINT SUBMIT_FILE_CK CHECK (SUBMIT_FILE IN ('N','Y'))--제출서류발급유무/제출함Y,제출안함N
 );
+--조회
+SELECT PUR_ID, MEM_NO, P_NO, P_TITLE, PURCHASE_DATE, PURCHASE_CANCEL_STATUS, CANCEL_DATE, PURCHASE_STATUS, SUBMIT_FILE
+FROM MY_PURCHASE
+JOIN P_STUDY USING(P_NO)
+where mem_no='10028';
+comit;
+SELECT * FROM P_STUDY;
+select * from ta_member;
 --구매시퀀스
 create sequence seq_my_purchase
 start with 1
 increment by 1;
 --구매테이블 더미데이타
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10021,44,SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10022,44,SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10027,45,SYSDATE,'Y','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,46,SYSDATE,'Y','N');
-
-
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10021,1,SYSDATE,'N',SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,SYSDATE,'Y',SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,2,SYSDATE,'Y',SYSDATE,'Y','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,SYSDATE,'N',SYSDATE,'Y','Y');
+SELECT * FROM MY_PURCHASE;
+SELECT * FROM TA_MEMBER;
 --TODOLIST테이블
 CREATE TABLE TODO_LIST(
     TODO_ID NUMBER PRIMARY KEY,--해야할일 아이디
@@ -183,34 +171,6 @@ CREATE TABLE TODO_LIST(
     TODO_DATE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT TODO_DATE_STATUS_CK CHECK (TODO_DATE_STATUS IN ('N','Y'))--마감일정이 지났는지에 따른 상태
     
 );
---payment구매테이블
-
---PURCHASE테이블
-CREATE TABLE MY_PURCHASE(
-    PUR_ID NUMBER PRIMARY KEY,--구매번호
-    mem_no number constraint PUR_MEM_FK references ta_member(mem_no), -- 회원의 번호
-    PUR_DATETIME DATE CONSTRAINT PUR_DATE_NN NOT NULL,--구매일시
-    PUR_STUDY_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PUR_STUDY_STATUS_CK CHECK (PUR_STUDY_STATUS IN ('N','Y')),--일정상태 완료Y,미완료N
-    SUBMIT_FILE CHAR(1) DEFAULT 'N' CONSTRAINT PUR_SUBMIT_FILE_CK CHECK (SUBMIT_FILE IN ('N','Y'))--마감일정이 지났는지에 따른 상태
-    
-);
-
-SELECT * FROM MY_PURCHASE;
-DROP TABLE MY_PURCHASE;
-
-
-
-
-create table my_purchase(
-    pur_id number primary key,--찜번호
-    mem_no number references ta_member(mem_no), -- 회원 번호
-    p p_no number default null constraint purchase_p_study_fk references p_study(p_no), -- 강사스터디 번호
-    f_no number default null constraint purchase_f_study_fk references f_study(f_no), -- 일반스터디 번호
-    purchase_date date, --구매일시
-    purchase_study_status char(1) default 'n' check(purchase_status in('N','Y')),--구매한 스터디 상태
-    submit_file char(1) default 'n' check(submit_file in('N','Y'))--제출서류발급유무
-);
-
 select * from p_study;
 select * from f_study;
 select * from ta_member;
