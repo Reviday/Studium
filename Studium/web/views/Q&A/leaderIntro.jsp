@@ -27,7 +27,7 @@
                 스터디움 강사가 되어 <br>
                 공부의 즐거움을 선사하세요.
             </div>
-            <a href="">Apply Now</a> <!-- 지원페이지로 이동하는 a태그 -->
+            <a href="<%=request.getContextPath() %>/leader/leaderForm">Apply Now</a> <!-- 지원페이지로 이동하는 a태그 -->
             <p>강사 지원 페이지로 이동합니다.</p>
         </div>
         <article>

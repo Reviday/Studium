@@ -95,9 +95,7 @@
 		                                        <%=listM.get(j).getTitleM() %>
 		                                     </label>
 											<%}
-										
-									}
-									
+									}	
 								}
 								}%>
 								
