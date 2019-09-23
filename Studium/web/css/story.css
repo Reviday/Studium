@@ -12,9 +12,10 @@ body {
 }
 
 section.allhugi {
-    background-color: black;
+	
+    background-color: #EBEBEB;
     box-sizing: border-box;
-    padding-top: 100px;
+    padding-top: 30px;
 }
 
 section.allhugi article {
@@ -33,14 +34,14 @@ section.allhugi article {
 .hugiIntro > div {
     width: 500px;
     height: 300px;
-    position: absolute;
+    position: relative;
     top: 50px;
     background-color: white;
     box-sizing: border-box;
 }
 
 .hugiIntro > div img:nth-of-type(1) {
-    margin: 30px 0 10px 40px;
+    margin: 50px 0 10px 40px;
    
 }
 
@@ -103,7 +104,7 @@ section.allhugi article {
 
 .reviewAll > img {
     display: block;
-    position: absolute;
+    position: relative;
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -112,7 +113,7 @@ section.allhugi article {
 }
 
 .reviewName {
-    position: absolute;
+    position: relative;
     font-size: 20px;
     color: black;
     top: 40px;
@@ -120,7 +121,7 @@ section.allhugi article {
 }
 
 .star {
-    position: absolute;
+    position: relative;
     top: 78px;
     left: 140px;
 }
@@ -133,10 +134,12 @@ section.allhugi article {
 }
 
 .reviewContent {
-    position: absolute;
-    top: 130px;
+    position: relative;
+    top: 30px;
     box-sizing: border-box;
     left: 140px;
+   /*  height:300px; */
+  
 }
 
 .reviewText {
@@ -163,15 +166,16 @@ section.allhugi article {
 }
 
 .reviewTeacher {
-    position: absolute;
+    position: relative;
     font-size: 19px;
-    right: 20px;
+    right: -350px;
     top: 0;
     display: flex;
     box-sizing: border-box;
 }
 
 .reviewTeacher img {
+	
     width: 50px;
     height: 50px;
     border-radius: 50%;

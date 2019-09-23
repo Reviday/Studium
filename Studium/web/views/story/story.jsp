@@ -1,77 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<%@ page import="java.util.*,com.studium.story.model.vo.Story" %>
+<%
+	List <Story> slist = (List)request.getAttribute("slist");
+
+%>
+
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/story.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <style>
         /* 사이드바 스타일 */
-        .sidenav {
-            height: 50%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            right: 0;
-            background-color: rgb(240, 26, 80);
-            /* overflow-x: hidden; */
-            transition: 0.7s ease-in-out;
-            padding-top: 60px;
+        #review-level{
+        	float:right;
+        	box-sizing:border-box;
+        	width:15pc;
+        	background:#fff;
+        	border:1px solid #dcdcdc;
+        	box-shadow:0 2px 6px 0 rgba(0,0,0,.1)
+        	}
+        .review-title{
+        	margin: 0 24px;
+    		color: #505050;
+    		font-size: 18pt;
+    		padding: 36px 0 9pt;
+    		border-bottom: 2px solid #f2f2f2;
         }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: white;
-            display: block;
-            transition: 0.7s ease-in-out;
+        .level-list{
+         	margin: 0;
+    		padding: 0;
         }
-
-        .sidenav a:hover,
-        .offcanvas a:focus {
-            color: black;
-        }
-
-        .closebtn {
-            position: absolute;
-            top: 0;
-            right: -20px;
-            font-size: 10px !important;
-            margin-left: 50px;
-        }
-
-        .openmenu:hover {
-            color: red;
-            transition: 0.5s ease-in;
-        }
-
-        .openmenu {
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.5s ease-in;
-        }
-
-        .supText {
-            vertical-align: super;
-            font-size: small;
-            color: red;
-        }
-
-        /* .openmenu > i {
-            font-size: 30px;
-        } */
-        /* 미디어쿼리 적용 */
-        @media screen and (max-height:450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-
-            .sidenav a {
-                font-size: 18px;
-            }
-        }
+        
+        .level-select{
+			display: block;
+    		box-sizing: border-box;
+    		height: 72px;
+    		line-height: 72px;
+    		padding-left: 24px;
+    		color: #787878;
+		}
+		.level-select:hover {
+    		padding-left: 20px;
+    		border-left: 4px solid #ef6c00;
+    		background: #f8f8f8;
+    		color: #ef6c00;
+		}
+		
+		
+		}
+      
     </style>
     
     <div class="header-background"
@@ -80,57 +59,81 @@
 </div>
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
+        <aside id="review-level">
+            	<div class="review-title">레벨별</div>
+            	<ul class="level-list">
+            		<li class="level-select-wrap">
+            			<a class="level-select">입문</a>
+            		</li>
+            
+            	
+            		<li class="level-select-wrap">
+            			<a class="level-select">초급</a>
+            		</li>
+            	
+            	
+            		<li class="level-select-wrap">
+            			<a class="level-select">중급</a>
+            		</li>
+            	
+            	
+            		<li class="level-select-wrap">
+            			<a class="level-select">고급</a>
+            		</li>
+            	</ul>
+            
+            </aside>
         <article class="allhugi">
             <!-- 가운데 맞춤 article -->
+           
             <div class="hugiIntro">
                 <!-- 배경사진 넣은 div -->
                 <div>
                     <!-- 후기를 설명하는 div -->
-                    <img src="img/검은색영어.png" alt="">
+                    <img src="img/story1.png" alt="">
                     <div>진짜~가 나타났다!</div>
                     <div>리얼 스터디 후기</div>
                     <div></div> <!-- 디자인선 -->
                     <div>스터디에 참여한 멤버들의 후기를 확인해보세요!</div>
-                    <img src="img/전체후기(디자인용).png" alt="">
+                    <img src="img/story2.png" alt="">
                 </div>
             </div>
+             
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                    초급 후기 <span>(1)</span>
-                    <br>
-                    <div id="mysidenav" class="sidenav">
-                        <a href="#" class="closebtn" onclick='closeNav()'>x를 눌러 joy를 표하십시오</a>
-                        <a href="introduction .html">입문후기</a>
-                        <a href="beginner.html">초급후기</a>
-                        <a href="intermediate level.html">중급후기</a>
-                        <a href="a high class.html">고급후기</a>
+                   입문후기
+          
+    <!--  <div id="mysidenav" class="sidenav">   
+	<ul>
+		 <li><a class="active" href="#review">후기1</a></li>
+		 <li><a href="#review1">후기2</a></li>
+         <li><a href="#review2">후기3</a></li>
+         <li><a href="#review3">후기4</a></li>
+	</ul>
+	 </div> -->
 
-                    </div>
+                    <!-- <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5"
+                            aria-hidden="true"></i>레벨별 후기 만나보기<sup class="supText">click!</sup></span> -->
 
-
-                    <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5"
-                            aria-hidden="true"></i>레벨별 후기 만나보기<sup class="supText">click!</sup></span>
-
-                    <script>
-                        function openNav() {
-                            document.getElementById('mysidenav').style.width = '250px';
-                        }
-                        function closeNav() {
-                            document.getElementById('mysidenav').style.width = '0';
-                        }
-                    </script>
+                    
                 </div>
                 <div class="rine"></div> <!-- 구분선 -->
                 <div class="reviewContainer">
+                <%
+               
+                for(Story s : slist) { 
+                %>
                     <!-- 후기 들어가는 div -->
                     <div class="reviewAll">
                         <!-- 개인후기 div -->
-                        <img src="https://cdn.clien.net/web/api/file/F01/7204370/101c3b18a512f9.jpg?w=780&h=30000&gif=true" alt="">
+                        <%-- <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryStudentpicture()%>" --%>
+                        
                         <!-- 후기올린 사람 사진 -->
                         <div class="reviewName">
                             <!-- 이름 -->
-                            김예림
+                          <%=s.getStoryWrite()%>
+                 
                         </div>
                         <div class="star">
                             <!-- 별점 -->
@@ -143,30 +146,42 @@
                         <div class="reviewContent">
                             <div class="reviewText">
                                 <!-- 내용 -->
-                                우리 예리쌤 너무 이쁘고 완벽한 발음으로 진짜 현지에서 쓰는 영어를 가르쳐주셨어요! <br>
-                                또한 엄청난 인싸력으로 재밌는 행사 만들어주셔서 너무 좋았습니다!!&nbsp; <span></span>
+                               <%=s.getStoryContent()%>
+                                 &nbsp; <span></span>
                             </div>
                             <div class="reviewTeacherTime">
                                 <div class="reviewTime">
                                     <!-- 후기올린 시간 -->
-                                    오전 2시 22분
+                                    <%=s.getStoryTime()%>
                                 </div>
                                 <div class="reviewTeacher">
                                     <!-- 강사 이름, 사진 -->
                                     <div>
                                         <!-- 강사 이름 -->
-                                        Yeri Mina
+                                        <%=s.getStoryTeachername()%>
                                     </div>
-                                    <img src="https://t1.daumcdn.net/cfile/tistory/99A1753F5B7DB0BD1A" alt="">
+                                    <%=s.getStoryTeacherpicture()%>
+                                   <!--  <img src="http://ph.spotvnews.co.kr/news/photo/201904/279726_344511_1627.jpg" alt=""> -->
                                     <!-- 강사 사진 -->
-
-                                </div>
+                                    
+                          </div>
+                                
                             </div>
+                              
                             <div class="reviewrine"></div> <!-- 후기 구분선 -->
+                        
                         </div>
+                      <%
+                        }
+                
+                        %>
                     </div>
+                         
                 </div>
             </div>
         </article>
+        
     </section>
-<%@ include file="/views/common/footer.jsp" %>
+ <%@ include file="/views/common/footer.jsp" %> 
+
+
