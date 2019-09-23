@@ -51,7 +51,7 @@
 								if(list.get(i).getPurchaseCancelStatus()=='N'){%>
                         <tr>
                             <td><%=list.get(i).getPurchaseDate() %></td>
-                            <td><%=list.get(i).getPurchaseStatus()%></td>
+                            <td><%if(list.get(i).getPurchaseStatus()=='Y'){%>진행중<%}else{ %>스터디 종료<%} %></td>
                             <td><%=list.get(i).getpTitle()%></td>
                             <td><%if(list.get(i).getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
                         </tr>
@@ -74,7 +74,7 @@
 								if(list.get(i).getPurchaseCancelStatus()=='Y'){%>
                         <tr>
                             <td><%=list.get(i).getCancelDate() %></td>
-                            <td><%=list.get(i).getPurchaseStatus()%></td>
+                            <td><%if(list.get(i).getPurchaseStatus()=='Y'){%>진행중<%}else{ %>스터디 종료<%} %></td>
                             <td><%=list.get(i).getpTitle()%></td>
                             <td><%if(list.get(i).getSubmitFile()=='Y'){%>o<%}else{ %>x<%} %></td>
                         </tr>

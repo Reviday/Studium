@@ -315,4 +315,47 @@ public class MemberDao {
 			close(pstmt);
 		} return list;
 	}
+
+	public int updateSetting(Connection conn, String settingName, int no) {
+		String sql="";
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		if(settingName.equals("recieveEmail")) {
+			sql= prop.getProperty("recieveEmail");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "Y");
+				pstmt.setInt(2, no);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				
+			} 
+		}
+		if(settingName.equals("recieveEmail")) {
+			sql= prop.getProperty("recieveEmail");
+			try {
+				pstmt=conn.prepareStatement(sql);
+
+				pstmt.setString(1, "Y");
+				pstmt.setInt(2, no);
+
+				result=pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				
+			} 
+		}
+
+		
+		return result;
+	}
+	
+	
 }
