@@ -59,7 +59,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" action="">
+			<form class="contact100-form validate-form" action="<%=request.getContextPath()%>/insertLeaderForm">
 				<span class="contact100-form-title">
 					신청 페이지
 				</span>
@@ -72,11 +72,11 @@
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
 					data-validate="Enter Your Email (e@a.x)">
 					<span class="label-input100">gender *</span>
-					<input class="input-radio100" id="gender1" type="radio" name="type-product" value="M">
+					<input class="input-radio100" id="gender1" type="radio" name="gender" value="M">
 					<label class="label-radio100" for="gender1">
 						Male
 					</label>
-					<input class="input-radio100" id="gender2" type="radio" name="type-product" value="F">
+					<input class="input-radio100" id="gender2" type="radio" name="gender" value="F">
 					<label class="label-radio100" for="gender2">
 						FeMale
 					</label>
@@ -93,9 +93,9 @@
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Needed Services *</span>
+					<span class="label-input100">Needed leaderType *</span>
 					<div>
-						<select class="js-select2" name="service">
+						<select class="js-select2" name="leaderType">
 							<option>Please chooses</option>
 							<option value="강사">강사 신청</option>
 							<option value="리더">리더 신청</option>
@@ -106,9 +106,9 @@
 
 				<div class="w-full dis-none js-show-service">
 					<div class="wrap-contact100-form-radio">
-						<span class="label-input100">I can work in</span>
+						<h2>I can work in</h2>
 						<div class="contact100-form-radio m-t-15">
-							<input class="input-radio100" id="radio1" type="radio" name="type-product" value="강남"
+							<input class="input-radio100" id="radio1" type="radio" name="area" value="강남"
 								checked="checked">
 							<label class="label-radio100" for="radio1">
 								강남
@@ -116,46 +116,48 @@
 						</div>
 
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio2" type="radio" name="type-product" value="건대">
+							<input class="input-radio100" id="radio2" type="radio" name="area" value="건대">
 							<label class="label-radio100" for="radio2">
 								건대
 							</label>
 						</div>
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="잠실">
+							<input class="input-radio100" id="radio3" type="radio" name="area" value="잠실">
 							<label class="label-radio100" for="radio3">
 								잠실
 							</label>
 						</div>
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio4" type="radio" name="type-product" value="신촌">
+							<input class="input-radio100" id="radio4" type="radio" name="area" value="신촌">
 							<label class="label-radio100" for="radio4">
 								신촌
 							</label>
 						</div>
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio5" type="radio" name="type-product" value="분당">
+							<input class="input-radio100" id="radio5" type="radio" name="area" value="분당">
 							<label class="label-radio100" for="radio5">
 								분당
 							</label>
 						</div>
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio6" type="radio" name="type-product" value="수원">
+							<input class="input-radio100" id="radio6" type="radio" name="area" value="수원">
 							<label class="label-radio100" for="radio6">
 								수원
 							</label>
 						</div>
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio7" type="radio" name="type-product" value="남양주">
+							<input class="input-radio100" id="radio7" type="radio" name="area" value="남양주">
 							<label class="label-radio100" for="radio7">
 								남양주
 							</label>
 						</div>
 					</div>
 				
-			
-					
+				
+				
 							  <div class="inputInteresting">
+							  	<h2>희망 과목</h2>	
+							  	<div id="view"></div>
 								<% if(!listM.isEmpty()&&!listB.isEmpty()){
 									//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
 									//<%-- for(Category cb : listB){
@@ -266,12 +268,21 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
     //관심사 개수제한
+    
+    
     $('input[type=checkbox]').on('change', function (e) {
-        if ($('input[type=checkbox]:checked').length > 3) {
+		
+    	 
+    	 if ($('input[type=checkbox]:checked').length > 3) {
             $(this).prop('checked', false);
-            alert("관심사는 세 개만 선택 가능합니다.");
+            $('#view').remove();
+            alert("희망과목은 세 개까지만 선택 가능합니다.");
         }
+    	
     });
+	
+							
+  	
 		window.dataLayer = window.dataLayer || [];
 
 		function gtag() {

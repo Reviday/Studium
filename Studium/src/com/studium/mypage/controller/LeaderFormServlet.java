@@ -16,13 +16,13 @@ import com.studium.category.model.vo.Category;
  * Servlet implementation class LeaderFromServlet
  */
 @WebServlet("/leader/leaderForm")
-public class LeaderFromServlet extends HttpServlet {
+public class LeaderFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LeaderFromServlet() {
+    public LeaderFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

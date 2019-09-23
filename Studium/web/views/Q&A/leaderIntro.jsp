@@ -68,7 +68,7 @@
                     <div class="left"> <!-- 왼쪽 -->
                         <div>Be one of our Leaders!</div>
                         <div>
-                            <span>먼저 <a href="">강사 지원서</a>를 확인 및 작성해주세요.</span> <br>
+                            <span>먼저 <a href="<%=request.getContextPath() %>/leader/leaderForm">강사 지원서</a>를 확인 및 작성해주세요.</span> <br>
                             개설 가능한 지역 및 시간대, 예상 수입에 대해 <br>
                             7일 이내로 안내를 드리겠습니다!
                         </div>
