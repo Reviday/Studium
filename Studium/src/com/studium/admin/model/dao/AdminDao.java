@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Properties;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
+import com.sun.jmx.snmp.Timestamp;
 
 public class AdminDao {
 
@@ -957,7 +959,7 @@ public class AdminDao {
 				p.setMemEmail(rs.getString("mem_email"));
 				p.setPoint(rs.getInt("mem_point"));
 				p.setPointStatus(rs.getString("point_status").charAt(0));
-				p.setPointEnrollDate(rs.getDate("point_enrolldate"));
+				p.setPointEnrollDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("point_enrolldate")));
 
 				list.add(p);				
 			}

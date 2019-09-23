@@ -9,13 +9,13 @@ public class PointShow {
 	private String memEmail;
 	private int point;
 	private char pointStatus;
-	private Date pointEnrollDate;
+	private String pointEnrollDate;
 	
 	public PointShow() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointShow(String memId, String memName, String memEmail, int point, char pointStatus, Date pointEnrollDate) {
+	public PointShow(String memId, String memName, String memEmail, int point, char pointStatus, String pointEnrollDate) {
 		super();
 		this.memId = memId;
 		this.memName = memName;
@@ -65,11 +65,11 @@ public class PointShow {
 		this.pointStatus = pointStatus;
 	}
 
-	public Date getPointEnrollDate() {
+	public String getPointEnrollDate() {
 		return pointEnrollDate;
 	}
 
-	public void setPointEnrollDate(Date pointEnrollDate) {
+	public void setPointEnrollDate(String pointEnrollDate) {
 		this.pointEnrollDate = pointEnrollDate;
 	}
 

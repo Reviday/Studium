@@ -67,7 +67,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                            <input type="checkbox">
+                                            <input type="checkbox" id="recieveEmail" value="Y">
                                                 <div>
                                                     <canvas></canvas>
                                                 </div>
@@ -82,11 +82,11 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                                <input type="checkbox">
-                                                    <div>
-                                                        <canvas></canvas>
-                                                    </div>
-                                            </label>
+                                    <input type="checkbox" id="useNote" value="Y">
+                                        <div>
+                                           <canvas></canvas>
+                                        </div>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -97,11 +97,11 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                                    <input type="checkbox">
-                                                        <div>
-                                                            <canvas></canvas>
-                                                        </div>
-                                                </label>
+                                    <input type="checkbox" id="receiveSms" value="Y">
+                                        <div>
+                                           <canvas></canvas>
+                                        </div>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                     <input type="checkbox">
+                                     <input type="checkbox" id="openProfile" value="Y">
                                         <div>
                                              <canvas></canvas>
                                                 </div>
@@ -144,18 +144,87 @@
 
 
 
-
-
-
-
-
-
-    <!-- 버튼 스크립트 -->
-
-
-
-    <!-- 버튼 스크립트 -->
+    
     <script>
+    //체크박스 이벤트
+    var test="";
+        $(document).ready(function(){
+        //이메일수신여부값
+        $("#recieveEmail").change(function(){
+            if($("#recieveEmail").is(":checked")){
+            	alert("체크박스 체크했음!");
+                test=$(this).val();
+                $.ajax({
+                	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                    type:'POST',
+    				cache: false,
+    				dataType: "json",
+                    data:{"recieveEmail":test},
+                    success:function(data){
+                    	$("#recieveEmail").prop('checked', true);
+                    }
+
+        		});
+            
+            }
+        });
+        $("#useNote").change(function(){
+            if($("#useNote").is(":checked")){
+            	alert("체크박스 체크했음!");
+                test=$(this).val();
+                $.ajax({
+                	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                    type:'POST',
+    				cache: false,
+    				dataType: "json",
+                    data:{"useNote":test},
+                    success:function(data){
+                    	$("#useNote").prop('checked', true);
+                    }
+
+        		});
+            
+            }
+        });
+        $("#receiveSms").change(function(){
+            if($("#receiveSms").is(":checked")){
+                alert("체크박스 체크했음!");
+                test=$(this).val();
+                $.ajax({
+                	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                    type:'POST',
+    				cache: false,
+    				dataType: "json",
+                    data:{"receiveSms":test},
+                    success:function(data){
+                    	$("#receiveSms").prop('checked', true);
+                    }
+
+        		});
+            
+            }
+        });
+        $("#openProfile").change(function(){
+            if($("#openProfile").is(":checked")){
+                test=$(this).val();
+                $.ajax({
+        			url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                    type:'POST',
+    				cache: false,
+    				dataType: "json",
+                    data:{"openProfile":test},
+                    success:function(data){
+                    	$("#openProfile").prop('checked', true);
+                    }
+
+        		});
+            
+            }
+        }); 
+    }); 
+   
+        
+  //버튼 스크립트 
         $('.switch').each(function() {
             let toggle = $(this),
                 input = toggle.children('input'),
@@ -222,6 +291,8 @@
                 active.color.setHex(!checked ? 0xFFFFFF : 0x275EFE);
             }).trigger('change');
         });
+        
+         
     </script>
 
 

@@ -75,28 +75,26 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 	    
 
 		//해당 아이디로  수정된 멤버객체 가지고옴
-	      Member m= new Member();
-	     m=ms.selectNo(no);
-
-	      System.out.println("멤버"+m);
+	     Member m= new Member();
 	     String msg="";
 	     String loc="/";
 	     String view="";
 	      if(result>0) {
 				//회원사진변경완료
 	    	  System.out.println("사진변경완료");
-//				request.setAttribute("member", m);
-//				request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-//				.forward(request,response);
+	 	     m=ms.selectNo(no);
+				request.setAttribute("member", m);
+				request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+				.forward(request,response);
 				
 			} else {
 		    	  System.out.println("사진변경실패");
-//				msg="사진 등록이 실패하였습니다.";
-//				view="/views/common/msg.jsp";
-//				loc="/views/myPage/myInfoCheckPw.jsp";
-//				request.setAttribute("msg", msg);
-//				request.setAttribute("loc", loc);
-//				request.getRequestDispatcher(view).forward(request, response);
+				msg="사진 등록이 실패하였습니다.";
+				view="/views/common/msg.jsp";
+				loc="/views/myPage/myInfoCheckPw.jsp";
+				request.setAttribute("msg", msg);
+				request.setAttribute("loc", loc);
+				request.getRequestDispatcher(view).forward(request, response);
 			}
 	}
 

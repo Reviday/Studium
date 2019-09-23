@@ -91,7 +91,7 @@
 				<td><%=m.getMemPoint() %></td>
 				<td class="trNo" style="display:none;"><%=m.getMemNo() %></td>
 				<td>
-					<input type="button" value="내역 확인" class="pointConfirm" id="pointConfirm"
+					<input type="button" value="내역 확인" class="pointConfirm" id="<%=m.getMemNo() %>"
 						   onclick="PointPageShow();">
 				</td>
 			</tr>
@@ -106,17 +106,10 @@
 				<span class="closePointPage">&times;</span>
 				<div class="pointPage-header">
 					<div>포인트 내역확인</div>
-					<div>기영성<span>(ysung26@daum.net)</span></div>
+					<div id="pointPageName"><span>(<span id="pointPageEmail"></span>)</span></div>
 				</div>
-				<table class="PointTable">
-					<tr>
-						<th>일시</th>
-						<th>금액</th>
-						<th>상태</th>
-					</tr>
-					
-					
-				</table>
+				<div class="PointTable">
+				</div>
 			</div>
 
 		</div>
@@ -147,14 +140,23 @@
         });
         
         $('.checkMember').on('click', function (e) {
-            if ($(".checkMember").is(":checked") == true) {
-            	$(".checkMember").next().prop("checked", true);  
+            if ($(this).is(":checked") == true) {
+            	$(this).next().prop("checked", true);  
             }else{
-            	$(".checkMember").next().prop("checked", false);
+            	$(this).next().prop("checked", false);
             }
         });
         
-        
+        var modal = document.getElementById('pointPage');                                         
+        $(".closePointPage").click(function() {
+            $("#pointPage").css("display","none");
+        }); 
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+            	$("#pointPage").css("display","none");
+            }
+        }
     })
     
     
@@ -209,45 +211,46 @@
     }
     
 
-    var modal = document.getElementById('pointPage');
-    var btn = document.getElementById("pointConfirm");
-    var span = document.getElementsByClassName("closePointPage")[0];                                          
-    
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+   
 
     function PointPageShow() {
-    	var memEmail = $(".trNo").text();
     	$.ajax({
 			url:"<%=request.getContextPath()%>/PointPageShow",
 			type:"post",
-			data:{"no":'10050'},
+			data:{"no":$(".pointConfirm").attr('id')},
 			dataType:"json",
 			success:function(data){
 				console.log(data);
+				if(data[0] != null){
 				var table=$("<table>");
+				var th="<tr><th>일시</th>	<th>금액</th>	<th>상태</th>	</tr>";
+				table.append(th);
 				for(var i=0;i<data.length;i++){
-					var td=$("<td>").html(data[i]['no']);
-					var td2=$("<td>").html(data[i]['name']);
-					var td3=$("<td>").html(data[i]['email']);
+					var td=$("<td>").html(data[i]['memId']);
+					var td2=$("<td>").html(data[i]['memName']);
+					var td3=$("<td>").html(data[i]['memEmail']);
 					var td4=$("<td>").html(data[i]['point']);
-					var td5=$("<td>").html(data[i]['pointstatus']);
-					var td6=$("<td>").html(data[i]['enrolldate']);
-					table.append($("<tr>").append(td).append(td2).append(td3).append(td4).append(td5).append(td6));
+					if(data[i]['pointStatus'] == 'Y'){
+						var td5=$("<td>").html("지급");
+					}else{
+						var td5=$("<td>").html("차감");
+					}
+					var td6=$("<td>").html(data[i]['pointEnrollDate']);
+					table.append($("<tr>").append(td6).append(td4).append(td5));
 				}
+				$("#pointPageName").text(data[0]['memName']+"("+data[0]['memEmail']+")");
 				$(".PointTable").html(table);
-			
+				
+				$("#pointPage").css("display","block");
+				}else{
+					alert("포인트내역이 없습니다.");
+				}
+			},
+			error:function(r,e,m){
+				console.log(r);
+				console.log(e);
+				console.log(m);	
+				alert("포인트내역이 없습니다.");
 			}
 		});
     }

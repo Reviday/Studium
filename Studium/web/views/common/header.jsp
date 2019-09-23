@@ -165,7 +165,8 @@
 							href="<%=request.getContextPath()%>/AdminManager">회원관리</a>
 							</li>
 							<li class="nav-item cta-btn">
-							<a class="btn btn-white btn-outline-white" style="border: 1px solid">게시글관리</a></li>
+							<a class="btn btn-white btn-outline-white" style="border: 1px solid"
+							href="<%=request.getContextPath()%>/AdminBoardManager">게시글관리</a></li>
 							<li class="nav-item cta-btn">
 							<a class="btn btn-white btn-outline-white" style="border: 1px solid"
 								 onclick="location.href='<%=request.getContextPath()%>/logout'">로그아웃</a></li>

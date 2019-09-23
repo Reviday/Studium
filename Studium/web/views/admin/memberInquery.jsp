@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <!--오른쪽 상단에 위치하는 검색기능-->
-                    <form action="<%=request.getContextPath()%>/adminInquerySearch">
+                    <form action="<%=request.getContextPath()%>/adminInquerySearch" id="searchMember">
                         <select name="gradeList" id="gradeList">
                             <option value="allGrade" <%="allGrade".equals(grade) ? "selected" : "" %>>전체</option>
                             <option value="M" <%="M".equals(grade) ? "selected" : "" %>>관리자</option>
@@ -50,8 +50,8 @@
                             <option value="P" <%="P".equals(status
                             		) ? "selected" : "" %>>영구정지</option>
                         </select>
-                        <input type="submit" value="조회" class="submitSearch">
                     </form>
+                        <input type="submit" value="조회" class="submitSearch" onclick="searchMember();">
 
 
                     <form action="<%=request.getContextPath() %>/admin/memberFinder"
@@ -169,6 +169,18 @@
         	
         	}
         	
+        	function searchMember() {
+        		var params = jQuery("#searchMember").serialize();
+        		$.ajax({
+        			url: "<%=request.getContextPath()%>/adminInquerySearch",
+        			type: "POST",
+        			dataType: "json",
+        			data: params,
+        			success: function(data){
+        				console.log(data);
+        			}
+        		});
+        	}
          
         
         
