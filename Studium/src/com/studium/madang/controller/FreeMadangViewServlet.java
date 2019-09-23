@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,8 +45,35 @@ public class FreeMadangViewServlet extends HttpServlet {
 		int no=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		
+		//쿠키값 확인하기
+		Cookie[] cookies=request.getCookies();
+		String madangCookieVal="";
+		boolean hasRead=false; //읽었는지 안읽었는지 구분하는 기준
+		
+		if(cookies!=null) {
+			for(Cookie c : cookies) {
+				String name=c.getName(); // 키 값
+				String value=c.getValue(); // value
+				if("madangCookie".equals(name)) {
+					madangCookieVal=value; //이전 값 보관
+					if(value.contains("|"+no+"|")) {
+						hasRead=true;
+						break;
+					}
+				}
+			}
+		}
+		
+		//안 읽었을 때 조회수를 추가하고
+		//cookie에 현재 boardNo 기록
+		if(!hasRead) {
+			Cookie c=new Cookie("madangCookie", madangCookieVal+"|"+no+"|");
+			c.setMaxAge(-1); // 브라우저가 close 되거나 logout했을 때
+			response.addCookie(c);
+		}
+		
 		// View에 보여질 글을 가져온다.
-		FreeMadang fm=new FreeMadangService().selectMadang(no);
+		FreeMadang fm=new FreeMadangService().selectMadang(no, hasRead);
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, FreeMadang> preNext=new FreeMadangService().selectPreNext(no);
 		

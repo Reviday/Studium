@@ -2,6 +2,8 @@ package com.studium.madang.model.service;
 
 import static common.template.JDBCTemplate.close;
 import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -28,9 +30,14 @@ public class FreeMadangService {
 		return list;
 	}
 	
-	public FreeMadang selectMadang(int no) {
+	public FreeMadang selectMadang(int no, boolean hasRead) {
 		Connection conn=getConnection();
 		FreeMadang fm=dao.selectMadang(conn, no);
+		if(!hasRead && fm!=null) {
+			int result=dao.updateReadCount(conn,no);
+			if(result>0) commit(conn);
+			else rollback(conn);
+		}
 		close(conn);
 		return fm;
 	}

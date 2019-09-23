@@ -315,12 +315,14 @@
 															//부모 댓글에게 reply가 있는지 확인
 															if(cmt.getCmtReply()=='Y') {
 																//대댓글이 있을 경우 생성 로직을 돌린다.
+														%>
+																	<ul class="reply-list list-unstyled">
+																<%
 																for(FreeMadangCmt reply : replyList) {
 																	//부모댓글과 같은 group에 있는 대댓글만 불러온다.
 																	if(cmt.getCmtGroup()==reply.getCmtGroup()) {
 																		//대댓글 생성
 																		%>
-																			<ul class="reply-list list-unstyled">
 																				<li id="comment<%=reply.getCmtNo()%>">
 																					<div class="rp_admin cng-container">
 																						<div class="cng-header">
@@ -366,18 +368,18 @@
 																						</div>
 																					</div>
 																				</li>
-																			</ul>
 																		<%
 																	}
 																}
+																%>
+																</ul>
+																<% 
 															}
 														%>
-														
 													</li>	
 												<%
 											}
 										}
-									
 									%>
 									</ol>
 

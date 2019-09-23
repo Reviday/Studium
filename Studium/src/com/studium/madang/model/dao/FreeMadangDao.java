@@ -152,4 +152,20 @@ public class FreeMadangDao {
 			close(pstmt);
 		} return preNext;
 	}
+	
+	public int updateReadCount(Connection conn, int madangNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateReadCount");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
 }
