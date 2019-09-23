@@ -217,10 +217,12 @@ set LOGGING_CONFIG=-Dnop
 if not exist "%CATALINA_BASE%\conf\logging.properties" goto noJuliConfig
 set LOGGING_CONFIG=-Djava.util.logging.config.file="%CATALINA_BASE%\conf\logging.properties"
 :noJuliConfig
+set "JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG% -Djava.net.preferIPv4Stack=true"
 
 if not "%LOGGING_MANAGER%" == "" goto noJuliManager
 set LOGGING_MANAGER=-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
 :noJuliManager
+set "JAVA_OPTS=%JAVA_OPTS% %LOGGING_MANAGER% -Djava.net.preferIPv4Stack=true"
 
 rem Configure JAVA 9 specific start-up parameters
 set "JDK_JAVA_OPTIONS=%JDK_JAVA_OPTIONS% --add-opens=java.base/java.lang=ALL-UNNAMED"
