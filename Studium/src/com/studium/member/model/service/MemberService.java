@@ -13,9 +13,8 @@ import com.studium.member.model.vo.Member;
 import com.studium.member.model.vo.MyPurchase;
 
 public class MemberService {
+	
 	private MemberDao dao=new MemberDao();
-
-
 	
 	public Member selectNo(int no) {
 		Connection conn=getConnection();

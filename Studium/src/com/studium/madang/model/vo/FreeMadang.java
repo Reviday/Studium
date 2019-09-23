@@ -7,6 +7,7 @@ public class FreeMadang {
 	private int madangNo; // 글번호
 	private int madangParent; // 답글을 달았을 시, 원글의 글번호를 저장
 	private int madangOrder; // 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+	private int madangWriterUid; // 글쓴이 uid
 	private String madangWriterEmail; // 글쓴이 이메일
 	private String madangWriterName; // 글쓴이 이름
 	private String madangTitle; // 글 제목
@@ -19,19 +20,21 @@ public class FreeMadang {
 	private char madangFilePresence; // 파일이 있는지 없는지(List화면에서 표시용으로 사용)
 	private char madangImgPresence; // 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
 	private char madangStatus; // 삭제 여부
+	private String profilePath; // 프로필 사진의 경로를 담아두는 곳으로, cmt DB에는 없고 DAO로 불러오는 과정에 삽입된다.
 	
 	public FreeMadang() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FreeMadang(int madangNo, int madangParent, int madangOrder, String madangWriterEmail,
+	public FreeMadang(int madangNo, int madangParent, int madangOrder, int madangWriterUid, String madangWriterEmail,
 			String madangWriterName, String madangTitle, String madangContent, Timestamp madangRegisterDatetime,
 			String madangRegisterIp, int madangRecCount, int madangRepCount, int madangReadCount,
-			char madangFilePresence, char madangImgPresence, char madangStatus) {
+			char madangFilePresence, char madangImgPresence, char madangStatus, String profilePath) {
 		super();
 		this.madangNo = madangNo;
 		this.madangParent = madangParent;
 		this.madangOrder = madangOrder;
+		this.madangWriterUid = madangWriterUid;
 		this.madangWriterEmail = madangWriterEmail;
 		this.madangWriterName = madangWriterName;
 		this.madangTitle = madangTitle;
@@ -44,6 +47,7 @@ public class FreeMadang {
 		this.madangFilePresence = madangFilePresence;
 		this.madangImgPresence = madangImgPresence;
 		this.madangStatus = madangStatus;
+		this.profilePath = profilePath;
 	}
 
 	public int getMadangNo() {
@@ -68,6 +72,14 @@ public class FreeMadang {
 
 	public void setMadangOrder(int madangOrder) {
 		this.madangOrder = madangOrder;
+	}
+
+	public int getMadangWriterUid() {
+		return madangWriterUid;
+	}
+
+	public void setMadangWriterUid(int madangWriterUid) {
+		this.madangWriterUid = madangWriterUid;
 	}
 
 	public String getMadangWriterEmail() {
@@ -166,14 +178,24 @@ public class FreeMadang {
 		this.madangStatus = madangStatus;
 	}
 
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeMadang [madangNo=" + madangNo + ", madangParent=" + madangParent + ", madangOrder=" + madangOrder
-				+ ", madangWriterEmail=" + madangWriterEmail + ", madangWriterName=" + madangWriterName
-				+ ", madangTitle=" + madangTitle + ", madangContent=" + madangContent + ", madangRegisterDatetime="
-				+ madangRegisterDatetime + ", madangRegisterIp=" + madangRegisterIp + ", madangRecCount="
-				+ madangRecCount + ", madangRepCount=" + madangRepCount + ", madangReadCount=" + madangReadCount
-				+ ", madangFilePresence=" + madangFilePresence + ", madangImgPresence=" + madangImgPresence
-				+ ", madangStatus=" + madangStatus + "]";
+				+ ", madangWriterUid=" + madangWriterUid + ", madangWriterEmail=" + madangWriterEmail
+				+ ", madangWriterName=" + madangWriterName + ", madangTitle=" + madangTitle + ", madangContent="
+				+ madangContent + ", madangRegisterDatetime=" + madangRegisterDatetime + ", madangRegisterIp="
+				+ madangRegisterIp + ", madangRecCount=" + madangRecCount + ", madangRepCount=" + madangRepCount
+				+ ", madangReadCount=" + madangReadCount + ", madangFilePresence=" + madangFilePresence
+				+ ", madangImgPresence=" + madangImgPresence + ", madangStatus=" + madangStatus + ", profilePath="
+				+ profilePath + "]";
 	}
+
 }

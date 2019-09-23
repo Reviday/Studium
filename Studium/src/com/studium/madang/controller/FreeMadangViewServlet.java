@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.FreeMadangCmtService;
 import com.studium.madang.model.service.FreeMadangService;
+import com.studium.madang.model.service.MadangCmtService;
 import com.studium.madang.model.vo.FreeMadang;
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.vo.MadangCmt;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -78,11 +78,11 @@ public class FreeMadangViewServlet extends HttpServlet {
 		Map<String, FreeMadang> preNext=new FreeMadangService().selectPreNext(no);
 		
 		//Pagination 
-		FreeMadangCmtService service=new FreeMadangCmtService();
+		MadangCmtService service=new MadangCmtService();
 		int totalData=service.selectCountList(no); // 총 데이터 개수
 		String URLmapping="/madnag/freeMadangView"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
+		List<MadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
 		
 		String view="";

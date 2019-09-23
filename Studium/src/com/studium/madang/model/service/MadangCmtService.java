@@ -6,12 +6,12 @@ import static common.template.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.studium.madang.model.dao.FreeMadangCmtDao;
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.dao.MadangCmtDao;
+import com.studium.madang.model.vo.MadangCmt;
 
-public class FreeMadangCmtService {
+public class MadangCmtService {
 	
-	private FreeMadangCmtDao dao=new FreeMadangCmtDao();
+	private MadangCmtDao dao=new MadangCmtDao();
 	
 	public int selectCountList(int madangNo) {
 		Connection conn=getConnection();
@@ -20,10 +20,12 @@ public class FreeMadangCmtService {
 		return result;
 	}
 	
-	public List<FreeMadangCmt> selectCmtList(int madangNo, int cPage, int numPerPage) {
+	public List<MadangCmt> selectCmtList(int madangNo, int cPage, int numPerPage) {
 		Connection conn=getConnection();
-		List<FreeMadangCmt> list=dao.selectCmtList(conn, madangNo, cPage, numPerPage);
+		List<MadangCmt> list=dao.selectCmtList(conn, madangNo, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
+	
+	public 
 }
