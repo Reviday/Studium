@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
+
+import common.template.PaginationTemplate;
 
 /**
  * Servlet implementation class AdminQandAListDeleteServlet
@@ -21,14 +24,14 @@ import com.studium.util.model.vo.SideMenuElement;
 @WebServlet("/AdminQandAListDelete")
 public class AdminQandAListDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminQandAListDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AdminQandAListDeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,19 +39,41 @@ public class AdminQandAListDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		
+
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-		
-		String[] deList = request.getParameterValues("checkQ&A");
-		int result = new AdminService().deleteQnAList(deList);
-		
-		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-		request.setAttribute("elements", elements);
-		
-		if(result > 0 ) {
-			
-			request.getRequestDispatcher("/AdminQandAList").forward(request,response);
-		}
+
+			String[] deList = request.getParameterValues("checkQ&A");
+			String method = request.getParameter("method");
+			int cPage;
+			try {
+				cPage= Integer.parseInt(request.getParameter("cPage"));
+			}catch(NumberFormatException e) {
+				cPage=1;
+			}
+
+
+			AdminService service=new AdminService();
+			int result = service.deleteQnAList(deList);
+
+			if(result > 0 ) {
+
+
+				int totalData=service.selectCountQandA();
+				String URLmapping="/AdminQandAListDelete"; // 패턴을 넘겨주기 위한 변수
+				AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
+				List<QandA> list=service.selectQandAList(cPage,pt.getNumPerPage());
+				request.setAttribute("list",list);
+				request.setAttribute("cPage", cPage);
+				request.setAttribute("pageBar", pt.getPageBar());
+				request.setAttribute("numPerPage", pt.getNumPerPage());
+
+				List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+				request.setAttribute("elements", elements);
+
+				request.getRequestDispatcher("/views/admin/commonQ&A.jsp")
+				.forward(request,response);
+
+			}
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";

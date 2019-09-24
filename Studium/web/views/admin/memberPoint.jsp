@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.studium.admin.model.vo.QandA"%>
+<%@ page import="java.util.List" %>
 <%
 	List<Member> list=(List)request.getAttribute("list");
 	int cPage = (int) request.getAttribute("cPage");
@@ -26,31 +26,24 @@
 			<div>포인트 관리</div>
 			<div>
 				<button id="allcheck">전체</button>
-				<form
-					action="<%=request.getContextPath() %>/admin/memberPointFinder"
-					onsubmit="return search_validate();" style="display: inline-block;">
-					<input type="text" placeholder="검색" name="memberName"
-						class="nameSearch"> <input type="submit" value=""
-						class="submitPicture">
+				<form id="search" style="display: inline-block;">
+					<input type="text" placeholder="검색" name="memberName" class="nameSearch"> 
+					<input type="hidden" value="nameSearch" name="method">
 				</form>
-				<form action="<%=request.getContextPath() %>/admin/memberPointUp"
-					id="pointUp" onsubmit="return point_validate();"
-					style="display: inline-block;">
-					<input type="text" placeholder="금액 입력" name="pointUp"
-						class="pointInput" onkeydown='return onlyNumber(event)'
-						onkeyup='removeChar(event)'> <input type="submit"
-						value="포인트 지급" class="pointSubmit">
+					<input type="submit" value="" class="submitPicture" onclick="nameSearch();">
+				<form id="pointUp" style="display: inline-block;">
+					<input type="hidden" value="pointUp" name="method">
+					<input type="text" placeholder="금액 입력" name="pointUp" class="pointInput" onkeydown='return onlyNumber(event)'onkeyup='removeChar(event)'> 
 				</form>
-				<form action="<%=request.getContextPath() %>/admin/memberPointDown"
-					id="pointDown" onsubmit="return point1_validate();"
-					style="display: inline-block;">
-					<input type="text" placeholder="금액 입력" name="pointDown"
-						class="pointInput1" onkeydown='return onlyNumber(event)'
-						onkeyup='removeChar(event)'> <input type="submit"
-						value="포인트 차감" class="pointSubmit">
+					<input type="submit" value="포인트 지급" class="pointSubmit" onclick="pointUp();">
+				<form id="pointDown" style="display: inline-block;">
+					<input type="hidden" value="pointDown" name="method">
+					<input type="text" placeholder="금액 입력" name="pointDown" class="pointInput1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> 
 				</form>
+					<input type="submit" value="포인트 차감" class="pointSubmit" onclick="pointDown();">
 			</div>
 		</div>
+		<div id="ajaxTable">
 		<table class="memberTable">
 			<tr>
 				<th>선택</th>
@@ -72,9 +65,9 @@
             	%>
 			<tr>
 				<td><input type="checkbox" name="checkMember"
-					class="checkMember" id="checkMember" value="<%=m.getMemNo() %>"
+					class="checkMember" value="<%=m.getMemNo() %>"
 					form="pointUp"> <input type="checkbox" name="checkMember1"
-					class="checkMember1" id="checkMember1" value="<%=m.getMemNo() %>"
+					class="checkMember1" value="<%=m.getMemNo() %>"
 					form="pointDown"></td>
 				<td>
 					<%=m.getMemName() %>
@@ -91,14 +84,15 @@
 				<td><%=m.getMemPoint() %></td>
 				<td class="trNo" style="display:none;"><%=m.getMemNo() %></td>
 				<td>
-					<input type="button" value="내역 확인" class="pointConfirm" id="<%=m.getMemNo() %>"
-						   onclick="PointPageShow();">
+					<input type="button" value="내역 확인" class="pointConfirm" id="<%=m.getMemNo() %>"> 
 				</td>
 			</tr>
 
 			<%} %>
 		</table>
-
+		
+		<%@ include file="/views/common/pagination.jsp"%>
+		</div>
 		<div id="pointPage" class="pointPage">
 
 			<!-- Modal content -->
@@ -115,7 +109,6 @@
 		</div>
 
 
-		<%@ include file="/views/common/pagination.jsp"%>
 	</div>
 </section>
 <script type="text/javascript">
@@ -158,39 +151,6 @@
             }
         }
     })
-    
-    
-
-    function point_validate() {
-    	if($('.checkMember').is(":checked") == false){
-    		alert("회원을 체크하세요.");
-    		return false;
-    	}
-    	
-    	if($('.pointInput').val().trim() == 0) {
-    		alert("포인트를 입력하세요.");
-    		return false;
-    	}
-    }
-    
-    function point1_validate() {
-    	if($('.checkMember1').is(":checked") == false){
-    		alert("회원을 체크하세요.");
-    		return false;
-    	}
-    	
-    	if($('.pointInput1').val().trim() == 0) {
-    		alert("포인트를 입력하세요.");
-    		return false;
-    	}
-    }
-    
-    function search_validate() {
-        if($('.nameSearch').val().trim() == 0) {
-            alert("검색할 이름, 이메일을 입력하세요.");
-            return false;
-        }
-    }
 	
     function onlyNumber(event){
         event = event || window.event;
@@ -210,50 +170,121 @@
             event.target.value = event.target.value.replace(/[^0-9]/g, "");
     }
     
-
-   
-
-    function PointPageShow() {
-    	$.ajax({
-			url:"<%=request.getContextPath()%>/PointPageShow",
-			type:"post",
-			data:{"no":$(".pointConfirm").attr('id')},
-			dataType:"json",
-			success:function(data){
-				console.log(data);
-				if(data[0] != null){
-				var table=$("<table>");
-				var th="<tr><th>일시</th>	<th>금액</th>	<th>상태</th>	</tr>";
-				table.append(th);
-				for(var i=0;i<data.length;i++){
-					var td=$("<td>").html(data[i]['memId']);
-					var td2=$("<td>").html(data[i]['memName']);
-					var td3=$("<td>").html(data[i]['memEmail']);
-					var td4=$("<td>").html(data[i]['point']);
-					if(data[i]['pointStatus'] == 'Y'){
-						var td5=$("<td>").html("지급");
-					}else{
-						var td5=$("<td>").html("차감");
-					}
-					var td6=$("<td>").html(data[i]['pointEnrollDate']);
-					table.append($("<tr>").append(td6).append(td4).append(td5));
-				}
-				$("#pointPageName").text(data[0]['memName']+"("+data[0]['memEmail']+")");
-				$(".PointTable").html(table);
-				
-				$("#pointPage").css("display","block");
-				}else{
-					alert("포인트내역이 없습니다.");
-				}
-			},
-			error:function(r,e,m){
-				console.log(r);
-				console.log(e);
-				console.log(m);	
-				alert("포인트내역이 없습니다.");
-			}
-		});
-    }
+    
+    	$(".pointConfirm").click(function(){
+    		console.log($(this).attr('id'));
+    		$.ajax({
+    			url:"<%=request.getContextPath()%>/PointPageShow",
+    			type:"post",
+    			data:{"no":$(this).attr('id')},
+    			dataType:"json",
+    			success:function(data){
+    				console.log(data);
+    				if(data[0] != null){
+    				var table=$("<table>");
+    				var th="<tr><th>일시</th>	<th>금액</th>	<th>상태</th>	</tr>";
+    				table.append(th);
+    				for(var i=0;i<data.length;i++){
+    					var td=$("<td>").html(data[i]['memId']);
+    					var td2=$("<td>").html(data[i]['memName']);
+    					var td3=$("<td>").html(data[i]['memEmail']);
+    					var td4=$("<td>").html(data[i]['point']);
+    					if(data[i]['pointStatus'] == 'Y'){
+    						var td5=$("<td>").html("지급");
+    					}else{
+    						var td5=$("<td>").html("차감");
+    					}
+    					var td6=$("<td>").html(data[i]['pointEnrollDate']);
+    					table.append($("<tr>").append(td6).append(td4).append(td5));
+    				}
+    				$("#pointPageName").text(data[0]['memName']+"("+data[0]['memEmail']+")");
+    				$(".PointTable").html(table);
+    				
+    				$("#pointPage").css("display","block");
+    				}else{
+    					alert("포인트내역이 없습니다.");
+    				}
+    			},
+    			error:function(r,e,m){
+    				console.log(r);
+    				console.log(e);
+    				console.log(m);	
+    				alert("포인트내역이 없습니다.");
+    			}
+    		});
+    	})
+    
+    	function nameSearch(cPage) {
+    			
+        		if(!$(".nameSearch").val().trim()){
+        			alert("검색할 이름, 이메일을 입력하세요.");
+        		}else{
+        		var params = jQuery("#search").serialize();
+        		params+='&cPage='+cPage;
+        		$.ajax({
+        			url: "<%=request.getContextPath() %>/admin/memberPointFinder",
+        			type: "POST",
+        			dataType: "html",
+        			data: params,
+        			success: function(data){
+        				$("#ajaxTable").html("");
+        				$("#ajaxTable").html(data);
+        			}
+        		})
+        		}
+        	}
+    	
+    	function pointUp(cPage) {
+    		if($('.checkMember').is(":checked") == false){
+        		alert("회원을 체크하세요.");
+        		return false;
+        	}
+        	
+        	if($('.pointInput').val().trim() == 0) {
+        		alert("포인트를 입력하세요.");
+        		return false;
+        	}	
+    
+    		var params = jQuery("#pointUp").serialize();
+    		params+='&cPage='+cPage;
+    		$.ajax({
+    			url: "<%=request.getContextPath() %>/admin/memberPointUp",
+    			type: "POST",
+    			dataType: "html",
+    			data: params,
+    			success: function(data){
+    				$("#ajaxTable").html("");
+    				$("#ajaxTable").html(data);
+    			}
+    		})
+    		
+    	}
+    	
+    	function pointDown(cPage) {
+    		if($('.checkMember1').is(":checked") == false){
+        		alert("회원을 체크하세요.");
+        		return false;
+        	}
+        	
+        	if($('.pointInput1').val().trim() == 0) {
+        		alert("포인트를 입력하세요.");
+        		return false;
+        	}	
+    
+    		var params = jQuery("#pointDown").serialize();
+    		params+='&cPage='+cPage;
+    		$.ajax({
+    			url: "<%=request.getContextPath() %>/admin/memberPointDown",
+    			type: "POST",
+    			dataType: "html",
+    			data: params,
+    			success: function(data){
+    				$("#ajaxTable").html("");
+    				$("#ajaxTable").html(data);
+    			}
+    		})
+    		
+    	}
   
 </script>
 

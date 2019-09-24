@@ -20,10 +20,10 @@
         <div>
             1:1문의 관리
         </div>
-        <form action="<%=request.getContextPath()%>/AdminQandAListDelete" method="post"
-            onsubmit="return delete_validate();">
+        <form method="post" id="deleteQnA">
             <input type="checkbox" name="allcheck" id="alldelete">
-            <input type="submit" value="삭제" id="deletebtn">
+            <input type="hidden" name="method" value="deleteQnA"> 
+        	<button type="button" id="deletebtn" onclick="deleteQnA();">삭제</button>
             <table class="qandaTable">
                 <tr>
                     <th>선택</th>
@@ -64,18 +64,33 @@
         })
     })
 
-    function delete_validate() {
-        if ($('input:checkbox[name="checkQ&A"]').is(":checked") == false) {
-            alert("선택된 글이 없습니다.");
-            return false;
-        }else{
-        	if(confirm("정말 삭제하시겠습니까?")){
-        		return true;
-        	}else{
-        		return false;
-        	}
-        	
-        }
+
+    
+    function deleteQnA(cPage){
+    	if($('input:checkbox[name="checkQ&A"]').is(":checked") == false){
+    		alert("선택된 글이 없습니다.");
+    		return false;
+    	}
+    	
+    	var result = confirm("삭제하시겠습니까?");
+
+		if(result){
+		var params = jQuery("#deleteQnA").serialize();
+		params+='&cPage='+cPage;
+		$.ajax({
+			url: "<%=request.getContextPath()%>/AdminQandAListDelete",
+			type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$(".qanda").html("");
+				$(".qanda").html(data);
+			}
+		})
+		return true;
+		}else{
+			return false;
+		}
     }
 
   

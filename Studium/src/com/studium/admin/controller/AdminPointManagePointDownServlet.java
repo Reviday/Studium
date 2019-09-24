@@ -45,7 +45,14 @@ public class AdminPointManagePointDownServlet extends HttpServlet {
 			String[] memberNo = request.getParameterValues("checkMember1");
 			String[] memName = request.getParameterValues("memName1");
 			String[] memEmail = request.getParameterValues("memEmail1");
-	
+			String method = request.getParameter("method");
+			int cPage;
+			try {
+			 cPage= Integer.parseInt(request.getParameter("cPage"));
+			}catch(NumberFormatException e) {
+				cPage=1;
+			}
+			
 			AdminService service = new AdminService();
 			
 			service.pointDownContent(point, memberNo, memName, memEmail);
@@ -54,31 +61,26 @@ public class AdminPointManagePointDownServlet extends HttpServlet {
 			List<Integer> memPoint = service.memberPoint(memberNo);
 			
 			List<Integer> memberPoint = new ArrayList<Integer>();
-			System.out.println(memberNo.length);
 			for(int i = 0; i < memberNo.length; i++) {
 				int a = memPoint.get(i) - Integer.parseInt(point);
 				memberPoint.add(a);
 			}
-			/*
-			 * for(int i : memPoint) { int a = memPoint.get(i) + Integer.parseInt(point);
-			 * memberPoint.add(a); }
-			 */
 			
 			int result = service.memberPointUp(memberNo, memberPoint);
 			
 			if( result > 0 ) {
 				String URLmapping="/admin/memberPointUp"; // 패턴을 넘겨주기 위한 변수
 				int totalData=service.selectCountPointMember();
-				PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
-				List<Member> list=service.selectMemberPointList(pt.getcPage(),pt.getNumPerPage());
+				AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
+				List<Member> list=service.selectMemberPointList(cPage,pt.getNumPerPage());
 				request.setAttribute("list",list);
-				request.setAttribute("cPage", pt.getcPage());
+				request.setAttribute("cPage", cPage);
 				request.setAttribute("pageBar", pt.getPageBar());
 				request.setAttribute("numPerPage", pt.getNumPerPage());
 				
 				List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 				request.setAttribute("elements", elements);
-				request.getRequestDispatcher("/views/admin/memberPoint.jsp")
+				request.getRequestDispatcher("/views/admin/commonPoint.jsp")
 						.forward(request,response);
 			}
 			

@@ -54,12 +54,14 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 		String memberName = request.getParameter("memberName");
 		String method = request.getParameter("method");
 		int cPage;
-		try {
-		 cPage= Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage=1;
-		}
+		
 		if(isEmail(memberName) == true) {
+			try {
+				 cPage= Integer.parseInt(request.getParameter("cPage"));
+				}catch(NumberFormatException e) {
+					cPage=1;
+				}
+
 			AdminService service=new AdminService();
 			int totalData=service.selectCountMemberEmail(memberName);
 			String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
@@ -78,7 +80,12 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/admin/commonInquery.jsp")
 					.forward(request,response);
 		}else {
-		
+			try {
+				 cPage= Integer.parseInt(request.getParameter("cPage"));
+				}catch(NumberFormatException e) {
+					cPage=1;
+				}
+
 		AdminService service=new AdminService();
 		int totalData=service.selectCountMemberName(memberName);
 		String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수

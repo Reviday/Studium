@@ -51,45 +51,52 @@ public class AdminPointManageFinder extends HttpServlet {
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
 		
 		String memberName = request.getParameter("memberName");
+		String method = request.getParameter("method");
+		int cPage;
+		try {
+		 cPage= Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
 		
 		if(isEmail(memberName) == true) {
 			AdminService service=new AdminService();
 			int totalData=service.selectCountMemberEmail(memberName);
 			String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
-			PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+			AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 			pt.setQueryString("memberName", memberName);
-			List<Member> list=service.selectMemberEmailList(pt.getcPage(),pt.getNumPerPage(), memberName);
-			
+			List<Member> list=service.selectMemberEmailList(cPage,pt.getNumPerPage(), memberName);
+		
 			
 			request.setAttribute("list",list);
-			request.setAttribute("cPage", pt.getcPage());
+			request.setAttribute("cPage", cPage);
 			request.setAttribute("pageBar", pt.getPageBar());
 			request.setAttribute("numPerPage", pt.getNumPerPage());
 			
 			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 			request.setAttribute("elements", elements);
 			
-			request.getRequestDispatcher("/views/admin/memberPoint.jsp")
+			request.getRequestDispatcher("/views/admin/commonPoint.jsp")
 					.forward(request,response);
 		}else {
 		
 		AdminService service=new AdminService();
 		int totalData=service.selectCountMemberName(memberName);
 		String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 		pt.setQueryString("memberName", memberName);
-		List<Member> list=service.selectMemberNameList(pt.getcPage(),pt.getNumPerPage(), memberName);
-		
+		List<Member> list=service.selectMemberNameList(cPage,pt.getNumPerPage(), memberName);
+		System.out.println(list);
 		
 		request.setAttribute("list",list);
-		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 		request.setAttribute("elements", elements);
 		
-		request.getRequestDispatcher("/views/admin/memberPoint.jsp")
+		request.getRequestDispatcher("/views/admin/commonPoint.jsp")
 				.forward(request,response);
 			}
 		}else {
