@@ -67,7 +67,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                            <input type="checkbox" id="recieveEmail" value="Y">
+                                            <input type="checkbox" id="receiveEmail" value="Y" <%if(m.getMemReceiveEmail()=='Y'){ %> checked="checked" <%} %>>
                                                 <div>
                                                     <canvas></canvas>
                                                 </div>
@@ -82,7 +82,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                    <input type="checkbox" id="useNote" value="Y">
+                                    <input type="checkbox" id="useNote" value="Y" <%if(m.getMemUseNote()=='Y'){ %> checked="checked" <%} %>>
                                         <div>
                                            <canvas></canvas>
                                         </div>
@@ -97,7 +97,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                    <input type="checkbox" id="receiveSms" value="Y">
+                                    <input type="checkbox" id="receiveSms" value="Y" <%if(m.getMemReceiveSms()=='Y'){ %> checked="checked" <%} %>>
                                         <div>
                                            <canvas></canvas>
                                         </div>
@@ -112,7 +112,7 @@
                         <div class="col-5">
                             <div class="switchForm">
                                 <label class="switch">
-                                     <input type="checkbox" id="openProfile" value="Y">
+                                     <input type="checkbox" id="openProfile" value="Y" <%if(m.getMemOpenProfile()=='Y'){ %> checked="checked" <%} %>>
                                         <div>
                                              <canvas></canvas>
                                                 </div>
@@ -148,30 +148,41 @@
     <script>
     //체크박스 이벤트
     var test="";
-        $(document).ready(function(){
+    var status="";
+    
+    $(document).ready(function(){
         //이메일수신여부값
-        $("#recieveEmail").change(function(){
-            if($("#recieveEmail").is(":checked")){
-            	alert("체크박스 체크했음!");
+        $("#receiveEmail").change(function(){//체크박스 상태 변화시
+            if($("#receiveEmail").is(":checked")){//체크되면 status 에 true, value에 있는 Y값 넣음
                 test=$(this).val();
-                $.ajax({
-                	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
-                    type:'POST',
-    				cache: false,
-    				dataType: "json",
-                    data:{"recieveEmail":test},
-                    success:function(data){
-                    	$("#recieveEmail").prop('checked', true);
-                    }
+                console.log(test);
+                status=true;
+            }else {
+           	 test='N';
+           	 status=false;
+             console.log(test);
+           }
+               $.ajax({
+               	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                   type:'POST',
+   				cache: false,
+   				dataType: "json",
+                   data:{"receiveEmail":test},
+                   success:function(data){
+                   	$("#receiveEmail").prop('checked', status);
+                   }
 
-        		});
-            
-            }
-        });
+       		});
+       });
+        //쪽지수신여부
         $("#useNote").change(function(){
             if($("#useNote").is(":checked")){
-            	alert("체크박스 체크했음!");
                 test=$(this).val();
+                status=true;
+            }else{
+            	 test='N';
+            	 status=false;
+            }
                 $.ajax({
                 	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
                     type:'POST',
@@ -179,47 +190,53 @@
     				dataType: "json",
                     data:{"useNote":test},
                     success:function(data){
-                    	$("#useNote").prop('checked', true);
+                    	$("#useNote").prop('checked', status);
                     }
 
         		});
-            
-            }
         });
+
+        //문자수신여부
         $("#receiveSms").change(function(){
             if($("#receiveSms").is(":checked")){
-                alert("체크박스 체크했음!");
                 test=$(this).val();
-                $.ajax({
-                	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
-                    type:'POST',
-    				cache: false,
-    				dataType: "json",
-                    data:{"receiveSms":test},
-                    success:function(data){
-                    	$("#receiveSms").prop('checked', true);
-                    }
-
-        		});
-            
+                status=true;
+            }else{
+            	 test='N';
+            	 status=false;
             }
+            $.ajax({
+            	url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                type:'POST',
+				cache: false,
+				dataType: "json",
+                data:{"receiveSms":test},
+                success:function(data){
+                	$("#receiveSms").prop('checked', status);
+                }
+
+    		});
         });
+
+        //프로필공개여부
         $("#openProfile").change(function(){
             if($("#openProfile").is(":checked")){
                 test=$(this).val();
-                $.ajax({
-        			url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
-                    type:'POST',
-    				cache: false,
-    				dataType: "json",
-                    data:{"openProfile":test},
-                    success:function(data){
-                    	$("#openProfile").prop('checked', true);
-                    }
+                status=true;
+            }else{
+            	 test='N';
+            	 status=false;
+            }$.ajax({
+    			url:'<%=request.getContextPath()%>/myPage/settingEnd?no=<%=m.getMemNo()%>',
+                type:'POST',
+				cache: false,
+				dataType: "json",
+                data:{"openProfile":test},
+                success:function(data){
+                	$("#openProfile").prop('checked', status);
+                }
 
-        		});
-            
-            }
+    		});
         }); 
     }); 
    

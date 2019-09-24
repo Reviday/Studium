@@ -79,14 +79,15 @@ public class MemberService {
 		return list;
 		
 	}
-	public int updateSetting(String settingName, int no) {
+	
+	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();
-		int result=dao.updateSetting(conn, settingName, no);
+		int result=dao.updateSetting(conn, settingName,type, no);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
-		
 	}
+
 }
 

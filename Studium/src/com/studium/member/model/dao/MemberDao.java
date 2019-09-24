@@ -316,42 +316,40 @@ public class MemberDao {
 		} return list;
 	}
 
-	public int updateSetting(Connection conn, String settingName, int no) {
-		String sql="";
+	public int updateSetting(Connection conn, String settingName, String type, int no) {
+		String setString="";
 		PreparedStatement pstmt=null;
 		int result=0;
 		
-		if(settingName.equals("recieveEmail")) {
-			sql= prop.getProperty("recieveEmail");
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, "Y");
-				pstmt.setInt(2, no);
-				result=pstmt.executeUpdate();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-				
-			} 
+		if(settingName.equals("receiveEmail")) {
+			setString="receiveEmail";
 		}
-		if(settingName.equals("recieveEmail")) {
-			sql= prop.getProperty("recieveEmail");
-			try {
-				pstmt=conn.prepareStatement(sql);
-
-				pstmt.setString(1, "Y");
-				pstmt.setInt(2, no);
-
-				result=pstmt.executeUpdate();
-				
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-				
-			} 
+		if(settingName.equals("useNote")) {
+			setString="useNote";
 		}
+		if(settingName.equals("receiveSms")) {
+			setString="receiveSms";
+		}
+		if(settingName.equals("openProfile")) {
+			setString="openProfile";
+		}
+		
+
+		String sql= prop.getProperty(setString);
+		try {
+			pstmt=conn.prepareStatement(sql);
+
+			pstmt.setString(1, type);
+			pstmt.setInt(2, no);
+
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		} 
 
 		
 		return result;
