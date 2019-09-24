@@ -51,13 +51,7 @@ public class SettingEndServlet extends HttpServlet {
 			setName="openProfile";
 			result=ms.updateSetting(setName,openProfile, no);
 		}
-		if(result>0) {
-			System.out.println("변경성공");
-		}else{
-
-			System.out.println("변경실패");
-			
-		}
+		
 
 		}
 

@@ -17,6 +17,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
+import common.policy.StudiumFileRenamePolicy;
+
 /**
  * Servlet implementation class ChangeMyPhotoServlet
  */
@@ -63,7 +65,7 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 					saveDir,
 					maxSize,
 					"UTF-8",
-					new DefaultFileRenamePolicy() 
+					new StudiumFileRenamePolicy() 
 					);
 		
 			
