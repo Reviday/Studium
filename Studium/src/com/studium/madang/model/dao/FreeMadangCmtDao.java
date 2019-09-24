@@ -70,7 +70,7 @@ private Properties prop=new Properties();
 			while(rs.next()) {
 				FreeMadangCmt cmt=new FreeMadangCmt();
 				cmt.setCmtNo(rs.getInt("cmt_no"));
-				cmt.setCmtGroup(rs.getInt("cmt_group"));
+				cmt.setCmtParent(rs.getInt("cmt_parent"));
 				cmt.setCmtSort(rs.getInt("cmt_sort"));
 				cmt.setCmtMadangNo(rs.getInt("cmt_madang_no"));
 				cmt.setCmtContent(rs.getString("cmt_content"));
@@ -100,16 +100,79 @@ private Properties prop=new Properties();
 	public int insertComment(Connection conn, FreeMadangCmt cmt) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("insertComment");
+		String insertsql=prop.getProperty("insertComment");
 		
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(insertsql);
 			pstmt.setInt(1, cmt.getCmtMadangNo());
 			pstmt.setString(2, cmt.getCmtContent());
 			pstmt.setInt(3, cmt.getCmtWriterUid());
 			pstmt.setString(4, cmt.getCmtWriter());
 			pstmt.setString(5, cmt.getCmtWriterName());
 			pstmt.setString(6, cmt.getCmtRegisterIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int insertReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		// 대댓글을 추가하기 위한 SQL문
+		String sql=prop.getProperty("insertReply");
+		
+		try {
+			// 기존 대댓글의 SORT값을 UPDATE 시킨 이후, 대댓글을 추가한다.
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtParent());
+			pstmt.setInt(2, cmt.getCmtMadangNo());
+			pstmt.setString(3, cmt.getCmtContent());
+			pstmt.setInt(4, cmt.getCmtWriterUid());
+			pstmt.setString(5, cmt.getCmtWriter());
+			pstmt.setString(6, cmt.getCmtWriterName());
+			pstmt.setString(7, cmt.getCmtRegisterIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateReplySort(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		// 대댓글 추가시, 기존의 댓글들의 SORT 값을 증가시키기 위한 UPDATE 문
+		String sql=prop.getProperty("updateReplySort");
+		
+		try {
+			// 대댓글을 INSERT 하기 전에, 기존에 존재하는 대댓글의 SORT값을 증가시킨다
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtParent());
+			
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	
+	public int updateCmtReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		// 대댓글 추가시, 해당 댓글에 cmt_reply을 'Y'로 세팅한다.(기존에 'Y'값이어도 상관없다.);
+		String sql=prop.getProperty("updateCmtReply");
+		
+		try {
+			// 대댓글을 INSERT 하기 전에, 기존에 존재하는 대댓글의 SORT값을 증가시킨다
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtParent());
+			
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace(); 

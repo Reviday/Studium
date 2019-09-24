@@ -6,7 +6,7 @@ import java.util.Date;
 public class FreeMadangCmt {
 	
 	private int cmtNo; // 댓글 시퀀스 넘버
-	private int cmtGroup; // 댓글 번호 그룹(댓글과 대댓글을 한 그룹으로 봄)
+	private int cmtParent; // 부모 댓글의 번호를 가짐. 부모는 null
 	private int cmtSort; // 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
 	private int cmtMadangNo; // 게시글 번호(왜래키)
 	private String cmtContent; // 댓글 내용
@@ -27,13 +27,13 @@ public class FreeMadangCmt {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FreeMadangCmt(int cmtNo, int cmtGroup, int cmtSort, int cmtMadangNo, String cmtContent, char cmtReply,
+	public FreeMadangCmt(int cmtNo, int cmtParent, int cmtSort, int cmtMadangNo, String cmtContent, char cmtReply,
 			int cmtWriterUid, String cmtWriter, String cmtWriterName, Timestamp cmtRegisterDatetime,
 			Timestamp cmtUpdatedDatetime, String cmtRegisterIp, String cmtUpdatedIp, char status, int cmtBlame,
 			char cmtBlameAdmin, String profilePath) {
 		super();
 		this.cmtNo = cmtNo;
-		this.cmtGroup = cmtGroup;
+		this.cmtParent = cmtParent;
 		this.cmtSort = cmtSort;
 		this.cmtMadangNo = cmtMadangNo;
 		this.cmtContent = cmtContent;
@@ -59,12 +59,12 @@ public class FreeMadangCmt {
 		this.cmtNo = cmtNo;
 	}
 
-	public int getCmtGroup() {
-		return cmtGroup;
+	public int getCmtParent() {
+		return cmtParent;
 	}
 
-	public void setCmtGroup(int cmtGroup) {
-		this.cmtGroup = cmtGroup;
+	public void setCmtParent(int cmtParent) {
+		this.cmtParent = cmtParent;
 	}
 
 	public int getCmtSort() {
@@ -189,7 +189,7 @@ public class FreeMadangCmt {
 
 	@Override
 	public String toString() {
-		return "FreeMadangCmt [cmtNo=" + cmtNo + ", cmtGroup=" + cmtGroup + ", cmtSort=" + cmtSort + ", cmtMadangNo="
+		return "FreeMadangCmt [cmtNo=" + cmtNo + ", cmtParent=" + cmtParent + ", cmtSort=" + cmtSort + ", cmtMadangNo="
 				+ cmtMadangNo + ", cmtContent=" + cmtContent + ", cmtReply=" + cmtReply + ", cmtWriterUid="
 				+ cmtWriterUid + ", cmtWriter=" + cmtWriter + ", cmtWriterName=" + cmtWriterName
 				+ ", cmtRegisterDatetime=" + cmtRegisterDatetime + ", cmtUpdatedDatetime=" + cmtUpdatedDatetime

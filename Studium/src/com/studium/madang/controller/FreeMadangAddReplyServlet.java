@@ -1,7 +1,6 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +11,16 @@ import com.studium.madang.model.service.FreeMadangCmtService;
 import com.studium.madang.model.vo.FreeMadangCmt;
 
 /**
- * Servlet implementation class AddCommentServlet
+ * Servlet implementation class FreeMadangAddReplyServlet
  */
-@WebServlet("/madang/freeAddComment")
-public class FreeMadangAddCommentServlet extends HttpServlet {
+@WebServlet("/madang/freeAddReply")
+public class FreeMadangAddReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-
-    public FreeMadangAddCommentServlet() {
+     * @see HttpServlet#HttpServlet()
+     */
+    public FreeMadangAddReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,9 +39,10 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 		cmt.setCmtWriterName(request.getParameter("memName"));
 		cmt.setCmtContent(request.getParameter("content"));
 		cmt.setCmtRegisterIp(request.getParameter("REMOTE_ADDR"));
-		
-		int result=new FreeMadangCmtService().insertComment(cmt);
-		
+		cmt.setCmtParent(Integer.parseInt(request.getParameter("cmtNo")));
+		System.out.println("request.getParameter(\"cmtNo\"):" + request.getParameter("cmtNo"));
+		int result=new FreeMadangCmtService().insertReply(cmt);
+		System.out.println("cmt.getCmtParent():"+cmt.getCmtParent());
 		String view="";
 		if(result>0) {
 			view="/madnag/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;

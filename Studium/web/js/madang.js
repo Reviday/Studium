@@ -25,10 +25,14 @@ function fn_needLogin() {
 
 function fn_addComment(path,REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
 	var commentArea=document.getElementById('comment_text');
-	console.log("/madang/freeAddComment?madangNo="+ madangNo + "&memberNo=" + memberNo 
-			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
-			+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage);
 	location.href=path+"/madang/freeAddComment?madangNo="+ madangNo + "&memberNo=" + memberNo 
 	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
 	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage;
+};
+
+function fn_addReply(path,REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
+	var commentArea=document.getElementById('comment_text_rep');
+	location.href=path+"/madang/freeAddReply?madangNo="+ madangNo + "&memberNo=" + memberNo 
+	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
+	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage +"&cmtNo=" + cmtNo;
 };

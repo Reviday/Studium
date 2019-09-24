@@ -268,7 +268,7 @@
 						                                        <span class="name ie-nanum">
 						                                            <img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>"
 						                                                alt="BlogIcon" width="64" height="64"
-						                                                onerror="this.parentNode.removeChild(this)">
+						                                                onerror="this.onerror='';this.src='<%=request.getContextPath()%>/upload/myPage/nonProfile.png'">
 						                                            <a href="https://sonylove.tistory.com"
 						                                                onclick="return openLinkInNewWindow(this)">
 						                                                <%=cmt.getCmtWriterName()%>
@@ -312,7 +312,23 @@
 						                                                    <td class="i3">
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
-						                                                            <a href="#" class="u_cbox_txt_upload _submitCmtRep">등록</a>
+						                                                           <%
+																							if(loginMember!=null) {
+																																	//로그인 상태일때
+																						%>
+																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
+																								onclick="fn_addReply('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+																								등록</a>													
+																							<%
+																																					} else {
+																																															//비로그인 상태일때
+																																				%>
+																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
+																								onclick="fn_needLogin(); return false;">
+																								등록</a>	
+																							<%
+																									}
+																								%>
 						                                                        </div>
 						                                                    </td>
 						                                                </tr>
@@ -330,14 +346,14 @@
 												} else {
 													//대댓글 작성 로직
 									%>					
-												<li class="reply-list list-unstyled" id="comment<%=cmt.getCmtNo()%>">
+												<li class="reply-list list-unstyled <%=cmt.getCmtSort()==1?"last":"" %>" id="comment<%=cmt.getCmtNo()%>">
                                                             <div class="rp_admin cng-container">
                                                                 <div class="cng-header">
                                                                     <span class="blogicon"></span> 
                                                                     <span class="name ie-nanum">
                                                                         <img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>" alt="BlogIcon"
                                                                             width="64" height="64"
-                                                                            onerror="this.parentNode.removeChild(this)"> 
+                                                                            onerror="this.onerror='';this.src='<%=request.getContextPath()%>/upload/myPage/nonProfile.png'"> 
                                                                         <a href="https://cocosoft.kr"
                                                                         onclick="return openLinkInNewWindow(this)"><%=cmt.getCmtWriterName() %>
                                                                         </a>
@@ -455,12 +471,6 @@
 			<div class="remote-area-radi-bottom"></div>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			console.log($(".reply-list").last());
-			$(".reply-list").last().css("height","45px");
-		});
-	</script>
 	<div class="col-lg-1"></div>
 </section>
 <%@ include file="/views/common/footer.jsp"%>
