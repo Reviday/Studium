@@ -1,25 +1,15 @@
-/*
-[첫 회원가입 시 - 1안]
-- 회원 아이디
-- 회원 비밀번호
-- 회원 이름
-- 회원 생년월일
-- 회원 성별
-
-[첫 회원가입시 - 2안]
-- 회원 이메일 
-- 회원 비밀번호
-(- 회원 닉네임&이름)
- => 그 외 정보는 추가정보 입력으로
-    첫 회원 가입시 입력받는 정보들만 必(not null 제약)
-
-[스터디 이용시 추가 정보 입력 => 1,2안 외 나머지 정보들]
-- 
-*/
 -- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
 -- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
 alter session set nls_date_format = 'YYYY.MM.DD HH24:MI:SS'; 
 
+drop table ta_sidemenu_elements;
+drop sequence ta_sidemenu_seq;
+drop table ta_fmadang_cmt;
+drop sequence fmadang_cmt_seq ;
+drop table ta_free_madang;
+drop sequence fboard_seq;
+drop table ta_share_madang;
+drop sequence sboard_seq;
 drop table ta_member;
 drop sequence mem_seq;
 
@@ -107,37 +97,6 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
  Q) 게시글에 이미지를 삽입할 경우, 어떻게 처리해야하는지?
 */
 
-drop table ta_study_madang;
-drop sequence sboard_seq;
-
--- 공부마당(or 풀이마당)
-/* 글쓴이가 계정을 탈퇴한다고 게시글이 삭제되는 경우도 드물기에 외래키 지정 안 함 */
-create table ta_study_madang(
-    board_no number constraint board_no_pk primary key, -- 글번호
-    board_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
-    /* 0번부터 순차적으로 부여, board_no을 오름차순으로 정렬해놓은 상태면,
-    board_order을 내림차순으로 2차 정렬하면 원하는 글 순서가 출력된다.
-    board_order가 0이 아닌 글은 답글로 판단하면 될 듯.*/
-    board_writer_id varchar2(20), -- 글쓴이 아이디
-    board_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
-    board_title varchar2(100) constraint board_title_nn not null, -- 글 제목
-    board_content clob constraint board_content_nn not null, -- 글 내용
-    board_register_datetime date, -- 글 작성 일시
---  board_register_ip varchar2(20) -- 글 작성 ip 주소
-    board_rec_count number default 0, -- 글 추천 수(recommand)
-    board_fork_count number default 0, -- 글 포크 수 
-    board_que_count number default 0 -- 글 풀이 수
-);
-
--- 공부마당(풀이마당)
-create sequence sboard_seq 
-start with 1
-increment by 1
-maxvalue 999999;
-
-drop table ta_share_madang;
-drop sequence sboard_seq;
-
 -- 공유마당
 create table ta_share_madang(
     madang_no number constraint smadang_no_pk primary key, -- 글번호
@@ -166,10 +125,6 @@ increment by 1
 maxvalue 999999;
 
 
-
-drop table ta_free_madang;
-drop sequence fboard_seq;
-
 -- 자유마당
 create table ta_free_madang(
     madang_no number constraint fmadang_no_pk primary key, -- 글번호
@@ -195,20 +150,6 @@ create sequence fboard_seq
 start with 1
 increment by 1
 maxvalue 999999;
-
-UPDATE TA_FREE_MADANG SET MADANG_READ_COUNT=MADANG_READ_COUNT+1 WHERE MADANG_NO=110;
-SELECT * FROM 
-( 
-SELECT MADANG_NO, MADANG_TITLE,
-LEAD(MADANG_TITLE,1,'다음글') OVER (ORDER BY MADANG_NO) NEXT_TITLE,
-LAG(MADANG_TITLE,1,'이전글') OVER (ORDER BY MADANG_NO) PRE_TITLE 
-FROM TA_FREE_MADANG 
-) 
-WHERE MADANG_NO=10;
-
-SELECT * FROM (SELECT MADANG_NO, LAG(MADANG_NO,1) OVER(ORDER BY MADANG_NO) PREV, LAG(MADANG_TITLE,1) OVER(ORDER BY MADANG_NO) PREV_TITLE, LEAD(MADANG_NO,1) OVER(ORDER BY MADANG_NO) NEXT, LEAD(MADANG_TITLE,1) OVER(ORDER BY MADANG_NO) NEXT_TITLE FROM TA_FREE_MADANG) WHERE MADANG_NO=1;
-
-
 
 -- 테스트용 더미 데이터(자유마당)
 insert into ta_free_madang values(fboard_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', '테스트 글 입니다.1',sysdate, null, default,default, default, default, default, default);
@@ -367,28 +308,6 @@ insert into ta_share_madang values(sboard_seq.nextval, 10, 2, 10000, 'admin@stud
 commit;
 
 
-
-create table free_madang_file (
-    fmf_no number fmf_id_pk primary key,-- 파일 번호 
-    madang_no number constraint madang_no_fk references ta_free_madang(madang_no), -- 마당글 번호
-    member_no number constraint member_no_fk references ta_member(mem_no), -- 회원 번호
-    fmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
-    fmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
-    fmf_download_count number, -- 다운로드 회수
-    fmf_filesize number, -- 파일 크기
-    fmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
-    fmf_width number default null, -- 이미지일 경우 이미지 가로값
-    fmf_height number default null, -- 이미지일 경우 이미지 세로값
-    fmf_type varchar2(20), -- 파일 확장자
-    fmf_datetime date, -- 등록일자
-    fmf_ip varchar2(20) -- 등록 ip
-);
-
-
-
-
-
-
 -- 댓글 테이블
 
 -- 공부마당 댓글 테이블
@@ -400,23 +319,6 @@ create table free_madang_file (
     2. parent가 null이 아닐 경우, parent로 정렬한다.
     3. 첫번째 정렬 조건에서 값이 같을 경우 cmt_seq로 정렬한다.
 */
-create table ta_qboard_rep (
-    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
-    cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
-    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
-    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
-    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
-);
-
--- 공유마당 댓글 테이블
-create table ta_sboard_rep (
-    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
-    cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
-    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
-    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
-    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
-);
-
 -- 자유마당 댓글 테이블
 create table ta_fmadang_rep (
     madang_no number constraint madang_no_fk references ta_free_madang(madang_no), -- 게시글 번호(외래키)
@@ -425,8 +327,7 @@ create table ta_fmadang_rep (
     parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
     cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
 );
-drop table ta_fmadang_cmt;
-drop sequence fmadang_cmt_seq ;
+
 
 -- 댓글 테이블 => 각 게시판당 한 개의 테이블 생성 => 댓글 테이블은 계층형으로 도전!
 create table ta_fmadang_cmt (
@@ -454,18 +355,18 @@ start with 1
 increment by 1
 maxvalue 9999999;
 
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.3', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 1, 110, '테스트 대댓글입니다.3-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.4', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 2, 110, '테스트 대댓글입니다.3-2', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 5, 1, 110, '테스트 대댓글입니다.4-1', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.5', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, 'N', default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, 'N', default, default);
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, 'Y');
-insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, sysdate, null, null, default, default, 'Y');
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.2', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default,110, '테스트 댓글입니다.3', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 1, 110, '테스트 대댓글입니다.3-1', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.4', 'Y', 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 3, 2, 110, '테스트 대댓글입니다.3-2', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, 5, 1, 110, '테스트 대댓글입니다.4-1', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '테스트 댓글입니다.5', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, 'N', default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '출력되면 안되는 댓글입니다.', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, 'N', default, default);
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, 'Y');
+insert into ta_fmadang_cmt values(fmadang_cmt_seq.nextval, fmadang_cmt_seq.currval, default, 110, '신고접수로 삭제된 댓글.', default, 10000, 'admin@studium.com', '관리자', sysdate, null, null, null, default, default, 'Y');
 SELECT NVL(MIN(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3';
 SELECT * FROM TA_FMADANG_CMT WHERE CMT_GROUP = '3';
 SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FMADANG_CMT WHERE CMT_MADANG_NO=110 AND CMT_STATUS='Y' AND CMT_BLAME_ADMIN='N' ORDER BY CMT_GROUP ASC, CMT_SORT ASC) A) WHERE RNUM BETWEEN 1 AND 50;
@@ -473,74 +374,12 @@ SELECT COUNT(*) FROM TA_FMADANG_CMT WHERE CMT_MADANG_NO=110 AND CMT_STATUS='Y' A
 SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3';
 --UPDATE TA_FMADANG_CMT SET CMT_SORT = CMT_SORT + 1 WHERE CMT_GROUP =  3  AND CMT_SORT >= 0;
 -- 댓글의 경우
-INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, FMADANG_CMT_SEQ.CURRVAL, DEFAULT, 110, '새로 추가된 댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, FMADANG_CMT_SEQ.CURRVAL, DEFAULT, 110, '새로 추가된 댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- 대댓글의 경우 
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 13, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '13')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, (SELECT NVL(MAX(CMT_SORT),0) FROM TA_FMADANG_CMT WHERE  CMT_GROUP = '3')+1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 commit;
-/*
-시퀀스 생성은 JDBC로 생성
 
--- 댓글 최대치 9999
--- 댓글의 시퀀스는 [게시판테이블]_rep_[게시글번호]_seq 형식으로 생성
-create sequence qboard_rep_1_seq 
-start with 1
-increment by 1
-maxvalue 9999;
-
--- 대댓글 최대치 999
--- 대댓글의 시퀀스는 [게시판테이블]_rep_[게시글번호]_[parent]_req
-create sequence qboard_rep_1_2_seq 
-start with 1
-increment by 1
-maxvalue 999;
-
-*/
-
-
-
-
--- 테스트 테스트!
-
--- 댓글 최대치 9999
--- 댓글의 시퀀스는 [게시판테이블]_rep_[게시글번호]_seq 형식으로 생성
-create sequence qboard_rep_1_seq 
-start with 1
-increment by 1
-maxvalue 9999;
-
--- 대댓글 최대치 999
--- 대댓글의 시퀀스는 [게시판테이블]_rep_[게시글번호]_[parent]_req
-create sequence qboard_rep_1_2_seq 
-start with 1
-increment by 1
-maxvalue 999;
-
-DROP sequence qboard_rep_1_seq;
-DROP sequence qboard_rep_1_2_seq;
-
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, '안녕하세요!!!',null , 0);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, '넹넹 반가워요',null , 0);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, '하하하하!',null , 0);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, 'STUDIUM!',null , 0);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, '이게 대댓글이에요!',2 , qboard_rep_1_2_seq.NEXTVAL);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, '그렇군요! 대댓글 이군요!',2 , qboard_rep_1_2_seq.NEXTVAL);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, 'STUDIUM! 대댓글1',4 , 1);
-insert into ta_qboard_rep values (1, qboard_rep_1_seq.NEXTVAL, 'STUDIUM! 대댓글2',4 , 2);
-
-SELECT * FROM ta_qboard_rep;
-
-SELECT *
-FROM ta_qboard_rep
-ORDER BY DECODE(parent,NULL,cmt_no,parent), cmt_seq;
-
-SELECT * FROM TABS;
-SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_FREE_MADANG WHERE MADANG_STATUS='Y' ORDER BY DECODE(MADANG_PARENT,NULL,MADANG_NO,MADANG_PARENT) DESC, MADANG_NO) A) WHERE RNUM BETWEEN 1 AND 10;
-
-
-
-drop table ta_sidemenu_elements;
-drop sequence ta_sidemenu_seq;
 -- 사이드 메뉴 바 요소를 위한 테이블
 create table ta_sidemenu_elements (
     menu_id number constraint menu_id_pk primary key, -- 기본키
@@ -582,33 +421,78 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분�
 commit;
 
 
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '마당소개', default, 1);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '공부마당', default, 2);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '자유마당', default, 3);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '공유마당', default, 4);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '자랑마당', default, 5);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '질문마당', default, 6);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', 4, 1);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', 4, 2);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', 4, 3);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', '질문마당', 1);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', '질문마당', 2);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', '질문마당', 3);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류1', '공부마당', 1);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류2', '공부마당', 2);
-insert into ta_sidemenu values(ta_sidemenu_seq.nextval, 'madang', '대분류3', '공부마당', 3);
-commit;
 
-select * from ta_sidemenu where sm_category='madang' order by sm_order; 
-select * from ta_sidemenu where sm_category='madang' order by case when sm_parent is null then sm_order
-                                                                   else sm_order
-                                                                end, sm_order; 
+
+
+-- 이 위 까지만 전체 실하면 됩니다.
+-----------------------------------------------<이 아래는 아직 테스트 중입니다. :>
 
 
 
 
 
 
+drop table ta_study_madang;
+drop sequence sboard_seq;
+
+-- 공부마당(or 풀이마당)
+/* 글쓴이가 계정을 탈퇴한다고 게시글이 삭제되는 경우도 드물기에 외래키 지정 안 함 */
+create table ta_study_madang(
+    board_no number constraint board_no_pk primary key, -- 글번호
+    board_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    /* 0번부터 순차적으로 부여, board_no을 오름차순으로 정렬해놓은 상태면,
+    board_order을 내림차순으로 2차 정렬하면 원하는 글 순서가 출력된다.
+    board_order가 0이 아닌 글은 답글로 판단하면 될 듯.*/
+    board_writer_id varchar2(20), -- 글쓴이 아이디
+    board_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    board_title varchar2(100) constraint board_title_nn not null, -- 글 제목
+    board_content clob constraint board_content_nn not null, -- 글 내용
+    board_register_datetime date, -- 글 작성 일시
+--  board_register_ip varchar2(20) -- 글 작성 ip 주소
+    board_rec_count number default 0, -- 글 추천 수(recommand)
+    board_fork_count number default 0, -- 글 포크 수 
+    board_que_count number default 0 -- 글 풀이 수
+);
+
+-- 공부마당(풀이마당)
+create sequence sboard_seq 
+start with 1
+increment by 1
+maxvalue 999999;
 
 
 
+create table free_madang_file (
+    fmf_no number fmf_id_pk primary key,-- 파일 번호 
+    madang_no number constraint madang_no_fk references ta_free_madang(madang_no), -- 마당글 번호
+    member_no number constraint member_no_fk references ta_member(mem_no), -- 회원 번호
+    fmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
+    fmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
+    fmf_download_count number, -- 다운로드 회수
+    fmf_filesize number, -- 파일 크기
+    fmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
+    fmf_width number default null, -- 이미지일 경우 이미지 가로값
+    fmf_height number default null, -- 이미지일 경우 이미지 세로값
+    fmf_type varchar2(20), -- 파일 확장자
+    fmf_datetime date, -- 등록일자
+    fmf_ip varchar2(20) -- 등록 ip
+);
+
+
+
+create table ta_qboard_rep (
+    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
+    cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
+    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
+    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
+    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
+);
+
+-- 공유마당 댓글 테이블
+create table ta_sboard_rep (
+    board_no number constraint board_no_fk references ta_qborad(board_no), -- 게시글 번호(외래키)
+    cmt_no number constraint cmt_no_pk primary key, -- 댓글 번호(시퀀스)
+    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
+    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
+    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
+);
