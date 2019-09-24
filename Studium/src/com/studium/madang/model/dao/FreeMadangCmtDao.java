@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.studium.madang.model.vo.MadangCmt;
+import com.studium.madang.model.vo.FreeMadangCmt;
 import com.studium.member.model.service.MemberService;
 
-public class MadangCmtDao {
+public class FreeMadangCmtDao {
 	
 private Properties prop=new Properties();
 	
-	public MadangCmtDao() {
-		String path=FreeMadangDao.class.getResource("/sql/madang/madangcmt-query.properties").getPath();
+	public FreeMadangCmtDao() {
+		String path=FreeMadangDao.class.getResource("/sql/madang/freemadangcmt-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (FileNotFoundException e) {
@@ -54,10 +54,10 @@ private Properties prop=new Properties();
 		} return result;
 	}
 	
-	public List<MadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
+	public List<FreeMadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<MadangCmt> list = new ArrayList<MadangCmt>();
+		List<FreeMadangCmt> list = new ArrayList<FreeMadangCmt>();
 		String sql=prop.getProperty("selectCmtList");
 		MemberService service= new MemberService();
 		
@@ -68,7 +68,7 @@ private Properties prop=new Properties();
 			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				MadangCmt cmt=new MadangCmt();
+				FreeMadangCmt cmt=new FreeMadangCmt();
 				cmt.setCmtNo(rs.getInt("cmt_no"));
 				cmt.setCmtGroup(rs.getInt("cmt_group"));
 				cmt.setCmtSort(rs.getInt("cmt_sort"));
@@ -94,5 +94,27 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		} return list;
+	}
+	
+	
+	public int insertComment(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertComment");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtMadangNo());
+			pstmt.setString(2, cmt.getCmtContent());
+			pstmt.setInt(3, cmt.getCmtWriterUid());
+			pstmt.setString(4, cmt.getCmtWriter());
+			pstmt.setString(5, cmt.getCmtWriterName());
+			pstmt.setString(6, cmt.getCmtRegisterIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
 	}
 }

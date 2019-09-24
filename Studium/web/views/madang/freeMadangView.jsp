@@ -1,6 +1,6 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.studium.madang.model.vo.MadangCmt"%>
+<%@page import="com.studium.madang.model.vo.FreeMadangCmt"%>
 <%@page import="com.studium.madang.model.vo.FreeMadang"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,7 +8,7 @@
 <%
 	FreeMadang fm = (FreeMadang) request.getAttribute("fm");
 	int cPage = (int)request.getAttribute("cPage");
-	List<MadangCmt> list = (List<MadangCmt>)request.getAttribute("cmtList");
+	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 	String REMOTE_ADDR = request.getRemoteAddr();
@@ -17,16 +17,16 @@
 	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
 	
 	//댓글은 한 번에 다루는 양이 많으므로 한차례 걸러준다.
-	List<MadangCmt> cmtList = new ArrayList<MadangCmt>();
-	List<MadangCmt> replyList = new ArrayList<MadangCmt>();
+	List<FreeMadangCmt> cmtList = new ArrayList<FreeMadangCmt>();
+	List<FreeMadangCmt> replyList = new ArrayList<FreeMadangCmt>();
 	if(!list.isEmpty()) {
-		for(MadangCmt fmc : list ) {
-			//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
-			if(fmc.getCmtSort()==0) {
-				cmtList.add(fmc);
-			} else {
-				replyList.add(fmc);
-			}
+		for(FreeMadangCmt fmc : list ) {
+	//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
+	if(fmc.getCmtSort()==0) {
+		cmtList.add(fmc);
+	} else {
+		replyList.add(fmc);
+	}
 		}	
 	}
 %>
@@ -234,22 +234,22 @@
 										<div class="u_cbox_btn_upload _submitBtn">
 											
 											<%
-												if(loginMember!=null) {
-													//로그인 상태일때 	
-													%>
+																							if(loginMember!=null) {
+																																	//로그인 상태일때
+																						%>
 														<a href="#" class="u_cbox_txt_upload _submitCmt" 
-														onclick="fn_addComment('<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>; return false;')">
+														onclick="fn_addComment('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
 														등록</a>													
 													<%
-												} else {
-													//비로그인 상태일때
-													%>
+																											} else {
+																																					//비로그인 상태일때
+																										%>
 														<a href="#" class="u_cbox_txt_upload _submitCmt" 
 														onclick="fn_needLogin(); return false;">
 														등록</a>	
 													<%
-												}
-											%>
+															}
+														%>
 											
 										</div>
 									</td>
@@ -267,11 +267,11 @@
 									<ol id="comment-list" class="cng-list list-unstyled">
 									<%
 										if(!list.isEmpty()) {
-											//부모 댓글 처리 
-											for(MadangCmt cmt : cmtList) {
-												//부모 댓글 생성
-												%>
-													<li id="comment<%=cmt.getCmtNo() %>" class="<%=cmt.getCmtReply()=='Y'?"has-reply":""%>">
+																		//부모 댓글 처리 
+																		for(FreeMadangCmt cmt : cmtList) {
+																			//부모 댓글 생성
+									%>
+													<li id="comment<%=cmt.getCmtNo()%>" class="<%=cmt.getCmtReply()=='Y'?"has-reply":""%>">
 														<div class="rp_general cng-container">
 															<div class="cng-header">
 																<span class="blogicon"></span>
@@ -281,7 +281,7 @@
 																		onerror="this.parentNode.removeChild(this)">
 																	<a href="https://sonylove.tistory.com"
 																		onclick="return openLinkInNewWindow(this)">
-																		<%=cmt.getCmtWriterName() %>
+																		<%=cmt.getCmtWriterName()%>
 																	</a>
 																</span>
 																<span class="timeago dt-published ie-dotum" title="">
@@ -333,18 +333,18 @@
 																</table>
 															</div>
 														</div>
-														<% 
+														<%
 															//부모 댓글에게 reply가 있는지 확인
 															if(cmt.getCmtReply()=='Y') {
 																//대댓글이 있을 경우 생성 로직을 돌린다.
 														%>
 																	<ul class="reply-list list-unstyled">
 																<%
-																for(MadangCmt reply : replyList) {
+																	for(FreeMadangCmt reply : replyList) {
 																	//부모댓글과 같은 group에 있는 대댓글만 불러온다.
-																	if(cmt.getCmtGroup()==reply.getCmtGroup()) {
+																		if(cmt.getCmtGroup()==reply.getCmtGroup()) {
 																		//대댓글 생성
-																		%>
+																%>
 																				<li id="comment<%=reply.getCmtNo()%>">
 																					<div class="rp_admin cng-container">
 																						<div class="cng-header">

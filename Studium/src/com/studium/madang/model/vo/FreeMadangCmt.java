@@ -3,7 +3,7 @@ package com.studium.madang.model.vo;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class MadangCmt {
+public class FreeMadangCmt {
 	
 	private int cmtNo; // 댓글 시퀀스 넘버
 	private int cmtGroup; // 댓글 번호 그룹(댓글과 대댓글을 한 그룹으로 봄)
@@ -23,11 +23,11 @@ public class MadangCmt {
 	private char cmtBlameAdmin; // 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 지금은 그냥 삭제처리와 동일하게)
 	private String profilePath; // 프로필 사진의 경로를 담아두는 곳으로, cmt DB에는 없고 DAO로 불러오는 과정에 삽입된다.
 	
-	public MadangCmt() {
+	public FreeMadangCmt() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MadangCmt(int cmtNo, int cmtGroup, int cmtSort, int cmtMadangNo, String cmtContent, char cmtReply,
+	public FreeMadangCmt(int cmtNo, int cmtGroup, int cmtSort, int cmtMadangNo, String cmtContent, char cmtReply,
 			int cmtWriterUid, String cmtWriter, String cmtWriterName, Timestamp cmtRegisterDatetime,
 			Timestamp cmtUpdatedDatetime, String cmtRegisterIp, String cmtUpdatedIp, char status, int cmtBlame,
 			char cmtBlameAdmin, String profilePath) {

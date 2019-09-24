@@ -23,9 +23,12 @@ function fn_needLogin() {
 	alert("로그인 후 이용바랍니다.");
 }
 
-function fn_addComment(REMOTE_ADDR, madangNo, memberNo, memEmail, memName) {
+function fn_addComment(path,REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
 	var commentArea=document.getElementById('comment_text');
-	var path = window.location.pathname;
-	location.href=path+"/madang/addComment?madangNo="+ madangNo + "&memberNo=" + madangNo 
-	+ "&memEmail=" + memEmail + + "&memName=" + memName + "&content=" + commentArea.value + "&REMOTE_ADDR=" + REMOTE_ADDR;
+	console.log("/madang/freeAddComment?madangNo="+ madangNo + "&memberNo=" + memberNo 
+			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
+			+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage);
+	location.href=path+"/madang/freeAddComment?madangNo="+ madangNo + "&memberNo=" + memberNo 
+	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
+	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage;
 };
