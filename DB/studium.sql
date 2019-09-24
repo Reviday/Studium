@@ -6,11 +6,11 @@ drop table ta_sidemenu_elements;
 drop sequence ta_sidemenu_seq;
 drop table ta_fmadang_cmt;
 drop sequence fmadang_cmt_seq ;
-drop table ta_free_madang;
+drop table ta_free_madang CASCADE CONSTRAINT;
 drop sequence fboard_seq;
 drop table ta_share_madang;
 drop sequence sboard_seq;
-drop table ta_member;
+drop table ta_member CASCADE CONSTRAINT;
 drop sequence mem_seq;
 
 /*해당 정보는 멤버 테이블에 필요한 정보들 */

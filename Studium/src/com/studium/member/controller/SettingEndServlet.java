@@ -30,7 +30,7 @@ public class SettingEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no=Integer.parseInt(request.getParameter("no"));
-		String recieveEmail=request.getParameter("recieveEmail");
+		String receiveEmail=request.getParameter("receiveEmail");
 		String useNote=request.getParameter("useNote");
 		String receiveSms=request.getParameter("receiveSms");
 		String openProfile=request.getParameter("openProfile");
@@ -38,24 +38,21 @@ public class SettingEndServlet extends HttpServlet {
 		MemberService ms=new MemberService();
 		String setName="";
 		int result=0;
-		if(recieveEmail!=null) {
-			setName="recieveEmail";
-			result=ms.updateSetting(setName, no);
+		if(receiveEmail!=null) {
+			setName="receiveEmail";
+			result=ms.updateSetting(setName,receiveEmail, no);
 		}if(useNote!=null) {
 			setName="useNote";
-			result=ms.updateSetting(setName, no);
+			result=ms.updateSetting(setName,useNote, no);
 		}if(receiveSms!=null) {
 			setName="receiveSms";
-			result=ms.updateSetting(setName, no);
+			result=ms.updateSetting(setName,receiveSms, no);
 		}if(openProfile!=null) {
 			setName="openProfile";
-			result=ms.updateSetting(setName, no);
-		}
-		if(result>0) {
-			
+			result=ms.updateSetting(setName,openProfile, no);
 		}
 		
-		
+
 		}
 
 	/**
