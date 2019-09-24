@@ -358,7 +358,7 @@
                                                                         onclick="return openLinkInNewWindow(this)"><%=cmt.getCmtWriterName() %>
                                                                         </a>
                                                                     </span> 
-                                                                    <span class="timeago dt-published ie-dotum" title=""><%=cmt.getCmtRegisterDatetime()%> 
+                                                                    <span class="timeago dt-published ie-dotum" title=""><%=format.format(cmt.getCmtRegisterDatetime())%> 
                                                                         <a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
                                                                         onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
                                                                     </span>
