@@ -2,7 +2,7 @@ package com.studium.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
@@ -68,12 +67,21 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 					new StudiumFileRenamePolicy() 
 					);
 		
-			
+		 
 		 int no=Integer.parseInt(mr.getParameter("no"));
-		 String myPhoto=mr.getFilesystemName("myPhoto");
+		 
+		 //ajax로 사진받음
+		 Enumeration<String> e= mr.getFileNames();
+		 String fileName="";
+	      if(e.hasMoreElements()) {
+	         fileName=mr.getFilesystemName(e.nextElement());
+	      }
+//		 System.out.println("내 사진이름"+fileName);
+//		 System.out.println("원래사진이름"+mr.getOriginalFileName(fileName));
+		 
 		 
 		 MemberService ms=new MemberService();
-	     int result=ms.changeMyPhoto(myPhoto,no);
+	     int result=ms.changeMyPhoto(fileName,no);
 	    
 
 		//해당 아이디로  수정된 멤버객체 가지고옴
