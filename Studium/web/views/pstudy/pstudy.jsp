@@ -256,6 +256,7 @@ body{
 		</div>
 
 	</div>
+	<%@ include file="/views/common/pagination.jsp"%>
 </div>
 </div>
   </div>

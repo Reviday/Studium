@@ -63,6 +63,26 @@ private Properties prop=new Properties();
 		}
 		return result;
 	}
+	public int selectCountFstudy(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("selectCountFstudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				//result=rs.getInt("cnt");
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
+	}
 
 	
 	public int paymentMember(Connection conn , Member m) {
@@ -252,13 +272,15 @@ private Properties prop=new Properties();
 		}return p;
 	}
 	
-	public List<Fstudy> selectFstudy(Connection conn){
+	public List<Fstudy> selectFstudy(Connection conn,int cPage,int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Fstudy>list=new ArrayList();
 		String sql=prop.getProperty("selectFstudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Fstudy p=new Fstudy();

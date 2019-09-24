@@ -31,7 +31,6 @@ public class AddLeaderFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("여기오니 ");
 		String name=request.getParameter("name");
 		String gender=request.getParameter("gender");
 		String email=request.getParameter("email");
@@ -40,6 +39,7 @@ public class AddLeaderFormServlet extends HttpServlet {
 		String type=request.getParameter("leaderType");
 		String [] inter =request.getParameterValues("inter");
 		String message=request.getParameter("message");
+		
 		LeaderAdd l= new LeaderAdd();
 		l.setlName(name);
 		l.setlGender(gender);
@@ -48,12 +48,14 @@ public class AddLeaderFormServlet extends HttpServlet {
 		l.setlArea(area);
 		l.setlType(type);
 		l.setlCategory1(inter[0]);
-		if(inter[1]==null) {
+		if(inter.length==1) {
 			l.setlCategory2(null);
+			l.setlCategory3(null);
 		}else {
 			l.setlCategory2(inter[1]);
+			l.setlCategory3(inter[2]);
 		}
-		if(inter[2]==null) {
+		if(inter.length==2) {
 			l.setlCategory3(null);
 		}else {
 			l.setlCategory3(inter[2]);

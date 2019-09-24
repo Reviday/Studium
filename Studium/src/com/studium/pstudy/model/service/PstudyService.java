@@ -7,6 +7,7 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.member.model.vo.Member;
 import com.studium.pstudy.model.dao.PstudyDao;
 import com.studium.pstudy.model.vo.Pstudy;
@@ -41,9 +42,9 @@ public class PstudyService {
 		close(conn);
 		return p;
 	}
-	public List<Pstudy> selectPstudy(){
+	public List<Pstudy> selectPstudy(int cPage,int numPerPage){
 		Connection conn=getConnection();
-		List<Pstudy> list=dao.selectPstudy(conn);
+		List<Pstudy> list=dao.selectPstudy(conn,cPage,numPerPage);
 		close(conn);
 		return list;
 		
@@ -93,5 +94,12 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public int selectCountPstudy() {
+		Connection conn=getConnection();
+		int result=dao.selectCountPstudy(conn);
+		close(conn);
+		return result;
+	}
+
 
 }

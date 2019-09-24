@@ -65,13 +65,13 @@
 				</span>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100 data-validate=" Please Type Your Name">
-					<span class="label-input100">FULL NAME *</span>
+					<span class="label-input100">이름 *</span>
 					<input class="input100" type="text" name="name" placeholder="Enter Your Name">
 				</div>
 				
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
 					data-validate="Enter Your Email (e@a.x)">
-					<span class="label-input100">gender *</span>
+					<span class="label-input100">성별 *</span>
 					<input class="input-radio100" id="gender1" type="radio" name="gender" value="M">
 					<label class="label-radio100" for="gender1">
 						Male
@@ -83,17 +83,17 @@
 				</div>
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
 					data-validate="Enter Your Email (e@a.x)">
-					<span class="label-input100">Email *</span>
+					<span class="label-input100">이메일 *</span>
 					<input class="input100" type="text" name="email" placeholder="Enter Your Email ">
 				</div>
 
 				<div class="wrap-input100 bg1 rs1-wrap-input100">
-					<span class="label-input100">Phone</span>
+					<span class="label-input100">핸드폰</span>
 					<input class="input100" type="text" name="phone" placeholder="Enter Number Phone">
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Needed leaderType *</span>
+					<span class="label-input100">신청 분류 *</span>
 					<div>
 						<select class="js-select2" name="leaderType">
 							<option>Please chooses</option>
@@ -106,7 +106,7 @@
 
 				<div class="w-full dis-none js-show-service">
 					<div class="wrap-contact100-form-radio">
-						<h2>I can work in</h2>
+						<h2>희망 지역</h2>
 						<div class="contact100-form-radio m-t-15">
 							<input class="input-radio100" id="radio1" type="radio" name="area" value="강남"
 								checked="checked">
@@ -152,34 +152,29 @@
 							</label>
 						</div>
 					</div>
+						</div>
 				
-				
-				
-							  <div class="inputInteresting">
+				<div class="w-full dis-none js-show-service">
+							 
 							  	<h2>희망 과목</h2>	
 							  	<div id="view"></div>
-								<% if(!listM.isEmpty()&&!listB.isEmpty()){
-									//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
-									//<%-- for(Category cb : listB){
+							  	<div class="wrap-contact100-form-radio">
+								<% if(!listM.isEmpty()&&!listB.isEmpty()){ %>
+									
+										<% for(int j=0;j<listM.size();j++){ %>
 										
-									for(int i=0;i<listB.size();i++){%>
-									<div><p><%=listB.get(i).getTitleB()%></p></div>
-									
-										<% for(int j=0;j<listM.size();j++){
-											if(listB.get(i).getCategoryBId().equals(listM.get(j).getCategoryBId())){%>
-												<label class="check-label">
-		                                        <input type="checkbox" class="option-input checkbox"  name="inter" id="<%=listM.get(j).getCategoryMId()%>" value="<%=listM.get(j).getTitleM() %>">
-		                                        <%=listM.get(j).getTitleM() %>
-		                                     </label>
+										<div class="contact100-form-radio">
+		              <input type="radio" class="input-radio100"  name="inter" id="<%=listM.get(j).getCategoryMId()%>" value="<%=listM.get(j).getTitleM() %>">
+										<label class="label-radio100" for="<%=listM.get(j).getCategoryMId()%>"> <%=listM.get(j).getTitleM() %></label>
+		                                    </div>
+		                                   
 											<%}
-									}	
 								}
-								}%>
-								
-									
+								%>
+									</div>
                                 </div>
-						
-				</div>
+					
+		
 					
 					
 				<div class="wrap-input100 validate-input bg0 rs1-alert-validate"
@@ -191,8 +186,8 @@
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
-							Submit
-							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							전송
+							
 						</span>
 					</button>
 				</div>
@@ -268,19 +263,7 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
     //관심사 개수제한
-    
-    
-    $('input[type=checkbox]').on('change', function (e) {
-		
-    	 
-    	 if ($('input[type=checkbox]:checked').length > 3) {
-            $(this).prop('checked', false);
-            $('#view').remove();
-            alert("희망과목은 세 개까지만 선택 가능합니다.");
-        }
-    	
-    });
-	
+
 							
   	
 		window.dataLayer = window.dataLayer || [];

@@ -17,6 +17,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studium.fstudy.model.service.FstudyService;
 import com.studium.fstudy.model.vo.Fstudy;
 
+import common.policy.StudiumFileRenamePolicy;
+
 /**
  * Servlet implementation class PstudyUpdateServlet
  */
@@ -67,7 +69,7 @@ public class FstudyUpdateServlet extends HttpServlet {
 					saveDir,
 					maxSize,
 					"UTF-8",
-					new DefaultFileRenamePolicy() 
+					new StudiumFileRenamePolicy()  
 					);
 		
 		

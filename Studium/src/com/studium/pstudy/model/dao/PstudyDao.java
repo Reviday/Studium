@@ -254,13 +254,15 @@ public class PstudyDao {
 		}return p;
 	}
 	
-	public List<Pstudy> selectPstudy(Connection conn){
+	public List<Pstudy> selectPstudy(Connection conn,int cPage,int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Pstudy>list=new ArrayList();
 		String sql=prop.getProperty("selectPstudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Pstudy p=new Pstudy();
@@ -322,6 +324,25 @@ public class PstudyDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}return result;
+		
+	}
+	public int selectCountPstudy(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("selectCountPstudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
 			close(pstmt);
 		}return result;
 		
