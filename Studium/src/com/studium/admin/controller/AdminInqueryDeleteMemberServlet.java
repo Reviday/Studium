@@ -40,22 +40,30 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		
+		System.out.println("테스트");
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-		
+		System.out.println("테스트1");
 		String memNo = request.getParameter("memNo");
 		int result=new AdminService().deleteMember(memNo);
 		
-		String grade = request.getParameter("grade");
-		String status = request.getParameter("status");
+		String grade = "allGrade";
+		String status = "allStatus";
+		System.out.println(grade+status);
+		String method = request.getParameter("method");
+		int cPage;
+		try {
+		 cPage= Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
 		
 		AdminService service = new AdminService();
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminDeleteMember"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 		pt.setQueryString("gradeList", grade);
 		pt.setQueryString("statusList", status);
-		List<Member> list=service.selectMemberSearchList(pt.getcPage(),pt.getNumPerPage(), grade, status);
+		List<Member> list=service.selectMemberSearchList(cPage,pt.getNumPerPage(), grade, status);
 		
 
 
@@ -65,7 +73,7 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 		
 
 		request.setAttribute("list",list);
-		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("grade", grade);

@@ -39,15 +39,15 @@
 			<div>
 				<!--오른쪽 상단에 위치하는 검색기능-->
 				<form action="<%=request.getContextPath()%>/adminInquerySearch"
-					id="searchMember">
-					<select name="gradeList" id="gradeList">
+					class="searchMember">
+					<select name="gradeList" class="gradeList">
 						<option value="allGrade"
 							<%="allGrade".equals(grade) ? "selected" : "" %>>전체</option>
 						<option value="M" <%="M".equals(grade) ? "selected" : "" %>>관리자</option>
 						<option value="T" <%="T".equals(grade) ? "selected" : "" %>>강사</option>
 						<option value="R" <%="R".equals(grade) ? "selected" : "" %>>정회원</option>
 						<option value="A" <%="A".equals(grade) ? "selected" : "" %>>준회원</option>
-					</select> <select name="statusList" id="statusList">
+					</select> <select name="statusList" class="statusList">
 						<option value="allStatus"
 							<%="allStatus".equals(status) ? "selected" : "" %>>전체</option>
 						<option value="N" <%="N".equals(status) ? "selected" : "" %>>정상</option>
@@ -56,14 +56,16 @@
 							<%="P".equals(status
                             		) ? "selected" : "" %>>영구정지</option>
 					</select>
+					<input type="hidden" value="searchMember" name="method">
+					
 				</form>
 				<input type="submit" value="조회" class="submitSearch"
 					onclick="searchMember('<%=cPage%>');">
 
 
-				<form action="<%=request.getContextPath() %>/admin/memberFinder" id="nameFinder"
-					onsubmit="return search_validate();">
-					<input type="text" placeholder="검색" name="memberName"> 
+				<form action="<%=request.getContextPath() %>/admin/memberFinder" class="nameFinder">
+					<input type="text" placeholder="검색" name="memberName" id="findName"> 
+					<input type="hidden" value="nameFinder" name="method">
 				</form>
 					<input type="submit" value="" class="submitPicture" onclick="nameFinder();">
 			</div>
@@ -86,8 +88,8 @@
 					<td><%=m.getMemName() %></td>
 					<td><span class="momoClick"><%=m.getMemUserEmail() %></span>
 						<div class="adminMemo">
-							<form id="memoUpdate">
-								<textarea name="memo" id="memotextarea" cols="30" rows="10"
+							<form class="memoUpdate">
+								<textarea name="memo" class="memotextarea" cols="30" rows="10"
 									placeholder="회원에 대한 메모를 작성하세요."
 									value=<%=m.getMemAdminmemo() != null ? m.getMemAdminmemo() : "" %>><%=m.getMemAdminmemo()%></textarea>
 								<input type="hidden" name="memNo" value="<%=m.getMemNo() %>">
@@ -95,17 +97,16 @@
 							<button type="submit" onclick="memoUpdate();">수정</button>
 						</div></td>
 					<td><%=m.getMemEnrollDatetime() %></td>
-					<form action="<%=request.getContextPath()%>/adminUpdateMember" id="statusUpdate"
-						onsubmit="return update_validate();">
+					<form action="<%=request.getContextPath()%>/adminUpdateMember" class="statusUpdate">
 						<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo"
 							class="memUpdateNo">
-						<td><select name="memberGradeList" id="memberGradeList">
+						<td><select name="memberGradeList" class="memberGradeList">
 								<option value="M" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
 								<option value="T" <%='T' == m.getMemCode() ? "selected" : "" %>>강사</option>
 								<option value="R" <%='R' == m.getMemCode() ? "selected" : "" %>>정회원</option>
 								<option value="A" <%='A' == m.getMemCode() ? "selected" : "" %>>준회원</option>
 						</select></td>
-						<td><select name="memberStatusList" id="memberStatusList">
+						<td><select name="memberStatusList" class="memberStatusList">
 								<option value="N"
 									<%='N' == m.getMemDenied() ? "selected" : "" %>>정상</option>
 								<option value="Y"
@@ -113,14 +114,15 @@
 								<option value="P"
 									<%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
 						</select></td>
+						<input type="hidden" value="statusUpdate" name="method">
 					</form>
 						<td><input type="submit" value="수정" class="memberUpdate" onclick="statusUpdate();">
 						</td>
 					<td>
-						<form action="<%=request.getContextPath()%>/adminDeleteMember" id="deleteMember"
-						 onsubmit="return delete_validate();"> 
+						<form action="<%=request.getContextPath()%>/adminDeleteMember" class="deleteMember"> 
 						 <input type="hidden" value="<%=m.getMemNo() %>" name="memNo"
 						class="memNo"> 
+						<input type="hidden" value="deleteMember" name="method">
 						</form>
 						<input type="button" value="탈퇴" class="deleteSubmit" onclick="deleteMember();"> 
 					</td>
@@ -135,34 +137,15 @@
 
 <script>
     	
-    	function update_validate() {
-        	var result = confirm("수정하시겠습니까?");
-        	if(result){return true;}
-        	else{return false;}
-        	
-    	}
-    
-        function search_validate() {
-            if ($('input:text[name="memberName"]').val().trim() == 0) {
-                alert("검색할 이름, 이메일을 입력하세요.");
-                return false;
-            }
-        }
 
-/*         function delete_validate() {
-        	var result = confirm("정말 탈퇴하시겠습니까?");
-        	if(result){
-        		return true;
-        	}else{
-        		return false;
-        	}
-        } */
         
-         function deleteMember(){
-        	
+         function deleteMember(cPage){
+        	console.log($(".gradeList").val());
         	var result = confirm("정말 탈퇴하시겠습니까?");
         	if(result){
-        		var params = jQuery("#deleteMember").serialize();
+        		var params = jQuery(".deleteMember").serialize();
+        		params+='&cPage='+cPage+'&gradeList'+$(".gradeList").val()+'&statusList'+$(".statusList").val();
+
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminDeleteMember",
         			type: "POST",
@@ -181,23 +164,30 @@
         	}
         	
         	function searchMember(cPage) {
-        		var params = jQuery("#searchMember").serialize();
-        		params.cPage = cPage;
+        		
+        		var params = jQuery(".searchMember").serialize();
+        		params+='&cPage='+cPage;
+        		console.log(cPage);
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminInquerySearch",
         			type: "POST",
         			dataType: "html",
         			data: params,
         			success: function(data){
-        				console.log(data);
         				$("#ajaxTable").html("");
         				$("#ajaxTable").html(data);
+        				
         			}
         		});
+        		
         	}
         	
-        	function nameFinder() {
-        		var params = jQuery("#nameFinder").serialize();
+        	function nameFinder(cPage) {
+        		if(!$("#findName").val().trim()){
+        			alert("검색할 이름, 이메일을 입력하세요.");
+        		}else{
+        		var params = jQuery(".nameFinder").serialize();
+        		params+='&cPage='+cPage;
         		$.ajax({
         			url: "<%=request.getContextPath() %>/admin/memberFinder",
         			type: "POST",
@@ -208,12 +198,14 @@
         				$("#ajaxTable").html(data);
         			}
         		})
+        		}
         	}
         	
-        	function statusUpdate() {
+        	function statusUpdate(cPage) {
         		var result = confirm("정말 수정하시겠습니까?");
         		if(result){
-        		var params = jQuery("#statusUpdate").serialize();
+        		var params = jQuery(".statusUpdate").serialize();
+        		params+='&cPage='+cPage;
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminUpdateMember",
         			type: "POST",
@@ -224,7 +216,7 @@
         				$("#ajaxTable").html(data);
         			}
         		})
-        		return true;
+        			return true;
         		}else{
         			return false;
         		} 
@@ -238,14 +230,15 @@
             })
             
             function memoUpdate() {
-        		var memo  = jQuery("#memoUpdate").serialize();
+        		var memo  = jQuery(".memoUpdate").serialize();
+
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminMemoUpdate",
         			type: "POST",
         			dataType: "json",
         			data: memo,
         			success: function(data){
-        				$("#memotextarea").text(data);
+        				$(".memotextarea").text(data);
         			}
         		})
         	}

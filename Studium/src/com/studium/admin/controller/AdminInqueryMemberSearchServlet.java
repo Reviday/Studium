@@ -43,21 +43,27 @@ public class AdminInqueryMemberSearchServlet extends HttpServlet {
 		
 		String grade = request.getParameter("gradeList");
 		String status = request.getParameter("statusList");
-
+		String method = request.getParameter("method");
+		int cPage;
+		try {
+		 cPage= Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
 		AdminService service=new AdminService();
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminInquerySearch"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 		pt.setQueryString("gradeList", grade);
 		pt.setQueryString("statusList", status);
-		List<Member> list=service.selectMemberSearchList(pt.getcPage(),pt.getNumPerPage(), grade, status);
+		List<Member> list=service.selectMemberSearchList(cPage,pt.getNumPerPage(), grade, status);
 		
 		
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 		request.setAttribute("elements", elements);
 		
 		request.setAttribute("list",list);
-		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("grade", grade);

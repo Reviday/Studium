@@ -44,14 +44,14 @@ public class AdminInqueryUpdateMemberServlet extends HttpServlet {
 		String grade = request.getParameter("memberGradeList");
 		String status = request.getParameter("memberStatusList");
 		String memNo = request.getParameter("memUpdateNo");
-		
+		String method = request.getParameter("method");
 		AdminService service = new AdminService();
 
 		int result = service.updateMember(memNo, grade, status); 
 		
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminUpdateMember"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 		List<Member> list=service.selectMemberList(pt.getcPage(),pt.getNumPerPage());
 		
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
