@@ -18,6 +18,7 @@ import com.studium.madang.model.vo.FreeMadangCmt;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
+import common.template.CmtPaginationTemplate;
 import common.template.PaginationTemplate;
 
 /**
@@ -81,9 +82,14 @@ public class FreeMadangViewServlet extends HttpServlet {
 		FreeMadangCmtService service=new FreeMadangCmtService();
 		int totalData=service.selectCountList(no); // 총 데이터 개수
 		String URLmapping="/madnag/freeMadangView"; // 패턴을 넘겨주기 위한 변수
-		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		CmtPaginationTemplate pt=new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
+		
+		System.out.println("사이즈 : " + cmtList.size());
+		for(FreeMadangCmt cmt:cmtList) {
+			System.out.println(cmt);
+		}
 		
 		String view="";
 		if(fm!=null)

@@ -1010,27 +1010,26 @@ a.disabled {
 }
 
 #comment .reply-list, 
-#comment .reply-list li+li .cng-container {
+#comment .reply-list .cng-container {
 	border-top: 0
 }
 
-#comment .reply-list li {
+#comment .reply-list  {
 	margin-top: -15px !important;
 }
 
-#comment .reply-list, 
-#comment .reply-list li {
+#comment .reply-list{
 	position: relative
 }
 
 #comment .has-reply>.cng-container>.cng-content:after, 
-#comment .reply-list li:after,
-#comment .reply-list li:before {
+#comment .reply-list:after,
+#comment .reply-list:before {
 	content: " ";
 	position: absolute
 }
 
-#comment .reply-list li:before {
+#comment .reply-list:before {
 	top: 45px;
 	left: 18px;
 	width: 30px;
@@ -1041,7 +1040,7 @@ a.disabled {
 	z-index: 10
 }
 
-#comment .reply-list li:after {
+#comment .reply-list:after {
 	top: 0;
 	left: 23px;
 	width: 2px;
@@ -1050,17 +1049,22 @@ a.disabled {
 	z-index: 2
 }
 
-#comment .reply-list li:last-child:after {
+#comment .reply-list:last-child:after {
 	height: 45px
 }
 
-#comment .has-reply>.cng-container>.cng-content:after {
-	top: 90px;
+#comment .cng-container>.cng-content:after {
+	top: 70px;
 	bottom: 15px;
 	left: 23px;
+	height:100%;
 	width: 2px;
 	background-color: #e0ddda;
-	z-index: 1
+	z-index: 0
+}
+
+#comment .ie-nanum img {
+	z-index:1 ;
 }
 
 #comment .reply-list .cng-container {

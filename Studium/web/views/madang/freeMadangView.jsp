@@ -16,19 +16,7 @@
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
 	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
 	
-	//댓글은 한 번에 다루는 양이 많으므로 한차례 걸러준다.
-	List<FreeMadangCmt> cmtList = new ArrayList<FreeMadangCmt>();
-	List<FreeMadangCmt> replyList = new ArrayList<FreeMadangCmt>();
-	if(!list.isEmpty()) {
-		for(FreeMadangCmt fmc : list ) {
-	//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
-	if(fmc.getCmtSort()==0) {
-		cmtList.add(fmc);
-	} else {
-		replyList.add(fmc);
-	}
-		}	
-	}
+	
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -267,147 +255,138 @@
 									<ol id="comment-list" class="cng-list list-unstyled">
 									<%
 										if(!list.isEmpty()) {
-																		//부모 댓글 처리 
-																		for(FreeMadangCmt cmt : cmtList) {
-																			//부모 댓글 생성
+
+											for(FreeMadangCmt cmt : list) {
+												//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
+												if(cmt.getCmtSort()==0) {
+													//부모 댓글 작성 로직
 									%>
 													<li id="comment<%=cmt.getCmtNo()%>" class="<%=cmt.getCmtReply()=='Y'?"has-reply":""%>">
-														<div class="rp_general cng-container">
-															<div class="cng-header">
-																<span class="blogicon"></span>
-																<span class="name ie-nanum">
-																	<img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>"
-																		alt="BlogIcon" width="64" height="64"
-																		onerror="this.parentNode.removeChild(this)">
-																	<a href="https://sonylove.tistory.com"
-																		onclick="return openLinkInNewWindow(this)">
-																		<%=cmt.getCmtWriterName()%>
-																	</a>
-																</span>
-																<span class="timeago dt-published ie-dotum" title="">
-																	<%=format.format(cmt.getCmtRegisterDatetime())%>
-																</span>
-																<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
-																	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
-															</div>
-															<div class="cng-content">
-																<div class="speech">
-																	<div class="comm_body">
-																		<span>
-																			<%=cmt.getCmtContent()%>
-																		</span>
-																	</div>
-																</div>
-															</div>
-															<a href="#" onclick="deleteComment(<%=cmt.getCmtNo()%>);return false"
-																class="modify" title="수정/삭제"><i
-																class="icon icon-cancel_circle"></i></a>
-															<div class="comm-bottom">
-																<button onclick="fn_writeComment(<%=cmt.getCmtNo()%>);"
-																	class="btn-init ie-dotum write">
-																	<span class="arrow-symbol dsc_comm">답글달기</span>
-																</button>
-																<table cellspacing="0" class="cminput _cminputRep" id="re_conmmentRep<%=cmt.getCmtNo()%>"
-																	style="display: none">
-																	<tbody>
-																		<tr>
-																			<td class="i2">
-																				<div class="comm_write_wrap border-sub skin-bgcolor">
-																					<textarea id="comment_text_rep" cols="50" rows="2"
-																						class="textarea m-tcol-c" maxlength="6000"
-																						style="overflow: hidden; line-height: 14px; height: 39px;"
-																						title="댓글입력"></textarea>
-																				</div>
-																			</td>
-																			<td class="i3">
-			
-																				<div class="u_cbox_btn_upload _submitBtnRep">
-																					<a href="#" class="u_cbox_txt_upload _submitCmtRep">등록</a>
-																				</div>
-																			</td>
-																		</tr>
-																		<tr>
-																			<td colspan="3"></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-														<%
-															//부모 댓글에게 reply가 있는지 확인
-															if(cmt.getCmtReply()=='Y') {
-																//대댓글이 있을 경우 생성 로직을 돌린다.
-														%>
-																	<ul class="reply-list list-unstyled">
-																<%
-																	for(FreeMadangCmt reply : replyList) {
-																	//부모댓글과 같은 group에 있는 대댓글만 불러온다.
-																		if(cmt.getCmtGroup()==reply.getCmtGroup()) {
-																		//대댓글 생성
-																%>
-																				<li id="comment<%=reply.getCmtNo()%>">
-																					<div class="rp_admin cng-container">
-																						<div class="cng-header">
-																							<span class="blogicon"></span> 
-																							<span class="name ie-nanum">
-																								<img src="<%=request.getContextPath()%>/upload/myPage/<%=reply.getProfilePath()%>" alt="BlogIcon"
-																									width="64" height="64"
-																									onerror="this.parentNode.removeChild(this)"> 
-																								<a href="https://cocosoft.kr"
-																								onclick="return openLinkInNewWindow(this)"><%=reply.getCmtWriterName() %>
-																								</a>
-																							</span> 
-																							<span class="timeago dt-published ie-dotum" title=""><%=reply.getCmtRegisterDatetime()%> 
-																								<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
-																								onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
-																							</span>
-																						</div>
-																						<div class="cng-content">
-																							<div class="speech">
-																								<div class="comm_body">
-																									<span> 
-																										<%=reply.getCmtContent() %>
-																									</span>
-																								</div>
-																							</div>
-																						</div>
-																						<a href="#"
-																							onclick="deleteComment(<%=reply.getCmtNo()%>); return false;"
-																							class="modify" title="수정/삭제"><i
-																							class="icon icon-cancel_circle"></i></a>
-								
-																						<div class="dropdown">
-																							<button class="btn-init" data-toggle="dropdown"
-																								aria-expanded="true">
-																								<i class="icon icon-more-vert"></i>
-																							</button>
-																							<ul class="dropdown-menu">
-																								<li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
-																								<li><a href="#"
-																									onclick="deleteComment(<%=reply.getCmtNo()%>); return false;"
-																									tabindex="-1">수정/삭제</a></li>
-																							</ul>
-																						</div>
-																					</div>
-																				</li>
-																		<%
-																	}
-																}
-																%>
-																</ul>
-																<% 
-															}
-														%>
-													</li>	
-												<%
+						                                <div class="rp_general cng-container">
+						                                    <div class="cng-header">
+						                                        <span class="blogicon"></span>
+						                                        <span class="name ie-nanum">
+						                                            <img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>"
+						                                                alt="BlogIcon" width="64" height="64"
+						                                                onerror="this.parentNode.removeChild(this)">
+						                                            <a href="https://sonylove.tistory.com"
+						                                                onclick="return openLinkInNewWindow(this)">
+						                                                <%=cmt.getCmtWriterName()%>
+						                                            </a>
+						                                        </span>
+						                                        <span class="timeago dt-published ie-dotum" title="">
+						                                            <%=format.format(cmt.getCmtRegisterDatetime())%>
+						                                        </span>
+						                                        <a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
+						                                            onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+						                                    </div>
+						                                    <div class="cng-content">
+						                                        <div class="speech">
+						                                            <div class="comm_body">
+						                                                <span>
+						                                                    <%=cmt.getCmtContent()%>
+						                                                </span>
+						                                            </div>
+						                                        </div>
+						                                    </div>
+						                                    <a href="#" onclick="deleteComment(<%=cmt.getCmtNo()%>);return false"
+						                                        class="modify" title="수정/삭제"><i
+						                                        class="icon icon-cancel_circle"></i></a>
+						                                    <div class="comm-bottom">
+						                                        <button onclick="fn_writeComment(<%=cmt.getCmtNo()%>);"
+						                                            class="btn-init ie-dotum write">
+						                                            <span class="arrow-symbol dsc_comm">답글달기</span>
+						                                        </button>
+						                                        <table cellspacing="0" class="cminput _cminputRep" id="re_conmmentRep<%=cmt.getCmtNo()%>"
+						                                            style="display: none">
+						                                            <tbody>
+						                                                <tr>
+						                                                    <td class="i2">
+						                                                        <div class="comm_write_wrap border-sub skin-bgcolor">
+						                                                            <textarea id="comment_text_rep" cols="50" rows="2"
+						                                                                class="textarea m-tcol-c" maxlength="6000"
+						                                                                style="overflow: hidden; line-height: 14px; height: 39px;"
+						                                                                title="댓글입력"></textarea>
+						                                                        </div>
+						                                                    </td>
+						                                                    <td class="i3">
+						
+						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
+						                                                            <a href="#" class="u_cbox_txt_upload _submitCmtRep">등록</a>
+						                                                        </div>
+						                                                    </td>
+						                                                </tr>
+						                                                <tr>
+						                                                    <td colspan="3"></td>
+						                                                </tr>
+						                                            </tbody>
+						                                        </table>
+						                                    </div>
+						                                </div>
+						                             </li>
+									<%	
+                                
+												// sort값이 0이 아니라면 대댓글이다.
+												} else {
+													//대댓글 작성 로직
+									%>					
+												<li class="reply-list list-unstyled" id="comment<%=cmt.getCmtNo()%>">
+                                                            <div class="rp_admin cng-container">
+                                                                <div class="cng-header">
+                                                                    <span class="blogicon"></span> 
+                                                                    <span class="name ie-nanum">
+                                                                        <img src="<%=request.getContextPath()%>/upload/myPage/<%=cmt.getProfilePath()%>" alt="BlogIcon"
+                                                                            width="64" height="64"
+                                                                            onerror="this.parentNode.removeChild(this)"> 
+                                                                        <a href="https://cocosoft.kr"
+                                                                        onclick="return openLinkInNewWindow(this)"><%=cmt.getCmtWriterName() %>
+                                                                        </a>
+                                                                    </span> 
+                                                                    <span class="timeago dt-published ie-dotum" title=""><%=cmt.getCmtRegisterDatetime()%> 
+                                                                        <a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
+                                                                        onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="cng-content">
+                                                                    <div class="speech">
+                                                                        <div class="comm_body">
+                                                                            <span> 
+                                                                                <%=cmt.getCmtContent() %>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <a href="#"
+                                                                    onclick="deleteComment(<%=cmt.getCmtNo()%>); return false;"
+                                                                    class="modify" title="수정/삭제"><i
+                                                                    class="icon icon-cancel_circle"></i></a>
+        
+                                                                <div class="dropdown">
+                                                                    <button class="btn-init" data-toggle="dropdown"
+                                                                        aria-expanded="true">
+                                                                        <i class="icon icon-more-vert"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#" onclick="" tabindex="-1">답글달기</a></li>
+                                                                        <li><a href="#"
+                                                                            onclick="deleteComment(<%=cmt.getCmtNo()%>); return false;"
+                                                                            tabindex="-1">수정/삭제</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                             	</li>
+														
+									<%
+												}
 											}
-										}
+									}
 									%>
 									</ol>
 
 								</div>
 							</div>
 						</div>
+						<!-- 탭 : 댓글 -->
 					</div>
 				</div>
 
@@ -435,7 +414,7 @@
 			</div>
 		</div>
 
-
+	
 	</div>
 	<!-- 리모콘 -->
 
@@ -476,7 +455,12 @@
 			<div class="remote-area-radi-bottom"></div>
 		</div>
 	</div>
-
+	<script>
+		$(function(){
+			console.log($(".reply-list").last());
+			$(".reply-list").last().css("height","45px");
+		});
+	</script>
 	<div class="col-lg-1"></div>
 </section>
 <%@ include file="/views/common/footer.jsp"%>
