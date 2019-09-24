@@ -2,11 +2,7 @@ package com.studium.pstudy.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
+
+import common.policy.StudiumFileRenamePolicy;
 
 /**
  * Servlet implementation class PstudyAddServlet
@@ -71,7 +68,7 @@ public class PstudyAddServlet extends HttpServlet {
 					saveDir,
 					maxSize,
 					"UTF-8",
-					new DefaultFileRenamePolicy() 
+					new StudiumFileRenamePolicy() 
 					);
 		
 		

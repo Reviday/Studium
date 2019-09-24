@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
+
+import common.template.PaginationTemplate;
 
 /**
  * Servlet implementation class PstudyViewServlet
@@ -32,8 +35,17 @@ public class PstudyListViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		PstudyService service=new PstudyService();
-		List<Pstudy> pList=service.selectPstudy();
+		
+		int totalData=service.selectCountPstudy(); // 총 데이터 개수
+		String URLmapping="/pstudyListView"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		List<Pstudy> pList=service.selectPstudy(pt.getcPage(),pt.getNumPerPage());
+		
+		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("pageBar", pt.getPageBar());
+		request.setAttribute("numPerPage", pt.getNumPerPage());
 		List<Pstudy> bestList=service.bestPstudy();
 		request.setAttribute("pList", pList);
 		request.setAttribute("bestList",  bestList);

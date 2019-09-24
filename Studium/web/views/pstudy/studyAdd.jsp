@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*,com.studium.category.model.vo.Category" %>
+<%
+    List<Category> listM=(List)request.getAttribute("categoryM");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -8,6 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
@@ -27,102 +31,9 @@
             vertical-align: middle;
             cursor: pointer;
         }
+
 	</style>
-    <%--    .star-input>.input,
-        .star-input>.input>label:hover,
-        .star-input>.input>input:focus+label,
-        .star-input>.input>input:checked+label {
-            display: inline-block;
-            vertical-align: middle;
-            background: url('<%=request.getContextPath()%>/img/grade_img.png')no-repeat;
-        }
 
-        .star-input {
-            display: inline-block;
-            white-space: nowrap;
-            width: 225px;
-            height: 40px;
-            padding: 25px;
-            line-height: 30px;
-        }
-
-        .star-input>.input {
-            display: inline-block;
-            width: 150px;
-            background-size: 150px;
-            height: 28px;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .star-input>.input>input {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-
-        star-input>.input.focus {
-            outline: 1px dotted #ddd;
-        }
-
-        .star-input>.input>label {
-            width: 30px;
-            height: 0;
-            padding: 28px 0 0 0;
-            overflow: hidden;
-            float: left;
-            cursor: pointer;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .star-input>.input>label:hover,
-        .star-input>.input>input:focus+label,
-        .star-input>.input>input:checked+label {
-            background-size: 150px;
-            background-position: 0 bottom;
-        }
-
-        .star-input>.input>label:hover~label {
-            background-image: none;
-        }
-
-        .star-input>.input>label[for="p1"] {
-            width: 30px;
-            z-index: 5;
-        }
-
-        .star-input>.input>label[for="p2"] {
-            width: 60px;
-            z-index: 4;
-        }
-
-        .star-input>.input>label[for="p3"] {
-            width: 90px;
-            z-index: 3;
-        }
-
-        .star-input>.input>label[for="p4"] {
-            width: 120px;
-            z-index: 2;
-        }
-
-        .star-input>.input>label[for="p5"] {
-            width: 150px;
-            z-index: 1;
-        }
-
-        .star-input>output {
-            display: inline-block;
-            width: 60px;
-            font-size: 18px;
-            text-align: right;
-            vertical-align: middle;
-        }
-    </style> --%>
     <script>
         $(function () {
 
@@ -249,10 +160,10 @@
                                                         <select class=input1 name=p_category
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>분류 선택</option>
-                                                            <option value='영어'>영어</option>
-                                                            <option value='코딩'>코딩</option>
-                                                            <option value='중국어'>중국어</option>
-
+                                         <% if(!listM.isEmpty()){ %>
+										<% for(int j=0;j<listM.size();j++){ %>
+                                                         	<option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
+										<% } } %>
                                                         </select>
 
                                                     </td>

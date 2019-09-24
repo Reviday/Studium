@@ -36,17 +36,20 @@
                 <div class="myName">
                     <blockquote class="testimonial">
                         <div class="d-flex author">
-                       <%--  <%if(m.getMemPhoto()!=null) { %>
-                            <img src="<%=request.getContextPath()%>/<%=m.getMemPhoto()%>" alt="" id="myProfile" class="mr-4">
-                           <%}else{ %> --%>
-                            <img src="<%=request.getContextPath()%>/img/default_image.png" alt="" id="myProfile" class="mr-4">
-                           <%-- <%} %> --%>
+                       <div id="myProfile-preview">
+                       <%if(m.getMemPhoto()!=null) { %>
+                            <img src="<%=request.getContextPath()%>/upload/myPage/<%=m.getMemPhoto()%>" alt="" id="myProfile_y" class="mr-4">
+                           <%}else{ %>
+                            <img src="<%=request.getContextPath()%>/img/default_image.png" alt="" id="myProfile_n" class="mr-4">
+                           <%} %> 
+                           </div>
                             <div class="author-info">
                                 <div>
                                     <h3 class="float-left ">
                                         <%=m.getMemName()%>
                                     </h3>
                                     <form action="<%=request.getContextPath() %>/myPage/changeMyPhoto" id="frm_profile_img" method="post" enctype="multipart/form-data">
+
 										<input type="hidden" value="<%=m.getMemNo()%>" name="no"> 
 										<input type="file" id="file" class="fileinput" name="myPhoto" accept="image/png,image/jpg"/>
 											<label for="file" class="btn-2" onClick="">사진변경</label>
@@ -161,33 +164,47 @@
 
 
     <script>
-    //업로드 파일체인지가 됬을경우 실행되는 이벤트  form태그에 fileProfile은 hidden으로 넣어줌
- $(function() {   
-    $("input[name='myPhoto']").change(function(e){
-       console.log('스크립트 들어옴')
-        $( "#frm_profile_img" ).submit();
-        var filePath = document.getElementById('file');
-       
-        var fileData = new FormData(frm);
-     
-        // ajax
-        <%-- $.ajax({
-            type:'POST',
-            url:'<%=request.getContextPath()%>/myPage/changeMyPhoto',
-            data:fileData,
-            processData: false,
-            contentType: false,
-            success : function(data, textStatus, xhr) {
-                console.log('success');
-                $('#myProfile').attr('src',filePath);
-            },
-            error : function(request,status,error) {  
-               alert("code:"+request.status+"\n"+"error:"+error);
-            }
-        }); --%>
-    })
-});
     
+    //사진변경한거 바로 화면에 띄워주기
+	$(function(){
+			$("input[name='myPhoto']").change(function(){
+				
+				console.log("스크립트 들어옴");
+				$("#myProfile-preview").html("");
+				$.each($(this)[0].files,function(i,item){
+					var reader=new FileReader();
+					reader.onload=function(e){
+						
+						var img=$("<img>").attr({"src":e.target.result, "class":"mr-4"});
+						$("#myProfile-preview").append(img);
+					}
+					reader.readAsDataURL(item);
+				});
+			
+				
+			});
+		});
+	
+	$("#changePhoto").on("click",function(){
+        //ajax를 통한 파일전송을 할떄
+        //FormData() 객체를 이용 
+        var fd=new FormData();
+        $.each($("#file")[0].files,function(i,item){
+           fd.append("file"+i,item);
+        });
+        $.ajax({
+           url:"<%=request.getContextPath()%>/myPage/changeMyPhoto?no=<%=m.getMemNo()%>",
+           data:fd,
+           type:"post",
+           processData:false,
+           contentType:false,
+           success:function(data){
+              alert("사진 수정이 완료되었습니다.");
+           }
+           
+           
+        })
+     });
     
     
     

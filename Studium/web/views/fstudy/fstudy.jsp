@@ -6,6 +6,7 @@
 <%
 List<Fstudy> fList=(List)request.getAttribute("fList");
 List<Fstudy> bestList =(List)request.getAttribute("bestList");
+int cPage=(int)request.getAttribute("cPage");
 
 %>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/pstudy.css">
@@ -256,6 +257,7 @@ body{
 	  %>
 		</div>
 </div>
+		<%@ include file="/views/common/pagination.jsp"%>
 	</div>
 </div>
 
@@ -263,19 +265,48 @@ body{
 
 
 
-  <script type="text/javascript" src=""></script>
+  <script type="text/javascript" src="">
+  
+  $(window).scroll(function() {
+      
+      
+      var scrolltop = $(document).scrollTop();
+      console.log(scrolltop);
+      var height = $(document).height();
+      console.log(height);
+      var height_win = $(window).height();
+      console.log(height_win);
+      
+      
+   if (Math.round( $(window).scrollTop()) == $(document).height() - $(window).height()) {
+      
+      
+      moreList();
+      
+  }  
+  
+  </script>
 	
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script>
-    $("#leftside-navigation .sub-menu > a").click(function (e) {
-      $("#leftside-navigation ul ul").slideUp(), $(this).next().is(":visible") || $(this).next().slideDown(),
-        e.stopPropagation()
-    })
-    
-    function fn_insert(){
-    	location.href="<%=request.getContextPath()%>/fstudy/fstudyListAdd";
-    }
-  </script>
+
+<script type="text/javascript">
+var page = 1;  //페이징과 같은 방식이라고 생각하면 된다. 
+ 
+$(function(){  //페이지가 로드되면 데이터를 가져오고 page를 증가시킨다.
+     getList(page);
+     page++;
+}); 
+ 
+$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
+     if($(window).scrollTop() >= $(document).height() - $(window).height()){
+          getList(page);
+           page++;   
+     } 
+});
+ 
+
+</script>
+
 <!-- aos 애니메이션-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

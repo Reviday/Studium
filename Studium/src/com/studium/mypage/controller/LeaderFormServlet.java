@@ -34,11 +34,11 @@ public class LeaderFormServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//중분류
 		List<Category> listM=new CategoryService().selectTitleM();
+		request.setAttribute("categoryM", listM);
 		//대분류
 		List<Category> listB=new CategoryService().selectTitleB();
 		
 		
-		request.setAttribute("categoryM", listM);
 		request.setAttribute("categoryB", listB);
 		
 		request.getRequestDispatcher("/views/Q&A/leaderForm.jsp")

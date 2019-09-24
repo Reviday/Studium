@@ -40,9 +40,9 @@ public class FstudyService {
 		close(conn);
 		return p;
 	}
-	public List<Fstudy> selectFstudy(){
+	public List<Fstudy> selectFstudy(int cPage,int numPerPage){
 		Connection conn=getConnection();
-		List<Fstudy> list=dao.selectFstudy(conn);
+		List<Fstudy> list=dao.selectFstudy(conn,cPage,numPerPage);
 		close(conn);
 		return list;
 		
@@ -89,6 +89,12 @@ public class FstudyService {
 		int result=dao.fstudyDibsDelete(conn,no,mNo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int selectCountFstudy() {
+		Connection conn=getConnection();
+		int result=dao.selectCountFstudy(conn);
 		close(conn);
 		return result;
 	}

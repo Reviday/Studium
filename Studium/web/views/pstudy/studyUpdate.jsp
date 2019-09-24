@@ -37,6 +37,71 @@
   	z-index:9999;
     background-color:#f5f5f5;
     }
+    .fileinput {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.fileinput + label {
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight:0px;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 10px 25px;
+  position: relative;
+  top:-5px;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+.fileinput + label.btn-2{
+   background-color: #99c793;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.fileinput + label.btn-2::before {
+  color: #fff;
+  content: "";
+  font-family: "Font Awesome 5 Pro";
+  font-size: 100%;
+  height: 100%;
+  right: 130%;
+  line-height: 3.3;
+  position: absolute;
+  top: 0px;
+  transition: all 0.3s;
+}
+.fileinput + label.btn-2:hover {
+  background-color: #497f42;
+}
+.fileinput + label.btn-2:hover::before {
+  right: 80%;
+}
+.changePhoto{
+   border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight:0px;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 10px 25px;
+  position: relative;
+  top:-5px;
+  transition: all 0.3s;
+  vertical-align: middle;   
+  background-color: #99c793;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.changePhoto:hover{
+   background-color: #497f42;
+}
     </style>
        <script>
         $(function () {
