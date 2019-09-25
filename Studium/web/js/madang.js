@@ -24,20 +24,31 @@ function fn_needLogin() {
 }
 
 function fn_addComment(path,REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
-	var commentArea=document.getElementById('comment_text');
+	var commentArea=convertToTag(document.getElementById('comment_text'));
 	location.href=path+"/madang/freeAddComment?madangNo="+ madangNo + "&memberNo=" + memberNo 
-	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
+	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
 	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage;
 };
 
 function fn_addReply(path,REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
-	var commentArea=document.getElementById('comment_text_rep');
+	var commentArea=convertToTag(document.getElementById('comment_text_rep'));
 	location.href=path+"/madang/freeAddReply?madangNo="+ madangNo + "&memberNo=" + memberNo 
 	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
 	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage +"&cmtNo=" + cmtNo;
 };
 
-
+function convertToTag(textArea) {
+	var lines = textArea.value.split("\n");
+	
+	// generate HTML version of text
+	var resultString  = "<p>";
+	for (var i = 0; i < lines.length; i++) {
+	  resultString += lines[i] + "<br />";
+	}
+	resultString += "</p>";
+	
+	return resultString;
+}
 // madang Write
 
 

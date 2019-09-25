@@ -52,6 +52,8 @@ private Properties prop=new Properties();
 				sm.setMadangContent(rs.getString("madang_content"));
 				sm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				sm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				sm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
+				sm.setMadangUpdatedIp(rs.getString("madang_updated_ip"));
 				sm.setMadangRecCount(rs.getInt("madang_rec_count"));
 				sm.setMadangRepCount(rs.getInt("madang_rep_count"));
 				sm.setMadangReadCount(rs.getInt("madang_read_count"));

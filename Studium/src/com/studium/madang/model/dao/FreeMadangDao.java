@@ -77,6 +77,8 @@ public class FreeMadangDao {
 				fm.setMadangContent(rs.getString("madang_content"));
 				fm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				fm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				fm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
+				fm.setMadangUpdatedIp(rs.getString("madang_updated_ip"));
 				fm.setMadangRecCount(rs.getInt("madang_rec_count"));
 				fm.setMadangRepCount(rs.getInt("madang_rep_count"));
 				fm.setMadangReadCount(rs.getInt("madang_read_count"));
@@ -115,6 +117,8 @@ public class FreeMadangDao {
 				fm.setMadangContent(rs.getString("madang_content"));
 				fm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				fm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				fm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
+				fm.setMadangUpdatedIp(rs.getString("madang_updated_ip"));
 				fm.setMadangRecCount(rs.getInt("madang_rec_count"));
 				fm.setMadangRepCount(rs.getInt("madang_rep_count"));
 				fm.setMadangReadCount(rs.getInt("madang_read_count"));
@@ -166,6 +170,27 @@ public class FreeMadangDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, madangNo);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int insertMadang(Connection conn, FreeMadang fm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fm.getMadangWriterUid());
+			pstmt.setString(2, fm.getMadangWriterEmail());
+			pstmt.setString(3, fm.getMadangWriterName());
+			pstmt.setString(4, fm.getMadangTitle());
+			pstmt.setString(5, fm.getMadangContent());
+			pstmt.setString(6, fm.getMadangRegisterIp());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

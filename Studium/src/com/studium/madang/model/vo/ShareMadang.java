@@ -14,6 +14,8 @@ public class ShareMadang {
 	private String madangContent; // 글 내용
 	private Timestamp madangRegisterDatetime; // 글 작성 일시
 	private String madangRegisterIp; // 글 작성 ip 주소
+	private Timestamp madangUpdatedDatetime; // 글 수정 일시
+	private String madangUpdatedIp; // 글 수정 ip 주소
 	private int madangRecCount; // 글 추천 수(recommand)
 	private int madangRepCount; // 글 댓글 수(reply)
 	private int madangReadCount; // 조회수
@@ -29,8 +31,9 @@ public class ShareMadang {
 
 	public ShareMadang(int madangNo, int madangParent, int madangOrder, int madangWriterUid, String madangWriterEmail,
 			String madangWriterName, String madangTitle, String madangContent, Timestamp madangRegisterDatetime,
-			String madangRegisterIp, int madangRecCount, int madangRepCount, int madangReadCount, int madangForkCount,
-			char madangFilePresence, char madangImgPresence, char madangStatus, String profilePath) {
+			String madangRegisterIp, Timestamp madangUpdatedDatetime, String madangUpdatedIp, int madangRecCount,
+			int madangRepCount, int madangReadCount, int madangForkCount, char madangFilePresence,
+			char madangImgPresence, char madangStatus, String profilePath) {
 		super();
 		this.madangNo = madangNo;
 		this.madangParent = madangParent;
@@ -42,6 +45,8 @@ public class ShareMadang {
 		this.madangContent = madangContent;
 		this.madangRegisterDatetime = madangRegisterDatetime;
 		this.madangRegisterIp = madangRegisterIp;
+		this.madangUpdatedDatetime = madangUpdatedDatetime;
+		this.madangUpdatedIp = madangUpdatedIp;
 		this.madangRecCount = madangRecCount;
 		this.madangRepCount = madangRepCount;
 		this.madangReadCount = madangReadCount;
@@ -132,6 +137,22 @@ public class ShareMadang {
 		this.madangRegisterIp = madangRegisterIp;
 	}
 
+	public Timestamp getMadangUpdatedDatetime() {
+		return madangUpdatedDatetime;
+	}
+
+	public void setMadangUpdatedDatetime(Timestamp madangUpdatedDatetime) {
+		this.madangUpdatedDatetime = madangUpdatedDatetime;
+	}
+
+	public String getMadangUpdatedIp() {
+		return madangUpdatedIp;
+	}
+
+	public void setMadangUpdatedIp(String madangUpdatedIp) {
+		this.madangUpdatedIp = madangUpdatedIp;
+	}
+
 	public int getMadangRecCount() {
 		return madangRecCount;
 	}
@@ -202,7 +223,8 @@ public class ShareMadang {
 				+ ", madangWriterUid=" + madangWriterUid + ", madangWriterEmail=" + madangWriterEmail
 				+ ", madangWriterName=" + madangWriterName + ", madangTitle=" + madangTitle + ", madangContent="
 				+ madangContent + ", madangRegisterDatetime=" + madangRegisterDatetime + ", madangRegisterIp="
-				+ madangRegisterIp + ", madangRecCount=" + madangRecCount + ", madangRepCount=" + madangRepCount
+				+ madangRegisterIp + ", madangUpdatedDatetime=" + madangUpdatedDatetime + ", madangUpdatedIp="
+				+ madangUpdatedIp + ", madangRecCount=" + madangRecCount + ", madangRepCount=" + madangRepCount
 				+ ", madangReadCount=" + madangReadCount + ", madangForkCount=" + madangForkCount
 				+ ", madangFilePresence=" + madangFilePresence + ", madangImgPresence=" + madangImgPresence
 				+ ", madangStatus=" + madangStatus + ", profilePath=" + profilePath + "]";

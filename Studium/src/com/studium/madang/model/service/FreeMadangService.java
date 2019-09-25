@@ -48,4 +48,9 @@ public class FreeMadangService {
 		close(conn);
 		return preNext;
 	}
+	
+	public int insertMadang(FreeMadang fm) {
+		Connection conn=getConnection();
+		int result=dao.insertMadang(conn, fm);
+	}
 }

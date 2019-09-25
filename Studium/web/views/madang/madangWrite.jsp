@@ -61,7 +61,7 @@
                         <li id="file_attach_menu" class="file_attach_menu">
                             <div class="filebox">
                                 
-                                    <label for="files" class="item">업로드<a id="fileDB" class="ico_file" href="#"></a></label>
+                                <label for="files" class="item">업로드<a id="fileDB" class="ico_file" href="#"></a></label>
                                 
                                 <input type="file" id="files" class="upload-hidden" name="file" multiple>
                                 <input class="upload-name" value="파일선택" disabled="disabled">
