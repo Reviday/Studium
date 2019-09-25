@@ -89,8 +89,7 @@
 					<td><span class="momoClick"><%=m.getMemUserEmail() %></span>
 						<div class="adminMemo">
 							<form class="memoUpdate">
-								<textarea name="memo" class="memotextarea" cols="30" rows="10"
-									placeholder="회원에 대한 메모를 작성하세요."
+								<textarea name="memo" class="memotextarea" cols="30" rows="10" placeholder="회원에 대한 메모를 작성하세요."
 									value=<%=m.getMemAdminmemo() != null ? m.getMemAdminmemo() : "" %>><%=m.getMemAdminmemo()%></textarea>
 								<input type="hidden" name="memNo" value="<%=m.getMemNo() %>">
 							</form>
@@ -143,6 +142,7 @@
         	console.log($(".gradeList").val());
         	var result = confirm("정말 탈퇴하시겠습니까?");
         	if(result){
+        		console.log(cPage);
         		var params = jQuery(".deleteMember").serialize();
         		params+='&cPage='+cPage+'&gradeList'+$(".gradeList").val()+'&statusList'+$(".statusList").val();
 

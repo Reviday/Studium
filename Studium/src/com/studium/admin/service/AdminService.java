@@ -12,6 +12,7 @@ import com.studium.admin.model.dao.AdminDao;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
+import com.studium.mypage.model.vo.LeaderAdd;
 
 public class AdminService {
 
@@ -71,6 +72,20 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountLeader() {
+		Connection conn=getConnection();
+		int result=dao.selectCountLeader(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<LeaderAdd> selectLeaderPSList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<LeaderAdd> list=dao.selectLeaderPSList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
 	public List<QandA> selectQandAList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<QandA> list=dao.selectQandAList(conn,cPage,numPerPage);
@@ -125,6 +140,15 @@ public class AdminService {
 	public int deleteQnAList(String[] deList) {
 		Connection conn = getConnection();
 		int result = dao.deleteQnAList(conn, deList);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;	 
+	}
+	
+	public int deletePS(String[] leaderNo) {
+		Connection conn = getConnection();
+		int result = dao.deletePS(conn, leaderNo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
 		close(conn);

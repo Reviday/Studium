@@ -40,15 +40,15 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		System.out.println("테스트");
+		
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-		System.out.println("테스트1");
+		
 		String memNo = request.getParameter("memNo");
 		int result=new AdminService().deleteMember(memNo);
 		
 		String grade = "allGrade";
 		String status = "allStatus";
-		System.out.println(grade+status);
+		
 		String method = request.getParameter("method");
 		int cPage;
 		try {

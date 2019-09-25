@@ -17,7 +17,7 @@ import java.util.Properties;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
-import com.sun.jmx.snmp.Timestamp;
+import com.studium.mypage.model.vo.LeaderAdd;
 
 public class AdminDao {
 
@@ -73,6 +73,26 @@ public class AdminDao {
 		ResultSet rs=null;
 		int result=0;
 		String sql=prop.getProperty("selectCountMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountLeader(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountLeader");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -226,7 +246,42 @@ public class AdminDao {
 
 	}
 
+	public List<LeaderAdd> selectLeaderPSList(Connection conn,int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<LeaderAdd> list=new ArrayList();
+		String sql=prop.getProperty("selectLeaderPSList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LeaderAdd l=new LeaderAdd();
+				l.setlNo(rs.getInt("l_no"));
+				l.setlName(rs.getString("l_name"));
+				l.setlGender(rs.getString("l_gender"));
+				l.setlEmail(rs.getString("l_email"));
+				l.setlPhone(rs.getString("l_phone"));
+				l.setlType(rs.getString("l_type"));
+				l.setlArea(rs.getString("l_area"));
+				l.setlCategory1(rs.getString("l_category1"));
+				l.setlCategory2(rs.getString("l_category2"));
+				l.setlCategory3(rs.getString("l_category3"));
+				l.setlMessage(rs.getString("l_message"));
+				l.setlEnrolldate(rs.getDate("l_enrolldate"));
+				l.setlStatus(rs.getString("l_status"));
 
+				list.add(l);				
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 
 
 	public List<QandA> selectQandAList(Connection conn,int cPage, int numPerPage){
@@ -990,6 +1045,26 @@ public class AdminDao {
 				close(pstmt);
 			}
 		
+		return result;
+	}
+	
+	public int deletePS(Connection conn, String[] leaderNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deletePS");
+		for(String s : leaderNo) {
+			try {
+				System.out.println(leaderNo);
+
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, s);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		}
 		return result;
 	}
 	
