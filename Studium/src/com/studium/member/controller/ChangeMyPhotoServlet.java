@@ -56,8 +56,6 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 		    	isDir.mkdir();
 
 		    }
-		    System.out.println(saveDir);
-		    System.out.println(isDir);
 
 		 MultipartRequest mr =new MultipartRequest(
 					request,
@@ -91,14 +89,12 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 	     String view="";
 	      if(result>0) {
 				//회원사진변경완료
-	    	  System.out.println("사진변경완료");
 //	 	     m=ms.selectNo(no);
 //				request.setAttribute("member", m);
 //				request.getRequestDispatcher("/views/myPage/myInfo.jsp")
 //				.forward(request,response);
 				
 			} else {
-		    	  System.out.println("사진변경실패");
 				msg="사진 등록이 실패하였습니다.";
 				view="/views/common/msg.jsp";
 				loc="/views/myPage/myInfoCheckPw.jsp";
