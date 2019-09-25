@@ -33,5 +33,23 @@ public class StoryService {
 		close(conn);
 		return list;
 	}
+	public List<Story> selectengList() {
+		Connection conn=getConnection();
+		List<Story> list=dao.selectengList(conn);
+		close(conn);
+		return list;
+	}
+	public List<Story> selectchaList() {
+		Connection conn=getConnection();
+		List<Story> list=dao.selectchaList(conn);
+		close(conn);
+		return list;
+	}
+	public List<Story> selectcodList() {
+		Connection conn=getConnection();
+		List<Story> list=dao.selectcodList(conn);
+		close(conn);
+		return list;
+	}
 
 }

@@ -37,12 +37,13 @@ public class StoryDao {
 			if(rs.next()) {
 				s=new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setStoryStudentpicture(rs.getString("STORY_STUDNET_PICTURE"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
-				s.setStoryTime(rs.getString("STORY_TIME"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
-				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTURE"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				
 			
 				
 			}
@@ -67,12 +68,13 @@ public class StoryDao {
 			while(rs.next()) {
 				Story s=new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setStoryStudentpicture(rs.getString("STORY_STUDNET_PICTURE"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
-				s.setStoryTime(rs.getString("STORY_TIME"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
-				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTURE"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				
 				list.add(s);
 			}
@@ -96,5 +98,89 @@ public class StoryDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public List<Story> selectengList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectengList");
+		List<Story> list=new ArrayList<Story>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s=new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Story> selectchaList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectchaList");
+		List<Story> list=new ArrayList<Story>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s=new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Story> selectcodList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectcodList");
+		List<Story> list=new ArrayList<Story>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s=new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 }

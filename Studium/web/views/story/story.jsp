@@ -14,7 +14,8 @@
     <style>
         /* 사이드바 스타일 */
         #review-level{
-        	float:right;
+        	position:fixed;
+        	right:0;
         	box-sizing:border-box;
         	width:15pc;
         	background:#fff;
@@ -60,25 +61,28 @@
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
         <aside id="review-level">
-            	<div class="review-title">레벨별</div>
+            	<div class="review-title">종류별</div>
             	<ul class="level-list">
+            	<li class="level-select-wrap">
+            			<a class="level-select" href="<%=request.getContextPath()%>/story">전체</a>
+            		</li>
             		<li class="level-select-wrap">
-            			<a class="level-select">입문</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story1">영어</a>
             		</li>
             
             	
             		<li class="level-select-wrap">
-            			<a class="level-select">초급</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story2">중국어</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select">중급</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story3">코딩</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select">고급</a>
+            			<a class="level-select">기타</a>
             		</li>
             	</ul>
             
@@ -102,20 +106,9 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                   입문후기
+                  전체후기
           
-    <!--  <div id="mysidenav" class="sidenav">   
-	<ul>
-		 <li><a class="active" href="#review">후기1</a></li>
-		 <li><a href="#review1">후기2</a></li>
-         <li><a href="#review2">후기3</a></li>
-         <li><a href="#review3">후기4</a></li>
-	</ul>
-	 </div> -->
-
-                    <!-- <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5"
-                            aria-hidden="true"></i>레벨별 후기 만나보기<sup class="supText">click!</sup></span> -->
-
+    
                     
                 </div>
                 <div class="rine"></div> <!-- 구분선 -->
@@ -127,7 +120,7 @@
                     <!-- 후기 들어가는 div -->
                     <div class="reviewAll">
                         <!-- 개인후기 div -->
-                        <%-- <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryStudentpicture()%>" --%>
+                         <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryStudentpicture()%>"/>
                         
                         <!-- 후기올린 사람 사진 -->
                         <div class="reviewName">
@@ -160,8 +153,8 @@
                                         <!-- 강사 이름 -->
                                         <%=s.getStoryTeachername()%>
                                     </div>
-                                    <%=s.getStoryTeacherpicture()%>
-                                   <!--  <img src="http://ph.spotvnews.co.kr/news/photo/201904/279726_344511_1627.jpg" alt=""> -->
+                                    <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryTeacherpicture()%>"/>
+                   
                                     <!-- 강사 사진 -->
                                     
                           </div>
@@ -182,6 +175,6 @@
         </article>
         
     </section>
- <%@ include file="/views/common/footer.jsp" %> 
+ <%@ include file="/views/common/footer.jsp" %>  
 
 

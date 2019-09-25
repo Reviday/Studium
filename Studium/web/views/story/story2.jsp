@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <style>
         /* 사이드바 스타일 */
-        #review-level{
+       #review-level{
         	position:fixed;
         	right:0;
         	box-sizing:border-box;
@@ -60,7 +60,7 @@
 </div>
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
-        <aside id="review-level">
+      <aside id="review-level">
             	<div class="review-title">종류별</div>
             	<ul class="level-list">
             	<li class="level-select-wrap">
@@ -106,7 +106,7 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                   영어후기
+                   중국어후기
           
     
                     
