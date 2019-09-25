@@ -47,7 +47,7 @@
         </div>
         <hr />
         <div class="write_form">
-            <form action="/page/test/send.jsp" method="post" id="frm">
+            <form action="<%=request.getContextPath()%>/madang/<%=locate%>/writeEnd" method="post" id="frm">
                 <div class="subject_cover">
                     <ul class="subject">
                         <li class="post_subject">
@@ -148,10 +148,18 @@
 	                <!-- 버튼 -->
 					<div class="post_btns">
 						<div class="fr">
-							<input type="reset" class="btn_type1" value="취소" onclick="location.href='<%=request.getContextPath()%>/madang/<%=locate%>MadangList?cPage=1'">
+							<input type="reset" class="btn_type1" value="취소" 
+							onclick="location.href='<%=request.getContextPath()%>/madang/<%=locate%>MadangList?cPage=1'">
 							<input type="submit" id="savebutton" class="btn_type1" value="확인">
 						</div>
 					</div>
+                </div>
+                <div style="display:none">
+                	<!-- 함께 전달해야 할 데이터 -->
+                	<input type="hidden" name="userUid" value="<%=loginMember.getMemNo()%>">
+                	<input type="hidden" name="userEmail" value="<%=loginMember.getMemUserEmail()%>"> 
+                	<input type="hidden" name="userName" value="<%=loginMember.getMemPassword()%>">
+                	<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
                 </div>
             </form>
         </div>

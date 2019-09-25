@@ -37,3 +37,9 @@ function fn_addReply(path,REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memN
 	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage +"&cmtNo=" + cmtNo;
 };
 
+
+// madang Write
+
+
+
+
