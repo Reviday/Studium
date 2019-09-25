@@ -1,5 +1,7 @@
 package com.studium.mypage.model.vo;
 
+import java.util.Date;
+
 public class LeaderAdd {
 	private int lNo;
 	private String lName;
@@ -12,7 +14,8 @@ public class LeaderAdd {
 	private String lCategory2;
 	private String lCategory3;
 	private String lMessage;
-	
+	private Date lEnrolldate;
+	private String lStatus;
 	
 	public LeaderAdd() {
 		// TODO Auto-generated constructor stub
@@ -21,7 +24,7 @@ public class LeaderAdd {
 
 
 	public LeaderAdd(int lNo, String lName, String lGender, String lEmail, String lPhone, String lType, String lArea,
-			String lCategory1, String lCategory2, String lCategory3, String lMessage) {
+			String lCategory1, String lCategory2, String lCategory3, String lMessage, Date lEnrolldate, String lStatus) {
 		super();
 		this.lNo = lNo;
 		this.lName = lName;
@@ -34,6 +37,8 @@ public class LeaderAdd {
 		this.lCategory2 = lCategory2;
 		this.lCategory3 = lCategory3;
 		this.lMessage = lMessage;
+		this.lEnrolldate = lEnrolldate;
+		this.lStatus = lStatus;
 	}
 
 
@@ -145,6 +150,30 @@ public class LeaderAdd {
 
 	public void setlMessage(String lMessage) {
 		this.lMessage = lMessage;
+	}
+
+	
+
+	public Date getlEnrolldate() {
+		return lEnrolldate;
+	}
+
+
+
+	public void setlEnrolldate(Date lEnrolldate) {
+		this.lEnrolldate = lEnrolldate;
+	}
+
+
+
+	public String getlStatus() {
+		return lStatus;
+	}
+
+
+
+	public void setlStatus(String lStatus) {
+		this.lStatus = lStatus;
 	}
 
 
