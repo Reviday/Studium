@@ -41,5 +41,17 @@ public class MyDibsService {
 		close(conn);
 		return list;
 	}
-
+	public List<MyDibs> selectMyDibs(int memberNo,int cPage,int numPerPage){
+		Connection conn=getConnection();
+		List<MyDibs> list=dao.selectMyDibs(conn, memberNo,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+		public int selectCountDibs(int memberNo) {
+		Connection conn=getConnection();
+		int result=dao.selectCountDibs(conn,memberNo);
+		close(conn);
+		return result;
+	}
+		
 }

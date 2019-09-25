@@ -344,4 +344,43 @@ private Properties prop=new Properties();
 		}return result;
 		
 	}
+	public List<Fstudy> selectMyfstudy(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Fstudy>list=new ArrayList();
+		String sql=prop.getProperty("selectMyfstudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Fstudy p=new Fstudy();
+				p.setfNo(rs.getInt("f_no"));
+				p.setfTitle(rs.getString("f_title"));
+				p.setfName(rs.getString("f_name"));
+				p.setfArea(rs.getString("f_area"));
+				p.setfDay(rs.getString("f_day"));
+				p.setfStudypserson(rs.getInt("f_studyperson"));
+				p.setfCategory(rs.getString("f_category"));
+				p.setfIntro1(rs.getString("f_intro1"));
+				p.setfIntro2(rs.getString("f_intro2"));
+				p.setfImgtitle(rs.getString("f_imgtitle"));
+				p.setfImg1(rs.getString("f_img1"));
+				p.setfImg2(rs.getString("f_img2"));
+				p.setfImg3(rs.getString("f_img3"));
+				p.setfTimestart(rs.getString("f_timestart"));
+				p.setfTimeend(rs.getString("f_timeend"));
+				p.setfDatestart(rs.getDate("f_datestart"));
+				p.setfDateend(rs.getDate("f_dateend"));
+				p.setfLike(rs.getInt("f_like"));
+				p.setfReadername(rs.getString("f_readername"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+	}
 }

@@ -98,4 +98,10 @@ public class FstudyService {
 		close(conn);
 		return result;
 	}
+	public List<Fstudy> selectMyfstudy(){
+		Connection conn=getConnection();
+		List<Fstudy> list=dao.selectMyfstudy(conn);
+		close(conn);
+		return list;
+	}
 }

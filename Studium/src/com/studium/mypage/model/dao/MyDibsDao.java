@@ -133,6 +133,52 @@ public class MyDibsDao {
 			close(pstmt);
 		}return list;
 	}
-	
+	public List<MyDibs> selectMyDibs(Connection conn, int memberNo,int cPage,int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectmyDibs");
+		List<MyDibs> list= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MyDibs m =new MyDibs();
+				m.setDibsId(rs.getInt("dibs_id"));
+				m.setMemberNo(rs.getInt("mem_no"));
+				m.setpNo(rs.getInt("p_no"));
+				m.setfNo(rs.getInt("f_no"));
+				m.setScrDateTime(rs.getDate("scr_datetime"));
+				list.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+	}
+	public int selectCountDibs(Connection conn,int memberNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("selectCountDibs");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 
 }

@@ -27,6 +27,12 @@ public class PstudyService {
 		return result;
 		
 	}
+	public List<Pstudy> selectMypstudy(){
+		Connection conn =getConnection();
+		List<Pstudy> list=dao.selectMypstudy(conn);
+		close(conn);
+		return list;
+	}
 	
 	public int paymentMember(Member m) {
 		Connection conn=getConnection();

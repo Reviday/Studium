@@ -121,6 +121,45 @@ public class PstudyDao {
 			close(pstmt);
 		}return list;
 	}
+	public List<Pstudy> selectMypstudy(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pstudy>list=new ArrayList();
+		String sql=prop.getProperty("selectMypstudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Pstudy p=new Pstudy();
+				p.setpNo(rs.getInt("p_no"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setpName(rs.getString("p_name"));
+				p.setpArea(rs.getString("p_area"));
+				p.setpDay(rs.getString("P_day"));
+				p.setpStudypserson(rs.getInt("p_studyperson"));
+				p.setpPrice(rs.getInt("p_price"));
+				p.setpCategory(rs.getString("p_category"));
+				p.setpIntro1(rs.getString("p_intro1"));
+				p.setpIntro2(rs.getString("p_intro2"));
+				p.setpImgtitle(rs.getString("p_imgtitle"));
+				p.setpImg1(rs.getString("p_img1"));
+				p.setpImg2(rs.getString("p_img2"));
+				p.setpImg3(rs.getString("p_img3"));
+				p.setpTimestart(rs.getString("p_timestart"));
+				p.setpTimeend(rs.getString("P_timeend"));
+				p.setpDatestart(rs.getDate("p_datestart"));
+				p.setpDateend(rs.getDate("p_dateend"));
+				p.setpLike(rs.getInt("p_like"));
+				p.setpTeachername(rs.getString("p_teachername"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	public List<Pstudy> searchPstudy(Connection conn,String area,String day,String category){
 		PreparedStatement pstmt=null;
