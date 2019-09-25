@@ -301,6 +301,7 @@ public class MemberDao {
 				mp=new MyPurchase();
 				mp.setPurId(rs.getInt("pur_id"));
 				mp.setMemNo(rs.getInt("mem_no"));
+				mp.setpNo(rs.getInt("f_no"));
 				mp.setpNo(rs.getInt("p_no"));
 				mp.setpTitle(rs.getString("p_title"));
 				mp.setPurchaseDate(rs.getDate("purchase_date"));

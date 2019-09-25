@@ -47,8 +47,9 @@
                             <th>증빙서류</th>
                         </tr>
                       <% if(!list.isEmpty()){
+                    	  
 							for(int i=0;i<list.size();i++){
-								if(list.get(i).getPurchaseCancelStatus()=='N'){%>
+								if(String.valueOf(list.get(i).getpNo())!=null &&list.get(i).getPurchaseCancelStatus()=='N'){%>
                         <tr>
                             <td><%=list.get(i).getPurchaseDate() %></td>
                             <td><%if(list.get(i).getPurchaseStatus()=='Y'){%>진행중<%}else{ %>스터디 종료<%} %></td>
@@ -71,7 +72,7 @@
                         </tr>
                       <% if(!list.isEmpty()){
 							for(int i=0;i<list.size();i++){
-								if(list.get(i).getPurchaseCancelStatus()=='Y'){%>
+								if(String.valueOf(list.get(i).getpNo())!=null &&list.get(i).getPurchaseCancelStatus()=='Y'){%>
                         <tr>
                             <td><%=list.get(i).getCancelDate() %></td>
                             <td><%if(list.get(i).getPurchaseStatus()=='Y'){%>진행중<%}else{ %>스터디 종료<%} %></td>
