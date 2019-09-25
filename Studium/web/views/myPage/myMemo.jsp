@@ -22,73 +22,75 @@
       </div>
     </div>
 
-
-    <div class="section-content">
-        <div class="memo_wrap">
-    <div class="memo_box" id="memoDrag">
-        <div class="memo_top">
-            <button class="btn_add" title="추가" style="font-size: 15px">+</button>
-            <button class="btn_save" title="저장"><img src="img/upload.png" style="width:15px; height:12.5px;"></i></button>
-            <div class="right">
-                <button class="btn_list" title="목록"><img src="img/list.png" style="width:15px; height:12.5px;"></i></button>
-                <button class="btn_close" title="닫기"style="font-size: 15px; transform:rotate(45deg)">+</button>
-            </div>
-        </div>
-        <textarea class="memo_write" name="txt" placeholder="메모를 입력하세요"></textarea>
-        <div class="memo_list" style="display:none">
-            <ul></ul>
-        </div>
-    </div>
-</div>
+        <div class="section-content" style="height:600px">
+                <div class="row">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-8 navbar-myMenu" id="memo_area" style=" margin-top:20px">
+                        <div style="margin:0px auto;"><button id="click" class="changePhoto" >새로운 메모</button></div>
+                
+                            <div id="0" class="newMemo">
+                    <div class="memo_content">
+                    <div class="memo_top">
+                                <button class="memo_close" title="닫기" style="font-size: 25px; transform:rotate(45deg)">+</button>
+                            
+                    </div>
+                    <textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"></textarea>
+                </div>
+                </div>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
 
 <script>
-    $("#memoDrag").draggable();
-    if (localStorage) {
-        for (var i = 0; i < localStorage.length; i++) {
-            $('.memo_list ul').append($('<li>').text(localStorage.key(i)));
-        }
-    }
-    $('.memo_list ul').find('li').append('<a href="#n" class="memo_del"><img src="img/trash.png" style="width:12px; height:15px;"></a>');
+//기존에 있는 하나 움직일 수 있게 해줌 
+$(".newMemo").draggable();
+var numberId = 0;
+$("#click").on("click", function () {
+   //클릭할 때마다 아이디에 넣을 값 증가하게
+   numberId += 1;
+   //div만들기
+   $newdiv = $('<div/>');
+   // 랜덤좌표
+   var posx = (Math.random() * ($(document).width() - 200)).toFixed();
+   var posy = (Math.random() * ($(document).height() - 200)).toFixed();
+   //임의의 색깔
+   var color = '#' + Math.round(0xffffff * Math.random()).toString(16);
+   //아이디값추가
+   $newdiv.attr('id', numberId);
+   //클래스값추가
+   $newdiv.attr('class', 'newMemo');
+   //첫 메모 클론, 값 초기화
+   $(".memo_content").clone().appendTo($newdiv).children('.memo_write').val('');
+   //css추가
+   $newdiv.css({
+       'width': '200px',
+       'height': '200px',
+       'background-color': color,
+       'position': 'absolute',
+       'left': posx + 'px',
+       'top': posy + 'px',
+       'display': 'none'
+   }).appendTo('.section-content').fadeIn(100).draggable();;
 
-    var stickyMemo = $('.memo_wrap');
+//    //버튼으로 생성한  div삭제
+//     $(".newMemo").on('click', function () {
+//         console.log("들어옴");
+//         $(this).remove();
+//     });
+$(".memo_close").on('click', function () {
+       console.log("들어옴");
+       $(this).parents('.newMemo').remove();
+   });
+});
+//밖에 있는 기본 div삭제
+$(".memo_close").on('click', function () {
+       console.log("들어옴");
+       $(this).parents('.newMemo').remove();
+   });
 
-    // 메모추가 
-    stickyMemo.on('click', '.btn_add', function() {
-        $(this).parents('.memo_box').clone().appendTo('.memo_wrap').draggable().children('.memo_write').val('');
-        $('#drag').draggable();
-    });
 
-    // 메모저장
-    stickyMemo.on('click', '.btn_save', function() {
-        var txtMemo = $(this).parents('.memo_box').find('.memo_write').val();
-        var title = prompt('제목을 입력해 주세요');
-        localStorage.setItem(title, txtMemo);
-        $('.memo_list ul').append($('<li>').text(title).append('<a href="#n" class="memo_del"><img src="img/trash.png" style="width:12px; height:15px;"></a>'));
-    });
-
-    // 메모삭제
-    stickyMemo.on('click', '.btn_close', function() {
-        $(this).parents('.memo_box').remove();
-    });
-
-    // 메모삭제
-    stickyMemo.on('click', '.memo_del', function() {
-        var removeLi = $(this).parents('li');
-        var removeLiTitle = removeLi.text();
-        localStorage.removeItem(removeLiTitle);
-        removeLi.remove();
-    });
-
-    // 목록열기
-    stickyMemo.on('click', '.btn_list', function() {
-        $(this).parents('.memo_box').find('.memo_list').toggle();
-    });
-    stickyMemo.on('click', '.memo_list li', function() {
-        $('.memo_list').hide();
-        var selectTitle = $(this).text();
-        var selectCon = localStorage.getItem(selectTitle);
-        $(this).parents('.memo_box').find('.memo_write').val(selectCon);
-    });
 </script>
 
     </div>

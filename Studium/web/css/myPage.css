@@ -803,73 +803,43 @@ div .img-category {
 	background-color: #497f42;
 }
 
-/*인풋 파일버튼*/
-.blind {
-    position: absolute;
-    text-indent: -9999%
-}
-
-.memo_box {
-    float: left;
-    width: 250px;
-    height: 300px;
-    font-size: 1em;
-    background: #FEF098;
+/* 나의 메모 */
+.newMemo{ 
+    background-color:yellow; 
+    position: absolute; 
+    top:100px; 
+    left:500px;
     border: 1px solid #ccc;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, .3);
     margin: 0;
-    padding: 0 0 32px;
+    padding: 0px 10px 10px 10px;
     overflow: hidden;
-    opacity: .8
+    opacity: .6
 }
-
-.memo_box .memo_top {
-    height: 30px;
+.newMemo .memo_top{
+    height: 20px;
     line-height: 30px;
-    border-bottom: 1px solid #ddd;
-    padding: 0 10px
+    /* border-bottom: 1px solid #ddd; */
+    /* background-color:rgba(160, 159, 159, 0.299); */
+    padding: 0 10px;
 }
-
-.memo_box .memo_top button {
+.newMemo .memo_top button {
     border: 0;
     background-color: transparent;
-    padding: 4px
+    padding: 4px;
+    left:10px;
+    float: right;
 }
-
-.memo_box .memo_top .right {
-    float: right
-}
-
-.memo_box .memo_write {
+.memo_write {
     position: relative;
-    width: 250px;
-    height: 300px;
+    width: 200px;
+    height: 170px;
     margin: 0;
     padding: 10px;
     box-sizing: border-box;
-    background: #ffffe0;
+    background: transparent;
     border: none;
-    resize: none
+    resize: none;
+    
 }
 
-.memo_box .memo_list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 100%;
-    padding-right: 10px;
-    background: rgba(0, 0, 0, .6);
-    color: #fff;
-    box-sizing: border-box;
-    padding-top: 32px;
-    list-style: none;
-    overflow: auto;
-    transition: .5s
-}
-
-.memo_box .memo_del {
-    float: right;
-    padding: 0 10px;
-    color: #fff
-}
