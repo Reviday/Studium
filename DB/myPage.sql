@@ -1,6 +1,7 @@
 select * from tab;
 drop table my_dibs;
 drop table my_purchase;
+
 drop table todo_list;
 drop table ta_member;
 create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
@@ -128,12 +129,13 @@ insert into my_dibs values(seq_my_dibs.nextval,10001,44,null,sysdate);
 insert into my_dibs values(seq_my_dibs.nextval,10001,null,1,sysdate);
 
 DROP TABLE MY_PURCHASE;
---구매목록
+--구매,신청테이블
 CREATE TABLE MY_PURCHASE(
     PUR_ID NUMBER PRIMARY KEY,--구매번호
     mem_no number constraint PUR_mem_no_fk references ta_member(mem_no), -- 구매한 회원 번호
+    f_no number default null constraint PUR_f_study_fk references f_study(f_no), -- 신청한 무료스터디 번호
     p_no number default null constraint PUR_p_study_fk references p_study(p_no), -- 구매한 강사스터디 번호
-    PURCHASE_DATE DATE, --구매 날짜
+    PURCHASE_DATE DATE, --구매,신청 날짜
     PURCHASE_CANCEL_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PURCHASE_CANCEL_STATUS_CK CHECK (PURCHASE_CANCEL_STATUS IN ('N','Y')), --취소여부
     CANCEL_DATE DATE, --취소 날짜
     PURCHASE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PURCHASE_CK CHECK (PURCHASE_STATUS IN ('N','Y')),--스터디 진행여부/진행중Y, 완료N
@@ -152,10 +154,11 @@ create sequence seq_my_purchase
 start with 1
 increment by 1;
 --구매테이블 더미데이타
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10021,1,SYSDATE,'N',SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,SYSDATE,'Y',SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,2,SYSDATE,'Y',SYSDATE,'Y','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,SYSDATE,'N',SYSDATE,'Y','Y');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10021,1,null,SYSDATE,'N',SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,null,SYSDATE,'Y',SYSDATE,'N','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,null,SYSDATE,'Y',SYSDATE,'Y','N');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,null,1,SYSDATE,'N',SYSDATE,'Y','Y');
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,null,1,SYSDATE,'Y',SYSDATE,'Y','Y');
 SELECT * FROM MY_PURCHASE;
 SELECT * FROM TA_MEMBER;
 --TODOLIST테이블
@@ -300,8 +303,6 @@ insert into ta_member values(mem_seq.NEXTVAL,'aaa@naver.com','x61Ey612Kl2gpFL56F
 
 update ta_member set mem_password='x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==' where mem_email='aaa@naver.com';
 commit;
-
-
-update ta_member set mem_birth='2019-09-10';
 select * from ta_member;
-
+select * from my_purchase;
+select * from tab;
