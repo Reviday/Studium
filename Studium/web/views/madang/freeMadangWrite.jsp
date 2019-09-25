@@ -126,8 +126,7 @@
 						<label>작성하기</label>
 					</div>
 					<div style="clear:both"></div>
-	                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
-	                    style="width: 740px; height: 466px;"> </textarea>
+	                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100" > </textarea>
 	
 	
 	                

@@ -45,21 +45,25 @@
         }
 
         #madang_writer .smdarteditor_area {
-        	margin-inline-start: 80px;
+        	margin-inline-start: 5%;
         	position: relative;
         }
 
         #madang_writer .write_form textarea {
-        	margin-inline-start: 80px;
+			margin-inline-start: 5%;
+			width: 94%;
+			height: 466px;
+			min-width: 612px;
         }
 
         #madang_writer .write_form .subject_cover {
-        	padding-inline-start: 80px;
+        	padding-inline-start: 5%;
         }
 
         #madang_writer .write_form ul.subject {
         	overflow: hidden;
-        	width: 740px;
+			width: 94%;
+			min-width: 612px;
         	background-color: rgba(239, 108, 0, 0.01);
         	border: 1px solid rgba(239, 108, 0, 0.3);
         	border-radius: 10px;
@@ -70,7 +74,6 @@
 
         #madang_writer .write_form ul.subject li {
         	position: relative;
-        	width: 740px;
         	margin: 0 0 9px 0;
         }
 
@@ -150,7 +153,19 @@
         	color: #222;
         	padding-left: 15px;
         	background: url(https://cafe.pstatic.net/editor/icon/ico_file2.gif) 0 3px no-repeat;
-        }
+		}
+		
+		.main-area {
+			width: 100%;
+			max-width: 850px;
+			min-width: 680px;
+		}
+
+		.write_form {
+			width: 100%;
+			max-width: 920px;
+			min-width: 680px;
+		}
 
         .write_form #fileDB:after {
         	content: "";
@@ -178,7 +193,8 @@
         }
 
         .write_form .post_btns {
-        	width: 740px;
+			width: 94%;
+        	min-width: 544px;
         	margin-top: 9px;
         	text-align: right;
         }
