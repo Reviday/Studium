@@ -3,6 +3,7 @@
 <%@ page import="com.studium.member.model.vo.Member"%>
 <% 
 	Member loginMember=(Member)session.getAttribute("loginMember");
+	String REMOTE_ADDR= request.getRemoteAddr(); // IP
 %>
 <!doctype html>
 <html lang="ko">

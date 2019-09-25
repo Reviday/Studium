@@ -107,10 +107,18 @@
 							%>
 						</tbody>
 					</table>
-				
-					<%@ include file="/views/common/pagination.jsp"%>
-
+					
+					<!-- 버튼 -->
+					<div class="post_btns">
+						<div class="fr">
+							<a href="#" id="writeFormBtn"
+								onclick="fn_madangWrite(); return false;"
+								class="btn_type1 post_write _rosRestrict">글쓰기</a>
+						</div>
+					</div>
+					
 				</div>
+				<%@ include file="/views/common/pagination.jsp"%>
 			</div>
 
 		</div>

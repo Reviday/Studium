@@ -36,3 +36,8 @@ function fn_addReply(path,REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memN
 	+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value 
 	+ "&REMOTE_ADDR=" + REMOTE_ADDR +"&cPage=" + cPage +"&cmtNo=" + cmtNo;
 };
+
+// madangList
+function fn_madangWrite() {
+	
+};
