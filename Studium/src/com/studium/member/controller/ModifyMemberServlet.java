@@ -32,19 +32,45 @@ public class ModifyMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("loginMember");
-		String phone=request.getParameter("phone");
-		String address1=request.getParameter("address1");
-		String address2=request.getParameter("address2");
-		String zipcode=request.getParameter("zipcode");
+
 		String password=request.getParameter("password");
-	
-		// 수정한 내용
+
 		Member m=new Member();
-		m.setMemPhone(phone);
-		m.setMemZipCode(zipcode);
-		m.setMemAddress1(address1);
-		m.setMemAddress2(address2);
-		m.setMemPassword(password);
+		m.setMemPassword(password);	
+		
+		System.out.println(request.getParameter("phone"));
+		// 수정한 내용
+		if(request.getParameter("phone").equals(null)) {
+			System.out.println("여기들어옴");
+			String phone=request.getParameter("phone");
+			String address1=request.getParameter("address1");
+			String address2=request.getParameter("address2");
+			String zipcode=request.getParameter("zipcode");
+			String [] inter =request.getParameterValues("inter");
+			m.setMemPhone(phone);
+			m.setMemZipCode(zipcode);
+			m.setMemAddress1(address1);
+			m.setMemAddress2(address2);
+			if(inter.length==1) {
+				m.setMemCategory1(inter[0]);
+				m.setMemCategory2(null);
+				m.setMemCategory3(null);
+			}
+			if(inter.length==2){
+				m.setMemCategory1(inter[0]);
+				m.setMemCategory2(inter[1]);
+				m.setMemCategory3(null);
+			}
+			else{
+				m.setMemCategory1(inter[0]);
+				m.setMemCategory2(inter[1]);
+				m.setMemCategory3(inter[2]);
+			}
+			
+			
+		}
+	
+		
 		System.out.println("멤버객체"+m);
 		
 		MemberService ms=new MemberService();

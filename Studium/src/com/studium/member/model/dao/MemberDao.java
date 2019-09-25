@@ -215,7 +215,7 @@ public class MemberDao {
 	public int modifyMember(Connection conn, Member m,String id) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql= prop.getProperty("updateMember");
+		String sql= prop.getProperty("modifyMember");
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -223,8 +223,11 @@ public class MemberDao {
 			pstmt.setString(2, m.getMemZipCode());
 			pstmt.setString(3, m.getMemAddress1());
 			pstmt.setString(4, m.getMemAddress2());
-			pstmt.setString(5, m.getMemPassword());
-			pstmt.setString(6, id);
+			pstmt.setString(5, m.getMemCategory1());
+			pstmt.setString(6, m.getMemCategory2());
+			pstmt.setString(7, m.getMemCategory3());
+			pstmt.setString(8, m.getMemPassword());
+			pstmt.setString(9, id);
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
