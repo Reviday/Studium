@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
@@ -46,10 +49,8 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String zipcode=request.getParameter("zipcode");
 		String address1=request.getParameter("address1");
 		String address2=request.getParameter("address2");
-		System.out.println(zipcode);
 		String [] inter =request.getParameterValues("inter");
-		System.out.println(inter[0]);
-	
+		
 		// 수정한 내용
 		Member m=new Member();
 		m.setMemBirth(d);
@@ -58,9 +59,21 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		m.setMemZipCode(zipcode);
 		m.setMemAddress1(address1);
 		m.setMemAddress2(address2);
-		m.setMemCategory1(inter[0]);
-		m.setMemCategory2(inter[1]);
-		m.setMemCategory3(inter[2]);
+		if(inter.length==1) {
+			m.setMemCategory1(inter[0]);
+			m.setMemCategory2(null);
+			m.setMemCategory3(null);
+		}
+		if(inter.length==2){
+			m.setMemCategory1(inter[0]);
+			m.setMemCategory2(inter[1]);
+			m.setMemCategory3(null);
+		}
+		else{
+			m.setMemCategory1(inter[0]);
+			m.setMemCategory2(inter[1]);
+			m.setMemCategory3(inter[2]);
+		}
 		
 		MemberService ms=new MemberService();
 		//회원정보 수정
@@ -69,10 +82,19 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String loc="/";
 		String view="";
 		//해당 아이디로  수정된 멤버객체 가지고옴
-		m=ms.selectNo(no);
 		if(result>0) {
 			//회원정보수정성공
+			m=ms.selectNo(no);
+			
+			List<Category> listM=new CategoryService().selectTitleM();
+			//대분류
+			List<Category> listB=new CategoryService().selectTitleB();
+			
+			request.setAttribute("categoryB", listB);
+			request.setAttribute("categoryM", listM);
+			System.out.println(m);
 			request.setAttribute("member", m);
+			//리스트쏴주기
 			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
 			.forward(request,response);
 			

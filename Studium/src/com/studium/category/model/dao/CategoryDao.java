@@ -97,7 +97,6 @@ public class CategoryDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

@@ -5,6 +5,7 @@ import java.sql.Date;
 public class MyPurchase {
 	private int purId;//구매아이디
 	private int memNo;//구매한 멤버 no
+	private int fNo;//신청한 f study의 no
 	private int pNo;//구매한 p study의 no
 	private String pTitle;//구매한 p study의 title
 	private Date purchaseDate;//구매한 날짜
@@ -31,6 +32,13 @@ public class MyPurchase {
 
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
+	}
+	public int getfNo() {
+		return fNo;
+	}
+
+	public void setfNo(int fNo) {
+		this.fNo = fNo;
 	}
 
 	public int getpNo() {

@@ -11,7 +11,6 @@
 	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
-	String REMOTE_ADDR = request.getRemoteAddr();
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
 	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");

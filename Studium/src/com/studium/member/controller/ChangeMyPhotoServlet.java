@@ -92,10 +92,10 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 	      if(result>0) {
 				//회원사진변경완료
 	    	  System.out.println("사진변경완료");
-	 	     m=ms.selectNo(no);
-				request.setAttribute("member", m);
-				request.getRequestDispatcher("/views/myPage/myInfo.jsp")
-				.forward(request,response);
+//	 	     m=ms.selectNo(no);
+//				request.setAttribute("member", m);
+//				request.getRequestDispatcher("/views/myPage/myInfo.jsp")
+//				.forward(request,response);
 				
 			} else {
 		    	  System.out.println("사진변경실패");

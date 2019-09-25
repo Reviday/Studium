@@ -36,7 +36,9 @@ public class AddmyInfoServlet extends HttpServlet {
 		List<Category> listM=new CategoryService().selectTitleM();
 		//대분류
 		List<Category> listB=new CategoryService().selectTitleB();
-		
+
+		System.out.println(listM);
+		System.out.println(listB);
 		
 		request.setAttribute("categoryM", listM);
 		request.setAttribute("categoryB", listB);

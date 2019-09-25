@@ -1,25 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="/views/common/header.jsp"%>
+<!-- 마당에 적용할  css -->
+<link href="<%=request.getContextPath()%>/css/madang.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/madang-writer.css"
+	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 <!-- Smart Editor2 -->
 <script type="text/javascript"
    src="<%=request.getContextPath()%>/SE2/js/HuskyEZCreator.js"
    charset="utf-8"></script>
-</head>
-<body>
-   <form action="/page/test/send.jsp" method="post" id="frm">
-      <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
-         style="width: 766px; height: 466px;"> </textarea>
-         
-         
-      <input type="submit" id="savebutton" value="확인">
-   </form>
+<div class="header-background"
+	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+	<div class="header-background-cover"></div>
+</div>
+<section id="madang_writer" class="row">
+	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left: 0">
+		<!-- 사이드 메뉴가 들어갈 곳 -->
+		<%@ include file="/views/common/sideMenuBar.jsp"%>
+	</div>
+    <div class="main-area col-md-7 col-lg-7">
+        <div class="madang-list mldiv">
+            <div class="sub-tit row mldiv">
+                <div class="title-area mldiv">
+                    <h3 class="list-title">자유마당</h3>
+                    <p class="list-sub">자유롭게 글을 올리는 공간입니다.</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="write_form">
+            <form action="/page/test/send.jsp" method="post" id="frm">
+                <div class="subject_cover">
+                    <ul class="subject">
+                        <li class="post_subject">
+                            <label class="item" for="subject">제　목</label>
+                            <div class="label">
+                                <input type="text" name="subject" placeholder="게시글 제목을 입력하세요" id="subject"
+                                    class="box_input">
+                            </div>
 
+                        </li>
+                        <li id="file_attach_menu" class="file_attach_menu">
+                            <div class="filebox">
+                                <a id="fileDB" class="ico_file" href="#">
+                                    <label for="files">업로드</label>
+                                </a>
+                                <input type="file" id="files" class="upload-hidden" name="file" multiple>
+                                <input class="upload-name" value="파일선택" disabled="disabled">
+                                <!--<button onclick="abortRead();">Cancel read</button> 지금 구현하지않음.-->
+                                <div id="progress_bar">
+                                    <div class="percent">0%</div>
+                                </div>
+                                <script>
+                                    var reader;
+                                    var progress = document.querySelector('.percent');
+
+                                    function abortRead() {
+                                        reader.abort();
+                                    }
+
+                                    function errorHandler(evt) {
+                                        switch (evt.target.error.code) {
+                                            case evt.target.error.NOT_FOUND_ERR:
+                                                alert('File Not Found!');
+                                                break;
+                                            case evt.target.error.NOT_READABLE_ERR:
+                                                alert('File is not readable');
+                                                break;
+                                            case evt.target.error.ABORT_ERR:
+                                                break; // noop
+                                            default:
+                                                alert('An error occurred reading this file.');
+                                        };
+                                    }
+
+                                    function updateProgress(evt) {
+                                        // evt is an ProgressEvent.
+                                        if (evt.lengthComputable) {
+                                            var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+                                            // Increase the progress bar length.
+                                            if (percentLoaded < 100) {
+                                                progress.style.width = percentLoaded + '%';
+                                                progress.textContent = percentLoaded + '%';
+                                            }
+                                        }
+                                    }
+
+                                    function handleFileSelect(evt) {
+                                        // Reset progress indicator on new file selection.
+                                        progress.style.width = '0%';
+                                        progress.textContent = '0%';
+
+                                        reader = new FileReader();
+                                        reader.onerror = errorHandler;
+                                        reader.onprogress = updateProgress;
+                                        reader.onabort = function (e) {
+                                            alert('File read cancelled');
+                                        };
+                                        reader.onloadstart = function (e) {
+                                            document.getElementById('progress_bar').className = 'loading';
+                                        };
+                                        reader.onload = function (e) {
+                                            // Ensure that the progress bar displays 100% at the end.
+                                            progress.style.width = '100%';
+                                            progress.textContent = '100%';
+                                            setTimeout("document.getElementById('progress_bar').className='';",
+                                                2000);
+                                        }
+
+                                        // Read in the image file as a binary string.
+                                        reader.readAsBinaryString(evt.target.files[0]);
+                                    }
+
+                                    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                                </script>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
+                    style="width: 766px; height: 466px;"> </textarea>
+
+
+                <input type="submit" id="savebutton" value="확인">
+            </form>
+        </div>
+    </div>
+</section>
    <script type="text/javascript">
       
    $(document).ready(function() { var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
@@ -66,5 +176,21 @@
    }
 
    </script>
+   <script>
+    $(document).ready(function () {
+        var fileTarget = $('.filebox .upload-hidden');
+        fileTarget.on('change',
+            function () { // 값이 변경되면 
+                if (window.FileReader) { // modern browser 
+                    var filename = $(this)[0].files;
+                } else { // old IE 
+                    var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+                }
+
+                // 추출한 파일명 삽입 
+                $(this).siblings('.upload-name').val(filename);
+            });
+    });
+</script>
 </body>
 </html>

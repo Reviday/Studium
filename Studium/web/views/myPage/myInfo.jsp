@@ -36,13 +36,13 @@
                 <div class="myName">
                     <blockquote class="testimonial">
                         <div class="d-flex author">
-                       <div id="myProfile-preview">
-                       <%if(m.getMemPhoto()!=null) { %>
+                        <div id="myProfile-preview">
+                         <%if(m.getMemPhoto()!=null) { %>
                             <img src="<%=request.getContextPath()%>/upload/myPage/<%=m.getMemPhoto()%>" alt="" id="myProfile_y" class="mr-4">
                            <%}else{ %>
                             <img src="<%=request.getContextPath()%>/img/default_image.png" alt="" id="myProfile_n" class="mr-4">
                            <%} %> 
-                           </div>
+                         </div>
                             <div class="author-info">
                                 <div>
                                     <h3 class="float-left ">
@@ -95,6 +95,8 @@
                                 <div class="inputForm">
                                     <input type="password" name="passwordck" id="modipwdck" class="myI-1" required>
                                 </div>
+                                 
+                                 
                                 <%if(m.getMemBirth()!=null&&m.getMemPhone()!=null&&m.getMemZipCode()!=null&&m.getMemCategory1()!=null){ %>
                                 <div class="inputForm">
                                     <input type="phone" name="phone" id="phone" class="myI-1" autocomplete=off value="<%=m.getMemPhone()%>" required>
@@ -141,6 +143,15 @@
                                     </div>
                                     <%}%>
                                      <input type="submit" onclick="modifyMember_validate()" class="btn-sm btn-changeInfo" value="수정하기">
+                                     
+                                     <input type="hidden" name="phone"  value=null>
+                                    <input type="hidden" name="birth"  value=null>
+                                    <input type="hidden" name="zipcode"  value=null>
+                                    <input type="hidden" name="address1" value=null>
+                                    <input type="hidden"  name="address2" value=null>
+                               					
+                                
+                                
                                 </div>
                                    
 
@@ -187,7 +198,8 @@
 	
 	$("#changePhoto").on("click",function(){
         //ajax를 통한 파일전송을 할떄
-        //FormData() 객체를 이용 
+        //FormData() 객체를 이용
+        console.log("스크립트 chnage 들어옴")
         var fd=new FormData();
         $.each($("#file")[0].files,function(i,item){
            fd.append("file"+i,item);
