@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
@@ -42,7 +44,8 @@ public class PstudyListViewServlet extends HttpServlet {
 		String URLmapping="/pstudyListView"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		List<Pstudy> pList=service.selectPstudy(pt.getcPage(),pt.getNumPerPage());
-		
+		List<Category> listM=new CategoryService().selectTitleM();
+		request.setAttribute("categoryM", listM);
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());

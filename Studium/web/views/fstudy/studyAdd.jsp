@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+
+<%@ page import="java.util.*,com.studium.category.model.vo.Category" %>
+<%
+    List<Category> listM=(List)request.getAttribute("categoryM");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -241,11 +245,12 @@
                                                         <select class=input1 name=p_category
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>분류 선택</option>
-                                                            <option value='영어'>영어</option>
-                                                            <option value='코딩'>코딩</option>
-                                                            <option value='중국어'>중국어</option>
-
+                                         <% if(!listM.isEmpty()){ %>
+										<% for(int j=0;j<listM.size();j++){ %>
+                                                         	<option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
+										<% } } %>
                                                         </select>
+
 
                                                     </td>
                                                 </tr>

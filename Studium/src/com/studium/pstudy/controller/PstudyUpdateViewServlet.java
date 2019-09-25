@@ -1,12 +1,16 @@
 package com.studium.pstudy.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -32,6 +36,8 @@ public class PstudyUpdateViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int no=Integer.parseInt(request.getParameter("pNo"));
 		Pstudy p=new PstudyService().selectpStudyVIew(no);
+		List<Category> listM=new CategoryService().selectTitleM();
+		request.setAttribute("categoryM", listM);
 		request.setAttribute("pstudy", p);
 		request.getRequestDispatcher("/views/pstudy/studyUpdate.jsp").forward(request, response);
 	}

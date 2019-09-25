@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -36,7 +38,8 @@ public class PstudySearchServlet extends HttpServlet {
 		String day=request.getParameter("p_day");
 		String category=request.getParameter("p_category");
 		System.out.println(area+day);
-		
+		List<Category> listM=new CategoryService().selectTitleM();
+		request.setAttribute("categoryM", listM);
 		List<Pstudy>pList=new PstudyService().searchPstudy(area, day,category);
 		request.setAttribute("pList", pList);
 		request.setAttribute("area", area);

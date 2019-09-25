@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy" %>
+    <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy,com.studium.category.model.vo.Category" %>
       <%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+
 <%
+    List<Category> listM=(List)request.getAttribute("categoryM");
 List<Fstudy> fList=(List)request.getAttribute("fList");
 List<Fstudy> bestList =(List)request.getAttribute("bestList");
 int cPage=(int)request.getAttribute("cPage");
@@ -51,11 +53,12 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value='null'>관심사</option>
-          <option value='영어'>영어</option>
-          <option value='코딩'>코딩</option>
-          <option value='중국어'>중국어</option>
-        </select>
+            <option value=''>분류 선택</option>     
+			  <% if(!listM.isEmpty()){ %>
+			<% for(int j=0;j<listM.size();j++){ %>
+       <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
+			<% } } %>
+         </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
           <option value='null'>가능 시간</option>
           <option value='평일'>평일</option>
@@ -265,47 +268,18 @@ body{
 
 
 
-  <script type="text/javascript" src="">
+  <script type="text/javascript">
   
-  $(window).scroll(function() {
-      
-      
-      var scrolltop = $(document).scrollTop();
-      console.log(scrolltop);
-      var height = $(document).height();
-      console.log(height);
-      var height_win = $(window).height();
-      console.log(height_win);
-      
-      
-   if (Math.round( $(window).scrollTop()) == $(document).height() - $(window).height()) {
-      
-      
-      moreList();
-      
-  }  
+ 
   
+  function fn_insert(){
+  	location.href="<%=request.getContextPath()%>/fstudy/fstudyListAdd";
+  }
   </script>
 	
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
-<script type="text/javascript">
-var page = 1;  //페이징과 같은 방식이라고 생각하면 된다. 
- 
-$(function(){  //페이지가 로드되면 데이터를 가져오고 page를 증가시킨다.
-     getList(page);
-     page++;
-}); 
- 
-$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-     if($(window).scrollTop() >= $(document).height() - $(window).height()){
-          getList(page);
-           page++;   
-     } 
-});
- 
 
-</script>
 
 <!-- aos 애니메이션-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

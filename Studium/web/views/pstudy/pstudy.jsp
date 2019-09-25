@@ -3,9 +3,11 @@
     <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy, java.text.*" %>
     <%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.*,com.studium.category.model.vo.Category" %>
 <%
-List<Pstudy> pList=(List)request.getAttribute("pList");
-List<Pstudy> bestList =(List)request.getAttribute("bestList");
+    List<Category> listM=(List)request.getAttribute("categoryM");
+	List<Pstudy> pList=(List)request.getAttribute("pList");
+	List<Pstudy> bestList =(List)request.getAttribute("bestList");
 
 %>
 
@@ -52,11 +54,12 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value='null'>관심사</option>
-          <option value='영어'>영어</option>
-          <option value='코딩'>코딩</option>
-          <option value='중국어'>중국어</option>
-        </select>
+          <option value='null'>분류</option>
+           <% if(!listM.isEmpty()){ %>
+			<% for(int j=0;j<listM.size();j++){ %>
+       <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
+			<% } } %>
+      </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
           <option value='null'>가능 시간</option>
           <option value='평일'>평일</option>

@@ -216,12 +216,10 @@
 		}
 		var msg = "결제하시겠습니까";
 		var flag = confirm(msg);
-		
 		if(flag==true) {
-			aleart("ㅊㅋㅊㅋ");
+			location.href="<%=request.getContextPath()%>/fstudy/fsutdyPayment?&mNo=<%=loginMember.getMemNo()%>&fNo=<%=p.getfNo()%>";
 		}
 		else alert("취소하였습니다.");
-		
 	}
 	
 	

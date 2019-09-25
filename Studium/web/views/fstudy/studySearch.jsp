@@ -3,6 +3,10 @@
     <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy" %>
       <%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.*,com.studium.category.model.vo.Category" %>
+<%
+    List<Category> listM=(List)request.getAttribute("categoryM");
+%>
 <%
 List<Fstudy> fList=(List)request.getAttribute("fList");
 String day= String.valueOf(request.getAttribute("day"));
@@ -53,10 +57,12 @@ body{
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
           <option value='<%=category %>'><%=category %></option>
-          <option value='영어'>영어</option>
-          <option value='코딩'>코딩</option>
-          <option value='중국어'>중국어</option>
-        </select>
+           <% if(!listM.isEmpty()){ %>
+			<% for(int j=0;j<listM.size();j++){ %>
+       <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
+			<% } } %>
+      </select>
+
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
           <option value='<%=day %>'><%=day %></option>
           <option value='평일'>평일</option>
