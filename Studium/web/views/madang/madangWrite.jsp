@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+ <%
+ 	String locate=(String)request.getAttribute("locate");
+ 
+ 	//게시판 마다 띄워줄 제목과 문구 처리.
+ 	//추후, DB에 넣어서 가져오는 방법으로 처리할 예정.
+ 	String mTit="",mSub="";
+ 	switch(locate) {
+ 	case"intro" : break;
+ 	case"study" : break;
+ 	case"free" : mTit="자유마당"; mSub="자유롭게 글을 올리는 공간입니다."; break;
+ 	case"share" : break;
+ 	case"boast" : break;
+ 	case"question" : break;
+ 	}
+ %>
 <%@ include file="/views/common/header.jsp"%>
 <!-- 마당에 적용할  css -->
 <link href="<%=request.getContextPath()%>/css/madang.css"
@@ -25,8 +40,8 @@
         <div class="madang-list mldiv">
             <div class="sub-tit row mldiv">
                 <div class="title-area mldiv">
-                    <h3 class="list-title">자유마당</h3>
-                    <p class="list-sub">자유롭게 글을 올리는 공간입니다.</p>
+                    <h3 class="list-title"><%=mTit%></h3>
+                    <p class="list-sub"><%=mSub%></p>
                 </div>
             </div>
         </div>
@@ -133,7 +148,7 @@
 	                <!-- 버튼 -->
 					<div class="post_btns">
 						<div class="fr">
-							<input type="reset" class="btn_type1" value="취소">
+							<input type="reset" class="btn_type1" value="취소" onclick="location.href='<%=request.getContextPath()%>/madang/<%=locate%>MadangList?cPage=1'">
 							<input type="submit" id="savebutton" class="btn_type1" value="확인">
 						</div>
 					</div>

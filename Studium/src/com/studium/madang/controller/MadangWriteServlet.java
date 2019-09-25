@@ -38,11 +38,12 @@ public class MadangWriteServlet extends HttpServlet {
 		// 글쓰기 페이지는 하나의 서블릿으로 처리
 		String locate = request.getParameter("locate");
 
-		String view = "/views/madang/" + locate + "MadangWrite.jsp";
+		String view = "/views/madang/madangWrite.jsp";
 		
 		// SideMenuElement
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
 		
+		request.setAttribute("locate", locate);
 		request.setAttribute("elements", elements);
 		request.getRequestDispatcher(view).forward(request, response);
 	}

@@ -54,7 +54,7 @@ public class FreeMadangListServlet extends HttpServlet {
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("freeMadangList", list);
 		request.setAttribute("elements", elements);
-		request.setAttribute("choice", "");
+		request.setAttribute("choice", "자유마당");
 
 		request.getRequestDispatcher("/views/madang/freeMadangList.jsp").forward(request, response);
 	}

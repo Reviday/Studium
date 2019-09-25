@@ -51,7 +51,7 @@
 					uCount++;
 		%>
 			<li data-toggle="collapse" data-target="#element<%=uCount %>"
-				class="collapsed <%=choice!=null&&choice.equals(element.getMenuName())?"choice":""%>">
+				class="collapsed <%=choice!=null&&choice.equals(element.getMenuName())?"active":""%>">
 				<a class="top-menu"
 				<%
 							//만약 하위메뉴가 존재하면 href 설정을 주지 않고,
