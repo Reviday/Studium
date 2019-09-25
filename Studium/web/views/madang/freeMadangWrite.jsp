@@ -20,7 +20,8 @@
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
 	</div>
-    <div class="main-area col-md-7 col-lg-7">
+	<div class="col-lg-1"></div><!-- 공백용 -->
+    <div class="main-area col-md-6 col-lg-6">
         <div class="madang-list mldiv">
             <div class="sub-tit row mldiv">
                 <div class="title-area mldiv">
@@ -38,15 +39,15 @@
                             <label class="item" for="subject">제　목</label>
                             <div class="label">
                                 <input type="text" name="subject" placeholder="게시글 제목을 입력하세요" id="subject"
-                                    class="box_input">
+                                    class="box_input" required>
                             </div>
 
                         </li>
                         <li id="file_attach_menu" class="file_attach_menu">
                             <div class="filebox">
-                                <a id="fileDB" class="ico_file" href="#">
-                                    <label for="files">업로드</label>
-                                </a>
+                                
+                                    <label for="files" class="item">업로드<a id="fileDB" class="ico_file" href="#"></a></label>
+                                
                                 <input type="file" id="files" class="upload-hidden" name="file" multiple>
                                 <input class="upload-name" value="파일선택" disabled="disabled">
                                 <!--<button onclick="abortRead();">Cancel read</button> 지금 구현하지않음.-->
@@ -120,12 +121,24 @@
                         </li>
                     </ul>
                 </div>
-
-                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
-                    style="width: 766px; height: 466px;"> </textarea>
-
-
-                <input type="submit" id="savebutton" value="확인">
+				<div class="smdarteditor_area">
+					<div class="write_tag">
+						<label>작성하기</label>
+					</div>
+					<div style="clear:both"></div>
+	                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
+	                    style="width: 740px; height: 466px;"> </textarea>
+	
+	
+	                
+	                <!-- 버튼 -->
+					<div class="post_btns">
+						<div class="fr">
+							<input type="reset" class="btn_type1" value="취소">
+							<input type="submit" id="savebutton" class="btn_type1" value="확인">
+						</div>
+					</div>
+                </div>
             </form>
         </div>
     </div>

@@ -112,7 +112,7 @@
 					<div class="post_btns">
 						<div class="fr">
 							<a href="#" id="writeFormBtn"
-								onclick="fn_madangWrite(); return false;"
+								onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=free'; return false;"
 								class="btn_type1 post_write _rosRestrict">글쓰기</a>
 						</div>
 					</div>

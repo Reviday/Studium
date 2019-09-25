@@ -44,12 +44,17 @@
         	margin-bottom: 200px !important;
         }
 
+        #madang_writer .smdarteditor_area {
+        	margin-inline-start: 80px;
+        	position: relative;
+        }
+
         #madang_writer .write_form textarea {
-        	margin-inline-start: 40px;
+        	margin-inline-start: 80px;
         }
 
         #madang_writer .write_form .subject_cover {
-        	padding-inline-start: 40px;
+        	padding-inline-start: 80px;
         }
 
         #madang_writer .write_form ul.subject {
@@ -59,6 +64,8 @@
         	border: 1px solid rgba(239, 108, 0, 0.3);
         	border-radius: 10px;
         	padding: 10px 20px;
+        	margin-top: 20px;
+        	margin-bottom: 50px;
         }
 
         #madang_writer .write_form ul.subject li {
@@ -84,7 +91,8 @@
         #madang_writer .write_form ul.subject .box_input {
         	width: 478px;
         	height: 21px;
-        	padding: 3px 0 0 3px;
+        	padding: 3px 0 3px 3px;
+        	margin-top: 6px;
         	color: #8C8C8C;
         	font-size: 12px;
         	border: 1px solid #A7A7A7;
@@ -141,7 +149,7 @@
         #madang_writer .write_form .file_attach_menu .ico_file {
         	color: #222;
         	padding-left: 15px;
-        	background: url(https://cafe.pstatic.net/editor/icon/ico_file2.gif) 0 5px no-repeat;
+        	background: url(https://cafe.pstatic.net/editor/icon/ico_file2.gif) 0 3px no-repeat;
         }
 
         .write_form #fileDB:after {
@@ -150,7 +158,52 @@
         	clear: both;
         }
 
-        .write_form #file_attach_menu input[type="file"] {
+        .write_form .write_tag {
+        	position: absolute;
+        	top: -32px;
+        	z-index: -1;
+        }
+
+        .write_form .write_tag label {
+        	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+        	font-weight: bold;
+        	color: #444444;
+        	font-size: 12px;
+        	border: 1px solid #ccc;
+        	background-color: #fff;
+        	border-radius: 10px;
+        	font-size: 12px;
+        	padding: 0.7em 1.7em;
+        	margin-bottom: -10px;
+        }
+
+        .write_form .post_btns {
+        	width: 740px;
+        	margin-top: 9px;
+        	text-align: right;
+        }
+
+        .write_form .btn_type1 {
+        	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+        	font-weight: bold;
+        	color: #444444;
+        	font-size: 12px;
+        	display: inline-block;
+        	min-width: 56px;
+        	height: 36px;
+        	padding: 6px 20px;
+        	-webkit-box-sizing: border-box;
+        	box-sizing: border-box;
+        	border: 1px solid rgba(239, 108, 0, 0.3);
+        	background-color: rgba(239, 108, 0, 0.08);
+        	text-align: center;
+        	vertical-align: top;
+        	margin-right: 10px;
+        	border-radius: 10px;
+        }
+
+
+        #file_attach_menu input[type="file"] {
         	position: absolute;
         	width: 1px;
         	height: 1px;
@@ -164,12 +217,13 @@
         /* named upload */
         .write_form .filebox .upload-name {
         	display: inline-block;
+        	width: 250px;
         	padding: .5em .75em;
         	/* label의 패딩값과 일치 */
         	font-size: inherit;
         	font-family: inherit;
         	line-height: normal;
-        	vertical-align: middle;
+        	vertical-align: baseline;
         	background-color: #f5f5f5;
         	border: 1px solid #ebebeb;
         	border-bottom-color: #e2e2e2;
@@ -178,6 +232,7 @@
         	/* 네이티브 외형 감추기 */
         	-moz-appearance: none;
         	appearance: none;
+        	margin-left: 68px;
         }
 
         /* file upload API */

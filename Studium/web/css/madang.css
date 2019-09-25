@@ -54,12 +54,11 @@
 }
 
 .madang-section th {
-	border-top-color: #333;
-	border-bottom-color: #f2f2f2;
 	color: #4e4e4e;
+	background-color: rgba(239, 108, 0, 0.08);
 	height: 40px;
 	padding: 2px;
-	border-top: 1px solid #666;
+	border-top: 1px solid rgba(239, 108, 0, 0.3);
 	border-bottom: 1px solid #f2f2f2;
 	text-align: center;
 }
@@ -273,17 +272,16 @@
 	font-family: "Do Hyeon", Arial, sans-serif !important;
 }
 
-.madang-list .list-title {
+.list-title {
 	display: inline;
-	margin: 40px;
 	font-weight: 600;
 	font-size: 22px;
 	line-height: 24px;
 	vertical-align: sub;
 }
 
-.madang-section .list-sub {
-	margin-top: 8px;
+.list-sub {
+	margin-top: 8px !important;
 	font-size: 13px;
 	line-height: 15px;
 	color: #999;
@@ -298,13 +296,15 @@
     display: inline-block;
     min-width: 56px;
     height: 36px;
-    padding: 9px 12px;
+    padding: 6px 20px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border: 1px solid #d3d3d3;
+	border: 1px solid rgba(239, 108, 0, 0.3);
+	background-color: rgba(239, 108, 0, 0.08);
     text-align: center;
 	vertical-align: top;
 	margin-right:10px;
+	border-radius: 10px;
 }
 
 .madang-section .btn_type1 .post_write {
