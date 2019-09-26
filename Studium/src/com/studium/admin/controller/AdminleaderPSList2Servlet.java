@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.studium.admin.model.vo.QandA;
 import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
 import com.studium.mypage.model.vo.LeaderAdd;
@@ -20,77 +19,57 @@ import com.studium.util.model.vo.SideMenuElement;
 import common.template.PaginationTemplate;
 
 /**
- * Servlet implementation class AdminPSManageDeleteServlet
+ * Servlet implementation class AdminleaderPSList2Servlet
  */
-@WebServlet("/admindeleteLeaderPSList")
-public class AdminPSManageDeleteServlet extends HttpServlet {
+@WebServlet("/leaderPSList2")
+public class AdminleaderPSList2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AdminPSManageDeleteServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminleaderPSList2Servlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-
+		
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-
-			String[] leaderNo = request.getParameterValues("checkMember");
 			String method = request.getParameter("method");
-			
 			int cPage;
 			try {
 				cPage= Integer.parseInt(request.getParameter("cPage"));
 			}catch(NumberFormatException e) {
 				cPage=1;
-			}
-
-
+			}		
+			
 			AdminService service=new AdminService();
-			int result = service.deletePS(leaderNo);
-
-			if(result > 0 ) {
-
-				
-				int totalData=service.selectCountLeader();
-				String URLmapping="/admindeleteLeaderPSList"; // 패턴을 넘겨주기 위한 변수
-				AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
-				List<LeaderAdd> list=service.selectLeaderPSList(cPage,pt.getNumPerPage());
-				request.setAttribute("list",list);
-				request.setAttribute("cPage", cPage);
-				request.setAttribute("pageBar", pt.getPageBar());
-				request.setAttribute("numPerPage", pt.getNumPerPage());
-
-				List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-				request.setAttribute("elements", elements);
-				request.getRequestDispatcher("/views/admin/commonleaderPSList.jsp")
-				.forward(request,response);
-
-			}
-		}else {
-			String msg = "로그인이 필요합니다.";
-			String loc = "/";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			int totalData=service.selectCountLeader();
+			String URLmapping="/leaderPSList2"; // 패턴을 넘겨주기 위한 변수
+			AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
+			List<LeaderAdd> list=service.selectLeaderPSList(cPage,pt.getNumPerPage());
+			request.setAttribute("list",list);
+			request.setAttribute("cPage", cPage);
+			request.setAttribute("pageBar", pt.getPageBar());
+			request.setAttribute("numPerPage", pt.getNumPerPage());
+			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+			request.setAttribute("elements", elements);
+			request.getRequestDispatcher("/views/admin/commonleaderPSList.jsp")
+					.forward(request,response);
+			}else {
+				String msg = "로그인이 필요합니다.";
+				String loc = "/";
+				request.setAttribute("msg", msg);
+				request.setAttribute("loc", loc);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
-
-
-
-
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

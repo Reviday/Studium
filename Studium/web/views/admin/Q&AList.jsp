@@ -22,7 +22,7 @@
         </div>
         <form method="post" id="deleteQnA">
             <input type="checkbox" name="allcheck" id="alldelete">
-            <input type="hidden" name="method" value="deleteQnA"> 
+            <input type="hidden" name="method" value="ListQnA"> 
         	<button type="button" id="deletebtn" onclick="deleteQnA();">삭제</button>
             <table class="qandaTable">
                 <tr>
@@ -64,7 +64,19 @@
         })
     })
 
-
+	function ListQnA(cPage){
+    		var params = '&cPage='+cPage + '&method=' + 'ListQnA';
+    	$.ajax({
+    		url: "<%=request.getContextPath()%>/AdminQandAList2",
+    		type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$(".qanda").html("");
+				$(".qanda").html(data);
+			}
+    	})
+    }
     
     function deleteQnA(cPage){
     	if($('input:checkbox[name="checkQ&A"]').is(":checked") == false){

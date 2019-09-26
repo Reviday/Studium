@@ -181,56 +181,92 @@ a {
     background: #2664eb;
 }
 
-.adminMemo {
-	overflow: hidden;
-    border: 1px solid black;
-    width: 250px;
-    height: 105px;
-    box-sizing: border-box;
-    text-align: left;
-    padding: 0 10px 0 10px;
-    border-radius: 10px;
-    background-color: rgb(239,108,0,0.05);
-    color: black;
-}
-
 .momoClick {
 	cursor: pointer;
 }
 
-.adminMemo {
-	display:none;
-}
-
-.adminMemo  textarea {
-	overflow: hidden;
+.pointPage {
+	display: none; 
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
 	width: 100%;
-	height: 70px;
-	box-sizing: border-box;
-    text-align: left;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    background-color: rgb(239,108,0,0.01);
-    color: black;
-    outline-style: none;
-    border: none;
-    resize: none;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
-.adminMemo  button {
+.pointPage-content {
+	background-color: floralwhite;
+	margin: 200px 0 0 350px;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 350px;
+	height: 250px;
+	position: relative;
+}
+
+.closePointPage {
+	color: #aaa;
 	float: right;
-    border-radius: 10px;
-    border: none;
-    background: coral;
-    margin-top: 1px;
-    outline-style: none;
-    border: 2px solid rgb(239,108,0,0.01);
+	font-size: 28px;
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	right: 15px;
 }
 
-.adminMemo  button:hover {
-	border: 2px solid rgb(239,108,0,1);
+.closePointPage:hover, .closePointPage:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
 
-.show {
-	display: block;
+.pointPage-header {
+	position: relative;
+}
+
+.pointPage-header>div:nth-of-type(1) {
+	margin: 10px 0 0 10px;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 1.6px;
+}
+
+.pointPage-header>div:nth-of-type(2) {
+	margin: 15px 0 0 10px;
+	color: black;
+	font-weight: bold;
+}
+
+.memo {
+	width: 100%;
+	height: 160px;
+	background-color: floralwhite;
+	border: none;
+	outline-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	resize: none;
+}
+
+.memobtn {
+	position: absolute;
+    top: 0;
+    left: 120px;
+    border-radius: 4px;
+    border: 1.5px solid floralwhite;
+    margin-left: -4px;
+    width: 58px;
+    background-color: floralwhite;
+    outline-style: none !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.memobtn:hover {
+	border: 1.5px solid rgba(255,105,30,1);
 }

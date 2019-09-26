@@ -52,15 +52,16 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
 		
 		String memberName = request.getParameter("memberName");
-		String method = request.getParameter("method");
+//		String method = request.getParameter("method");
+		String method =	"inqueryList2";
 		int cPage;
+		try {
+			cPage= Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
 		
 		if(isEmail(memberName) == true) {
-			try {
-				 cPage= Integer.parseInt(request.getParameter("cPage"));
-				}catch(NumberFormatException e) {
-					cPage=1;
-				}
 
 			AdminService service=new AdminService();
 			int totalData=service.selectCountMemberEmail(memberName);

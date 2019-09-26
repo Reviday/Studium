@@ -63,7 +63,7 @@
 				<tr>
 					<td>
 						<form class="deleteLeaderPS" method="POST">
-							<input type="hidden" name="method" value="deleteLeaderPS">
+							<input type="hidden" name="method" value="leaderPSList2">
 							<input type="checkbox" name="checkMember" class="checkMember"
 								value="<%=l.getlNo()%>">
 						</form> 
@@ -166,6 +166,20 @@
 		}else{
 			return false;
 		}
+    }
+    
+    function leaderPSList2(cPage){
+    	var params = '&cPage='+cPage + '&method=' + 'leaderPSList2';
+    	$.ajax({
+    		url: "<%=request.getContextPath()%>/leaderPSList2",
+    		type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$("#ajaxTable").html("");
+				$("#ajaxTable").html(data);
+			}
+    	})
     }
     
     

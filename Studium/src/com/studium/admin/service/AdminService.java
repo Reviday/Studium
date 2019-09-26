@@ -211,4 +211,11 @@ public class AdminService {
 		close(conn);	
 	}
 	
+	public String showMemo(String memNo) {
+		Connection conn = getConnection();
+		String memo = dao.showMemo(conn, memNo);
+		close(conn);
+		return memo;
+	}
+	
 }

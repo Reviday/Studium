@@ -39,7 +39,7 @@
 			<tr>
 				<td>
 				<form class="deleteLeaderPS">
-				<input type="hidden" name="method" value="deleteLeaderPS">
+				<input type="hidden" name="method" value="leaderPSList2">
 				<input type="checkbox" name="checkMember" class="checkMember" value="<%=l.getlNo() %>">
 				</form>
 				<td>
@@ -58,8 +58,9 @@
 			<%} %>
 		</table>
 <link href="/Studium/css/pagination.css" rel="stylesheet">
-<div class="page">
+		<%@ include file="/views/common/pagination.jsp"%>
+<%-- <div class="page">
 	<ul class="pagination num-modal">
 		<%=request.getAttribute("pageBar") %>
 	</ul>
-</div>		
+</div>	 --%>	

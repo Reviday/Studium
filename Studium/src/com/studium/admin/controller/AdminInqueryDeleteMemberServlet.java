@@ -61,8 +61,7 @@ public class AdminInqueryDeleteMemberServlet extends HttpServlet {
 		int totalData=service.selectCountMemberSearch(grade, status);
 		String URLmapping="/adminDeleteMember"; // 패턴을 넘겨주기 위한 변수
 		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
-		pt.setQueryString("gradeList", grade);
-		pt.setQueryString("statusList", status);
+
 		List<Member> list=service.selectMemberSearchList(cPage,pt.getNumPerPage(), grade, status);
 		
 
