@@ -116,7 +116,7 @@ private Properties prop=new Properties();
 				p.setfName(rs.getString("f_name"));
 				p.setfArea(rs.getString("f_area"));
 				p.setfDay(rs.getString("f_day"));
-				p.setfStudypserson(rs.getInt("f_studyperson"));
+				p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
 				p.setfCategory(rs.getString("f_category"));
 				p.setfIntro1(rs.getString("f_intro1"));
 				p.setfIntro2(rs.getString("f_intro2"));
@@ -130,6 +130,7 @@ private Properties prop=new Properties();
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -172,6 +173,7 @@ private Properties prop=new Properties();
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -261,6 +263,7 @@ private Properties prop=new Properties();
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
 			
 			}
 			
@@ -303,6 +306,7 @@ private Properties prop=new Properties();
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -373,6 +377,7 @@ private Properties prop=new Properties();
 				p.setfDateend(rs.getDate("f_dateend"));
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {

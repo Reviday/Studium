@@ -23,14 +23,15 @@ public class Fstudy {
 	private Date fDateend;
 	private int fLike;
 	private String fReadername;
+	private int fStudyMember;
 
 	public Fstudy() {
 		// TODO Auto-generated constructor stub
 	}
-
 	public Fstudy(int fNo, String fTitle, String fName, String fArea, String fDay, int fStudypserson, String fCategory,
 			String fIntro1, String fIntro2, String fImgtitle, String fImg1, String fImg2, String fImg3,
-			String fTimestart, String fTimeend, Date fDatestart, Date fDateend, int fLike, String fReadername) {
+			String fTimestart, String fTimeend, Date fDatestart, Date fDateend, int fLike, String fReadername,
+			int fStudyMember) {
 		super();
 		this.fNo = fNo;
 		this.fTitle = fTitle;
@@ -51,6 +52,7 @@ public class Fstudy {
 		this.fDateend = fDateend;
 		this.fLike = fLike;
 		this.fReadername = fReadername;
+		this.fStudyMember = fStudyMember;
 	}
 
 	public int getfNo() {
@@ -205,14 +207,14 @@ public class Fstudy {
 		this.fReadername = fReadername;
 	}
 
-	@Override
-	public String toString() {
-		return "Fstudy [fNo=" + fNo + ", fTitle=" + fTitle + ", fName=" + fName + ", fArea=" + fArea + ", fDay=" + fDay
-				+ ", fStudypserson=" + fStudypserson + ", fCategory=" + fCategory + ", fIntro1=" + fIntro1
-				+ ", fIntro2=" + fIntro2 + ", fImgtitle=" + fImgtitle + ", fImg1=" + fImg1 + ", fImg2=" + fImg2
-				+ ", fImg3=" + fImg3 + ", fTimestart=" + fTimestart + ", fTimeend=" + fTimeend + ", fDatestart="
-				+ fDatestart + ", fDateend=" + fDateend + ", fLike=" + fLike + ", fReadername=" + fReadername + "]";
+	public int getfStudyMember() {
+		return fStudyMember;
 	}
+
+	public void setfStudyMember(int fStudyMember) {
+		this.fStudyMember = fStudyMember;
+	}
+
 	
 }
 

@@ -49,7 +49,7 @@ public class FstudyAddServlet extends HttpServlet {
 		}
 		
 		String root=getServletContext().getRealPath("/");
-		 String saveDir=root+"\\upload\\pstudy"; 
+		 String saveDir=root+"\\upload\\fstudy"; 
 		//String saveDir=root+"upload"+File.separator+"pstudy"; 
 //		
 //		String saveDir="C:"+File.separator+"Users"+File.separator+"User"+File.separator+"git"+File.separator+"Studium"
@@ -62,8 +62,6 @@ public class FstudyAddServlet extends HttpServlet {
 		    	isDir.mkdir();
 
 		    }
-		    System.out.println(saveDir);
-
 		    MultipartRequest mr =new MultipartRequest(
 					request,
 					saveDir,
@@ -86,7 +84,6 @@ public class FstudyAddServlet extends HttpServlet {
 		 String img1=mr.getFilesystemName("p_img1");
 		 String img2=mr.getFilesystemName("p_img2");
 		 String img3=mr.getFilesystemName("p_img3");
-		 System.out.println("text: " + mr.getParameter("p_timeend"));
 		 String timestart=mr.getParameter("p_timestart");
 		 String timeend=mr.getParameter("p_timeend");
 				 Date datestart;

@@ -122,10 +122,23 @@ body{
 						 difvvDays = difvv/(24 * 60 * 60 * 1000);
 						
 						
-						if(diffDays<1){ %>
+						 if((diffDays<3&&diffDays>1)){ %>
+							
 							<div class="drawing-near">마감 임박</div>
-						<%	}else{ %>
-						<div class="recruiting-status new">신규 모집</div>
+
+						<%}else if(diffDays>3){ 
+							if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
+						%>
+							<div class="drawing-near">마감 임박</div>
+							<%}else if(p.getpStudypserson()-p.getpStudyMember()==0){%>
+							<div class="full-cover">마감</div>
+							<% }else{ %>
+							<div class="recruiting-status new">신규모집</div>
+							<%} %>
+						<%}else{ %>
+						<div class="full-cover">
+						마감
+						 </div>
 						<%} %> 
 					
 					 <%
@@ -209,12 +222,24 @@ body{
 						diffDays = diff / (24 * 60 * 60 * 1000);
 						
 						
+							if((diffDays<3&&diffDays>1)){ %>
 						
-						if(diffDays<1){ %>
-							<div class="drawing-near">마감 임박</div>
-						<%	}else{ %>
-						<div class="recruiting-status new">신규 모집</div>
-						<%} %> 
+						<div class="drawing-near">마감 임박</div>
+
+					<%}else if(diffDays>3){ 
+						if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
+					%>
+						<div class="drawing-near">마감 임박</div>
+						<%}else if(p.getpStudypserson()-p.getpStudyMember()==0){%>
+						<div class="full-cover">마감</div>
+						<% }else{ %>
+						<div class="recruiting-status new">신규모집</div>
+						<%} %>
+					<%}else{ %>
+					<div class="full-cover">
+					마감
+					 </div>
+					<%} %> 
 					 <%
                     	if(loginMember!=null) {
                     %>
