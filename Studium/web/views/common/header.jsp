@@ -149,9 +149,12 @@
 							id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">커뮤니티</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/shareMadangList">공유마당</a> 
-								<a class="dropdown-item" href="services.html">공부마당</a> 
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/introMadang">마당소개</a>
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/studyMadangList">공부마당</a> 
 								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/freeMadangList">자유마당</a>
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/shareMadangList">공유마당</a> 
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/boastMadangList">자랑마당</a>
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/madang/questionMadangList">질문마당</a>
 							</div></li>
 					</ul>
 

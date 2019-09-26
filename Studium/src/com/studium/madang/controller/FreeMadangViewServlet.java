@@ -55,7 +55,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 			for(Cookie c : cookies) {
 				String name=c.getName(); // 키 값
 				String value=c.getValue(); // value
-				if("madangCookie".equals(name)) {
+				if("freeMadangCookie".equals(name)) {
 					madangCookieVal=value; //이전 값 보관
 					if(value.contains("|"+no+"|")) {
 						hasRead=true;
@@ -68,7 +68,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 		//안 읽었을 때 조회수를 추가하고
 		//cookie에 현재 boardNo 기록
 		if(!hasRead) {
-			Cookie c=new Cookie("madangCookie", madangCookieVal+"|"+no+"|");
+			Cookie c=new Cookie("freeMadangCookie", madangCookieVal+"|"+no+"|");
 			c.setMaxAge(-1); // 브라우저가 close 되거나 logout했을 때
 			response.addCookie(c);
 		}

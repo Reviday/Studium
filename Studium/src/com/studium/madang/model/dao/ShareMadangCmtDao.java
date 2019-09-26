@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.vo.ShareMadangCmt;
 import com.studium.member.model.service.MemberService;
 
-public class FreeMadangCmtDao {
+public class ShareMadangCmtDao {
 	
 	private Properties prop=new Properties();
 	
-	public FreeMadangCmtDao() {
-		String path=FreeMadangDao.class.getResource("/sql/madang/freemadangcmt-query.properties").getPath();
+	public ShareMadangCmtDao() {
+		String path=FreeMadangDao.class.getResource("/sql/madang/sharemadangcmt-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (FileNotFoundException e) {
@@ -54,10 +54,10 @@ public class FreeMadangCmtDao {
 		} return result;
 	}
 	
-	public List<FreeMadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
+	public List<ShareMadangCmt> selectCmtList(Connection conn, int madangNo, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<FreeMadangCmt> list = new ArrayList<FreeMadangCmt>();
+		List<ShareMadangCmt> list = new ArrayList<ShareMadangCmt>();
 		String sql=prop.getProperty("selectCmtList");
 		MemberService service= new MemberService();
 		
@@ -68,7 +68,7 @@ public class FreeMadangCmtDao {
 			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				FreeMadangCmt cmt=new FreeMadangCmt();
+				ShareMadangCmt cmt=new ShareMadangCmt();
 				cmt.setCmtNo(rs.getInt("cmt_no"));
 				cmt.setCmtParent(rs.getInt("cmt_parent"));
 				cmt.setCmtSort(rs.getInt("cmt_sort"));
@@ -97,7 +97,7 @@ public class FreeMadangCmtDao {
 	}
 	
 	
-	public int insertComment(Connection conn, FreeMadangCmt cmt) {
+	public int insertComment(Connection conn, ShareMadangCmt cmt) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String insertsql=prop.getProperty("insertComment");
@@ -118,7 +118,7 @@ public class FreeMadangCmtDao {
 		} return result;
 	}
 	
-	public int insertReply(Connection conn, FreeMadangCmt cmt) {
+	public int insertReply(Connection conn, ShareMadangCmt cmt) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		// 대댓글을 추가하기 위한 SQL문
@@ -142,7 +142,7 @@ public class FreeMadangCmtDao {
 		} return result;
 	}
 	
-	public int updateReplySort(Connection conn, FreeMadangCmt cmt) {
+	public int updateReplySort(Connection conn, ShareMadangCmt cmt) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		// 대댓글 추가시, 기존의 댓글들의 SORT 값을 증가시키기 위한 UPDATE 문
@@ -162,7 +162,7 @@ public class FreeMadangCmtDao {
 	}
 	
 	
-	public int updateCmtReply(Connection conn, FreeMadangCmt cmt) {
+	public int updateCmtReply(Connection conn, ShareMadangCmt cmt) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		// 대댓글 추가시, 해당 댓글에 cmt_reply을 'Y'로 세팅한다.(기존에 'Y'값이어도 상관없다.);

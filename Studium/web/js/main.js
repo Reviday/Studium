@@ -184,8 +184,8 @@
       }
 
     }, {
-      offset: '95%'
-    });
+        offset: '95%'
+      });
   };
   contentWayPoint();
 
@@ -201,21 +201,21 @@ $(function () {
     $headerClone = $header.contents().clone(),
     // $headerClone = $header.clone(),
     $headerCloneContainer = $('<div class="page-header-clone"></div>')
-    // 메뉴가 중간에 있을 경우,
-    $threshold = $header.offset().top + $header.outerHeight();
-    // 메뉴가 상단에 있으므로,
-    // $threshold = $header.outerHeight();
+  // 메뉴가 중간에 있을 경우,
+  $threshold = $header.offset().top + $header.outerHeight();
+  // 메뉴가 상단에 있으므로,
+  // $threshold = $header.outerHeight();
 
-    //A.append(B)
-    $headerCloneContainer.append($headerClone);
-    //A.appendTo(B)
-    $headerCloneContainer.appendTo('body');
+  //A.append(B)
+  $headerCloneContainer.append($headerClone);
+  //A.appendTo(B)
+  $headerCloneContainer.appendTo('body');
 
-    $window.scroll(function () {
-      if ($(this).scrollTop() >= $threshold) {
-        $headerCloneContainer.addClass('visible');
-      } else {
-        $headerCloneContainer.removeClass('visible');
+  $window.scroll(function () {
+    if ($(this).scrollTop() >= $threshold) {
+      $headerCloneContainer.addClass('visible');
+    } else {
+      $headerCloneContainer.removeClass('visible');
     }
   });
 
@@ -235,45 +235,45 @@ $(function () {
 
 // 모달창
 $(function () {
-	// 로그인 모달창
-	var logflag = true;
-	$("#logbtn-open-dialog,#log-dialog-background,#btn-close-dialog").click(function () {
-		$("#my-log-dialog, #log-dialog-background").toggle();
-		$('.input-area input').val('');
-		$('.input-area input').removeClass("focus");
-		if(logflag) {
-			$('html').css("overflow","hidden");
-			logflag=false;
-		} else {
-			$('html').css("overflow","visible");
-			logflag=true;
-		}
-	});
-	
-	// 회원가입 모달창
-	var regflag = true;
-	$("#regbtn-open-dialog,#reg-dialog-background,#btn-close-dialog").click(function () {
-		$("#my-reg-dialog,#reg-dialog-background").toggle();
-		$('.input-area input').val('');
-		$('.input-area input').removeClass("focus");
-		if(regflag) {
-			$('html').css("overflow","hidden");
-			regflag=false;
-		} else {
-			$('html').css("overflow","visible");
-			regflag=true;
-		}
-	});
+  // 로그인 모달창
+  var logflag = true;
+  $("#logbtn-open-dialog,#log-dialog-background,#btn-close-dialog").click(function () {
+    $("#my-log-dialog, #log-dialog-background").toggle();
+    $('.input-area input').val('');
+    $('.input-area input').removeClass("focus");
+    if (logflag) {
+      $('html').css("overflow", "hidden");
+      logflag = false;
+    } else {
+      $('html').css("overflow", "visible");
+      logflag = true;
+    }
+  });
+
+  // 회원가입 모달창
+  var regflag = true;
+  $("#regbtn-open-dialog,#reg-dialog-background,#btn-close-dialog").click(function () {
+    $("#my-reg-dialog,#reg-dialog-background").toggle();
+    $('.input-area input').val('');
+    $('.input-area input').removeClass("focus");
+    if (regflag) {
+      $('html').css("overflow", "hidden");
+      regflag = false;
+    } else {
+      $('html').css("overflow", "visible");
+      regflag = true;
+    }
+  });
 });
 
 // 로그인 창 
-$(".input-area input").on("focus",function() {
+$(".input-area input").on("focus", function () {
   $(this).addClass("focus");
 });
 
-$(".input-area input").on("blur",function() {
-  if($(this).val() == "")
-  $(this).removeClass("focus");
+$(".input-area input").on("blur", function () {
+  if ($(this).val() == "")
+    $(this).removeClass("focus");
 });
 
 
@@ -288,90 +288,87 @@ var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*
 var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
 //약관체크
-$(".confirmed #mark").click(function() {
-	$('.required-ck').hide(); 
-	$('.confirmed').css("border","1px solid #ccc");
-	if (confirmed) {
-		confirmed = false;
-		console.log('unchecked');
-		$('.confirmed #mark').removeClass('checked');
-	} else {
-		confirmed = true;
-		$('.confirmed #mark').addClass('checked');
-		console.log('checked');
-	}
+$(".confirmed #mark").click(function () {
+  $('.required-ck').hide();
+  $('.confirmed').css("border", "1px solid #ccc");
+  if (confirmed) {
+    confirmed = false;
+    console.log('unchecked');
+    $('.confirmed #mark').removeClass('checked');
+  } else {
+    confirmed = true;
+    $('.confirmed #mark').addClass('checked');
+    console.log('checked');
+  }
 })
 
 // Validate
 function registation_validate() {
-	//정규표현식을 적용해서 유효성검사
-	
-	//이름 검사
-	var name = $('#name');
-	if(!name.val()) {
-		alert('이름을 입력해주세요.');
-		name.focus();
-		return false;
-	} else {
-		if(!regName.test(name.val().trim())) {
-			alert('이름이 유효하지 않습니다.');
-			name.focus();
-			return false;
-		}
-	}
-	
-	//이메일 검사
-	var email = $('#email');
-	if(!email.val()) { // 이메일란이 공백일 경우
-		alert('이메일 주소를 입력해주세요.');
-		email.focus(); // 이메일 입력란으로 focus (왜  이메일은 포커스 이동이 안되지?)
-		return false;
-	} else {
-		if(!regEmail.test(email.val().trim())) {
-			alert('이메일 주소가 유효하지 않습니다.');
-			email.focus();
-			return false;
-		}
-	}
-	
-	//비밀번호 검사
-	var pwd = $('#pwd');
-	if(!pwd.val()) {
-		alert("비밀번호를 입력해주세요.");
-		pwd.focus();
-		return false;
-	} else if(pwd.val().length<8 && pwd.val().length>16){
-		alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
-		pwd.focus();
-		return false;
-	} else {
-		if(!regPwd.test(pwd.val().trim())) {
-			alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
-			pwd.focus();
-			return false;
-		}
-	}
-	
-	// 비밀번호 일치 확인
-	var pwdck = $('#pwdck');
-	if(pwd.val()!=pwdck.val()) {
-		alert("비밀번호가 일치하지 않습니다.");
-		pwdck.focus();
-		return false;
-	}
-	
-	// 약관 동의 체크
-	if(!confirmed) {
-		console.log(confirmed);
-		$('.confirmed').css("border","1px solid #e74c3c");
-		$('.required-ck').show();
-		return false;
-	}
-	
-	// 모든 확인사항 통과
-	return true;
+  //정규표현식을 적용해서 유효성검사
+
+  //이름 검사
+  var name = $('#name');
+  if (!name.val()) {
+    alert('이름을 입력해주세요.');
+    name.focus();
+    return false;
+  } else {
+    if (!regName.test(name.val().trim())) {
+      alert('이름이 유효하지 않습니다.');
+      name.focus();
+      return false;
+    }
+  }
+
+  //이메일 검사
+  var email = $('#email');
+  if (!email.val()) { // 이메일란이 공백일 경우
+    alert('이메일 주소를 입력해주세요.');
+    email.focus(); // 이메일 입력란으로 focus (왜  이메일은 포커스 이동이 안되지?)
+    return false;
+  } else {
+    if (!regEmail.test(email.val().trim())) {
+      alert('이메일 주소가 유효하지 않습니다.');
+      email.focus();
+      return false;
+    }
+  }
+
+  //비밀번호 검사
+  var pwd = $('#pwd');
+  if (!pwd.val()) {
+    alert("비밀번호를 입력해주세요.");
+    pwd.focus();
+    return false;
+  } else if (pwd.val().length < 8 && pwd.val().length > 16) {
+    alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
+    pwd.focus();
+    return false;
+  } else {
+    if (!regPwd.test(pwd.val().trim())) {
+      alert("비밀번호가 유효하지 않습니다.\n특수문자 (!@#$%^&+=), 문자 , 숫자를 포함한 \n8~16자리 이내의 비밀번호이어야 합니다.");
+      pwd.focus();
+      return false;
+    }
+  }
+
+  // 비밀번호 일치 확인
+  var pwdck = $('#pwdck');
+  if (pwd.val() != pwdck.val()) {
+    alert("비밀번호가 일치하지 않습니다.");
+    pwdck.focus();
+    return false;
+  }
+
+  // 약관 동의 체크
+  if (!confirmed) {
+    console.log(confirmed);
+    $('.confirmed').css("border", "1px solid #e74c3c");
+    $('.required-ck').show();
+    return false;
+  }
+
+  // 모든 확인사항 통과
+  return true;
 };
 
-
-
-	

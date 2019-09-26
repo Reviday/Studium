@@ -5,6 +5,8 @@
 <% 
 	List<SideMenuElement> elements=(List<SideMenuElement>)request.getAttribute("elements");
 	String choice=(String)request.getAttribute("choice");
+	String choiceSub=(String)request.getAttribute("choiceSub");
+	int choiceNum=0; //서브메뉴를 펼쳐주기 위한 변수
 %>
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/sidemenubar.css"
@@ -51,7 +53,12 @@
 					uCount++;
 		%>
 			<li data-toggle="collapse" data-target="#element<%=uCount %>"
-				class="collapsed <%=choice!=null&&choice.equals(element.getMenuName())?"active":""%>">
+				class="<%=choice!=null&&choice.equals(element.getMenuName())?"active":"collapsed"%>">
+						<%	
+							//선택 메뉴와 동일하면 id값을 저장시킨다.
+							if(choice!=null&&choice.equals(element.getMenuName()))
+							choiceNum=element.getMenuId();
+						%>
 				<a class="top-menu"
 				<%
 							//만약 하위메뉴가 존재하면 href 설정을 주지 않고,
@@ -79,9 +86,10 @@
 					// flag가 1이라면 첫 메뉴이므로 ul 태그 생성
 					if(flag==1) {
 		%>
-			<ul class="sub-menu collapse" id="element<%=uCount %>">
-				<li><a class="down-menu"
-					href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
+			<ul class="sub-menu collapse <%=element.getParentId()==choiceNum?"show":""%>" 
+				id="element<%=uCount %>">
+				<li><a class="down-menu <%=choiceSub!=null&&choiceSub.equals(element.getMenuName())&&element.getParentId()==choiceNum?"active":""%>"
+					href="<%=request.getContextPath()%><%=element.getMenuUrl()%>?choiceSub=<%=element.getMenuName()%>">
 						<%=element.getMenuName()%>
 				</a></li>
 				<%	
@@ -90,8 +98,8 @@
 					} else if(flag==0) {
 						// 일반 요소는 ul을 열거나 닫지 않는다.
 		%>
-				<li><a class="down-menu"
-					href="<%=request.getContextPath()%><%=element.getMenuUrl()%>">
+				<li><a class="down-menu <%=choiceSub!=null&&choiceSub.equals(element.getMenuName())&&element.getParentId()==choiceNum?"active":""%>"
+					href="<%=request.getContextPath()%><%=element.getMenuUrl()%>?choiceSub=<%=element.getMenuName()%>">
 						<%=element.getMenuName()%>
 				</a></li>
 				<% 
