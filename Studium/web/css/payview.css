@@ -1,0 +1,313 @@
+body {
+    font-family: "Nanum Gothic";
+}
+
+
+
+#paypay {
+    margin: auto;
+    width: 880px;
+}
+
+.pay-header {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.pay-header > span {
+    color: red;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+article {
+    border: 1px solid #e6e8eb;
+    box-sizing: border-box;
+    padding: 50px 30px;
+    box-shadow: 0 1.2rem 2.4rem -1rem rgba(0,0,0,0.1);
+    margin-bottom: 50px;
+}
+
+article > div:first-child {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.rine1 {
+    width: 100%;
+    border: 0.1px solid black;
+    margin: 30px 0;
+}
+
+.subject {
+    color: #aaaaaf;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.payanswer {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#gogakcenter {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.rine2 {
+    width: 100%;
+    border: 0.5px solid lightgray;
+    margin: 30px 0;
+}
+
+.rine3 {
+    width: 100%;
+    border: 0.1px solid lightgray;
+    margin: 30px 0;
+}
+
+.turnback {
+    font-size: 11px;
+    color: black;
+}
+
+.pointFlex {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.pointFlex > div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.pointFlex > div:last-child {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pointSelect input{
+    border: 0.5px solid #d3d3d3;
+    height: 22px;
+    outline-style: none;
+}
+
+.pointSelect button {
+    background-color: #d3d3d3;
+    color: #fff;
+    height: 26px;
+    margin-left: 10px;
+    outline-style: none;
+    border: none;
+}
+
+.pointSelect button:active {
+    /* background-color: #b50f30; */
+    background-color: #ed234b;
+}
+
+.paymethod-select label {
+    display: block;
+    margin: 25px 0;
+    font-size: 14px;
+}
+
+.payInfo {
+    line-height: 1.8;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.payInfo > span {
+    color: red;
+}
+
+.paypopup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 25;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    transform: translateY(0%);
+    transition: 1.3s;
+}
+
+.slide-in-from-bottom {
+    animation: slide-in-from-bottom 0.5s forwards;
+}
+
+.slide-out-from-bottom {
+    animation: slide-out-to-bottom 0.5s forwards;
+}
+
+.paypopup-Info {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.paypopup-subject {
+    color: #aaaaaf;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.paypopup-subject1 {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.paypopup-answer {
+    margin: 0 150px 0 40px;
+}
+
+.img-payview {
+    width: 20px;
+    height: 20px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.paypopup-answer1 {
+    font-size: 21px;
+}
+
+.paypopup-answer2 {
+    font-size: 21px;
+    color: red;
+    font-weight: bold;
+}
+
+.payagree {
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.payagree > div {
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    margin-right: 40px;
+    margin-top: 9px;
+}
+
+.payagree > button {
+    background-color: #d3d3d3;
+    color: #fff;
+    height: 40px;
+    margin-left: 10px;
+    outline-style: none;
+    border: none;
+    width: 300px;
+}
+
+.payagree > button:hover {
+    background-color: #ed234b;
+}
+
+.hide {
+    display: none;
+}
+
+
+.inputInteresting {
+    width: 300px;
+    text-align: left;
+    margin-left: 9px;
+}
+
+.inputInteresting p {
+    font-size: 0.9em;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: black !important;
+    border-bottom: 1px solid;
+}
+
+.check-label {
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.check-label span {
+    margin-left: 10px;
+}
+
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 5px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 3px;
+    outline: none;
+    position: relative;
+}
+
+.option-input+label {
+    margin-right: 10px;
+}
+
+.option-input:hover {
+    background: #9faab7;
+}
+
+.option-input:checked {
+    background: orangered;
+}
+
+input:checked::before {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    content: '✔';
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    line-height: 17px;
+}
+
+.option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: orangered;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+}
+
+.payagreespan {
+    font-size: 13px;
+}
+

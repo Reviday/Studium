@@ -108,10 +108,10 @@
                     </div> <!-- 스터디 소개 텍스트 -->
                     <div>
                      <br><br><br>
-                     <textarea cols="60" rows="15" readonly>
+                     <textarea cols="60" rows="15" id="textarea1" readonly>
                        <%=p.getpIntro1().replace("\r\n","<br>") %>
 					</textarea>
-					<textarea cols="60" rows="15" readonly>
+					<textarea cols="60" rows="15" id="textarea2" readonly>
 					 <%=p.getpIntro2().replace("\r\n","<br>") %>
 					 </textarea>
                     </div> <!-- 스터디 소개 content -->
@@ -486,7 +486,16 @@
             }
         }    --%>
 
-       
+        var str = $('#textarea1').val();
+
+        str = str.split('<br/>').join("\r\n");
+
+        $('#textarea1').val(str);
+        var str = $('#textarea2').val();
+
+        str = str.split('<br/>').join("\r\n");
+
+        $('#textarea2').val(str);
 
     </script>
     

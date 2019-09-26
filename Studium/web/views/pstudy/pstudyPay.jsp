@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy" %>
+<%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy"%>
  <%
  	Pstudy p=(Pstudy)request.getAttribute("pstudy");
   	int resultPay=(int)request.getAttribute("resultPay");
+  	
+  	
  %>
 <!DOCTYPE html>
-<html lang="ko">
+
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +21,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/main.js"></script>
-</head>
+
 <style>
 	body{
 	background-color: #eeeeee !important;
@@ -78,6 +80,7 @@
          background-color: rgba(0,0,0,0.8);
       }
 </style>
+</head>
 <body>
 	<%@ include file="../../views/common/header.jsp" %> 
     <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -206,10 +209,15 @@
             <input type="button" class="next" value="결제" onclick="fn_pay();" />
         </form>
         </section>
-        
+        <form id="studypayy">
+        <input type="hidden" value="<%=p.getpNo()%>" name="pno"/>
+        <input type="hidden" value="<%=loginMember.getMemNo()%>" name="mno"/>
+         <input type="hidden" value="<%= resultPay%>" name="resultPoint"/>
+        </form>
         <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 <script>
+
 	function fn_pay() {
 		if(!confirmed) {
 			console.log(confirmed);
@@ -218,18 +226,27 @@
 			alert("약관의 동의를 해주세요 ");
 			return false;
 		}
-		var msg = "결제하시겠습니까";
-		var flag = confirm(msg);
-		var resultPay =<%=resultPay%>;
-		if(flag==true) {
-			if(resultPay>0){
-		location.href="<%=request.getContextPath()%>/pstudy/psutdyPayment?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo()%>&mPoint=<%= resultPay%>";
-			}else{
-				alert("포인트 충전 후  결제하세요 ");
-				return false;
-			}
-		}
-		else alert("취소하였습니다.");
+		
+		var params = jQuery("#studypayy").serialize();
+	
+		
+		               $.ajax({
+		                    url:"<%=request.getContextPath()%>/studyPay",
+		                    type: "POST",
+		                    dataType: "html",
+		                    data: params,
+		                    success: function(data){
+		                    	console.log(data);
+		                       $(".studyIntro").html("");
+		                       $(".studyIntro").html(data);
+		                    },
+		              error: function (request, status, error){
+		            	   alert("ajax실패");
+		            	   console.log(error);
+		            	   console.log(data);
+		               }
+		                 });
+	
 		
 	}
 	
