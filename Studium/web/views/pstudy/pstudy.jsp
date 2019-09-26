@@ -84,7 +84,7 @@ body{
 			
 			<% 
 				for(Pstudy p :bestList){ 
-			
+				
 				
 			%>
 			<div class="a_cnt1">
@@ -178,12 +178,13 @@ body{
 			</div>
 
 			<%} 
+				
 	   %>
 		</div>
 
 	</div>
 </div>
-<% } else {%>
+<%}  else {%>
 <%} %>
 <div class="plist">
 	<div class="a_title">강사 스터디 </div>
@@ -235,11 +236,20 @@ body{
 						<% }else{ %>
 						<div class="recruiting-status new">신규모집</div>
 						<%} %>
-					<%}else{ %>
+					<%}else{
+					if(loginMember.getMemCode()=='M')	{
+						%>
+						<div class="full-cover" style="z-index:0;">
+					마감
+					 </div>
+				<% }else{
+						
+					%>
+					
 					<div class="full-cover">
 					마감
 					 </div>
-					<%} %> 
+					<%} }%> 
 					 <%
                     	if(loginMember!=null) {
                     %>
