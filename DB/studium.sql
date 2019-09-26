@@ -449,8 +449,10 @@ increment by 1
 maxvalue 9999;
 
 select * from ta_sidemenu_elements;
---select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
---SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
+SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='admin' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? START WITH PARENT_ID IS NULL CONNECT BY PRIOR MENU_ID=PARENT_ID;
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공부마당', '/madang/studyMadangList', 'fab fa-studiovinari fa-lg', 'Y', 2, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자유마당', '/madang/freeMadangList', 'fab fa-fort-awesome-alt fa-lg', default, 3, default);
@@ -478,8 +480,8 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','1:1문�
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 관리', '/AdminPayManage', default, default, 4, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 신청 관리', '/AdminPSManage', default, default, 5, default);
 update ta_sidemenu_elements set use_down='Y' where menu_name='결제 관리';
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 1, 22);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 2, 22);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 6, 22);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 7, 22);
 
 
 -- 이 위 까지만 전체 실하면 됩니다.

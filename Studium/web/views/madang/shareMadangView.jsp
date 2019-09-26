@@ -1,19 +1,19 @@
+<%@page import="com.studium.madang.model.vo.ShareMadangCmt"%>
+<%@page import="com.studium.madang.model.vo.ShareMadang"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.studium.madang.model.vo.FreeMadangCmt"%>
-<%@page import="com.studium.madang.model.vo.FreeMadang"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	FreeMadang fm = (FreeMadang) request.getAttribute("fm");
+	ShareMadang sm = (ShareMadang) request.getAttribute("sm");
 	int cPage = (int)request.getAttribute("cPage");
-	List<FreeMadangCmt> list = (List<FreeMadangCmt>)request.getAttribute("cmtList");
+	List<ShareMadangCmt> list = (List<ShareMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
-	Map<String, FreeMadang> preNext=(Map<String, FreeMadang>)request.getAttribute("preNext");
+	Map<String, ShareMadang> preNext=(Map<String, ShareMadang>)request.getAttribute("preNext");
 	
 	
 %>
@@ -43,8 +43,8 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">자유마당</h3>
-					<p class="list-sub">자유롭게 글을 올리는 공간입니다.</p>
+					<h3 class="list-title">공유마당</h3>
+					<p class="list-sub">자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)</p>
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 							border="0">
 							<tbody>
 								<tr valign="top">
-									<td><span class="b m-tcol-c"><%=fm.getMadangTitle()%></span></td>
+									<td><span class="b m-tcol-c"><%=sm.getMadangTitle()%></span></td>
 									<td nowrap="" class="m-tcol-c" style="opacity: 0.3">|</td>
 									<td nowrap="" class="m-tcol-c"><a href="#" onclick=""
 										class="m-tcol-c" style="color: #ccc">[현재 메뉴 위치]</a></td>
@@ -77,7 +77,7 @@
 							<tbody>
 								<tr>
 									<td></td>
-									<td class="m-tcol-c date"><%=format.format(fm.getMadangRegisterDatetime())%></td>
+									<td class="m-tcol-c date"><%=format.format(sm.getMadangRegisterDatetime())%></td>
 								</tr>
 							</tbody>
 						</table>
@@ -105,13 +105,13 @@
 											<tbody>
 												<tr>
 													<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
-															<img src="<%=request.getContextPath()%>/upload/myPage/<%=fm.getProfilePath()%>" width="24" height="24"
+															<img src="<%=request.getContextPath()%>/upload/myPage/<%=sm.getProfilePath()%>" width="24" height="24"
 															onerror="this.onerror='';this.src='<%=request.getContextPath()%>/img/nonProfile.png'">
 													</a></td>
 													<td class="p-nick">
 														<!-- 이름/이메일 클릭 시, 해당 유저의 게시글보기/1:1채팅/쪽지보내기 등을 드롭다운 박스로 표시 -->
-														<a href="#" class="m-tcol-c b"><%=fm.getMadangWriterName()%>
-															<!-- 아이디 별표(*)처리 --> (<%=fm.getMadangWriterEmail().substring(0, 4)%>****)</a>
+														<a href="#" class="m-tcol-c b"><%=sm.getMadangWriterName()%>
+															<!-- 아이디 별표(*)처리 --> (<%=sm.getMadangWriterEmail().substring(0, 4)%>****)</a>
 													</td>
 												</tr>
 											</tbody>
@@ -145,7 +145,7 @@
 				<!-- 실제 작성 내용 -->
 				<div class="tbody m-tcol-c" id="tbody"
 					style="padding-left: 43px; padding-right: 43px; margin-right: 0px;">
-					<pre><%=fm.getMadangContent()%></pre>
+					<pre><%=sm.getMadangContent()%></pre>
 				</div>
 
 				<div class="h40"></div>
@@ -219,25 +219,9 @@
 									<td class="i3">
 
 										<div class="u_cbox_btn_upload _submitBtn">
-											
-											<%
-																							if(loginMember!=null) {
-																																	//로그인 상태일때
-																						%>
-														<a href="#" class="u_cbox_txt_upload _submitCmt" 
-														onclick="fn_addComment('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
-														등록</a>													
-													<%
-																											} else {
-																																					//비로그인 상태일때
-																										%>
-														<a href="#" class="u_cbox_txt_upload _submitCmt" 
-														onclick="fn_needLogin(); return false;">
-														등록</a>	
-													<%
-															}
-														%>
-											
+											<a href="#" class="u_cbox_txt_upload _submitCmt" 
+											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+											등록</a>													
 										</div>
 									</td>
 								</tr>
@@ -255,7 +239,7 @@
 									<%
 										if(!list.isEmpty()) {
 
-											for(FreeMadangCmt cmt : list) {
+											for(ShareMadangCmt cmt : list) {
 												//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
 												if(cmt.getCmtSort()==0) {
 													//부모 댓글 작성 로직
@@ -311,23 +295,9 @@
 						                                                    <td class="i3">
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
-						                                                           <%
-																							if(loginMember!=null) {
-																																	//로그인 상태일때
-																						%>
-																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																								onclick="fn_addReply('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
-																								등록</a>													
-																							<%
-																																					} else {
-																																															//비로그인 상태일때
-																																				%>
-																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																								onclick="fn_needLogin(); return false;">
-																								등록</a>	
-																							<%
-																									}
-																								%>
+																					<a href="#" class="u_cbox_txt_upload _submitCmt" 
+																					onclick="fn_addReply('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+																					등록</a>													
 						                                                        </div>
 						                                                    </td>
 						                                                </tr>
@@ -441,7 +411,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
@@ -450,7 +420,7 @@
 				<div class="btn btn_lower">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/freeMadangList?cPage=<%=cPage%>'"> 
+						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangList?cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 						<img id="goList" src="<%=request.getContextPath()%>/img/list_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
@@ -460,7 +430,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>

@@ -76,7 +76,7 @@
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>">
+											<a class="article" href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
 												 <%=sm.getMadangTitle()%>
 											</a>
 										</div>
@@ -112,7 +112,7 @@
 					<div class="post_btns">
 						<div class="fr">
 							<a href="#" id="writeFormBtn"
-								onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=share'; return false;"
+								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','share','<%=choice%>','<%=choiceSub%>'); return false;"
 								class="btn_type1 post_write _rosRestrict">글쓰기</a>
 						</div>
 					</div>
@@ -126,6 +126,5 @@
 
 
 </section>
-
-
+<script src="<%=request.getContextPath() %>/js/madang.js"></script>
 <%@ include file="/views/common/footer.jsp"%>

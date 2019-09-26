@@ -21,5 +21,5 @@
 	</div>
 	</section>
 
-
+<script src="<%=request.getContextPath() %>/js/madang.js"></script>
 <%@ include file="/views/common/footer.jsp"%>

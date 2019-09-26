@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.studium.madang.model.service.FreeMadangCmtService;
+import com.studium.madang.model.service.ShareMadangCmtService;
 import com.studium.madang.model.service.ShareMadangService;
-import com.studium.madang.model.vo.FreeMadangCmt;
 import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.vo.ShareMadangCmt;
 import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.CmtPaginationTemplate;
+import common.template.LoginCheck;
 
 /**
  * Servlet implementation class ShareMadangViewServlet
@@ -45,21 +46,7 @@ public class ShareMadangViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 공유마당의 게시글은 회원들만 볼 수 있다.(리스트를 보는건 회원/비회원 모두 가능.)
-		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("loginMember");
-		
-		String view = "";
-		String msg = "";
-		String loc = "";
-		if(m==null) {
-			msg="회원만 이용가능합니다.";
-			loc="/madang/shareMadangList?choiceSub"+request.getParameter("choiceSub");
-			view = "/views/common/msg.jsp";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher(view).forward(request, response); 
-			return;
-		} 
+		new LoginCheck(request, response, 1004);
 		
 		int no = Integer.parseInt(request.getParameter("madangNo"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -97,18 +84,19 @@ public class ShareMadangViewServlet extends HttpServlet {
 		Map<String, ShareMadang> preNext = new ShareMadangService().selectPreNext(no);
 
 		// Pagination
-		FreeMadangCmtService service = new FreeMadangCmtService();
+		ShareMadangCmtService service = new ShareMadangCmtService();
 		int totalData = service.selectCountList(no); // 총 데이터 개수
 		String URLmapping = "/madnag/shareMadangView"; // 패턴을 넘겨주기 위한 변수
 		CmtPaginationTemplate pt = new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리
-		List<FreeMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
+		List<ShareMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
+		
+		// Side Menu
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
-
-		System.out.println("사이즈 : " + cmtList.size());
-		for (FreeMadangCmt cmt : cmtList) {
-			System.out.println(cmt);
-		}
-
+		String choiceSub = request.getParameter("choiceSub");
+		
+		String msg="";
+		String loc="";
+		String view="";
 		if (sm != null) {
 			view = "/views/madang/shareMadangView.jsp";
 			request.setAttribute("sm", sm);
@@ -125,7 +113,8 @@ public class ShareMadangViewServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 		}
 		
-		request.setAttribute("choice", "share");
+		request.setAttribute("choice", "공유마당");
+		request.setAttribute("choiceSub", choiceSub);
 		request.setAttribute("elements", elements);
 		request.getRequestDispatcher(view).forward(request, response);
 	}

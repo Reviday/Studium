@@ -110,9 +110,9 @@
 					
 					<!-- 버튼 -->
 					<div class="post_btns">
-						<div class="fr">
+						<div class="fr">	
 							<a href="#" id="writeFormBtn"
-								onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=free'; return false;"
+								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=choice%>','null'); return false;"
 								class="btn_type1 post_write _rosRestrict">글쓰기</a>
 						</div>
 					</div>
@@ -126,6 +126,5 @@
 
 
 </section>
-
-
+<script src="<%=request.getContextPath() %>/js/madang.js"></script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -19,6 +19,7 @@ import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.CmtPaginationTemplate;
+import common.template.LoginCheck;
 import common.template.PaginationTemplate;
 
 /**
@@ -41,6 +42,8 @@ public class FreeMadangViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		new LoginCheck(request, response, 1003);
+		
 		// 자유마당이므로 모든 회원,비회원에게 열람권이 부여된다.
 		// 때문에 파라미터로 받을 인수는 글번호와 cPage 뿐이다.
 		int no=Integer.parseInt(request.getParameter("madangNo"));
@@ -86,11 +89,6 @@ public class FreeMadangViewServlet extends HttpServlet {
 		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
 		
-		System.out.println("사이즈 : " + cmtList.size());
-		for(FreeMadangCmt cmt:cmtList) {
-			System.out.println(cmt);
-		}
-		
 		String view="";
 		if(fm!=null)
 		{
@@ -110,7 +108,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}
-		request.setAttribute("choice", "free");
+		request.setAttribute("choice", "자유마당");
 		request.setAttribute("elements", elements);
 		request.getRequestDispatcher(view).forward(request, response);
 		

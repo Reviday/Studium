@@ -219,25 +219,9 @@
 									<td class="i3">
 
 										<div class="u_cbox_btn_upload _submitBtn">
-											
-											<%
-																							if(loginMember!=null) {
-																																	//로그인 상태일때
-																						%>
-														<a href="#" class="u_cbox_txt_upload _submitCmt" 
-														onclick="fn_addComment('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
-														등록</a>													
-													<%
-																											} else {
-																																					//비로그인 상태일때
-																										%>
-														<a href="#" class="u_cbox_txt_upload _submitCmt" 
-														onclick="fn_needLogin(); return false;">
-														등록</a>	
-													<%
-															}
-														%>
-											
+											<a href="#" class="u_cbox_txt_upload _submitCmt" 
+											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+											등록</a>													
 										</div>
 									</td>
 								</tr>
@@ -311,23 +295,9 @@
 						                                                    <td class="i3">
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
-						                                                           <%
-																							if(loginMember!=null) {
-																																	//로그인 상태일때
-																						%>
-																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																								onclick="fn_addReply('<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
-																								등록</a>													
-																							<%
-																																					} else {
-																																															//비로그인 상태일때
-																																				%>
-																								<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																								onclick="fn_needLogin(); return false;">
-																								등록</a>	
-																							<%
-																									}
-																								%>
+																					<a href="#" class="u_cbox_txt_upload _submitCmt" 
+																					onclick="fn_addReply('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=fm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+																					등록</a>													
 						                                                        </div>
 						                                                    </td>
 						                                                </tr>
@@ -441,7 +411,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/freeMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>'"> 
 						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
@@ -460,7 +430,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/freeMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>'"> 
 							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>

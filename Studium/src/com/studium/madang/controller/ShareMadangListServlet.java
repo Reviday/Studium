@@ -49,6 +49,7 @@ public class ShareMadangListServlet extends HttpServlet {
 		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
+		String choiceSub = request.getParameter("choiceSub");
 		
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
@@ -56,7 +57,7 @@ public class ShareMadangListServlet extends HttpServlet {
 		request.setAttribute("shareMadangList", list);
 		request.setAttribute("elements", elements);
 		request.setAttribute("choice", "공유마당");
-		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
+		request.setAttribute("choiceSub", choiceSub);
 
 		request.getRequestDispatcher("/views/madang/shareMadangList.jsp").forward(request, response);
 	}
