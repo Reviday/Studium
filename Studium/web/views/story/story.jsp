@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <style>
         /* 사이드바 스타일 */
-        #review-level{
+       #review-level{
         	position:fixed;
         	right:0;
         	box-sizing:border-box;
@@ -48,7 +48,10 @@
     		background: #f8f8f8;
     		color: #ef6c00;
 		}
-		
+		.subjectName{
+			 
+    		color: #ef6c00;
+		}
 		
 		}
       
@@ -60,32 +63,34 @@
 </div>
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
-        <aside id="review-level">
+      <aside id="review-level">
             	<div class="review-title">종류별</div>
             	<ul class="level-list">
             	<li class="level-select-wrap">
             			<a class="level-select" href="<%=request.getContextPath()%>/story">전체</a>
             		</li>
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story1">영어</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story1">외국어</a>
             		</li>
             
             	
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story2">중국어</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story2">프로그래밍</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story3">코딩</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story3">공무원</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select">기타</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story4">자격증</a>
+            		</li>
+            		<li class="level-select-wrap">
+            			<a class="level-select" href="<%=request.getContextPath()%>/story5">취업준비</a>
             		</li>
             	</ul>
-            
             </aside>
         <article class="allhugi">
             <!-- 가운데 맞춤 article -->
@@ -106,7 +111,7 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                  전체후기
+                   전체후기
           
     
                     
@@ -126,6 +131,9 @@
                         <div class="reviewName">
                             <!-- 이름 -->
                           <%=s.getStoryWrite()%>
+                          <span class="subjectName">
+                        		 <%=s.getStorySubject()%>
+                          </span>
                  
                         </div>
                         <div class="star">

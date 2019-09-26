@@ -112,7 +112,7 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                   공무원 준비후기
+                   자격증 준비후기
           
     
                     
@@ -132,9 +132,10 @@
                         <div class="reviewName">
                             <!-- 이름 -->
                           <%=s.getStoryWrite()%>
-                		 <span class="subjectName">
+                          <span class="subjectName">
                         		 <%=s.getStorySubject()%>
                           </span>
+                 
                         </div>
                         <div class="star">
                             <!-- 별점 -->

@@ -138,13 +138,16 @@ section.allhugi article {
     top: 30px;
     box-sizing: border-box;
     left: 140px;
-   /*  height:300px; */
+    color: #505050; 
+    height:300px; ; 
+   
   
 }
 
 .reviewText {
     font-size: 18px;
     line-height: 1.4;
+    width:500px;
 }
 
 .reviewText span {

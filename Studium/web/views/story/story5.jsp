@@ -92,6 +92,7 @@
             			<a class="level-select" href="<%=request.getContextPath()%>/story5">취업준비</a>
             		</li>
             	</ul>
+          
             </aside>
         <article class="allhugi">
             <!-- 가운데 맞춤 article -->
@@ -112,7 +113,7 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                   공무원 준비후기
+                   취업준비후기
           
     
                     
@@ -132,9 +133,10 @@
                         <div class="reviewName">
                             <!-- 이름 -->
                           <%=s.getStoryWrite()%>
-                		 <span class="subjectName">
+                          <span class="subjectName">
                         		 <%=s.getStorySubject()%>
                           </span>
+                 
                         </div>
                         <div class="star">
                             <!-- 별점 -->
