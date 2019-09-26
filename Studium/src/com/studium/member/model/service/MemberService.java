@@ -79,6 +79,13 @@ public class MemberService {
 		return list;
 		
 	}
+	public List<MyPurchase> selectAllPurchase(int no) {
+		Connection conn=getConnection();
+		List <MyPurchase> list=dao.selectAllPurchase(conn, no);
+		close(conn);
+		return list;
+		
+	}
 	
 	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();

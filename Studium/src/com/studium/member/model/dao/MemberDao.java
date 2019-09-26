@@ -284,6 +284,7 @@ public class MemberDao {
 		} return result;
 		
 	}
+	//구매한 데이터들만 가져옴 p_study로 join, fstudy값 x
 	public List<MyPurchase> selectPurchase(Connection conn, int no){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -301,7 +302,6 @@ public class MemberDao {
 				mp=new MyPurchase();
 				mp.setPurId(rs.getInt("pur_id"));
 				mp.setMemNo(rs.getInt("mem_no"));
-				mp.setpNo(rs.getInt("f_no"));
 				mp.setpNo(rs.getInt("p_no"));
 				mp.setpTitle(rs.getString("p_title"));
 				mp.setPurchaseDate(rs.getDate("purchase_date"));
@@ -319,6 +319,42 @@ public class MemberDao {
 			close(pstmt);
 		} return list;
 	}
+	
+	//구매+신청목록
+		public List<MyPurchase> selectAllPurchase(Connection conn, int no){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql=prop.getProperty("selectAllPurchase");
+			List<MyPurchase> list= new ArrayList<MyPurchase>();
+			MyPurchase mp=null;
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, no);
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()) {
+					// 테이블 변경을 고려하여 인수를 열 이름으로 사용
+					mp=new MyPurchase();
+					mp.setPurId(rs.getInt("pur_id"));
+					mp.setMemNo(rs.getInt("mem_no"));
+					mp.setfNo(rs.getInt("f_no"));
+					mp.setpNo(rs.getInt("p_no"));
+					mp.setPurchaseDate(rs.getDate("purchase_date"));
+					mp.setPurchaseCancelStatus(rs.getString("purchase_status").charAt(0));
+					mp.setCancelDate(rs.getDate("cancel_date"));
+					mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
+					mp.setSubmitFile(rs.getString("submit_file").charAt(0));
+					
+					list.add(mp);
+					}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			} return list;
+		}
 
 	public int updateSetting(Connection conn, String settingName, String type, int no) {
 		String setString="";
