@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember", m);
 			session.setMaxInactiveInterval(3600); // 한 시간 세션 유지
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getHeader("referer")); // 로그인 후 현재 페이지 유지
 		} else {
 			//로그인 실패
 			msg="아이디나 패스워드가 일치하지 않습니다";

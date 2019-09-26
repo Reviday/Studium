@@ -39,7 +39,7 @@ public class LogoutServlet extends HttpServlet {
 			// 세션을 비우는 것으로 로그아웃 실행
 			System.out.println(view);
 			session.invalidate();
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getHeader("referer")); // 로그아웃 후 현재 페이지 유지
 		} else {
 			String msg="잘못된 접근 경로입니다.";
 			String loc="/";

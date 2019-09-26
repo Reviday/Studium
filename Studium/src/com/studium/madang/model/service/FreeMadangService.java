@@ -52,5 +52,13 @@ public class FreeMadangService {
 	public int insertMadang(FreeMadang fm) {
 		Connection conn=getConnection();
 		int result=dao.insertMadang(conn, fm);
+		int madangNo=-1;
+		if(result>0) {
+			commit(conn);
+			madangNo=dao.selectSeqCurrval(conn);
+		}
+		else rollback(conn);
+		close(conn);
+		return madangNo;
 	}
 }

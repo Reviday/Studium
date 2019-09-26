@@ -76,7 +76,7 @@
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madnag/freeMadangView?madangNo=<%=fm.getMadangNo() %>&cPage=<%=cPage%>">
+											<a class="article" href="<%=request.getContextPath()%>/madang/freeMadangView?madangNo=<%=fm.getMadangNo() %>&cPage=<%=cPage%>">
 												 <%=fm.getMadangTitle()%>
 											</a>
 										</div>

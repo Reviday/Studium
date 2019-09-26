@@ -158,7 +158,7 @@
                 	<!-- 함께 전달해야 할 데이터 -->
                 	<input type="hidden" name="userUid" value="<%=loginMember.getMemNo()%>">
                 	<input type="hidden" name="userEmail" value="<%=loginMember.getMemUserEmail()%>"> 
-                	<input type="hidden" name="userName" value="<%=loginMember.getMemPassword()%>">
+                	<input type="hidden" name="userName" value="<%=loginMember.getMemName()%>">
                 	<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
                 </div>
             </form>

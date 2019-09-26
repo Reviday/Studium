@@ -45,8 +45,20 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		//이미지 받기 및 넣기
 		
 		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
-		int result=new FreeMadangService().insertMadang(fm);
+		//정상적으로 insert되면 해당 madangNo가 반환된다.
+		int madangNo=new FreeMadangService().insertMadang(fm);
 		
+		String view="/";
+		if(madangNo>0) {
+			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage=1";
+		} else {
+			String msg="게시글 작성에 실패하였습니다.";
+			String loc="/madang/freeMadangList";
+			view="/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+		}
+		request.getRequestDispatcher(view).forward(request, response);
 		
 	}
 

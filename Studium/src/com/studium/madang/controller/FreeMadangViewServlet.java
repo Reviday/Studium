@@ -24,7 +24,7 @@ import common.template.PaginationTemplate;
 /**
  * Servlet implementation class FreeMadangViewServlet
  */
-@WebServlet("/madnag/freeMadangView")
+@WebServlet("/madang/freeMadangView")
 public class FreeMadangViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
