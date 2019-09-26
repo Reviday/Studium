@@ -41,7 +41,7 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		bm.setMadangWriterEmail(request.getParameter("userEmail"));
 		bm.setMadangWriterName(request.getParameter("userName"));
 		bm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
-		bm.setMadangContent(request.getParameter("bmarteditor"));
+		bm.setMadangContent(request.getParameter("smarteditor"));
 		
 		
 		//파일 받기 및 넣기

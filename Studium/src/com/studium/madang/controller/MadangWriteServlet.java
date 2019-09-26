@@ -38,9 +38,6 @@ public class MadangWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("loginMember");
-		
 		// 어느 페이지의 글쓰기인지 확인하고자 받는 변수
 		// 글쓰기 페이지는 하나의 서블릿으로 처리
 		String locate = request.getParameter("locate");

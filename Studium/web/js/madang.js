@@ -23,24 +23,24 @@ function fn_needLogin() {
 	alert("회원만 이용가능합니다.");
 }
 
-function fn_addComment(memCheck, path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
+function fn_addComment(memCheck, locate, path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
 		var commentArea = convertToTag(document.getElementById('comment_text'));
-		location.href = path + "/madang/freeAddComment?madangNo=" + madangNo + "&memberNo=" + memberNo
+		location.href = path + "/madang/" + locate + "AddComment?madangNo=" + madangNo + "&memberNo=" + memberNo
 			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
 			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage;
 	}
 };
 
-function fn_addReply(memCheck, path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
+function fn_addReply(memCheck, locate, path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
 		var commentArea = convertToTag(document.getElementById('comment_text_rep'));
-		location.href = path + "/madang/freeAddReply?madangNo=" + madangNo + "&memberNo=" + memberNo
-			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value
+		location.href = path + "/madang/" + locate + "AddReply?madangNo=" + madangNo + "&memberNo=" + memberNo
+			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
 			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&cmtNo=" + cmtNo;
 	}
 };

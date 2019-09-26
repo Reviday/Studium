@@ -7,22 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.FreeMadangCmtService;
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.service.ShareMadangCmtService;
+import com.studium.madang.model.vo.ShareMadangCmt;
 
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class FreeMadangAddReplyServlet
+ * Servlet implementation class ShareMadangAddReplyServlet
  */
-@WebServlet("/madang/freeAddReply")
-public class FreeMadangAddReplyServlet extends HttpServlet {
+@WebServlet("/madang/shareAddReply")
+public class ShareMadangAddReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeMadangAddReplyServlet() {
+    public ShareMadangAddReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class FreeMadangAddReplyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		new LoginCheck(request, response, 1003);
 		
-		FreeMadangCmt cmt=new FreeMadangCmt();
+		ShareMadangCmt cmt=new ShareMadangCmt();
 		int madangNo=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		cmt.setCmtMadangNo(madangNo);
@@ -45,14 +45,14 @@ public class FreeMadangAddReplyServlet extends HttpServlet {
 		cmt.setCmtRegisterIp(request.getParameter("REMOTE_ADDR"));
 		cmt.setCmtParent(Integer.parseInt(request.getParameter("cmtNo")));
 		System.out.println("request.getParameter(\"cmtNo\"):" + request.getParameter("cmtNo"));
-		int result=new FreeMadangCmtService().insertReply(cmt);
+		int result=new ShareMadangCmtService().insertReply(cmt);
 		System.out.println("cmt.getCmtParent():"+cmt.getCmtParent());
 		String view="";
 		if(result>0) {
-			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			view="/madang/shareMadangView?madangNo="+madangNo+"&cPage="+cPage;
 		} else {
 			String msg="댓글 작성에 실패하였습니다.";
-			String loc="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			String loc="/madang/shareMadangView?madangNo="+madangNo+"&cPage="+cPage;
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
