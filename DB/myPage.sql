@@ -1,7 +1,7 @@
 select * from tab;
 drop table my_dibs;
 drop table my_purchase;
-select seq_pstudy.nextval from dual;
+
 drop table todo_list;
 drop table ta_member;
 create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
@@ -53,8 +53,6 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
 
 
 --무료스터디 db
-alter table f_study  MODIFY (f_category VARCHAR2(25));
-commit;
 create table f_study(
     f_no number constraint fstudy_pk primary key, --스터디 번호
     f_title varchar2(30), --스터디 타이틀
@@ -62,7 +60,7 @@ create table f_study(
     f_area varchar2(30), --스터디 지역
     f_day  varchar2(30), --스터디 평일,주말
     f_studyperson number, --스터디 인원
-    f_category varchar2(25),--스터디 카테고리
+    f_category varchar2(15),--스터디 카테고리
     f_intro1 varchar2(1000), --스터디 소개 1
     f_intro2 varchar2(1000), --스터기 소개 2
     f_imgtitle varchar(225), --이미지 타이틀
@@ -164,7 +162,10 @@ INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,default,SYSDATE,'
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'N',SYSDATE,'N','Y');
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'N',SYSDATE,'Y','Y');
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'Y',SYSDATE,'Y','N');
-SELECT * FROM MY_PURCHASE;
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,41,default,SYSDATE,'Y',SYSDATE,'Y','N');
+SELECT * FROM MY_PURCHASE where mem_no='10028';
+commit;
+select * from f_study;
 SELECT * FROM TA_MEMBER;
 --TODOLIST테이블
 CREATE TABLE TODO_LIST(
@@ -182,7 +183,7 @@ CREATE TABLE TODO_LIST(
 select * from p_study;
 select * from f_study;
 select * from ta_member;
-
+select * from my_purchase;
 
 update ta_member set mem_email='aaa@naver.com' where mem_no=10001;
 select * from tab;
@@ -311,3 +312,5 @@ commit;
 select * from ta_member;
 select * from my_purchase;
 select * from tab;
+
+

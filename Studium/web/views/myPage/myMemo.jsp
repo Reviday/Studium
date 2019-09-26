@@ -22,7 +22,7 @@
       </div>
     </div>
 
-        <div class="section-content" style="height:600px">
+        <div class="section-content">
                 <div class="row">
                     <div class="col-sm-2">
                     </div>
@@ -53,10 +53,10 @@ $("#click").on("click", function () {
    //div만들기
    $newdiv = $('<div/>');
    // 랜덤좌표
-   var posx = (Math.random() * ($(document).width() - 200)).toFixed();
-   var posy = (Math.random() * ($(document).height() - 200)).toFixed();
+   var posx = (Math.random() * ($('#memo_area').width() - 200)).toFixed();
+   var posy = (Math.random() * ($('#memo_area').height() - 200)).toFixed();
    //임의의 색깔
-   var color = '#' + Math.round(0xffffff * Math.random()).toString(16);
+   //var color = '#' + Math.round(0xffffff * Math.random()).toString(16);
    //아이디값추가
    $newdiv.attr('id', numberId);
    //클래스값추가
@@ -67,12 +67,11 @@ $("#click").on("click", function () {
    $newdiv.css({
        'width': '200px',
        'height': '200px',
-       'background-color': color,
        'position': 'absolute',
        'left': posx + 'px',
        'top': posy + 'px',
        'display': 'none'
-   }).appendTo('.section-content').fadeIn(100).draggable();;
+   }).appendTo('#memo_area').fadeIn(100).draggable();;
 
 //    //버튼으로 생성한  div삭제
 //     $(".newMemo").on('click', function () {
@@ -89,7 +88,21 @@ $(".memo_close").on('click', function () {
        console.log("들어옴");
        $(this).parents('.newMemo').remove();
    });
+   
+   //옮긴 위치 console
+$(document).on("mouseup", ".newMemo", function(){
 
+	var elem = $(this),
+	    id = elem.attr('id'),
+	    desc = elem.attr('data-desc'),
+	    pos = elem.position(),
+	    val= elem.find('textarea[name="txt"]').val();
+	    
+	console.log('Left: '+pos.left+'; Top:'+pos.top);
+	console.log(id);
+	console.log(desc);
+	console.log('그거'+val);
+	});
 
 </script>
 
