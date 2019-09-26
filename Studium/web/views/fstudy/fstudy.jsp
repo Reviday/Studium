@@ -122,11 +122,24 @@ body{
 						
 						
 						
-						if(diffDays<3){ %>
-							<div class="drawing-near">마감 임박</div>
-						<%	}else{ %>
-						<div class="recruiting-status new">신규 모집</div>
-						<%} %> 
+						if((diffDays<3&&diffDays>1)){ %>
+						
+						<div class="drawing-near">마감 임박</div>
+
+					<%}else if(diffDays>3){ 
+						if(p.getfStudypserson()-p.getfStudyMember()<3&&p.getfStudypserson()-p.getfStudyMember()>0){
+					%>
+						<div class="drawing-near">마감 임박</div>
+						<%}else if(p.getfStudypserson()-p.getfStudyMember()==0){%>
+						<div class="full-cover">마감</div>
+						<% }else{ %>
+						<div class="recruiting-status new">신규모집</div>
+						<%} %>
+					<%}else{ %>
+					<div class="full-cover">
+					마감
+					 </div>
+					<%} %> 
 					
 					 <%
                     	if(loginMember!=null) {
@@ -217,11 +230,33 @@ body{
 			<div class="a_cnt1">
 				<div data-aos="fade-up" class="col-3 pstudy-card">
 				<%
-						if(diffDays<3){ %>
-							<div class="drawing-near">마감 임박</div>
-						<%	}else{ %>
-						<div class="recruiting-status new">신규 모집</div>
-						<%} %> 
+				if((diffDays<3&&diffDays>1)){ %>
+				
+				<div class="drawing-near">마감 임박</div>
+
+			<%}else if(diffDays>3){ 
+				if(p.getfStudypserson()-p.getfStudyMember()<3&&p.getfStudypserson()-p.getfStudyMember()>0){
+			%>
+				<div class="drawing-near">마감 임박</div>
+				<%}else if(p.getfStudypserson()-p.getfStudyMember()==0){%>
+				<div class="full-cover">마감</div>
+				<% }else{ %>
+				<div class="recruiting-status new">신규모집</div>
+				<%} %>
+			<%}else{
+				if(loginMember.getMemCode()=='M')	{
+					%>
+					<div class="full-cover" style="z-index:0;">
+				마감
+				 </div>
+			<% }else{
+					
+				%>
+				
+				<div class="full-cover">
+				마감
+				 </div>
+				<%}} %> 
 					 <%
                     	if(loginMember!=null) {
                     %>

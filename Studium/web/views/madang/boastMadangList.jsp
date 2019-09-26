@@ -1,10 +1,10 @@
-<%@page import="com.studium.madang.model.vo.FreeMadang"%>
+<%@page import="com.studium.madang.model.vo.BoastMadang"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	List<FreeMadang> fmlist = (List) request.getAttribute("freeMadangList");
+	List<BoastMadang> bmlist = (List) request.getAttribute("boastMadangList");
 	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
 %>
@@ -17,16 +17,16 @@
 	<div class="header-background-cover"></div>
 </div>
 <section class="madang-section row">
-<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left:0">
+<div class="col-xs-4 col-bm-3 col-md-3 col-lg-2" style="padding-left:0">
 <%@ include file="/views/common/sideMenuBar.jsp"%>	
 </div>
 <div class="col-lg-1"></div>
-		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9">
+		<div class="wrapper col-xs-6 col-bm-6 col-md-7 col-lg-9">
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">
-						<h3 class="list-title">자유마당</h3>
-						<p class="list-sub">자유롭게 글을 올리는 공간입니다.</p>
+						<h3 class="list-title">자랑마당</h3>
+						<p class="list-sub">자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!</p>
 					</div>
 					<div class="sort_area mldiv">
 						<input type="checkbox" id="notice_checkbox"> <label
@@ -60,8 +60,8 @@
 						</thead>
 						<tbody>
 							<%
-								if (!fmlist.isEmpty()) {
-									for (FreeMadang fm : fmlist) {
+								if (!bmlist.isEmpty()) {
+									for (BoastMadang bm : bmlist) {
 							%>
 							<tr class="_noticeArticle board-notice type_main">
 								<td class="td_article">
@@ -70,14 +70,14 @@
 										<!-- <strong class="board-tag-txt">
 		                                <span class="inner">공지</span>
 		                            </strong>  공지는 이거로-->
-										<span class="inner" style="text-align: center"><%=fm.getMadangNo()%></span>
+										<span class="inner" style="text-align: center"><%=bm.getMadangNo()%></span>
 									</div>
 								</td>
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/freeMadangView?madangNo=<%=fm.getMadangNo() %>&cPage=<%=cPage%>">
-												 <%=fm.getMadangTitle()%>
+											<a class="article" href="<%=request.getContextPath()%>/madang/boastMadangView?madangNo=<%=bm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
+												 <%=bm.getMadangTitle()%>
 											</a>
 										</div>
 									</div>
@@ -88,7 +88,7 @@
 											<tbody>
 												<tr>
 													<td class="p-nick" style="padding: 0"><a href="#"
-														class="" onclick=""> <%=fm.getMadangWriterName()%></a> <span
+														class="" onclick=""> <%=bm.getMadangWriterName()%></a> <span
 														class="mem-level"><img
 															src="https://cafe.pstatic.net/levelicon/1/1_888.gif"
 															width="11" height="11"></span></td>
@@ -97,9 +97,9 @@
 										</table>
 									</div>
 								</td>
-								<td class="td_date"><%=format.format(fm.getMadangRegisterDatetime())%></td>
-								<td class="td_view"><%=fm.getMadangReadCount()%></td>
-								<td class="td_like"><%=fm.getMadangRecCount()%></td>
+								<td class="td_date"><%=format.format(bm.getMadangRegisterDatetime())%></td>
+								<td class="td_view"><%=bm.getMadangReadCount()%></td>
+								<td class="td_like"><%=bm.getMadangRecCount()%></td>
 							</tr>
 							<%
 								}
@@ -110,9 +110,9 @@
 					
 					<!-- 버튼 -->
 					<div class="post_btns">
-						<div class="fr">	
+						<div class="fr">
 							<a href="#" id="writeFormBtn"
-								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=choice%>','null'); return false;"
+								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','boast','<%=choice%>','<%=choiceSub%>'); return false;"
 								class="btn_type1 post_write _rosRestrict">글쓰기</a>
 						</div>
 					</div>

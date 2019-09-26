@@ -37,6 +37,7 @@ public class PstudyProductViewServlet extends HttpServlet {
 		int no =Integer.parseInt(request.getParameter("pNo"));
 		int mNo=Integer.parseInt(request.getParameter("mNo"));
 		
+		
 		Pstudy p=new PstudyService().selectpStudyVIew(no);
 		if(mNo!=0) {
 			 MyDibs md=new MyDibsService().selectDibs(mNo,no); 

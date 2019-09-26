@@ -20,22 +20,31 @@ function fn_writeComment(cmtNo) {
 };
 
 function fn_needLogin() {
-	alert("로그인 후 이용바랍니다.");
+	alert("회원만 이용가능합니다.");
 }
 
-function fn_addComment(path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
-	var commentArea = convertToTag(document.getElementById('comment_text'));
-	location.href = path + "/madang/freeAddComment?madangNo=" + madangNo + "&memberNo=" + memberNo
-		+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
-		+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage;
+function fn_addComment(memCheck, path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
+	if (memCheck == "null") {
+		fn_needLogin();
+	} else {
+		var commentArea = convertToTag(document.getElementById('comment_text'));
+		location.href = path + "/madang/freeAddComment?madangNo=" + madangNo + "&memberNo=" + memberNo
+			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
+			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage;
+	}
 };
 
-function fn_addReply(path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
-	var commentArea = convertToTag(document.getElementById('comment_text_rep'));
-	location.href = path + "/madang/freeAddReply?madangNo=" + madangNo + "&memberNo=" + memberNo
-		+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value
-		+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&cmtNo=" + cmtNo;
+function fn_addReply(memCheck, path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
+	if (memCheck == "null") {
+		fn_needLogin();
+	} else {
+		var commentArea = convertToTag(document.getElementById('comment_text_rep'));
+		location.href = path + "/madang/freeAddReply?madangNo=" + madangNo + "&memberNo=" + memberNo
+			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea.value
+			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&cmtNo=" + cmtNo;
+	}
 };
+
 
 function convertToTag(textArea) {
 	var lines = textArea.value.split("\n");
@@ -49,6 +58,16 @@ function convertToTag(textArea) {
 
 	return resultString;
 }
+
+// madangList
+function fn_madangWrite(memCheck, path, locate, choice, choiceSub) {
+	if (memCheck == "null") {
+		fn_needLogin();
+	} else {
+		location.href = path + "/madang/madangWrite?locate=" + locate + "&choice=" + choice + "&choiceSub=" + choiceSub;
+	}
+}
+
 // madang Write
 
 

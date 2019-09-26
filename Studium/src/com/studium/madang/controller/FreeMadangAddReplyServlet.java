@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.studium.madang.model.service.FreeMadangCmtService;
 import com.studium.madang.model.vo.FreeMadangCmt;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class FreeMadangAddReplyServlet
  */
@@ -30,6 +32,8 @@ public class FreeMadangAddReplyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		new LoginCheck(request, response, 1003);
+		
 		FreeMadangCmt cmt=new FreeMadangCmt();
 		int madangNo=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));

@@ -18,91 +18,115 @@ public class MyPurchase {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public int getPurId() {
 		return purId;
 	}
+
 
 	public void setPurId(int purId) {
 		this.purId = purId;
 	}
 
+
 	public int getMemNo() {
 		return memNo;
 	}
 
+
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
+
+
 	public int getfNo() {
 		return fNo;
 	}
+
 
 	public void setfNo(int fNo) {
 		this.fNo = fNo;
 	}
 
+
 	public int getpNo() {
 		return pNo;
 	}
+
 
 	public void setpNo(int pNo) {
 		this.pNo = pNo;
 	}
 
+
 	public String getpTitle() {
 		return pTitle;
 	}
+
 
 	public void setpTitle(String pTitle) {
 		this.pTitle = pTitle;
 	}
 
+
 	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
+
 
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
+
 	public char getPurchaseCancelStatus() {
 		return purchaseCancelStatus;
 	}
+
 
 	public void setPurchaseCancelStatus(char purchaseCancelStatus) {
 		this.purchaseCancelStatus = purchaseCancelStatus;
 	}
 
+
 	public Date getCancelDate() {
 		return cancelDate;
 	}
+
 
 	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 
+
 	public char getPurchaseStatus() {
 		return purchaseStatus;
 	}
+
 
 	public void setPurchaseStatus(char purchaseStatus) {
 		this.purchaseStatus = purchaseStatus;
 	}
 
+
 	public char getSubmitFile() {
 		return submitFile;
 	}
+
 
 	public void setSubmitFile(char submitFile) {
 		this.submitFile = submitFile;
 	}
 
+
 	@Override
 	public String toString() {
-		return "MyPurchase [purId=" + purId + ", memNo=" + memNo + ", pNo=" + pNo + ", pTitle=" + pTitle
-				+ ", purchaseDate=" + purchaseDate + ", purchaseCancelStatus=" + purchaseCancelStatus + ", cancelDate="
-				+ cancelDate + ", purchaseStatus=" + purchaseStatus + ", submitFile=" + submitFile + "]";
+		return "MyPurchase [purId=" + purId + ", memNo=" + memNo + ", fNo=" + fNo + ", pNo=" + pNo + ", pTitle="
+				+ pTitle + ", purchaseDate=" + purchaseDate + ", purchaseCancelStatus=" + purchaseCancelStatus
+				+ ", cancelDate=" + cancelDate + ", purchaseStatus=" + purchaseStatus + ", submitFile=" + submitFile
+				+ "]";
 	}
 
+	
 	
 }

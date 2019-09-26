@@ -496,6 +496,7 @@
         str = str.split('<br/>').join("\r\n");
 
         $('#textarea2').val(str);
+        
 
     </script>
     

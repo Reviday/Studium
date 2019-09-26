@@ -10,7 +10,7 @@
  	case"intro" : break;
  	case"study" : break;
  	case"free" : mTit="자유마당"; mSub="자유롭게 글을 올리는 공간입니다."; break;
- 	case"share" : break;
+ 	case"share" : mTit="공유마당"; mSub="자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)";break;
  	case"boast" : break;
  	case"question" : break;
  	}
@@ -160,6 +160,8 @@
                 	<input type="hidden" name="userEmail" value="<%=loginMember.getMemUserEmail()%>"> 
                 	<input type="hidden" name="userName" value="<%=loginMember.getMemName()%>">
                 	<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
+                	<input type="hidden" name="choice" value="<%=choice %>">
+                	<input type="hidden" name="choiceSub" value="<%=choiceSub%>">
                 </div>
             </form>
         </div>
@@ -227,5 +229,4 @@
             });
     });
 </script>
-</body>
-</html>
+<%@ include file="/views/common/footer.jsp"%>
