@@ -1,30 +1,29 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.FreeMadangService;
-import com.studium.madang.model.service.ShareMadangService;
-import com.studium.madang.model.vo.FreeMadang;
-import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.service.BoastMadangService;
+import com.studium.madang.model.vo.BoastMadang;
 
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class ShareMadangWriterEndServlet
+ * Servlet implementation class BoastMadangWriterEndServlet
  */
-@WebServlet("/madang/share/writeEnd")
-public class ShareMadangWriterEndServlet extends HttpServlet {
+@WebServlet("/madang/boast/writeEnd")
+public class BoastMadangWriterEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShareMadangWriterEndServlet() {
+    public BoastMadangWriterEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +33,15 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1004);
+		new LoginCheck(request, response, 1005);
 		
-		ShareMadang sm=new ShareMadang();
-		sm.setMadangTitle(request.getParameter("subject"));
-		sm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
-		sm.setMadangWriterEmail(request.getParameter("userEmail"));
-		sm.setMadangWriterName(request.getParameter("userName"));
-		sm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
-		sm.setMadangContent(request.getParameter("smarteditor"));
+		BoastMadang bm=new BoastMadang();
+		bm.setMadangTitle(request.getParameter("subject"));
+		bm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
+		bm.setMadangWriterEmail(request.getParameter("userEmail"));
+		bm.setMadangWriterName(request.getParameter("userName"));
+		bm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
+		bm.setMadangContent(request.getParameter("bmarteditor"));
 		
 		
 		//파일 받기 및 넣기
@@ -51,20 +50,19 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 		
 		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
 		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int madangNo=new ShareMadangService().insertMadang(sm);
+		int madangNo=new BoastMadangService().insertMadang(bm);
 		
 		String view="/";
 		if(madangNo>0) {
-			view="/madang/shareMadangView?madangNo="+madangNo+"&cPage=1";
+			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage=1";
 		} else {
 			String msg="게시글 작성에 실패하였습니다.";
-			String loc="/madang/shareMadangList";
+			String loc="/madang/boastMadangList";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}
 		request.getRequestDispatcher(view).forward(request, response);
-		
 	}
 
 	/**

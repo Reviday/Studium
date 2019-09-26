@@ -9,26 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.FreeMadangService;
-import com.studium.madang.model.service.ShareMadangService;
-import com.studium.madang.model.vo.FreeMadang;
-import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.service.BoastMadangService;
+import com.studium.madang.model.vo.BoastMadang;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.PaginationTemplate;
 
 /**
- * Servlet implementation class ShareMadangListServlet
+ * Servlet implementation class BoastMadangListServlet
  */
-@WebServlet("/madang/shareMadangList")
-public class ShareMadangListServlet extends HttpServlet {
+@WebServlet("/madang/boastMadangList")
+public class BoastMadangListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShareMadangListServlet() {
+    public BoastMadangListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +36,13 @@ public class ShareMadangListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		//Pagination 
-		ShareMadangService service=new ShareMadangService();
+		BoastMadangService service=new BoastMadangService();
 		int totalData=service.selectCountList(); // 총 데이터 개수
 		String URLmapping="/madang/boastMadangList"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		
-		List<ShareMadang> list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
+		List<BoastMadang> list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
 		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
@@ -54,12 +51,12 @@ public class ShareMadangListServlet extends HttpServlet {
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
-		request.setAttribute("shareMadangList", list);
+		request.setAttribute("boastMadangList", list);
 		request.setAttribute("elements", elements);
-		request.setAttribute("choice", "공유마당");
+		request.setAttribute("choice", "자랑마당");
 		request.setAttribute("choiceSub", choiceSub);
 
-		request.getRequestDispatcher("/views/madang/shareMadangList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/madang/boastMadangList.jsp").forward(request, response);
 	}
 
 	/**
