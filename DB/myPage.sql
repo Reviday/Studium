@@ -1,7 +1,7 @@
 select * from tab;
 drop table my_dibs;
 drop table my_purchase;
-
+select seq_pstudy.nextval from dual;
 drop table todo_list;
 drop table ta_member;
 create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
@@ -53,6 +53,8 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
 
 
 --무료스터디 db
+alter table f_study  MODIFY (f_category VARCHAR2(25));
+commit;
 create table f_study(
     f_no number constraint fstudy_pk primary key, --스터디 번호
     f_title varchar2(30), --스터디 타이틀
@@ -60,7 +62,7 @@ create table f_study(
     f_area varchar2(30), --스터디 지역
     f_day  varchar2(30), --스터디 평일,주말
     f_studyperson number, --스터디 인원
-    f_category varchar2(15),--스터디 카테고리
+    f_category varchar2(25),--스터디 카테고리
     f_intro1 varchar2(1000), --스터디 소개 1
     f_intro2 varchar2(1000), --스터기 소개 2
     f_imgtitle varchar(225), --이미지 타이틀

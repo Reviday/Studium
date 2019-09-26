@@ -104,4 +104,27 @@ public class FstudyService {
 		close(conn);
 		return list;
 	}
+	
+	public int addPurchaseResult(int mno,int fno) {
+		Connection conn=getConnection();
+		int result=dao.addPurchaseResult(conn,mno,fno);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int PurchaseCount(int fno) {
+		Connection conn=getConnection();
+		int result=dao.PurchaseCount(conn,fno);
+		close(conn);
+		return result;
+	}
+	public int addPerson(int fno,int count) {
+		Connection conn=getConnection();
+		int result=dao.addPerson(conn,fno,count);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
 }

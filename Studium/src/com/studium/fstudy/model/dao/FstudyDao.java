@@ -383,4 +383,56 @@ private Properties prop=new Properties();
 		}return list;
 		
 	}
+	public int addPurchaseResult(Connection conn,int fno,int mno) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql =prop.getProperty("addPurchaseResult");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fno);
+			pstmt.setInt(2, mno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int PurchaseCount(Connection conn,int fno) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("PurchaseCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fno);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public int addPerson(Connection conn,int fno,int count) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("addPerson");
+		try {
+			pstmt=conn.prepareCall(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, fno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }

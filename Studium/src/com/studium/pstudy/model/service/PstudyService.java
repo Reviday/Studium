@@ -106,5 +106,28 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public int addPurchaseResult(int mno,int pno) {
+		Connection conn=getConnection();
+		int result=dao.addPurchaseResult(conn,mno,pno);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int PurchaseCount(int pno) {
+		Connection conn=getConnection();
+		int result=dao.PurchaseCount(conn,pno);
+		close(conn);
+		return result;
+	}
+	public int addPerson(int pno,int count) {
+		Connection conn=getConnection();
+		int result=dao.addPerson(conn,pno,count);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+
 
 }

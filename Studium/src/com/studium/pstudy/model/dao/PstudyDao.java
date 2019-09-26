@@ -112,6 +112,7 @@ public class PstudyDao {
 				p.setpDateend(rs.getDate("p_dateend"));
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -151,6 +152,7 @@ public class PstudyDao {
 				p.setpDateend(rs.getDate("p_dateend"));
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -194,6 +196,7 @@ public class PstudyDao {
 				p.setpDateend(rs.getDate("p_dateend"));
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -283,6 +286,7 @@ public class PstudyDao {
 				p.setpDateend(rs.getDate("p_dateend"));
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
 			}
 			
 		}catch(SQLException e) {
@@ -325,6 +329,7 @@ public class PstudyDao {
 				p.setpDateend(rs.getDate("p_dateend"));
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -384,6 +389,58 @@ public class PstudyDao {
 			close(rs);
 			close(pstmt);
 		}return result;
-		
 	}
+	public int addPurchaseResult(Connection conn,int pno,int mno) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql =prop.getProperty("addPurchaseResult");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			pstmt.setInt(2, mno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int PurchaseCount(Connection conn,int pno) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("PurchaseCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public int addPerson(Connection conn,int pno,int count) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("addPerson");
+		try {
+			pstmt=conn.prepareCall(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, pno);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 }

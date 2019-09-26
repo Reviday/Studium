@@ -214,7 +214,7 @@
 			alert("약관의 동의를 해주세요 ");
 			return false;
 		}
-		var msg = "결제하시겠습니까";
+		var msg = "신청하시겠습니까";
 		var flag = confirm(msg);
 		if(flag==true) {
 			location.href="<%=request.getContextPath()%>/fstudy/fsutdyPayment?&mNo=<%=loginMember.getMemNo()%>&fNo=<%=p.getfNo()%>";

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.member.model.vo.Member" %>
+
  <%
  	Pstudy p=(Pstudy)request.getAttribute("newp");
 	int resultPay =(int)request.getAttribute("resultPay");
@@ -25,7 +26,7 @@
             <div class="payanswer"><span><%=p.getpTimestart() %></span>~<span><%=p.getpTimeend() %></span></div> <!--강의일정-->
             <div class="subject">장소</div>
             <div class="payanswer">결제 후 24시간 이내 쪽지발송(마이페이지 확인)</div>
-            <div class="subject">문의</div>
+            <div class="subject">문의(환불 문의)</div>
             <div id="gogakcenter">
                 고객센터 010-6606-5547 <br>
                 <span>한정원입니다@google.com</span>
@@ -111,7 +112,8 @@
                         <span class="payagreespan">강의 및 결제 정보를 확인하였으며, 이에 동의합니다. (필수)</span>
                     </label>
                 </div>
-                <button>결제하기</button>
+   
+                <button onclick="fn_payment();">결제하기</button>
             </div>
         </div>
     </section>
@@ -129,4 +131,11 @@
                 }
             });
         });
+   
+    </script>
+    <script>
+    function fn_payment(){
+ 	   location.href="<%=request.getContextPath()%>/pstudy/pstudyFinally?pNo=<%=p.getpNo()%>&mNo=<%=m.getMemNo()%>";
+    }
+    
     </script>

@@ -39,7 +39,6 @@ public class PstudyPaymentServlet extends HttpServlet {
 		Member m =new Member();
 		m.setMemNo(mNo);
 		m.setMemPoint(mPoint);
-		System.out.println(mPoint);
 		int result=new PstudyService().paymentMember(m);
 		
 		String msg=result>0?"결제성공!":"결제실패!";

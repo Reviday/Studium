@@ -39,14 +39,9 @@ public class PstudystudyPayServlet extends HttpServlet {
 		Pstudy newp=new PstudyService().selectpStudyVIew(pno); 
 		Member newm=new MemberService().selectNo(mno);
 		int resultPay=newp.getpPrice()-newm.getMemPoint();
-		System.out.println(pno);
-		System.out.println(mno);
-		System.out.println(newp);
-		System.out.println(newm);
 		request.setAttribute("newp", newp);
 	 request.setAttribute("resultPay", resultPay); 
 		request.setAttribute("newm", newm);
-		System.out.println("여기오냐");
 		request.getRequestDispatcher("/views/pstudy/payview.jsp").forward(request, response);
 	}
 

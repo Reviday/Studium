@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studium.fstudy.model.service.FstudyService;
+import com.studium.fstudy.model.vo.Fstudy;
+import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
+import com.studium.pstudy.model.service.PstudyService;
 
 /**
  * Servlet implementation class PstudyPaymentServlet
@@ -31,14 +34,17 @@ public class FstudyPaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int fNo=Integer.parseInt(request.getParameter("fNo"));
-		int mNo=Integer.parseInt(request.getParameter("mNo"));
-
+		int fno=Integer.parseInt(request.getParameter("fNo"));
+		int mno=Integer.parseInt(request.getParameter("mNo"));
 		
-		Member m =new Member();
-		m.setMemNo(mNo);
+		Fstudy f=new FstudyService().selectpStudyVIew(fno); 
+		Member m=new MemberService().selectNo(mno);
+		int PurchaseResult=new FstudyService().addPurchaseResult(mno,fno);
+		int count = new FstudyService().PurchaseCount(fno);
+		System.out.println(count);
+		 int result=new FstudyService().addPerson(fno,count); 
+		
 
-		int result=new FstudyService().paymentMember(m);
 		
 		String msg=result>0?" 결제성공!":"결제실패!";
 	      String loc="";
