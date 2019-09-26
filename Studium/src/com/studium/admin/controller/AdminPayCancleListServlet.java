@@ -10,21 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.studium.admin.model.vo.CanclePayMember;
+import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
+import common.template.PaginationTemplate;
+
 /**
- * Servlet implementation class AdminManageViewServlet
+ * Servlet implementation class AdminPayCancleListServlet
  */
-@WebServlet("/AdminManager")
-public class AdminManageViewServlet extends HttpServlet {
+@WebServlet("/AdminPayManageCancleList")
+public class AdminPayCancleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminManageViewServlet() {
+    public AdminPayCancleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +37,26 @@ public class AdminManageViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-			request.setAttribute("elements", elements);
-
-			request.getRequestDispatcher("/views/admin/Q&AFirst.jsp").forward(request, response);
-
+				
+		AdminService service=new AdminService();
+		int totalData=service.selectCountCanclePayMember();
+		String URLmapping="/AdminPayManageCancleList"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		List<CanclePayMember> list=service.selectCanclePayMemberList(pt.getcPage(),pt.getNumPerPage());
+		request.setAttribute("list",list);
+		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("pageBar", pt.getPageBar());
+		request.setAttribute("numPerPage", pt.getNumPerPage());
+		
+		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
+		request.setAttribute("elements", elements);
+		
+		request.getRequestDispatcher("/views/admin/canclepayList.jsp")
+				.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";
@@ -50,7 +64,6 @@ public class AdminManageViewServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-	
 	}
 
 	/**

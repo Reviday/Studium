@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.studium.admin.model.vo.CanclePayMember;
+import com.studium.admin.service.AdminService;
 import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 /**
- * Servlet implementation class AdminManageViewServlet
+ * Servlet implementation class AdminCancleCommonFinderServlet
  */
-@WebServlet("/AdminManager")
-public class AdminManageViewServlet extends HttpServlet {
+@WebServlet("/findCanclePayMember")
+public class AdminCancleCommonFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminManageViewServlet() {
+    public AdminCancleCommonFinderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +35,34 @@ public class AdminManageViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		
+
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
+			String method = request.getParameter("method");
+			int cPage;
+			try {
+				cPage= Integer.parseInt(request.getParameter("cPage"));
+			}catch(NumberFormatException e) {
+				cPage=1;
+			}
+
+
+			AdminService service=new AdminService();
+			int totalData=service.selectCountCanclePayMember();
+			String URLmapping="/findCanclePayMember"; // 패턴을 넘겨주기 위한 변수
+			AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
+			List<CanclePayMember> list=service.selectCanclePayMemberList(cPage,pt.getNumPerPage());
+			request.setAttribute("list",list);
+			request.setAttribute("cPage", cPage);
+			request.setAttribute("pageBar", pt.getPageBar());
+			request.setAttribute("numPerPage", pt.getNumPerPage());
+
 			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 			request.setAttribute("elements", elements);
 
-			request.getRequestDispatcher("/views/admin/Q&AFirst.jsp").forward(request, response);
-
+			request.getRequestDispatcher("/views/admin/commonCanclePayList.jsp")
+			.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";
@@ -50,7 +70,6 @@ public class AdminManageViewServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-	
 	}
 
 	/**
