@@ -2,7 +2,6 @@ package com.studium.admin.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,27 +15,17 @@ import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
-import common.template.PaginationTemplate;
-
 /**
- * Servlet implementation class AdminPointManageFinder
+ * Servlet implementation class AdminPayManageServlet
  */
-@WebServlet("/admin/memberPointFinder")
-public class AdminPointManageFinder extends HttpServlet {
+@WebServlet("/AdminPayManageList")
+public class AdminPayManageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	public static boolean isEmail(String email) {
-        boolean b = Pattern.matches(
-            "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+", 
-            email.trim());
-        if(b == true) {return true;}
-        else {return false;}
-    }
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPointManageFinder() {
+    public AdminPayManageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,58 +36,32 @@ public class AdminPointManageFinder extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		
+
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-		
-		String memberName = request.getParameter("memberName");
-		String method = "inqueryList3";
-		int cPage;
-		try {
-		 cPage= Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage=1;
-		}
-		
-		if(isEmail(memberName) == true) {
+			String method = request.getParameter("method");
+			int cPage;
+			try {
+				cPage= Integer.parseInt(request.getParameter("cPage"));
+			}catch(NumberFormatException e) {
+				cPage=1;
+			}
+
+
 			AdminService service=new AdminService();
-			int totalData=service.selectCountMemberEmail(memberName);
-			String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
+			int totalData=service.selectCountMember();
+			String URLmapping="/inqueryList2"; // 패턴을 넘겨주기 위한 변수
 			AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
-			pt.setQueryString("memberName", memberName);
-			List<Member> list=service.selectMemberEmailList(cPage,pt.getNumPerPage(), memberName);
-		
-			
+			List<Member> list=service.selectMemberList(cPage,pt.getNumPerPage());
 			request.setAttribute("list",list);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("pageBar", pt.getPageBar());
 			request.setAttribute("numPerPage", pt.getNumPerPage());
-			
+
 			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 			request.setAttribute("elements", elements);
-			
-			request.getRequestDispatcher("/views/admin/commonPoint.jsp")
-					.forward(request,response);
-		}else {
-		
-		AdminService service=new AdminService();
-		int totalData=service.selectCountMemberName(memberName);
-		String URLmapping="/admin/memberFinder"; // 패턴을 넘겨주기 위한 변수
-		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
-		pt.setQueryString("memberName", memberName);
-		List<Member> list=service.selectMemberNameList(cPage,pt.getNumPerPage(), memberName);
-		System.out.println(list);
-		
-		request.setAttribute("list",list);
-		request.setAttribute("cPage", cPage);
-		request.setAttribute("pageBar", pt.getPageBar());
-		request.setAttribute("numPerPage", pt.getNumPerPage());
-		
-		List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
-		request.setAttribute("elements", elements);
-		
-		request.getRequestDispatcher("/views/admin/commonPoint.jsp")
-				.forward(request,response);
-			}
+
+			request.getRequestDispatcher("/views/admin/commonInquery.jsp")
+			.forward(request,response);
 		}else {
 			String msg = "로그인이 필요합니다.";
 			String loc = "/";

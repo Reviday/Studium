@@ -38,3 +38,63 @@
 		<%=request.getAttribute("pageBar") %>
 	</ul>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        //전체선택 체크박스 클릭 
+        $("#alldelete").click(function () {
+            //만약 전체 선택 체크박스가 체크된상태일경우 
+            if ($("#alldelete").prop("checked")) {
+                //해당화면에 전체 checkbox들을 체크해준다 
+                $("input[type=checkbox]").prop("checked", true);
+                // 전체선택 체크박스가 해제된 경우 
+            } else {
+                //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+                $("input[type=checkbox]").prop("checked", false);
+            }
+        })
+    })
+
+	function ListQnA(cPage){
+    		var params = '&cPage='+cPage + '&method=' + 'ListQnA';
+    	$.ajax({
+    		url: "<%=request.getContextPath()%>/AdminQandAList2",
+    		type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$(".qanda").html("");
+				$(".qanda").html(data);
+			}
+    	})
+    }
+    
+    function deleteQnA(cPage){
+    	if($('input:checkbox[name="checkQ&A"]').is(":checked") == false){
+    		alert("선택된 글이 없습니다.");
+    		return false;
+    	}
+    	
+    	var result = confirm("삭제하시겠습니까?");
+
+		if(result){
+		var params = jQuery("#deleteQnA").serialize();
+		params+='&cPage='+cPage;
+		$.ajax({
+			url: "<%=request.getContextPath()%>/AdminQandAListDelete",
+			type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$(".qanda").html("");
+				$(".qanda").html(data);
+			}
+		})
+		return true;
+		}else{
+			return false;
+		}
+    }
+
+  
+</script>

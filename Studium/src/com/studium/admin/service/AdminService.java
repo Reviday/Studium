@@ -203,12 +203,13 @@ public class AdminService {
 		return list;
 	}
 	
-	public void updateMemo(String memNo, String memo) {
+	public int updateMemo(String memNo, String memo) {
 		Connection conn = getConnection();
 		int result = dao.updateMemo(conn, memNo, memo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
-		close(conn);	
+		close(conn);
+		return result;
 	}
 	
 	public String showMemo(String memNo) {

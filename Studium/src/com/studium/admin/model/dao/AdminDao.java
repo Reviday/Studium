@@ -1079,6 +1079,7 @@ public class AdminDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				memo=rs.getString(1);
+	
 			}
 
 		}catch(SQLException e) {

@@ -251,8 +251,8 @@
                 		dataType: "json",
                 		data: {"memNo" : memNo},
                 		success: function(data){
-                			console.log(data);
                 			$(".memo").text(data);
+                			$(".memo").val(data);
 		                	$("#pointPage").css("display","block");
                 		}
                 	})
@@ -269,7 +269,8 @@
         			data: params,
         			success: function(data){
         				console.log(data);
-        				$(".memo").text(data);				
+        				$(".memo").text(data);
+        				$(".memo").val(data);
         			}
         		});
         	}

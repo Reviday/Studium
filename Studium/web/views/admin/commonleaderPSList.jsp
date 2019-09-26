@@ -59,8 +59,83 @@
 		</table>
 <link href="/Studium/css/pagination.css" rel="stylesheet">
 		<%@ include file="/views/common/pagination.jsp"%>
-<%-- <div class="page">
-	<ul class="pagination num-modal">
-		<%=request.getAttribute("pageBar") %>
-	</ul>
-</div>	 --%>	
+<<script type="text/javascript">
+    $(function () {
+        $(".checkMember").prop("checked", false);
+        var check = 0;
+        $("#allcheck").click(function () {
+             
+				if(check == 0){            
+                $(".checkMember").prop("checked", false);
+                $(".checkMember1").prop("checked", false);
+            		check++;
+            		return;
+				}
+				if(check == 1){
+					$(".checkMember").prop("checked", true);
+					$(".checkMember1").prop("checked", true);
+					check--;
+					return;
+				}
+            
+        });
+        
+        var modal = document.getElementById('pointPage');                                         
+        $(".closePointPage").click(function() {
+            $("#pointPage").css("display","none");
+        }); 
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+            	$("#pointPage").css("display","none");
+            }
+        }
+    })
+	  
+    function deleteLeaderPS(cPage){
+    	if($('input:checkbox[name="checkMember"]').is(":checked") == false){
+    		alert("선택된 인원이 없습니다.");
+    		return false;
+    	}
+    	
+    	var result = confirm("삭제하시겠습니까?");
+
+		if(result){
+		
+		var params = jQuery(".deleteLeaderPS").serialize();
+		params+='&cPage='+cPage;
+		console.log(params);
+		$.ajax({
+			url: "<%=request.getContextPath()%>/admindeleteLeaderPSList",
+			type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				console.log("성공이니?");
+				$("#ajaxTable").html("");
+				$("#ajaxTable").html(data);
+			}
+		})
+		return true;
+		}else{
+			return false;
+		}
+    }
+    
+    function leaderPSList2(cPage){
+    	var params = '&cPage='+cPage + '&method=' + 'leaderPSList2';
+    	$.ajax({
+    		url: "<%=request.getContextPath()%>/leaderPSList2",
+    		type: "POST",
+			dataType: "html",
+			data: params,
+			success: function(data){
+				$("#ajaxTable").html("");
+				$("#ajaxTable").html(data);
+			}
+    	})
+    }
+    
+    
+  
+</script>

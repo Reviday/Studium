@@ -183,51 +183,9 @@
     }
     
     
-    
-    	<%-- $(".pointConfirm").click(function(){
-    		console.log($(this).attr('id'));
-    		$.ajax({
-    			url:"<%=request.getContextPath()%>/PointPageShow",
-    			type:"post",
-    			data:{"no":$(this).attr('id')},
-    			dataType:"json",
-    			success:function(data){
-    				console.log(data);
-    				if(data[0] != null){
-    				var table=$("<table>");
-    				var th="<tr><th>일시</th>	<th>금액</th>	<th>상태</th>	</tr>";
-    				table.append(th);
-    				for(var i=0;i<data.length;i++){
-    					var td=$("<td>").html(data[i]['memId']);
-    					var td2=$("<td>").html(data[i]['memName']);
-    					var td3=$("<td>").html(data[i]['memEmail']);
-    					var td4=$("<td>").html(data[i]['point']);
-    					if(data[i]['pointStatus'] == 'Y'){
-    						var td5=$("<td>").html("지급");
-    					}else{
-    						var td5=$("<td>").html("차감");
-    					}
-    					var td6=$("<td>").html(data[i]['pointEnrollDate']);
-    					table.append($("<tr>").append(td6).append(td4).append(td5));
-    				}
-    				$("#pointPageName").text(data[0]['memName']+"("+data[0]['memEmail']+")");
-    				$(".PointTable").html(table);
-    				
-    				$("#pointPage").css("display","block");
-    				}else{
-    					alert("포인트내역이 없습니다.");
-    				}
-    			},
-    			error:function(r,e,m){
-    				console.log(r);
-    				console.log(e);
-    				console.log(m);	
-    				alert("포인트내역이 없습니다.");
-    			}
-    		});
-    	}) --%>
   
-</script> <%@ include file="/views/common/footer.jsp"%>
+</script> 
+<%@ include file="/views/common/footer.jsp"%>
 
 						</body>
 

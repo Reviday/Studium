@@ -112,6 +112,23 @@
 	</div>
 </section>
 <script type="text/javascript">
+
+
+function inqueryList3(cPage){
+	 var params = '&cPage='+cPage+'&method='+"inqueryList3";
+	 $.ajax({
+		url: "<%=request.getContextPath()%>/inqueryList3",
+		type: "POST",
+		dataType: "html",
+		data: params,
+		success: function(data){
+			$("#ajaxTable").html("");
+			$("#ajaxTable").html(data);
+		}
+	})
+}
+
+
     $(function () {
         $(".checkMember").prop("checked", false);
         var check = 0;

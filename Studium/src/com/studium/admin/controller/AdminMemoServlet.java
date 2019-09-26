@@ -34,7 +34,6 @@ public class AdminMemoServlet extends HttpServlet {
 		String memo = service.showMemo(memNo);
 		response.setContentType("application/json;charset=UTF-8");
 
-		System.out.println(memo);
 		new Gson().toJson(memo,response.getWriter());
 		
 	}

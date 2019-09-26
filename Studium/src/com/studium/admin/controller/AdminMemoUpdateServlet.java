@@ -34,10 +34,12 @@ public class AdminMemoUpdateServlet extends HttpServlet {
 		String memNo = request.getParameter("memNo");
 		
 		AdminService service = new AdminService();
-		
+		int result = service.updateMemo(memNo, memo);
+
+		String memo1 = service.showMemo(memNo);
 		response.setContentType("application/json;charset=UTF-8");
-		System.out.println(memo);
-		new Gson().toJson(memo,response.getWriter());
+		
+		new Gson().toJson(memo1,response.getWriter());
 		
 	}
 
