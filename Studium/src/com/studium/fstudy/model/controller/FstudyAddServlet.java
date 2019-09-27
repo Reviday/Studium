@@ -92,7 +92,7 @@ public class FstudyAddServlet extends HttpServlet {
 		endstart = Date.valueOf(mr.getParameter("p_dateend"));
 		String teachername=mr.getParameter("p_teachername");
 		int like=Integer.parseInt(mr.getParameter("star-input"));
-		
+		int teacherno=Integer.parseInt(mr.getParameter("f_teacherno"));
 
 	      FstudyService service=new FstudyService();
 	      
@@ -115,6 +115,7 @@ public class FstudyAddServlet extends HttpServlet {
 	      p.setfDateend(endstart);
 	      p.setfReadername(teachername);
 	      p.setfLike(like);
+	      p.setfTeacherno(teacherno);
 	     
 	   
 	      int result=service.inserFstudy(p);

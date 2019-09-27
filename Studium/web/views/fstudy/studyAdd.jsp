@@ -31,100 +31,21 @@
             cursor: pointer;
         }
 
-        .star-input>.input,
-        .star-input>.input>label:hover,
-        .star-input>.input>input:focus+label,
-        .star-input>.input>input:checked+label {
-            display: inline-block;
-            vertical-align: middle;
-            background: url('<%=request.getContextPath()%>/img/grade_img.png')no-repeat;
-        }
-
-        .star-input {
-            display: inline-block;
-            white-space: nowrap;
-            width: 225px;
-            height: 40px;
-            padding: 25px;
-            line-height: 30px;
-        }
-
-        .star-input>.input {
-            display: inline-block;
-            width: 150px;
-            background-size: 150px;
-            height: 28px;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .star-input>.input>input {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-
-        star-input>.input.focus {
-            outline: 1px dotted #ddd;
-        }
-
-        .star-input>.input>label {
-            width: 30px;
-            height: 0;
-            padding: 28px 0 0 0;
-            overflow: hidden;
-            float: left;
-            cursor: pointer;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .star-input>.input>label:hover,
-        .star-input>.input>input:focus+label,
-        .star-input>.input>input:checked+label {
-            background-size: 150px;
-            background-position: 0 bottom;
-        }
-
-        .star-input>.input>label:hover~label {
-            background-image: none;
-        }
-
-        .star-input>.input>label[for="p1"] {
-            width: 30px;
-            z-index: 5;
-        }
-
-        .star-input>.input>label[for="p2"] {
-            width: 60px;
-            z-index: 4;
-        }
-
-        .star-input>.input>label[for="p3"] {
-            width: 90px;
-            z-index: 3;
-        }
-
-        .star-input>.input>label[for="p4"] {
-            width: 120px;
-            z-index: 2;
-        }
-
-        .star-input>.input>label[for="p5"] {
-            width: 150px;
-            z-index: 1;
-        }
-
-        .star-input>output {
-            display: inline-block;
-            width: 60px;
-            font-size: 18px;
-            text-align: right;
-            vertical-align: middle;
-        }
+             .memo {
+	width: 100%;
+	height: 160px;
+	background-color: floralwhite;
+	border: none;
+	outline-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	resize: none;
+}
+        .header-background-cover {
+         height: 95px;
+         background-color: rgba(0,0,0,0.8);
+      }
+        
     </style>
     <script>
         $(function () {
@@ -175,7 +96,11 @@
 </head>
 
 <body>
-
+    <%@ include file="../../views/common/header.jsp" %> 
+    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -259,7 +184,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개1</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro1" id="p_intro1" cols="30"
+                                                        <textarea name="p_intro1" id="p_intro1" cols="30" class="memo"
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
@@ -268,7 +193,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개2</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro2" id="p_intro2" cols="30"
+                                                        <textarea name="p_intro2" id="p_intro2" cols="30" class="memo"
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
@@ -331,7 +256,9 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">강사이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <INPUT TYPE="text" NAME="p_teachername" size=50 /></td>
+                                                         <input type="hidden" id="f_teacherno" name="f_teacherno" value="<%=loginMember.getMemNo()%>"/>
                                                 </tr>
+                                                     <tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">별점</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
@@ -447,8 +374,10 @@
 		}
 
     </script>
+ <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     <script src="<%=request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/star.js"></script>
 
 </body>
 

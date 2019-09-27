@@ -141,41 +141,249 @@ private Properties prop=new Properties();
 		}return list;
 	}
 	
-	public List<Fstudy> searchFstudy(Connection conn,String area,String day,String category){
+	public List<Fstudy> searchFstudy(Connection conn,String setString,String area,String day,String category){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Fstudy>list=new ArrayList();
-		String sql=prop.getProperty("searchFstudy");
+		String sql=prop.getProperty(setString);
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, area);
-			pstmt.setString(2, day);
-			pstmt.setString(3, category);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Fstudy p=new Fstudy();
-				p.setfNo(rs.getInt("f_no"));
-				p.setfTitle(rs.getString("f_title"));
-				p.setfName(rs.getString("f_name"));
-				p.setfArea(rs.getString("f_area"));
-				p.setfDay(rs.getString("f_day"));
-				p.setfStudypserson(rs.getInt("f_studyperson"));
-				p.setfCategory(rs.getString("f_category"));
-				p.setfIntro1(rs.getString("f_intro1"));
-				p.setfIntro2(rs.getString("f_intro2"));
-				p.setfImgtitle(rs.getString("f_imgtitle"));
-				p.setfImg1(rs.getString("f_img1"));
-				p.setfImg2(rs.getString("f_img2"));
-				p.setfImg3(rs.getString("f_img3"));
-				p.setfTimestart(rs.getString("f_timestart"));
-				p.setfTimeend(rs.getString("f_timeend"));
-				p.setfDatestart(rs.getDate("f_datestart"));
-				p.setfDateend(rs.getDate("f_dateend"));
-				p.setfLike(rs.getInt("f_like"));
-				p.setfReadername(rs.getString("f_readername"));
-				p.setfStudyMember(rs.getInt("f_studyMember"));
-				list.add(p);
+			
+			if(setString.equals("allall")) {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Fstudy p=new Fstudy();
+					p.setfNo(rs.getInt("f_no"));
+					p.setfTitle(rs.getString("f_title"));
+					p.setfName(rs.getString("f_name"));
+					p.setfArea(rs.getString("f_area"));
+					p.setfDay(rs.getString("f_day"));
+					p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+					p.setfCategory(rs.getString("f_category"));
+					p.setfIntro1(rs.getString("f_intro1"));
+					p.setfIntro2(rs.getString("f_intro2"));
+					p.setfImgtitle(rs.getString("f_imgtitle"));
+					p.setfImg1(rs.getString("f_img1"));
+					p.setfImg2(rs.getString("f_img2"));
+					p.setfImg3(rs.getString("f_img3"));
+					p.setfTimestart(rs.getString("f_timestart"));
+					p.setfTimeend(rs.getString("f_timeend"));
+					p.setfDatestart(rs.getDate("f_datestart"));
+					p.setfDateend(rs.getDate("f_dateend"));
+					p.setfLike(rs.getInt("f_like"));
+					p.setfReadername(rs.getString("f_readername"));
+					p.setfStudyMember(rs.getInt("f_studyMember"));
+					list.add(p);
+				}
+			 }
+				if(setString.equals("nota")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, area);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notac")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, area);
+					pstmt.setString(2, category);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notc")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, category);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notad")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, area);
+					pstmt.setString(2, day);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notd")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, day);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notcd")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, category);
+					pstmt.setString(2, day);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
+					}
+				 }
+				if(setString.equals("notacd")) {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, area);
+					pstmt.setString(2, category);
+					pstmt.setString(3, day);
+					rs=pstmt.executeQuery();
+					while(rs.next()) {
+						Fstudy p=new Fstudy();
+						p.setfNo(rs.getInt("f_no"));
+						p.setfTitle(rs.getString("f_title"));
+						p.setfName(rs.getString("f_name"));
+						p.setfArea(rs.getString("f_area"));
+						p.setfDay(rs.getString("f_day"));
+						p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+						p.setfCategory(rs.getString("f_category"));
+						p.setfIntro1(rs.getString("f_intro1"));
+						p.setfIntro2(rs.getString("f_intro2"));
+						p.setfImgtitle(rs.getString("f_imgtitle"));
+						p.setfImg1(rs.getString("f_img1"));
+						p.setfImg2(rs.getString("f_img2"));
+						p.setfImg3(rs.getString("f_img3"));
+						p.setfTimestart(rs.getString("f_timestart"));
+						p.setfTimeend(rs.getString("f_timeend"));
+						p.setfDatestart(rs.getDate("f_datestart"));
+						p.setfDateend(rs.getDate("f_dateend"));
+						p.setfLike(rs.getInt("f_like"));
+						p.setfReadername(rs.getString("f_readername"));
+						p.setfStudyMember(rs.getInt("f_studyMember"));
+						list.add(p);
 			}
+		}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -340,6 +548,7 @@ private Properties prop=new Properties();
 			pstmt.setDate(16, p.getfDateend());
 			pstmt.setInt(17, p.getfLike());
 			pstmt.setString(18, p.getfReadername());
+			pstmt.setInt(19, p.getfTeacherno());
             result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

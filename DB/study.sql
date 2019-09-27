@@ -51,7 +51,9 @@ create table f_study(
     f_datestart date default sysdate not null, --시작 날짜
     f_dateend date not null, --끝날짜
     f_like number default 0, --좋아요
-    f_readername varchar(30) default null --강사 이름 
+    f_readername varchar(30) default null, --강사 이름 
+    f_studyMember number default 0,--스터디 구매 확정 멤버 넘버 
+    f_teacherno number --스터디 강사 넘버
 );
 
 
@@ -83,7 +85,8 @@ create table p_study(
     p_like number default 0, --좋아요
     p_teachername varchar(30) default null, --강사 이름 
     p_status varchar(20) default 'Y', --보이는 용도 delete 안씀 
-    p_studyMember number default 0--스터디 구매 확정 멤버 넘버 
+    p_studyMember number default 0,--스터디 구매 확정 멤버 넘버 
+    p_teacherno number --스터디 강사 넘버
 );
 --스터디 구매
 create sequence seq_my_purchase

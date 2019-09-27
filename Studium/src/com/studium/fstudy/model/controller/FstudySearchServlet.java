@@ -1,6 +1,7 @@
 package com.studium.fstudy.model.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import com.studium.category.model.service.CategoryService;
 import com.studium.category.model.vo.Category;
 import com.studium.fstudy.model.service.FstudyService;
 import com.studium.fstudy.model.vo.Fstudy;
+import com.studium.pstudy.model.service.PstudyService;
+import com.studium.pstudy.model.vo.Pstudy;
 
 /**
  * Servlet implementation class PstudySearchServlet
@@ -40,7 +43,33 @@ public class FstudySearchServlet extends HttpServlet {
 		System.out.println(area+day);
 		List<Category> listM=new CategoryService().selectTitleM();
 		request.setAttribute("categoryM", listM);
-		List<Fstudy>fList=new FstudyService().searchFstudy(area, day,category);
+		List<Fstudy>fList=new ArrayList();
+		String setString="";
+		if(area.equals("all")&&category.equals("all")&&day.equals("all")) {
+			setString="allall";
+		}
+		if((!area.equals("all")) && category.equals("all") && day.equals("all")) {
+			setString="nota";
+		}
+		if((!area.equals("all")) && (!category.equals("all")) && day.equals("all")) {
+			setString="notac";
+		}
+		if(area.equals("all") && (!category.equals("all") && day.equals("all"))) {
+			setString="notc";			
+		}
+		if((!area.equals("all")) && category.equals("all") && (!day.equals("all"))) {
+			setString="notad";		
+		}
+		if(area.equals("all") && category.equals("all") && (!day.equals("all"))) {
+			setString="notd";	
+		}
+		if(area.equals("all") && (!category.equals("all")) && (!day.equals("all"))) {
+			setString="notcd";			
+		}
+		if((!area.equals("all")) && (!category.equals("all")) && (!day.equals("all"))) {
+			setString="notacd";
+		}
+		fList=new FstudyService().searchFstudy(setString,area, day,category);
 		request.setAttribute("fList", fList);
 		request.setAttribute("area", area);
 		request.setAttribute("day", day);

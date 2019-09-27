@@ -8,6 +8,7 @@
     List<Category> listM=(List)request.getAttribute("categoryM");
 	List<Pstudy> pList=(List)request.getAttribute("pList");
 	List<Pstudy> bestList =(List)request.getAttribute("bestList");
+	
 
 %>
 
@@ -28,6 +29,7 @@ body{
 
   </style>
 
+
 <body>
     <%@ include file="../../views/common/header.jsp" %> 
     <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -42,9 +44,10 @@ body{
     <section >
     <div style=" padding-top: 50px; margin-left:150px;">
       <div class="a_title">스터디 지역 찾기</div>
-      <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form">
+      <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form" name="frm1"  onsubmit="return valid_check();" >
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value=' '>지역 선택</option>
+          <option value="all">지역 선택</option>
+          <option value="all">전체</option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
           <option value='잠실'>잠실</option>
@@ -54,18 +57,20 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value=" ">분류</option>
+          <option value="all">분류</option>
+		 <option value="all">전체</option>
            <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
 			<% } } %>
       </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value=" ">가능 시간</option>
+          <option value="all">가능 시간</option>
+           <option value="all">전체</option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
-       <button class="submit">필터 검색<span class="arrow"></span></button>
+       <button  class="submit" >필터 검색<span class="arrow"></span></button>
          
       </form>
       
@@ -292,7 +297,7 @@ body{
 			<%} 
 	  %>
 		</div>
-
+	</section>
 	</div>
 	<%@ include file="/views/common/pagination.jsp"%>
 </div>
@@ -319,7 +324,7 @@ body{
     <script>
         AOS.init();
     </script>
-</section>
+
 <%@ include file="../../views/common/footer.jsp" %> 
 </body>
 

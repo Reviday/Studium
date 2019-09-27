@@ -25,13 +25,14 @@ public class Pstudy {
 	private int pLike;
 	private String pTeachername;
 	private int pStudyMember;
+	private int pStudyTeacherno;
 	public Pstudy() {
 		// TODO Auto-generated constructor stub
 	}
 	public Pstudy(int pNo, String pTitle, String pName, String pArea, String pDay, int pStudypserson, int pPrice,
 			String pCategory, String pIntro1, String pIntro2, String pImgtitle, String pImg1, String pImg2,
 			String pImg3, String pTimestart, String pTimeend, Date pDatestart, Date pDateend, int pLike,
-			String pTeachername, int pStudyMember) {
+			String pTeachername, int pStudyMember, int pStudyTeacherno) {
 		super();
 		this.pNo = pNo;
 		this.pTitle = pTitle;
@@ -54,6 +55,7 @@ public class Pstudy {
 		this.pLike = pLike;
 		this.pTeachername = pTeachername;
 		this.pStudyMember = pStudyMember;
+		this.pStudyTeacherno = pStudyTeacherno;
 	}
 	public int getpNo() {
 		return pNo;
@@ -181,6 +183,12 @@ public class Pstudy {
 	public void setpStudyMember(int pStudyMember) {
 		this.pStudyMember = pStudyMember;
 	}
+	public int getpStudyTeacherno() {
+		return pStudyTeacherno;
+	}
+	public void setpStudyTeacherno(int pStudyTeacherno) {
+		this.pStudyTeacherno = pStudyTeacherno;
+	}
 	@Override
 	public String toString() {
 		return "Pstudy [pNo=" + pNo + ", pTitle=" + pTitle + ", pName=" + pName + ", pArea=" + pArea + ", pDay=" + pDay
@@ -188,9 +196,9 @@ public class Pstudy {
 				+ pIntro1 + ", pIntro2=" + pIntro2 + ", pImgtitle=" + pImgtitle + ", pImg1=" + pImg1 + ", pImg2="
 				+ pImg2 + ", pImg3=" + pImg3 + ", pTimestart=" + pTimestart + ", pTimeend=" + pTimeend + ", pDatestart="
 				+ pDatestart + ", pDateend=" + pDateend + ", pLike=" + pLike + ", pTeachername=" + pTeachername
-				+ ", pStudyMember=" + pStudyMember + "]";
-	}	
-	
+				+ ", pStudyMember=" + pStudyMember + ", pStudyTeacherno=" + pStudyTeacherno + "]";
+	}
+
 	
 	
 

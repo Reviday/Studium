@@ -43,7 +43,8 @@ body{
       <div class="a_title" >스터디 지역 찾기</div>
            <form method=post action="<%=request.getContextPath()%>/fstudy/search" class="filter-form">
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value='null'>지역 선택</option>
+          <option value='all'>지역 선택</option>
+           <option value='all'>전체</option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
           <option value='잠실'>잠실</option>
@@ -53,24 +54,24 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-            <option value=''>분류 선택</option>     
+            <option value='all'>분류 선택</option>
+             <option value='all'>전체</option>     
 			  <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
 			<% } } %>
          </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value='null'>가능 시간</option>
+          <option value='all'>가능 시간</option>
+           <option value='all'>전체</option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
        <button class="submit">필터 검색<span class="arrow"></span></button>
          
       </form>
-      
-      
-      <% if(loginMember!=null&&(loginMember.getMemCode()=='M'||loginMember.getMemCode()=='L')){ %>
-      <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();"> </div>
+      <% if(loginMember!=null&&(loginMember.getMemCode()=='M'||loginMember.getMemCode()=='R'||loginMember.getMemCode()=='T')){ %>
+      <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();" style=""> </div>
      <%}else{ %>
      	
      <%} %>
