@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MemberLoginLog;
 import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
 
@@ -440,4 +441,27 @@ public class MemberDao {
 		return result;
 	}
 
+	public int insertMll(Connection conn, MemberLoginLog mll) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertMll");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(mll.getMllSuccess()));
+			pstmt.setInt(2, mll.getMllMemNo());
+			pstmt.setString(3, mll.getMllUserEmail());
+			pstmt.setString(4, mll.getMllIp());
+			pstmt.setString(5, mll.getMllReason());
+			pstmt.setString(6, mll.getMllUseragent());
+			pstmt.setString(7, mll.getMllUrl());
+			pstmt.setString(8, mll.getMllReferer());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			//로그인 로그 남기는 용도
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
 }

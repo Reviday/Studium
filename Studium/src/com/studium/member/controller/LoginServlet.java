@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MemberLoginLog;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,6 +42,20 @@ public class LoginServlet extends HttpServlet {
 		String msg="";
 		String loc="/";
 		String view="";
+		
+		MemberLoginLog mll=new MemberLoginLog();
+		mll.setMllSuccess(m!=null?'Y':'N'); // m이 null이 아니면 로그인 성공
+		mll.setMllMemNo(m!=null?m.getMemNo():null); // m의 uid를 가져온다.
+		mll.setMllUserEmail(email); // 사용자가 입력한 이메일
+		mll.setMllIp(request.getParameter("REMOTE_ADDR")); // 로그인 시도한 ip
+		mll.setMllReason(m!=null?"로그인 성공":"아이디/패스워드 불일치"); // 로그인 성공/실패시 이유(더 다양한 사유도 가능할 듯하다)
+		mll.setMllUseragent(request.getHeader("User-Agent")); // 로그인한 브라우저의 user agent
+		mll.setMllUrl(String.valueOf(request.getRequestURL())); // 로그인한 페이지 주소
+		mll.setMllReferer(request.getHeader("referer"));// 이전 페이지 주소
+		
+		
+		//로그인 로그를 남긴다. (리턴값은 필요없음.)
+		new MemberService().insertMll(mll);
 		
 		if(m!=null) {
 			//로그인 성공

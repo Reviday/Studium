@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.studium.member.model.dao.MemberDao;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MemberLoginLog;
 import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
 
@@ -104,6 +105,11 @@ public class MemberService {
 		return result;
 	}
 	
-
+	public void insertMll(MemberLoginLog mll) {
+		Connection conn=getConnection();
+		int result=dao.insertMll(conn, mll);
+		if(result>0) commit(conn);
+		else rollback(conn);
+	}
 }
 

@@ -581,11 +581,32 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 �
 commit;
 
 
+-- 로그인 로그 db
+create table ta_member_login_log (
+    mll_no number primary key, -- 시퀀스 PK 
+    mll_success char(1) check (mll_success in ('Y','N')), -- 로그인 성공 여부
+    mll_mem_no number references ta_member(mem_no), -- 로그인 한 회원 PK
+    mll_user_email varchar2(30), -- 로그인 시도할 때에 입력한 이메일
+    mll_datetime date, -- 로그인 일시
+    mll_ip varchar2(20), -- 로그인 한 IP
+    mll_reason varchar2(500), -- 로그인 성공/실패시 이유
+    mll_useragent varchar2(500), -- 로그인한 브라우저의 user agent
+    mll_url varchar2(500), -- 로그인한 페이지 주소
+    mll_referer varchar2(500) -- 이전 페이지 주소
+);
+
+-- 로그인 로그 시퀀스
+create sequence mll_seq 
+start with 1
+increment by 1
+maxvalue 999999999;
+
 -- 이 위 까지만 전체 실하면 됩니다.
 -----------------------------------------------<이 아래는 아직 테스트 중입니다. :>
 
-
-
+drop table ta_member_login_log;
+drop sequence mll_seq;
+select * from ta_member_login_log;
 
 
 
