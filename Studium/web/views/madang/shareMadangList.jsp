@@ -21,7 +21,7 @@
 <%@ include file="/views/common/sideMenuBar.jsp"%>	
 </div>
 <div class="col-lg-1"></div>
-		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9">
+		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9" style="min-height: 600px">
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">

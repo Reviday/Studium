@@ -585,7 +585,7 @@ commit;
 create table ta_member_login_log (
     mll_no number primary key, -- 시퀀스 PK 
     mll_success char(1) check (mll_success in ('Y','N')), -- 로그인 성공 여부
-    mll_mem_no number references ta_member(mem_no), -- 로그인 한 회원 PK
+    mll_mem_no number, -- 로그인 한 회원 PK (찾아오지 못할 때, null(0값)을 넣을 생각인데, 외래키는 부모키를 찾을 수 없다고 에러나기 때문에 없앴음.) references ta_member(mem_no) 
     mll_user_email varchar2(30), -- 로그인 시도할 때에 입력한 이메일
     mll_datetime date, -- 로그인 일시
     mll_ip varchar2(20), -- 로그인 한 IP

@@ -20,7 +20,7 @@ public class LoginCheck {
 		//다른 페이지에서도 사용하고자 한다면 CODE CASE를 추가할 것.
 		HttpSession session=request.getSession();
 		Member m=(Member)session.getAttribute("loginMember");
-		System.out.println(m);
+		
 		String view = "";
 		String msg = "";
 		String loc = "";
