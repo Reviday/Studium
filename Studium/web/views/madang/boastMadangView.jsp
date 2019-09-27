@@ -43,8 +43,8 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">공유마당</h3>
-					<p class="list-sub">자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)</p>
+					<h3 class="list-title">자랑마당</h3>
+					<p class="list-sub">자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!</p>
 				</div>
 			</div>
 		</div>
