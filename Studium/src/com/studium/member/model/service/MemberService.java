@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.studium.member.model.dao.MemberDao;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
 
 public class MemberService {
@@ -86,6 +87,13 @@ public class MemberService {
 		return list;
 		
 	}
+	public List<MyMemo> selectMyMemo(int no) {
+		Connection conn=getConnection();
+		List <MyMemo> list=dao.selectMyMemo(conn, no);
+		close(conn);
+		return list;
+		
+	}
 	
 	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();
@@ -95,6 +103,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
 
 }
 

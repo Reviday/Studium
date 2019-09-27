@@ -313,4 +313,32 @@ select * from ta_member;
 select * from my_purchase;
 select * from tab;
 
+alter table p_study add p_studyMember  number default 0;
+alter table f_study add p_studyMember  number default 0;
+ALTER TABLE f_study RENAME COLUMN p_studyMember TO f_studyMember;
 
+update f_study set f_studyMember=8;
+update p_study set p_studyMember=8;
+select * from f_study;
+commit;
+
+drop table my_memo;
+--My Memo 테이블
+create table my_memo(
+    MEMO_ID NUMBER PRIMARY KEY,--메모 주키
+    MEM_NO number constraint MEMO_MEM_FK references ta_member(mem_no), --메모를 가진 회원의 번호
+    MEMO_FRONT_ID NUMBER CONSTRAINT MEMO_FRONT_ID_NN NOT NULL,--프론트 화면에서 생성한 ID값
+    MEMO_CONTENTS clob constraint MEMO_CONTENTS_NN not null, -- 메모내용
+    MEMO_LEFT NUMBER NOT NULL,-- 메모 좌표 LEFT
+    MEMO_TOP NUMBER NOT NULL --메모의 좌표 TOP
+);
+
+create sequence seq_my_memo
+start with 1
+increment by 1
+maxvalue 999;
+SELECT * FROM MY_MEMO WHERE MEM_NO=10028;
+
+commit;
+insert into my_memo values(seq_my_memo.nextval,10028,1,'메모 내용이에욥 ㅇㅂㅇ',100,100);
+insert into my_memo values(seq_my_memo.nextval,10028,1,'두번째 메모 내용이에욥 ㅇㅂㅇ',110,200);

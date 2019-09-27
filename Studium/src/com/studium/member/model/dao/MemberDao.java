@@ -14,14 +14,15 @@ import java.util.List;
 import java.util.Properties;
 
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
 
 public class MemberDao {
-	
-	private Properties prop=new Properties();
+
+	private Properties prop = new Properties();
 
 	public MemberDao() {
-		String path=MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
+		String path = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (FileNotFoundException e) {
@@ -32,20 +33,21 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-	public Member selectNo(Connection conn, int no){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("selectNo");
-		Member m=null;
-		
+
+	public Member selectNo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectNo");
+		Member m = null;
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
 				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
-				m=new Member();
+				m = new Member();
 				m.setMemNo(rs.getInt("mem_no"));
 				m.setMemUserEmail(rs.getString("mem_email"));
 				m.setMemPassword(rs.getString("mem_password"));
@@ -79,29 +81,30 @@ public class MemberDao {
 				m.setMemWithdrawalDate(rs.getTimestamp("mem_withdrawal_date"));
 				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
-		} return m;
+		}
+		return m;
 	}
-		
+
 	public Member selectEmail(Connection conn, String email, String password) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("selectEmail");
-		Member m=null;
-		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectEmail");
+		Member m = null;
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
 				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
-				m=new Member();
+				m = new Member();
 				m.setMemNo(rs.getInt("mem_no"));
 				m.setMemUserEmail(rs.getString("mem_email"));
 				m.setMemPassword(rs.getString("mem_password"));
@@ -132,27 +135,28 @@ public class MemberDao {
 				m.setMemIcon(rs.getString("mem_icon"));
 				m.setMemPhoto(rs.getString("mem_photo"));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
-		} return m;
+		}
+		return m;
 	}
-	
+
 	public Member checkEmail(Connection conn, String email) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("checkEmail");
-		Member m=null;
-		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("checkEmail");
+		Member m = null;
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				m=new Member();
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				m = new Member();
 				m.setMemNo(rs.getInt("mem_no"));
 				m.setMemUserEmail(rs.getString("mem_email"));
 				m.setMemPassword(rs.getString("mem_password"));
@@ -183,42 +187,43 @@ public class MemberDao {
 				m.setMemIcon(rs.getString("mem_icon"));
 				m.setMemPhoto(rs.getString("mem_photo"));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
-		} return m;
+		}
+		return m;
 	}
-	
-	
+
 	public int insertMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql= prop.getProperty("insertMember");
-		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertMember");
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemUserEmail());
 			pstmt.setString(1, m.getMemUserEmail());
 			pstmt.setString(2, m.getMemPassword());
 			pstmt.setString(3, m.getMemName());
-			result=pstmt.executeUpdate();
-		} catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-		} return result;
-		
+		}
+		return result;
+
 	}
-	
-	public int modifyMember(Connection conn, Member m,String id) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql= prop.getProperty("modifyMember");
-		
+
+	public int modifyMember(Connection conn, Member m, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("modifyMember");
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemPhone());
 			pstmt.setString(2, m.getMemZipCode());
 			pstmt.setString(3, m.getMemAddress1());
@@ -228,21 +233,23 @@ public class MemberDao {
 			pstmt.setString(7, m.getMemCategory3());
 			pstmt.setString(8, m.getMemPassword());
 			pstmt.setString(9, id);
-			result=pstmt.executeUpdate();
-		} catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-		} return result;
-		
+		}
+		return result;
+
 	}
-	public int addMemberInfo(Connection conn, Member m,int no) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql= prop.getProperty("addMemberInfo");
+
+	public int addMemberInfo(Connection conn, Member m, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("addMemberInfo");
 
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setDate(1, m.getMemBirth());
 			pstmt.setString(2, String.valueOf(m.getMemGender()));
 			pstmt.setString(3, m.getMemPhone());
@@ -253,53 +260,57 @@ public class MemberDao {
 			pstmt.setString(8, m.getMemCategory2());
 			pstmt.setString(9, m.getMemCategory3());
 			pstmt.setInt(10, no);
-			
-			result=pstmt.executeUpdate();
-			
-		} catch(SQLException e) {
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-			
-		} return result;
-		
+
+		}
+		return result;
+
 	}
+
 	public int changeMyPhoto(Connection conn, String filePath, int no) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql= prop.getProperty("changeMyPhoto");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("changeMyPhoto");
 
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, filePath);//mem_photo
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, filePath);// mem_photo
 			pstmt.setInt(2, no);
-			
-			result=pstmt.executeUpdate();
-			
-		} catch(SQLException e) {
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-			
-		} return result;
-		
+
+		}
+		return result;
+
 	}
-	//구매한 데이터들만 가져옴 p_study로 join, fstudy값 x
-	public List<MyPurchase> selectPurchase(Connection conn, int no){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("selectPurchase");
-		List<MyPurchase> list= new ArrayList<MyPurchase>();
-		MyPurchase mp=null;
-		
+
+	// 구매한 데이터들만 가져옴 p_study로 join, fstudy값 x
+	public List<MyPurchase> selectPurchase(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectPurchase");
+		List<MyPurchase> list = new ArrayList<MyPurchase>();
+		MyPurchase mp = null;
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
-			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
 				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
-				mp=new MyPurchase();
+				mp = new MyPurchase();
 				mp.setPurId(rs.getInt("pur_id"));
 				mp.setMemNo(rs.getInt("mem_no"));
 				mp.setpNo(rs.getInt("p_no"));
@@ -309,91 +320,124 @@ public class MemberDao {
 				mp.setCancelDate(rs.getDate("cancel_date"));
 				mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
 				mp.setSubmitFile(rs.getString("submit_file").charAt(0));
-				
+
 				list.add(mp);
-				}
-		} catch(SQLException e) {
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
-		} return list;
-	}
-	
-	//구매+신청목록
-		public List<MyPurchase> selectAllPurchase(Connection conn, int no){
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			String sql=prop.getProperty("selectAllPurchase");
-			List<MyPurchase> list= new ArrayList<MyPurchase>();
-			MyPurchase mp=null;
-			
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, no);
-				rs=pstmt.executeQuery();
-				
-				while(rs.next()) {
-					// 테이블 변경을 고려하여 인수를 열 이름으로 사용
-					mp=new MyPurchase();
-					mp.setPurId(rs.getInt("pur_id"));
-					mp.setMemNo(rs.getInt("mem_no"));
-					mp.setfNo(rs.getInt("f_no"));
-					mp.setpNo(rs.getInt("p_no"));
-					mp.setPurchaseDate(rs.getDate("purchase_date"));
-					mp.setPurchaseCancelStatus(rs.getString("purchase_status").charAt(0));
-					mp.setCancelDate(rs.getDate("cancel_date"));
-					mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
-					mp.setSubmitFile(rs.getString("submit_file").charAt(0));
-					
-					list.add(mp);
-					}
-			} catch(SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rs);
-				close(pstmt);
-			} return list;
 		}
+		return list;
+	}
+
+	// 구매+신청목록
+	public List<MyPurchase> selectAllPurchase(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectAllPurchase");
+		System.out.println(sql);
+		List<MyPurchase> list = new ArrayList<MyPurchase>();
+		MyPurchase mp = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
+				mp = new MyPurchase();
+				mp.setPurId(rs.getInt("pur_id"));
+				mp.setMemNo(rs.getInt("mem_no"));
+				mp.setfNo(rs.getInt("f_no"));
+				mp.setpNo(rs.getInt("p_no"));
+				mp.setPurchaseDate(rs.getDate("purchase_date"));
+				mp.setPurchaseCancelStatus(rs.getString("purchase_status").charAt(0));
+				mp.setCancelDate(rs.getDate("cancel_date"));
+				mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
+				mp.setSubmitFile(rs.getString("submit_file").charAt(0));
+
+				list.add(mp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	// 내 메모 전체조회
+	public List<MyMemo> selectMyMemo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectMyMemo");
+		System.out.println(sql);
+		List<MyMemo> list = new ArrayList<MyMemo>();
+		MyMemo mm = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				mm = new MyMemo();
+				mm.setMemoId(rs.getInt("memo_id"));
+				mm.setMemNo(rs.getInt("mem_no"));
+				mm.setMemoFrontId(rs.getInt("memo_front_id"));
+				mm.setMemoContents(rs.getString("memo_contents"));
+				mm.setMemoLeft(rs.getInt("memo_left"));
+				mm.setMemoTop(rs.getInt("memo_top"));
+				list.add(mm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 
 	public int updateSetting(Connection conn, String settingName, String type, int no) {
-		String setString="";
-		PreparedStatement pstmt=null;
-		int result=0;
-		
-		if(settingName.equals("receiveEmail")) {
-			setString="receiveEmail";
-		}
-		if(settingName.equals("useNote")) {
-			setString="useNote";
-		}
-		if(settingName.equals("receiveSms")) {
-			setString="receiveSms";
-		}
-		if(settingName.equals("openProfile")) {
-			setString="openProfile";
-		}
-		
+		String setString = "";
+		PreparedStatement pstmt = null;
+		int result = 0;
 
-		String sql= prop.getProperty(setString);
+		if (settingName.equals("receiveEmail")) {
+			setString = "receiveEmail";
+		}
+		if (settingName.equals("useNote")) {
+			setString = "useNote";
+		}
+		if (settingName.equals("receiveSms")) {
+			setString = "receiveSms";
+		}
+		if (settingName.equals("openProfile")) {
+			setString = "openProfile";
+		}
+
+		String sql = prop.getProperty(setString);
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, type);
 			pstmt.setInt(2, no);
 
-			result=pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-			
-		} 
+			result = pstmt.executeUpdate();
 
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+
+		}
+
 		return result;
 	}
-	
-	
+
 }

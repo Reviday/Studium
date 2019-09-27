@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.studium.member.model.vo.Member"%>
+<%@ page import="com.studium.member.model.vo.MyMemo"%>
+ <%@ page import="java.util.List"%>
 <% 
 	Member m=(Member)request.getAttribute("member");
-
+	List<MyMemo> listM=(List)request.getAttribute("memoList");
 %>
- 
 <style>
 .header-background-cover {
 	height: 95px;
@@ -28,16 +29,20 @@
                     </div>
                     <div class="col-sm-8 navbar-myMenu" id="memo_area" style=" margin-top:20px">
                         <div style="margin:0px auto;"><button id="click" class="changePhoto" >새로운 메모</button></div>
-                
-                            <div id="0" class="newMemo">
-                    <div class="memo_content">
-                    <div class="memo_top">
-                                <button class="memo_close" title="닫기" style="font-size: 25px; transform:rotate(45deg)">+</button>
+                <% if(!listM.isEmpty()){
+						for(MyMemo mm : listM){%>
+							
+                            <div id="<%=mm.getMemoFrontId()%>" class="newMemo" style="left:<%=mm.getMemoLeft()%>px; top:<%=mm.getMemoTop()%>px">
+                   				<div class="memo_content">
+                    				<div class="memo_top">
+                                		<button class="memo_close" title="닫기" style="font-size: 25px; transform:rotate(45deg)">+</button>
                             
-                    </div>
-                    <textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"></textarea>
-                </div>
-                </div>
+                    				</div>
+                   					<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"><%=mm.getMemoContents()%></textarea>
+               					 </div>
+                			</div>
+                			<%}
+                			}%>
                     </div>
                     <div class="col-sm-2">
                     </div>
@@ -46,7 +51,9 @@
 <script>
 //기존에 있는 하나 움직일 수 있게 해줌 
 $(".newMemo").draggable();
-var numberId = 0;
+//메모의 마지막 div의 id, 숫자로 형변환해서 가져옴 
+var numberId = Number($(".newMemo").last().attr("id"));
+
 $("#click").on("click", function () {
    //클릭할 때마다 아이디에 넣을 값 증가하게
    numberId += 1;
@@ -101,7 +108,7 @@ $(document).on("mouseup", ".newMemo", function(){
 	console.log('Left: '+pos.left+'; Top:'+pos.top);
 	console.log(id);
 	console.log(desc);
-	console.log('그거'+val);
+	console.log('이거슨 내용이닷: '+val);
 	});
 
 </script>
