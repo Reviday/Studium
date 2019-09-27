@@ -76,8 +76,19 @@
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
-												 <%=sm.getMadangTitle()%>
+											<a class="article" 
+											<%
+												if(loginMember!=null) {
+											%>
+											href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
+											<%
+												} else {
+											%>
+												onclick="fn_needLogin();return false;"
+											<%
+												}
+											%>
+												 ><%=sm.getMadangTitle()%>
 											</a>
 										</div>
 									</div>

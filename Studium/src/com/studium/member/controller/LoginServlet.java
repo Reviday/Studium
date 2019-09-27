@@ -39,13 +39,15 @@ public class LoginServlet extends HttpServlet {
 	
 		// Member 객체 확인 후 받아오기
 		Member m=new MemberService().selectEmail(email, password);	
+		int memNo=0;
+		if(m!=null) {memNo=m.getMemNo();}
 		String msg="";
 		String loc="/";
 		String view="";
 		
 		MemberLoginLog mll=new MemberLoginLog();
 		mll.setMllSuccess(m!=null?'Y':'N'); // m이 null이 아니면 로그인 성공
-		mll.setMllMemNo(m!=null?m.getMemNo():null); // m의 uid를 가져온다.
+		mll.setMllMemNo(memNo); // m의 uid를 가져온다.
 		mll.setMllUserEmail(email); // 사용자가 입력한 이메일
 		mll.setMllIp(request.getParameter("REMOTE_ADDR")); // 로그인 시도한 ip
 		mll.setMllReason(m!=null?"로그인 성공":"아이디/패스워드 불일치"); // 로그인 성공/실패시 이유(더 다양한 사유도 가능할 듯하다)

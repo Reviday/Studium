@@ -49,8 +49,8 @@ public class MadangWriteServlet extends HttpServlet {
 		case "boast" : code=1005; break;
 		case "question" : code=1006; break;
 		}
-		new LoginCheck(request, response, code);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, code)) return;
 		String view = "/views/madang/madangWrite.jsp";
 		
 		// SideMenuElement

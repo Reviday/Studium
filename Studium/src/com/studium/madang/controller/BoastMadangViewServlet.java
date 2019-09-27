@@ -41,8 +41,6 @@ public class BoastMadangViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1005);
-		
 		int no = Integer.parseInt(request.getParameter("madangNo"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 
@@ -112,6 +110,7 @@ public class BoastMadangViewServlet extends HttpServlet {
 		request.setAttribute("choiceSub", choiceSub);
 		request.setAttribute("elements", elements);
 		request.getRequestDispatcher(view).forward(request, response);
+		
 	}
 
 	/**

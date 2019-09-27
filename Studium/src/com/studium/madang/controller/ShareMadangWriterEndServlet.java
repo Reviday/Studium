@@ -34,8 +34,8 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1004);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, 1004)) return;
 		ShareMadang sm=new ShareMadang();
 		sm.setMadangTitle(request.getParameter("subject"));
 		sm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));

@@ -1,29 +1,28 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.vo.BoastMadang;
+import com.studium.madang.model.service.BoastMadangCmtService;
+import com.studium.madang.model.vo.BoastMadangCmt;
 
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class BoastMadangWriterEndServlet
+ * Servlet implementation class BoastMadangAddCommentServlet
  */
-@WebServlet("/madang/boast/writeEnd")
-public class BoastMadangWriterEndServlet extends HttpServlet {
+@WebServlet("/madang/boastAddComment")
+public class BoastMadangAddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoastMadangWriterEndServlet() {
+    public BoastMadangAddCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,34 +34,33 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// 2차 로그인 체크. 
 		if(!new LoginCheck().doLoginCheck(request, response, 1005)) return;
-		BoastMadang bm=new BoastMadang();
-		bm.setMadangTitle(request.getParameter("subject"));
-		bm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
-		bm.setMadangWriterEmail(request.getParameter("userEmail"));
-		bm.setMadangWriterName(request.getParameter("userName"));
-		bm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
-		bm.setMadangContent(request.getParameter("smarteditor"));
 		
+		BoastMadangCmt cmt=new BoastMadangCmt();
+		int madangNo=Integer.parseInt(request.getParameter("madangNo"));
+		int cPage=Integer.parseInt(request.getParameter("cPage"));
+		cmt.setCmtMadangNo(madangNo);
+		cmt.setCmtWriterUid(Integer.parseInt(request.getParameter("memberNo")));
+		cmt.setCmtWriter(request.getParameter("memEmail"));	
+		cmt.setCmtWriterName(request.getParameter("memName"));
+		cmt.setCmtContent(request.getParameter("content"));
+		cmt.setCmtRegisterIp(request.getParameter("REMOTE_ADDR"));
 		
-		//파일 받기 및 넣기
+		int result=new BoastMadangCmtService().insertComment(cmt);
 		
-		//이미지 받기 및 넣기
-		
-		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
-		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int madangNo=new BoastMadangService().insertMadang(bm);
-		
-		String view="/";
-		if(madangNo>0) {
-			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage=1";
+		String view="";
+		if(result>0) {
+			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			request.setAttribute("choice", "자랑마당");
+			request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		} else {
-			String msg="게시글 작성에 실패하였습니다.";
-			String loc="/madang/boastMadangList";
+			String msg="댓글 작성에 실패하였습니다.";
+			String loc="/madang/boastMadangView?madangNo="+madangNo+"&cPage="+cPage;
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}
 		request.getRequestDispatcher(view).forward(request, response);
+		
 	}
 
 	/**

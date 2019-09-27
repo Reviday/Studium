@@ -1,28 +1,28 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.FreeMadangCmtService;
-import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.madang.model.service.BoastMadangCmtService;
+import com.studium.madang.model.vo.BoastMadangCmt;
 
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class AddCommentServlet
+ * Servlet implementation class BoastMadangAddReplyServlet
  */
-@WebServlet("/madang/freeAddComment")
-public class FreeMadangAddCommentServlet extends HttpServlet {
+@WebServlet("/madang/boastAddReply")
+public class BoastMadangAddReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-
-    public FreeMadangAddCommentServlet() {
+     * @see HttpServlet#HttpServlet()
+     */
+    public BoastMadangAddReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,8 +33,8 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 2차 로그인 체크. 
-		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
-		FreeMadangCmt cmt=new FreeMadangCmt();
+		if(!new LoginCheck().doLoginCheck(request, response, 1005)) return;
+		BoastMadangCmt cmt=new BoastMadangCmt();
 		int madangNo=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		cmt.setCmtMadangNo(madangNo);
@@ -43,17 +43,18 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 		cmt.setCmtWriterName(request.getParameter("memName"));
 		cmt.setCmtContent(request.getParameter("content"));
 		cmt.setCmtRegisterIp(request.getParameter("REMOTE_ADDR"));
-		
-		int result=new FreeMadangCmtService().insertComment(cmt);
-		
+		cmt.setCmtParent(Integer.parseInt(request.getParameter("cmtNo")));
+		System.out.println("request.getParameter(\"cmtNo\"):" + request.getParameter("cmtNo"));
+		int result=new BoastMadangCmtService().insertReply(cmt);
+		System.out.println("cmt.getCmtParent():"+cmt.getCmtParent());
 		String view="";
 		if(result>0) {
-			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
-			request.setAttribute("choice", "자유마당");
+			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			request.setAttribute("choice", "자랑마당");
 			request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		} else {
 			String msg="댓글 작성에 실패하였습니다.";
-			String loc="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			String loc="/madang/boastMadangView?madangNo="+madangNo+"&cPage="+cPage;
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

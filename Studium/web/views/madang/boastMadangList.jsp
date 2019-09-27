@@ -77,7 +77,7 @@
 									<div class="board-list">
 										<div class="inner_list">
 											<a class="article" href="<%=request.getContextPath()%>/madang/boastMadangView?madangNo=<%=bm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
-												 <%=bm.getMadangTitle()%>
+												<%=bm.getMadangTitle()%>
 											</a>
 										</div>
 									</div>

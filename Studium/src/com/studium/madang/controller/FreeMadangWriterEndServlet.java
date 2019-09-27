@@ -33,8 +33,8 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1003);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		FreeMadang fm=new FreeMadang();
 		fm.setMadangTitle(request.getParameter("subject"));
 		fm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
@@ -65,7 +65,6 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		request.setAttribute("choice", request.getParameter("choice"));
 		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		request.getRequestDispatcher(view).forward(request, response);
-		
 	}
 
 	/**

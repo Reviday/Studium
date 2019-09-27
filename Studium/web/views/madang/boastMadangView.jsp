@@ -220,7 +220,7 @@
 
 										<div class="u_cbox_btn_upload _submitBtn">
 											<a href="#" class="u_cbox_txt_upload _submitCmt" 
-											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
 											등록</a>													
 										</div>
 									</td>
@@ -286,7 +286,7 @@
 						                                                <tr>
 						                                                    <td class="i2">
 						                                                        <div class="comm_write_wrap border-sub skin-bgcolor">
-						                                                            <textarea id="comment_text_rep" cols="50" rows="2"
+						                                                            <textarea id="comment_text_rep_<%=cmt.getCmtNo()%>" cols="50" rows="2"
 						                                                                class="textarea m-tcol-c" maxlength="6000"
 						                                                                style="overflow: hidden; line-height: 14px; height: 39px;"
 						                                                                title="댓글입력"></textarea>
@@ -296,7 +296,7 @@
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
 																					<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																					onclick="fn_addReply('<%=loginMember!=null?loginMember.getMemNo():null%>', 'baost', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+																					onclick="fn_addReply('<%=cmt.getCmtNo()%>', '<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>','<%=choice%>', '<%=choiceSub%>'); return false;">
 																					등록</a>													
 						                                                        </div>
 						                                                    </td>

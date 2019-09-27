@@ -23,32 +23,32 @@ function fn_needLogin() {
 	alert("회원만 이용가능합니다.");
 }
 
-function fn_addComment(memCheck, locate, path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage) {
+function fn_addComment(memCheck, locate, path, REMOTE_ADDR, madangNo, memberNo, memEmail, memName, cPage, choice, choiceSub) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
 		var commentArea = convertToTag(document.getElementById('comment_text'));
 		location.href = path + "/madang/" + locate + "AddComment?madangNo=" + madangNo + "&memberNo=" + memberNo
 			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
-			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage;
+			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&chocie" + choice + "&choiceSub=" + choiceSub;
 	}
 };
 
-function fn_addReply(memCheck, locate, path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage) {
+function fn_addReply(cmtNo, memCheck, locate, path, REMOTE_ADDR, madangNo, cmtNo, memberNo, memEmail, memName, cPage, choice, choiceSub) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
-		var commentArea = convertToTag(document.getElementById('comment_text_rep'));
+		var commentArea = convertToTag(document.getElementById('comment_text_rep_'+cmtNo));
 		location.href = path + "/madang/" + locate + "AddReply?madangNo=" + madangNo + "&memberNo=" + memberNo
 			+ "&memEmail=" + memEmail + "&memName=" + memName + "&content=" + commentArea
-			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&cmtNo=" + cmtNo;
+			+ "&REMOTE_ADDR=" + REMOTE_ADDR + "&cPage=" + cPage + "&cmtNo=" + cmtNo + "&chocie" + choice +"&choiceSub=" + choiceSub;
 	}
 };
 
 
 function convertToTag(textArea) {
 	var lines = textArea.value.split("\n");
-
+	console.log(lines);
 	// generate HTML version of text
 	var resultString = "<p>";
 	for (var i = 0; i < lines.length; i++) {
