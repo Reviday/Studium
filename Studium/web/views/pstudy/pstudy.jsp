@@ -44,7 +44,7 @@ body{
       <div class="a_title">스터디 지역 찾기</div>
       <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form">
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value='null'>지역 선택</option>
+          <option value=' '>지역 선택</option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
           <option value='잠실'>잠실</option>
@@ -54,14 +54,14 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value='null'>분류</option>
+          <option value=" ">분류</option>
            <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
 			<% } } %>
       </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value='null'>가능 시간</option>
+          <option value=" ">가능 시간</option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
@@ -122,7 +122,7 @@ body{
 						 difvvDays = difvv/(24 * 60 * 60 * 1000);
 						
 						
-						 if((diffDays<3&&diffDays>1)){ %>
+						 if((diffDays<=3&&diffDays>=1)){ %>
 							
 							<div class="drawing-near">마감 임박</div>
 
@@ -137,7 +137,7 @@ body{
 							<%} %>
 						<%}else{ %>
 						<div class="full-cover">
-						마감
+						마감<
 						 </div>
 						<%} %> 
 					
@@ -223,7 +223,7 @@ body{
 						diffDays = diff / (24 * 60 * 60 * 1000);
 						
 						
-							if((diffDays<3&&diffDays>1)){ %>
+							if((diffDays<=3&&diffDays>=1)){ %>
 						
 						<div class="drawing-near">마감 임박</div>
 
@@ -237,7 +237,7 @@ body{
 						<div class="recruiting-status new">신규모집</div>
 						<%} %>
 					<%}else{
-					if(loginMember.getMemCode()=='M')	{
+					if((loginMember!=null)&&loginMember.getMemCode()=='M')	{
 						%>
 						<div class="full-cover" style="z-index:0;">
 					마감
