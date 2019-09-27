@@ -1425,4 +1425,26 @@ public class AdminDao {
 		}return memo;
 	}
 	
+	public String memoPS(Connection conn, String memNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String memo = "";
+		String sql=prop.getProperty("memoPS");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				memo=rs.getString(1);
+	
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return memo;
+	}
+	
 }

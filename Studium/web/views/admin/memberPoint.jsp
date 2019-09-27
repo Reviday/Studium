@@ -189,7 +189,6 @@ function inqueryList3(cPage){
     
     
     	$(".pointConfirm").click(function(){
-    		console.log($(this).attr('id'));
     		$.ajax({
     			url:"<%=request.getContextPath()%>/PointPageShow",
     			type:"post",

@@ -315,4 +315,11 @@ public class AdminService {
 		return memo;
 	}
 	
+	public String memoPS(String memNo) {
+		Connection conn = getConnection();
+		String memo = dao.memoPS(conn, memNo);
+		close(conn);
+		return memo;
+	}
+	
 }
