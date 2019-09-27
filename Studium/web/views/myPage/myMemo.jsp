@@ -30,9 +30,12 @@
                     <div class="col-sm-8 navbar-myMenu" id="memo_area" style=" margin-top:20px">
                         <div style="margin:0px auto;"><button id="click" class="changePhoto" >새로운 메모</button></div>
                 <% if(!listM.isEmpty()){
-						for(MyMemo mm : listM){%>
-							
-                            <div id="<%=mm.getMemoFrontId()%>" class="newMemo" style="left:<%=mm.getMemoLeft()%>px; top:<%=mm.getMemoTop()%>px">
+						for(MyMemo mm : listM){
+						 	if(mm.getMemoDeleteStatus()=='N'){%>
+						
+                            <div id="<%=mm.getMemoFrontId()%>" class="newMemo"  style="left:<%=mm.getMemoLeft()%>px; top:<%=mm.getMemoTop()%>px">
+                   				
+							<input type="hidden" name="primary" value="<%=mm.getMemoId()%>"> 
                    				<div class="memo_content">
                     				<div class="memo_top">
                                 		<button class="memo_close" title="닫기" style="font-size: 25px; transform:rotate(45deg)">+</button>
@@ -41,7 +44,9 @@
                    					<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"><%=mm.getMemoContents()%></textarea>
                					 </div>
                 			</div>
-                			<%}
+                			<%
+						 	}
+						 	}
                 			}%>
                     </div>
                     <div class="col-sm-2">
@@ -78,38 +83,98 @@ $("#click").on("click", function () {
        'left': posx + 'px',
        'top': posy + 'px',
        'display': 'none'
-   }).appendTo('#memo_area').fadeIn(100).draggable();;
+   }).appendTo('#memo_area').fadeIn(100).draggable();
 
-//    //버튼으로 생성한  div삭제
-//     $(".newMemo").on('click', function () {
-//         console.log("들어옴");
-//         $(this).remove();
-//     });
-$(".memo_close").on('click', function () {
+   
+   //버튼으로 생성한  div삭제
+	$(".memo_close").on('click', function () {
        console.log("들어옴");
-       $(this).parents('.newMemo').remove();
-   });
+       $(this).parents('.newMemo').remove();	
+   	});
+	
+		
+	
 });
+
+
+
+
+
 //밖에 있는 기본 div삭제
 $(".memo_close").on('click', function () {
-       console.log("들어옴");
        $(this).parents('.newMemo').remove();
+       var primary=$(this).parents('.newMemo').find('input[name="primary"]').val();
+       var status='N';
+      console.log(primary);
+      console.log(status);
+
+      $.ajax({
+               	url:'<%=request.getContextPath()%>/myPage/myMemoEnd?no=<%=m.getMemNo()%>',
+                   type:'POST',
+         			cache: false,
+         			dataType: "json",
+                   data:{"status":status, "primary":primary},
+                   success:function(data){
+                   	console.log('삭제됨');
+                   }
+      });
+      
    });
    
    //옮긴 위치 console
-$(document).on("mouseup", ".newMemo", function(){
+$(document).on("mouseup",".newMemo", function(){
 
 	var elem = $(this),
-	    id = elem.attr('id'),
-	    desc = elem.attr('data-desc'),
-	    pos = elem.position(),
-	    val= elem.find('textarea[name="txt"]').val();
+	    id = elem.attr('id'),//아이디
+	    pos = elem.position(),//위치가져오기
+	    val= elem.find('textarea[name="txt"]').val();//textarea의 내용
 	    
-	console.log('Left: '+pos.left+'; Top:'+pos.top);
+	    
+	var primary=elem.find('input[name="primary"]').val();
+	    if(primary==null){
+	    	primary=-1;//클론되어서 primary값이 없을 때 -1을 넣어줌
+	    }
+	
+	    
+	    
+	var left=pos.left.toFixed(0);
+	var top=pos.top.toFixed(0);
+	
+	console.log('Left: '+left+'; Top:'+top);
 	console.log(id);
-	console.log(desc);
 	console.log('이거슨 내용이닷: '+val);
+	console.log('이거슨 프라이머리값: '+primary);
+	
+	  $.ajax({
+      	url:'<%=request.getContextPath()%>/myPage/myMemoEnd?no=<%=m.getMemNo()%>',
+          type:'POST',
+			cache: false,
+			dataType: "json",
+          data:{"id":id, "left":left, "top": top, "val": val, "primary":primary},
+          success:function(data){
+          	console.log('success~~~~');
+          }
+
+		});
+	
 	});
+   
+ 
+   
+   
+
+function convertToTag(textArea) {
+	var lines = textArea.value.split("\n");
+
+	// generate HTML version of text
+	var resultString = "<p>";
+	for (var i = 0; i < lines.length; i++) {
+		resultString += lines[i] + "<br />";
+	}
+	resultString += "</p>";
+
+	return resultString;
+}
 
 </script>
 

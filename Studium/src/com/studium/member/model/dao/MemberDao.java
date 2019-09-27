@@ -1,6 +1,9 @@
 package com.studium.member.model.dao;
 
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.rollback;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -205,7 +208,6 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemUserEmail());
-			pstmt.setString(1, m.getMemUserEmail());
 			pstmt.setString(2, m.getMemPassword());
 			pstmt.setString(3, m.getMemName());
 			result = pstmt.executeUpdate();
@@ -376,7 +378,6 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("selectMyMemo");
-		System.out.println(sql);
 		List<MyMemo> list = new ArrayList<MyMemo>();
 		MyMemo mm = null;
 
@@ -393,6 +394,7 @@ public class MemberDao {
 				mm.setMemoContents(rs.getString("memo_contents"));
 				mm.setMemoLeft(rs.getInt("memo_left"));
 				mm.setMemoTop(rs.getInt("memo_top"));
+				mm.setMemoDeleteStatus(rs.getString("memo_delete_status").charAt(0));
 				list.add(mm);
 			}
 		} catch (SQLException e) {
@@ -404,25 +406,84 @@ public class MemberDao {
 		return list;
 	}
 
-	public int updateSetting(Connection conn, String settingName, String type, int no) {
-		String setString = "";
+	public int updateMyMemo(Connection conn, MyMemo memo, int primary) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		String sql = prop.getProperty("updateMyMemo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memo.getMemoFrontId());
+			pstmt.setInt(2, memo.getMemoLeft());
+			pstmt.setInt(3, memo.getMemoTop());
+			pstmt.setString(4, memo.getMemoContents());
+			pstmt.setInt(5, primary);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertMyMemo(Connection conn,MyMemo memo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertMyMemo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memo.getMemNo());
+			pstmt.setInt(2, memo.getMemoFrontId());
+			pstmt.setString(3, memo.getMemoContents());
+			pstmt.setInt(4, memo.getMemoLeft());
+			pstmt.setInt(5, memo.getMemoTop());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	public int deleteMyMemo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteMyMemo");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	
+	public int updateSetting(Connection conn, String settingName, String type, int no) {
+//		String setString = "";
+		PreparedStatement pstmt = null;
+		int result = 0;
+//
+//		if (settingName.equals("receiveEmail")) {
+//			setString = "receiveEmail";
+//		}
+//		if (settingName.equals("useNote")) {
+//			setString = "useNote";
+//		}
+//		if (settingName.equals("receiveSms")) {
+//			setString = "receiveSms";
+//		}
+//		if (settingName.equals("openProfile")) {
+//			setString = "openProfile";
+//		}
 
-		if (settingName.equals("receiveEmail")) {
-			setString = "receiveEmail";
-		}
-		if (settingName.equals("useNote")) {
-			setString = "useNote";
-		}
-		if (settingName.equals("receiveSms")) {
-			setString = "receiveSms";
-		}
-		if (settingName.equals("openProfile")) {
-			setString = "openProfile";
-		}
-
-		String sql = prop.getProperty(setString);
+		String sql = prop.getProperty(settingName);
 		try {
 			pstmt = conn.prepareStatement(sql);
 
@@ -459,7 +520,6 @@ public class MemberDao {
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			//로그인 로그 남기는 용도
-			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		} return result;

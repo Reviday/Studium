@@ -199,7 +199,7 @@
 	$("#changePhoto").on("click",function(){
         //ajax를 통한 파일전송을 할떄
         //FormData() 객체를 이용
-        console.log("스크립트 chnage 들어옴")
+        console.log("스크립트 change 들어옴")
         var fd=new FormData();
         $.each($("#file")[0].files,function(i,item){
            fd.append("file"+i,item);

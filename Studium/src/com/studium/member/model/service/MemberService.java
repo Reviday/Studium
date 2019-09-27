@@ -95,7 +95,34 @@ public class MemberService {
 		return list;
 		
 	}
+	public int updateMyMemo(MyMemo memo, int primary) {
+		Connection conn=getConnection();
+		int result=dao.updateMyMemo(conn, memo, primary);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	
+	public int insertMyMemo(MyMemo memo) {
+		Connection conn=getConnection();
+		int result=dao.insertMyMemo(conn, memo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteMyMemo(int no) {
+		Connection conn=getConnection();
+		int result=dao.deleteMyMemo(conn, no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();
 		int result=dao.updateSetting(conn, settingName,type, no);

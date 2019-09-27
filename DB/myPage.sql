@@ -328,17 +328,24 @@ create table my_memo(
     MEMO_ID NUMBER PRIMARY KEY,--메모 주키
     MEM_NO number constraint MEMO_MEM_FK references ta_member(mem_no), --메모를 가진 회원의 번호
     MEMO_FRONT_ID NUMBER CONSTRAINT MEMO_FRONT_ID_NN NOT NULL,--프론트 화면에서 생성한 ID값
-    MEMO_CONTENTS clob constraint MEMO_CONTENTS_NN not null, -- 메모내용
+    MEMO_CONTENTS clob , -- 메모내용
     MEMO_LEFT NUMBER NOT NULL,-- 메모 좌표 LEFT
-    MEMO_TOP NUMBER NOT NULL --메모의 좌표 TOP
+    MEMO_TOP NUMBER NOT NULL, --메모의 좌표 TOP
+    MEMO_DELETE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT MEMO_STATUS_CK CHECK (MEMO_DELETE_STATUS IN ('N','Y'))--메모 삭제Y,
 );
-
+Select * 
+from my_memo 
+where mem_no=10028
+order by memo_front_id 
+;
+drop sequence seq_my_memo;
 create sequence seq_my_memo
 start with 1
-increment by 1
-maxvalue 999;
+increment by 1;
 SELECT * FROM MY_MEMO WHERE MEM_NO=10028;
 
+insert into my_memo values(seq_my_memo.nextval,10028,1,'메모 내용이에욥 ㅇㅂㅇ',100,100,'N');
+insert into my_memo values(seq_my_memo.nextval,10028,2,'두번째 메모 내용이에욥 ㅇㅂㅇ',110,200,'N');
+insert into my_memo values(seq_my_memo.nextval,10028,3,'셋셋세셋번째 메모 내용이에욥!!!',600,300,'N');
 commit;
-insert into my_memo values(seq_my_memo.nextval,10028,1,'메모 내용이에욥 ㅇㅂㅇ',100,100);
-insert into my_memo values(seq_my_memo.nextval,10028,1,'두번째 메모 내용이에욥 ㅇㅂㅇ',110,200);
+delete from my_memo where mem_no=10028;
