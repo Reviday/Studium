@@ -99,10 +99,10 @@ public class StoryDao {
 			close(pstmt);
 		}return result;
 	}
-	public List<Story> selectengList(Connection conn){
+	public List<Story> selectForeignlanguageList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("selectengList");
+		String sql=prop.getProperty("selectForeignlanguageList");
 		List<Story> list=new ArrayList<Story>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -127,10 +127,10 @@ public class StoryDao {
 			close(pstmt);
 		}return list;
 	}
-	public List<Story> selectchaList(Connection conn){
+	public List<Story> selectProgrammingList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("selectchaList");
+		String sql=prop.getProperty("selectProgrammingList");
 		List<Story> list=new ArrayList<Story>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -155,10 +155,66 @@ public class StoryDao {
 			close(pstmt);
 		}return list;
 	}
-	public List<Story> selectcodList(Connection conn){
+	public List<Story> selectPublicofficerList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("selectcodList");
+		String sql=prop.getProperty("selectPublicofficerList");
+		List<Story> list=new ArrayList<Story>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s=new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Story> selectCertificateList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectCertificateList");
+		List<Story> list=new ArrayList<Story>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s=new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Story> selectEmploymentList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectEmploymentList");
 		List<Story> list=new ArrayList<Story>();
 		try {
 			pstmt=conn.prepareStatement(sql);

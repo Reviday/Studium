@@ -86,7 +86,7 @@ public class ShareMadangViewServlet extends HttpServlet {
 		// Pagination
 		ShareMadangCmtService service = new ShareMadangCmtService();
 		int totalData = service.selectCountList(no); // 총 데이터 개수
-		String URLmapping = "/madnag/shareMadangView"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping = "/madang/shareMadangView"; // 패턴을 넘겨주기 위한 변수
 		CmtPaginationTemplate pt = new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리
 		List<ShareMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		

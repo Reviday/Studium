@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import com.studium.admin.model.vo.CanclePayMember;
+import com.studium.admin.model.vo.PayMember;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
@@ -107,6 +109,46 @@ public class AdminDao {
 		}
 		return result;
 	}
+	
+	public int selectCountCanclePayMember(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountCanclePayMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountPayMember(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountPayMember");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public int selectCountPointMember(Connection conn) {
 		PreparedStatement pstmt=null;
@@ -147,12 +189,92 @@ public class AdminDao {
 		}
 		return result;
 	}
+	
+	public int selectCountPayMemberName(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountPayMemberName") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountCanclePayMemberName(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountCanclePayMemberName") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountCanclePayMemberEmail(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountCanclePayMemberEmail") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public int selectCountMemberEmail(Connection conn, String memberName) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		String sql=prop.getProperty("selectCountMemberEmail") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountPayMemberEmail(Connection conn, String memberName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountPayMemberEmail") + memberName+"%'";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -273,6 +395,73 @@ public class AdminDao {
 				l.setlStatus(rs.getString("l_status"));
 
 				list.add(l);				
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<CanclePayMember> selectCanclePayMemberList(Connection conn,int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<CanclePayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectCanclePayMemberList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CanclePayMember p=new CanclePayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setCancleDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("cancel_date")));
+				p.setPrice(rs.getInt("p_price"));				
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	
+	public List<PayMember> selectPayMemberList(Connection conn,int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectPayMemberList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PayMember p=new PayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setPurchaseDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("purchase_date")));
+				
+				String status = "";
+				if(rs.getString("purchase_status").equals("N")) status = "스터디 진행 중";
+				if(rs.getString("purchase_status").equals("Y")) status = "스터디 종료";
+				if(rs.getString("purchase_status").equals("B")) status = "스터디 준비 중";
+				
+				p.setPurchaseStatus(status);
+				
+				list.add(p);
+				
 			}
 
 		}catch(SQLException e) {
@@ -671,6 +860,41 @@ public class AdminDao {
 		return list;
 
 	}
+	
+	public List<PayMember> selectPayMemberNameList(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectPayMemberNameList") + memberName + 
+					"%' ORDER BY PURCHASE_DATE DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PayMember p=new PayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setPurchaseDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("purchase_date")));
+				
+				String status = "";
+				if(rs.getString("purchase_status").equals("N")) status = "스터디 진행 중";
+				if(rs.getString("purchase_status").equals("Y")) status = "스터디 종료";
+				if(rs.getString("purchase_status").equals("B")) status = "스터디 준비 중";
+				
+				p.setPurchaseStatus(status);
+				
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 
 	public List<Member> selectMemberNameList(Connection conn,int cPage, int numPerPage, String memberName){
 		PreparedStatement pstmt=null;
@@ -721,6 +945,99 @@ public class AdminDao {
 				m.setMemDeniedDate(rs.getTimestamp("mem_denied_date"));
 
 				list.add(m);	
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<CanclePayMember> selectCanclePayMemberNameList(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<CanclePayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectCanclePayMemberNameList") + memberName + 
+					"%' ORDER BY CANCEL_DATE DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CanclePayMember p=new CanclePayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setCancleDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("cancel_date")));
+				p.setPrice(rs.getInt("p_price"));
+				
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<CanclePayMember> selectCanclePayMemberEmailList(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<CanclePayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectCanclePayMemberEmailList") + memberName + 
+					"%' ORDER BY CANCEL_DATE DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CanclePayMember p=new CanclePayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setCancleDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("cancel_date")));
+				p.setPrice(rs.getInt("p_price"));
+				
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<PayMember> selectPayMemberEmailList(Connection conn,int cPage, int numPerPage, String memberName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PayMember> list=new ArrayList();
+		String sql=prop.getProperty("selectPayMemberEmailList") + memberName + 
+					"%' ORDER BY PURCHASE_DATE DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PayMember p=new PayMember();
+				p.setMemNo(rs.getInt("mem_no"));
+				p.setMemName(rs.getString("mem_name"));
+				p.setMemPhone(rs.getString("mem_phone"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setPurchaseDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("purchase_date")));
+				
+				String status = "";
+				if(rs.getString("purchase_status").equals("N")) status = "스터디 진행 중";
+				if(rs.getString("purchase_status").equals("Y")) status = "스터디 종료";
+				if(rs.getString("purchase_status").equals("B")) status = "스터디 준비 중";
+				
+				p.setPurchaseStatus(status);
+				
+				list.add(p);
 			}
 
 		}catch(SQLException e) {
@@ -864,6 +1181,24 @@ public class AdminDao {
 				close(pstmt);
 			}
 		}
+		return result;
+	}
+	
+	public int deletePayMember(Connection conn, String memNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deletePayMember");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memNo);				
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
 		return result;
 	}
 

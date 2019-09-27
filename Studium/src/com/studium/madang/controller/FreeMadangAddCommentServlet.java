@@ -48,10 +48,10 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 		
 		String view="";
 		if(result>0) {
-			view="/madnag/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
 		} else {
 			String msg="댓글 작성에 실패하였습니다.";
-			String loc="/madnag/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			String loc="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

@@ -14,16 +14,16 @@ import com.studium.story.model.service.StoryService;
 import com.studium.story.model.vo.Story;
 
 /**
- * Servlet implementation class StoryList1Servlet
+ * Servlet implementation class StoryEmploymentListServlet
  */
-@WebServlet("/story1")
-public class StoryEngListServlet extends HttpServlet {
+@WebServlet("/story5")
+public class StoryEmploymentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StoryEngListServlet() {
+    public StoryEmploymentListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +33,14 @@ public class StoryEngListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		StoryService service =new StoryService();
     	List<Story> slist = new ArrayList<Story>();
-    	slist=service.selectengList();
+    	slist=service.selectEmploymentList();
     	
     	request.setAttribute("slist",slist);
 		
-		request.getRequestDispatcher("/views/story/story1.jsp")
-	      .forward(request,response);  
+		request.getRequestDispatcher("/views/story/story5.jsp")
+	      .forward(request,response);
 	}
 
 	/**

@@ -349,6 +349,19 @@
 				
 			});
 		});
+		function convertToTag(textArea) {
+			var lines = textArea.value.split("\n");
+
+			// generate HTML version of text
+			var resultString = "<p>";
+			for (var i = 0; i < lines.length; i++) {
+				resultString += lines[i] + "<br />";
+			}
+			resultString += "</p>";
+
+			return resultString;
+		}
+
 	
     </script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

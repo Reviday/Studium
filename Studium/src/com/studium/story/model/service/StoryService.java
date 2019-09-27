@@ -33,23 +33,36 @@ public class StoryService {
 		close(conn);
 		return list;
 	}
-	public List<Story> selectengList() {
+	public List<Story> selectForeignlanguageList() {
 		Connection conn=getConnection();
-		List<Story> list=dao.selectengList(conn);
+		List<Story> list=dao.selectForeignlanguageList(conn);
 		close(conn);
 		return list;
 	}
-	public List<Story> selectchaList() {
+	public List<Story> selectProgrammingList() {
 		Connection conn=getConnection();
-		List<Story> list=dao.selectchaList(conn);
+		List<Story> list=dao.selectProgrammingList(conn);
 		close(conn);
 		return list;
 	}
-	public List<Story> selectcodList() {
+	public List<Story> selectPublicofficerList() {
 		Connection conn=getConnection();
-		List<Story> list=dao.selectcodList(conn);
+		List<Story> list=dao.selectPublicofficerList(conn);
 		close(conn);
 		return list;
 	}
+	public List<Story> selectCertificateList() {
+		Connection conn=getConnection();
+		List<Story> list=dao.selectCertificateList(conn);
+		close(conn);
+		return list;
+	}
+	public List<Story> selectEmploymentList() {
+		Connection conn=getConnection();
+		List<Story> list=dao.selectEmploymentList(conn);
+		close(conn);
+		return list;
+	}
+	
 
 }

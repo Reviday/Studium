@@ -220,7 +220,7 @@
 
 										<div class="u_cbox_btn_upload _submitBtn">
 											<a href="#" class="u_cbox_txt_upload _submitCmt" 
-											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>', 'share', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
 											등록</a>													
 										</div>
 									</td>
@@ -296,7 +296,7 @@
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
 																					<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																					onclick="fn_addReply('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
+																					onclick="fn_addReply('<%=loginMember!=null?loginMember.getMemNo():null%>', 'share', '<%=request.getContextPath() %>', '<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>'); return false;">
 																					등록</a>													
 						                                                        </div>
 						                                                    </td>

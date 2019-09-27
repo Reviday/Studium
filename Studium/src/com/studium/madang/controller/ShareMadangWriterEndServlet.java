@@ -12,6 +12,8 @@ import com.studium.madang.model.service.ShareMadangService;
 import com.studium.madang.model.vo.FreeMadang;
 import com.studium.madang.model.vo.ShareMadang;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class ShareMadangWriterEndServlet
  */
@@ -32,6 +34,8 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		new LoginCheck(request, response, 1004);
+		
 		ShareMadang sm=new ShareMadang();
 		sm.setMadangTitle(request.getParameter("subject"));
 		sm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));

@@ -14,16 +14,16 @@ import com.studium.story.model.service.StoryService;
 import com.studium.story.model.vo.Story;
 
 /**
- * Servlet implementation class StoryCodListServlet
+ * Servlet implementation class StoryCertificateListServlet
  */
-@WebServlet("/story3")
-public class StoryCodListServlet extends HttpServlet {
+@WebServlet("/story4")
+public class StoryCertificateListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StoryCodListServlet() {
+    public StoryCertificateListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,11 +35,11 @@ public class StoryCodListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		StoryService service =new StoryService();
     	List<Story> slist = new ArrayList<Story>();
-    	slist=service.selectcodList();
+    	slist=service.selectCertificateList();
     	
     	request.setAttribute("slist",slist);
 		
-		request.getRequestDispatcher("/views/story/story3.jsp")
+		request.getRequestDispatcher("/views/story/story4.jsp")
 	      .forward(request,response);  
 	}
 

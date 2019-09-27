@@ -40,9 +40,7 @@ public class AdminManageViewServlet extends HttpServlet {
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
 			List<SideMenuElement> elements=new SideMenuElementService().selectElements("admin");
 			request.setAttribute("elements", elements);
-			for(SideMenuElement s : elements) {
-				System.out.println(s);
-			}
+
 			request.getRequestDispatcher("/views/admin/Q&AFirst.jsp").forward(request, response);
 
 		}else {

@@ -48,15 +48,15 @@ public class LoginCheck {
 			view = "/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
-			try {
-				request.getRequestDispatcher(view).forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+//			try {
+//				request.getRequestDispatcher(view).forward(request, response);
+//			} catch (ServletException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} 
 			return;
 		} 
 	}

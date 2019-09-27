@@ -155,6 +155,34 @@ start with 1
 increment by 1
 maxvalue 999999;
 
+-- 자랑마당
+create table ta_boast_madang(
+    madang_no number constraint bmadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint bmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint bmadang_content_nn not null, -- 글 내용
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_file_presence char(1) default 'N' constraint bmadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint bmadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint bmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 자랑마당
+create sequence bmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 -- 테스트용 더미 데이터(자유마당)
 insert into ta_free_madang values(fmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', '테스트 글 입니다.1',sysdate, null, default,default, null, null, default, default, default, default);
 insert into ta_free_madang values(fmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.2', '테스트 글 입니다.2',sysdate, null, default,default, null, null, default, default, default, default);
@@ -311,6 +339,49 @@ insert into ta_share_madang values(smadang_seq.nextval, 10, 1, 10000, 'admin@stu
 insert into ta_share_madang values(smadang_seq.nextval, 10, 2, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.10-답글2', '테스트 글 입니다.10-답글2',sysdate, null, default,default, null, null, default, default, default, default, default);
 commit;
 
+-- 자랑마당 더미데이터
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', '테스트 글 입니다.1',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.2', '테스트 글 입니다.2',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.3', '테스트 글 입니다.3',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.4', '테스트 글 입니다.3',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.5', '테스트 글 입니다.4',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.6', '테스트 글 입니다.5',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.7', '테스트 글 입니다.6',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.8', '테스트 글 입니다.7',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.9', '테스트 글 입니다.8',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.10', '테스트 글 입니다.10',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.11', '테스트 글 입니다.11',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.12', '테스트 글 입니다.12',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.13', '테스트 글 입니다.13',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.14', '테스트 글 입니다.14',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.15', '테스트 글 입니다.15',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.16', '테스트 글 입니다.16',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.17', '테스트 글 입니다.17',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.18', '테스트 글 입니다.18',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.19', '테스트 글 입니다.19',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.20', '테스트 글 입니다.20',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.21', '테스트 글 입니다.21',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.22', '테스트 글 입니다.22',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.23', '테스트 글 입니다.23',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.24', '테스트 글 입니다.24',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.25', '테스트 글 입니다.25',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.26', '테스트 글 입니다.26',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.27', '테스트 글 입니다.27',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.28', '테스트 글 입니다.28',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.29', '테스트 글 입니다.29',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.30', '테스트 글 입니다.39',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.1', '삭제된 글입니다. 출력되면 안됩니다.1',sysdate, null, default,default, null, null, default, default, default, 'N');
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.2', '삭제된 글입니다. 출력되면 안됩니다.2',sysdate, null, default,default, null, null, default, default, default, 'N');
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.3', '삭제된 글입니다. 출력되면 안됩니다.3',sysdate, null, default,default, null, null, default, default, default, 'N');
+insert into ta_boast_madang values(bmadang_seq.nextval, default, default, 10000, 'admin@studium.com', '관리자', '삭제된 글입니다. 출력되면 안됩니다.4', '삭제된 글입니다. 출력되면 안됩니다.4',sysdate, null, default,default, null, null, default, default, default, 'N');
+insert into ta_boast_madang values(bmadang_seq.nextval, 8, 1, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.8-답글1', '테스트 글 입니다.8-답글1',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, 8, 2, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.8-답글2', '테스트 글 입니다.8-답글2',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, 8, 3, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.8-답글3', '테스트 글 입니다.8-답글3',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, 8, 4, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.8-답글4', '테스트 글 입니다.8-답글4',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, 10, 1, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.10-답글1', '테스트 글 입니다.10-답글1',sysdate, null, default,default, null, null, default, default, default, default);
+insert into ta_boast_madang values(bmadang_seq.nextval, 10, 2, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.10-답글2', '테스트 글 입니다.10-답글2',sysdate, null, default,default, null, null, default, default, default, default);
+commit;
+
 
 -- 댓글 테이블
 
@@ -400,7 +471,7 @@ create table ta_smadang_cmt (
     cmt_no number primary key, -- 댓글 시퀀스 넘버
     cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
     cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
-    cmt_madang_no number references ta_free_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_madang_no number references ta_share_madang(madang_no), -- 게시글 번호(왜래키)
     cmt_content clob, -- 댓글 내용
     cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
 --  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
@@ -423,7 +494,32 @@ increment by 1
 maxvalue 9999999;
 
 
+-- 자랑마당 댓글 테이블 
+create table ta_bmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_boast_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
 
+-- 자랑마당 댓글 시퀀스
+create sequence bmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
 
 
 
@@ -482,6 +578,7 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 �
 update ta_sidemenu_elements set use_down='Y' where menu_name='결제 관리';
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 6, 22);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 7, 22);
+commit;
 
 
 -- 이 위 까지만 전체 실하면 됩니다.
