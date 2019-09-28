@@ -44,7 +44,8 @@
 <body>
 	<!-- 로그인 폼 -->
 	<div class="login-sec" id="log-dialog-background"></div>
-	<form action="<%=request.getContextPath() %>/login" class="login-form" id="my-log-dialog"  method="post">
+	<form action="<%=request.getContextPath() %>/login?REMOTE_ADDR=<%=REMOTE_ADDR%>" 
+		class="login-form" id="my-log-dialog"  method="post">
 		<h1>Login</h1>
 
 		<div class="input-area">

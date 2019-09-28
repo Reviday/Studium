@@ -106,6 +106,16 @@
 .changePhoto:hover{
    background-color: #497f42;
 }
+     .memo {
+	width: 100%;
+	height: 160px;
+	background-color: floralwhite;
+	border: none;
+	outline-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	resize: none;
+}
     </style>
        <script>
         $(function () {
@@ -245,7 +255,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개1</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro1" id="p_intro1" cols="30"
+                                                        <textarea name="p_intro1" id="p_intro1" cols="30" class="memo"
                                                             rows="10"><%=p.getpIntro1() %></textarea>
                                                     </td>
                                                 </tr>
@@ -254,7 +264,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개2</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro2" id="p_intro2" cols="30"
+                                                        <textarea name="p_intro2" id="p_intro2" cols="30" class="memo"
                                                             rows="10"><%=p.getpIntro2() %></textarea>
                                                     </td>
                                                 </tr>

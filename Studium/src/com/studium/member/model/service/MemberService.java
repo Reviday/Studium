@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.studium.member.model.dao.MemberDao;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MemberLoginLog;
+import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
 
 public class MemberService {
@@ -86,7 +88,41 @@ public class MemberService {
 		return list;
 		
 	}
+	public List<MyMemo> selectMyMemo(int no) {
+		Connection conn=getConnection();
+		List <MyMemo> list=dao.selectMyMemo(conn, no);
+		close(conn);
+		return list;
+		
+	}
+	public int updateMyMemo(MyMemo memo, int primary) {
+		Connection conn=getConnection();
+		int result=dao.updateMyMemo(conn, memo, primary);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	
+	public int insertMyMemo(MyMemo memo) {
+		Connection conn=getConnection();
+		int result=dao.insertMyMemo(conn, memo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteMyMemo(int no) {
+		Connection conn=getConnection();
+		int result=dao.deleteMyMemo(conn, no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();
 		int result=dao.updateSetting(conn, settingName,type, no);
@@ -95,6 +131,12 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
-
+	
+	public void insertMll(MemberLoginLog mll) {
+		Connection conn=getConnection();
+		int result=dao.insertMll(conn, mll);
+		if(result>0) commit(conn);
+		else rollback(conn);
+	}
 }
 

@@ -46,8 +46,8 @@ public class ShareMadangViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 공유마당의 게시글은 회원들만 볼 수 있다.(리스트를 보는건 회원/비회원 모두 가능.)
-		new LoginCheck(request, response, 1004);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, 1004)) return;
 		int no = Integer.parseInt(request.getParameter("madangNo"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 
@@ -86,7 +86,7 @@ public class ShareMadangViewServlet extends HttpServlet {
 		// Pagination
 		ShareMadangCmtService service = new ShareMadangCmtService();
 		int totalData = service.selectCountList(no); // 총 데이터 개수
-		String URLmapping = "/madnag/shareMadangView"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping = "/madang/shareMadangView"; // 패턴을 넘겨주기 위한 변수
 		CmtPaginationTemplate pt = new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리
 		List<ShareMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		

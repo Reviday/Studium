@@ -64,9 +64,9 @@ public class PstudyService {
 		return result;
 	
 	}
-	public List<Pstudy> searchPstudy(String area,String day,String category){
+	public List<Pstudy> searchPstudy(String setString,String area,String day,String category,int cPage,int numPerPage){
 		Connection conn=getConnection();
-		List<Pstudy> list=dao.searchPstudy(conn,area,day,category);
+		List<Pstudy> list=dao.searchPstudy(conn,setString,area,day,category,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -125,6 +125,12 @@ public class PstudyService {
 		int result=dao.addPerson(conn,pno,count);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int selectCountSearch(String area, String day, String category) {
+		Connection conn=getConnection();
+		int result=dao.selectCountSearch(conn,area,day,category);
 		close(conn);
 		return result;
 	}

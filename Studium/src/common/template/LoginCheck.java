@@ -11,7 +11,7 @@ import com.studium.member.model.vo.Member;
 
 public class LoginCheck {
 	
-	public LoginCheck(HttpServletRequest request, HttpServletResponse response, int code) {
+	public boolean doLoginCheck(HttpServletRequest request, HttpServletResponse response, int code) {
 		//MadangPage에 최적화 되어있음.
 		//로그인이 필요한 페이지이지만, 어떤 이유로 인해 세션이 끊어져
 		//로그인이 해제되었는데도 불구하고 로그인이 필요한 페이지에 머무를 경우
@@ -27,6 +27,7 @@ public class LoginCheck {
 		if(m==null) {
 			msg="[LoginError:CODE"+code+"] 잘못된 경로입니다.";
 			switch(code) {
+			case 1000 : loc="/index"; break;
 			case 1001 : loc="/madang/introMadang"; break;
 			case 1002 : loc="/madang/studyMadangList"; break;
 			case 1003 : loc="/madang/freeMadangList"; break;
@@ -56,8 +57,7 @@ public class LoginCheck {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
-			return;
-		} 
+			} return false;
+		} return true;
 	}
 }

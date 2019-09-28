@@ -471,7 +471,7 @@ create table ta_smadang_cmt (
     cmt_no number primary key, -- 댓글 시퀀스 넘버
     cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
     cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
-    cmt_madang_no number references ta_free_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_madang_no number references ta_share_madang(madang_no), -- 게시글 번호(왜래키)
     cmt_content clob, -- 댓글 내용
     cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
 --  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
@@ -494,7 +494,32 @@ increment by 1
 maxvalue 9999999;
 
 
+-- 자랑마당 댓글 테이블 
+create table ta_bmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_boast_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
 
+-- 자랑마당 댓글 시퀀스
+create sequence bmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
 
 
 
@@ -553,13 +578,35 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 �
 update ta_sidemenu_elements set use_down='Y' where menu_name='결제 관리';
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 6, 22);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 7, 22);
+commit;
 
+
+-- 로그인 로그 db
+create table ta_member_login_log (
+    mll_no number primary key, -- 시퀀스 PK 
+    mll_success char(1) check (mll_success in ('Y','N')), -- 로그인 성공 여부
+    mll_mem_no number, -- 로그인 한 회원 PK (찾아오지 못할 때, null(0값)을 넣을 생각인데, 외래키는 부모키를 찾을 수 없다고 에러나기 때문에 없앴음.) references ta_member(mem_no) 
+    mll_user_email varchar2(30), -- 로그인 시도할 때에 입력한 이메일
+    mll_datetime date, -- 로그인 일시
+    mll_ip varchar2(20), -- 로그인 한 IP
+    mll_reason varchar2(500), -- 로그인 성공/실패시 이유
+    mll_useragent varchar2(500), -- 로그인한 브라우저의 user agent
+    mll_url varchar2(500), -- 로그인한 페이지 주소
+    mll_referer varchar2(500) -- 이전 페이지 주소
+);
+
+-- 로그인 로그 시퀀스
+create sequence mll_seq 
+start with 1
+increment by 1
+maxvalue 999999999;
 
 -- 이 위 까지만 전체 실하면 됩니다.
 -----------------------------------------------<이 아래는 아직 테스트 중입니다. :>
 
-
-
+drop table ta_member_login_log;
+drop sequence mll_seq;
+select * from ta_member_login_log;
 
 
 

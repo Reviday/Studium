@@ -33,15 +33,15 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1005);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, 1005)) return;
 		BoastMadang bm=new BoastMadang();
 		bm.setMadangTitle(request.getParameter("subject"));
 		bm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
 		bm.setMadangWriterEmail(request.getParameter("userEmail"));
 		bm.setMadangWriterName(request.getParameter("userName"));
 		bm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
-		bm.setMadangContent(request.getParameter("bmarteditor"));
+		bm.setMadangContent(request.getParameter("smarteditor"));
 		
 		
 		//파일 받기 및 넣기

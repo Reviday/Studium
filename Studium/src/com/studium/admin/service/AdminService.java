@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.studium.admin.model.dao.AdminDao;
+import com.studium.admin.model.vo.CanclePayMember;
+import com.studium.admin.model.vo.PayMember;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.member.model.vo.Member;
@@ -58,9 +60,52 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountPayMemberName(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountPayMemberName(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountCanclePayMemberEmail(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountCanclePayMemberEmail(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountCanclePayMemberName(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountCanclePayMemberName(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountPayMemberEmail(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountPayMemberEmail(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
 	public int selectCountMemberSearch(String grade, String status) {
 		Connection conn=getConnection();
 		int result=dao.selectCountMemberSearch(conn, grade, status);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountPayMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountPayMember(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int selectCountCanclePayMember() {
+		Connection conn=getConnection();
+		int result=dao.selectCountCanclePayMember(conn);
 		close(conn);
 		return result;
 	}
@@ -100,6 +145,20 @@ public class AdminService {
 		return list;
 	}
 	
+	public List<CanclePayMember> selectCanclePayMemberList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<CanclePayMember> list=dao.selectCanclePayMemberList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<PayMember> selectPayMemberList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<PayMember> list=dao.selectPayMemberList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
 	public List<Member> selectMemberPointList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberPointList(conn,cPage,numPerPage);
@@ -130,9 +189,37 @@ public class AdminService {
 		return list;
 	}
 	
+	public List<PayMember> selectPayMemberNameList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<PayMember> list=dao.selectPayMemberNameList(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
+	}
+	
 	public List<Member> selectMemberEmailList(int cPage, int numPerPage, String memberName){
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberEmailList(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
+	}
+	
+	public List<CanclePayMember> selectCanclePayMemberEmailList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<CanclePayMember> list=dao.selectCanclePayMemberEmailList(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
+	}
+	
+	public List<CanclePayMember> selectCanclePayMemberNameList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<CanclePayMember> list=dao.selectCanclePayMemberNameList(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
+	}
+	
+	public List<PayMember> selectPayMemberEmailList(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<PayMember> list=dao.selectPayMemberEmailList(conn,cPage,numPerPage, memberName);
 		close(conn);
 		return list;
 	}
@@ -158,6 +245,15 @@ public class AdminService {
 	public int deleteMember(String memNo) {
 		Connection conn = getConnection();
 		int result = dao.deleteMember(conn, memNo);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;	 
+	}
+	
+	public int deletePayMember(String memNo) {
+		Connection conn = getConnection();
+		int result = dao.deletePayMember(conn, memNo);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
 		close(conn);
@@ -215,6 +311,13 @@ public class AdminService {
 	public String showMemo(String memNo) {
 		Connection conn = getConnection();
 		String memo = dao.showMemo(conn, memNo);
+		close(conn);
+		return memo;
+	}
+	
+	public String memoPS(String memNo) {
+		Connection conn = getConnection();
+		String memo = dao.memoPS(conn, memNo);
 		close(conn);
 		return memo;
 	}

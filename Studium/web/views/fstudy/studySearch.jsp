@@ -46,7 +46,13 @@ body{
       <div class="a_title" >스터디 지역 찾기</div>
            <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form">
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value='<%=area %>'><%=area %></option>
+          <option value="<%=area %>">
+          <%if(area.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=area%>
+          <%} %>
+          </option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
           <option value='잠실'>잠실</option>
@@ -56,7 +62,13 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value='<%=category %>'><%=category %></option>
+          <option value="<%=category %>">
+         <%if(category.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=category%>
+          <%} %>
+          </option>
            <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
@@ -64,7 +76,13 @@ body{
       </select>
 
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value='<%=day %>'><%=day %></option>
+          <option value="<%=day %>">
+          <%if(day.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=day%>
+          <%} %>
+          </option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
@@ -164,6 +182,7 @@ body{
 		</div>
 </div>
 	</div>
+	<%@ include file="/views/common/pagination.jsp"%>
 </div>
 
   </div>

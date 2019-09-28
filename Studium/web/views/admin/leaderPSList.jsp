@@ -71,7 +71,7 @@
 					<td>
 						<%=l.getlGender()%>
 					</td>
-				<td class="pointConfirm"><%=l.getlEmail()%></td>
+				<td class="pointConfirm" id="<%=l.getlNo()%>"><%=l.getlEmail()%></td>
 				<td><%=l.getlPhone()%></td>
 				<td><%=l.getlType()%></td>
 				<td><%=l.getlArea()%></td>
@@ -93,7 +93,7 @@
 				<div class="pointPage-header">
 					<div>지원내용</div>
 					<div id="pointPageName">
-						<span>(<span id="pointPageEmail"></span>)</span>
+
 					</div>
 				</div>
 				<div class="PointTable">
@@ -182,6 +182,23 @@
     	})
     }
     
+    $(function() {
+        $('.pointConfirm').click(function(e) {
+        	var memNo = $(this).attr('id');
+        	$.ajax({
+        		url: "<%=request.getContextPath()%>/adminPSMemo",
+        		type: "POST",
+        		dataType: "json",
+        		data: {"memNo" : memNo},
+        		success: function(data){
+        			$("#pointPageName").text(data);
+        			$("#pointPageName").val(data);
+                	$("#pointPage").css("display","block");
+        		}
+        	})
+        });
+
+    })
     
   
 </script> 

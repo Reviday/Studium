@@ -7,6 +7,7 @@
 <%
     List<Category> listM=(List)request.getAttribute("categoryM");
 	List<Pstudy> pList=(List)request.getAttribute("pList");
+	
 	String day= String.valueOf(request.getAttribute("day"));
 	String category= String.valueOf(request.getAttribute("category"));
 	String area= String.valueOf(request.getAttribute("area"));
@@ -29,24 +30,26 @@ body{
 }
 
   </style>
-
-<body>
-    <%@ include file="../../views/common/header.jsp" %> 
-    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+<%@ include file="../../views/common/header.jsp" %> 
+ <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 		<div class="header-background-cover">
       </div>
     </div>
-  <!-- END header -->
- 
-  
-  <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
+     <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
   <div class="container studycon">
     <section >
     <div style=" padding-top: 50px; margin-left:150px;">
       <div class="a_title">스터디 지역 찾기</div>
-      <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form">
+      <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form" name="frm1"  onsubmit="return valid_check();" >
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value='<%=area %>'><%=area %></option>
+          <option value="<%=area%>">
+          <%if(area.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=area%>
+          <%} %>
+          </option>
+          <option value="all">전체</option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
           <option value='잠실'>잠실</option>
@@ -56,29 +59,41 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value='<%=category %>'><%=category %></option>
+		 <option value="all">
+		 <%if(category.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=category%>
+          <%} %>
+		 </option>
            <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
 			<% } } %>
       </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value='<%=day %>'><%=day %></option>
+           <option value="all">
+            <%if(day.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=day%>
+          <%} %>
+           </option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
-       <button class="submit">필터 검색<span class="arrow"></span></button>
+       <button  class="submit" >필터 검색<span class="arrow"></span></button>
          
       </form>
       
-      <% if(loginMember!=null&&loginMember.getMemUserEmail()=="admin@studium.com"){ %>
+      <% if(loginMember!=null&&loginMember.getMemCode()==('M')){ %>
       <div><input type="image" src="<%=request.getContextPath()%>/img/admin.png" value="등록" onclick="fn_insert();"> </div>
      <%}else{ %>
      	
      <%} %>
      
     </div>
-<div class="plist">
+<div class="plist" id="pplist">
 	<div class="a_title">강사 스터디 </div>
 	<div class="study-list">
 		<div class="row ">
@@ -115,12 +130,33 @@ body{
 						diffDays = diff / (24 * 60 * 60 * 1000);
 						
 						
+							if((diffDays<=3&&diffDays>=1)){ %>
 						
-						if(diffDays<1){ %>
-							<div class="drawing-near">마감 임박</div>
-						<%	}else{ %>
-						<div class="recruiting-status new">신규 모집</div>
-						<%} %> 
+						<div class="drawing-near">마감 임박</div>
+
+					<%}else if(diffDays>3){ 
+						if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
+					%>
+						<div class="drawing-near">마감 임박</div>
+						<%}else if(p.getpStudypserson()-p.getpStudyMember()==0){%>
+						<div class="full-cover">마감</div>
+						<% }else{ %>
+						<div class="recruiting-status new">신규모집</div>
+						<%} %>
+					<%}else{
+					if((loginMember!=null)&&loginMember.getMemCode()=='M')	{
+						%>
+						<div class="full-cover" style="z-index:0;">
+					마감
+					 </div>
+				<% }else{
+						
+					%>
+					
+					<div class="full-cover">
+					마감
+					 </div>
+					<%} }%> 
 					 <%
                     	if(loginMember!=null) {
                     %>
@@ -163,15 +199,13 @@ body{
 			<%} 
 	  %>
 		</div>
-
+	
 	</div>
+	<%@ include file="/views/common/pagination.jsp"%>
 </div>
 </div>
   </div>
-
-
-
-  <script type="text/javascript" src=""></script>
+    <script type="text/javascript" src=""></script>
 	
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <script>
@@ -189,8 +223,4 @@ body{
     <script>
         AOS.init();
     </script>
-</section>
-<%@ include file="../../views/common/footer.jsp" %> 
-</body>
-
-</html>
+  <%@ include file="../../views/common/footer.jsp" %> 

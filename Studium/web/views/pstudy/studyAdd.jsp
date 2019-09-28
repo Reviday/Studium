@@ -32,6 +32,11 @@
             vertical-align: middle;
             cursor: pointer;
         }
+        .header-background-cover {
+         height: 95px;
+         background-color: rgba(0,0,0,0.8);
+      }
+        
 
 	</style>
 
@@ -84,7 +89,11 @@
 </head>
 
 <body>
-
+    <%@ include file="../../views/common/header.jsp" %> 
+    <div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
+		<div class="header-background-cover">
+      </div>
+    </div>
 
     <table width="100%" border="0" >
         <tr>
@@ -174,7 +183,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개1</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro1" id="p_intro1" cols="30"
+                                                        <textarea name="p_intro1" id="p_intro1" cols="30" class="memo"
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
@@ -183,7 +192,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개2</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro2" id="p_intro2" cols="30"
+                                                        <textarea name="p_intro2" id="p_intro2" cols="30" class="memo"
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
@@ -247,6 +256,11 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <INPUT TYPE="text" NAME="p_teachername" size=50 /></td>
                                                 </tr>
+                                                  <tr>
+                                                    <td width="24%" align="left" bgcolor="#EEEEEE">강사번호</td>
+                                                    <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                       <input type="number" id="f_teacherno" name="f_teacherno"/>
+                                                </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">별점</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
@@ -281,7 +295,20 @@
             </td>
         </tr>
     </table>
+     <style>
+     .memo {
+	width: 100%;
+	height: 160px;
+	background-color: floralwhite;
+	border: none;
+	outline-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	resize: none;
+}
      
+     
+     </style>
     <script>
         $(".time1").timepicker({
             step: 30, //시간간격 : 30분
@@ -361,6 +388,7 @@
 
 			return resultString;
 		}
+		
 
 	
     </script>

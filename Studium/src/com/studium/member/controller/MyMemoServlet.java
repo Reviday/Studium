@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.category.model.service.CategoryService;
-import com.studium.category.model.vo.Category;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyMemo;
+
+import common.template.LoginCheck;
 
 /**
  * Servlet implementation class MyMemoServlet
@@ -34,10 +35,15 @@ public class MyMemoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		Member m=new MemberService().selectNo(memberNo);
+		MemberService ms= new MemberService();
+		Member m=ms.selectNo(memberNo);
+		//마이메모 조회해오기 
+		List<MyMemo> listMemo= ms.selectMyMemo(memberNo);
 		request.setAttribute("member", m);
-		System.out.println("서블릿들어옴");
+		request.setAttribute("memoList", listMemo);
+		System.out.println(listMemo);
 		request.getRequestDispatcher("/views/myPage/myMemo.jsp")
 		.forward(request,response);	
 		

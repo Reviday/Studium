@@ -42,7 +42,6 @@ public class FreeMadangViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1003);
 		
 		// 자유마당이므로 모든 회원,비회원에게 열람권이 부여된다.
 		// 때문에 파라미터로 받을 인수는 글번호와 cPage 뿐이다.
@@ -84,7 +83,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 		//Pagination 
 		FreeMadangCmtService service=new FreeMadangCmtService();
 		int totalData=service.selectCountList(no); // 총 데이터 개수
-		String URLmapping="/madnag/freeMadangView"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping="/madang/freeMadangView"; // 패턴을 넘겨주기 위한 변수
 		CmtPaginationTemplate pt=new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		List<FreeMadangCmt> cmtList=service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");

@@ -32,8 +32,8 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1003);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		FreeMadangCmt cmt=new FreeMadangCmt();
 		int madangNo=Integer.parseInt(request.getParameter("madangNo"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -48,10 +48,12 @@ public class FreeMadangAddCommentServlet extends HttpServlet {
 		
 		String view="";
 		if(result>0) {
-			view="/madnag/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			request.setAttribute("choice", "자유마당");
+			request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		} else {
 			String msg="댓글 작성에 실패하였습니다.";
-			String loc="/madnag/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
+			String loc="/madang/freeMadangView?madangNo="+madangNo+"&cPage="+cPage;
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

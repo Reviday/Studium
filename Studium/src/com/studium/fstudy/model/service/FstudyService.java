@@ -56,9 +56,9 @@ public class FstudyService {
 		return result;
 	
 	}
-	public List<Fstudy> searchFstudy(String area,String day,String category){
+	public List<Fstudy> searchFstudy(String setString,String area,String day,String category,int cPage,int numPerPage){
 		Connection conn=getConnection();
-		List<Fstudy> list=dao.searchFstudy(conn,area,day,category);
+		List<Fstudy> list=dao.searchFstudy(conn,setString,area,day,category, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -124,6 +124,12 @@ public class FstudyService {
 		int result=dao.addPerson(conn,fno,count);
 		if(result>0) {commit(conn);}
 		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	public int selectCountSearch(String area, String day, String category) {
+		Connection conn=getConnection();
+		int result=dao.selectCountSearch(conn,area,day,category);
 		close(conn);
 		return result;
 	}

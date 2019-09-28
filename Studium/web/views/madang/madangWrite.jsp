@@ -7,11 +7,11 @@
  	//추후, DB에 넣어서 가져오는 방법으로 처리할 예정.
  	String mTit="",mSub="";
  	switch(locate) {
- 	case"intro" : break;
+ 	case"intro" :  break;
  	case"study" : break;
  	case"free" : mTit="자유마당"; mSub="자유롭게 글을 올리는 공간입니다."; break;
  	case"share" : mTit="공유마당"; mSub="자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)";break;
- 	case"boast" : break;
+ 	case"boast" : mTit="자랑마당"; mSub="자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!";break;
  	case"question" : break;
  	}
  %>
@@ -64,7 +64,7 @@
                                 <label for="files" class="item">업로드<a id="fileDB" class="ico_file" href="#"></a></label>
                                 
                                 <input type="file" id="files" class="upload-hidden" name="file" multiple>
-                                <input class="upload-name" value="파일선택" disabled="disabled">
+                                <input class="upload-name" value="no files yet" disabled="disabled">
                                 <!--<button onclick="abortRead();">Cancel read</button> 지금 구현하지않음.-->
                                 <div id="progress_bar">
                                     <div class="percent">0%</div>

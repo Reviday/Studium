@@ -21,7 +21,7 @@
 <%@ include file="/views/common/sideMenuBar.jsp"%>	
 </div>
 <div class="col-lg-1"></div>
-		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9">
+		<div class="wrapper col-xs-6 col-sm-6 col-md-7 col-lg-9" style="min-height: 600px">
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">
@@ -76,8 +76,19 @@
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
-												 <%=sm.getMadangTitle()%>
+											<a class="article" 
+											<%
+												if(loginMember!=null) {
+											%>
+											href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
+											<%
+												} else {
+											%>
+												onclick="fn_needLogin();return false;"
+											<%
+												}
+											%>
+												 ><%=sm.getMadangTitle()%>
 											</a>
 										</div>
 									</div>

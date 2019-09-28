@@ -1,7 +1,7 @@
 select * from tab;
 drop table my_dibs;
 drop table my_purchase;
-select seq_pstudy.nextval from dual;
+
 drop table todo_list;
 drop table ta_member;
 create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
@@ -53,8 +53,6 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
 
 
 --무료스터디 db
-alter table f_study  MODIFY (f_category VARCHAR2(25));
-commit;
 create table f_study(
     f_no number constraint fstudy_pk primary key, --스터디 번호
     f_title varchar2(30), --스터디 타이틀
@@ -62,7 +60,7 @@ create table f_study(
     f_area varchar2(30), --스터디 지역
     f_day  varchar2(30), --스터디 평일,주말
     f_studyperson number, --스터디 인원
-    f_category varchar2(25),--스터디 카테고리
+    f_category varchar2(15),--스터디 카테고리
     f_intro1 varchar2(1000), --스터디 소개 1
     f_intro2 varchar2(1000), --스터기 소개 2
     f_imgtitle varchar(225), --이미지 타이틀
@@ -164,7 +162,10 @@ INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,1,default,SYSDATE,'
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'N',SYSDATE,'N','Y');
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'N',SYSDATE,'Y','Y');
 INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,default,1,SYSDATE,'Y',SYSDATE,'Y','N');
-SELECT * FROM MY_PURCHASE;
+INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,10028,41,default,SYSDATE,'Y',SYSDATE,'Y','N');
+SELECT * FROM MY_PURCHASE where mem_no='10028';
+commit;
+select * from f_study;
 SELECT * FROM TA_MEMBER;
 --TODOLIST테이블
 CREATE TABLE TODO_LIST(
@@ -182,7 +183,7 @@ CREATE TABLE TODO_LIST(
 select * from p_study;
 select * from f_study;
 select * from ta_member;
-
+select * from my_purchase;
 
 update ta_member set mem_email='aaa@naver.com' where mem_no=10001;
 select * from tab;
@@ -311,3 +312,40 @@ commit;
 select * from ta_member;
 select * from my_purchase;
 select * from tab;
+
+alter table p_study add p_studyMember  number default 0;
+alter table f_study add p_studyMember  number default 0;
+ALTER TABLE f_study RENAME COLUMN p_studyMember TO f_studyMember;
+
+update f_study set f_studyMember=8;
+update p_study set p_studyMember=8;
+select * from f_study;
+commit;
+
+drop table my_memo;
+--My Memo 테이블
+create table my_memo(
+    MEMO_ID NUMBER PRIMARY KEY,--메모 주키
+    MEM_NO number constraint MEMO_MEM_FK references ta_member(mem_no), --메모를 가진 회원의 번호
+    MEMO_FRONT_ID NUMBER CONSTRAINT MEMO_FRONT_ID_NN NOT NULL,--프론트 화면에서 생성한 ID값
+    MEMO_CONTENTS clob , -- 메모내용
+    MEMO_LEFT NUMBER NOT NULL,-- 메모 좌표 LEFT
+    MEMO_TOP NUMBER NOT NULL, --메모의 좌표 TOP
+    MEMO_DELETE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT MEMO_STATUS_CK CHECK (MEMO_DELETE_STATUS IN ('N','Y'))--메모 삭제Y,
+);
+Select * 
+from my_memo 
+where mem_no=10028
+order by memo_front_id 
+;
+drop sequence seq_my_memo;
+create sequence seq_my_memo
+start with 1
+increment by 1;
+SELECT * FROM MY_MEMO WHERE MEM_NO=10028;
+
+insert into my_memo values(seq_my_memo.nextval,10028,1,'메모 내용이에욥 ㅇㅂㅇ',100,100,'N');
+insert into my_memo values(seq_my_memo.nextval,10028,2,'두번째 메모 내용이에욥 ㅇㅂㅇ',110,200,'N');
+insert into my_memo values(seq_my_memo.nextval,10028,3,'셋셋세셋번째 메모 내용이에욥!!!',600,300,'N');
+commit;
+delete from my_memo where mem_no=10028;

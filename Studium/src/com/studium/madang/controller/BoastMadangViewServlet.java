@@ -41,8 +41,6 @@ public class BoastMadangViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		new LoginCheck(request, response, 1005);
-		
 		int no = Integer.parseInt(request.getParameter("madangNo"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 
@@ -74,14 +72,14 @@ public class BoastMadangViewServlet extends HttpServlet {
 		}
 
 		// View에 보여질 글을 가져온다.
-		BoastMadang sm = new BoastMadangService().selectMadang(no, hasRead);
+		BoastMadang bm = new BoastMadangService().selectMadang(no, hasRead);
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, BoastMadang> preNext = new BoastMadangService().selectPreNext(no);
 
 		// Pagination
 		BoastMadangCmtService service = new BoastMadangCmtService();
 		int totalData = service.selectCountList(no); // 총 데이터 개수
-		String URLmapping = "/madnag/BoastMadangView"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping = "/madang/BoastMadangView"; // 패턴을 넘겨주기 위한 변수
 		CmtPaginationTemplate pt = new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리
 		List<BoastMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
 		
@@ -92,9 +90,9 @@ public class BoastMadangViewServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		String view="";
-		if (sm != null) {
+		if (bm != null) {
 			view = "/views/madang/boastMadangView.jsp";
-			request.setAttribute("sm", sm);
+			request.setAttribute("bm", bm);
 			request.setAttribute("preNext", preNext);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("totalData", totalData);
@@ -112,6 +110,7 @@ public class BoastMadangViewServlet extends HttpServlet {
 		request.setAttribute("choiceSub", choiceSub);
 		request.setAttribute("elements", elements);
 		request.getRequestDispatcher(view).forward(request, response);
+		
 	}
 
 	/**

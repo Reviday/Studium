@@ -163,16 +163,16 @@ public class PstudyDao {
 		}return list;
 	}
 	
-	public List<Pstudy> searchPstudy(Connection conn,String area,String day,String category){
+	public List<Pstudy> searchPstudy(Connection conn,String setString,String area,String day,String category,int cPage,int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Pstudy>list=new ArrayList();
-		String sql=prop.getProperty("searchPstudy");
+		String sql=prop.getProperty(setString);
 		try {
+			if(setString.equals("allall")) {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, area);
-			pstmt.setString(2, day);
-			pstmt.setString(3,category);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Pstudy p=new Pstudy();
@@ -199,6 +199,237 @@ public class PstudyDao {
 				p.setpStudyMember(rs.getInt("p_studyMember"));
 				list.add(p);
 			}
+		 }
+			if(setString.equals("nota")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, area);
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);
+				pstmt.setInt(3, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notac")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, area);
+				pstmt.setString(2, category);
+				pstmt.setInt(3, (cPage-1)*numPerPage+1);
+				pstmt.setInt(4, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notc")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);
+				pstmt.setInt(3, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notad")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, area);
+				pstmt.setString(2, day);
+				pstmt.setInt(3, (cPage-1)*numPerPage+1);
+				pstmt.setInt(4, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notd")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, day);
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);
+				pstmt.setInt(3, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notcd")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+				pstmt.setString(2, day);
+				pstmt.setInt(3, (cPage-1)*numPerPage+1);
+				pstmt.setInt(4, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			if(setString.equals("notacd")) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, area);
+				pstmt.setString(2, category);
+				pstmt.setString(3, day);
+				pstmt.setInt(4, (cPage-1)*numPerPage+1);
+				pstmt.setInt(5, cPage*numPerPage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Pstudy p=new Pstudy();
+					p.setpNo(rs.getInt("p_no"));
+					p.setpTitle(rs.getString("p_title"));
+					p.setpName(rs.getString("p_name"));
+					p.setpArea(rs.getString("p_area"));
+					p.setpDay(rs.getString("P_day"));
+					p.setpStudypserson(rs.getInt("p_studyperson"));
+					p.setpPrice(rs.getInt("p_price"));
+					p.setpCategory(rs.getString("p_category"));
+					p.setpIntro1(rs.getString("p_intro1"));
+					p.setpIntro2(rs.getString("p_intro2"));
+					p.setpImgtitle(rs.getString("p_imgtitle"));
+					p.setpImg1(rs.getString("p_img1"));
+					p.setpImg2(rs.getString("p_img2"));
+					p.setpImg3(rs.getString("p_img3"));
+					p.setpTimestart(rs.getString("p_timestart"));
+					p.setpTimeend(rs.getString("P_timeend"));
+					p.setpDatestart(rs.getDate("p_datestart"));
+					p.setpDateend(rs.getDate("p_dateend"));
+					p.setpLike(rs.getInt("p_like"));
+					p.setpTeachername(rs.getString("p_teachername"));
+					p.setpStudyMember(rs.getInt("p_studyMember"));
+					list.add(p);
+				}
+			 }
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -364,6 +595,7 @@ public class PstudyDao {
 			pstmt.setDate(17, p.getpDateend());
 			pstmt.setInt(18, p.getpLike());
 			pstmt.setString(19, p.getpTeachername());
+			pstmt.setInt(20, p.getpStudyTeacherno());
             result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -423,7 +655,7 @@ public class PstudyDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(result);
+	
 		return result;
 	}
 	
@@ -441,6 +673,37 @@ public class PstudyDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public int selectCountSearch(Connection conn,String area, String day, String category) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		if(area.equals("all")) {
+			area="%";
+		}
+		if(day.equals("all")) {
+			day="%";
+		}
+		if(category.equals("all")) {
+			category="%";
+		}
+		String sql =prop.getProperty("searchcount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, area);
+			pstmt.setString(2, category);
+			pstmt.setString(3, day);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
 	}
 	
 }

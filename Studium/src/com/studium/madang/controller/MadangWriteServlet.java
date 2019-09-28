@@ -38,9 +38,6 @@ public class MadangWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("loginMember");
-		
 		// 어느 페이지의 글쓰기인지 확인하고자 받는 변수
 		// 글쓰기 페이지는 하나의 서블릿으로 처리
 		String locate = request.getParameter("locate");
@@ -52,8 +49,8 @@ public class MadangWriteServlet extends HttpServlet {
 		case "boast" : code=1005; break;
 		case "question" : code=1006; break;
 		}
-		new LoginCheck(request, response, code);
-		
+		// 2차 로그인 체크. 
+		if(!new LoginCheck().doLoginCheck(request, response, code)) return;
 		String view = "/views/madang/madangWrite.jsp";
 		
 		// SideMenuElement
