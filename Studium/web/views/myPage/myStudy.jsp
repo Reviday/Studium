@@ -30,13 +30,14 @@
         <div class="col-11 myReview">
         	<div class="review-top">
         	
-        		<h5>ㅇㅇㅇ님 ㅁㅁㅁ스터디 어떠셨나요?</h5>
-        		<div>+</div>
+        		<h5>스터디 후기를 입력해 주세요!</h5>
+        		<div class="review-close">+</div>
         	</div>
         	<div class="review-contents" >
-        		<form>
-        		<textarea placeholder="생생한 후기를 남겨주세요:)"></textarea>
-        		<input type="hidden"  class="hidden_pNo" name="pNo" value="">
+        		<form id="memoform">
+        		<textarea name="my-review" class="memo" placeholder="생생한 후기를 남겨주세요:)"></textarea>
+        		<input type="hidden" class="hidden_no" name="no" value="">
+        		<input type="hidden" name="memNo" value="<%=m.getMemNo() %>">
         		</form>
         	</div>
         	
@@ -141,17 +142,24 @@ $("#p_study").on('click', function () {
 $(function() {
     $('.btn-gotochat').click(function(e) {
     	var pNo = $(this).attr('id');
+    	var memNo=<%=m.getMemNo()%>;
     	console.log(pNo);
-    	$(".hidden_pNo").val(pNo);
+    	console.log(memNo);
+    	//히든값에 pNo 붙여줌
+    	$(".hidden_no").val(pNo);
+    	
     	$.ajax({
-    		url: "<%=request.getContextPath()%>/myPage/review",
+    		url: "<%=request.getContextPath()%>/myPage/reviewSelect",
     		type: "POST",
     		dataType: "json",
-    		data: {"memNo" : memNo},
+    		data: {"memNo" : memNo, "pNo":pNo},
     		success: function(data){
     			$(".memo").text(data);
-    			$(".memo").val(data);
-            	$("#pointPage").css("display","block");
+            	$(".review-wrapper").css("display","block");
+            	console.log("들어옴");
+    		},
+    		error:function (data){
+    			console.log(data);
     		}
     	})
     });
@@ -159,15 +167,34 @@ $(function() {
 })
 
 
+//리뷰제출버튼 눌렀을 때 
+$('.review-btn').click(function(e) {
+	 function updateMemo(){
+ 		var params = jQuery("#memoform").serialize();
+ 		$.ajax({
+ 			url: "<%=request.getContextPath()%>/myPage/reviewUpdate",
+ 			type: "POST",
+ 			dataType: "json",
+ 			data: params,
+ 			success: function(data){
+ 				console.log(data);
+ 				$(".memo").text(data);				
+ 			}
+ 		});
+ 	}
+	
+});
+
+
 $(function(){
 	var modal = document.getElementById('review-wrapper');                                         
-    $(".closePointPage").click(function() {
-        $("#pointPage").css("display","none");
+    $(".review-close").click(function() {
+        $(".review-wrapper").css("display","none");
     }); 
 
     window.onclick = function(event) {
         if (event.target == modal) {
-        	$("#pointPage").css("display","none");
+        	$(".review-wrapper").css("display","none");
         }
     }
 });

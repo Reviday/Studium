@@ -612,6 +612,7 @@ div .img-category {
 	
 	background-color:rgba(0,0,0,0.8);
 	z-index:9998;
+	display:none;
 	
 	
 }
@@ -636,6 +637,12 @@ div .img-category {
 	margin-bottom:0px;
 }
 .review-close{
+	position:relative;
+	float:right;
+	cursor:pointer;
+	top:-50px;
+	left:10px;
+	font-size:2em;
 	transform:rotate(45deg);
 }
 .review-btn{
