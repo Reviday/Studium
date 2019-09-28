@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.member.model.service.MemberService;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class settingEndServlet
  */
@@ -29,6 +31,9 @@ public class SettingEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
+		
 		int no=Integer.parseInt(request.getParameter("no"));
 		String receiveEmail=request.getParameter("receiveEmail");
 		String useNote=request.getParameter("useNote");

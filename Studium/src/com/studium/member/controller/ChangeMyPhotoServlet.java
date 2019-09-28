@@ -17,6 +17,7 @@ import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
 import common.policy.StudiumFileRenamePolicy;
+import common.template.LoginCheck;
 
 /**
  * Servlet implementation class ChangeMyPhotoServlet
@@ -37,6 +38,8 @@ public class ChangeMyPhotoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "사진 변경 오류");

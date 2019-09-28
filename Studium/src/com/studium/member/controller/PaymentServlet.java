@@ -13,6 +13,8 @@ import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 import com.studium.member.model.vo.MyPurchase;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class MypageServlet
  */
@@ -32,6 +34,9 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		MemberService ms=new MemberService();
 		Member m=ms.selectNo(memberNo);

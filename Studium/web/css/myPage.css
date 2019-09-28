@@ -604,6 +604,70 @@ div .img-category {
     height: 300px;
     /* box-shadow: 3px 3px 20px 1px #999; */
 }
+/* 후기, review */
+.review-wrapper{
+	position:fixed;
+	width:100%;
+	height:100%;
+	
+	background-color:rgba(0,0,0,0.8);
+	z-index:9998;
+	
+	
+}
+.myReview{
+	width:50%;
+	background-color:white;
+	position:absolute;
+	top:150px;
+	left:50%;
+	transform:translateX(-50%);
+	z-index:9999;
+	padding:20px;
+	border:1px solid;
+	border-radius:10px;
+}
+.review-top{
+	padding:15px;
+	border-bottom:1px solid;
+	margin-bottom:15px;
+}
+.review-top h5{
+	margin-bottom:0px;
+}
+.review-close{
+	transform:rotate(45deg);
+}
+.review-btn{
+	float:right;
+	position:relative;
+	background-color:#e9e9e9;
+	border:1px solid #bdbebd;
+	border-radius:5px;
+	padding:3px 15px;
+    outline:0;
+    cursor:pointer;
+}
+.review-btn:hover{
+	color:white;
+	background-color:gray;
+	
+}
+.review-contents textarea{
+ position: relative;
+    width: 100%;
+    height: 170px;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #e9e9e9;
+    border: none;
+    resize: none;
+    outline:none;
+
+}
+
+
 /* pay */
 
 .myPay {

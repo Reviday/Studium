@@ -14,6 +14,8 @@ import com.studium.member.model.vo.Member;
 import com.studium.mypage.model.service.MyDibsService;
 import com.studium.mypage.model.vo.MyCalendar;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class MypageServlet
  */
@@ -33,6 +35,9 @@ public class MyScheduleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
 		List<MyCalendar> mlist = new MyDibsService().selectCalendar(memberNo);

@@ -15,6 +15,8 @@ import com.studium.category.model.vo.Category;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class MypageServlet
  */
@@ -35,6 +37,8 @@ public class MyInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		
 		String email=request.getParameter("loginMember");
 		String password=request.getParameter("password");

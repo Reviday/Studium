@@ -24,8 +24,25 @@
       </div>
     </div>
 
-
     <div class="section-content" style="background-color: rgb(240, 240, 240)">
+    <!-- 후기 모달 -->
+    <div class="review-wrapper"id="review-wrapper" >
+        <div class="col-11 myReview">
+        	<div class="review-top">
+        	
+        		<h5>ㅇㅇㅇ님 ㅁㅁㅁ스터디 어떠셨나요?</h5>
+        		<div>+</div>
+        	</div>
+        	<div class="review-contents" >
+        		<form>
+        		<textarea placeholder="생생한 후기를 남겨주세요:)"></textarea>
+        		<input type="hidden"  class="hidden_pNo" name="pNo" value="">
+        		</form>
+        	</div>
+        	
+        		<input type="button" class="review-btn" value="제출">
+        </div>
+     </div>
         <div class="row">
             <div class="col-sm-2">
             </div>
@@ -43,26 +60,28 @@
 
 
                 <div class="study-list" id="p_study_div">
+                
 				<%if(!(myplist.size()<0)){ 
 					for(Pstudy p :myplist){ %>
 
                     <div class="row"  >
-                        <div data-aos="fade-up" class="myStudy-card col-11" OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'">
+                        <div data-aos="fade-up" class="myStudy-card col-11" >
                             <div class="study">
                                 <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>" class="study-main-img">
                             </div>
 
                             <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImgtitle() %>" class="study-reader-img">
                             <div class="study-context">
-                                <h3><%=p.getpTitle()%></h3>
+                                <h3 OnClick="location.href ='<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>'"><%=p.getpTitle()%></h3>
                                 <p><%=p.getpDatestart()%> ~ <%=p.getpDateend() %><span>진행중</span></p>
                                 <p><%=p.getpTeachername()%></p>
-                                <button class="btn btn-gotochat">채팅방 가기</button>
-                                <button class="btn btn-gotochat">후기 작성</button>
+                                <button class="btn btn-gotochat" id="<%=p.getpNo()%>">후기 작성</button>
+                                	
                             </div>
+                            
                         </div>
+                        
                     </div>
-                    
               
 	                 	<% 
 						}
@@ -85,7 +104,7 @@
                                 <p><%=f.getfDatestart()%> ~ <%=f.getfDateend()%><span>진행중</span></p>
                                 <p><%=f.getfReadername()%></p>
                                 <button class="btn btn-gotochat">채팅방 가기</button>
-                                <button class="btn btn-gotochat">후기 작성</button>
+                                <button class="btn btn-gotochat" id="">후기 작성</button>
                             </div>
                         </div>
                    	 </div>
@@ -116,6 +135,41 @@ $("#f_study").on('click', function () {
 $("#p_study").on('click', function () {
 	 $('#p_study_div').show();
 	 $('#f_study_div').hide();
+});
+
+//리뷰쓰기 버튼 눌렀을 때 
+$(function() {
+    $('.btn-gotochat').click(function(e) {
+    	var pNo = $(this).attr('id');
+    	console.log(pNo);
+    	$(".hidden_pNo").val(pNo);
+    	$.ajax({
+    		url: "<%=request.getContextPath()%>/myPage/review",
+    		type: "POST",
+    		dataType: "json",
+    		data: {"memNo" : memNo},
+    		success: function(data){
+    			$(".memo").text(data);
+    			$(".memo").val(data);
+            	$("#pointPage").css("display","block");
+    		}
+    	})
+    });
+
+})
+
+
+$(function(){
+	var modal = document.getElementById('review-wrapper');                                         
+    $(".closePointPage").click(function() {
+        $("#pointPage").css("display","none");
+    }); 
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        	$("#pointPage").css("display","none");
+        }
+    }
 });
 
 </script>

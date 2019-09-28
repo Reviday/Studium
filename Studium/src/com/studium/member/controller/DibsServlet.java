@@ -21,6 +21,7 @@ import com.studium.mypage.model.vo.MyDibs;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
+import common.template.LoginCheck;
 import common.template.PaginationTemplate;
 
 /**
@@ -42,6 +43,9 @@ public class DibsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		Member m=new MemberService().selectNo(memberNo);
 		MyDibsService service=new MyDibsService();

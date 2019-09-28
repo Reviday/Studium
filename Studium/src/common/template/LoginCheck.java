@@ -27,6 +27,7 @@ public class LoginCheck {
 		if(m==null) {
 			msg="[LoginError:CODE"+code+"] 잘못된 경로입니다.";
 			switch(code) {
+			case 1000 : loc="/index"; break;
 			case 1001 : loc="/madang/introMadang"; break;
 			case 1002 : loc="/madang/studyMadangList"; break;
 			case 1003 : loc="/madang/freeMadangList"; break;

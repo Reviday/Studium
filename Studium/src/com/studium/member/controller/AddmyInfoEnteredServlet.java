@@ -17,6 +17,8 @@ import com.studium.category.model.vo.Category;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
+import common.template.LoginCheck;
+
 /**
  * Servlet implementation class AddmyInfoEnteredServlet
  */
@@ -36,7 +38,8 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int no=Integer.parseInt(request.getParameter("no"));
 		//생일 멤버객체에서 sql로 해놔서 parse방법이 다름
 		String birthDay=request.getParameter("birthday");

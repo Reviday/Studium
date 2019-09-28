@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.studium.category.model.service.CategoryService;
 import com.studium.category.model.vo.Category;
 
+import common.template.LoginCheck;
+
 
 /**
  * Servlet implementation class AddmyInfo
@@ -32,6 +34,9 @@ public class AddmyInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
+		
 		//중분류
 		List<Category> listM=new CategoryService().selectTitleM();
 		//대분류
