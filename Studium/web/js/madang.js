@@ -55,6 +55,21 @@ function fn_openCommentArea() {
 	}
 };
 
+function fn_likeUp(path, rocate, madangNo, memNo, REMOTE_ADDR) {
+	$.ajax({
+		url:path+"/madang/"+rocate+"MadangLikeUp",
+		type:"post",
+		dataType:"json",
+		data: { "madangNo" :madangNo, 
+				"memNo" : memNo,
+				"REMOTE_ADDR" : REMOTE_ADDR},
+		success : function(data) {
+			console.log(data.msg);
+			console.log(data.result);
+			console.log(data.madang);
+		}
+	});
+};
 
 function convertToTag(textArea) {
 	var lines = textArea.value.split("\n");

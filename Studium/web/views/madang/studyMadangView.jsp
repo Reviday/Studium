@@ -24,6 +24,8 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/madangview.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/studymadang.css"
+	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -60,9 +62,35 @@
 					<div class="fl">
 						<table role="presentation" cellspacing="0" cellpadding="0"
 							border="0">
-							<tbody>
-								<tr valign="top">
-									<td><span class="b m-tcol-c"><%=sm.getMadangTitle()%></span></td>
+							<tbody >
+								<tr valign="bottom" style="vertical-align: bottom;">
+									<td>
+										<div class="list-count-view">
+												<div class="votes">
+													<div class="votes-count text-center">
+														<a href="#" 
+														<%
+															if(loginMember!=null) {
+														%>
+															onclick="fn_likeUp('<%=request.getContextPath()%>','study','<%=sm.getMadangNo()%>','<%=loginMember.getMemNo()%>','<%=REMOTE_ADDR %>'); return false;"
+														<%		
+															} else {
+														%>
+															onclick="fn_needLogin(); return false;"
+														<%
+															}
+														%>
+														>
+															<%=sm.getMadangRecCount() %>
+														</a>
+													</div>
+													<div class="votes-text text-center">추천</div>
+												</div>
+										</div>
+									</td>
+									<td >
+										<span class="b m-tit"><%=sm.getMadangTitle()%></span>
+									</td >
 									<td nowrap="" class="m-tcol-c" style="opacity: 0.3">|</td>
 									<td nowrap="" class="m-tcol-c"><a href="#" onclick=""
 										class="m-tcol-c" style="color: #ccc">[현재 메뉴 위치]</a></td>
@@ -71,13 +99,15 @@
 						</table>
 					</div>
 					<!-- 작성일 -->
-					<div class="fr">
+					<div class="fr" style="margin:0 !important;">
 						<table role="presentation" cellspacing="0" cellpadding="0"
 							border="0">
 							<tbody>
-								<tr>
+								<tr valign="bottom" style="vertical-align: bottom; height:46px">
 									<td></td>
-									<td class="m-tcol-c date"><%=format.format(sm.getMadangRegisterDatetime())%></td>
+									<td nowrap="" class="m-tcol-c date">
+											<%=format.format(sm.getMadangRegisterDatetime())%>
+									</td>
 								</tr>
 							</tbody>
 						</table>

@@ -89,7 +89,7 @@
 												<%
 													} else {
 												%>
-													onclick="fn_needLogin();return false;"
+													href="#" onclick="fn_needLogin();return false;"
 												<%
 													}
 												%>

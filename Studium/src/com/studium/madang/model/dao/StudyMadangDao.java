@@ -218,6 +218,47 @@ public class StudyMadangDao {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rs);
+			close(pstmt);
+		} return result;
+	}
+	
+	public int checkLike(Connection conn, int madangNo, int memNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("checkLike");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			pstmt.setInt(2, memNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return result;
+	}
+	
+	public int insertLike(Connection conn, int madangNo, int memNo, String REMOTE_ADDR) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertLike");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setString(3, REMOTE_ADDR);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		} return result;
 	}

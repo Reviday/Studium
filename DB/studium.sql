@@ -1,9 +1,9 @@
--- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
--- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
-alter session set nls_date_format = 'YYYY.MM.DD HH24:MI:SS'; 
-
 drop table ta_sidemenu_elements;
 drop sequence ta_sidemenu_seq;
+drop table ta_study_madang CASCADE CONSTRAINT;
+drop sequence stmadang_seq;
+drop table ta_stmadang_cmt;
+drop sequence fmadang_cmt_seq;
 drop table ta_fmadang_cmt;
 drop sequence fmadang_cmt_seq ;
 drop table ta_free_madang CASCADE CONSTRAINT;
@@ -12,6 +12,12 @@ drop table ta_share_madang;
 drop sequence sboard_seq;
 drop table ta_member CASCADE CONSTRAINT;
 drop sequence mem_seq;
+drop table ta_member_login_log;
+drop sequence mll_seq;
+
+-- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
+-- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
+alter session set nls_date_format = 'YYYY.MM.DD HH24:MI:SS'; 
 
 /*해당 정보는 멤버 테이블에 필요한 정보들 */
 create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
@@ -122,17 +128,20 @@ create table ta_study_madang(
     madang_answer_count number default 0, -- 글 답변(풀이) 수 
     madang_status char(1) default 'Y' constraint stmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
 );
+
+-- 공부마당
+create sequence stmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.1',
     '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
 insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.<br>테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.',
     '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
 select * from ta_study_madang;
 commit;
--- 공부마당
-create sequence stmadang_seq 
-start with 1
-increment by 1
-maxvalue 999999;
+
 
 -- 공유마당
 create table ta_share_madang(
@@ -653,15 +662,33 @@ increment by 1
 maxvalue 999999999;
 
 -- 이 위 까지만 전체 실하면 됩니다.
------------------------------------------------<이 아래는 아직 테스트 중입니다. :>
 
+-----------------------------------------------<이 아래는 아직 테스트 중입니다. :>
+-- 좋아요(추천 테이블)
+-- 한 테이블로 처리하고 싶었는데, 외래키 지정때문에 마당마다 만들어야할 듯 싶다..
+create table ta_stmadang_like (
+    like_no number primary key, -- 시퀀스 pk
+    madang_no number references ta_study_madang(madang_no), -- 마당 번호 fk
+    mem_no number references ta_member(mem_no), -- 회원 번호 fk
+    like_datetime date default sysdate, -- 좋아요(추천) 일시
+    like_ip varchar2(20), -- 좋아요(추천) ip
+    unique (madang_no, mem_no)
+);
+
+create sequence stm_like_seq  
+start with 1
+increment by 1
+maxvalue 999999999;
+
+drop table ta_stmadang_like CASCADE CONSTRAINT;
+drop sequence stm_like_seq;
 drop table ta_member_login_log;
 drop sequence mll_seq;
 select * from ta_member_login_log;
 
-
-
-drop table ta_study_madang;
+SELECT COUNT(*) FROM TA_STMADANG_LIKE WHERE MEM_NO = 10000;
+select * from ta_stmadang_like ;
+drop table ta_study_madang ;
 drop sequence sboard_seq;
 
 -- 공부마당(or 풀이마당)

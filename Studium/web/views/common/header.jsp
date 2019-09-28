@@ -14,6 +14,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/img/studium_logo.png" type="image/x-icon" />
+<link rel="icon" href="<%=request.getContextPath() %>/img/studium_logo.png" type="image/x-icon" />
+
 <!-- font -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">

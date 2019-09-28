@@ -63,4 +63,19 @@ public class StudyMadangService {
 		close(conn);
 		return madangNo;
 	}
+	
+	public int insertLike(int madangNo, int memNo, String REMOTE_ADDR) {
+		Connection conn = getConnection();
+		int check = dao.checkLike(conn, madangNo, memNo);
+		int result = -1;
+		System.out.println("check:"+check);
+		if(check==0) {
+			result = dao.insertLike(conn, madangNo, memNo, REMOTE_ADDR);
+			System.out.println("result:"+result);
+			if(result>0) commit(conn);
+			else rollback(conn);
+		} 
+		close(conn);
+		return result;
+	}
 }

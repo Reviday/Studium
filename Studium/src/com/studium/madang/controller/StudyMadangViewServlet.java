@@ -90,7 +90,7 @@ public class StudyMadangViewServlet extends HttpServlet {
 		
 		String msg="";
 		String loc="";
-		String view="";
+		String view="/madang/studyMadangList";
 		if (sm != null) {
 			view = "/views/madang/studyMadangView.jsp";
 			request.setAttribute("sm", sm);
@@ -108,8 +108,11 @@ public class StudyMadangViewServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("choice", "공부마당");
-		request.setAttribute("choiceSub", choiceSub);
+		request.setAttribute("choiceSub", choiceSub!=null?choiceSub:"");
 		request.setAttribute("elements", elements);
+		System.out.println(view);
+		System.out.println(request);
+		System.out.println(response);
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
