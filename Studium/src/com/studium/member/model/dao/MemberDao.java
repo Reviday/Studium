@@ -20,6 +20,7 @@ import com.studium.member.model.vo.Member;
 import com.studium.member.model.vo.MemberLoginLog;
 import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
+import com.studium.story.model.vo.Story;
 
 public class MemberDao {
 
@@ -524,4 +525,79 @@ public class MemberDao {
 			close(pstmt);
 		} return result;
 	}
+	public Story reviewSelect(Connection conn, int memNo, int pNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("reviewSelect");
+		Story s=null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, pNo);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				s = new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setMemNo(rs.getInt("MEM_NO"));
+				s.setpNo(rs.getInt("P_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStoryStar(rs.getInt("STORY_STAR"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return s;
+	}
+	public int reviewInsert(Connection conn, Story s) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("reviewInsert");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, s.getMemNo());
+			pstmt.setInt(2, s.getpNo());
+			pstmt.setString(3, s.getStoryStudentpicture());
+			pstmt.setString(4, s.getStoryWrite());
+			pstmt.setString(5, s.getStoryContent());
+			pstmt.setTimestamp(6, s.getStoryTime());
+			pstmt.setString(7, s.getStoryTeachername());
+			pstmt.setString(8, s.getStoryTeacherpicture());
+			pstmt.setInt(9, s.getStoryStar());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int reviewUpdate(Connection conn, Story story, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("reviewUpdate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, story.getStoryContent());
+			pstmt.setInt(2, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }

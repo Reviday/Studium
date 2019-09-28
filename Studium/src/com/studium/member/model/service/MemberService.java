@@ -13,6 +13,7 @@ import com.studium.member.model.vo.Member;
 import com.studium.member.model.vo.MemberLoginLog;
 import com.studium.member.model.vo.MyMemo;
 import com.studium.member.model.vo.MyPurchase;
+import com.studium.story.model.vo.Story;
 
 public class MemberService {
 	
@@ -138,5 +139,29 @@ public class MemberService {
 		if(result>0) commit(conn);
 		else rollback(conn);
 	}
+	public Story reviewSelect(int memNo, int no) {
+		Connection conn=getConnection();
+		Story s=dao.reviewSelect(conn, memNo, no);
+		close(conn);
+		return s;
+	}
+	public int reviewInsert(Story s) {
+		Connection conn=getConnection();
+		int result=dao.reviewInsert(conn, s);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int reviewUpdate(Story story, int no) {
+		Connection conn=getConnection();
+		int result=dao.reviewUpdate(conn, story, no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 }
 

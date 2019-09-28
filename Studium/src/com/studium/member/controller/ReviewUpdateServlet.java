@@ -1,6 +1,7 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.studium.admin.service.AdminService;
 import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
+import com.studium.pstudy.model.service.PstudyService;
+import com.studium.pstudy.model.vo.Pstudy;
 import com.studium.story.model.vo.Story;
 
 /**
@@ -32,17 +35,38 @@ public class ReviewUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		System.out.println("update서블릿");
 		String review = request.getParameter("my-review");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int pNo = Integer.parseInt(request.getParameter("no"));
+		
+
+		MemberService service = new MemberService();
+		Member memM=service.selectNo(memNo);//학생정보 가져옴
+		PstudyService pService= new PstudyService();
+		Pstudy p=pService.selectpStudyVIew(pNo);//스터디 정보 가져옴
+		
+		Member teacherM=service.selectNo(p.getpStudyTeacherno());//teacher정보 가져옴
+
 		Story s=new Story();
 		s.setMemNo(memNo);
 		s.setpNo(pNo);
 		s.setStoryContent(review);
 		
-		MemberService service = new MemberService();
-		String memo = service.reviewUpdate(memNo, pNo);
+		//리뷰select해서 보여줌 
+		Story selects = service.reviewSelect(memNo, pNo);
+		//리뷰업데이트
+		int result= service.reviewUpdate(s, selects.getpNo());
+		if(result<=0) {//업데이트 되는 값 없으면 insert해줌
+
+			s.setStoryStudentpicture(memM.getMemPhoto());
+			s.setStoryWrite(memM.getMemName());
+			s.setStoryTeachername(teacherM.getMemName());
+			s.setStoryTeacherpicture(teacherM.getMemPhoto());
+			s.setStorySubject(p.getpCategory());
+			result= service.reviewInsert(s);
+			
+		}
 		String memo="넘기는값";
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(memo,response.getWriter());

@@ -169,19 +169,22 @@ $(function() {
 
 //리뷰제출버튼 눌렀을 때 
 $('.review-btn').click(function(e) {
-	 function updateMemo(){
- 		var params = jQuery("#memoform").serialize();
+		console.log('리뷰제출함수');
+ 		var params = $("#memoform").serialize();
+
+		console.log('리뷰제출함수3');
  		$.ajax({
  			url: "<%=request.getContextPath()%>/myPage/reviewUpdate",
  			type: "POST",
  			dataType: "json",
  			data: params,
  			success: function(data){
- 				console.log(data);
- 				$(".memo").text(data);				
+ 				console.log('제출성공');
+ 				$(".memo").text(data);	
+ 	        	$(".review-wrapper").css("display","none");
+ 				
  			}
  		});
- 	}
 	
 });
 

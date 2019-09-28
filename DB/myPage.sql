@@ -97,7 +97,7 @@ drop sequence seq_pstudy;
 --강사스터디 더미데이터
 insert into p_study values(seq_pstudy.nextval,'TEST P STUDY','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유');
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유',DEFAULT, 8);
 
 --무료스터디 더미데이터
 insert into f_study values(seq_fstudy.nextval,'1','2','강남','주말',10,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
@@ -349,3 +349,13 @@ insert into my_memo values(seq_my_memo.nextval,10028,2,'두번째 메모 내용이에욥 �
 insert into my_memo values(seq_my_memo.nextval,10028,3,'셋셋세셋번째 메모 내용이에욥!!!',600,300,'N');
 commit;
 delete from my_memo where mem_no=10028;
+
+select * from ta_story;
+select * from ta_member;
+select * from p_study;
+select * from ta_story where mem_no=10028 and P_NO=2;
+commit;
+
+INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10028,2, 'frog.jpg','개구리','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요 ', DEFAULT, '서경석', 'seo.jpg','Interview','3');
+INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10028,1, 'nalgangdo.jpg', '날강두', '데이터베이스를 배워보고싶어 스터디에 등록을 했는데 등록금을 77ㅓ억해버리셨습니다 ', DEFAULT, '산체스', 'Sanchez.jpg','Database','1');
+   commit;
