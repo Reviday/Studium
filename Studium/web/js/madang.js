@@ -45,6 +45,16 @@ function fn_addReply(cmtNo, memCheck, locate, path, REMOTE_ADDR, madangNo, cmtNo
 	}
 };
 
+function fn_openCommentArea() {
+	var commentArea=document.getElementById('comment');
+	console.log(commentArea);
+	if (commentArea.style.display == 'none') {
+		commentArea.style.display = 'inline-block';
+	} else {
+		commentArea.style.display = 'none';
+	}
+};
+
 
 function convertToTag(textArea) {
 	var lines = textArea.value.split("\n");

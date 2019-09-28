@@ -1,19 +1,19 @@
-<%@page import="com.studium.madang.model.vo.ShareMadangCmt"%>
-<%@page import="com.studium.madang.model.vo.ShareMadang"%>
+<%@page import="com.studium.madang.model.vo.StudyMadangCmt"%>
+<%@page import="com.studium.madang.model.vo.StudyMadang"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ShareMadang sm = (ShareMadang) request.getAttribute("sm");
+	StudyMadang sm = (StudyMadang) request.getAttribute("sm");
 	int cPage = (int)request.getAttribute("cPage");
-	List<ShareMadangCmt> list = (List<ShareMadangCmt>)request.getAttribute("cmtList");
-	int totalDate = (int)request.getAttribute("totalData");
+	List<StudyMadangCmt> list = (List<StudyMadangCmt>)request.getAttribute("cmtList");
+	int totalData = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
-	Map<String, ShareMadang> preNext=(Map<String, ShareMadang>)request.getAttribute("preNext");
+	Map<String, StudyMadang> preNext=(Map<String, StudyMadang>)request.getAttribute("preNext");
 	
 	
 %>
@@ -43,8 +43,8 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">공유마당</h3>
-					<p class="list-sub">자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)</p>
+					<h3 class="list-title">공부마당</h3>
+					<p class="list-sub">서로가 문제를 출제하고 문제를 풀어보는 공간입니다.</p>
 				</div>
 			</div>
 		</div>
@@ -118,9 +118,9 @@
 										</table>
 									</td>
 									<td class="m-tcol-c step"><span class="filter-50">
-											매니저 <%
 										
-									%>
+										<!-- 직급 -->
+										
 									</span> <img class="levelico"
 										src="<%=request.getContextPath()%>/img/manager_icon.png"
 										width="11" height="11" border="0"></td>
@@ -160,16 +160,17 @@
 								<tr style="vertical-align: top">
 									<!-- 댓글 수 -->
 									<td class="reply"><a href="javascript:"
-										class="reply_btn b m-tcol-c m-tcol-p _totalCnt" id="comment">댓글
-											1 <img class="new_icon"
+										class="reply_btn b m-tcol-c m-tcol-p _totalCnt cmt_toggle" 
+										onclick="fn_openCommentArea(); return false;">
+											댓글 <%=totalData%>
+										<img class="new_icon"
 											src="<%=request.getContextPath()%>/img/new_icon.png"
 											width="20" height="20" padding_bottom="2" alt="new">
-
 									</a></td>
 									<!-- 조회 수 -->
 									<td class="m-tcol-c filter-30">|</td>
 									<td><span class="b m-tcol-c reply ">조회수 </span> <span
-										class="b m-tcol-c reply">3</span></td>
+										class="b m-tcol-c reply"><%=sm.getMadangReadCount()%></span></td>
 									<!-- 포크 -->
 									<td class="m-tcol-c filter-30">|</td>
 									<td><a href="#" class="b fork_btn">포크</a>
@@ -177,17 +178,7 @@
 											<a href="#" class="btn_cnt" aria-pressed="false"> <img
 												class="fork_icon"
 												src="<%=request.getContextPath()%>/img/fork_icon.png" alt="">
-												<em class="fork_count">10</em>
-											</a>
-										</div></td>
-									<!-- 좋아요 -->
-									<td class="m-tcol-c filter-30">|</td>
-									<td><a href="#" class="b like_btn">좋아요</a>
-										<div class="btn_module">
-											<a href="#" class="btn_cnt" aria-pressed="false"> <img
-												class="dibs_icon"
-												src="<%=request.getContextPath()%>/img/like_icon_click.png"
-												alt=""> <em class="like_count">100</em>
+												<em class="fork_count"><%=sm.getMadangForkCount()%></em>
 											</a>
 										</div></td>
 								</tr>
@@ -199,8 +190,8 @@
 				<div class="h10"></div>
 
 				<!-- 댓글 -->
-				<div class="box-reply2 bg-color u_cbox" id="comment"
-					style="display: block;">
+				<div class="box-reply2 bg-color u_cbox" id="comment" 
+					style="display: block; display:none">
 					<h3 class="ir_su">댓글 작성</h3>
 					<!-- 댓글 폼 -->
 					<div class="tab_container">
@@ -220,7 +211,7 @@
 
 										<div class="u_cbox_btn_upload _submitBtn">
 											<a href="#" class="u_cbox_txt_upload _submitCmt" 
-											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>', 'share', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>','<%=choice%>', '<%=choiceSub%>'); return false;">
+											onclick="fn_addComment('<%=loginMember!=null?loginMember.getMemNo():null%>', 'study', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>','<%=choice%>', '<%=choiceSub%>'); return false;">
 											등록</a>													
 										</div>
 									</td>
@@ -239,7 +230,7 @@
 									<%
 										if(!list.isEmpty()) {
 
-											for(ShareMadangCmt cmt : list) {
+											for(StudyMadangCmt cmt : list) {
 												//댓글 테이블 특성상 sort값이 0이면 부모댓글이다.
 												if(cmt.getCmtSort()==0) {
 													//부모 댓글 작성 로직
@@ -296,7 +287,7 @@
 						
 						                                                        <div class="u_cbox_btn_upload _submitBtnRep">
 																					<a href="#" class="u_cbox_txt_upload _submitCmt" 
-																					onclick="fn_addReply('<%=cmt.getCmtNo()%>', '<%=loginMember!=null?loginMember.getMemNo():null%>', 'share', '<%=request.getContextPath() %>', '<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>','<%=choice%>', '<%=choiceSub%>'); return false;">
+																					onclick="fn_addReply('<%=cmt.getCmtNo()%>', '<%=loginMember!=null?loginMember.getMemNo():null%>', 'study', '<%=request.getContextPath() %>', '<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=cmt.getCmtNo() %>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>','<%=choice%>', '<%=choiceSub%>'); return false;">
 																					등록</a>													
 						                                                        </div>
 						                                                    </td>
@@ -382,7 +373,7 @@
 					<% 
 						//댓글 총 갯수가 30개를 초과한다면 (한 페이지당 30개)
 						//댓글 페이징 처리를 한다.
-						if(totalDate>30) {
+						if(totalData>30) {
 					%>
 							<%@ include file="/views/common/pagination.jsp"%>
 					<%
@@ -411,7 +402,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
@@ -420,7 +411,7 @@
 				<div class="btn btn_lower">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangList?cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
+						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangList?cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 						<img id="goList" src="<%=request.getContextPath()%>/img/list_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
@@ -430,7 +421,7 @@
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
+							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>

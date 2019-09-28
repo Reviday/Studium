@@ -97,6 +97,43 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
  Q) 게시글에 이미지를 삽입할 경우, 어떻게 처리해야하는지?
 */
 
+drop table ta_study_madang;
+drop sequence stmadang_seq;
+-- 공부마당
+create table ta_study_madang(
+    madang_no number constraint stmadang_no_pk primary key, -- 글번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint stmadang_title_nn not null, -- 글 제목
+    madang_level number, -- 문제 난이도(Level 1~5)
+    madang_content clob constraint stmadang_content_nn not null, -- 글 내용
+    madang_main_category varchar2(100), -- 대분류(관리자 고정)
+    madang_category varchar2(100), -- 중분류(관리자 고정)
+    madang_sub_category varchar2(100), -- 소분류(사용자 지정)
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_fork_count number default 0, -- 글 포크 수
+    madang_answer_count number default 0, -- 글 답변(풀이) 수 
+    madang_status char(1) default 'Y' constraint stmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.1',
+    '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
+insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.<br>테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.',
+    '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
+select * from ta_study_madang;
+commit;
+-- 공부마당
+create sequence stmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 -- 공유마당
 create table ta_share_madang(
     madang_no number constraint smadang_no_pk primary key, -- 글번호
@@ -394,14 +431,7 @@ commit;
     2. parent가 null이 아닐 경우, parent로 정렬한다.
     3. 첫번째 정렬 조건에서 값이 같을 경우 cmt_seq로 정렬한다.
 */
--- 자유마당 댓글 테이블
-create table ta_fmadang_rep (
-    madang_no number constraint fmadang_no_fk references ta_free_madang(madang_no), -- 게시글 번호(외래키)
-    cmt_no number constraint fcmt_no_pk primary key, -- 댓글 번호(시퀀스)
-    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
-    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
-    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
-);
+
 
 
 -- 댓글 테이블 => 각 게시판당 한 개의 테이블 생성 => 댓글 테이블은 계층형으로 도전!
@@ -456,14 +486,35 @@ UPDATE TA_FMADANG_CMT SET CMT_SORT = CMT_SORT + 1 WHERE CMT_PARENT =  3  AND CMT
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, 1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 commit;
 
--- 공유마당 댓글 테이블
-create table ta_smadang_rep (
-    madang_no number constraint smadang_no_fk references ta_share_madang(madang_no), -- 게시글 번호(외래키)
-    cmt_no number constraint scmt_no_pk primary key, -- 댓글 번호(시퀀스)
-    cmt varchar2(1000), -- 댓글 내용(최대 300자까지 받을 예정)
-    parent number default null, -- 대댓글의 경우 사용되는 열로, null이면 기본댓글, 값이 있으면 대댓글 parent의 값이 부모 댓글의 cmt_no
-    cmt_seq number default 0 --부모댓글이 seq값이 기본적으로 0이 부여, 대댓글 순서대로 1,2,3 ... 부여
+
+
+-- 공부마당 댓글 테이블 
+create table ta_stmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_study_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
 );
+
+-- 공부마당 댓글 시퀀스
+create sequence stmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
 
 
 -- 공유마당 댓글 테이블 
@@ -544,10 +595,10 @@ start with 1
 increment by 1
 maxvalue 9999;
 
-select * from ta_sidemenu_elements;
-select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
-SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='admin' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
-SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+--select * from ta_sidemenu_elements;
+--select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
+--SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='admin' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
+--SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
 SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? START WITH PARENT_ID IS NULL CONNECT BY PRIOR MENU_ID=PARENT_ID;
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공부마당', '/madang/studyMadangList', 'fab fa-studiovinari fa-lg', 'Y', 2, default);

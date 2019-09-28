@@ -145,7 +145,7 @@
 				<!-- 실제 작성 내용 -->
 				<div class="tbody m-tcol-c" id="tbody"
 					style="padding-left: 43px; padding-right: 43px; margin-right: 0px;">
-					<pre><%=fm.getMadangContent()%></pre>
+					<%=fm.getMadangContent()%>
 				</div>
 
 				<div class="h40"></div>

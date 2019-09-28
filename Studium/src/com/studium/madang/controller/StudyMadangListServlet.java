@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.madang.model.service.StudyMadangService;
+import com.studium.madang.model.vo.StudyMadang;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
+
+import common.template.PaginationTemplate;
 
 /**
  * Servlet implementation class StudyMadangListServlet
@@ -33,20 +37,30 @@ public class StudyMadangListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 검색조건 판별
+		
 		
 		//Pagination 
+		StudyMadangService service=new StudyMadangService();
+		int totalData=service.selectCountList(); // 총 데이터 개수
+		String URLmapping="/madang/studyMadangList"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		
+		List<StudyMadang> list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
 		
 		// SideMenuElement
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
-
+		
+		request.setAttribute("list", list);
+		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("pageBar", pt.getPageBar());
+		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("elements", elements);
 		request.setAttribute("choice", "공부마당");
 		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 
 		request.getRequestDispatcher("/views/madang/studyMadangList.jsp").forward(request, response);
-
+		
 	}
 
 	/**

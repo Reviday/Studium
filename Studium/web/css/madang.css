@@ -332,3 +332,9 @@
     text-align: left;
     caption-side: bottom;
 }
+
+.madang-section .list-title,
+.madang-section .list-sub,
+.madang-section .btn_font_family1{
+	font-family:"Do Hyeon", Arial, sans-serif !important;
+}

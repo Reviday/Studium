@@ -9,12 +9,12 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-import com.studium.madang.model.dao.ShareMadangDao;
-import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.dao.StudyMadangDao;
+import com.studium.madang.model.vo.StudyMadang;
 
-public class ShareMadangService {
+public class StudyMadangService {
 
-	private ShareMadangDao dao = new ShareMadangDao();
+	private StudyMadangDao dao = new StudyMadangDao();
 
 	public int selectCountList() {
 		Connection conn = getConnection();
@@ -23,16 +23,16 @@ public class ShareMadangService {
 		return result;
 	}
 
-	public List<ShareMadang> selectMadangList(int cPage, int numPerPage) {
+	public List<StudyMadang> selectMadangList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<ShareMadang> list = dao.selectMadangList(conn, cPage, numPerPage);
+		List<StudyMadang> list = dao.selectMadangList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public ShareMadang selectMadang(int no, boolean hasRead) {
+	public StudyMadang selectMadang(int no, boolean hasRead) {
 		Connection conn = getConnection();
-		ShareMadang fm = dao.selectMadang(conn, no);
+		StudyMadang fm = dao.selectMadang(conn, no);
 		if (!hasRead && fm != null) {
 			int result = dao.updateReadCount(conn, no);
 			if (result > 0)
@@ -44,14 +44,14 @@ public class ShareMadangService {
 		return fm;
 	}
 
-	public Map<String, ShareMadang> selectPreNext(int madangNo) {
+	public Map<String, StudyMadang> selectPreNext(int madangNo) {
 		Connection conn = getConnection();
-		Map<String, ShareMadang> preNext = dao.selectPreNext(conn, madangNo);
+		Map<String, StudyMadang> preNext = dao.selectPreNext(conn, madangNo);
 		close(conn);
 		return preNext;
 	}
 
-	public int insertMadang(ShareMadang sm) {
+	public int insertMadang(StudyMadang sm) {
 		Connection conn = getConnection();
 		int result = dao.insertMadang(conn, sm);
 		int madangNo = -1;
