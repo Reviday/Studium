@@ -4,7 +4,12 @@
 <%@ page import="java.util.*,com.studium.story.model.vo.Story" %>
 <%
 	List <Story> slist = (List)request.getAttribute("slist");
-
+	int totaldata = (int)request.getAttribute("totaldata"); 
+	int Foreignlanguagetotaldata = (int)request.getAttribute("Foreignlanguagetotaldata"); 
+	int Programmingtotaldata = (int)request.getAttribute("Programmingtotaldata"); 
+	int Publicofficertotaldata = (int)request.getAttribute("Publicofficertotaldata"); 
+	int Certificatetotaldata = (int)request.getAttribute("Certificatetotaldata");
+	int Employmenttotaldata = (int)request.getAttribute("Employmenttotaldata"); 
 %>
 
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css">
@@ -13,7 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
     <style>
         /* 사이드바 스타일 */
-       #review-level{
+        #review-level{
         	position:fixed;
         	right:0;
         	box-sizing:border-box;
@@ -64,34 +69,35 @@
 </div>
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
-      <aside id="review-level">
-            	<div class="review-title">종류별</div>
+        <aside id="review-level">
+            	<div class="review-title" href="<%=request.getContextPath()%>/score">종류별</div>
             	<ul class="level-list">
             	<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story">전체</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story">전체(<%=totaldata%>)</a>
             		</li>
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story1">외국어</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story1">외국어(<%=Foreignlanguagetotaldata%>)</a>
             		</li>
             
             	
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story2">프로그래밍</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story2">프로그래밍(<%=Programmingtotaldata%>)</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story3">공무원</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story3">공무원(<%=Publicofficertotaldata%>)</a>
             		</li>
             	
             	
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story4">자격증</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story4">자격증(<%=Certificatetotaldata%>)</a>
             		</li>
             		<li class="level-select-wrap">
-            			<a class="level-select" href="<%=request.getContextPath()%>/story5">취업준비</a>
+            			<a class="level-select" href="<%=request.getContextPath()%>/story5">취업준비(<%=Employmenttotaldata%>)</a>
             		</li>
             	</ul>
+          
             </aside>
         <article class="allhugi">
             <!-- 가운데 맞춤 article -->
@@ -112,7 +118,7 @@
             <div class="review">
                 <div class="review-title">
                     <!-- 후기 -->
-                   프로그래밍후기
+                 공무원 준비후기<a class="/story3">(<%=Publicofficertotaldata%>)</a>
           
     
                     
@@ -132,18 +138,34 @@
                         <div class="reviewName">
                             <!-- 이름 -->
                           <%=s.getStoryWrite()%>
-                  		<span class="subjectName">
+                          <span class="subjectName">
                         		 <%=s.getStorySubject()%>
                           </span>
+                 
                         </div>
                         <div class="star">
-                            <!-- 별점 -->
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+		
+		         <%if(s.getStoryStar()==1){ %>
+				<img src="<%=request.getContextPath()%>/img/star1.png" width=100px; class="star">
+			<%}else if(s.getStoryStar()==2) {%>
+			<img src="<%=request.getContextPath()%>/img/star2.png" width=100px; class="star">
+			<%}else if(s.getStoryStar()==3){ %>
+			<img src="<%=request.getContextPath()%>/img/star3.png" width=100px; class="star">
+			<%}else if(s.getStoryStar()==4){ %>
+			<img src="<%=request.getContextPath()%>/img/star4.png" width=100px; class="star">
+			<%}else if(s.getStoryStar()==5){ %>
+			<img src="<%=request.getContextPath()%>/img/star5.png" width=100px; class="star">
+			
+			<%} else{%>
+			
+			<%} %>
+
+		
+		
+		<div class="score">
+		<b><%=s.getStoryStar() %></b>점
+		</div>
+		</div>
                         <div class="reviewContent">
                             <div class="reviewText">
                                 <!-- 내용 -->

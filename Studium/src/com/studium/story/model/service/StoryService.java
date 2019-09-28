@@ -63,6 +63,42 @@ public class StoryService {
 		close(conn);
 		return list;
 	}
+	public int selectTotalnumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectTotalnumberList(conn);
+		close(conn);
+		return result;
+	}
+	public int selectForeignlanguagenumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectForeignlanguagenumberList(conn);
+		close(conn);
+		return result;
+	}
+	public int selectProgrammingnumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectProgrammingnumberList(conn);
+		close(conn);
+		return result;
+	}
+	public int selectPublicofficernumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectPublicofficernumberList(conn);
+		close(conn);
+		return result;
+	}
+	public int selectCertificatenumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectCertificatenumberList(conn);
+		close(conn);
+		return result;
+	}
+	public int selectEmploymentnumberList() {
+		Connection conn=getConnection();
+		int result=dao.selectEmploymentnumberList(conn);
+		close(conn);
+		return result;
+	}
 	
 
 }

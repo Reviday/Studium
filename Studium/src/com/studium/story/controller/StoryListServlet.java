@@ -36,6 +36,19 @@ public class StoryListServlet extends HttpServlet {
     	List<Story> slist = new ArrayList<Story>();
     	slist=service.selectStoryList();
     	
+		
+    	int totalData=service.selectTotalnumberList(); 
+		request.setAttribute("totaldata",totalData);
+    	int ForeignlanguagetotalData=service.selectForeignlanguagenumberList();
+		request.setAttribute("Foreignlanguagetotaldata",ForeignlanguagetotalData);
+		int ProgrammingtotalData=service.selectProgrammingnumberList(); 
+		request.setAttribute("Programmingtotaldata",ProgrammingtotalData);
+    	int PublicofficertotalData=service.selectPublicofficernumberList(); 
+		request.setAttribute("Publicofficertotaldata",PublicofficertotalData);
+    	int CertificatetotalData=service.selectCertificatenumberList(); 
+		request.setAttribute("Certificatetotaldata",CertificatetotalData);
+    	int EmploymenttotalData=service.selectEmploymentnumberList(); 
+		request.setAttribute("Employmenttotaldata",EmploymenttotalData);
     	request.setAttribute("slist",slist);
     	
     	request.getRequestDispatcher("/views/story/story.jsp")
