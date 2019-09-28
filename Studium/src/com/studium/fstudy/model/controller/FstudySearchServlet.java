@@ -17,6 +17,8 @@ import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
+import common.template.PaginationTemplate;
+
 /**
  * Servlet implementation class PstudySearchServlet
  */
@@ -40,9 +42,10 @@ public class FstudySearchServlet extends HttpServlet {
 		String area=request.getParameter("p_area");
 		String day=request.getParameter("p_day");
 		String category= request.getParameter("p_category");
-		System.out.println(area+day);
 		List<Category> listM=new CategoryService().selectTitleM();
 		request.setAttribute("categoryM", listM);
+		String URLmapping="/fstudy/search"; // 패턴을 넘겨주기 위한 변수
+		int totalData=new FstudyService().selectCountSearch(area, day,category); // 총 데이터 개수
 		List<Fstudy>fList=new ArrayList();
 		String setString="";
 		if(area.equals("all")&&category.equals("all")&&day.equals("all")) {
@@ -69,7 +72,19 @@ public class FstudySearchServlet extends HttpServlet {
 		if((!area.equals("all")) && (!category.equals("all")) && (!day.equals("all"))) {
 			setString="notacd";
 		}
-		fList=new FstudyService().searchFstudy(setString,area, day,category);
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		pt.setQueryString("p_area", area);
+		pt.setQueryString("p_category", category);
+		pt.setQueryString("p_day", day);
+		fList=new FstudyService().searchFstudy(setString,area, day,category,pt.getcPage(),pt.getNumPerPage());
+		request.setAttribute("categoryM", listM);
+		request.setAttribute("cPage", pt.getcPage());
+		request.setAttribute("pageBar", pt.getPageBar());
+		request.setAttribute("numPerPage", pt.getNumPerPage());
+		request.setAttribute("fList", fList);
+		request.setAttribute("area", area);
+		request.setAttribute("day", day);
+		request.setAttribute("category",category);
 		request.setAttribute("fList", fList);
 		request.setAttribute("area", area);
 		request.setAttribute("day", day);

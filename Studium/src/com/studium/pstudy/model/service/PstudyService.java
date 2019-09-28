@@ -128,6 +128,12 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public int selectCountSearch(String area, String day, String category) {
+		Connection conn=getConnection();
+		int result=dao.selectCountSearch(conn,area,day,category);
+		close(conn);
+		return result;
+	}
 
 
 }

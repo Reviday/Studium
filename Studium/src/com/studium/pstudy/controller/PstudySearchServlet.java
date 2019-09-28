@@ -41,11 +41,12 @@ public class PstudySearchServlet extends HttpServlet {
 		String day=request.getParameter("p_day");
 		String category=request.getParameter("p_category");
 		PstudyService service=new PstudyService();
-		List<Category> listM=new CategoryService().selectTitleM();
-		request.setAttribute("categoryM", listM);
+		String URLmapping="/pstudy/search"; // 패턴을 넘겨주기 위한 변수
+		int totalData=service.selectCountSearch(area, day,category); // 총 데이터 개수
+
 		List<Pstudy>pList=new ArrayList();
 		String setString="";
-		if(area.equals("all")&&category.equals("all")&&day.equals("all")) {
+		if((area.equals("all"))&&(category.equals("all"))&&(day.equals("all"))) {
 			setString="allall";
 		}
 		if((!area.equals("all")) && category.equals("all") && day.equals("all")) {
@@ -55,23 +56,26 @@ public class PstudySearchServlet extends HttpServlet {
 			setString="notac";
 		}
 		if(area.equals("all") && (!category.equals("all") && day.equals("all"))) {
-			setString="notc";			
+			setString="notc";
 		}
 		if((!area.equals("all")) && category.equals("all") && (!day.equals("all"))) {
-			setString="notad";		
+			setString="notad";
 		}
 		if(area.equals("all") && category.equals("all") && (!day.equals("all"))) {
-			setString="notd";	
+			setString="notd";
 		}
 		if(area.equals("all") && (!category.equals("all")) && (!day.equals("all"))) {
-			setString="notcd";			
+			setString="notcd";
 		}
 		if((!area.equals("all")) && (!category.equals("all")) && (!day.equals("all"))) {
 			setString="notacd";
 		}
-		int totalData=service.selectCountPstudy(); // 총 데이터 개수
-		String URLmapping="/pstudy/search"; // 패턴을 넘겨주기 위한 변수
+		List<Category> listM=new CategoryService().selectTitleM();
+	
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		pt.setQueryString("p_area", area);
+		pt.setQueryString("p_category", category);
+		pt.setQueryString("p_day", day);
 		pList=new PstudyService().searchPstudy(setString,area, day,category,pt.getcPage(),pt.getNumPerPage());
 		request.setAttribute("categoryM", listM);
 		request.setAttribute("cPage", pt.getcPage());

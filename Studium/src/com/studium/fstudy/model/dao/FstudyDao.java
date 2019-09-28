@@ -141,7 +141,7 @@ private Properties prop=new Properties();
 		}return list;
 	}
 	
-	public List<Fstudy> searchFstudy(Connection conn,String setString,String area,String day,String category){
+	public List<Fstudy> searchFstudy(Connection conn,String setString,String area,String day,String category,int cPage,int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<Fstudy>list=new ArrayList();
@@ -150,6 +150,8 @@ private Properties prop=new Properties();
 			
 			if(setString.equals("allall")) {
 				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, (cPage-1)*numPerPage+1);
+				pstmt.setInt(2, cPage*numPerPage);
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					Fstudy p=new Fstudy();
@@ -179,6 +181,8 @@ private Properties prop=new Properties();
 				if(setString.equals("nota")) {
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, area);
+					pstmt.setInt(2, (cPage-1)*numPerPage+1);
+					pstmt.setInt(3, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -209,6 +213,8 @@ private Properties prop=new Properties();
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, area);
 					pstmt.setString(2, category);
+					pstmt.setInt(3, (cPage-1)*numPerPage+1);
+					pstmt.setInt(4, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -238,6 +244,8 @@ private Properties prop=new Properties();
 				if(setString.equals("notc")) {
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, category);
+					pstmt.setInt(2, (cPage-1)*numPerPage+1);
+					pstmt.setInt(3, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -268,6 +276,8 @@ private Properties prop=new Properties();
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, area);
 					pstmt.setString(2, day);
+					pstmt.setInt(3, (cPage-1)*numPerPage+1);
+					pstmt.setInt(4, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -297,6 +307,8 @@ private Properties prop=new Properties();
 				if(setString.equals("notd")) {
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, day);
+					pstmt.setInt(2, (cPage-1)*numPerPage+1);
+					pstmt.setInt(3, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -327,6 +339,8 @@ private Properties prop=new Properties();
 					pstmt=conn.prepareStatement(sql);
 					pstmt.setString(1, category);
 					pstmt.setString(2, day);
+					pstmt.setInt(3, (cPage-1)*numPerPage+1);
+					pstmt.setInt(4, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -358,6 +372,8 @@ private Properties prop=new Properties();
 					pstmt.setString(1, area);
 					pstmt.setString(2, category);
 					pstmt.setString(3, day);
+					pstmt.setInt(4, (cPage-1)*numPerPage+1);
+					pstmt.setInt(5, cPage*numPerPage);
 					rs=pstmt.executeQuery();
 					while(rs.next()) {
 						Fstudy p=new Fstudy();
@@ -648,5 +664,36 @@ private Properties prop=new Properties();
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public int selectCountSearch(Connection conn,String area, String day, String category) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		if(area.equals("all")) {
+			area="%";
+		}
+		if(day.equals("all")) {
+			day="%";
+		}
+		if(category.equals("all")) {
+			category="%";
+		}
+		String sql =prop.getProperty("searchcount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, area);
+			pstmt.setString(2, category);
+			pstmt.setString(3, day);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
 	}
 }

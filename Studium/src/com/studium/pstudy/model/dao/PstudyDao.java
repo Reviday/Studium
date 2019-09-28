@@ -674,5 +674,36 @@ public class PstudyDao {
 			close(pstmt);
 		}return result;
 	}
+	public int selectCountSearch(Connection conn,String area, String day, String category) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		if(area.equals("all")) {
+			area="%";
+		}
+		if(day.equals("all")) {
+			day="%";
+		}
+		if(category.equals("all")) {
+			category="%";
+		}
+		String sql =prop.getProperty("searchcount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, area);
+			pstmt.setString(2, category);
+			pstmt.setString(3, day);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
+	}
 	
 }

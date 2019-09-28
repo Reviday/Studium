@@ -7,6 +7,7 @@
 <%
     List<Category> listM=(List)request.getAttribute("categoryM");
 	List<Pstudy> pList=(List)request.getAttribute("pList");
+	
 	String day= String.valueOf(request.getAttribute("day"));
 	String category= String.valueOf(request.getAttribute("category"));
 	String area= String.valueOf(request.getAttribute("area"));
@@ -41,7 +42,13 @@ body{
       <div class="a_title">스터디 지역 찾기</div>
       <form method=post action="<%=request.getContextPath()%>/pstudy/search" class="filter-form" name="frm1"  onsubmit="return valid_check();" >
         <select class=input1  id= "filter" name="p_area" style="width: 120px; height: 30px;">
-          <option value="all">지역 선택</option>
+          <option value="<%=area%>">
+          <%if(area.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=area%>
+          <%} %>
+          </option>
           <option value="all">전체</option>
           <option value='강남'>강남</option>
           <option value='건대'>건대</option>
@@ -52,16 +59,26 @@ body{
           <option value='남양주'>남양주</option>
         </select>
          <select class=input1 id="filter2" name="p_category" style="width: 120px; height: 30px;">
-          <option value="all">분류</option>
-		 <option value="all">전체</option>
+		 <option value="all">
+		 <%if(category.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=category%>
+          <%} %>
+		 </option>
            <% if(!listM.isEmpty()){ %>
 			<% for(int j=0;j<listM.size();j++){ %>
        <option value="<%=listM.get(j).getTitleM() %>"><%=listM.get(j).getTitleM() %></option>
 			<% } } %>
       </select>
         <select class=input1 id="filter3" name="p_day" style="width: 120px; height: 30px;">
-          <option value="all">가능 시간</option>
-           <option value="all">전체</option>
+           <option value="all">
+            <%if(day.equals("all")){%>
+          	전체
+          <%}else {%>
+          <%=day%>
+          <%} %>
+           </option>
           <option value='평일'>평일</option>
           <option value='주말'>주말</option>
         </select>
