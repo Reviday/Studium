@@ -3,7 +3,7 @@
      <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy, java.text.*" %>
      <%@ page import="com.studium.member.model.vo.Member"%>
 <% 
-	
+ 	int categoryCount=(Integer)request.getAttribute("categoryCount");
 	List<Pstudy> bestList =(List)request.getAttribute("bestList");
 	List<Pstudy> categoryList=(List)request.getAttribute("categoryList");
 %>
@@ -12,10 +12,9 @@
  <div style="display:none;">  <%@ include file="/views/common/header.jsp" %></div>
  
  		<%
-				if(loginMember!=null&&loginMember.getMemCategory1()!=null)	{
+				if(loginMember!=null&&loginMember.getMemCategory1()!=null&&categoryCount!=0)	{
 					for(Pstudy p :categoryList){ 
- 		%>
- 				
+ 		%>		
 		<%if(loginMember!=null) { %>			
       <a href="<%=request.getContextPath()%>/pstudy/pstudyProduct?pNo=<%=p.getpNo()%>&mNo=<%=loginMember.getMemNo() %>" class="item-dishes" >
       <%}else{ %>
@@ -62,6 +61,7 @@ $('.centernonloop').owlCarousel({
     loop: false,
     margin: 10,
     itemsDesktop:[1199,4],
+    
     dots: true,
     responsive: {
       600: {

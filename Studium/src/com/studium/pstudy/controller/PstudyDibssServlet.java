@@ -44,20 +44,14 @@ public class PstudyDibssServlet extends HttpServlet {
 			int result=service.pstudyDibsDelete(no,mNo);
 			String a="0";
 			obj.put("result",a);
-			System.out.println(result +"찜하기풀기 삭제되니"+no+"NO"+mNo+"mNo");
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(a);
-
 		}else{
-			// 찜하기 쿼리
-		
+			// 찜하기 쿼리	
 		int result=service.pstudyDibs(no,mNo);
-		
-		System.out.println(result+"짐하기쿼리");
 		String b="1";
 		obj.put("result",b);
 		//request.setAttribute("json", json);
-		System.out.println(obj+"찜하기 ");
 		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(b);
 		

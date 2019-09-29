@@ -1,6 +1,7 @@
 package com.studium.index.model.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,20 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.index.model.service.IndexService;
+import com.studium.mypage.model.vo.MyDibs;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
+import com.studium.story.model.vo.Story;
 
 /**
- * Servlet implementation class IndexBestServlet
+ * Servlet implementation class IndexBestReviewService
  */
-@WebServlet("/indexBest")
-public class IndexBestServlet extends HttpServlet {
+@WebServlet("/indexreview")
+public class IndexBestReviewService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexBestServlet() {
+    public IndexBestReviewService() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +36,21 @@ public class IndexBestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String category=request.getParameter("locate");
-		PstudyService service=new PstudyService();
-		if(category.equals("N")) {
-		List<Pstudy> bestList=service.bestPstudy();
-		request.setAttribute("bestList",  bestList);
-		request.setAttribute("categoryCount", 0);
-		request.getRequestDispatcher("/views/common/bestIndex.jsp")
-	    .forward(request,response);   
-		}else {
-		List<Pstudy>categoryList=service.selectcategoryList(category);
-		int categoryCount=service.selectcountCategoryList(category);
-		request.setAttribute("categoryCount", categoryCount);
-		request.setAttribute("categoryList", categoryList);
-		request.getRequestDispatcher("/views/common/bestIndex.jsp")
-	    .forward(request,response);   
+		IndexService serivce = new IndexService();
+		List<Story> slist=serivce.selectReview();
+		List<Pstudy> plist=new PstudyService().selectMypstudy();
+		List<Pstudy> myplist= new ArrayList();
+		for(Story s : slist) {
+			for(Pstudy pl : plist) {
+				if(s.getpNo()==pl.getpNo()) {
+					myplist.add(pl);
+				}
+			}
 		}
-		
-		
+		request.setAttribute("myplist", myplist);
+		request.setAttribute("slist", slist);
+		request.getRequestDispatcher("/views/common/bestreivew.jsp")
+	    .forward(request,response); 
 	}
 
 	/**

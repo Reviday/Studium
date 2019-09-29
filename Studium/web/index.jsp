@@ -114,17 +114,9 @@
 
     <div class="container">
 
-      <div class="row no-gutters">
-        <div class="col-md-6">
-          <div class="sched d-block d-lg-flex">
-            <div class="bg-image order-2" style="background-image: url('img/3.jpg');"></div>
-            <div class="text order-1">
-              <h3>집단지성의 힘!</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-              <p class="text-primary h3">경찰공무원 합격방</p>
-            </div>
+      <div class="row no-gutters" id="indexreview">
+        <div class="col-md-6" >
 
-          </div>
 
           <div class="sched d-block d-lg-flex">
             <div class="bg-image" style="background-image: url('img/4.jpg');"></div>
@@ -238,7 +230,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" id="indexreview">
           <blockquote class="testimonial">
             <h4>선택과 집중</h4>
             <p>&ldquo; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, obcaecati? Quis eum minus, sequi
@@ -323,9 +315,9 @@
   var params = jQuery("#logincategory").serialize();
   $(document).ready(function(){
 	  loadNext();
+	  loadNext2();
 	});
 	function loadNext(){
-
 	  $.ajax({
 	    type: "POST",
 	    url: "<%=request.getContextPath()%>/indexBest",
@@ -344,6 +336,24 @@
 	  });
 
 	}
+ 	function loadNext2(){
+		  $.ajax({
+		    type: "POST",
+		    url: "<%=request.getContextPath()%>/indexreview",
+		    dataType: "html",
+		    success: function(data){
+		      $('#indexreview').html("");
+		      $('#indexreview').html(data);
+		    },
+		    error: function (request, status, error){
+	     	   alert("ajax실패");
+	     	   console.log(error);
+	     	   console.log(data);
+	        }
+
+		  });
+
+		} 
   </script>
 
 <%@ include file="views/common/footer.jsp" %>
