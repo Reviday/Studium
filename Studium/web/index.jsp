@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy, java.text.*" %>
+    <%
+    List<Pstudy> pList=(List)request.getAttribute("pList");
+	List<Pstudy> bestList =(List)request.getAttribute("bestList");
     
+    %>
 <%@ include file="views/common/header.jsp" %>
  <link rel="stylesheet" href="css/myPage.css">
   <section class="home-slider owl-carousel">
@@ -15,9 +20,7 @@
           </div>
         </div>
       </div>
-
     </div>
-
     <div class="slider-item" style="background-image: url('img/2.jpg');">
       <div class="container">
         <div class="row slider-text align-items-center justify-content-center">
@@ -32,6 +35,21 @@
     </div>
 
   </section>
+<style>
+#indexBest{
+	z-index:1;
+	position: relative;
+    display: block;
+
+}
+.item-dishes {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 10px;
+}
+
+</style>
   <!-- END slider -->
 
 
@@ -68,45 +86,18 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 text-center heading-wrap">
-            <h2></h2>
+              <h2>best</h2>
             <span class="back-text">STUDIUM</span>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="owl-carousel centernonloop">
-      <a href="#" class="item-dishes">
-        <div class="text">
-          <p class="dishes-price">22,400/M</p>
-          <!--동그라미 위치 조정해야함-->
-          <h2 class="dishes-heading">우리 같이 공부할래?</h2>
-        </div>
-        <img src="img/3.jpg" alt="" class="img-fluid shallwestudy">
-      </a>
-      <a href="#" class="item-dishes">
-        <div class="text">
-          <p class="dishes-price">$12.00</p>
-          <h2 class="dishes-heading">즐겁게 놀면서 공부해요</h2>
-        </div>
-        <img src="img/4.jpg" alt="" class="img-fluid shallwestudy">
-      </a>
-      <a href="#" class="item-dishes">
-        <div class="text">
-          <p class="dishes-price">$11.00</p>
-          <h2 class="dishes-heading">코딩 같이할래?</h2>
-        </div>
-        <img src="img/5.jpg" alt="" class="img-fluid shallwestudy">
-      </a>
-      <a href="#" class="item-dishes">
-        <div class="text">
-          <p class="dishes-price">$12.00</p>
-          <h2 class="dishes-heading">열심히해보자</h2>
-        </div>
-        <img src="img/6.jpg" alt="" class="img-fluid shallwestudy">
-      </a>
+       <div class="owl-carousel centernonloop" id="indexBest" >
+   
     </div>
-  </section> <!-- .section -->
+
+  </section> 
+  <!-- .section -->
 
   <section class="section bg-light element-animate">
 
@@ -317,6 +308,42 @@
         </div>
       </div>
     </div>
+     <form id="logincategory">
+    <%if(loginMember!=null&&loginMember.getMemCategory1()!=null){ %>
+   
+    <input type="hidden" value="<%=loginMember.getMemCategory1()%>" name="locate"  id="locate"/>
+  
+    <%}else{ %>
+    <input type="hidden" value="N" name="locate" id="locate" />
+  
+    <%} %>
+      </form>
   </section>
+  <script>
+  var params = jQuery("#logincategory").serialize();
+  $(document).ready(function(){
+	  loadNext();
+	});
+	function loadNext(){
+
+	  $.ajax({
+	    type: "POST",
+	    url: "<%=request.getContextPath()%>/indexBest",
+	    data:params,
+	    dataType: "html",
+	    success: function(data){
+	      $('#indexBest').html("");
+	      $('#indexBest').html(data);
+	    },
+	    error: function (request, status, error){
+     	   alert("ajax실패");
+     	   console.log(error);
+     	   console.log(data);
+        }
+
+	  });
+
+	}
+  </script>
 
 <%@ include file="views/common/footer.jsp" %>

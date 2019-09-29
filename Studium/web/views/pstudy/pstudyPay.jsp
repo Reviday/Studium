@@ -228,22 +228,17 @@
 		}
 		
 		var params = jQuery("#studypayy").serialize();
-	
-		
 		               $.ajax({
 		                    url:"<%=request.getContextPath()%>/studyPay",
 		                    type: "POST",
 		                    dataType: "html",
 		                    data: params,
 		                    success: function(data){
-		                    	console.log(data);
 		                       $(".studyIntro").html("");
 		                       $(".studyIntro").html(data);
 		                    },
 		              error: function (request, status, error){
 		            	   alert("ajax실패");
-		            	   console.log(error);
-		            	   console.log(data);
 		               }
 		                 });
 	

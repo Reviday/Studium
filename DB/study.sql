@@ -88,6 +88,11 @@ create table p_study(
     p_studyMember number default 0,--스터디 구매 확정 멤버 넘버 
     p_teacherno number --스터디 강사 넘버
 );
+select * from p_study;
+--강사스터디 더미데이터
+insert into p_study values(seq_pstudy.nextval,'TEST P STUDY','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a2.jpg','a3.jpg','a4.jpg','01:00','07:00','19/11/28','19/11/30',5,'아이린','Y',default,15);
 --스터디 구매
 create sequence seq_my_purchase
 start with 1
@@ -103,3 +108,9 @@ CREATE TABLE MY_PURCHASE(
     PURCHASE_STATUS CHAR(1) DEFAULT 'N' CONSTRAINT PURCHASE_CK CHECK (PURCHASE_STATUS IN ('N','Y')),--스터디 진행여부/진행중Y, 완료N
     SUBMIT_FILE CHAR(1) DEFAULT 'N' CONSTRAINT SUBMIT_FILE_CK CHECK (SUBMIT_FILE IN ('N','Y'))--제출서류발급유무/제출함Y,제출안함N
 );
+select * from p_study;
+select seq_pstudy.nextval from dual;
+commit;
+select * from p_study where p_area like '%%' and p_day like '%' order by p_no;
+select count(*) as cnt from p_study;
+select count(*) as cnt from(select * from p_study where p_area like '%' and p_category like '%' and p_day like '%' order by p_no);

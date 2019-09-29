@@ -134,6 +134,12 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public List<Pstudy> selectcategoryList(String category){
+		Connection conn=getConnection();
+		List<Pstudy> list=dao.selectcategoryList(conn,category);
+		close(conn);
+		return list;
+	}
 
 
 }

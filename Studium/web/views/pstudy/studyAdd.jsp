@@ -259,7 +259,7 @@
                                                   <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">강사번호</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                       <input type="number" id="f_teacherno" name="f_teacherno"/>
+                                                       <input type="number" id="p_teacherno" name="p_teacherno"/>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">별점</td>

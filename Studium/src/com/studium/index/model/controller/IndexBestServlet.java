@@ -1,7 +1,7 @@
-package com.studium.pstudy.controller;
+package com.studium.index.model.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.member.model.service.MemberService;
-import com.studium.member.model.vo.Member;
 import com.studium.pstudy.model.service.PstudyService;
 import com.studium.pstudy.model.vo.Pstudy;
 
 /**
- * Servlet implementation class PstudystudyPayServlet
+ * Servlet implementation class IndexBestServlet
  */
-@WebServlet("/studyPay")
-public class PstudystudyPayServlet extends HttpServlet {
+@WebServlet("/indexBest")
+public class IndexBestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PstudystudyPayServlet() {
+    public IndexBestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +31,23 @@ public class PstudystudyPayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pno=Integer.parseInt(request.getParameter("pno"));
-		int mno=Integer.parseInt(request.getParameter("mno"));
+		// TODO Auto-generated method stub
+		String category=request.getParameter("locate");
+		System.out.println(category);
+		PstudyService service=new PstudyService();
+		if(category.equals("N")) {
+		List<Pstudy> bestList=service.bestPstudy();
+		request.setAttribute("bestList",  bestList);
+		request.getRequestDispatcher("/views/common/bestIndex.jsp")
+	    .forward(request,response);   
+		}else {
+		List<Pstudy>categoryList=service.selectcategoryList(category);
+		request.setAttribute("categoryList", categoryList);
+		request.getRequestDispatcher("/views/common/bestIndex.jsp")
+	    .forward(request,response);   
+		}
 		
-		Pstudy newp=new PstudyService().selectpStudyVIew(pno); 
-		Member newm=new MemberService().selectNo(mno);
-		int resultPay=newp.getpPrice()-newm.getMemPoint();
-		request.setAttribute("newp", newp);
-	    request.setAttribute("resultPay", resultPay); 
-		request.setAttribute("newm", newm);
-		request.getRequestDispatcher("/views/pstudy/payview.jsp").forward(request, response);
+		
 	}
 
 	/**
