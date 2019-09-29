@@ -160,5 +160,32 @@ public class AdminBoardDao {
 
 		return result;
 	}
+	
+	public List<FAQ> showFAQList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<FAQ> list=new ArrayList();
+		String sql=prop.getProperty("showFAQList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				FAQ f=new FAQ();
+				f.setFaqNO(rs.getInt("faq_no"));
+				f.setFaqType(rs.getString("faq_type"));
+				f.setFaqTitle(rs.getString("faq_title"));
+				String content = rs.getString("faq_content");
+				content = content.replaceAll("\n", "<br/>");
+				f.setFaqContent(content);
+				list.add(f);				
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 
 }

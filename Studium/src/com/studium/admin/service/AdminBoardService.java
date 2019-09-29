@@ -63,4 +63,11 @@ public class AdminBoardService {
 		return result;
 	}
 	
+	public List<FAQ> showFAQList(){
+		Connection conn = getConnection();
+		List<FAQ> list=dao.showFAQList(conn);
+		close(conn);
+		return list;
+	}
+	
 }

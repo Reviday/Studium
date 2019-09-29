@@ -6,6 +6,7 @@ body {
 a {
     text-decoration: none;
     outline-style: none;
+    cursor: pointer;
 }
 
 .picture {

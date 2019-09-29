@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.admin.model.vo.FAQ;
 import com.studium.admin.model.vo.QandA;
+import com.studium.admin.service.AdminBoardService;
 import com.studium.admin.service.AdminService;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
@@ -38,6 +40,10 @@ public class AdminQandAServlet extends HttpServlet {
 		
 		AdminService service = new AdminService();
 		int result = service.insertQandA(content, email);
+		
+		AdminBoardService service1 = new AdminBoardService();
+		List<FAQ> list = service1.showFAQList();
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/Q&A/Q&A.jsp")
 		.forward(request,response);
