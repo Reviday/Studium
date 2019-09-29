@@ -393,47 +393,44 @@ insert into ta_member values(20010, 't10@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpS
    
    --pstudy
 select * from p_study;
-delete from p_study where p_title='Hannah 쌤과 함께하는 스피킹 수업';
-insert into p_study values(101,'Hannah 쌤과 함께하는 스피킹 수업','Exciting speaking','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_1.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'Hannah',DEFAULT, 8,20001 );
-
-insert into p_study values(101,'놀면서 영어배워요! Justin 쌤과 즐거운 스피킹','놀면서 영어할래?','역삼','주말',8,120000,'영어','I love reading, writing, watching movies and TV shows. All kinds of sports, specially football, mixed martial arts, cycling, hiking, gym & skateboarding. Love playing drums and the Ukulele, and listen to all kinds of music.',
-'I graduated from an International school, and I attended acting school in New York City','t_2.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'Justin',DEFAULT, 8,20002 );
-
-insert into p_study values(101,'예슬 쌤과 함께하는 스피킹 수업','2','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_3.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'예슬',DEFAULT, 8,20003 );
-
-insert into p_study values(101,'재욱 쌤과 함께하는 중국어 스피킹 수업','2','역삼','평일',8,120000,'중국어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-'대륙을 정복하는자 세상을 정복하리니! 영어 다음으로 각광받는 외국어 언어인 중국어! 회화를 잘해서 고객사도 만나고 세일즈도 하고 취업도 하시길 기대합니다.','t_4.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'재욱',DEFAULT, 8,20004 );
-
-insert into p_study values(101,'Benedict 쌤과 함께하는 스피킹 수업','2','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_5.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'Benedict',DEFAULT, 8,20005 );
-
-insert into p_study values(101,'송강 쌤과 함께하는 스피킹 수업','2','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_6.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'송강',DEFAULT, 8,20006 );
-
-insert into p_study values(101,'실제 인사담당 혜교쌤의 실전 면접 준비','2','강남','주말',8,210000,'면접','실제 면접관이 보는 면접에 대해',
-'면접 준비, 제대로 해봐요','t_7.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'혜교',DEFAULT, 8,20007 );
-
-insert into p_study values(101,'은우 쌤과 함께하는 스피킹 수업','2','이태원','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_8.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'은우',DEFAULT, 8,20008 );
+--날짜바꾸기
+update p_study set p_datestart='19/11/11', p_dateend='19,12,30';
+update p_study set p_status='Y';
+update p_study set p_studymember=0;
+commit;
 
 
-insert into p_study values(101,'우식 쌤과 함께하는 정보처리기사','2','역삼','평일',8,120000,'국가기술자격증','15년간 컴퓨터 강의 및 현장 실무를 모두 수행해온 강사가 정보처리기사 합격을 도와 드립니다.',
-'문제풀이 위주로 진행할 예정입니다.','t_9.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'우식',DEFAULT, 8,20009 );
+insert into p_study values(101,'Hannah 쌤과 스피킹','Exciting speaking','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','t_1.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'Hannah','Y', 8,20001 );
 
-insert into p_study values(101,'떠먹여주는 알고리즘','2','신촌','주말',8,500000,'알고리즘','최근 IT 개발자에 대한 수요가 계속해서 증가하고 있고, 그에 따라 IT 회사로의 취업을 고려하고 있는 학생, 이직을 준비하는 비전공자 분들도 계속해서 늘어나고 있습니다. 회사의 채용 프로세스를 진행하며 코딩 테스트, 코딩 면접은 피할 수 없는 관문이고, 이를 위해 혼자서 어디서부터 어떻게 알고리즘을 공부해야 될지 막막하신 분들도 많았을 것입니다. 특히 컴퓨터 관련 전공자가 아니라면 더더욱, 이런 부분은 어렵기만 합니다.',
+insert into p_study values(102,'놀면서 영어배워요! ','Justin 쌤과 즐거운 스피킹, 놀면서 영어할래?','역삼','주말',8,120000,'영어','I love reading, writing, watching movies and TV shows. All kinds of sports, specially football, mixed martial arts, cycling, hiking, gym & skateboarding. Love playing drums and the Ukulele, and listen to all kinds of music.',
+'I graduated from an International school, and I attended acting school in New York City','t_2.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'Justin','Y', 8,20002 );
+
+insert into p_study values(103,'예슬 쌤과 스피킹','제대로 된 스피킹','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','t_3.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'예슬','Y', 8,20003 );
+
+insert into p_study values(104,'재욱 쌤과 중국어수업','실무에서의 중국어','역삼','평일',8,120000,'중국어','우리 같이 중국어할래요?',
+'대륙을 정복하는자 세상을 정복하리니! 영어 다음으로 각광받는 외국어 언어인 중국어! 회화를 잘해서 고객사도 만나고 세일즈도 하고 취업도 하시길 기대합니다.','t_4.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'재욱','Y', 8,20004 );
+
+insert into p_study values(105,'Benedict 와 진지한 영어','진지한 영국영어','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','t_5.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'Benedict','Y', 8,20005 );
+
+insert into p_study values(106,'송강 쌤과 영어','즐거운 영어스터디','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','t_6.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'송강','Y', 8,20006 );
+
+insert into p_study values(107,'면접스터디 ','실제 인사담당 혜교쌤','강남','주말',8,210000,'면접','실제 면접관이 보는 면접에 대해',
+'면접 준비, 제대로 해봐요','t_7.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'혜교','Y', 8,20007 );
+
+insert into p_study values(108,'은우쌤과 함께 공부','잘생쁨주의','이태원','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','t_8.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'은우','Y', 8,20008 );
+
+
+insert into p_study values(109,'정보처리기사 공부','합격합시다.','역삼','평일',8,120000,'국가기술','15년간 컴퓨터 강의 및 현장 실무를 모두 수행해온 강사가 정보처리기사 합격을 도와 드립니다.',
+'문제풀이 위주로 진행할 예정입니다.','t_9.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','2019/12/12','2020/01/22',4,'우식','Y', 8,20009 );
+
+insert into p_study values(110,'떠먹여주는 알고리즘','알고리즘 스터디','신촌','주말',8,500000,'알고리즘','최근 IT 개발자에 대한 수요가 계속해서 증가하고 있고, 그에 따라 IT 회사로의 취업을 고려하고 있는 학생, 이직을 준비하는 비전공자 분들도 계속해서 늘어나고 있습니다. 회사의 채용 프로세스를 진행하며 코딩 테스트, 코딩 면접은 피할 수 없는 관문이고, 이를 위해 혼자서 어디서부터 어떻게 알고리즘을 공부해야 될지 막막하신 분들도 많았을 것입니다. 특히 컴퓨터 관련 전공자가 아니라면 더더욱, 이런 부분은 어렵기만 합니다.',
 '이런 분들을 위해 알고리즘 스터디가 기획되었고, 스터디를 통해 알고리즘에 필요한 개념들과 문제에 적용할 수 있는 여러 스킬들을 스터디원들과 함께 학습하며 모두 자신의 것으로 만들 수 있길 기대하고 있습니다. 언어는 Java를 위주로 진행합니다. 국내 IT 대기업 S사 사내 알고리즘 강사로 활동하고 계신 리더님에게 오만가지 도움을 다 받아가세요!'
-,'t_10.jpg','p_11.jpg','p_9.jpg','p_10.jpg','01:00','07:00',sysdate,sysdate,4,'박진영',DEFAULT, 8,20010 );
+,'t_10.jpg','p_11.jpg','p_9.jpg','p_10.jpg','01:00','07:00','2019/12/12','2020/01/22',4,'박진영','Y', 8,20010 );
 
- select * from category_m
- select * from 
- 
- 
- 
-    --후기 
-    
---강사스터디 더미데이터
-insert into p_study values(seq_pstudy.nextval,'TEST P STUDY','2','강남','주말',10,20,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i2.jpg','i3.jpg','i4.jpg','01:00','07:00',sysdate,sysdate,4,'아이유',DEFAULT, 8);
+ --후기 
+--INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20011,2, 'frog.jpg','개구리','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요 ', DEFAULT, '서경석', 'seo.jpg','Interview','3');

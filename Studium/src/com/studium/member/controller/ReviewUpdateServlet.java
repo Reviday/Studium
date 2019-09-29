@@ -45,18 +45,23 @@ public class ReviewUpdateServlet extends HttpServlet {
 		Member memM=service.selectNo(memNo);//학생정보 가져옴
 		PstudyService pService= new PstudyService();
 		Pstudy p=pService.selectpStudyVIew(pNo);//스터디 정보 가져옴
-		
+		System.out.println("스터디정보"+p);
+		System.out.println("teacherno"+p.getpStudyTeacherno());
 		Member teacherM=service.selectNo(p.getpStudyTeacherno());//teacher정보 가져옴
+		System.out.println("teacherM!"+teacherM);
 
 		Story s=new Story();
 		s.setMemNo(memNo);
 		s.setpNo(pNo);
 		s.setStoryContent(review);
 		
-		//리뷰select해서 보여줌 
+		//리뷰select해서 primary값 가져옴 
 		Story selects = service.reviewSelect(memNo, pNo);
 		//리뷰업데이트
-		int result= service.reviewUpdate(s, selects.getpNo());
+		int result= -1;
+		if(selects!=null) {
+			result= service.reviewUpdate(s, selects.getpNo());
+		}
 		if(result<=0) {//업데이트 되는 값 없으면 insert해줌
 
 			s.setStoryStudentpicture(memM.getMemPhoto());

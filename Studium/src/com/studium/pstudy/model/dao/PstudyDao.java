@@ -518,6 +518,7 @@ public class PstudyDao {
 				p.setpLike(rs.getInt("p_like"));
 				p.setpTeachername(rs.getString("p_teachername"));
 				p.setpStudyMember(rs.getInt("p_studyMember"));
+				p.setpStudyTeacherno(rs.getInt("p_teacherno"));
 			}
 			
 		}catch(SQLException e) {

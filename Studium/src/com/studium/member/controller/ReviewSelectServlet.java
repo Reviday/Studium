@@ -39,9 +39,13 @@ public class ReviewSelectServlet extends HttpServlet {
 		System.out.println(pNo);
 		MemberService service = new MemberService();
 		Story story = service.reviewSelect(memNo, pNo);
-		String memo=story.getStoryContent();
+		
+		String memo="";
 		//스터디 후기 값 없으면 공백넣음
-		if(story==null) {
+		if(story!=null) {
+			memo=story.getStoryContent();
+		}
+		else {
 			memo="";
 		}
 		response.setContentType("application/json;charset=UTF-8");

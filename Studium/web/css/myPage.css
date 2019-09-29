@@ -583,6 +583,8 @@ div .img-category {
     border: 1px solid white;
     border-radius: 5px;
     margin: 50px 3px;
+    position:relative;
+    left:-80px;
 }
 
 .btn-gotochat:hover {
@@ -678,7 +680,7 @@ div .img-category {
 /* pay */
 
 .myPay {
-    margin-top: 20%;
+    margin-top: 240px;
     padding-top: 50px;
     text-align: center;
 }
