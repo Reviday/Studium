@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.studium.madang.model.dao.StudyMadangDao;
 import com.studium.madang.model.vo.StudyMadang;
+import com.studium.madang.model.vo.StudyMadangQuestion;
 
 public class StudyMadangService {
 
@@ -75,6 +76,19 @@ public class StudyMadangService {
 			if(result>0) commit(conn);
 			else rollback(conn);
 		} 
+		close(conn);
+		return result;
+	}
+	
+	public int insertQuestion(StudyMadangQuestion smq) {
+		Connection conn = getConnection();
+		int update=dao.updateMadangAnswerCount(conn, smq);
+		int result=-1;
+		if(update>0) {
+			result=dao.insertQuestion(conn, smq);
+			if(result>0) commit(conn);
+			else rollback(conn);
+		} else rollback(conn);
 		close(conn);
 		return result;
 	}

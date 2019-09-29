@@ -550,12 +550,12 @@
 								<!-- 하단 item box -->
 								<div class="bottom-box">
 									<!-- left item -->
+									<!-- 만들 여력이 없어서 일단 드랍..
 									<div class="fl reply_sort">
 										<table role="presentation" cellspacing="0" cellpadding="0"
 											border="0" class="border-none">
 											<tbody>
 												<tr style="vertical-align: top">
-													<!-- 댓글 수 -->
 													<td class="reply"><a href="javascript:"
 														class="reply_btn b m-tcol-c m-tcol-p _totalCnt cmt_toggle" 
 														onclick="fn_openCommentArea(); return false;">
@@ -568,6 +568,7 @@
 											</tbody>
 										</table>
 									</div>
+									 -->
 								</div>
 						</div>
 				<%
@@ -596,11 +597,16 @@
 			                </ul>
 			            </small>
 			        </div>
-			
-			        <div class="alert alert-warning" id="answer_login_msg" style="display:none">
-			            	풀이 작성은 로그인이 필요합니다.
-			        </div>
-			        <form role="form" method="post" action="<%=request.getContextPath()%>/madang/insertQuestion">
+			        <form role="form" method="post" action="<%=request.getContextPath()%>/madang/insertQuestion"
+			        		onsubmit="return fn_qValidate();">
+			        		<script>
+			        			function fn_qValidate() {
+			        				if(<%=loginMember==null%>) {
+			        					fn_needLogin();
+			        					return false;
+			        				}
+			        			}
+			        		</script>
 			            <div class="form-group markdown_editor">
 			                
 			                    <div class="toolbar clearfix" style="margin-bottom: 5px;">
@@ -617,7 +623,7 @@
 								<button type="submit" class="btn-default" id="submitBtn" 
 									style="background-color: transparent; border:none; cursor: pointer">
 					                <span class="_rosRestrict btn_type1 font-family-type1"
-					                 style="color:#000">풀이달기</span>
+					                 style="color:#000; margin:0 !important; ">풀이달기</span>
 					            </button>
 							</div>
 						</div>
@@ -625,10 +631,22 @@
 						<!-- hidden data -->
 						<div class="hidden" style="display:none">
 							<input type="hidden" name="madangNo" value="<%=sm.getMadangNo()%>">
-							<input type="hidden" name="memNo" value="<%=loginMember.getMemNo()%>">
-							<input type="hidden" name="memEmail" value="<%=loginMember.getMemUserEmail()%>">
-							<input type="hidden" name="memName" value="<%=loginMember.getMemName()%>">
 							<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
+							<input type="hidden" name="cPage" value="<%=cPage%>">
+							<input type="hidden" name="choiceSub" value="<%=choiceSub%>">
+							<input type="hidden" name="mCategory" value="<%=sm.getMadangMainCategory()%>">
+							<input type="hidden" name="category" value="<%=sm.getMadangCategory()%>">
+							<input type="hidden" name="sCategory" value="<%=sm.getMadangSubCategory()%>">
+							
+							<%
+								if(loginMember!=null) {
+									%>
+										<input type="hidden" name="memNo" value="<%=loginMember.getMemNo()%>">
+										<input type="hidden" name="memEmail" value="<%=loginMember.getMemUserEmail()%>">
+										<input type="hidden" name="memName" value="<%=loginMember.getMemName()%>">
+								   <%
+								}
+							%>
 						</div>
 			        </form>
 			    </div>
@@ -705,8 +723,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">코드삽입</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
             <div class="form-group">

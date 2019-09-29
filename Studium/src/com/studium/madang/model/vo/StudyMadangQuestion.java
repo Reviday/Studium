@@ -10,6 +10,9 @@ public class StudyMadangQuestion {
 	private String questionWriterEmail; // 글쓴이 이메일
 	private String questionWriterName; // 글쓴이 이름(이름으로 표기)
 	private String questionContent; // 글 내용
+	private String questionMainCategory; // 대분류(관리자 고정) => 통계용
+	private String questionCategory; //중분류(관리자 고정)
+	private String questionSubCategory; // 소분류(사용자 지정)
 	private Timestamp questionRegisterDatetime; // 글 작성 일시
 	private String questionRegisterIp; // 글 작성 ip 주소
 	private Timestamp questionUpdatedDatetime; // 글 수정 일시
@@ -23,9 +26,10 @@ public class StudyMadangQuestion {
 	}
 
 	public StudyMadangQuestion(int questionNo, int madangNo, int questionWriterUid, String questionWriterEmail,
-			String questionWriterName, String questionContent, Timestamp questionRegisterDatetime,
-			String questionRegisterIp, Timestamp questionUpdatedDatetime, String questionUpdatedIp,
-			int questionRecCount, int questionRepCount, String profilePath) {
+			String questionWriterName, String questionContent, String questionMainCategory, String questionCategory,
+			String questionSubCategory, Timestamp questionRegisterDatetime, String questionRegisterIp,
+			Timestamp questionUpdatedDatetime, String questionUpdatedIp, int questionRecCount, int questionRepCount,
+			String profilePath) {
 		super();
 		this.questionNo = questionNo;
 		this.madangNo = madangNo;
@@ -33,6 +37,9 @@ public class StudyMadangQuestion {
 		this.questionWriterEmail = questionWriterEmail;
 		this.questionWriterName = questionWriterName;
 		this.questionContent = questionContent;
+		this.questionMainCategory = questionMainCategory;
+		this.questionCategory = questionCategory;
+		this.questionSubCategory = questionSubCategory;
 		this.questionRegisterDatetime = questionRegisterDatetime;
 		this.questionRegisterIp = questionRegisterIp;
 		this.questionUpdatedDatetime = questionUpdatedDatetime;
@@ -88,6 +95,30 @@ public class StudyMadangQuestion {
 
 	public void setQuestionContent(String questionContent) {
 		this.questionContent = questionContent;
+	}
+
+	public String getQuestionMainCategory() {
+		return questionMainCategory;
+	}
+
+	public void setQuestionMainCategory(String questionMainCategory) {
+		this.questionMainCategory = questionMainCategory;
+	}
+
+	public String getQuestionCategory() {
+		return questionCategory;
+	}
+
+	public void setQuestionCategory(String questionCategory) {
+		this.questionCategory = questionCategory;
+	}
+
+	public String getQuestionSubCategory() {
+		return questionSubCategory;
+	}
+
+	public void setQuestionSubCategory(String questionSubCategory) {
+		this.questionSubCategory = questionSubCategory;
 	}
 
 	public Timestamp getQuestionRegisterDatetime() {
@@ -150,10 +181,12 @@ public class StudyMadangQuestion {
 	public String toString() {
 		return "StudyMadangQuestion [questionNo=" + questionNo + ", madangNo=" + madangNo + ", questionWriterUid="
 				+ questionWriterUid + ", questionWriterEmail=" + questionWriterEmail + ", questionWriterName="
-				+ questionWriterName + ", questionContent=" + questionContent + ", questionRegisterDatetime="
-				+ questionRegisterDatetime + ", questionRegisterIp=" + questionRegisterIp + ", questionUpdatedDatetime="
-				+ questionUpdatedDatetime + ", questionUpdatedIp=" + questionUpdatedIp + ", questionRecCount="
-				+ questionRecCount + ", questionRepCount=" + questionRepCount + ", profilePath=" + profilePath + "]";
+				+ questionWriterName + ", questionContent=" + questionContent + ", questionMainCategory="
+				+ questionMainCategory + ", questionCategory=" + questionCategory + ", questionSubCategory="
+				+ questionSubCategory + ", questionRegisterDatetime=" + questionRegisterDatetime
+				+ ", questionRegisterIp=" + questionRegisterIp + ", questionUpdatedDatetime=" + questionUpdatedDatetime
+				+ ", questionUpdatedIp=" + questionUpdatedIp + ", questionRecCount=" + questionRecCount
+				+ ", questionRepCount=" + questionRepCount + ", profilePath=" + profilePath + "]";
 	}
-	
+
 }

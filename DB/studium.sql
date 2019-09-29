@@ -144,26 +144,30 @@ insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.c
 select * from ta_study_madang;
 commit;
 
-
+drop table ta_study_madang_question;
+select * from ta_study_madang_question;
 -- 공부마당 풀이
 create table ta_study_madang_question(
-    question_no number primary key,
+    question_no number primary key,-- 시퀀스 pk
     madang_no number references ta_study_madang(madang_no), -- 해당 글번호
     question_writer_uid number, -- 글쓴이 uid
     question_writer_email varchar2(20), -- 글쓴이 이메일
     question_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
-    question_content clob constraint stmadang_content_nn not null, -- 글 내용
+    question_content clob, -- 글 내용
+    question_main_category varchar2(100), -- 대분류(관리자 고정) => 통계용
+    question_category varchar2(100), -- 중분류(관리자 고정)
+    question_sub_category varchar2(100), -- 소분류(사용자 지정)
     question_register_datetime date, -- 글 작성 일시
     question_register_ip varchar2(20), -- 글 작성 ip 주소
     question_updated_datetime date default null, -- 글 수정 일시
     question_updated_ip varchar2(20), -- 글 수정 ip 주소
     question_rec_count number default 0, -- 글 추천 수(recommand)
     question_rep_count number default 0, -- 글 댓글 수
-    question_status char(1) default 'Y' constraint stmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+    question_status char(1) default 'Y' check(question_status in ('Y','N')) -- 삭제 여부
 );
 
 -- 공부마당
-create sequence stmadang_seq 
+create sequence stmadang_question_seq 
 start with 1
 increment by 1
 maxvalue 999999;

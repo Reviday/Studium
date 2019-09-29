@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.StudyMadang;
+import com.studium.madang.model.vo.StudyMadangQuestion;
 import com.studium.member.model.service.MemberService;
 
 public class StudyMadangDao {
@@ -255,6 +256,46 @@ public class StudyMadangDao {
 			pstmt.setInt(1, madangNo);
 			pstmt.setInt(2, memNo);
 			pstmt.setString(3, REMOTE_ADDR);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateMadangAnswerCount(Connection conn, StudyMadangQuestion smq) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMadangAnswerCount");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, smq.getMadangNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int insertQuestion(Connection conn, StudyMadangQuestion smq) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertQuestion");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, smq.getMadangNo());
+			pstmt.setInt(2, smq.getQuestionWriterUid());
+			pstmt.setString(3, smq.getQuestionWriterEmail());
+			pstmt.setString(4, smq.getQuestionWriterName());
+			pstmt.setString(5, smq.getQuestionContent());
+			pstmt.setString(6, smq.getQuestionMainCategory());
+			pstmt.setString(7, smq.getQuestionCategory());
+			pstmt.setString(8, smq.getQuestionSubCategory());
+			pstmt.setString(9, smq.getQuestionRegisterIp());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
