@@ -570,10 +570,9 @@ public class MemberDao {
 			pstmt.setString(3, s.getStoryStudentpicture());
 			pstmt.setString(4, s.getStoryWrite());
 			pstmt.setString(5, s.getStoryContent());
-			pstmt.setTimestamp(6, s.getStoryTime());
-			pstmt.setString(7, s.getStoryTeachername());
-			pstmt.setString(8, s.getStoryTeacherpicture());
-			pstmt.setString(9, s.getStorySubject());
+			pstmt.setString(6, s.getStoryTeachername());
+			pstmt.setString(7, s.getStoryTeacherpicture());
+			pstmt.setString(8, s.getStorySubject());
 			pstmt.setInt(9, s.getStoryStar());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

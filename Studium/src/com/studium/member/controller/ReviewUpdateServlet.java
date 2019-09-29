@@ -36,24 +36,23 @@ public class ReviewUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("update서블릿");
+		
 		String review = request.getParameter("my-review");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int pNo = Integer.parseInt(request.getParameter("no"));
+		int star = Integer.parseInt(request.getParameter("star"));
 		
-
 		MemberService service = new MemberService();
 		Member memM=service.selectNo(memNo);//학생정보 가져옴
 		PstudyService pService= new PstudyService();
 		Pstudy p=pService.selectpStudyVIew(pNo);//스터디 정보 가져옴
-		System.out.println("스터디정보"+p);
-		System.out.println("teacherno"+p.getpStudyTeacherno());
 		Member teacherM=service.selectNo(p.getpStudyTeacherno());//teacher정보 가져옴
-		System.out.println("teacherM!"+teacherM);
-
+		
 		Story s=new Story();
 		s.setMemNo(memNo);
 		s.setpNo(pNo);
 		s.setStoryContent(review);
+		s.setStoryStar(star);
 		
 		//리뷰select해서 primary값 가져옴 
 		Story selects = service.reviewSelect(memNo, pNo);

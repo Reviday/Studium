@@ -614,7 +614,7 @@ div .img-category {
 	
 	background-color:rgba(0,0,0,0.8);
 	z-index:9998;
-	display:none;
+	 display:none;
 	
 	
 }
@@ -633,7 +633,6 @@ div .img-category {
 .review-top{
 	padding:15px;
 	border-bottom:1px solid;
-	margin-bottom:15px;
 }
 .review-top h5{
 	margin-bottom:0px;
@@ -675,8 +674,6 @@ div .img-category {
     outline:none;
 
 }
-
-
 /* pay */
 
 .myPay {
