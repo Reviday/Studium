@@ -57,11 +57,9 @@
 
 $('.centernonloop').owlCarousel({
     center: true,
-    items: 3,
     loop: false,
     margin: 10,
     itemsDesktop:[1199,4],
-    
     dots: true,
     responsive: {
       600: {

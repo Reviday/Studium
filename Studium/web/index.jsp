@@ -93,12 +93,9 @@
       </div>
     </div>
        <div class="owl-carousel centernonloop" id="indexBest" >
-   
     </div>
-
   </section> 
   <!-- .section -->
-
   <section class="section bg-light element-animate">
 
     <div class="clearfix mb-5 pb-5">
@@ -113,51 +110,8 @@
     </div>
 
     <div class="container">
-
       <div class="row no-gutters" id="indexreview">
-        <div class="col-md-6" >
-
-
-          <div class="sched d-block d-lg-flex">
-            <div class="bg-image" style="background-image: url('img/4.jpg');"></div>
-            <div class="text">
-              <h3>살면서 코딩을 이만큼 할 줄 몰랐어요</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-              <p class="text-primary h3">3주만에 코딩완성</p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="col-md-6">
-          <div class="sched d-block d-lg-flex">
-            <div class="bg-image order-2" style="background-image: url('img/5.jpg');"></div>
-            <div class="text order-1">
-              <h3>강사님이 너무 재밌고 좋아요</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-              <p class="text-primary h3">javascript마스터</p>
-
-            </div>
-
-          </div>
-
-          <div class="sched d-block d-lg-flex">
-            <div class="bg-image" style="background-image: url('img/5.jpg');"></div>
-            <div class="text">
-              <h3>즐겁게 공부하고 취업까지!</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-              <p class="text-primary h3">그만해,,</p>
-
-            </div>
-
-          </div>
-
-        </div>
       </div>
-
-
     </div>
   </section> <!-- .section -->
 

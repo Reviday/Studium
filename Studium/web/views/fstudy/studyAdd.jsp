@@ -257,30 +257,8 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         <INPUT TYPE="text" NAME="p_teachername" size=50 /></td>
                                                          <input type="hidden" id="f_teacherno" name="f_teacherno" value="<%=loginMember.getMemNo()%>"/>
-                                                </tr>
-                                                     <tr>
-                                                <tr>
-                                                    <td width="24%" align="left" bgcolor="#EEEEEE">별점</td>
-                                                    <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <span class="star-input">
-                                                            <span class="input">
-                                                                <input type="radio" name="star-input" value="1" id="p1">
-                                                                <label for="p1">1</label>
-                                                                <input type="radio" name="star-input" value="2" id="p2">
-                                                                <label for="p2">2</label>
-                                                                <input type="radio" name="star-input" value="3" id="p3">
-                                                                <label for="p3">3</label>
-                                                                <input type="radio" name="star-input" value="4" id="p4">
-                                                                <label for="p4">4</label>
-                                                                <input type="radio" name="star-input" value="5" id="p5">
-                                                                <label for="p5">5</label>
-                                                            </span>
-                                                            <output for="star-input"><b>0</b>점</output>
-                                                        </span>
-
-
-                                                    </td>
-                                                </tr>
+                                                          <input type="hidden" name="star-input" value="0" id="p1"/>
+                                                </tr> 
                                                 <tr>
                                                     <td colspan=2 align=center bgcolor="#FFFFFF"><INPUT TYPE="submit"
                                                             VALUE="등록"></td>
