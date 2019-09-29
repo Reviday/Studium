@@ -1,6 +1,7 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.member.model.service.MemberService;
 import com.studium.member.model.vo.Member;
 
@@ -45,8 +48,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		
 		System.out.println(request.getParameter("phone"));
 		// 수정한 내용
-		if(request.getParameter("phone").equals(null)) {
-			System.out.println("여기들어옴");
+		if(!request.getParameter("phone").equals(null)) {
 			String phone=request.getParameter("phone");
 			String address1=request.getParameter("address1");
 			String address2=request.getParameter("address2");
@@ -56,7 +58,13 @@ public class ModifyMemberServlet extends HttpServlet {
 			m.setMemZipCode(zipcode);
 			m.setMemAddress1(address1);
 			m.setMemAddress2(address2);
-			if(inter.length==1) {
+			System.out.println(inter);
+			if(inter[0].contentEquals("null")) {
+				m.setMemCategory1(null);
+				m.setMemCategory2(null);
+				m.setMemCategory3(null);
+			}
+			if(inter.length<2) {
 				m.setMemCategory1(inter[0]);
 				m.setMemCategory2(null);
 				m.setMemCategory3(null);
@@ -66,7 +74,7 @@ public class ModifyMemberServlet extends HttpServlet {
 				m.setMemCategory2(inter[1]);
 				m.setMemCategory3(null);
 			}
-			else{
+			if(inter.length==3){
 				m.setMemCategory1(inter[0]);
 				m.setMemCategory2(inter[1]);
 				m.setMemCategory3(inter[2]);
@@ -81,6 +89,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		MemberService ms=new MemberService();
 		//회원정보 수정
 		int result=ms.modifyMember(m, id);
+		System.out.println(result+"수정여부");
 		String msg="";
 		String loc="/";
 		String view="";
@@ -89,6 +98,12 @@ public class ModifyMemberServlet extends HttpServlet {
 		
 		if(result>0) {
 			//회원정보수정성공
+			List<Category> listM=new CategoryService().selectTitleM();
+			//대분류
+			List<Category> listB=new CategoryService().selectTitleB();
+			
+			request.setAttribute("categoryB", listB);
+			request.setAttribute("categoryM", listM);
 			request.setAttribute("member", m);
 			request.getRequestDispatcher("/views/myPage/myInfo.jsp")
 			.forward(request,response);

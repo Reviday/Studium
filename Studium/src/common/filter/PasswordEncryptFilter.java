@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 					"LoginServlet",
 					"RegisterServlet",
 					"MyInfoServlet",
-					"ModifyMemberServlet"
+					"ModifyMemberServlet",
+					"CheckOriginPwServlet"
 					
 			})
 public class PasswordEncryptFilter implements Filter {

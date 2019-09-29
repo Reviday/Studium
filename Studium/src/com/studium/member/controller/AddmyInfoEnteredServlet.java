@@ -38,7 +38,7 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("서블릿들어옴");
 		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
 		int no=Integer.parseInt(request.getParameter("no"));
 		//생일 멤버객체에서 sql로 해놔서 parse방법이 다름
@@ -53,6 +53,7 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String address1=request.getParameter("address1");
 		String address2=request.getParameter("address2");
 		String [] inter =request.getParameterValues("inter");
+		System.out.println("배열의 길이"+inter.length);
 		
 		// 수정한 내용
 		Member m=new Member();
@@ -62,17 +63,20 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		m.setMemZipCode(zipcode);
 		m.setMemAddress1(address1);
 		m.setMemAddress2(address2);
-		if(inter.length==1) {
+		if(inter.length<2) {
+			System.out.println("여기들어감1");
 			m.setMemCategory1(inter[0]);
 			m.setMemCategory2(null);
 			m.setMemCategory3(null);
 		}
 		if(inter.length==2){
+			System.out.println("여기들어감2");
 			m.setMemCategory1(inter[0]);
 			m.setMemCategory2(inter[1]);
 			m.setMemCategory3(null);
 		}
-		else{
+		if(inter.length==3){
+			System.out.println("여기들어감3");
 			m.setMemCategory1(inter[0]);
 			m.setMemCategory2(inter[1]);
 			m.setMemCategory3(inter[2]);
@@ -88,6 +92,7 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		if(result>0) {
 			//회원정보수정성공
 			m=ms.selectNo(no);
+			System.out.println("회원수정성공");
 			
 			List<Category> listM=new CategoryService().selectTitleM();
 			//대분류

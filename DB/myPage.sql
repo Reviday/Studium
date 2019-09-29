@@ -314,6 +314,7 @@ select * from tab;
 
 alter table p_study add p_studyMember  number default 0;
 alter table f_study add p_studyMember  number default 0;
+alter table f_study add p_studyMember  number default 0;
 ALTER TABLE f_study RENAME COLUMN p_studyMember TO f_studyMember;
 
 update f_study set f_studyMember=8;
@@ -392,7 +393,7 @@ insert into ta_member values(20009, 't9@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo
 insert into ta_member values(20010, 't10@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '박진영','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_10.jpg',default,default,default);
    
    --pstudy
-select * from p_study;
+select * from ta_story;
 --날짜바꾸기
 update p_study set p_datestart='19/11/11', p_dateend='19,12,30';
 update p_study set p_status='Y';
@@ -434,3 +435,10 @@ insert into p_study values(110,'떠먹여주는 알고리즘','알고리즘 스터디','신촌','�
 
  --후기 
 --INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20011,2, 'frog.jpg','개구리','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요 ', DEFAULT, '서경석', 'seo.jpg','Interview','3');
+
+--fstudy
+select * from my_purchase;
+
+insert into f_study values(110,'공부할랭? 알고리즘','알고리즘 스터디','신촌','주말',8,500000,'알고리즘','최근 IT 개발자에 대한 수요가 계속해서 증가하고 있고, 그에 따라 IT 회사로의 취업을 고려하고 있는 학생, 이직을 준비하는 비전공자 분들도 계속해서 늘어나고 있습니다. 회사의 채용 프로세스를 진행하며 코딩 테스트, 코딩 면접은 피할 수 없는 관문이고, 이를 위해 혼자서 어디서부터 어떻게 알고리즘을 공부해야 될지 막막하신 분들도 많았을 것입니다. 특히 컴퓨터 관련 전공자가 아니라면 더더욱, 이런 부분은 어렵기만 합니다.',
+'이런 분들을 위해 알고리즘 스터디가 기획되었고, 스터디를 통해 알고리즘에 필요한 개념들과 문제에 적용할 수 있는 여러 스킬들을 스터디원들과 함께 학습하며 모두 자신의 것으로 만들 수 있길 기대하고 있습니다. 언어는 Java를 위주로 진행합니다. 국내 IT 대기업 S사 사내 알고리즘 강사로 활동하고 계신 리더님에게 오만가지 도움을 다 받아가세요!'
+,'s_1.jpg','p_11.jpg','p_9.jpg','p_10.jpg','01:00','07:00','2019/12/12','2020/01/22',4,'박진영','Y', 8,20010 );
