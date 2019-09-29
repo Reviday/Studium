@@ -11,6 +11,7 @@
 	List<StudyMadangCmt> list = (List<StudyMadangCmt>)request.getAttribute("cmtList");
 	int totalData = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
+	String show = (String)request.getAttribute("show");
 	
 	//prev, next 기능을 위해서 앞글과 이전글의 번호를 가져와야한다.
 	Map<String, StudyMadang> preNext=(Map<String, StudyMadang>)request.getAttribute("preNext");
@@ -28,7 +29,13 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/markdown.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/default.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/studyview.css"
+	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/simplemde.min.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/bootstap-3.3.7.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <script src="<%=request.getContextPath()%>/js/markdown.js"></script>
@@ -52,8 +59,8 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">공부마당</h3>
-					<p class="list-sub">서로가 문제를 출제하고 문제를 풀어보는 공간입니다.</p>
+					<h3 class="list-title font-family-type1">공부마당</h3>
+					<p class="list-sub font-family-type1">서로가 문제를 출제하고 문제를 풀어보는 공간입니다.</p>
 				</div>
 			</div>
 		</div>
@@ -130,7 +137,7 @@
 				<div class="board-box-line-dashed"></div>
 
 				<!-- 기타 정보 박스// 이름(이메일) etc.. -->
-				<div class="etc-box">
+				<div class="etc-box" style="margin-bottom:10px;">
 					<!-- 프로필 사진/이름(이메일) -->
 					<div class="fl">
 						<table role="presentation" cellspacing="0" cellpadding="0" class="border-none"
@@ -180,8 +187,8 @@
 				<div class="h10"></div>
 
 				<!-- 실제 작성 내용 -->
-				<div class="tbody m-tcol-c" id="tbody"
-					style="padding-left: 43px; padding-right: 43px; margin-right: 0px;">
+				<div class="markdown_area answer-content" id="tbody"
+					style="padding-left: 43px; padding-right: 43px; margin-right: 0px; color: #333;">
 					<%=sm.getMadangContent()%>
 				</div>
 
@@ -402,6 +409,8 @@
 						
 					</div>
 				</div>
+				
+				<div class="h40"></div>
 
 				<div style="clear: both; height: 0pt; font: 0pt/0pt arial;"></div>
 				<div style="display: none;" class="cc_paginate cmt"
@@ -419,16 +428,164 @@
 					
 				</div>
 				
+				
+				<div class="show-answer-area" style="margin:20px; padding-top:20px; border-top: 1px solid #333">
+				<%
+					if(sm.getMadangAnswerCount()>0 && !show.equals("true")) {
+						// 답변이 1개 이상일떄만 풀이보기를 출력한다.
+						// show가 true가 아니면 풀이가 감춰진 상태
+						%> 
+							<a href="<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=sm.getMadangNo()%>&cPage=<%=cPage%>&show=true&choiceSub=<%=choiceSub%>" 
+								class="btn btn-block btn-outline btn-lg" id="showAnswerBtn">
+			                    <i class="glyphicon glyphicon-menu-down"></i>
+			                    <span class="help">풀이 보기 (<%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다)</span>
+			                </a>
+						<%
+				
+					} else if(sm.getMadangAnswerCount()>0 && show.equals("true")) {
+						// 답변이 1개 이상일떄만 풀이보기를 출력한다.
+						// show가 true면 풀이가 보여지는 상태.
+				%> 
+						<a name="answer-filter-area"></a> <!-- 타게팅용 -->
+						<span class="b m-tit help" style="font-size: 20px;"><%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다!</span>
+						<div class="row" id="queView()"
+							style="margin:10px 0 30px 0; padding: 30px 0; border-top:1px groove rgba(239, 108, 0, 0.4); "> 
+							<div class="col-md-1 answer-info">
+								<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
+									border="0">
+									<tbody >
+										<tr valign="bottom" style="vertical-align: top; border:none;">
+											<td style="border:none;">
+												<div class="list-count-view">
+													<div class="votes">
+														<div class="votes-count text-center">
+															<a href="#" 
+															<%
+																if(loginMember!=null) {
+															%>
+																onclick="fn_likeUp('<%=request.getContextPath()%>','study','<%=sm.getMadangNo()%>','<%=loginMember.getMemNo()%>','<%=REMOTE_ADDR %>'); return false;"
+															<%		
+																} else {
+															%>
+																onclick="fn_needLogin(); return false;"
+															<%
+																}
+															%>
+															>
+																<%=sm.getMadangRecCount() %>
+															</a>
+														</div>
+														<div class="votes-text text-center">추천</div>
+													</div>
+												</div>
+											</td>
+												
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-11">
+								<div class="fl" style="padding 5px 5px;border-radius: 10px; background-color: rgba(239, 108, 0, 0.04)">
+									<table role="presentation" cellspacing="0" cellpadding="0" class="border-none"
+										border="0" >
+										<tbody >
+											<tr style="background-color: transparent !important;">
+												<td class="m-tcol-c b nick">
+													<table role="presentation" cellspacing="0" class="border-none">
+														<tbody>
+															<tr style="background-color: transparent !important;">
+																<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
+																		<img src="<%=request.getContextPath()%>/upload/myPage/<%=sm.getProfilePath()%>" width="24" height="24"
+																		onerror="this.onerror='';this.src='<%=request.getContextPath()%>/img/nonProfile.png'">
+																</a></td>
+																<td class="p-nick">
+																	<!-- 이름/이메일 클릭 시, 해당 유저의 게시글보기/1:1채팅/쪽지보내기 등을 드롭다운 박스로 표시 -->
+																	<a href="#" class="m-tcol-c b"><%=sm.getMadangWriterName()%>
+																		<!-- 아이디 별표(*)처리 --> (<%=sm.getMadangWriterEmail().substring(0, 4)%>****)</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+												<td class="m-tcol-c step"><span class="filter-50">
+													
+													<!-- 직급 -->
+													
+												</span> <img class="levelico"
+													src="<%=request.getContextPath()%>/img/manager_icon.png"
+													width="11" height="11" border="0"></td>
+			
+												<td class="m-tcol-c chat"><span> <a href="#"
+														onclick=""> <img
+															src="<%=request.getContextPath()%>/img/chatting_icon.png"
+															width="20" height="20" alt="1:1대화" class="ico" title="1:1대화">
+													</a>
+												</span></td>
+			
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- 작성일 -->
+								<div class="fr" style="margin:0 !important;">
+									<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
+										border="0">
+										<tbody>
+											<tr valign="bottom" style="vertical-align: bottom;">
+												<td></td>
+												<td nowrap="" class="m-tcol-c date" >
+														<%=format.format(sm.getMadangRegisterDatetime())%>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div style="clear:both; height: 10px;"></div>
+								<div class="markdown_area answer-content" id="tbody" style="color: #333;">
+									<%=sm.getMadangContent()%>
+								</div>
+								<div class="buttons">
+                    				<span class="label label-tag label-xs">피보나치 수열</span>
+							    </div>
+								<!-- 하단 item box -->
+								<div class="bottom-box">
+									<!-- left item -->
+									<div class="fl reply_sort">
+										<table role="presentation" cellspacing="0" cellpadding="0"
+											border="0" class="border-none">
+											<tbody>
+												<tr style="vertical-align: top">
+													<!-- 댓글 수 -->
+													<td class="reply"><a href="javascript:"
+														class="reply_btn b m-tcol-c m-tcol-p _totalCnt cmt_toggle" 
+														onclick="fn_openCommentArea(); return false;">
+															댓글 <%=totalData%>
+														<img class="new_icon"
+															src="<%=request.getContextPath()%>/img/new_icon.png"
+															width="20" height="20" padding_bottom="2" alt="new">
+													</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+						</div>
+				<%
+					}
+				%>
+				</div>
+				
+				
 				<div class="answer-area">
 					<!-- 풀이  답변 영역 -->
 				</div>	
 				
 				<!-- 풀이영역 -->
-				<div class="answer-write-area">
-			        <p class="lead"><strong>풀이 작성</strong></p>
+				<div class="answer-write-area" >
+			        <p class="lead" style="margin:10px 0;"><strong style="color:#000">풀이를 작성해 주세요!</strong></p>
 			
-			        <div class="well" style="padding:10px 20px">
-			            <strong>※ 풀이작성 안내</strong>
+			        <div class="well" style="padding:10px 20px; background-color: rgba(239, 108, 0, 0.03);">
+			            <strong>※ 이렇게 해주세요!</strong>
 			            <small>
 			                <ul style="margin:5px 0;padding-left:20px;">
 			                    
@@ -436,15 +593,14 @@
 			                    
 			                    <li><a href="http://daringfireball.net/projects/markdown/basics" target="_new">마크다운</a> 문법으로 본문을 작성 해 주세요.</li>
 			                    <li>풀이를 읽는 사람들을 위하여 풀이에 대한 설명도 부탁드려요. (아이디어나 사용한 알고리즘 또는 참고한 자료등)</li>
-			                    <li>작성한 풀이는 다른 사람(빨간띠 이상)에 의해서 내용이 개선될 수 있습니다.</li>
 			                </ul>
 			            </small>
 			        </div>
 			
 			        <div class="alert alert-warning" id="answer_login_msg" style="display:none">
-			            풀이 작성은 로그인이 필요합니다.
+			            	풀이 작성은 로그인이 필요합니다.
 			        </div>
-			        <form role="form" method="post" action="/scode/answer/save/676"><input type='hidden' name='csrfmiddlewaretoken' value='QnxczhDZpLKlHyBola97mZpZxYlG5R1vpQVAAHoslDxYwMI8IGM0OxXWmKrtc9qB' />
+			        <form role="form" method="post" action="<%=request.getContextPath()%>/madang/insertQuestion">
 			            <div class="form-group markdown_editor">
 			                
 			                    <div class="toolbar clearfix" style="margin-bottom: 5px;">
@@ -454,66 +610,26 @@
 			                
 			                <textarea class="form-control" rows="15" id="id_content" name="content"></textarea>
 			            </div>
-			            <div class="modal" id="insertCode" tabindex="-1" role="dialog" aria-labelledby="insertCodeLabel" aria-hidden="true">
-			    <div class="modal-dialog">
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			          <h4 class="modal-title">코드삽입</h4>
-			        </div>
-			        <div class="modal-body">
-			            <div class="form-group">
-			                <select class="form-control" id="codeLang">
-			                    <option value="">Choose Language</option>
-			                    <option value="actionscript">ActionScript</option>
-			                    <option value="bash">Bash</option>
-			                    <option value="cs">C#</option>
-			                    <option value="cpp">C++</option>
-			                    <option value="clojure">Clojure</option>
-			                    <option value="delphi">Delphi</option>
-			                    <option value="erlang">Erlang</option>
-			                    <option value="go">Go</option>
-			                    <option value="haskell">Haskell</option>
-			                    <option value="html">Html</option>
-			                    <option value="java">Java</option>
-			                    <option value="javascript">JavaScript</option>
-			                    <option value="lisp">Lisp</option>
-			                    <option value="lua">Lua</option>
-			                    <option value="matlab">Matlab</option>
-			                    <option value="objectivec">Objective C</option>
-			                    <option value="php">PHP</option>
-			                    <option value="perl">Perl</option>
-			                    <option value="python">Python</option>
-			                    <option value="r">R</option>
-			                    <option value="ruby">Ruby</option>
-			                    <option value="smalltalk">SmallTalk</option>
-			                    <option value="swift">Swift</option>
-			                    <option value="scala">Scala</option>
-			                    <option value="sql">SQL</option>
-			                    <option value="vbnet">VB.NET</option>
-			                    <option value="vbscript">VBScript</option>
-			                    <option value="typescript">TypeScript</option>
-			                    <option value="no-highlight">No Highlight</option>
-			                </select>
-			            </div>
-			            <div class="form-group">
-			                <textarea class="form-control" rows="10" id="codeContent" name="codeContent"></textarea>
-			            </div>
-			        </div>
-			        <div class="modal-footer">
-			            <button type="button" class="btn btn-default" id="codeOkBtn">OK</button>
-			            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			        </div>
-			      </div>
-			    </div>
-			</div>
-			            <button type="submit" class="btn btn-default btn-sm" id="submitBtn">
-			                <i class="glyphicon glyphicon-save"></i> 저장하기
-			            </button>
-			
-			            <a href="/scode/list" class="btn btn-default btn-sm">
-			                <i class="glyphicon glyphicon-list"></i> 목록으로
-			            </a>
+			            
+			            
+			            <div class="post_btns">
+							<div class="fr">
+								<button type="submit" class="btn-default" id="submitBtn" 
+									style="background-color: transparent; border:none; cursor: pointer">
+					                <span class="_rosRestrict btn_type1 font-family-type1"
+					                 style="color:#000">풀이달기</span>
+					            </button>
+							</div>
+						</div>
+						
+						<!-- hidden data -->
+						<div class="hidden" style="display:none">
+							<input type="hidden" name="madangNo" value="<%=sm.getMadangNo()%>">
+							<input type="hidden" name="memNo" value="<%=loginMember.getMemNo()%>">
+							<input type="hidden" name="memEmail" value="<%=loginMember.getMemUserEmail()%>">
+							<input type="hidden" name="memName" value="<%=loginMember.getMemName()%>">
+							<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
+						</div>
 			        </form>
 			    </div>
 				<!-- 풀이영역 -->
@@ -521,10 +637,10 @@
 			</div>
 		</div>
 
+		</div>
 	
 	</div>
 	<!-- 리모콘 -->
-
 	<div id="remocon" class="col-lg-1" style="diplay: block">
 		<div class="remote-area">
 			<div class="remote-area-radi-top"></div>
@@ -532,14 +648,14 @@
 				<div class="btn btn_upper">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
-						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
+						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
+							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
+						<img id="upper-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
 				</div>
-				<div class="btn btn_lower">
+				<div class="btn">
 					<span></span>
 					<p>
 						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangList?cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
@@ -551,9 +667,29 @@
 				<div class="btn">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
-							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
-							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"
+						<a href="#" class="m-tcol-c" 
+							<%
+								if(loginMember!=null) {
+									%>
+										onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=study&cPage=<%=cPage%>&choice=공부마당&choiceSub=<%=choiceSub%>'"
+									<%
+								} else {
+							%>
+									onclick="fn_needLogin(); return false;"
+							<%
+								}
+							%>>
+						<img id="goWite" src="<%=request.getContextPath()%>/img/write_icon.png"
+							width="30px" height="30px" alt="" />
+						</a>
+					</p>
+				</div>
+				<div class="btn btn_lower">
+					<span></span>
+					<p>
+						<a href="#" class="m-tcol-c <%=preNext.get("next").getMadangNo()!=0?"":"disabled"%>" 
+							onclick="location.href='<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=preNext.get("next").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
+							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("next").getMadangNo()!=0?"":"sepia"%>"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>
@@ -564,4 +700,58 @@
 	</div>
 	<div class="col-lg-1"></div>
 </section>
+<!-- 모달 -->
+<div class="modal" id="insertCode" tabindex="-1" role="dialog" aria-labelledby="insertCodeLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">코드삽입</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <select class="form-control" id="codeLang">
+                    <option value="">Choose Language</option>
+                    <option value="actionscript">ActionScript</option>
+                    <option value="bash">Bash</option>
+                    <option value="cs">C#</option>
+                    <option value="cpp">C++</option>
+                    <option value="clojure">Clojure</option>
+                    <option value="delphi">Delphi</option>
+                    <option value="erlang">Erlang</option>
+                    <option value="go">Go</option>
+                    <option value="haskell">Haskell</option>
+                    <option value="html">Html</option>
+                    <option value="java">Java</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="lisp">Lisp</option>
+                    <option value="lua">Lua</option>
+                    <option value="matlab">Matlab</option>
+                    <option value="objectivec">Objective C</option>
+                    <option value="php">PHP</option>
+                    <option value="perl">Perl</option>
+                    <option value="python">Python</option>
+                    <option value="r">R</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="smalltalk">SmallTalk</option>
+                    <option value="swift">Swift</option>
+                    <option value="scala">Scala</option>
+                    <option value="sql">SQL</option>
+                    <option value="vbnet">VB.NET</option>
+                    <option value="vbscript">VBScript</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="no-highlight">No Highlight</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="10" id="codeContent" name="codeContent"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="codeOkBtn">OK</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+</div>
 <%@ include file="/views/common/footer.jsp"%>

@@ -8,7 +8,7 @@
  	String mTit="",mSub="";
  	switch(locate) {
  	case"intro" :  break;
- 	case"study" : break;
+ 	case"study" : mTit="공부마당"; mSub="서로가 문제를 출제하고 문제를 풀어보는 공간입니다."; break;
  	case"free" : mTit="자유마당"; mSub="자유롭게 글을 올리는 공간입니다."; break;
  	case"share" : mTit="공유마당"; mSub="자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)";break;
  	case"boast" : mTit="자랑마당"; mSub="자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!";break;

@@ -139,8 +139,35 @@ insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.c
     '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
 insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.<br>테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.',
     '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  default, default);
+insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.2', 1, '테스트 글 입니다.2',
+    '컴퓨터', '프로그래밍','java',sysdate, null, default, null, default, default, default, default,  1, default);
 select * from ta_study_madang;
 commit;
+
+
+-- 공부마당 풀이
+create table ta_study_madang_question(
+    question_no number primary key,
+    madang_no number references ta_study_madang(madang_no), -- 해당 글번호
+    question_writer_uid number, -- 글쓴이 uid
+    question_writer_email varchar2(20), -- 글쓴이 이메일
+    question_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    question_content clob constraint stmadang_content_nn not null, -- 글 내용
+    question_register_datetime date, -- 글 작성 일시
+    question_register_ip varchar2(20), -- 글 작성 ip 주소
+    question_updated_datetime date default null, -- 글 수정 일시
+    question_updated_ip varchar2(20), -- 글 수정 ip 주소
+    question_rec_count number default 0, -- 글 추천 수(recommand)
+    question_rep_count number default 0, -- 글 댓글 수
+    question_status char(1) default 'Y' constraint stmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 공부마당
+create sequence stmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 
 
 -- 공유마당

@@ -44,7 +44,8 @@ public class StudyMadangViewServlet extends HttpServlet {
 		// 공부마당의 게시글은 모두가 볼 수 있다.
 		int no = Integer.parseInt(request.getParameter("madangNo"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
-
+		String show = request.getParameter("show");
+			
 		// 쿠키값 확인하기
 		Cookie[] cookies = request.getCookies();
 		String madangCookieVal = "";
@@ -93,12 +94,16 @@ public class StudyMadangViewServlet extends HttpServlet {
 		String view="/madang/studyMadangList";
 		if (sm != null) {
 			view = "/views/madang/studyMadangView.jsp";
+			if(show!=null&&show.equals("true")) {
+				view+="#answer-filter-area";
+			}
 			request.setAttribute("sm", sm);
 			request.setAttribute("preNext", preNext);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
+			request.setAttribute("show", show!=null?show:"false");
 		} else {
 			msg = "게시글이 존재하지 않습니다.";
 			loc = "/madang/studyMadangList";
@@ -110,9 +115,6 @@ public class StudyMadangViewServlet extends HttpServlet {
 		request.setAttribute("choice", "공부마당");
 		request.setAttribute("choiceSub", choiceSub!=null?choiceSub:"");
 		request.setAttribute("elements", elements);
-		System.out.println(view);
-		System.out.println(request);
-		System.out.println(response);
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

@@ -429,6 +429,26 @@
 				<div class="btn">
 					<span></span>
 					<p>
+						<a href="#" class="m-tcol-c" 
+							<%
+								if(loginMember!=null) {
+									%>
+										onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=share&cPage=<%=cPage%>&choice=공유마당&choiceSub=<%=choiceSub%>'"
+									<%
+								} else {
+							%>
+									onclick="fn_needLogin(); return false;"
+							<%
+								}
+							%>>
+						<img id="goWite" src="<%=request.getContextPath()%>/img/write_icon.png"
+							width="30px" height="30px" alt="" />
+						</a>
+					</p>
+				</div>
+				<div class="btn">
+					<span></span>
+					<p>
 						<a href="#" class="m-tcol-c <%=preNext.get("prev").getMadangNo()!=0?"":"disabled"%>" 
 							onclick="location.href='<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=preNext.get("prev").getMadangNo()%>&cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
 							<img id="lower-arrow" src="<%=request.getContextPath()%>/img/arrow_icon.png" class="<%=preNext.get("prev").getMadangNo()!=0?"":"sepia"%>"

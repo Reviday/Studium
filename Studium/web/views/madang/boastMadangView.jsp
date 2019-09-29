@@ -420,8 +420,28 @@
 				<div class="btn btn_lower">
 					<span></span>
 					<p>
-						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/boastMadangList?cPage=<%=cPage%>&choiceSub=<%=choiceSub%>'"> 
-						<img id="goList" src="<%=request.getContextPath()%>/img/list_icon.png"
+						<a href="#" class="m-tcol-c" onclick="location.href='<%=request.getContextPath()%>/madang/boastMadangList?cPage=<%=cPage%>&choice=자랑마당&choiceSub=<%=choiceSub%>'">
+							<img id="goList" src="<%=request.getContextPath()%>/img/list_icon.png"
+							width="30px" height="30px" alt="" />
+						</a>
+					</p>
+				</div>
+				<div class="btn">
+					<span></span>
+					<p>
+						<a href="#" class="m-tcol-c"  
+							<%
+								if(loginMember!=null) {
+									%>
+										onclick="location.href='<%=request.getContextPath()%>/madang/madangWrite?locate=boast&cPage=<%=cPage%>&choice=자랑마당&choiceSub=<%=choiceSub%>'"
+									<%
+								} else {
+							%>
+									onclick="fn_needLogin(); return false;"
+							<%
+								}
+							%>>
+						<img id="goWite" src="<%=request.getContextPath()%>/img/write_icon.png"
 							width="30px" height="30px" alt="" />
 						</a>
 					</p>

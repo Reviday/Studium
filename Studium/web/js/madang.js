@@ -64,9 +64,8 @@ function fn_likeUp(path, rocate, madangNo, memNo, REMOTE_ADDR) {
 				"memNo" : memNo,
 				"REMOTE_ADDR" : REMOTE_ADDR},
 		success : function(data) {
-			console.log(data.msg);
-			console.log(data.result);
-			console.log(data.madang);
+			alert(data.msg);
+			
 		}
 	});
 };

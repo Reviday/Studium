@@ -18,10 +18,10 @@ $(document).ready(function () {
             delay: 5000,
         },
         forceSync: true,
-        hideIcons: ["preview", "side-by-side"],
+        hideIcons: ["side-by-side"],
         indentWithTabs: false,
         lineWrapping: true,
-        placeholder: "Type here...",
+        placeholder: "이곳에 작성해주세요!",
         promptURLs: true,
         renderingConfig: {
             singleLineBreaks: false,
