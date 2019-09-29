@@ -120,5 +120,45 @@ public class AdminBoardDao {
 			close(pstmt);
 		}return faq;
 	}
+	
+	public int updateFAQ(Connection conn, String no, String type, String title, String content) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateFAQ");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, type);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	public int deleteFAQ(Connection conn, String faqNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteFAQ");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, faqNo);
+
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 
 }

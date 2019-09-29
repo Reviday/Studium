@@ -45,4 +45,22 @@ public class AdminBoardService {
 		return faq;
 	}
 	
+	public int updateFAQ(String no, String type, String title, String content) {
+		Connection conn = getConnection();
+		int result = dao.updateFAQ(conn, no, type, title, content);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteFAQ(String faqNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteFAQ(conn, faqNo);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
+	
 }

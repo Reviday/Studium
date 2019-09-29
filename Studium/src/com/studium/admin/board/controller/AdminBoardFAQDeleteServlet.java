@@ -19,16 +19,16 @@ import com.studium.util.model.vo.SideMenuElement;
 import common.template.PaginationTemplate;
 
 /**
- * Servlet implementation class AdminBoardUpdateFAQServlet
+ * Servlet implementation class AdminBoardFAQDeleteServlet
  */
-@WebServlet("/AdminBoardUpdateFAQ")
-public class AdminBoardUpdateFAQServlet extends HttpServlet {
+@WebServlet("/AdminBoardDeleteFAQ")
+public class AdminBoardFAQDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminBoardUpdateFAQServlet() {
+    public AdminBoardFAQDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,15 +41,12 @@ public class AdminBoardUpdateFAQServlet extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
-		String no = request.getParameter("faqNo");
-		String type = request.getParameter("type");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String faqNo = request.getParameter("no");
 
 		AdminBoardService service=new AdminBoardService();
-		int result = service.updateFAQ(no, type, title, content);
+		int result = service.deleteFAQ(faqNo);
 		int totalData=service.selectCountFAQ();
-		String URLmapping="/AdminBoardUpdateFAQ"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping="/AdminBoardDeleteFAQ"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		List<FAQ> list=service.selectFAQList(pt.getcPage(),pt.getNumPerPage());
 		request.setAttribute("list",list);
