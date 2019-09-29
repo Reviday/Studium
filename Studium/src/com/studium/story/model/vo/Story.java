@@ -3,17 +3,17 @@ package com.studium.story.model.vo;
 import java.sql.Timestamp;
 
 public class Story {
-	private int storyNo;
+	private int storyNo; 
 	private int memNo;
 	private int pNo;
-	private String storyStudentpicture;
-	private String storyWrite;
-	private String storyContent;
-	private Timestamp storyTime;
-	private String storyTeachername;
-	private String storyTeacherpicture;
-	private String storySubject;
-	private int storyStar;
+	private String storyStudentpicture; //학생사진
+	private String storyWrite; //글쓴이이름
+	private String storyContent; // 글 내용
+	private Timestamp storyTime; // 글 올린 시간
+	private String storyTeachername; // 강사 이름
+	private String storyTeacherpicture; //강사 사진
+	private String storySubject; //배운 과목
+	private int storyStar; //별 갯수
 	
 public Story() {
 	// TODO Auto-generated constructor stub

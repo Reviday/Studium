@@ -39,8 +39,6 @@ public class StoryDao {
 			if (rs.next()) {
 				s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -72,8 +70,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -121,8 +117,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -154,8 +148,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -187,8 +179,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -220,8 +210,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));
@@ -253,8 +241,6 @@ public class StoryDao {
 			while (rs.next()) {
 				Story s = new Story();
 				s.setStoryNo(rs.getInt("STORY_NO"));
-				s.setMemNo(rs.getInt("mem_no"));
-				s.setpNo(rs.getInt("p_no"));
 				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
 				s.setStoryWrite(rs.getString("STORY_WRITE"));
 				s.setStoryContent(rs.getString("STORY_CONTENT"));

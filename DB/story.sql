@@ -21,7 +21,7 @@ CREATE TABLE TA_STORY(
        "STORY_TEACHER_NAME" VARCHAR2(30),
       "STORY_TEACHER_PICTUER" VARCHAR2(100),
       "STORY_SUBJECT" VARCHAR2(40),
-      "STORY_STAR" VARCHAR2(30)
+       "STORY_STAR" NUMBER
       );
 
     COMMENT ON COLUMN "TA_STORY"."STORY_NO" IS '게시글번호';
@@ -46,12 +46,12 @@ CREATE TABLE TA_STORY(
     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,4, 'choijinri.jpg','최진리','리더님 덕분에 12주가 너무 즐겁고 불어를 내뱉는 게 덜 두려워졌어요 ㅎㅎ 설리 리더님 스터디 정말 즐거워요! 기회가 닿는다면 다시 하고 싶을 정도랍니다 발음부터 회화 표현까지 두루두루 익히면서 일상 회화 뿐만 아니라 간단한 토의도 할 수 있게 되었어요 모두에게 추천합니당! ', DEFAULT, '설리알리문타리', 'SulleyAliMuntari.jpg','French','5');
      INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,5, 'Cjam.PNG','씨잼','일주일에 한번이지만 정말 많은 도움이 되었습니다.아직도 일본어 대화로 말할때 떨리지만 그래도 조금은 자신감이 생겼어요!모모쌤이 친구처럼 편안하게 대해주고 쉬운부분까지 잘 알려주셔서 너무 좋았습니다!! 저의 얕은 일본어에 많음 도움을 줬습니다 감사합니다 ㅎ하하핳ㅎㅎ ', DEFAULT, '히라이모모', 'MoMo.PNG','Japanese','5');
 
-INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,6 'MellowFrog.jpg','애잔한개구리','에듀윌로 공무원 시험 합격했어요! 공무원 시험 합격은 에듀윌 주택관리사 합격도 에듀윌 우리 모두 다 같이 에 듀 윌  ', DEFAULT, '서경석', 'seo.jpg','LocalOfficial','4');
+INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,6, 'MellowFrog.jpg','애잔한개구리','에듀윌로 공무원 시험 합격했어요! 공무원 시험 합격은 에듀윌 주택관리사 합격도 에듀윌 우리 모두 다 같이 에 듀 윌  ', DEFAULT, '서경석', 'seo.jpg','LocalOfficial','4');
 
 INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL, 'MellowFrog.jpeg','애잔한개구리','공무원 시험 합격은 에듀윌  ', DEFAULT, '서경석', 'seo.jpg','NationalTechnicalQualificationCertificate');
 
 
-INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,7 'frog.jpg','개구리','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요 ', DEFAULT, '서경석', 'seo.jpg','Interview','3');
+INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,7, 'frog.jpg','개구리','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요 ', DEFAULT, '서경석', 'seo.jpg','Interview','3');
 
 
 Select count(*) from TA_STORY WHERE STORY_SUBJECT IN ('AptitudeTest',' NCS','Interview','Document');    
