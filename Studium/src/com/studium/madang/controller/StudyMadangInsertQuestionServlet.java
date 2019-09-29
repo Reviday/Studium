@@ -43,7 +43,8 @@ public class StudyMadangInsertQuestionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		StudyMadangQuestion smq=new StudyMadangQuestion();
 		smq.setQuestionContent(request.getParameter("content"));
-		smq.setMadangNo(Integer.parseInt(request.getParameter("madangNo")));
+		int no = Integer.parseInt(request.getParameter("madangNo"));
+		smq.setMadangNo(no);
 		smq.setQuestionWriterUid(Integer.parseInt(request.getParameter("memNo")));
 		smq.setQuestionWriterEmail(request.getParameter("memEmail"));
 		smq.setQuestionWriterName(request.getParameter("memName"));
@@ -52,41 +53,12 @@ public class StudyMadangInsertQuestionServlet extends HttpServlet {
 		smq.setQuestionSubCategory(request.getParameter("sCategory"));
 		smq.setQuestionRegisterIp(request.getParameter("REMOTE_ADDR"));
 		int cPage=Integer.parseInt(request.getParameter("cPage"));
-		String choiceSub=request.getParameter("choiceSub");
 		
 		int result=new StudyMadangService().insertQuestion(smq);
 		
-		String show = request.getParameter("show");
-		
-		// 쿠키값 확인하기
-		Cookie[] cookies = request.getCookies();
-		String madangCookieVal = "";
-		boolean hasRead = false; // 읽었는지 안읽었는지 구분하는 기준
-
-		if (cookies != null) {
-			for (Cookie c : cookies) {
-				String name = c.getName(); // 키 값
-				String value = c.getValue(); // value
-				if ("studyMadangCookie".equals(name)) {
-					madangCookieVal = value; // 이전 값 보관
-					if (value.contains("|" + no + "|")) {
-						hasRead = true;
-						break;
-					}
-				}
-			}
-		}
-
-		// 안 읽었을 때 조회수를 추가하고
-		// cookie에 현재 boardNo 기록
-		if (!hasRead) {
-			Cookie c = new Cookie("studyMadangCookie", madangCookieVal + "|" + no + "|");
-			c.setMaxAge(-1); // 브라우저가 close 되거나 logout했을 때
-			response.addCookie(c);
-		}
-
 		// View에 보여질 글을 가져온다.
-		StudyMadang sm = new StudyMadangService().selectMadang(no, hasRead);
+		StudyMadang sm = new StudyMadangService().selectMadang(no, true);
+		
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, StudyMadang> preNext = new StudyMadangService().selectPreNext(no);
 
@@ -106,16 +78,13 @@ public class StudyMadangInsertQuestionServlet extends HttpServlet {
 		String view="/madang/studyMadangList";
 		if (sm != null) {
 			view = "/views/madang/studyMadangView.jsp";
-			if(show!=null&&show.equals("true")) {
-				view+="#answer-filter-area";
-			}
 			request.setAttribute("sm", sm);
 			request.setAttribute("preNext", preNext);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
-			request.setAttribute("show", show!=null?show:"false");
+			request.setAttribute("show", "false");
 		} else {
 			msg = "게시글이 존재하지 않습니다.";
 			loc = "/madang/studyMadangList";

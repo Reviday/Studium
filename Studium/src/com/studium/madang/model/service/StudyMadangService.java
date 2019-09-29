@@ -92,4 +92,11 @@ public class StudyMadangService {
 		close(conn);
 		return result;
 	}
+	
+	public List<StudyMadangQuestion> selectQuestionList(int madangNo, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<StudyMadangQuestion> list=dao.selectQuestionList(conn, madangNo, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
 }

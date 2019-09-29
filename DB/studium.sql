@@ -1,19 +1,59 @@
-drop table ta_sidemenu_elements;
-drop sequence ta_sidemenu_seq;
-drop table ta_study_madang CASCADE CONSTRAINT;
-drop sequence stmadang_seq;
-drop table ta_stmadang_cmt;
-drop sequence fmadang_cmt_seq;
-drop table ta_fmadang_cmt;
-drop sequence fmadang_cmt_seq ;
-drop table ta_free_madang CASCADE CONSTRAINT;
-drop sequence fmadang_seq;
-drop table ta_share_madang;
-drop sequence sboard_seq;
-drop table ta_member CASCADE CONSTRAINT;
-drop sequence mem_seq;
-drop table ta_member_login_log;
-drop sequence mll_seq;
+drop sequence FBOARD_SEQ;
+drop sequence TA_SIDEMENU_SEQ;
+drop sequence STM_LIKE_SEQ;
+drop sequence STMADANG_CMT_SEQ;
+drop sequence FMADANG_CMT_SEQ;
+drop sequence SMADANG_SEQ;
+drop sequence MLL_SEQ;
+drop sequence SMADANG_CMT_SEQ;
+drop sequence STMADANG_QUESTION_SEQ;
+drop sequence BMADANG_SEQ;
+drop sequence STMADANG_SEQ;
+drop sequence BMADANG_CMT_SEQ;
+drop sequence MEM_SEQ;
+drop sequence FMADANG_SEQ;
+drop table TA_MEMBER_LOGIN_LOG;
+drop table TA_SIDEMENU_ELEMENTS;
+drop table TA_STMADANG_CMT;
+drop table TA_FMADANG_CMT;
+drop table TA_FREE_MADANG;
+drop table TA_STUDY_MADANG_QUESTION;
+drop table TA_STUDY_MADANG;
+drop table TA_STMADANG_LIKE;
+drop table TA_FMADANG_REP;
+drop table TA_SMADANG_REP;
+drop table TA_BOAST_MADANG CASCADE CONSTRAINT;
+drop table TA_SHARE_MADANG;
+drop table TA_BMADANG_CMT;
+drop table TA_SMADANG_CMT;
+drop table TA_MEMBER;
+
+
+select *
+from (select case when object_type = 'VIEW' then 'view'
+         when object_type = 'PROCEDURE' then 'procedure'
+         when object_type = 'PROCEDURE' then 'function'
+         when object_type = 'SEQUENCE' then 'sequence'
+         when object_type = 'TYPE' then 'type'
+         when object_type = 'TABLE' then 'table'
+       end AS object_group
+      , case when object_type = 'VIEW' then 'drop view '||object_name||';'
+          when object_type = 'PROCEDURE' then 'drop procedure '||object_name||';'
+          when object_type = 'PROCEDURE' then 'drop function '||object_name||';'
+          when object_type = 'SEQUENCE' then 'drop sequence '||object_name||';'
+          when object_type = 'TYPE' then 'drop type '||object_name||';'
+          when object_type = 'TABLE' then 'drop table '||object_name||';'
+       end AS object_drop_sql
+   from user_objects
+   order by decode(object_type, 'VIEW', 0, 
+                  'PROCEDURE', 1, 
+                  'FUNCTION', 2, 
+                  'SEQUENCE', 3,
+                  'TYPE', 4,
+                  'TABLE', 5)
+)
+where object_drop_sql is not null;
+
 
 -- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
 -- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
@@ -103,8 +143,6 @@ insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL5
  Q) 게시글에 이미지를 삽입할 경우, 어떻게 처리해야하는지?
 */
 
-drop table ta_study_madang;
-drop sequence stmadang_seq;
 -- 공부마당
 create table ta_study_madang(
     madang_no number constraint stmadang_no_pk primary key, -- 글번호
@@ -166,7 +204,8 @@ create table ta_study_madang_question(
     question_status char(1) default 'Y' check(question_status in ('Y','N')) -- 삭제 여부
 );
 
--- 공부마당
+-- 공부마당 풀이 시퀀스
+
 create sequence stmadang_question_seq 
 start with 1
 increment by 1
@@ -635,11 +674,7 @@ start with 1
 increment by 1
 maxvalue 9999;
 
---select * from ta_sidemenu_elements;
---select * from ta_sidemenu_elements where menu_category='madang' ORDER BY DECODE(parent_id,NULL,sort_no,parent_id), sort_no;
---SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='admin' ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
---SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? ORDER BY DECODE(PARENT_ID,NULL,SORT_NO,PARENT_ID), SORT_NO;
-SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? START WITH PARENT_ID IS NULL CONNECT BY PRIOR MENU_ID=PARENT_ID;
+--SELECT * FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY=? START WITH PARENT_ID IS NULL CONNECT BY PRIOR MENU_ID=PARENT_ID;
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공부마당', '/madang/studyMadangList', 'fab fa-studiovinari fa-lg', 'Y', 2, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자유마당', '/madang/freeMadangList', 'fab fa-fort-awesome-alt fa-lg', default, 3, default);

@@ -18,6 +18,7 @@ import java.util.Properties;
 import com.studium.madang.model.vo.StudyMadang;
 import com.studium.madang.model.vo.StudyMadangQuestion;
 import com.studium.member.model.service.MemberService;
+import com.sun.crypto.provider.RSACipher;
 
 public class StudyMadangDao {
 
@@ -303,4 +304,50 @@ public class StudyMadangDao {
 			close(pstmt);
 		} return result;
 	}
+	
+	public List<StudyMadangQuestion> selectQuestionList(Connection conn, int madangNo, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<StudyMadangQuestion> list=new ArrayList<StudyMadangQuestion>();
+		String sql=prop.getProperty("selectQuestionList");
+		MemberService service= new MemberService();
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				StudyMadangQuestion smq=new StudyMadangQuestion();
+				// 원래라면 아래와 같이 유저의 이메일과 이름을 가져오는게 맞는 방식이겠지만
+				// 우리 프로젝트에서는 이름과 이메일을 변경 불가능 설정 해놓았기 때문에 
+				// 테이블에 저장된 정보를 그대로 가져와도 무방하긴 하다.
+				smq.setQuestionNo(rs.getInt("question_no"));
+				smq.setMadangNo(rs.getInt("madang_no"));
+				smq.setQuestionWriterUid(rs.getInt("question_writer_uid"));
+				smq.setQuestionWriterEmail(service.selectNo(smq.getQuestionWriterUid()).getMemUserEmail());
+				smq.setQuestionWriterName(service.selectNo(smq.getQuestionWriterUid()).getMemName());
+				smq.setQuestionContent(rs.getString("question_content"));
+				smq.setQuestionMainCategory(rs.getString("question_main_category"));
+				smq.setQuestionCategory(rs.getString("question_category"));
+				smq.setQuestionSubCategory(rs.getString("question_sub_category"));
+				smq.setQuestionRegisterDatetime(rs.getTimestamp("question_register_datetime"));
+				smq.setQuestionRegisterIp(rs.getString("question_register_ip"));
+				smq.setQuestionUpdatedDatetime(rs.getTimestamp("question_updated_datetime"));
+				smq.setQuestionUpdatedIp(rs.getString("question_updated_ip"));
+				smq.setQuestionRecCount(rs.getInt("question_rec_count"));
+				smq.setQuestionRepCount(rs.getInt("question_rep_count"));
+				smq.setQuestionWriteMemCode(service.selectNo(smq.getQuestionWriterUid()).getMemCode());
+				smq.setProfilePath(service.selectNo(smq.getQuestionWriterUid()).getMemPhoto());
+				list.add(smq);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return list;
+	}
+	
 }

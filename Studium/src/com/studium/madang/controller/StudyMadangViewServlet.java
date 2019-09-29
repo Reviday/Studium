@@ -15,11 +15,13 @@ import com.studium.madang.model.service.StudyMadangCmtService;
 import com.studium.madang.model.service.StudyMadangService;
 import com.studium.madang.model.vo.StudyMadang;
 import com.studium.madang.model.vo.StudyMadangCmt;
+import com.studium.madang.model.vo.StudyMadangQuestion;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.CmtPaginationTemplate;
 import common.template.LoginCheck;
+import common.template.PaginationTemplate;
 
 /**
  * Servlet implementation class StudyMadangViewServlet
@@ -74,16 +76,24 @@ public class StudyMadangViewServlet extends HttpServlet {
 		}
 
 		// View에 보여질 글을 가져온다.
-		StudyMadang sm = new StudyMadangService().selectMadang(no, hasRead);
+		StudyMadangService service=new StudyMadangService();
+		StudyMadang sm =service.selectMadang(no, hasRead);
+		
+		// 해당 글에 달려있는 풀이들을 페이지네이션 처리하여 가져온다.
+		int totalData=service.selectCountList(); // 총 데이터 개수
+		String URLmapping="/madang/studyMadangView"; // 패턴을 넘겨주기 위한 변수
+		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
+		List<StudyMadangQuestion> qList=service.selectQuestionList(no, pt.getcPage(), pt.getNumPerPage());
+		
 		// 이전글/다음글의 no와 title을 가져온다.
-		Map<String, StudyMadang> preNext = new StudyMadangService().selectPreNext(no);
+		Map<String, StudyMadang> preNext = service.selectPreNext(no);
 
-		// Pagination
-		StudyMadangCmtService service = new StudyMadangCmtService();
-		int totalData = service.selectCountList(no); // 총 데이터 개수
-		String URLmapping = "/madang/StudyMadangView"; // 패턴을 넘겨주기 위한 변수
-		CmtPaginationTemplate pt = new CmtPaginationTemplate(request, totalData, URLmapping); // 페이징 처리
-		List<StudyMadangCmt> cmtList = service.selectCmtList(no, pt.getcPage(), pt.getNumPerPage());
+		// Cmt Pagination
+		StudyMadangCmtService cmtService = new StudyMadangCmtService();
+		int cmtTotalData = cmtService.selectCountList(no); // 총 데이터 개수
+		String cmtURLmapping = "/madang/StudyMadangView"; // 패턴을 넘겨주기 위한 변수
+		CmtPaginationTemplate cpt = new CmtPaginationTemplate(request, cmtTotalData, cmtURLmapping); // 페이징 처리
+		List<StudyMadangCmt> cmtList = cmtService.selectCmtList(no, cpt.getcPage(), cpt.getNumPerPage());
 		
 		// Side Menu
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
@@ -101,8 +111,9 @@ public class StudyMadangViewServlet extends HttpServlet {
 			request.setAttribute("preNext", preNext);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("totalData", totalData);
-			request.setAttribute("cmtPageBar", pt.getPageBar());
+			request.setAttribute("cmtPageBar", cpt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
+			request.setAttribute("qList", qList);
 			request.setAttribute("show", show!=null?show:"false");
 		} else {
 			msg = "게시글이 존재하지 않습니다.";

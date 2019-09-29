@@ -18,7 +18,8 @@ public class StudyMadangQuestion {
 	private Timestamp questionUpdatedDatetime; // 글 수정 일시
 	private String questionUpdatedIp; // 글 수정 ip 주소
 	private int questionRecCount; // 글 추천 수(recommand)
-	private int questionRepCount; //글 댓글 수
+	private int questionRepCount; //글 댓글 수 => 원래는 만들 기능이긴 하였지만, 기간 여건상 구현이 어려울 것으로 판단하여 일단 예외시킴.
+	private char questionWriteMemCode; // 작성자 멤버 코드
 	private String profilePath; // 프로필 사진의 경로를 담아두는 곳으로, cmt DB에는 없고 DAO로 불러오는 과정에 삽입된다.
 	
 	public StudyMadangQuestion() {
@@ -29,7 +30,7 @@ public class StudyMadangQuestion {
 			String questionWriterName, String questionContent, String questionMainCategory, String questionCategory,
 			String questionSubCategory, Timestamp questionRegisterDatetime, String questionRegisterIp,
 			Timestamp questionUpdatedDatetime, String questionUpdatedIp, int questionRecCount, int questionRepCount,
-			String profilePath) {
+			char questionWriteMemCode, String profilePath) {
 		super();
 		this.questionNo = questionNo;
 		this.madangNo = madangNo;
@@ -46,6 +47,7 @@ public class StudyMadangQuestion {
 		this.questionUpdatedIp = questionUpdatedIp;
 		this.questionRecCount = questionRecCount;
 		this.questionRepCount = questionRepCount;
+		this.questionWriteMemCode = questionWriteMemCode;
 		this.profilePath = profilePath;
 	}
 
@@ -169,6 +171,14 @@ public class StudyMadangQuestion {
 		this.questionRepCount = questionRepCount;
 	}
 
+	public char getQuestionWriteMemCode() {
+		return questionWriteMemCode;
+	}
+
+	public void setQuestionWriteMemCode(char questionWriteMemCode) {
+		this.questionWriteMemCode = questionWriteMemCode;
+	}
+
 	public String getProfilePath() {
 		return profilePath;
 	}
@@ -186,7 +196,8 @@ public class StudyMadangQuestion {
 				+ questionSubCategory + ", questionRegisterDatetime=" + questionRegisterDatetime
 				+ ", questionRegisterIp=" + questionRegisterIp + ", questionUpdatedDatetime=" + questionUpdatedDatetime
 				+ ", questionUpdatedIp=" + questionUpdatedIp + ", questionRecCount=" + questionRecCount
-				+ ", questionRepCount=" + questionRepCount + ", profilePath=" + profilePath + "]";
+				+ ", questionRepCount=" + questionRepCount + ", questionWriteMemCode=" + questionWriteMemCode
+				+ ", profilePath=" + profilePath + "]";
 	}
 
 }

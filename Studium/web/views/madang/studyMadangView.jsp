@@ -1,3 +1,4 @@
+<%@page import="com.studium.madang.model.vo.StudyMadangQuestion"%>
 <%@page import="com.studium.madang.model.vo.StudyMadangCmt"%>
 <%@page import="com.studium.madang.model.vo.StudyMadang"%>
 <%@page import="java.util.Locale"%>
@@ -9,6 +10,7 @@
 	StudyMadang sm = (StudyMadang) request.getAttribute("sm");
 	int cPage = (int)request.getAttribute("cPage");
 	List<StudyMadangCmt> list = (List<StudyMadangCmt>)request.getAttribute("cmtList");
+	List<StudyMadangQuestion> qList = (List<StudyMadangQuestion>)request.getAttribute("qList");
 	int totalData = (int)request.getAttribute("totalData");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 	String show = (String)request.getAttribute("show");
@@ -436,7 +438,7 @@
 						// show가 true가 아니면 풀이가 감춰진 상태
 						%> 
 							<a href="<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=sm.getMadangNo()%>&cPage=<%=cPage%>&show=true&choiceSub=<%=choiceSub%>" 
-								class="btn btn-block btn-outline btn-lg" id="showAnswerBtn">
+								class="btn btn-block btn-outline btn-lg" id="showAnswerBtn" style="margin-bottom:20px;">
 			                    <i class="glyphicon glyphicon-menu-down"></i>
 			                    <span class="help">풀이 보기 (<%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다)</span>
 			                </a>
@@ -447,134 +449,146 @@
 						// show가 true면 풀이가 보여지는 상태.
 				%> 
 						<a name="answer-filter-area"></a> <!-- 타게팅용 -->
+						
 						<span class="b m-tit help" style="font-size: 20px;"><%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다!</span>
-						<div class="row" id="queView()"
-							style="margin:10px 0 30px 0; padding: 30px 0; border-top:1px groove rgba(239, 108, 0, 0.4); "> 
-							<div class="col-md-1 answer-info">
-								<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
-									border="0">
-									<tbody >
-										<tr valign="bottom" style="vertical-align: top; border:none;">
-											<td style="border:none;">
-												<div class="list-count-view">
-													<div class="votes">
-														<div class="votes-count text-center">
-															<a href="#" 
-															<%
-																if(loginMember!=null) {
-															%>
-																onclick="fn_likeUp('<%=request.getContextPath()%>','study','<%=sm.getMadangNo()%>','<%=loginMember.getMemNo()%>','<%=REMOTE_ADDR %>'); return false;"
-															<%		
-																} else {
-															%>
-																onclick="fn_needLogin(); return false;"
-															<%
-																}
-															%>
-															>
-																<%=sm.getMadangRecCount() %>
-															</a>
-														</div>
-														<div class="votes-text text-center">추천</div>
-													</div>
-												</div>
-											</td>
-												
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="col-md-11">
-								<div class="fl" style="padding 5px 5px;border-radius: 10px; background-color: rgba(239, 108, 0, 0.04)">
-									<table role="presentation" cellspacing="0" cellpadding="0" class="border-none"
-										border="0" >
-										<tbody >
-											<tr style="background-color: transparent !important;">
-												<td class="m-tcol-c b nick">
-													<table role="presentation" cellspacing="0" class="border-none">
-														<tbody>
+						
+						<!-- 풀이 뷰! -->
+						<%
+							if(!qList.isEmpty()) {
+								for(StudyMadangQuestion smq : qList) {
+									%>
+										<div class="row" id="queView_<%=smq.getQuestionNo()%>"
+											style="margin:10px 0 30px 0; padding: 30px 0; border-top:1px groove rgba(239, 108, 0, 0.4); "> 
+											<div class="col-md-1 answer-info">
+												<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
+													border="0">
+													<tbody >
+														<tr valign="bottom" style="vertical-align: top; border:none;">
+															<td style="border:none;">
+																<div class="list-count-view">
+																	<div class="votes">
+																		<div class="votes-count text-center">
+																			<a href="#" 
+																			<%
+																				if(loginMember!=null) {
+																			%>
+																				onclick="fn_likeUp('<%=request.getContextPath()%>','study','<%=smq.getQuestionNo()%>','<%=loginMember.getMemNo()%>','<%=REMOTE_ADDR %>'); return false;"
+																			<%		
+																				} else {
+																			%>
+																				onclick="fn_needLogin(); return false;"
+																			<%
+																				}
+																			%>
+																			>
+																				<%=smq.getQuestionRecCount() %>
+																			</a>
+																		</div>
+																		<div class="votes-text text-center">추천</div>
+																	</div>
+																</div>
+															</td>
+																
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="col-md-11">
+												<div class="fl" style="padding 5px 5px;border-radius: 10px; background-color: rgba(239, 108, 0, 0.04)">
+													<table role="presentation" cellspacing="0" cellpadding="0" class="border-none"
+														border="0" >
+														<tbody >
 															<tr style="background-color: transparent !important;">
-																<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
-																		<img src="<%=request.getContextPath()%>/upload/myPage/<%=sm.getProfilePath()%>" width="24" height="24"
-																		onerror="this.onerror='';this.src='<%=request.getContextPath()%>/img/nonProfile.png'">
-																</a></td>
-																<td class="p-nick">
-																	<!-- 이름/이메일 클릭 시, 해당 유저의 게시글보기/1:1채팅/쪽지보내기 등을 드롭다운 박스로 표시 -->
-																	<a href="#" class="m-tcol-c b"><%=sm.getMadangWriterName()%>
-																		<!-- 아이디 별표(*)처리 --> (<%=sm.getMadangWriterEmail().substring(0, 4)%>****)</a>
+																<td class="m-tcol-c b nick">
+																	<table role="presentation" cellspacing="0" class="border-none">
+																		<tbody>
+																			<tr style="background-color: transparent !important;">
+																				<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
+																						<img src="<%=request.getContextPath()%>/upload/myPage/<%=smq.getProfilePath()%>" width="24" height="24"
+																						onerror="this.onerror='';this.src='<%=request.getContextPath()%>/img/nonProfile.png'">
+																				</a></td>
+																				<td class="p-nick">
+																					<!-- 이름/이메일 클릭 시, 해당 유저의 게시글보기/1:1채팅/쪽지보내기 등을 드롭다운 박스로 표시 -->
+																					<a href="#" class="m-tcol-c b"><%=smq.getQuestionWriterName()%>
+																						<!-- 아이디 별표(*)처리 --> (<%=smq.getQuestionWriterEmail().substring(0, 4)%>****)</a>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+																<td class="m-tcol-c step">
+																	<span class="filter-50">
+																	</span> 
+																		<!-- 직급 -->
+																	<img class="levelico"
+																	src="<%=request.getContextPath()%>/img/manager_icon.png"
+																	width="11" height="11" border="0">
+																</td>
+																
+																<td class="m-tcol-c chat">
+																	<span> 
+																		<a href="#"	onclick=""> 
+																			<img src="<%=request.getContextPath()%>/img/chatting_icon.png"
+																				width="20" height="20" alt="1:1대화" class="ico" title="1:1대화">
+																		</a>
+																	</span>
 																</td>
 															</tr>
 														</tbody>
 													</table>
-												</td>
-												<td class="m-tcol-c step"><span class="filter-50">
-													
-													<!-- 직급 -->
-													
-												</span> <img class="levelico"
-													src="<%=request.getContextPath()%>/img/manager_icon.png"
-													width="11" height="11" border="0"></td>
-			
-												<td class="m-tcol-c chat"><span> <a href="#"
-														onclick=""> <img
-															src="<%=request.getContextPath()%>/img/chatting_icon.png"
-															width="20" height="20" alt="1:1대화" class="ico" title="1:1대화">
-													</a>
-												</span></td>
-			
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<!-- 작성일 -->
-								<div class="fr" style="margin:0 !important;">
-									<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
-										border="0">
-										<tbody>
-											<tr valign="bottom" style="vertical-align: bottom;">
-												<td></td>
-												<td nowrap="" class="m-tcol-c date" >
-														<%=format.format(sm.getMadangRegisterDatetime())%>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div style="clear:both; height: 10px;"></div>
-								<div class="markdown_area answer-content" id="tbody" style="color: #333;">
-									<%=sm.getMadangContent()%>
-								</div>
-								<div class="buttons">
-                    				<span class="label label-tag label-xs">피보나치 수열</span>
-							    </div>
-								<!-- 하단 item box -->
-								<div class="bottom-box">
-									<!-- left item -->
-									<!-- 만들 여력이 없어서 일단 드랍..
-									<div class="fl reply_sort">
-										<table role="presentation" cellspacing="0" cellpadding="0"
-											border="0" class="border-none">
-											<tbody>
-												<tr style="vertical-align: top">
-													<td class="reply"><a href="javascript:"
-														class="reply_btn b m-tcol-c m-tcol-p _totalCnt cmt_toggle" 
-														onclick="fn_openCommentArea(); return false;">
-															댓글 <%=totalData%>
-														<img class="new_icon"
-															src="<%=request.getContextPath()%>/img/new_icon.png"
-															width="20" height="20" padding_bottom="2" alt="new">
-													</a></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									 -->
-								</div>
-						</div>
+												</div>
+												<!-- 작성일 -->
+												<div class="fr" style="margin:0 !important;">
+													<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
+														border="0">
+														<tbody>
+															<tr valign="bottom" style="vertical-align: bottom;">
+																<td></td>
+																<td nowrap="" class="m-tcol-c date" >
+																		<%=format.format(smq.getQuestionRegisterDatetime())%>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div style="clear:both; height: 10px;"></div>
+												<div class="markdown_area answer-content" id="tbody" style="color: #333;">
+													<%=smq.getQuestionContent()%>
+												</div>
+												<!-- 하단 item box -->
+												<div class="bottom-box">
+													<!-- left item -->
+													<!-- 만들 여력이 없어서 일단 드랍..
+													<div class="fl reply_sort">
+														<table role="presentation" cellspacing="0" cellpadding="0"
+															border="0" class="border-none">
+															<tbody>
+																<tr style="vertical-align: top">
+																	<td class="reply"><a href="javascript:"
+																		class="reply_btn b m-tcol-c m-tcol-p _totalCnt cmt_toggle" 
+																		onclick="fn_openCommentArea(); return false;">
+																			댓글 <%=totalData%>
+																		<img class="new_icon"
+																			src="<%=request.getContextPath()%>/img/new_icon.png"
+																			width="20" height="20" padding_bottom="2" alt="new">
+																	</a></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													 -->
+												</div>
+											</div>
+										</div>
+									<%
+								}
+							}
+						%>				
+						
 				<%
 					}
 				%>
-				</div>
+				
 				
 				
 				<div class="answer-area">
