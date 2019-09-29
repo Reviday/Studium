@@ -584,3 +584,13 @@ section.madang-content .label-success {
 section.madang-content .pull-right {
     float: right!important;
 }
+
+.border-none table,
+.border-none thead,
+.border-none tbody,
+.border-none tfoot,
+.border-none tr,
+.border-none td {
+	border: none;
+}
+

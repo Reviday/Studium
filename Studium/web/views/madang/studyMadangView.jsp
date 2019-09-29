@@ -26,7 +26,14 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/studymadang.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/markdown.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/simplemde.min.css"
+	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/madang.js"></script>
+<script src="<%=request.getContextPath()%>/js/markdown.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.markdown-0.2.js"></script>
+<script src="<%=request.getContextPath()%>/js/simplemde.min.js"></script>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
@@ -60,11 +67,11 @@
 				<div class="tit-box">
 					<!-- 제목/메뉴 위치 -->
 					<div class="fl">
-						<table role="presentation" cellspacing="0" cellpadding="0"
+						<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
 							border="0">
 							<tbody >
-								<tr valign="bottom" style="vertical-align: bottom;">
-									<td>
+								<tr valign="bottom" style="vertical-align: bottom; border:none;">
+									<td style="border:none;">
 										<div class="list-count-view">
 												<div class="votes">
 													<div class="votes-count text-center">
@@ -100,7 +107,7 @@
 					</div>
 					<!-- 작성일 -->
 					<div class="fr" style="margin:0 !important;">
-						<table role="presentation" cellspacing="0" cellpadding="0"
+						<table role="presentation" class="border-none" cellspacing="0" cellpadding="0"
 							border="0">
 							<tbody>
 								<tr valign="bottom" style="vertical-align: bottom; height:46px">
@@ -126,12 +133,12 @@
 				<div class="etc-box">
 					<!-- 프로필 사진/이름(이메일) -->
 					<div class="fl">
-						<table role="presentation" cellspacing="0" cellpadding="0"
+						<table role="presentation" cellspacing="0" cellpadding="0" class="border-none"
 							border="0">
 							<tbody>
 								<tr>
 									<td class="m-tcol-c b nick">
-										<table role="presentation" cellspacing="0">
+										<table role="presentation" cellspacing="0" class="border-none">
 											<tbody>
 												<tr>
 													<td class="profile_img"><a href="#"> <!-- 프로필이미지가 없을 경우 다음 이미지로 대채한다. -->
@@ -185,7 +192,7 @@
 					<!-- left item -->
 					<div class="fl reply_sort">
 						<table role="presentation" cellspacing="0" cellpadding="0"
-							border="0">
+							border="0" class="border-none">
 							<tbody>
 								<tr style="vertical-align: top">
 									<!-- 댓글 수 -->
@@ -226,7 +233,7 @@
 					<!-- 댓글 폼 -->
 					<div class="tab_container">
 						<!-- 댓글 작성 테이블 -->
-						<table cellspacing="0" class="cminput">
+						<table cellspacing="0" class="cminput border-none">
 							<tbody>
 								<tr>
 									<td class="i2">
@@ -301,7 +308,7 @@
 						                                            class="btn-init ie-dotum write">
 						                                            <span class="arrow-symbol dsc_comm">답글달기</span>
 						                                        </button>
-						                                        <table cellspacing="0" class="cminput _cminputRep" id="re_conmmentRep<%=cmt.getCmtNo()%>"
+						                                        <table cellspacing="0" class="cminput _cminputRep border-none" id="re_conmmentRep<%=cmt.getCmtNo()%>"
 						                                            style="display: none">
 						                                            <tbody>
 						                                                <tr>
@@ -362,8 +369,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <a href="#"
-                                                                    onclick="deleteComment(<%=cmt.getCmtNo()%>); return false;"
+                                                                <a href="#" onclick="deleteComment(<%=cmt.getCmtNo()%>); return false;"
                                                                     class="modify" title="수정/삭제"><i
                                                                     class="icon icon-cancel_circle"></i></a>
         
@@ -393,6 +399,7 @@
 							</div>
 						</div>
 						<!-- 탭 : 댓글 -->
+						
 					</div>
 				</div>
 
@@ -411,12 +418,106 @@
 					%>
 					
 				</div>
-				<!--
-                        <div class="m-tcol-c reply_error" style="display:none;">
-                            <strong>죄송합니다. 댓글 시스템 오류로 댓글을 읽거나 쓸 수 없습니다.</strong>
-                            문제가 지속될 경우 <a href="http://help.naver.com/" target="_blank" class="m-tcol-c">고객센터</a>에 알려주시면
-                            친절하게 안내해 드리겠습니다.
-                        </div>-->
+				
+				<div class="answer-area">
+					<!-- 풀이  답변 영역 -->
+				</div>	
+				
+				<!-- 풀이영역 -->
+				<div class="answer-write-area">
+			        <p class="lead"><strong>풀이 작성</strong></p>
+			
+			        <div class="well" style="padding:10px 20px">
+			            <strong>※ 풀이작성 안내</strong>
+			            <small>
+			                <ul style="margin:5px 0;padding-left:20px;">
+			                    
+			                    <li>본문에 코드를 삽입할 경우 에디터 우측 상단의 "<strong>코드삽입</strong>" 버튼을 이용 해 주세요.</li>
+			                    
+			                    <li><a href="http://daringfireball.net/projects/markdown/basics" target="_new">마크다운</a> 문법으로 본문을 작성 해 주세요.</li>
+			                    <li>풀이를 읽는 사람들을 위하여 풀이에 대한 설명도 부탁드려요. (아이디어나 사용한 알고리즘 또는 참고한 자료등)</li>
+			                    <li>작성한 풀이는 다른 사람(빨간띠 이상)에 의해서 내용이 개선될 수 있습니다.</li>
+			                </ul>
+			            </small>
+			        </div>
+			
+			        <div class="alert alert-warning" id="answer_login_msg" style="display:none">
+			            풀이 작성은 로그인이 필요합니다.
+			        </div>
+			        <form role="form" method="post" action="/scode/answer/save/676"><input type='hidden' name='csrfmiddlewaretoken' value='QnxczhDZpLKlHyBola97mZpZxYlG5R1vpQVAAHoslDxYwMI8IGM0OxXWmKrtc9qB' />
+			            <div class="form-group markdown_editor">
+			                
+			                    <div class="toolbar clearfix" style="margin-bottom: 5px;">
+			                        <a href="http://daringfireball.net/projects/markdown/basics" target="_new" class="label label-default pull-right" style="margin-top:5px;margin-left:5px;">마크다운이란?</a>
+			                        <a href="javascript:insert_code();" id="preview_name" class="label label-primary pull-right" style="margin-top:5px;margin-left:5px;">코드삽입</a>
+			                    </div>
+			                
+			                <textarea class="form-control" rows="15" id="id_content" name="content"></textarea>
+			            </div>
+			            <div class="modal" id="insertCode" tabindex="-1" role="dialog" aria-labelledby="insertCodeLabel" aria-hidden="true">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			          <h4 class="modal-title">코드삽입</h4>
+			        </div>
+			        <div class="modal-body">
+			            <div class="form-group">
+			                <select class="form-control" id="codeLang">
+			                    <option value="">Choose Language</option>
+			                    <option value="actionscript">ActionScript</option>
+			                    <option value="bash">Bash</option>
+			                    <option value="cs">C#</option>
+			                    <option value="cpp">C++</option>
+			                    <option value="clojure">Clojure</option>
+			                    <option value="delphi">Delphi</option>
+			                    <option value="erlang">Erlang</option>
+			                    <option value="go">Go</option>
+			                    <option value="haskell">Haskell</option>
+			                    <option value="html">Html</option>
+			                    <option value="java">Java</option>
+			                    <option value="javascript">JavaScript</option>
+			                    <option value="lisp">Lisp</option>
+			                    <option value="lua">Lua</option>
+			                    <option value="matlab">Matlab</option>
+			                    <option value="objectivec">Objective C</option>
+			                    <option value="php">PHP</option>
+			                    <option value="perl">Perl</option>
+			                    <option value="python">Python</option>
+			                    <option value="r">R</option>
+			                    <option value="ruby">Ruby</option>
+			                    <option value="smalltalk">SmallTalk</option>
+			                    <option value="swift">Swift</option>
+			                    <option value="scala">Scala</option>
+			                    <option value="sql">SQL</option>
+			                    <option value="vbnet">VB.NET</option>
+			                    <option value="vbscript">VBScript</option>
+			                    <option value="typescript">TypeScript</option>
+			                    <option value="no-highlight">No Highlight</option>
+			                </select>
+			            </div>
+			            <div class="form-group">
+			                <textarea class="form-control" rows="10" id="codeContent" name="codeContent"></textarea>
+			            </div>
+			        </div>
+			        <div class="modal-footer">
+			            <button type="button" class="btn btn-default" id="codeOkBtn">OK</button>
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+			            <button type="submit" class="btn btn-default btn-sm" id="submitBtn">
+			                <i class="glyphicon glyphicon-save"></i> 저장하기
+			            </button>
+			
+			            <a href="/scode/list" class="btn btn-default btn-sm">
+			                <i class="glyphicon glyphicon-list"></i> 목록으로
+			            </a>
+			        </form>
+			    </div>
+				<!-- 풀이영역 -->
+				
 			</div>
 		</div>
 
