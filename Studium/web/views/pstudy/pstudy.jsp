@@ -142,7 +142,7 @@ body{
 							<%} %>
 						<%}else{ %>
 						<div class="full-cover">
-						마감<
+						마감
 						 </div>
 						<%} %> 
 					

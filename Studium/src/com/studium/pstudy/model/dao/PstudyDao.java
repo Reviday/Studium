@@ -746,5 +746,24 @@ public class PstudyDao {
 			close(pstmt);
 		}return list;
 	}
+	public int selectcountCategoryList(Connection conn,String category) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result=0;
+		String sql =prop.getProperty("selectcountCategoryList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 }

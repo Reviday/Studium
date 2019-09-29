@@ -140,6 +140,12 @@ public class PstudyService {
 		close(conn);
 		return list;
 	}
+	public int selectcountCategoryList(String category) {
+		Connection conn=getConnection();
+		int result=dao.selectcountCategoryList(conn,category);
+		close(conn);
+		return result;
+	}
 
 
 }
