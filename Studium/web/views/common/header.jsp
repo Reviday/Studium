@@ -245,7 +245,7 @@
                     }
                 }); 
                 $('#myM').click(function() {//마이페이지버튼  클릭 시 고정
-                    flag=!flag;
+                    flag=false;
                     console.log("click");
                 }); 
             });
