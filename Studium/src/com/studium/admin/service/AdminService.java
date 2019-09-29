@@ -13,8 +13,10 @@ import com.studium.admin.model.vo.CanclePayMember;
 import com.studium.admin.model.vo.PayMember;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
+import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.member.model.vo.Member;
 import com.studium.mypage.model.vo.LeaderAdd;
+import com.studium.pstudy.model.vo.Pstudy;
 
 public class AdminService {
 
@@ -102,6 +104,27 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountStudy() {
+		Connection conn=getConnection();
+		int result=dao.selectCountPayMember(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountFreeStudy() {
+		Connection conn=getConnection();
+		int result=dao.selectCountFreeStudy(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountFutureFreeStudyList() {
+		Connection conn=getConnection();
+		int result=dao.selectCountFutureFreeStudyList(conn);
+		close(conn);
+		return result;
+	}
+	
 	
 	public int selectCountCanclePayMember() {
 		Connection conn=getConnection();
@@ -124,6 +147,62 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountEndStudyList() {
+		Connection conn=getConnection();
+		int result=dao.selectCountEndStudyList(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountEndFreeStudyList() {
+		Connection conn=getConnection();
+		int result=dao.selectCountEndFreeStudyList(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectCountFutureStudyList() {
+		Connection conn=getConnection();
+		int result=dao.selectCountFutureStudyList(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Fstudy> selectFutureFreeStudyList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Fstudy> list=dao.selectFutureFreeStudyList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Fstudy> selectEndFreeStudyList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Fstudy> list=dao.selectEndFreeStudyList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Fstudy> selectFreeStudyPlayList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Fstudy> list=dao.selectFreeStudyPlayList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Pstudy> selectFutureStudyList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Pstudy> list=dao.selectFutureStudyList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Pstudy> selectEndStudyList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Pstudy> list=dao.selectEndStudyList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
 	public List<LeaderAdd> selectLeaderPSList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<LeaderAdd> list=dao.selectLeaderPSList(conn,cPage,numPerPage);
@@ -134,6 +213,13 @@ public class AdminService {
 	public List<QandA> selectQandAList(int cPage, int numPerPage){
 		Connection conn=getConnection();
 		List<QandA> list=dao.selectQandAList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Pstudy> selectStudyPlayList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Pstudy> list=dao.selectStudyPlayList(conn,cPage,numPerPage);
 		close(conn);
 		return list;
 	}

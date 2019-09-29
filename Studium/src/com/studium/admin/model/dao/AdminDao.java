@@ -18,8 +18,10 @@ import com.studium.admin.model.vo.CanclePayMember;
 import com.studium.admin.model.vo.PayMember;
 import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
+import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.member.model.vo.Member;
 import com.studium.mypage.model.vo.LeaderAdd;
+import com.studium.pstudy.model.vo.Pstudy;
 
 public class AdminDao {
 
@@ -95,6 +97,26 @@ public class AdminDao {
 		ResultSet rs=null;
 		int result=0;
 		String sql=prop.getProperty("selectCountLeader");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountStudy(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountStudy");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -215,6 +237,106 @@ public class AdminDao {
 		ResultSet rs=null;
 		int result=0;
 		String sql=prop.getProperty("selectCountCanclePayMemberName") + memberName+"%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountFreeStudy(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountFreeStudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountEndFreeStudyList(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountEndFreeStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountFutureStudyList(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountFutureStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountFutureFreeStudyList(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountFutureFreeStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectCountEndStudyList(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountEndStudyList");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -366,6 +488,266 @@ public class AdminDao {
 
 		return result;
 
+	}
+	
+	
+	public List<Fstudy> selectEndFreeStudyList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Fstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectEndFreeStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Fstudy p=new Fstudy();
+				p.setfNo(rs.getInt("f_no"));
+				p.setfTitle(rs.getString("f_title"));
+				p.setfName(rs.getString("f_name"));
+				p.setfArea(rs.getString("f_area"));
+				p.setfDay(rs.getString("f_day"));
+				p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+				p.setfCategory(rs.getString("f_category"));
+				p.setfIntro1(rs.getString("f_intro1"));
+				p.setfIntro2(rs.getString("f_intro2"));
+				p.setfImgtitle(rs.getString("f_imgtitle"));
+				p.setfImg1(rs.getString("f_img1"));
+				p.setfImg2(rs.getString("f_img2"));
+				p.setfImg3(rs.getString("f_img3"));
+				p.setfTimestart(rs.getString("f_timestart"));
+				p.setfTimeend(rs.getString("f_timeend"));
+				p.setfDatestart(rs.getDate("f_datestart"));
+				p.setfDateend(rs.getDate("f_dateend"));
+				p.setfLike(rs.getInt("f_like"));
+				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Fstudy> selectFutureFreeStudyList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Fstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectFutureFreeStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Fstudy p=new Fstudy();
+				p.setfNo(rs.getInt("f_no"));
+				p.setfTitle(rs.getString("f_title"));
+				p.setfName(rs.getString("f_name"));
+				p.setfArea(rs.getString("f_area"));
+				p.setfDay(rs.getString("f_day"));
+				p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+				p.setfCategory(rs.getString("f_category"));
+				p.setfIntro1(rs.getString("f_intro1"));
+				p.setfIntro2(rs.getString("f_intro2"));
+				p.setfImgtitle(rs.getString("f_imgtitle"));
+				p.setfImg1(rs.getString("f_img1"));
+				p.setfImg2(rs.getString("f_img2"));
+				p.setfImg3(rs.getString("f_img3"));
+				p.setfTimestart(rs.getString("f_timestart"));
+				p.setfTimeend(rs.getString("f_timeend"));
+				p.setfDatestart(rs.getDate("f_datestart"));
+				p.setfDateend(rs.getDate("f_dateend"));
+				p.setfLike(rs.getInt("f_like"));
+				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Fstudy> selectFreeStudyPlayList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Fstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectFreeStudyPlayList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Fstudy p=new Fstudy();
+				p.setfNo(rs.getInt("f_no"));
+				p.setfTitle(rs.getString("f_title"));
+				p.setfName(rs.getString("f_name"));
+				p.setfArea(rs.getString("f_area"));
+				p.setfDay(rs.getString("f_day"));
+				p.setfStudypserson(rs.getInt("F_STUDYPERSON"));
+				p.setfCategory(rs.getString("f_category"));
+				p.setfIntro1(rs.getString("f_intro1"));
+				p.setfIntro2(rs.getString("f_intro2"));
+				p.setfImgtitle(rs.getString("f_imgtitle"));
+				p.setfImg1(rs.getString("f_img1"));
+				p.setfImg2(rs.getString("f_img2"));
+				p.setfImg3(rs.getString("f_img3"));
+				p.setfTimestart(rs.getString("f_timestart"));
+				p.setfTimeend(rs.getString("f_timeend"));
+				p.setfDatestart(rs.getDate("f_datestart"));
+				p.setfDateend(rs.getDate("f_dateend"));
+				p.setfLike(rs.getInt("f_like"));
+				p.setfReadername(rs.getString("f_readername"));
+				p.setfStudyMember(rs.getInt("f_studyMember"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Pstudy> selectFutureStudyList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectFutureStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Pstudy p=new Pstudy();
+				p.setpNo(rs.getInt("p_no"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setpName(rs.getString("p_name"));
+				p.setpArea(rs.getString("p_area"));
+				p.setpDay(rs.getString("p_day"));
+				p.setpStudypserson(rs.getInt("p_studyperson"));
+				p.setpPrice(rs.getInt("p_price"));
+				p.setpCategory(rs.getString("p_category"));
+				p.setpIntro1(rs.getString("p_intro1"));
+				p.setpIntro2(rs.getString("p_intro2"));
+				p.setpImgtitle(rs.getString("p_imgtitle"));
+				p.setpImg1(rs.getString("p_img1"));
+				p.setpImg2(rs.getString("p_img2"));
+				p.setpImg3(rs.getString("p_img3"));
+				p.setpTimestart(rs.getString("p_timestart"));
+				p.setpTimeend(rs.getString("P_timeend"));
+				p.setpDatestart(rs.getDate("p_datestart"));
+				p.setpDateend(rs.getDate("p_dateend"));
+				p.setpLike(rs.getInt("p_like"));
+				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Pstudy> selectEndStudyList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectEndStudyList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Pstudy p=new Pstudy();
+				p.setpNo(rs.getInt("p_no"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setpName(rs.getString("p_name"));
+				p.setpArea(rs.getString("p_area"));
+				p.setpDay(rs.getString("p_day"));
+				p.setpStudypserson(rs.getInt("p_studyperson"));
+				p.setpPrice(rs.getInt("p_price"));
+				p.setpCategory(rs.getString("p_category"));
+				p.setpIntro1(rs.getString("p_intro1"));
+				p.setpIntro2(rs.getString("p_intro2"));
+				p.setpImgtitle(rs.getString("p_imgtitle"));
+				p.setpImg1(rs.getString("p_img1"));
+				p.setpImg2(rs.getString("p_img2"));
+				p.setpImg3(rs.getString("p_img3"));
+				p.setpTimestart(rs.getString("p_timestart"));
+				p.setpTimeend(rs.getString("P_timeend"));
+				p.setpDatestart(rs.getDate("p_datestart"));
+				p.setpDateend(rs.getDate("p_dateend"));
+				p.setpLike(rs.getInt("p_like"));
+				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Pstudy> selectStudyPlayList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pstudy> list=new ArrayList();
+		String sql=prop.getProperty("selectStudyPlayList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Pstudy p=new Pstudy();
+				p.setpNo(rs.getInt("p_no"));
+				p.setpTitle(rs.getString("p_title"));
+				p.setpName(rs.getString("p_name"));
+				p.setpArea(rs.getString("p_area"));
+				p.setpDay(rs.getString("P_day"));
+				p.setpStudypserson(rs.getInt("p_studyperson"));
+				p.setpPrice(rs.getInt("p_price"));
+				p.setpCategory(rs.getString("p_category"));
+				p.setpIntro1(rs.getString("p_intro1"));
+				p.setpIntro2(rs.getString("p_intro2"));
+				p.setpImgtitle(rs.getString("p_imgtitle"));
+				p.setpImg1(rs.getString("p_img1"));
+				p.setpImg2(rs.getString("p_img2"));
+				p.setpImg3(rs.getString("p_img3"));
+				p.setpTimestart(rs.getString("p_timestart"));
+				p.setpTimeend(rs.getString("P_timeend"));
+				p.setpDatestart(rs.getDate("p_datestart"));
+				p.setpDateend(rs.getDate("p_dateend"));
+				p.setpLike(rs.getInt("p_like"));
+				p.setpTeachername(rs.getString("p_teachername"));
+				p.setpStudyMember(rs.getInt("p_studyMember"));
+				list.add(p);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 
 	public List<LeaderAdd> selectLeaderPSList(Connection conn,int cPage, int numPerPage){

@@ -4,28 +4,28 @@ import java.security.Timestamp;
 import java.sql.Date;
 
 public class Pstudy {
-	private int pNo;
-	private String pTitle;
-	private String pName;
-	private String pArea;
-	private String pDay;
-	private int pStudypserson;
-	private int pPrice;
-	private String pCategory;
-	private String pIntro1;
-	private String pIntro2;
-	private String pImgtitle;
-	private String pImg1;
-	private String pImg2;
-	private String pImg3;
-	private String pTimestart;
-	private String pTimeend;
-	private Date pDatestart;
-	private Date pDateend;
-	private int pLike;
-	private String pTeachername;
-	private int pStudyMember;
-	private int pStudyTeacherno;
+	private int pNo; //스터디 번호
+	private String pTitle; //스터디 제목
+	private String pName; //스터디 이름
+	private String pArea; //스터디 지역
+	private String pDay; //스터디 요일
+	private int pStudypserson; //스터디 정원(명)
+	private int pPrice; //스터디 가격
+	private String pCategory; //스터디 카테고리
+	private String pIntro1; //스터디 소개글1
+	private String pIntro2; //스터디 소개글2
+	private String pImgtitle; //제목이미지
+	private String pImg1; //이미지1
+	private String pImg2; //이미지2
+	private String pImg3; //이미지3
+	private String pTimestart; //스터디 시작 시간
+	private String pTimeend; //스터디 끝 시간
+	private Date pDatestart; //스터디 시작 날짜
+	private Date pDateend; //스터디 끝 날짜
+	private int pLike; //좋아요 갯수
+	private String pTeachername; //강사 이름
+	private int pStudyMember; //현재 스터디 신청인원
+	private int pStudyTeacherno; //강사번호
 	public Pstudy() {
 		// TODO Auto-generated constructor stub
 	}
