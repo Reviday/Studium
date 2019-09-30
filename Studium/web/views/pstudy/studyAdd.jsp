@@ -354,18 +354,7 @@
 				
 			});
 		});
-		function convertToTag(textArea) {
-			var lines = textArea.value.split("\n");
-
-			// generate HTML version of text
-			var resultString = "<p>";
-			for (var i = 0; i < lines.length; i++) {
-				resultString += lines[i] + "<br />";
-			}
-			resultString += "</p>";
-
-			return resultString;
-		}
+	
 		
 
 	
