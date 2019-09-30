@@ -15,6 +15,7 @@ import com.studium.admin.model.vo.PointShow;
 import com.studium.admin.model.vo.QandA;
 import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MemberLoginLog;
 import com.studium.mypage.model.vo.LeaderAdd;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -147,6 +148,13 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountLoginLogSearch(String memberName) {
+		Connection conn=getConnection();
+		int result=dao.selectCountLoginLogSearch(conn, memberName);
+		close(conn);
+		return result;
+	}
+	
 	public int selectCountLeader() {
 		Connection conn=getConnection();
 		int result=dao.selectCountLeader(conn);
@@ -173,6 +181,20 @@ public class AdminService {
 		int result=dao.selectCountFutureStudyList(conn);
 		close(conn);
 		return result;
+	}
+	
+	public List<MemberLoginLog> selectLoginLogList(int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<MemberLoginLog> list=dao.selectLoginLogList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<MemberLoginLog> selectCountLoginLogSearch(int cPage, int numPerPage, String memberName){
+		Connection conn=getConnection();
+		List<MemberLoginLog> list=dao.selectCountLoginLogSearch(conn,cPage,numPerPage, memberName);
+		close(conn);
+		return list;
 	}
 	
 	public List<Fstudy> selectFutureFreeStudyList(int cPage, int numPerPage){

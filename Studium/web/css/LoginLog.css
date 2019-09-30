@@ -1,0 +1,271 @@
+body {
+    font-family: "Nanum Gothic";
+    /* background-color: #ebebeb; */
+    
+}
+
+.header-background-cover {
+	height: 95px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+a {
+    outline-style: none;
+    text-decoration: none;
+    color: black;
+}
+
+.mainArticle {
+	width: 900px; 
+	height: 400px;
+}
+
+.inquerySection {
+    /* display: flex; */ 
+}
+
+.leftmenu {
+	display: inline-block;
+}
+
+.leftmenu ul {
+	list-style: none;
+}
+
+.leftmenu li {
+    width: 180px;
+    height: 55px;
+    background-color: #ebebeb;
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.leftmenu li:hover {
+    background-color: #ef6c00;
+    font-weight: bold;
+}
+
+.leftmenu a {
+    display: block;
+    line-height: 3.3;
+    text-align: center;
+}
+
+.leftmenu li a:hover {
+    color: white;
+}
+
+.inquery {
+    margin: 50px 0 0 0px;
+    display: inline-block;
+}
+
+.inquery-header {
+    display: flex; 
+}
+
+.inquery-header div:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+
+.inquery-header div:nth-of-type(2) {
+    margin-left: 430px;
+    box-sizing: border-box;
+    padding: 0;
+    display: flex;
+}
+
+.inquery-header div:nth-of-type(2) select {
+    margin: 2px 10px 0;
+    border: none;
+    outline-style: none;
+    padding: 4px 0;
+}
+
+.inquery-header div:nth-of-type(2) input[type="text"]{
+    width: 180px;
+    height: 17px;
+    border: none;
+    outline-style: none;
+    margin: 7px 0 0;
+}
+
+.submitSearch {
+    box-sizing: border-box;
+    padding-right: 35px;
+    border-radius: 4px;
+    border: 1.5px solid white;
+    margin-left: -4px;
+    width: 38px;
+    background-color: white;
+    outline-style: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.submitSearch:hover {
+	border: 1.5px solid rgba(255,105,30,1);
+}
+
+.submitPicture{
+    box-sizing: border-box;
+    padding-top: 3px;
+    margin-top: 6px;
+    width: 30px;
+    background-color: white;
+    outline-style: none;
+    border: none;
+    cursor: pointer;
+    background-image: url("../img/search3.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inqueryTable {
+    margin-top: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    width: 758px;
+    font-size: 13px;
+}
+
+.inqueryTable tr th {
+    padding:10px;
+    border-top: 3px solid black;
+    background-color: #ebebeb;
+    font-weight: bold;
+}
+
+.inqueryTable tr td {
+    border-top: 1px solid #d6d3d3;
+    border-bottom: 1px solid #d6d3d3;
+    padding:5px;
+    padding-bottom: 10px;
+}
+
+.inqueryTable tr td select {
+    height: 27px;
+    border: none;
+    outline-style: none;
+}
+
+.deleteSubmit {
+    border-radius: 4px;
+    border: 1px solid rgba(255,105,30,1);
+    cursor: pointer;
+    background: rgba(255,105,30,1);
+    margin-top: 6px;
+}
+
+.deleteSubmit:hover {
+    background: #ef6c00;
+}
+
+.memberUpdate{
+	border-radius: 4px;
+    border: 1px solid #004cef;
+    cursor: pointer;
+    background: #4f82f0;
+    margin-top: 6px;
+}
+
+.memberUpdate:hover {
+    background: #2664eb;
+}
+
+.momoClick {
+	cursor: pointer;
+}
+
+.pointPage {
+	display: none; 
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.pointPage-content {
+	background-color: floralwhite;
+	margin: 200px 0 0 350px;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 350px;
+	height: 250px;
+	position: relative;
+}
+
+.closePointPage {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	right: 15px;
+}
+
+.closePointPage:hover, .closePointPage:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.pointPage-header {
+	position: relative;
+}
+
+.pointPage-header>div:nth-of-type(1) {
+	margin: 10px 0 0 10px;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 1.6px;
+}
+
+.pointPage-header>div:nth-of-type(2) {
+	margin: 15px 0 0 10px;
+	color: black;
+	font-weight: bold;
+}
+
+.memo {
+	width: 100%;
+	height: 160px;
+	background-color: floralwhite;
+	border: none;
+	outline-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	resize: none;
+}
+
+.memobtn {
+	position: absolute;
+    top: 0;
+    left: 120px;
+    border-radius: 4px;
+    border: 1.5px solid floralwhite;
+    margin-left: -4px;
+    width: 58px;
+    background-color: floralwhite;
+    outline-style: none !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.memobtn:hover {
+	border: 1.5px solid rgba(255,105,30,1);
+}
