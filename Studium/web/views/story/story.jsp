@@ -93,14 +93,15 @@ int Employmenttotaldata = (int)request.getAttribute("Employmenttotaldata");
                          <img src="<%=request.getContextPath()%>/upload/myPage/<%=s.getStoryStudentpicture()%>"/>
                         
                         <!-- 후기올린 사람 사진 -->
-                        
+                        <a class="titleName">Hannah 쌤과 스피킹</a>
                         <div class="reviewName">
                             <!-- 이름 -->
+                            
                           <%=s.getStoryWrite()%>
                           <span class="subjectName">
                         		 <%=s.getStorySubject()%>
                           </span>
-                          
+
                  
                         </div>
                     

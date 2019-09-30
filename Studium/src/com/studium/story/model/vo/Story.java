@@ -6,6 +6,7 @@ public class Story {
 	private int storyNo; 
 	private int memNo;
 	private int pNo;
+	private String pTitle; //스터디 제목
 	private String storyStudentpicture; //학생사진
 	private String storyWrite; //글쓴이이름
 	private String storyContent; // 글 내용
@@ -19,12 +20,14 @@ public Story() {
 	// TODO Auto-generated constructor stub
 }
 
-public Story(int storyNo, int memNo, int pNo, String storyStudentpicture, String storyWrite, String storyContent,
-		Timestamp storyTime, String storyTeachername, String storyTeacherpicture, String storySubject, int storyStar) {
+public Story(int storyNo, int memNo, int pNo, String pTitle, String storyStudentpicture, String storyWrite,
+		String storyContent, Timestamp storyTime, String storyTeachername, String storyTeacherpicture,
+		String storySubject, int storyStar) {
 	super();
 	this.storyNo = storyNo;
 	this.memNo = memNo;
 	this.pNo = pNo;
+	this.pTitle = pTitle;
 	this.storyStudentpicture = storyStudentpicture;
 	this.storyWrite = storyWrite;
 	this.storyContent = storyContent;
@@ -57,6 +60,14 @@ public int getpNo() {
 
 public void setpNo(int pNo) {
 	this.pNo = pNo;
+}
+
+public String getpTitle() {
+	return pTitle;
+}
+
+public void setpTitle(String pTitle) {
+	this.pTitle = pTitle;
 }
 
 public String getStoryStudentpicture() {
@@ -123,13 +134,6 @@ public void setStoryStar(int storyStar) {
 	this.storyStar = storyStar;
 }
 
-@Override
-public String toString() {
-	return "Story [storyNo=" + storyNo + ", memNo=" + memNo + ", pNo=" + pNo + ", storyStudentpicture="
-			+ storyStudentpicture + ", storyWrite=" + storyWrite + ", storyContent=" + storyContent + ", storyTime="
-			+ storyTime + ", storyTeachername=" + storyTeachername + ", storyTeacherpicture=" + storyTeacherpicture
-			+ ", storySubject=" + storySubject + ", storyStar=" + storyStar + "]";
-}
 
 
 

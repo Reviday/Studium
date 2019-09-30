@@ -124,18 +124,7 @@ section.allhugi article {
     left: 140px;
 }
 
-/* .star {
-    position: relative;
-    top: 30x;
-    left: 140px;
-}
 
-.star > span {
-    display: inline-block;
-    width: 20px;
-    background-image: url("/img/bigstar.png");
-    height: 20px;
-} */
 
 .reviewContent {
     position: relative;
@@ -254,5 +243,13 @@ section.allhugi article {
 			 
     		color: #ef6c00;
 		}
-		
+		.titleName{
+		 position: relative;
+    	font-size: 20px;
+    	color: gray;
+    	top: -30px;
+    	left: 120px;
+			
+			
+		}
 		}
