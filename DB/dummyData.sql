@@ -475,13 +475,13 @@ INSERT INTO ADMIN_FAQ VALUES(SEQ_FAQ.NEXTVAL, '결제', '결제 취소는 어떻게 하나요
 
  --스토리 더미                                        
 select * from ta_story;
-   INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20011,20003,'s_1.jpg', '보라', '우리 예슬쌤 너무 이쁘고 완벽한 발음으로 진짜 현지에서 쓰는 영어를 가르쳐주셨어요! 또한 엄청난 인싸력으로 재밌는 행사 만들어주셔서 너무 좋았습니다!! ', DEFAULT, '예슬', 't_3.jpg','English','5');
-   INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20012,20010, 's_2.jpg', '강준', '알고리즘을 배워보고싶어 스터디에 등록을 했는데 등록금을 77ㅓ억해버리셨습니다 ', DEFAULT, '박진영', 't_10.jpg','Algorithm','1');
-    INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20013,20004, 's_3.jpg', '주현', '재욱 리더 정말 강추합니다!!발음도 완전 좋으시고 외모도 훌륭하셔요~무엇보다 수업이 지루할 틈도 없게 즐겁고 활기차게 이끌어주십니다.중국어에 대한 거부감과 두려움이 많이 사라졌어요.바쁜 프로젝트 끝내고 재욱 리더님 수업 또 들을 예정이에요~^^ ', DEFAULT, '재욱', 't_4.jpg','Chinese','5');
-    INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20014,20001, 's_4.jpg','진구','리더님 덕분에 12주가 너무 즐겁고 영어를 내뱉는 게 덜 두려워졌어요 ㅎㅎ  Hannah 리더님 스터디 정말 즐거워요! 기회가 닿는다면 다시 하고 싶을 정도랍니다 발음부터 회화 표현까지 두루두루 익히면서 일상 회화 뿐만 아니라 간단한 토의도 할 수 있게 되었어요 모두에게 추천합니당! ', DEFAULT, 'Hannah', 't_1.jpg','English','5');
-     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20015,20008, 's_5.jpg','예서','일주일에 한번이지만 정말 많은 도움이 되었습니다.아직도 영어 대화로 말할때 떨리지만 그래도 조금은 자신감이 생겼어요!은우쌤이 친구처럼 편안하게 대해주고 쉬운부분까지 잘 알려주셔서 너무 좋았습니다!! 저의 얕은 영어에 많음 도움을 줬습니다 감사합니다 ㅎ하하핳ㅎㅎ ', DEFAULT, '은우', 't_8.jpg','English','5');
-     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20016,20007, 's_6.jpg','도환','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요', DEFAULT, '혜교', 't_7.jpg','Interview','5');
-     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20017,20009, 's_7.jpg','우주','우식쌤에 족집게 강의로 정보처리기사 자격증 획득에 성공했어요! 정보처리기사 자격증 취득을 위하시는 분들은 우식쌤 강력 추천드립니다 ', DEFAULT, '우식', 't_9.jpg','NationalTechnicalQualificationCertificate','5');
+   INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20011,103,'s_1.jpg', '보라', '우리 예슬쌤 너무 이쁘고 완벽한 발음으로 진짜 현지에서 쓰는 영어를 가르쳐주셨어요! 또한 엄청난 인싸력으로 재밌는 행사 만들어주셔서 너무 좋았습니다!! ', DEFAULT, '예슬', 't_3.jpg','English','5');
+   INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20012,111, 's_2.jpg', '강준', '알고리즘을 배워보고싶어 스터디에 등록을 했는데 등록금을 77ㅓ억해버리셨습니다 ', DEFAULT, '박진영', 't_10.jpg','Algorithm','1');
+    INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20013,104, 's_3.jpg', '주현', '재욱 리더 정말 강추합니다!!발음도 완전 좋으시고 외모도 훌륭하셔요~무엇보다 수업이 지루할 틈도 없게 즐겁고 활기차게 이끌어주십니다.중국어에 대한 거부감과 두려움이 많이 사라졌어요.바쁜 프로젝트 끝내고 재욱 리더님 수업 또 들을 예정이에요~^^ ', DEFAULT, '재욱', 't_4.jpg','Chinese','5');
+    INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20014,102, 's_4.jpg','진구','리더님 덕분에 12주가 너무 즐겁고 영어를 내뱉는 게 덜 두려워졌어요 ㅎㅎ  Hannah 리더님 스터디 정말 즐거워요! 기회가 닿는다면 다시 하고 싶을 정도랍니다 발음부터 회화 표현까지 두루두루 익히면서 일상 회화 뿐만 아니라 간단한 토의도 할 수 있게 되었어요 모두에게 추천합니당! ', DEFAULT, 'Hannah', 't_1.jpg','English','5');
+     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20015,108, 's_5.jpg','예서','일주일에 한번이지만 정말 많은 도움이 되었습니다.아직도 영어 대화로 말할때 떨리지만 그래도 조금은 자신감이 생겼어요!은우쌤이 친구처럼 편안하게 대해주고 쉬운부분까지 잘 알려주셔서 너무 좋았습니다!! 저의 얕은 영어에 많음 도움을 줬습니다 감사합니다 ㅎ하하핳ㅎㅎ ', DEFAULT, '은우', 't_8.jpg','English','5');
+     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20016,107, 's_6.jpg','도환','미적미적대고 소심해서 말을 잘못해서 면접에 대한 걱정을 많이 했는데 리더님 덕분에 많이 나아져서 자신감이 생겼어요', DEFAULT, '혜교', 't_7.jpg','Interview','5');
+     INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,20017,109, 's_7.jpg','우주','우식쌤에 족집게 강의로 정보처리기사 자격증 획득에 성공했어요 정보처리기사자격증 취득을 위하시는 분들은 우식쌤 강력 추천드립니다 ', DEFAULT, '우식', 't_9.jpg','국가기술','5');
 
 
 commit;
