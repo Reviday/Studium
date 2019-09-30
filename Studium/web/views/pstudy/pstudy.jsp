@@ -126,11 +126,11 @@ body{
 						 difvvDays = difvv/(24 * 60 * 60 * 1000);
 						
 						
-						 if((diffDays<=3&&diffDays>=1)){ %>
+						 if((diffDays<=10&&diffDays>=1)){ %>
 							
 							<div class="drawing-near">마감 임박</div>
 
-						<%}else if(diffDays>3){ 
+						<%}else if(diffDays>10){ 
 							if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
 						%>
 							<div class="drawing-near">마감 임박</div>
@@ -227,11 +227,11 @@ body{
 						diffDays = diff / (24 * 60 * 60 * 1000);
 						
 						
-							if((diffDays<=3&&diffDays>=1)){ %>
+							if((diffDays<=10&&diffDays>=1)){ %>
 						
 						<div class="drawing-near">마감 임박</div>
 
-					<%}else if(diffDays>3){ 
+					<%}else if(diffDays>10){ 
 						if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
 					%>
 						<div class="drawing-near">마감 임박</div>

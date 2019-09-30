@@ -122,11 +122,11 @@ body{
 						
 						
 						
-						if((diffDays<=3&&diffDays>=1)){ %>
+						if((diffDays<=10&&diffDays>=1)){ %>
 						
 						<div class="drawing-near">마감 임박</div>
 
-					<%}else if(diffDays>3){ 
+					<%}else if(diffDays>10){ 
 						if(p.getfStudypserson()-p.getfStudyMember()<3&&p.getfStudypserson()-p.getfStudyMember()>0){
 					%>
 						<div class="drawing-near">마감 임박</div>
@@ -230,11 +230,11 @@ body{
 			<div class="a_cnt1">
 				<div data-aos="fade-up" class="col-3 pstudy-card">
 				<%
-				if((diffDays<=3&&diffDays>=1)){ %>
+				if((diffDays<=10&&diffDays>=1)){ %>
 				
 				<div class="drawing-near">마감 임박</div>
 
-			<%}else if(diffDays>3){ 
+			<%}else if(diffDays>10){ 
 				if(p.getfStudypserson()-p.getfStudyMember()<3&&p.getfStudypserson()-p.getfStudyMember()>0){
 			%>
 				<div class="drawing-near">마감 임박</div>
