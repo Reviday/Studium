@@ -187,6 +187,9 @@ create table ta_share_madang(
     madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
     madang_title varchar2(100) constraint smadang_title_nn not null, -- 글 제목
     madang_content clob constraint smadang_content_nn not null, -- 글 내용
+    madang_main_category varchar2(100), -- 대분류(관리자 고정)
+    madang_category varchar2(100), -- 중분류(관리자 고정)
+    madang_sub_category varchar2(100), -- 소분류(사용자 지정)
     madang_register_datetime date, -- 글 작성 일시
     madang_register_ip varchar2(20), -- 글 작성 ip 주소
     madang_updated_datetime date default null, -- 글 수정 일시
@@ -245,6 +248,9 @@ create table ta_boast_madang(
     madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
     madang_title varchar2(100) constraint bmadang_title_nn not null, -- 글 제목
     madang_content clob constraint bmadang_content_nn not null, -- 글 내용
+    madang_main_category varchar2(100), -- 대분류(관리자 고정)
+    madang_category varchar2(100), -- 중분류(관리자 고정)
+    madang_sub_category varchar2(100), -- 소분류(사용자 지정)
     madang_register_datetime date, -- 글 작성 일시
     madang_register_ip varchar2(20), -- 글 작성 ip 주소
     madang_updated_datetime date default null, -- 글 수정 일시
