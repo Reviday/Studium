@@ -766,5 +766,21 @@ public class PstudyDao {
 			close(pstmt);
 		}return result;
 	}
+	public int updatePstudyStar(Connection conn,int pNo,int totalstar) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePstudyStar");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,totalstar);
+			pstmt.setInt(2,pNo);
+            result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+	}
 	
 }

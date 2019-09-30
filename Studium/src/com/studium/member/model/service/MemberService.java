@@ -161,6 +161,12 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public List<Story> starReview(int pNo){
+		Connection conn=getConnection();
+		List<Story> list=dao.starReview(conn,pNo);
+		close(conn);
+		return list;
+	}
 	
 	
 }
