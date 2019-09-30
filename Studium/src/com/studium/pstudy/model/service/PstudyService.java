@@ -146,6 +146,14 @@ public class PstudyService {
 		close(conn);
 		return result;
 	}
+	public int updatePstudyStar(int pNo,int totalstar) {
+		Connection conn=getConnection();
+		int result=dao.updatePstudyStar(conn,pNo,totalstar);
+		if(result>0) {commit(conn);}
+		else {rollback(conn);}
+		close(conn);
+		return result;
+	}
 
 
 }

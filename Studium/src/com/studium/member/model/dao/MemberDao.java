@@ -599,6 +599,39 @@ public class MemberDao {
 		}
 		return result;
 	}
+	public List<Story> starReview(Connection conn,int pNo){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("starReview");
+		List<Story> list = new ArrayList<Story>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pNo);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Story s = new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setMemNo(rs.getInt("MEM_NO"));
+				s.setpNo(rs.getInt("P_NO"));
+				s.setpTitle(rs.getString("P_TITLE"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));	
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStoryStar(rs.getInt("STORY_STAR"));
+				list.add(s);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
 }

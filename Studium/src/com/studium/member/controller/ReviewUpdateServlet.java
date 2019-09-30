@@ -1,6 +1,7 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,8 +62,7 @@ public class ReviewUpdateServlet extends HttpServlet {
 		if(selects!=null) {
 			result= service.reviewUpdate(s, selects.getStoryNo());
 		}
-		if(result<=0) {//업데이트 되는 값 없으면 insert해줌
-
+		else {//업데이트 되는 값 없으면 insert해줌
 			s.setpTitle(p.getpTitle());
 			s.setStoryStudentpicture(memM.getMemPhoto());
 			s.setStoryWrite(memM.getMemName());
@@ -72,6 +72,16 @@ public class ReviewUpdateServlet extends HttpServlet {
 			result= service.reviewInsert(s);
 			
 		}
+		int totalcount=0;
+		int sum=0;
+		int totalstar=0;
+		List<Story> slist=service.starReview(pNo);
+		for(int i=1; i<slist.size()+1; i++) {
+			sum+=slist.get(i).getStoryStar();
+			
+		}
+		int results=pService.updatePstudyStar(pNo,totalstar);
+		
 		String memo="넘기는값";
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(memo,response.getWriter());
