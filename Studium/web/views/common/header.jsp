@@ -32,27 +32,46 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/magnific-popup.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage.css">
 
+<!-- 하단메뉴바 -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myPageMenu.css">
+ <link href="<%=request.getContextPath()%>/css/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+ 
 <!-- Theme Style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
  <!--애니메이션-->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <!-- aos 애니메이션-->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<!-- 움직이는 메뉴바-->
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-list.svg" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.js"></script>
-   
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 </head>
+<style>
+
+
+</style>
 
 <body>
+<!--마이페이지 메뉴-->
+		<%if(loginMember!=null) { %>
+ <div class="myPageMenu">
+        <a href="#menu" id="toggle"><span></span></a>
+
+        <div id="menu">
+          <ul> 
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-user"></i>내 정보</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/mySchedule?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-calendar"></i>일정관리</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-book"></i>내 스터디</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-heart"></i>찜</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myMemo?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-sticky-note"></i>메모</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-credit-card"></i>결제</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myFork?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-share-alt"></i>내 포크</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/setting?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-cog"></i>환경설정</a></li>
+          </ul>
+        </div>
+    </div>
+    <%}%> 
 	<!-- 로그인 폼 -->
 	<div class="login-sec" id="log-dialog-background"></div>
 	<form action="<%=request.getContextPath() %>/login?REMOTE_ADDR=<%=REMOTE_ADDR%>" 
@@ -219,43 +238,50 @@
 			</div>
 		</nav>
 		
-		<!--마이페이지 메뉴-->
-		<%if(loginMember!=null) { %>
-        <div id="myP-index">
-            <nav class="nav-item nav-menu">
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>">마이페이지</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/mySchedule?memberNo=<%=loginMember.getMemNo()%>">일정관리</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>">내 스터디</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>">찜</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myMemo?memberNo=<%=loginMember.getMemNo()%>">메모</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>">결제</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/myFork?memberNo=<%=loginMember.getMemNo()%>">내 포크</a>
-                <a class="nav-link" href="<%=request.getContextPath()%>/myPage/setting?memberNo=<%=loginMember.getMemNo()%>"">환경설정</a>
-            </nav>
-        </div>
-       	<%} %>
-        <script>
-        //마이페이지버튼  호버 시 애니메이션
-            var flag = true;
-            $(function() {
-                $('#myM').hover(function() {
-                    $('#myP-index').animate({
-                        'left': '-100px'
-                    }); console.log("hover");
-                }, function() {
-                    if(flag) {
-                        $('#myP-index').animate({
-                            'left': '-360px'
-                        }); console.log("unhover");
-                    }
-                }); 
-                $('#myM').click(function() {//마이페이지버튼  클릭 시 고정
-                    flag=false;
-                    console.log("click");
-                }); 
-            });
+       	<script>
 
-        </script>
+
+        var theToggle = document.getElementById('toggle');
+
+        // 좌측하단 메뉴바 
+        // hasClass
+        function hasClass(elem, className) {
+        	return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+        }
+        // addClass
+        function addClass(elem, className) {
+            if (!hasClass(elem, className)) {
+            	elem.className += ' ' + className;
+            }
+        }
+        // removeClass
+        function removeClass(elem, className) {
+        	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
+        	if (hasClass(elem, className)) {
+                while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
+                    newClass = newClass.replace(' ' + className + ' ', ' ');
+                }
+                elem.className = newClass.replace(/^\s+|\s+$/g, '');
+            }
+        }
+        // toggleClass
+        function toggleClass(elem, className) {
+        	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
+            if (hasClass(elem, className)) {
+                while (newClass.indexOf(" " + className + " ") >= 0 ) {
+                    newClass = newClass.replace( " " + className + " " , " " );
+                }
+                elem.className = newClass.replace(/^\s+|\s+$/g, '');
+            } else {
+                elem.className += ' ' + className;
+            }
+        }
+
+        theToggle.onclick = function() {
+           toggleClass(this, 'on');
+           return false;
+        }
+       	</script>
 
 	</header>
 		
