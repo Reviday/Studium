@@ -76,7 +76,7 @@
             <div class="helf-right">
                 <form action="<%=request.getContextPath()%>/qandA" method="post" onsubmit="return validate()">
                     <textarea name="content" id="content" cols="30" rows="10" placeholder="무엇을 도와드릴까요? 문의하실 내용을 적어주세요."></textarea>
-                    <input type="email" placeholder="답변받을 이메일 주소" id="email" name="email">
+                    <input type="email" placeholder="답변받을 이메일 주소" id="Qemail" name="email">
                     <input type="submit" value="문의하기" class="submit">
                 </form>
             </div>
@@ -107,11 +107,12 @@
 				$("#content").focus();
 				return false;
 			}
-			if($("#email").val().trim().length==0){
+			if($("#Qemail").val().length==0){
 				alert("답변받으실 이메일을 입력하세요.");
-				$("#email").focus();
+				$("#Qemail").focus();
 				return false;
 			}
+			console.log("이메일:" + $("#Qemail").val());
 			
 			var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
 			 

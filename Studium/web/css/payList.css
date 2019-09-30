@@ -17,11 +17,11 @@ a {
 
 .mainArticle {
 	width: 900px; 
-	height: 400px;
+	min-height: 700px;
 }
 
 .inquerySection {
-    /* display: flex; */ 
+    min-height: 700px; 
 }
 
 .leftmenu {

@@ -1,4 +1,3 @@
-<%@page import="javafx.scene.control.Alert"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs" %>
