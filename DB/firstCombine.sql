@@ -1,5 +1,4 @@
 -- 테이블/시퀀스 등 삭제 초기화 단계
-drop sequence FBOARD_SEQ;
 drop sequence TA_SIDEMENU_SEQ;
 drop sequence STM_LIKE_SEQ;
 drop sequence STMADANG_CMT_SEQ;
@@ -34,8 +33,6 @@ drop table TA_FREE_MADANG;
 drop table TA_STUDY_MADANG_QUESTION;
 drop table TA_STUDY_MADANG CASCADE CONSTRAINT;
 drop table TA_STMADANG_LIKE;
-drop table TA_FMADANG_REP;
-drop table TA_SMADANG_REP;
 drop table TA_BOAST_MADANG CASCADE CONSTRAINT;
 drop table TA_SHARE_MADANG CASCADE CONSTRAINT;
 drop table TA_BMADANG_CMT;
@@ -585,18 +582,19 @@ create table p_study(
    NOCACHE; 
 --스토리 테이블
 CREATE TABLE TA_STORY(
-    "STORY_NO" NUMBER PRIMARY KEY, 
-     "mem_no" number references ta_member(mem_no), -- 구매한 회원 번호
-    "p_no" number references p_study(p_no), -- 구매한 강사스터디 번호
-      "STORY_STUDENT_PICTURE" VARCHAR2(100), 
-      "STORY_WRITE" VARCHAR2(30), 
-      "STORY_CONTENT" VARCHAR2(3000),
-      "STORY_TIME" TIMESTAMP DEFAULT TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
-       "STORY_TEACHER_NAME" VARCHAR2(30),
-      "STORY_TEACHER_PICTUER" VARCHAR2(100),
-      "STORY_SUBJECT" VARCHAR2(40),
-      "STORY_STAR" number
-      );
+    STORY_NO NUMBER PRIMARY KEY, 
+    MEM_NO number references TA_MEMBER(MEM_NO), -- 구매한 회원 번호
+    P_NO number references P_STUDY(P_NO), -- 구매한 강사스터디 번호
+    P_TITLE varchar2(100), --스터디 타이틀
+    STORY_STUDENT_PICTURE VARCHAR2(100), -- 
+    STORY_WRITE VARCHAR2(30), 
+    STORY_CONTENT VARCHAR2(3000),
+    STORY_TIME TIMESTAMP DEFAULT TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+    STORY_TEACHER_NAME VARCHAR2(30),
+    STORY_TEACHER_PICTUER VARCHAR2(100),
+    STORY_SUBJECT VARCHAR2(40),
+    STORY_STAR NUMBER
+);
 
 
 
