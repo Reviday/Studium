@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.studium.madang.model.dao.BoastMadangDao;
 import com.studium.madang.model.vo.BoastMadang;
+import com.studium.madang.model.vo.FreeMadang;
 
 public class BoastMadangService {
 
@@ -74,5 +75,35 @@ public class BoastMadangService {
 		else rollback(conn);
 		close(conn);
 		return madangNo;
+	}
+	
+	public int updateMadang(BoastMadang bm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, bm);
+		if(bm.getMadangWriterUid()==10000) check=1; //관리자 예외
+		int result=-1;
+		if(check>0) {
+			result=dao.updateMadang(conn, bm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
+		close(conn);
+		return result;
+	}
+	
+	public int deleteMadang(BoastMadang bm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, bm);
+		if(bm.getMadangWriterUid()==10000) check=1; //관리자 예외
+		int result=-1;
+		if(check>0) {
+			result=dao.deleteMadang(conn, bm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
+		close(conn);
+		return result;
 	}
 }

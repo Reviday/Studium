@@ -194,6 +194,26 @@
 							</tbody>
 						</table>
 					</div>
+					<!-- 버튼 -->
+					<!-- 해당 버튼들은 글쓴이와 관리자에게만 보여져야 한다. -->
+					<div class="fr">
+						<%
+							if(loginMember!=null && (loginMember.getMemNo()==bm.getMadangWriterUid() || loginMember.getMemCode()=='M')) {
+								%>
+									<div class="post_btns font-family-type1" style="display: inline;">
+										<a href="#" id="writeFormBtn"
+											onclick="fn_madangUpdate('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','boast','<%=bm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
+											class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
+									</div>
+									<div class="post_btns font-family-type1" style="display: inline;">
+										<a href="#" id="writeFormBtn"
+											onclick="fn_madangDelete('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','boast,'<%=bm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
+											class="btn_type1 post_write _rosRestrict" style="color:#000">삭제하기</a>
+									</div>
+								<%
+							}
+						%>
+					</div>
 				</div>
 
 				<div class="h10"></div>

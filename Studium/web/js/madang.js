@@ -103,6 +103,16 @@ function fn_madangUpdate(memCheck, path, locate, madangNo, choice, choiceSub, cP
 	}
 }
 
+function fn_madangDelete(memCheck, path, locate, madangNo, choice, choiceSub, cPage) {
+	if (memCheck == "null") {
+		fn_needLogin();
+	} else {
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			location.href = path + "/madang/" + locate + "MadangDelete" +
+			"?madangNo=" + madangNo + "&memNo=" + memCheck + "&choice=" + choice + "&choiceSub=" + choiceSub + "&cPage=" + cPage;	
+		}
+	}
+}
 
 // madang Write
 

@@ -17,16 +17,16 @@ import com.studium.util.model.vo.SideMenuElement;
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class FreeMadangUpdateEndServlet
+ * Servlet implementation class FreeMadangDeleteServlet
  */
-@WebServlet("/madang/free/updateEnd")
-public class FreeMadangUpdateEndServlet extends HttpServlet {
+@WebServlet("/madang/freeMadangDelete")
+public class FreeMadangDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FreeMadangUpdateEndServlet() {
+    public FreeMadangDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,37 +36,25 @@ public class FreeMadangUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 2차 로그인 체크. 
 		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
+		
 		FreeMadang fm=new FreeMadang();
+		System.out.println(request.getParameter("madangNo"));
 		fm.setMadangNo(Integer.parseInt(request.getParameter("madangNo")));
-		fm.setMadangTitle(request.getParameter("subject"));
-		fm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
-		fm.setMadangWriterEmail(request.getParameter("userEmail"));
-		fm.setMadangWriterName(request.getParameter("userName"));
-		fm.setMadangUpdatedIp(request.getParameter("REMOTE_ADDR"));
-		fm.setMadangContent(request.getParameter("smarteditor"));
-		int cPage=Integer.parseInt(request.getParameter("cPage"));
+		fm.setMadangWriterUid(Integer.parseInt(request.getParameter("memNo")));
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
 		
-		//파일 받기 및 넣기
-		//파일 유/무 처리 해줘야함.
-		//fm.setMadangFilePresence('Y');
-		fm.setMadangFilePresence('N');
-		
-		//이미지 받기 및 넣기
-		fm.setMadangImgPresence('N');
-		
+		// 
+		int result=new FreeMadangService().deleteMadang(fm);
 		
 		// SideMenuElement
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
 		
-		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
-		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int result=new FreeMadangService().updateMadang(fm);
-		
+		request.setAttribute("elements", elements);
+		request.setAttribute("cPage", cPage);
 		String view="/";
 		if(result>0) {
-			view="/madang/freeMadangView?madangNo="+fm.getMadangNo()+"&cPage="+cPage;
+			view="/madang/freeMadangList?cPage="+cPage;
 		} else if(result<0) {
 			String msg="권한이 없습니다.";
 			String loc="/madang/freeMadangList";
@@ -74,13 +62,12 @@ public class FreeMadangUpdateEndServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		} else {
-			String msg="게시글 수정에 실패하였습니다.";
+			String msg="게시글 삭제에 실패하였습니다.";
 			String loc="/madang/freeMadangList";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}
-		request.setAttribute("elements", elements);
 		request.setAttribute("choice", request.getParameter("choice"));
 		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		request.getRequestDispatcher(view).forward(request, response);

@@ -402,7 +402,7 @@ header .navbar .cta-btn a:hover,
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 101;
   background: rgba(50, 50, 50, 0.8);
 }
 

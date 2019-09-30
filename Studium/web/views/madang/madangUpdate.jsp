@@ -37,6 +37,13 @@
 	<div class="header-background-cover"></div>
 </div>
 <section id="madang_writer" class="row">
+<script>
+$(document).ready(function() {
+	window.onbeforeunload = function() { 
+  	    // blank function do nothing 
+  	 } 
+}
+</script>
 	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left: 0">
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
@@ -241,7 +248,8 @@
     </div>
 </section>
    <script type="text/javascript">
-      
+
+   
    $(document).ready(function() { var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
       // Editor Setting
       nhn.husky.EZCreator.createInIFrame({ 

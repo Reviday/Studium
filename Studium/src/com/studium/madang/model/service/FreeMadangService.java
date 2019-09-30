@@ -65,9 +65,25 @@ public class FreeMadangService {
 	public int updateMadang(FreeMadang fm) {
 		Connection conn=getConnection();
 		int check=dao.checkWriter(conn, fm);
+		if(fm.getMadangWriterUid()==10000) check=1; //관리자 예외
 		int result=-1;
 		if(check>0) {
 			result=dao.updateMadang(conn, fm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
+		close(conn);
+		return result;
+	}
+	
+	public int deleteMadang(FreeMadang fm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, fm);
+		if(fm.getMadangWriterUid()==10000) check=1; //관리자 예외
+		int result=-1;
+		if(check>0) {
+			result=dao.deleteMadang(conn, fm);
 			if(result>0) {
 				commit(conn);
 			} rollback(conn);

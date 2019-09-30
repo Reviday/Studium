@@ -247,6 +247,23 @@ public class FreeMadangDao {
 			pstmt.setString(3, fm.getMadangUpdatedIp());
 			pstmt.setString(4, String.valueOf(fm.getMadangFilePresence()));
 			pstmt.setString(5, String.valueOf(fm.getMadangImgPresence()));
+			pstmt.setInt(6, fm.getMadangNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int deleteMadang(Connection conn, FreeMadang fm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fm.getMadangNo());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

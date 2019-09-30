@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.BoastMadang;
+import com.studium.madang.model.vo.FreeMadang;
 import com.studium.member.model.service.MemberService;
 
 public class BoastMadangDao {
@@ -278,6 +279,60 @@ public class BoastMadangDao {
 			if(rs.next()) {
 				result=rs.getInt(1);
 			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int checkWriter(Connection conn, BoastMadang bm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("checkWriter");
+			
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bm.getMadangNo());
+			pstmt.setInt(2, bm.getMadangWriterUid());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateMadang(Connection conn, BoastMadang bm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bm.getMadangTitle());
+			pstmt.setString(2, bm.getMadangContent());
+			pstmt.setString(3, bm.getMadangUpdatedIp());
+			pstmt.setString(4, String.valueOf(bm.getMadangFilePresence()));
+			pstmt.setString(5, String.valueOf(bm.getMadangImgPresence()));
+			pstmt.setInt(6, bm.getMadangNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int deleteMadang(Connection conn, BoastMadang bm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bm.getMadangNo());
+			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
