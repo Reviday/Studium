@@ -2,9 +2,9 @@ SELECT * FROM tab;
 
 commit;
 SELECT * FROM TA_STORY;
-DROP TABLE TA_STORY;
+DROP TABLE TA_MEMBER;
 DELETE FROM TA_STORY;
-   delete from TA_STORY where STORY_WRITE = '최진리';
+   delete from TA_STORY where STORY_WRITE = '이지은';
 
 
 

@@ -16,51 +16,7 @@ int Employmenttotaldata = (int)request.getAttribute("Employmenttotaldata");
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/story.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
-    <style>
-        /* 사이드바 스타일 */
-       #review-level{
-        	position:fixed;
-        	right:0;
-        	box-sizing:border-box;
-        	width:15pc;
-        	background:#fff;
-        	border:1px solid #dcdcdc;
-        	box-shadow:0 2px 6px 0 rgba(0,0,0,.1)
-        	}
-        .review-title{
-        	margin: 0 24px;
-    		color: #505050;
-    		font-size: 18pt;
-    		padding: 36px 0 9pt;
-    		border-bottom: 2px solid #f2f2f2;
-        }
-        .level-list{
-         	margin: 0;
-    		padding: 0;
-        }
-        
-        .level-select{
-			display: block;
-    		box-sizing: border-box;
-    		height: 72px;
-    		line-height: 72px;
-    		padding-left: 24px;
-    		color: #787878;
-		}
-		.level-select:hover {
-    		padding-left: 20px;
-    		border-left: 4px solid #ef6c00;
-    		background: #f8f8f8;
-    		color: #ef6c00;
-		}
-		.subjectName{
-			 
-    		color: #ef6c00;
-		}
-		
-		}
-      
-    </style>
+   
     
     <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">

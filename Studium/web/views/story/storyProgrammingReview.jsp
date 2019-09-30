@@ -133,7 +133,7 @@
                     <!-- 후기 들어가는 div -->
                     <div class="reviewAll">
                         <!-- 개인후기 div -->
-                         <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryStudentpicture()%>"/>
+                         <img src="<%=request.getContextPath()%>/upload/myPage/<%=s.getStoryStudentpicture()%>"/>
                         
                         <!-- 후기올린 사람 사진 -->
                         <div class="reviewName">
@@ -183,7 +183,7 @@
                                         <!-- 강사 이름 -->
                                         <%=s.getStoryTeachername()%>
                                     </div>
-                                    <img src="<%=request.getContextPath()%>/upload/story/<%=s.getStoryTeacherpicture()%>"/>
+                                    <img src="<%=request.getContextPath()%>/upload/myPage/<%=s.getStoryTeacherpicture()%>"/>
                    
                                     <!-- 강사 사진 -->
                                     
