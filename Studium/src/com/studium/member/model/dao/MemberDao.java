@@ -567,13 +567,14 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, s.getMemNo());
 			pstmt.setInt(2, s.getpNo());
-			pstmt.setString(3, s.getStoryStudentpicture());
-			pstmt.setString(4, s.getStoryWrite());
-			pstmt.setString(5, s.getStoryContent());
-			pstmt.setString(6, s.getStoryTeachername());
-			pstmt.setString(7, s.getStoryTeacherpicture());
-			pstmt.setString(8, s.getStorySubject());
-			pstmt.setInt(9, s.getStoryStar());
+			pstmt.setString(3, s.getpTitle());
+			pstmt.setString(4, s.getStoryStudentpicture());
+			pstmt.setString(5, s.getStoryWrite());
+			pstmt.setString(6, s.getStoryContent());
+			pstmt.setString(7, s.getStoryTeachername());
+			pstmt.setString(8, s.getStoryTeacherpicture());
+			pstmt.setString(9, s.getStorySubject());
+			pstmt.setInt(10, s.getStoryStar());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

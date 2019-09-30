@@ -59,10 +59,11 @@ public class ReviewUpdateServlet extends HttpServlet {
 		//리뷰업데이트
 		int result= -1;
 		if(selects!=null) {
-			result= service.reviewUpdate(s, selects.getpNo());
+			result= service.reviewUpdate(s, selects.getStoryNo());
 		}
 		if(result<=0) {//업데이트 되는 값 없으면 insert해줌
 
+			s.setpTitle(p.getpTitle());
 			s.setStoryStudentpicture(memM.getMemPhoto());
 			s.setStoryWrite(memM.getMemName());
 			s.setStoryTeachername(teacherM.getMemName());
