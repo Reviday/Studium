@@ -62,9 +62,17 @@ public class FreeMadangService {
 		return madangNo;
 	}
 	
-	public int UpdateMadang(FreeMadang fm) {
+	public int updateMadang(FreeMadang fm) {
 		Connection conn=getConnection();
-		int check=dao.checkWriter(conn, fm.getMadangNo());
-		int result=dao.UpdateMadang(conn, fm);
+		int check=dao.checkWriter(conn, fm);
+		int result=-1;
+		if(check>0) {
+			result=dao.updateMadang(conn, fm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
+		close(conn);
+		return result;
 	}
 }

@@ -94,7 +94,7 @@ function fn_madangWrite(memCheck, path, locate, choice, choiceSub) {
 }
 
 // madangView
-function fn_madangWrite(memCheck, path, locate, madangNo, choice, choiceSub, cPage) {
+function fn_madangUpdate(memCheck, path, locate, madangNo, choice, choiceSub, cPage) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {

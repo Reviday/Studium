@@ -218,13 +218,16 @@ public class FreeMadangDao {
 		} return result;
 	}
 	
-	public int checkWriter(Connection conn, int madangNo) {
+	public int checkWriter(Connection conn, FreeMadang fm) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("checkWriter");
-		
-		try {
 			
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fm.getMadangNo());
+			pstmt.setInt(2, fm.getMadangWriterUid());
+			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -232,13 +235,19 @@ public class FreeMadangDao {
 		} return result;
 	}
 	
-	public int UpdateMadang(Connection conn, FreeMadang fm) {
+	public int updateMadang(Connection conn, FreeMadang fm) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("UpdateMadang");
+		String sql=prop.getProperty("updateMadang");
 		
 		try {
-			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, fm.getMadangTitle());
+			pstmt.setString(2, fm.getMadangContent());
+			pstmt.setString(3, fm.getMadangUpdatedIp());
+			pstmt.setString(4, String.valueOf(fm.getMadangFilePresence()));
+			pstmt.setString(5, String.valueOf(fm.getMadangImgPresence()));
+			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

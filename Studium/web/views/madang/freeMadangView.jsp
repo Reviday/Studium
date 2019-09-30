@@ -202,7 +202,7 @@
 								%>
 									<div class="post_btns font-family-type1">
 										<a href="#" id="writeFormBtn"
-											onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=fm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
+											onclick="fn_madangUpdate('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=fm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
 											class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
 									</div>
 								<%

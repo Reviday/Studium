@@ -7,6 +7,7 @@
  <%
  	String locate=(String)request.getAttribute("locate");
  	Madang madang=(Madang)request.getAttribute("madang");
+ 	int cPage=(int)request.getAttribute("cPage");
  	
  	//게시판 마다 띄워줄 제목과 문구 처리.
  	//추후, DB에 넣어서 가져오는 방법으로 처리할 예정.
@@ -168,30 +169,29 @@
 						<label>작성하기</label>
 					</div>
 					<div style="clear:both"></div>
-	                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100" 
-	                		<%
-								// 마당의 타입을 확인해야한다. 
-								if(madang!=null) {
-									if(madang instanceof FreeMadang) {
-										FreeMadang fm=(FreeMadang)madang;
-										%>
-											value="<%=fm.getMadangContent()%>"
-										<%
-									} else if (madang instanceof ShareMadang) {
-										ShareMadang sm=(ShareMadang)madang;
-										%>
-											value="<%=sm.getMadangContent()%>"
-										<%
-									} else if (madang instanceof BoastMadang) {
-										BoastMadang bm=(BoastMadang)madang;
-										%>
-											value="<%=bm.getMadangContent()%>"
-										<%
-									} //추후 질문마당 추가
-								}
-							%>
-	                > </textarea>
-							
+	                <textarea name="smarteditor" id="smarteditor" rows="10" cols="100"> 
+                		<%
+							// 마당의 타입을 확인해야한다. 
+							if(madang!=null) {
+								if(madang instanceof FreeMadang) {
+									FreeMadang fm=(FreeMadang)madang;
+									%>
+										<%=fm.getMadangContent()%>
+									<%
+								} else if (madang instanceof ShareMadang) {
+									ShareMadang sm=(ShareMadang)madang;
+									%>
+										<%=sm.getMadangContent()%>
+									<%
+								} else if (madang instanceof BoastMadang) {
+									BoastMadang bm=(BoastMadang)madang;
+									%>
+										<%=bm.getMadangContent()%>
+									<%
+								} //추후 질문마당 추가
+							}
+						%>
+					</textarea>	
 	
 	                
 	                <!-- 버튼 -->
@@ -211,6 +211,7 @@
                 	<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
                 	<input type="hidden" name="choice" value="<%=choice %>">
                 	<input type="hidden" name="choiceSub" value="<%=choiceSub%>">
+                	<input type="hidden" name="cPage" value="<%=cPage%>">
                 	<input type="hidden" name="madangNo" 
                 		<%
 							// 마당의 타입을 확인해야한다. 
@@ -242,7 +243,6 @@
    <script type="text/javascript">
       
    $(document).ready(function() { var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
-   
       // Editor Setting
       nhn.husky.EZCreator.createInIFrame({ 
          oAppRef : oEditors, // 전역변수 명과 동일해야 함. 
@@ -258,7 +258,15 @@
             bUseModeChanger : true, 
          } 
       }); 
+      var content="";
+      var org = new Array();
+      org.push("html 내용");
       
+
+      
+		oEditors.getById["smarteditor"].exec("LOAD_CONTENTS_FIELD");
+      //oEditors.getById["smarteditor"].exec("SET_IR", [""]); //내용초기화
+   
       // 전송버튼 클릭이벤트 
       $("#savebutton").click(function(){ 
          //if(confirm("저장하시겠습니까?")) { 

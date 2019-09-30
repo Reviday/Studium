@@ -44,6 +44,7 @@ public class MadangUpdateServlet extends HttpServlet {
 		// 글쓰기 페이지는 하나의 서블릿으로 처리
 		String locate = request.getParameter("locate");
 		int madangNo = Integer.parseInt(request.getParameter("madangNo"));
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
 		int code=0;
 		switch(locate) {
 		case "study" : code=1002; break;
@@ -76,6 +77,7 @@ public class MadangUpdateServlet extends HttpServlet {
 		
 		request.setAttribute("locate", locate);
 		request.setAttribute("elements", elements);
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("choice", request.getParameter("choice"));
 		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		request.getRequestDispatcher(view).forward(request, response);
