@@ -38,11 +38,11 @@ public class CheckOriginPwServlet extends HttpServlet {
 		MemberService ms= new MemberService();
 		Member m=ms.selectNo(no);
 		boolean flag=false;
-		if(pwd!=m.getMemPassword()) {
-			flag=true;
+		if(pwd.equals(m.getMemPassword())) {
+			flag=false;
 			System.out.println("flag="+flag);
 		}else {
-			flag=false;
+			flag=true;
 		}
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(flag,response.getWriter());

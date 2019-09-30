@@ -383,19 +383,15 @@
         		dataType: "json",
         		data: {"password" : pwd.val()},
         		success: function(data){
-        			console.log("ajax성공");
         			if(!data){
 						alert("기존 비밀번호와 동일할 수 없습니다.");
-        				return false;
         			}
         		},
         		error:function (data){
         			console.log(data);
         		}
         	});
-    		alert("ajax통과");
 			// 비밀번호 일치 확인
-			alert(pwd + pwdck);
 			if (pwd.val() != pwdck.val()) {
 				alert("비밀번호가 일치하지 않습니다.");
 				pwdck.focus();

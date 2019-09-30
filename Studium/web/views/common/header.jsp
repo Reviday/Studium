@@ -38,6 +38,13 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <!-- aos 애니메이션-->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<!-- 움직이는 메뉴바-->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-list.svg" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.js"></script>
    
 
 <!-- jQuery -->
@@ -144,10 +151,8 @@
 
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/fstudyListView">일반스터디</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="review.html">스터디후기</a>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/story">스터디후기</a>
 
-						</li>
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/story">스토리</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
