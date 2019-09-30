@@ -22,6 +22,9 @@ DROP SEQUENCE SEQ_MY_PURCHASE;
 DROP SEQUENCE SEQ_MYCALENDAR;
 DROP SEQUENCE SEQ_FSTUDY;
 DROP SEQUENCE SEQ_PSTUDY;
+DROP SEQUENCE SEQ_QandA;
+DROP SEQUENCE SEQ_FAQ;
+DROP SEQUENCE DEC_FAQ;
 
 drop table TA_MEMBER_LOGIN_LOG;
 drop table TA_SIDEMENU_ELEMENTS;
@@ -37,7 +40,10 @@ drop table TA_BOAST_MADANG CASCADE CONSTRAINT;
 drop table TA_SHARE_MADANG CASCADE CONSTRAINT;
 drop table TA_BMADANG_CMT;
 drop table TA_SMADANG_CMT;
-
+DROP TABLE QANDA;
+DROP TABLE ADMIN_FAQ;
+DROP TABLE DECLARATION;
+DROP TABLE ta_point_content;
 DROP TABLE MY_PURCHASE;
 DROP TABLE MY_DIBS;
 DROP TABLE MY_MEMO;
@@ -720,6 +726,63 @@ INSERT INTO CATEGORY_S VALUES(SEQ_CATEGORY.NEXTVAL,'CM10','UNIX');
 INSERT INTO CATEGORY_S VALUES(SEQ_CATEGORY.NEXTVAL,'CM10','LINUX');
 INSERT INTO CATEGORY_S VALUES(SEQ_CATEGORY.NEXTVAL,'CM10','IOS');
 INSERT INTO CATEGORY_S VALUES(SEQ_CATEGORY.NEXTVAL,'CM10','ANDROID');
+
+--자주묻는 질문 게시판 이메일 문의
+--시퀀스
+CREATE SEQUENCE SEQ_QandA 
+START WITH 1
+INCREMENT BY 1
+NOCYCLE;
+--테이블
+CREATE TABLE QANDA(
+    NO NUMBER PRIMARY KEY, --문의번호
+    EMAIL VARCHAR2(30) NOT NULL, --답변받을 이메일
+    CONTENT VARCHAR2(3000) NOT NULL, --문의내용
+    ENROLL_DATE DATE, --문의한 시간
+    QANDA_STATUS VARCHAR2(1) --문의내용 처리여부
+    );
+    
+--자주묻는 질문 게시판 어드민 관리
+--시퀀스
+create sequence SEQ_FAQ
+start with 1
+increment by 1;
+--테이블
+CREATE TABLE ADMIN_FAQ(
+    FAQ_NO NUMBER PRIMARY KEY,--질문번호
+    FAQ_TYPE VARCHAR2(100) NOT NULL, -- 질문종류
+    FAQ_TITLE VARCHAR2(100) NOT NULL, -- 질문제목
+    FAQ_CONTENT VARCHAR2(3000) NOT NULL -- 답변내용
+);
+
+--게시글/댓글 신고
+create sequence DEC_FAQ
+start with 1
+increment by 1;
+
+CREATE TABLE DECLARATION(
+    D_NO NUMBER PRIMARY KEY, --신고번호
+    R_NO NUMBER NOT NULL, --신고한 사람 번호
+    P_NO NUMBER NOT NULL, --신고당한 사람 번호
+    D_TYPE CHAR(1) CONSTRAINT DECLARATION_TYPE_CK CHECK (D_TYPE IN ('G', 'D')), --신고카테고리(G:게시글, D:댓글)
+    D_CATEGORY CHAR(1) CONSTRAINT DECLARATION_CATEGORY_CK CHECK (D_CATEGORY IN ('P','U', 'D', 'S', 'G')), 
+    -- 신고카테고리(P:영리목적의 광고, U:음란성/선정성 게시글, D:도배 게시글/댓글 S:개인정보 노출/사생활 침해 G:개인정보 노출/사생활 침해)
+    D_DATE DATE DEFAULT SYSDATE, --신고시간
+    D_IP VARCHAR2(20) NOT NULL, --아이피
+    D_CONTENT VARCHAR2(3000), --신고 내용
+    D_STATUS CHAR(1) DEFAULT 'Y' CONSTRAINT DECLARATION_STATUS_CK CHECK (D_STATUS IN ('Y', 'N')) 
+);
+
+-- 포인트내역 테이블
+create table ta_point_content (
+    mem_id number not null, -- 기본키
+    mem_name varchar2(50) not null, -- 회원 이름
+    mem_email varchar2(30) not null, --회원 이메일
+    mem_point number default 0, -- 회원 증감 포인트 
+    point_status char(1) check(point_status in ('Y','N')), -- y(지급) n(차감)
+    point_enrolldate date -- 정렬 순서
+);
+
 
 
 

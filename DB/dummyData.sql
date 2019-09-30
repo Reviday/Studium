@@ -260,7 +260,41 @@ insert into F_study values(10010,'TEST F STUDY','2','잠실','주말',11,'국가직','�
 -- 댓글 더미데이터
 INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,1,'a1.jpg', '김예림', '우리 예리쌤 너무 이쁘고 완벽한 발음으로 진짜 현지에서 쓰는 영어를 가르쳐주셨어요! 또한 엄청난 인싸력으로 재밌는 행사 만들어주셔서 너무 좋았습니다!! ', DEFAULT, '예리 미나', 'i2.jpg','English','5');
 
-select * From category_M;
+--QANDA(자주묻는질문 이메일문의)
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '제가말이죠 어쩌구저쩌구 그래서 말이죠', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '그래서 너무 하기가 싫은거 있죠 진짜 에휴', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할1 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할2 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할3 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할4 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할5 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할6 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할7 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할8 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할9 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할0 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할11 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할12 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할13 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할14 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할15 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할16 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할17 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할18 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할19 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할20 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할21 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할22 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할23 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할24 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할25 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할26 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할27 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할28 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할29 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할30 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할31 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
+INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할32 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
 
 commit;
 
