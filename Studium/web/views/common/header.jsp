@@ -15,6 +15,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
+<script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <link rel="shortcut icon" href="<%=request.getContextPath() %>/img/studium_logo.png" type="image/x-icon" />
 <link rel="icon" href="<%=request.getContextPath() %>/img/studium_logo.png" type="image/x-icon" />
 
@@ -32,6 +33,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/magnific-popup.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage.css">
 
+
+<!-- 움직이는메뉴바 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-list.svg" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/myNavigation.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.js"></script>
 <!-- 하단메뉴바 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myPageMenu.css">
  <link href="<%=request.getContextPath()%>/css/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -45,7 +54,6 @@
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 </head>
 <style>
 
@@ -53,10 +61,11 @@
 </style>
 
 <body>
-<!--마이페이지 메뉴-->
+<!--마이페이지 메뉴-->   
 		<%if(loginMember!=null) { %>
  <div class="myPageMenu">
-     <a href="#menu" id="toggle"><span></span></a>
+        <a href="#menu" id="toggle"><span></span></a>
+
         <div id="menu">
           <ul> 
             <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-user"></i>내 정보</a></li>
@@ -236,53 +245,222 @@
 				</div>
 			</div>
 		</nav>
+		<div class="center menu">
+                <div id="myMenu"></div>
+            </div>
 		
-       	<script>
-
-
-        var theToggle = document.getElementById('toggle');
-
-        // 좌측하단 메뉴바 
-        // hasClass
-        function hasClass(elem, className) {
-        	return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-        }
-        // addClass
-        function addClass(elem, className) {
-            if (!hasClass(elem, className)) {
-            	elem.className += ' ' + className;
-            }
-        }
-        // removeClass
-        function removeClass(elem, className) {
-        	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
-        	if (hasClass(elem, className)) {
-                while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-                    newClass = newClass.replace(' ' + className + ' ', ' ');
-                }
-                elem.className = newClass.replace(/^\s+|\s+$/g, '');
-            }
-        }
-        // toggleClass
-        function toggleClass(elem, className) {
-        	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
-            if (hasClass(elem, className)) {
-                while (newClass.indexOf(" " + className + " ") >= 0 ) {
-                    newClass = newClass.replace( " " + className + " " , " " );
-                }
-                elem.className = newClass.replace(/^\s+|\s+$/g, '');
-            } else {
-                elem.className += ' ' + className;
-            }
-        }
-
-        theToggle.onclick = function() {
-           toggleClass(this, 'on');
-           return false;
-        }
-       	</script>
-
+       	
 	</header>
 		
+<script>
 
+	 var theToggle = document.getElementById('toggle');
+
+     // 좌측하단 메뉴바 
+     // hasClass
+     function hasClass(elem, className) {
+     	return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+     }
+     // addClass
+     function addClass(elem, className) {
+         if (!hasClass(elem, className)) {
+         	elem.className += ' ' + className;
+         }
+     }
+     // removeClass
+     function removeClass(elem, className) {
+     	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
+     	if (hasClass(elem, className)) {
+             while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
+                 newClass = newClass.replace(' ' + className + ' ', ' ');
+             }
+             elem.className = newClass.replace(/^\s+|\s+$/g, '');
+         }
+     }
+     // toggleClass
+     function toggleClass(elem, className) {
+     	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
+         if (hasClass(elem, className)) {
+             while (newClass.indexOf(" " + className + " ") >= 0 ) {
+                 newClass = newClass.replace( " " + className + " " , " " );
+             }
+             elem.className = newClass.replace(/^\s+|\s+$/g, '');
+         } else {
+             elem.className += ' ' + className;
+         }
+     }
+
+     theToggle.onclick = function() {
+        toggleClass(this, 'on');
+        return false;
+     }
+    	</script>
+
+
+
+<script>
+
+var timeOut;
+var Item = /** @class */ (function () {
+ function Item(icon, backgroundColor) {
+     this.$element = $(document.createElement("div"));
+     this.icon = icon;
+     this.$element.addClass("item");
+     this.$element.css("background-color", backgroundColor);
+     var i = document.createElement("i");
+     $(i).addClass("fi-" + icon);
+     this.$element.append(i);
+     this.prev = null;
+     this.next = null;
+     this.isMoving = false;
+     var element = this;
+     this.$element.on("mousemove", function () {
+         clearTimeout(timeOut);
+         timeOut = setTimeout(function () {
+             if (element.next && element.isMoving) {
+                 element.next.moveTo(element);
+             }
+         }, 10);
+     });
+ }
+ Item.prototype.moveTo = function (item) {
+     anime({
+         targets: this.$element[0],
+         left: item.$element.css("left"),
+         top: item.$element.css("top"),
+         duration: 700,
+         elasticity: 500
+     });
+     if (this.next) {
+         this.next.moveTo(item);
+     }
+ };
+ Item.prototype.updatePosition = function () {
+     anime({
+         targets: this.$element[0],
+         left: this.prev.$element.css("left"),
+         top: this.prev.$element.css("top"),
+         duration: 80
+     });
+     if (this.next) {
+         this.next.updatePosition();
+     }
+ };
+ return Item;
+}());
+var Menu = /** @class */ (function () {
+ function Menu(menu) {
+     this.$element = $(menu);
+     this.size = 0;
+     this.first = null;
+     this.last = null;
+     this.timeOut = null;
+     this.hasMoved = false;
+     this.status = "closed";
+ }
+ Menu.prototype.add = function (item) {
+     var menu = this;
+     if (this.first == null) {
+         this.first = item;
+         this.last = item;
+         this.first.$element.on("mouseup", function () {
+             if (menu.first.isMoving) {
+                 menu.first.isMoving = false;
+             }
+             else {
+                 menu.click();
+             }
+         });
+         item.$element.draggable({
+             start: function () {
+                 menu.close();
+                 item.isMoving = true;
+             }
+         }, {
+             drag: function () {
+                 if (item.next) {
+                     item.next.updatePosition();
+                 }
+             }
+         }, {
+             stop: function () {
+                 item.isMoving = false;
+                 item.next.moveTo(item);
+             }
+         });
+     }
+     else {
+         this.last.next = item;
+         item.prev = this.last;
+         this.last = item;
+     }
+     this.$element.after(item.$element);
+ };
+ Menu.prototype.open = function () {
+     this.status = "open";
+     var current = this.first.next;
+     var iterator = 1;
+     var head = this.first;
+     console.log(head);
+     var sens = -1;
+     while (current != null) {
+         anime({
+             targets: current.$element[0],
+             left: parseInt(head.$element.css("left"), 10) + (sens * (iterator * 50)),
+             top: head.$element.css("top"),
+             duration: 500
+         });
+         iterator++;
+         current = current.next;
+     }
+ };
+ Menu.prototype.close = function () {
+     this.status = "closed";
+     var current = this.first.next;
+     var head = this.first;
+     var iterator = 1;
+     while (current != null) {
+         anime({
+             targets: current.$element[0],
+             left: head.$element.css("left"),
+             top: head.$element.css("top"),
+             duration: 500
+         });
+         iterator++;
+         current = current.next;
+     }
+ };
+ Menu.prototype.click = function () {
+     if (this.status == "closed") {
+         this.open();
+     }
+     else {
+         this.close();
+     }
+ };
+ return Menu;
+}());
+var menu = new Menu("#myMenu");
+var item1 = new Item("list");
+var item2 = new Item("torso", "#5CD1FF");
+var item3 = new Item("bookmark", "#ff7f00");
+var item3 = new Item("heart", "#FF5C5C");
+var item4 = new Item("credit-card", "#FFF15C");
+var item5 = new Item("widget", "#64F592");
+menu.add(item1);
+menu.add(item2);
+menu.add(item3);
+menu.add(item4);
+menu.add(item5);
+$(document).delay(50).queue(function (next) {
+ menu.open();
+ next();
+ $(document).delay(1000).queue(function (next) {
+     menu.close();
+     next();
+ });
+});
+
+       
+</script>
 	<!-- END header -->
