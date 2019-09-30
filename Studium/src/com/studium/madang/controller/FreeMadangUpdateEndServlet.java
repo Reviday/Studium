@@ -35,13 +35,14 @@ public class FreeMadangUpdateEndServlet extends HttpServlet {
 		// 2차 로그인 체크. 
 		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		FreeMadang fm=new FreeMadang();
+		fm.setMadangNo(Integer.parseInt(request.getParameter("madangNo")));
 		fm.setMadangTitle(request.getParameter("subject"));
 		fm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
 		fm.setMadangWriterEmail(request.getParameter("userEmail"));
 		fm.setMadangWriterName(request.getParameter("userName"));
 		fm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
 		fm.setMadangContent(request.getParameter("smarteditor"));
-		
+		int cPage=Integer.parseInt(request.getParameter("cPage"));
 		
 		//파일 받기 및 넣기
 		
@@ -49,11 +50,11 @@ public class FreeMadangUpdateEndServlet extends HttpServlet {
 		
 		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
 		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int result=new FreeMadangService()//.UpdateMadang(fm);
+		int result=new FreeMadangService().UpdateMadang(fm);
 		
 		String view="/";
 		if(result>0) {
-			view="/madang/freeMadangView?madangNo="+madangNo+"&cPage=1";
+			view="/madang/freeMadangView?madangNo="+fm.getMadangNo()+"&cPage="+cPage;
 		} else {
 			String msg="게시글 수정에 실패하였습니다.";
 			String loc="/madang/freeMadangList";

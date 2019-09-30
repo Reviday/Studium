@@ -211,6 +211,29 @@
                 	<input type="hidden" name="REMOTE_ADDR" value="<%=REMOTE_ADDR%>">
                 	<input type="hidden" name="choice" value="<%=choice %>">
                 	<input type="hidden" name="choiceSub" value="<%=choiceSub%>">
+                	<input type="hidden" name="madangNo" 
+                		<%
+							// 마당의 타입을 확인해야한다. 
+							if(madang!=null) {
+								if(madang instanceof FreeMadang) {
+									FreeMadang fm=(FreeMadang)madang;
+									%>
+										value="<%=fm.getMadangNo()%>"
+									<%
+								} else if (madang instanceof ShareMadang) {
+									ShareMadang sm=(ShareMadang)madang;
+									%>
+										value="<%=sm.getMadangNo()%>"
+									<%
+								} else if (madang instanceof BoastMadang) {
+									BoastMadang bm=(BoastMadang)madang;
+									%>
+										value="<%=bm.getMadangNo()%>"
+									<%
+								} //추후 질문마당 추가
+							}
+						%>
+                	>
                 </div>
             </form>
         </div>

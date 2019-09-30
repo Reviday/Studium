@@ -61,4 +61,10 @@ public class FreeMadangService {
 		close(conn);
 		return madangNo;
 	}
+	
+	public int UpdateMadang(FreeMadang fm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, fm.getMadangNo());
+		int result=dao.UpdateMadang(conn, fm);
+	}
 }

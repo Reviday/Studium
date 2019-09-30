@@ -217,4 +217,32 @@ public class FreeMadangDao {
 			close(pstmt);
 		} return result;
 	}
+	
+	public int checkWriter(Connection conn, int madangNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("checkWriter");
+		
+		try {
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int UpdateMadang(Connection conn, FreeMadang fm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("UpdateMadang");
+		
+		try {
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
 }

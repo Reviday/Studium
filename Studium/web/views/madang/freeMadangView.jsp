@@ -195,12 +195,19 @@
 						</table>
 					</div>
 					<!-- 버튼 -->
+					<!-- 해당 버튼들은 글쓴이에게만 보여져야 한다. -->
 					<div class="fr">
-						<div class="post_btns font-family-type1">
-							<a href="#" id="writeFormBtn"
-								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=fm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>'); return false;"
-								class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
-						</div>
+						<%
+							if(loginMember!=null && loginMember.getMemNo()==fm.getMadangWriterUid()) {
+								%>
+									<div class="post_btns font-family-type1">
+										<a href="#" id="writeFormBtn"
+											onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=fm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
+											class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
+									</div>
+								<%
+							}
+						%>
 					</div>
 				</div>
 

@@ -1,0 +1,467 @@
+-- 테이블/시퀀스 등 삭제 초기화 단계
+drop sequence FBOARD_SEQ;
+drop sequence TA_SIDEMENU_SEQ;
+drop sequence STM_LIKE_SEQ;
+drop sequence STMADANG_CMT_SEQ;
+drop sequence FMADANG_CMT_SEQ;
+drop sequence SMADANG_SEQ;
+drop sequence MLL_SEQ;
+drop sequence SMADANG_CMT_SEQ;
+drop sequence STMADANG_QUESTION_SEQ;
+drop sequence BMADANG_SEQ;
+drop sequence STMADANG_SEQ;
+drop sequence BMADANG_CMT_SEQ;
+drop sequence MEM_SEQ;
+drop sequence FMADANG_SEQ;
+drop table TA_MEMBER_LOGIN_LOG;
+drop table TA_SIDEMENU_ELEMENTS;
+drop table TA_STMADANG_CMT;
+drop table TA_FMADANG_CMT;
+drop table TA_FREE_MADANG;
+drop table TA_STUDY_MADANG_QUESTION;
+drop table TA_STUDY_MADANG CASCADE CONSTRAINT;
+drop table TA_STMADANG_LIKE;
+drop table TA_FMADANG_REP;
+drop table TA_SMADANG_REP;
+drop table TA_BOAST_MADANG CASCADE CONSTRAINT;
+drop table TA_SHARE_MADANG CASCADE CONSTRAINT;
+drop table TA_BMADANG_CMT;
+drop table TA_SMADANG_CMT;
+drop table TA_MEMBER;
+
+
+
+
+-- 날짜 포맷형식을 다음으로 바꾼다. ex) 2019.01.01 13:00:00
+-- 아래를 적용하지 않으면 Studium 프로젝트에서 사용되는 날짜 포맷형식을 사용할 수 없다.
+alter session set nls_date_format = 'YYYY.MM.DD HH24:MI:SS'; 
+
+
+
+
+-- 테이블 및 시퀀스 생성
+/*해당 정보는 멤버 테이블에 필요한 정보들 */
+create table ta_member ( -- 회원정보 테이블(비고: 必은 첫 회원가입시 반드시 입력받을 정보)
+    mem_no number constraint mem_no_pk primary key, -- 회원넘버(시퀀스넘버로 부여)
+--  mem_userid varchar2(20) constraint mem_userid_nn not null constraint mem_userid_uq unique, -- 회원 ID(必) 
+    mem_email varchar2(30) not null, -- 회원 이메일(추가정보 or 첫 가입시)
+    mem_password varchar2(300) constraint mem_password_nn not null , -- 회원 psssword(必)
+    mem_name varchar2(50) constraint mem_name_nn not null, -- 회원 이름(必)
+    mem_code char(1) constraint mem_code_ck check (mem_code in ('M','T','R','A')), -- 회원등급(Manager, Teacher, Regular, Associate)
+    mem_birth date, -- 회원 생년월일(必)
+    mem_phone varchar2(11), -- 회원 전화번호(없을 경우 집전화/ '-' 없이 입력받는다.),
+    mem_gender char(1) default 'U' constraint mem_gender_ck check (mem_gender in ('M','F','U')), -- 회원 성별(必)(U-Undefined)
+    mem_point number default 0, -- 회원 포인트
+    mem_category1 varchar2(30), -- 회원 선호 카테고리(최대 3개)
+    mem_category2 varchar2(30), 
+    mem_category3 varchar2(30), 
+    
+    -- 집주소 입력 API 사용시, 2~3개 // 없으면 1개만 
+    mem_zipcode varchar2(10), -- 우편번호 (자릿수가 가물해서 10)
+    mem_address1 varchar2(100), -- 회원 주소 앞부분
+    mem_address2 varchar2(100), -- 회원 상세주소
+    -----------------------------
+    
+    -- 이하는 부가정보
+    mem_receive_email char(1) default 'N' constraint mem_receive_email_ck check (mem_receive_email in ('Y','N')), -- 이메일 수신여부(기본값 N)
+    mem_use_note char(1) default 'N' constraint mem_use_note_ck check (mem_use_note in ('Y','N')), -- 쪽지 사용여부(기본값 N)
+    mem_receive_sms char(1) default 'N' constraint mem_receive_sms_ck check (mem_receive_sms in ('Y','N')), -- 문자 수신 여부(기본값 N)
+    mem_open_profile char(1) default 'N' constraint mem_open_profile_ck check (mem_open_profile in ('Y','N')), -- 프로필 공개 여부(기본값 N)
+    mem_denied char(1) default 'N' constraint mem_denied_ck check (mem_denied in ('Y','N','P')), -- 해당 회원 차단 여부(기본값 N/ 영구정지 P) 
+    mem_email_cert char(1) default 'N' constraint mem_email_cert_ck check (mem_email_cert in ('Y','N')), -- 이메일 인증 여부(기본값 N)
+    mem_enroll_datetime date , -- 회원 가입일(시간 포함)
+    mem_enroll_ip varchar2(20), -- 회원 가입 ip(ip 받아오는게 가능하면 넣을까 싶음)
+    mem_lastlogin_datetime date , -- 마지막 접속일 
+    mem_lastlogin_ip varchar2(20), -- 마지막 접속 ip
+    mem_profile_content varchar2(300), -- 자기소개(프로필용, 100자)
+    mem_adminmemo varchar2(1000),   -- 회원에 대한 관리자용 메모
+--  mem_following number default 0, -- 친구수
+--  mem_followed number default 0, -- 회원을 친구로 등록한 회원 수 => 이건 따로 테이블 만들어서 하는게 좋을듯 하다.
+    mem_icon varchar2(1000), -- 회원 아이콘 경로(댓글 사용할때 이미지 정도?, 경로를 어느 정도 범위로 주어야할지 몰라서 1000)
+    mem_photo varchar2(1000), -- 회원 프로필 사진 경로
+    mem_status char(1) default 'Y' constraint mem_status_ck check (mem_status in ('Y','N')), -- 회원 계정 상태
+    mem_withdrawal_date date default null, -- 회원 탈퇴 일시
+    mem_denied_date date default null -- 회원 차단 일시
+);
+
+/* 회원넘버용 시퀀스 */
+create sequence mem_seq 
+start with 10000
+increment by 1
+maxvalue 999999;
+
+
+-- 공부마당
+create table ta_study_madang(
+    madang_no number constraint stmadang_no_pk primary key, -- 글번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint stmadang_title_nn not null, -- 글 제목
+    madang_level number, -- 문제 난이도(Level 1~5)
+    madang_content clob constraint stmadang_content_nn not null, -- 글 내용
+    madang_main_category varchar2(100), -- 대분류(관리자 고정)
+    madang_category varchar2(100), -- 중분류(관리자 고정)
+    madang_sub_category varchar2(100), -- 소분류(사용자 지정)
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_fork_count number default 0, -- 글 포크 수
+    madang_answer_count number default 0, -- 글 답변(풀이) 수 
+    madang_status char(1) default 'Y' constraint stmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 공부마당
+create sequence stmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 공부마당 풀이
+create table ta_study_madang_question(
+    question_no number primary key,-- 시퀀스 pk
+    madang_no number references ta_study_madang(madang_no), -- 해당 글번호
+    question_writer_uid number, -- 글쓴이 uid
+    question_writer_email varchar2(20), -- 글쓴이 이메일
+    question_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    question_content clob, -- 글 내용
+    question_main_category varchar2(100), -- 대분류(관리자 고정) => 통계용
+    question_category varchar2(100), -- 중분류(관리자 고정)
+    question_sub_category varchar2(100), -- 소분류(사용자 지정)
+    question_register_datetime date, -- 글 작성 일시
+    question_register_ip varchar2(20), -- 글 작성 ip 주소
+    question_updated_datetime date default null, -- 글 수정 일시
+    question_updated_ip varchar2(20), -- 글 수정 ip 주소
+    question_rec_count number default 0, -- 글 추천 수(recommand)
+    question_rep_count number default 0, -- 글 댓글 수
+    question_status char(1) default 'Y' check(question_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 공부마당 풀이 시퀀스
+create sequence stmadang_question_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+
+-- 공유마당
+create table ta_share_madang(
+    madang_no number constraint smadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint smadang_title_nn not null, -- 글 제목
+    madang_content clob constraint smadang_content_nn not null, -- 글 내용
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_fork_count number default 0, -- 글 포크 수    
+    madang_file_presence char(1) default 'N' constraint smadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint smadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint smadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 공유마당
+create sequence smadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+
+-- 자유마당
+create table ta_free_madang(
+    madang_no number constraint fmadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint fmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint fmadang_content_nn not null, -- 글 내용
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_file_presence char(1) default 'N' constraint fmadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint fmadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint fmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 자유마당
+create sequence fmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 자랑마당
+create table ta_boast_madang(
+    madang_no number constraint bmadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint bmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint bmadang_content_nn not null, -- 글 내용
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_file_presence char(1) default 'N' constraint bmadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint bmadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint bmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 자랑마당
+create sequence bmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 댓글 테이블 => 각 게시판당 한 개의 테이블 생성 => 댓글 테이블은 계층형으로 도전!
+-- 자유마당 댓글 테이블
+create table ta_fmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_free_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
+
+-- 자유마당 댓글 시퀀스
+create sequence fmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
+
+-- 공부마당 댓글 테이블 
+create table ta_stmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_study_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
+
+-- 공부마당 댓글 시퀀스
+create sequence stmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
+
+
+-- 공유마당 댓글 테이블 
+create table ta_smadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_share_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
+
+-- 공유마당 댓글 시퀀스
+create sequence smadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
+
+-- 자랑마당 댓글 테이블 
+create table ta_bmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_boast_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
+
+-- 자랑마당 댓글 시퀀스
+create sequence bmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
+
+
+-- 사이드 메뉴 바 요소를 위한 테이블
+create table ta_sidemenu_elements (
+    menu_id number constraint menu_id_pk primary key, -- 기본키
+    menu_category varchar2(30) not null, -- 메뉴가 사용될 위치
+    menu_name varchar2(30) not null, -- 메뉴 이름
+    menu_url varchar2(30) not null, -- 이동시킬 경로
+    menu_class varchar2(50) default null, -- 메뉴에 설정할 class (아이콘 설정용//하위메뉴는 null)
+    use_down char(1) default 'N' constraint use_down_ck check(use_down in ('Y','N')), -- 하위 메뉴 사용 여부
+    sort_no number not null, -- 정렬 순서
+    parent_id number default null -- 부모 메뉴의 id
+);
+
+-- 요소 시퀀스
+create sequence ta_sidemenu_seq 
+start with 1
+increment by 1
+maxvalue 9999;
+
+-- 사이드 메뉴 요소 필수 데이터(마당)
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공부마당', '/madang/studyMadangList', 'fab fa-studiovinari fa-lg', 'Y', 2, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자유마당', '/madang/freeMadangList', 'fab fa-fort-awesome-alt fa-lg', default, 3, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공유마당', '/madang/shareMadangList', 'fab fa-pagelines fa-lg', 'Y', 4, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자랑마당', '/madang/boastMadangList', 'fas fa-user-tie fa-lg', 'Y', 5, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','질문마당', '/madang/questionMadang', 'fa fa-users fa-lg', 'Y', 6, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/studyMadangList', default, default, 7, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/studyMadangList', default, default, 8, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/studyMadangList', default, default, 9, 2);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/shareMadangList', default, default, 10, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/shareMadangList', default, default, 11, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/shareMadangList', default, default, 12, 4);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/questionMadang', default, default, 13, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/questionMadang', default, default, 14, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/questionMadang', default, default, 15, 6);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류1', '/madang/boastMadangList', default, default, 16, 5);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류2', '/madang/boastMadangList', default, default, 17, 5);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','대분류3', '/madang/boastMadangList', default, default, 18, 5);
+
+
+-- 로그인 로그 db
+create table ta_member_login_log (
+    mll_no number primary key, -- 시퀀스 PK 
+    mll_success char(1) check (mll_success in ('Y','N')), -- 로그인 성공 여부
+    mll_mem_no number, -- 로그인 한 회원 PK (찾아오지 못할 때, null(0값)을 넣을 생각인데, 외래키는 부모키를 찾을 수 없다고 에러나기 때문에 없앴음.) references ta_member(mem_no) 
+    mll_user_email varchar2(30), -- 로그인 시도할 때에 입력한 이메일
+    mll_datetime date, -- 로그인 일시
+    mll_ip varchar2(20), -- 로그인 한 IP
+    mll_reason varchar2(500), -- 로그인 성공/실패시 이유
+    mll_useragent varchar2(500), -- 로그인한 브라우저의 user agent
+    mll_url varchar2(500), -- 로그인한 페이지 주소
+    mll_referer varchar2(500) -- 이전 페이지 주소
+);
+
+-- 로그인 로그 시퀀스
+create sequence mll_seq 
+start with 1
+increment by 1
+maxvalue 999999999;
+
+-- 좋아요(추천 테이블)
+-- 한 테이블로 처리하고 싶었는데, 외래키 지정때문에 마당마다 만들어야할 듯 싶다..
+create table ta_stmadang_like (
+    like_no number primary key, -- 시퀀스 pk
+    madang_no number references ta_study_madang(madang_no), -- 마당 번호 fk
+    mem_no number references ta_member(mem_no), -- 회원 번호 fk
+    like_datetime date default sysdate, -- 좋아요(추천) 일시
+    like_ip varchar2(20), -- 좋아요(추천) ip
+    unique (madang_no, mem_no)
+);
+
+create sequence stm_like_seq  
+start with 1
+increment by 1
+maxvalue 999999999;
+
+
+
+
+
+
+
+
+
+
+
+
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

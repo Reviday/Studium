@@ -94,12 +94,12 @@ function fn_madangWrite(memCheck, path, locate, choice, choiceSub) {
 }
 
 // madangView
-function fn_madangWrite(memCheck, path, locate, madangNo, choice, choiceSub) {
+function fn_madangWrite(memCheck, path, locate, madangNo, choice, choiceSub, cPage) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
 		location.href = path + "/madang/madangUpdate?locate=" + locate +
-			"&madangNo=" + madangNo + "&choice=" + choice + "&choiceSub=" + choiceSub;
+			"&madangNo=" + madangNo + "&choice=" + choice + "&choiceSub=" + choiceSub + "&cPage=" + cPage;
 	}
 }
 
