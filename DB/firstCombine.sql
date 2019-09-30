@@ -471,8 +471,7 @@ create sequence seq_fstudy
 start with 1
 increment by 1
 maxvalue 999;
-select * from f_study;
-select seq_fstudy.nextval from dual;
+
 create table f_study(
     f_no number constraint fstudy_pk primary key, --스터디 번호
     f_title varchar2(100), --스터디 타이틀
@@ -497,6 +496,7 @@ create table f_study(
     f_studyMember number default 0,--스터디 구매 확정 멤버 넘버 
     f_teacherno number --스터디 강사 넘버
 );
+
 
 --강사스터디
 create sequence seq_pstudy

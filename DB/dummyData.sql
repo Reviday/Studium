@@ -2,32 +2,6 @@
 insert into ta_member values(mem_seq.NEXTVAL,'admin@studium.com','x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==','관리자','M','1990/01/01','','M',99999999,'','','','','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','studium_logo.png',default,default,default);
 insert into ta_member values(mem_seq.NEXTVAL, 'asd@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '아무개','A','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','',default,default,default);
 
---학생
-insert into ta_member values(20011, 's1@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '보라','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_1.jpg',default,default,default);
-insert into ta_member values(20012, 's2@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '강준','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_2.jpg',default,default,default);
-insert into ta_member values(20013, 's3@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '주현','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_3.jpg',default,default,default);
-insert into ta_member values(20014, 's4@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '진구','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_4.jpg',default,default,default);
-insert into ta_member values(20015, 's5@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '예서','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_5.jpg',default,default,default);
-insert into ta_member values(20016, 's6@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '도환','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_6.jpg',default,default,default);
-insert into ta_member values(20017, 's7@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '우주','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_7.jpg',default,default,default);
-insert into ta_member values(20018, 's8@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '승호','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_8.jpg',default,default,default);
-insert into ta_member values(20019, 's9@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '장성규','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_9.jpg',default,default,default);
-insert into ta_member values(20020, 's10@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '헨리','R','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','s_10.jpg',default,default,default);
-
---강사 
-insert into ta_member values(20001, 't1@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', 'Hannah','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_1.jpg',default,default,default);
-insert into ta_member values(20002, 't2@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', 'Justin','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_2.jpg',default,default,default);
-insert into ta_member values(20003, 't3@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '예슬','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_3.jpg',default,default,default);
-insert into ta_member values(20004, 't4@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '재욱','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_4.jpg',default,default,default);
-insert into ta_member values(20005, 't5@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', 'Benedict','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_5.jpg',default,default,default);
-insert into ta_member values(20006, 't6@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '송강','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_6.jpg',default,default,default);
-insert into ta_member values(20007, 't7@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '혜교','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_7.jpg',default,default,default);
-insert into ta_member values(20008, 't8@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '은우','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_8.jpg',default,default,default);
-insert into ta_member values(20009, 't9@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '우식','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_9.jpg',default,default,default);
-insert into ta_member values(20010, 't10@naver.com', 'x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ONxp3Y3pB37A==', '박진영','T','','',default, 0,null,null,null,'','','',default,default,default,default,default,'Y',sysdate,'',sysdate,'','','','','t_10.jpg',default,default,default);
-   
-
-
 -- 공부마당 더미
 insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.1', '프로그래밍', '고급언어','java',sysdate, null, default, null, default, default, default, default,  default, default);
 insert into ta_study_madang values(stmadang_seq.nextval, 10000, 'admin@studium.com', '관리자', '테스트 글 입니다.1', 1, '테스트 글 입니다.<br>테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.테스트 글 입니다.', '프로그래밍', '고급언어','java',sysdate, null, default, null, default, default, default, default,  default, default);
@@ -252,82 +226,41 @@ UPDATE TA_FMADANG_CMT SET CMT_SORT = CMT_SORT + 1 WHERE CMT_PARENT =  3  AND CMT
 INSERT INTO TA_FMADANG_CMT VALUES(FMADANG_CMT_SEQ.NEXTVAL, 3, 1, 110, '새로 추가된 대댓글입니다.', DEFAULT, 10000, 'admin@studium.com', '관리자', SYSDATE, SYSDATE, NULL, NULL, DEFAULT, DEFAULT, DEFAULT);
 
 --f스터디 더미데이터
-insert into F_study values(seq_fstudy.nextval,'나만 믿어라','2','강남','주말',10,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+insert into F_study values(10001,'나만 믿어라','2','강남','주말',10,'영어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i3.jpg','i3.jpg','i4.jpg','01:00','07:00','19/10/28','19/10/30',5,'혜교','Y',default,20007);
-insert into F_study values(seq_fstudy.nextval,'언제까지 못할꺼야','2','신촌','주말',10,'고급언어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+insert into F_study values(10002,'언제까지 못할꺼야','2','신촌','주말',10,'고급언어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/11/28','19/12/30',5,'예슬','Y',default,20003);
-insert into F_study values(seq_fstudy.nextval,'무료스터디디','2','분당','평일',10,'저급언어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','l1.jpg','l3.jpg','l3.jpg','l4.jpg','01:00','07:00','19/11/28','19/12/30',5,'예슬','Y',default,20003);
+insert into F_study values(10003,'무료스터디디','2','분당','평일',10,'저급언어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i3.jpg','i3.jpg','i4.jpg','01:00','07:00','19/11/15','19/12/30',5,'Hannah','Y',default,20001);
-insert into F_study values(seq_fstudy.nextval,'배운건 복습','2','역삼','주말',10,'중국어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/11/15','19/12/30',5,'Hannah','Y',default,20001);
+insert into F_study values(10004,'배운건 복습','2','역삼','주말',10,'중국어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
-저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i3.jpg','i3.jpg','i4.jpg','01:00','07:00','19/10/28','19/12/15',5,'재욱','Y',default,20004);
-insert into F_study values(seq_fstudy.nextval,'TEST F STUDY','2','역삼','주말',10,'중국어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','s1.jpg','s3.jpg','s3.jpg','s4.jpg','01:00','07:00','19/10/28','19/12/15',5,'재욱','Y',default,20004);
+insert into F_study values(10005,'TEST F STUDY','2','역삼','주말',12,'중국어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/10/15','19/12/30',5,'박진영','Y',default,20010);
+insert into F_study values(10006,'나만 믿어라','2','강남','주말',6,'일본어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','i1.jpg','i3.jpg','i3.jpg','i4.jpg','01:00','07:00','19/10/28','19/10/30',5,'혜교','Y',default,20007);
+insert into F_study values(10007,'언제까지 못할꺼야','2','신촌','평일',4,'프랑스어','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','l1.jpg','l3.jpg','l3.jpg','l4.jpg','01:00','07:00','19/11/28','19/12/30',5,'예슬','Y',default,20003);
+insert into F_study values(10008,'운영체제 이게 끝','2','강남','평일',3,'운영체제','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/11/15','19/12/30',5,'Hannah','Y',default,20001);
+insert into F_study values(10009,'자료구조이해','2','역삼','주말',2,'자료구조','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','s1.jpg','s3.jpg','s3.jpg','s4.jpg','01:00','07:00','19/10/28','19/12/15',5,'재욱','Y',default,20004);
+insert into F_study values(10010,'TEST F STUDY','2','잠실','주말',11,'국가직','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','노력은 결코 배신하지 않습니다. 의지를 갖고 최선을 다해 포기 하지 않는다면 교육과정이 끝난 후 여러분의 모습은 상상 그 이상으로 발전할 것이고 나아가 IT분야 전문가로서 탄탄한 기반을 갖춘 모습이 될 것입니다.
+저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/10/11','19/12/30',5,'박진영','Y',default,20010);
 
 -- 댓글 더미데이터
 INSERT INTO TA_STORY VALUES(SEQ_STORY_NO.NEXTVAL,10000,1,'a1.jpg', '김예림', '우리 예리쌤 너무 이쁘고 완벽한 발음으로 진짜 현지에서 쓰는 영어를 가르쳐주셨어요! 또한 엄청난 인싸력으로 재밌는 행사 만들어주셔서 너무 좋았습니다!! ', DEFAULT, '예리 미나', 'i2.jpg','English','5');
 
-
-
-
-
---PSTUDY 더미
-
-insert into p_study values(101,'Hannah 쌤과 스피킹','Exciting speaking','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_1.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/10/01','20/01/22',4,'Hannah','Y', 0,20001 );
-
-insert into p_study values(102,'Hannah 쌤과 스피킹','Exciting speaking','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_2.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/10/01','20/01/22',4,'Justin','Y', 0,20002 );
-
-insert into p_study values(103,'예슬 쌤과 스피킹','제대로 된 스피킹','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_3.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'예슬','Y', 0,20003 );
-
-insert into p_study values(104,'재욱 쌤과 중국어수업','실무에서의 중국어','역삼','평일',8,120000,'중국어','우리 같이 중국어할래요?',
-'대륙을 정복하는자 세상을 정복하리니! 영어 다음으로 각광받는 외국어 언어인 중국어! 회화를 잘해서 고객사도 만나고 세일즈도 하고 취업도 하시길 기대합니다.','t_4.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'재욱','Y', 0,20004 );
-
-insert into p_study values(105,'Benedict 와 진지한 영어','진지한 영국영어','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_5.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/09/20','20/01/22',4,'Benedict','Y', 0,20005 );
-
-insert into p_study values(106,'송강 쌤과 영어','즐거운 영어스터디','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_6.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/08/12','19/09/20',4,'송강','Y', 0,20006 );
-
-insert into p_study values(107,'면접스터디 ','실제 인사담당 혜교쌤','강남','주말',8,210000,'면접','실제 면접관이 보는 면접에 대해',
-'면접 준비, 제대로 해봐요','t_7.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00',sysdate,sysdate,4,'혜교','Y', 1,20007 );
-
-insert into p_study values(108,'은우쌤과 함께 공부','잘생쁨주의','이태원','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
-' I have a TESOL certification and more than five years of teaching experience.','t_8.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','19/12/12','20/01/22',4,'은우','Y', 0,20008 );
-
-
-insert into p_study values(109,'정보처리기사 공부','합격합시다.','역삼','평일',8,120000,'국가기술','15년간 컴퓨터 강의 및 현장 실무를 모두 수행해온 강사가 정보처리기사 합격을 도와 드립니다.',
-'문제풀이 위주로 진행할 예정입니다.','t_9.jpg','p_1.jpg','p_3.jpg','p_4.jpg','01:00','07:00','2019/12/12','2020/01/22',4,'우식','Y', 8,20009 );
-
-insert into p_study values(110,'떠먹여주는 알고리즘','알고리즘 스터디','신촌','주말',8,500000,'알고리즘','최근 IT 개발자에 대한 수요가 계속해서 증가하고 있고, 그에 따라 IT 회사로의 취업을 고려하고 있는 학생, 이직을 준비하는 비전공자 분들도 계속해서 늘어나고 있습니다. 회사의 채용 프로세스를 진행하며 코딩 테스트, 코딩 면접은 피할 수 없는 관문이고, 이를 위해 혼자서 어디서부터 어떻게 알고리즘을 공부해야 될지 막막하신 분들도 많았을 것입니다. 특히 컴퓨터 관련 전공자가 아니라면 더더욱, 이런 부분은 어렵기만 합니다.',
-'이런 분들을 위해 알고리즘 스터디가 기획되었고, 스터디를 통해 알고리즘에 필요한 개념들과 문제에 적용할 수 있는 여러 스킬들을 스터디원들과 함께 학습하며 모두 자신의 것으로 만들 수 있길 기대하고 있습니다. 언어는 Java를 위주로 진행합니다. 국내 IT 대기업 S사 사내 알고리즘 강사로 활동하고 계신 리더님에게 오만가지 도움을 다 받아가세요!'
-,'t_10.jpg','p_11.jpg','p_9.jpg','p_10.jpg','01:00','07:00','2019/12/12','2020/01/22',4,'박진영','Y', 8,20010 );
-
-
---찜테이블 더미데이터
-insert into my_dibs values(seq_my_dibs.nextval,20011,102,null,sysdate);
-insert into my_dibs values(seq_my_dibs.nextval,20011,110,null,sysdate);
-insert into my_dibs values(seq_my_dibs.nextval,20011,110,null,sysdate);
-
---구매테이블 더미데이타
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,101,default,SYSDATE,'N',SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,106,default,SYSDATE,'Y',SYSDATE,'N','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,110,default,SYSDATE,'Y',SYSDATE,'Y','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,default,병민아 수정해서 FNO여기넣어줘 ,SYSDATE,'N',SYSDATE,'N','Y');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,default,병민아 수정해서 FNO여기넣어줘,SYSDATE,'N',SYSDATE,'Y','Y');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20011,default,병민아 수정해서 FNO여기넣어줘,SYSDATE,'Y',SYSDATE,'Y','N');
-INSERT INTO MY_PURCHASE VALUES(seq_my_purchase.NEXTVAL,20013,41,default,SYSDATE,'Y',SYSDATE,'Y','N');
-
-
-
-
-
+select * From category_M;
 
 commit;
 
