@@ -190,19 +190,19 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                     <INPUT TYPE="file"NAME="p_img1" size=50  id="p_img1" />
-                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg1()%>" width="100px" height="100px"> </div></td>
+                                                    <div id="preview1"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg1()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                     <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
-                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg2()%>" width="100px" height="100px"> </div></td>
+                                                    <div id="preview2"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg2()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                     <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=50/>
-                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg3()%>" width="100px" height="100px"> </div></td>
+                                                    <div id="preview3"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg3()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
@@ -309,20 +309,7 @@
 				
 			});
 		});
-		function convertToTag(textArea) {
-			var lines = textArea.value.split("\n");
-
-			// generate HTML version of text
-			var resultString = "<p>";
-			for (var i = 0; i < lines.length; i++) {
-				resultString += lines[i] + "<br />";
-			}
-			resultString += "</p>";
-
-			return resultString;
-		}
-
-
+	
         </script>
          
 </body>
