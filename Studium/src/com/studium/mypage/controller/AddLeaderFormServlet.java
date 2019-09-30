@@ -37,7 +37,7 @@ public class AddLeaderFormServlet extends HttpServlet {
 		String phone=request.getParameter("phone");
 		String area=request.getParameter("area");
 		String type=request.getParameter("leaderType");
-		String [] inter =request.getParameterValues("inter");
+		String inter =request.getParameter("inter");
 		String message=request.getParameter("message");
 		
 		LeaderAdd l= new LeaderAdd();
@@ -47,19 +47,9 @@ public class AddLeaderFormServlet extends HttpServlet {
 		l.setlPhone(phone);
 		l.setlArea(area);
 		l.setlType(type);
-		l.setlCategory1(inter[0]);
-		if(inter.length==1) {
-			l.setlCategory2(null);
-			l.setlCategory3(null);
-		}else {
-			l.setlCategory2(inter[1]);
-			l.setlCategory3(inter[2]);
-		}
-		if(inter.length==2) {
-			l.setlCategory3(null);
-		}else {
-			l.setlCategory3(inter[2]);
-		}
+		l.setlCategory1(inter);
+		l.setlCategory2(null);
+		l.setlCategory3(null);
 		l.setlMessage(message);
 		LeaderAddService service=new LeaderAddService();
 		int result=service.addLeader(l);

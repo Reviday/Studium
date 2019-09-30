@@ -223,7 +223,13 @@
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
                     <% 		
-                    	} else {
+                    	} else if(loginMember!=null&&loginMember.getMemCode()=='A'){
+                    %>		
+                    
+                    	onclick="fn_addAlert();"
+                    <% 
+                    	}else {
+                    	
                     %>		
                  		onclick="fn_loginAlert();"
                  	<%
@@ -385,8 +391,9 @@
         	return alert("로그인후 이용하세요 ");
         }
         
-      	function fn_pay(){
-      		   
+      	function fn_addAlert(){
+      		   alert("추가 정보를 입력하세요");
+      			location.href="<%=request.getContextPath()%>/myPage/addMyInfo";
         }    
       	
 		//1. 추가한 input a값 기준으로 파라미터로 보내
