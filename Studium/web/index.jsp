@@ -111,6 +111,54 @@
 
     <div class="container">
       <div class="row no-gutters" id="indexreview">
+              <div class="col-md-6">
+          <div class="sched d-block d-lg-flex">
+            <div class="bg-image order-2" style="background-image: url('img/3.jpg');"></div>
+            <div class="text order-1">
+              <h3>집단지성의 힘!</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p class="text-primary h3">경찰공무원 합격방</p>
+            </div>
+
+          </div>
+
+          <div class="sched d-block d-lg-flex">
+            <div class="bg-image" style="background-image: url('img/4.jpg');"></div>
+            <div class="text">
+              <h3>살면서 코딩을 이만큼 할 줄 몰랐어요</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p class="text-primary h3">3주만에 코딩완성</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+          <div class="sched d-block d-lg-flex">
+            <div class="bg-image order-2" style="background-image: url('img/5.jpg');"></div>
+            <div class="text order-1">
+              <h3>강사님이 너무 재밌고 좋아요</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p class="text-primary h3">javascript마스터</p>
+
+            </div>
+
+          </div>
+
+          <div class="sched d-block d-lg-flex">
+            <div class="bg-image" style="background-image: url('img/5.jpg');"></div>
+            <div class="text">
+              <h3>즐겁게 공부하고 취업까지!</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p class="text-primary h3">그만해,,</p>
+
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </div>
   </section> <!-- .section -->
@@ -280,13 +328,7 @@
 	    success: function(data){
 	      $('#indexBest').html("");
 	      $('#indexBest').html(data);
-	    },
-	    error: function (request, status, error){
-     	   alert("ajax실패");
-     	   console.log(error);
-     	   console.log(data);
-        }
-
+	    }
 	  });
 
 	}
@@ -298,13 +340,7 @@
 		    success: function(data){
 		      $('#indexreview').html("");
 		      $('#indexreview').html(data);
-		    },
-		    error: function (request, status, error){
-	     	   alert("ajax실패");
-	     	   console.log(error);
-	     	   console.log(data);
-	        }
-
+		    }
 		  });
 
 		} 
