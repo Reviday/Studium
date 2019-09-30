@@ -116,7 +116,7 @@
             <div class="bg-image order-2" style="background-image: url('img/3.jpg');"></div>
             <div class="text order-1">
               <h3>집단지성의 힘!</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p>매 수업마다 너무 즐거웠고 선생님이 너무 좋으셨어요~! 매주 다른 방식으로 스터디를 진행하셨고, 무겁게 공부 하는 느낌이 아닌 일상적인 이야기나 준비하신 프린트물로 수업을 진행하셨습니다. :)</p>
               <p class="text-primary h3">경찰공무원 합격방</p>
             </div>
 
@@ -126,7 +126,7 @@
             <div class="bg-image" style="background-image: url('img/4.jpg');"></div>
             <div class="text">
               <h3>살면서 코딩을 이만큼 할 줄 몰랐어요</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p>말하는 것에 있어서 자신감을 확실히 심어주셨어요! 세달 가량 하면서 이제는 맞든 틀리든 생각보다는 일단 뱉고 보는거 같아요. 그리고 지금 까지 들은 많은 영어 수업 중 가장 즐겁게 한 것 같습니다</p>
               <p class="text-primary h3">3주만에 코딩완성</p>
 
             </div>
@@ -140,7 +140,7 @@
             <div class="bg-image order-2" style="background-image: url('img/5.jpg');"></div>
             <div class="text order-1">
               <h3>강사님이 너무 재밌고 좋아요</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p>모두들 좋은사람들에다 대화중에 틀린부분에 대해선 바로 바로 피드백 주시는게 너무 좋았습니다!!</p>
               <p class="text-primary h3">javascript마스터</p>
 
             </div>
@@ -151,7 +151,7 @@
             <div class="bg-image" style="background-image: url('img/5.jpg');"></div>
             <div class="text">
               <h3>즐겁게 공부하고 취업까지!</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
+              <p>강남에 유명하다는 회화학원도 다녀 봤지만..실력에 전혀 차도가 없어서 처음에는 반신반의로 신청해 봤습니다. 그런데 스터디 그룹 분위기도 너무 좋고 무엇보다 리더님의 눈높이 강의 덕분에 영어가 재미있어졌어요!</p>
               <p class="text-primary h3">그만해,,</p>
 
             </div>
