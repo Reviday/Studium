@@ -151,7 +151,6 @@
                                                         </select>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디비용</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF"><INPUT TYPE="text"

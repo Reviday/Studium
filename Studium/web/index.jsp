@@ -231,52 +231,35 @@
     </div>
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-4" id="indexreview">
-          <blockquote class="testimonial">
-            <h4>선택과 집중</h4>
-            <p>&ldquo; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, obcaecati? Quis eum minus, sequi
-              atque quisquam ducimus aliquam veritatis nobis cum iusto neque enim explicabo maxime natus doloribus, fuga
-              sunt. &rdquo;</p>
-            <div class="d-flex author">
-              <img src="img/person_1.jpg" alt="" class="mr-4">
-              <div class="author-info">
-                <p>CEO, XYZ Company</p>
-              </div>
+	        <!-- 스터디움홍보 -->
+        <div class="thirdSection-board">
+            <div class="board-first">
+                <span style="color: #ff6c00; font-weight: bold;">스터디움,</span> <br> 어떤 점이 좋나요?
             </div>
-          </blockquote>
-        </div>
-        <div class="col-md-4">
-          <blockquote class="testimonial">
-            <h4>집단지성의 힘</h4>
-            <p>&ldquo; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, obcaecati? Quis eum minus, sequi
-              atque quisquam ducimus aliquam veritatis nobis cum iusto neque enim explicabo maxime natus doloribus, fuga
-              sunt. &rdquo;</p>
-            <div class="d-flex author">
-              <img src="img/person_2.jpg" alt="" class="mr-4">
-              <div class="author-info">
-                <h4>Mike Richardson</h4>
-                <p>CEO, XYZ Company</p>
-              </div>
+            <div class="board-second">
+                <div class="board-second-study">
+                    <div class="study-img">
+                        <img src="<%=request.getContextPath() %>/img/asd1.png" alt="">
+                    </div>
+                    <div class="study-title">내가 원하는 분야별 스터디</div>
+                    <div class="study-text">나에게 딱 필요한 공부하고 싶은 <br> 분야, 시험별로 진행되는 스터디에요!</div>
+                </div>
+                <div class="board-second-study">
+                    <div class="study-img">
+                        <img src="<%=request.getContextPath() %>/img/asd2.png" alt="">
+                    </div>
+                    <div class="study-title">최대 6-8명의 소수 정예</div>
+                    <div class="study-text">도란도란 정예 멤버로 <br> 꼭 맞는 사람들끼리 시작해요:)</div>
+                </div>
+                <div class="board-second-time">
+                    <div class="study-img">
+                        <img src="<%=request.getContextPath() %>/img/asd3.png" alt="">
+                    </div>
+                    <div class="study-title">다양한 지역 및 시간대</div>
+                    <div class="study-text">평일 낮부터 밤, 그리고 주말까지! <br> 내게 딱 맞는 시간대를 찾아보세요 <br> :D</div>
+                </div>
             </div>
-          </blockquote>
         </div>
-        <div class="col-md-4">
-          <blockquote class="testimonial">
-            <h4>자기주도적 학습</h4>
-            <p>&ldquo; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, obcaecati? Quis eum minus, sequi
-              atque quisquam ducimus aliquam veritatis nobis cum iusto neque enim explicabo maxime natus doloribus, fuga
-              sunt. &rdquo;</p>
-            <div class="d-flex author">
-              <img src="img/person_3.jpg" alt="" class="mr-4">
-              <div class="author-info">
-                <h4>Charles White</h4>
-                <p>CEO, XYZ Company</p>
-              </div>
-            </div>
-          </blockquote>
-        </div>
-      </div>
     </div>
   </section> <!-- .section -->
 
@@ -313,6 +296,54 @@
     <%} %>
       </form>
   </section>
+  <style>
+  .thirdSection-board {
+    margin: auto;
+    width: 880px;
+}
+
+.board-first {
+    padding-top: 110px; 
+    font-size: 38px;
+    line-height: 1.5;
+}
+
+.board-second {
+    display: flex;
+    margin-top: 70px;
+}
+
+.board-second-study {
+    margin: 0 50px 0 0;
+}
+
+.board-second-time {
+    margin: 0;
+}
+
+.study-img {
+    
+}
+
+.study-img img {
+    width: 90px;
+}
+
+.study-title {
+    margin: 30px 0 18px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.study-text {
+    font-size: 17px;
+    color: #777b7e;
+    line-height: 1.5;
+    font-weight: bold;
+}
+  
+  
+  </style>
   <script>
   var params = jQuery("#logincategory").serialize();
   $(document).ready(function(){
