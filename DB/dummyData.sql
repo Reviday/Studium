@@ -285,7 +285,7 @@ insert into F_study values(10010,'TEST F STUDY','2','잠실','주말',11,'국가직','�
 저만 믿고 따라 오세요! 여러분은 할 수 있습니다','a1.jpg','a3.jpg','a3.jpg','a4.jpg','01:00','07:00','19/10/11','19/12/30',5,'박진영','Y',default,20010);
 
 
-<<<<<<< HEAD
+
 
 
 --PSTUDY 더미
@@ -380,7 +380,29 @@ INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할29 수 있을까
 INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할30 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
 INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할31 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
 INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할32 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
->>>>>>> branch 'master' of https://github.com/Reviday/Studium.git
+
+--어드민 메뉴 
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','인쿼리', '/AdminInqueryList', default, default, 1, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','포인트 관리', '/AdminPointManage', default, default, 2, default); 
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','1:1문의 관리', '/AdminQandAList', default, default, 3, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 관리', '/AdminPayManage', default, default, 4, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 신청 관리', '/AdminPSManage', default, default, 5, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','스터디 관리', '/AdminStudyManage', default, default, 6, default);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 스터디', '/AdminStudyManage', default, default, 1, 48);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','일반 스터디', '/AdminStudyFreeManage', default, default, 2, 48);
+
+
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 1, 41);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 2, 41);
+
+INSERT INTO TA_SIDEMENU_ELEMENTS VALUES(TA_SIDEMENU_SEQ.NEXTVAL, 'adminboard', '자주 묻는 질문', '/AdminBoardFAQ', DEFAULT, DEFAULT, 1, DEFAULT);
+INSERT INTO TA_SIDEMENU_ELEMENTS VALUES(TA_SIDEMENU_SEQ.NEXTVAL, 'adminboard', '후 기', '/AdminBoardStory', DEFAULT, DEFAULT, 2, DEFAULT);
+UPDATE ta_sidemenu_elements SET use_down = 'Y' where menu_id = 22;
+UPDATE ta_sidemenu_elements SET use_down = 'Y' where menu_id = 24;
+update ta_sidemenu_elements set parent_id = 22 where menu_id = 27;
+update ta_sidemenu_elements set parent_id = 22 where menu_id = 28;
+update ta_sidemenu_elements set parent_id = 24 where menu_id = 25;
+update ta_sidemenu_elements set parent_id = 24 where menu_id = 26;
 
 commit;
 
