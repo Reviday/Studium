@@ -583,7 +583,12 @@
  	function setPhotoToEditor(oFileInfo){
 		if (!!opener && !!opener.nhn && !!opener.nhn.husky && !!opener.nhn.husky.PopUpManager) {
 			//스마트 에디터 플러그인을 통해서 넣는 방법 (oFileInfo는 Array)
-			opener.nhn.husky.PopUpManager.setCallback(window, 'SET_PHOTO', [oFileInfo]);
+//			opener.nhn.husky.PopUpManager.setCallback(window, 'SET_PHOTO', [oFileInfo]);
+			for (var i=0; i<oFileInfo.length; i++){
+				console.log("진행"+i);
+				opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML',
+						["<img style=\"max-width:600px; \" src='../upload/madang/"+oFileInfo[i].sFileURL+"'>"]);
+			}
 			//본문에 바로 tag를 넣는 방법 (oFileInfo는 String으로 <img src=....> )
 			//opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML', [oFileInfo]);
 		}

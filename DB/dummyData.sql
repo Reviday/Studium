@@ -381,29 +381,7 @@ INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할30 수 있을까
 INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할31 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
 INSERT INTO QANDA VALUES(SEQ_QandA.NEXTVAL, '12345@naver.com', '잘할32 수 있을까요? 제가? 흑흑 너무 어려워여', SYSDATE, 'Y');
 
---어드민 메뉴 
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','인쿼리', '/AdminInqueryList', default, default, 1, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','포인트 관리', '/AdminPointManage', default, default, 2, default); 
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','1:1문의 관리', '/AdminQandAList', default, default, 3, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 관리', '/AdminPayManage', default, default, 4, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 신청 관리', '/AdminPSManage', default, default, 5, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','스터디 관리', '/AdminStudyManage', default, default, 6, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 스터디', '/AdminStudyManage', default, default, 1, 48);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','일반 스터디', '/AdminStudyFreeManage', default, default, 2, 48);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin', '로그인 로그', '/AdminLoginLog', default, default, 7, default);
 
-
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 1, 41);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','취소 내역', '/AdminPayManageCancleList', default, default, 2, 41);
-
-INSERT INTO TA_SIDEMENU_ELEMENTS VALUES(TA_SIDEMENU_SEQ.NEXTVAL, 'adminboard', '자주 묻는 질문', '/AdminBoardFAQ', DEFAULT, DEFAULT, 1, DEFAULT);
-INSERT INTO TA_SIDEMENU_ELEMENTS VALUES(TA_SIDEMENU_SEQ.NEXTVAL, 'adminboard', '후 기', '/AdminBoardStory', DEFAULT, DEFAULT, 2, DEFAULT);
-UPDATE ta_sidemenu_elements SET use_down = 'Y' where menu_id = 22;
-UPDATE ta_sidemenu_elements SET use_down = 'Y' where menu_id = 24;
-update ta_sidemenu_elements set parent_id = 22 where menu_id = 27;
-update ta_sidemenu_elements set parent_id = 22 where menu_id = 28;
-update ta_sidemenu_elements set parent_id = 24 where menu_id = 25;
-update ta_sidemenu_elements set parent_id = 24 where menu_id = 26;
 INSERT INTO ADMIN_FAQ VALUES(SEQ_FAQ.NEXTVAL, '취소 및 환불', '환불 요청은 어떻게 하나요?', '환불/교환문의는 카카오톡 플러스친구 카카오톡 플러스친구 @스터디움 을 통해 안내드리고 있습니다.
 
 친구추가 후 1:1메시지를 통해 성함, 연락처 및 환불/교환문의를 남겨주세요');
