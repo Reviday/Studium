@@ -191,7 +191,6 @@
                 		dataType: "json",
                 		data: {"memNo" : memNo},
                 		success: function(data){
-                			console.log(data);
                 			$(".memo").text(data);
 		                	$("#pointPage").css("display","block");
                 		}

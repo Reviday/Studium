@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.studium.admin.model.vo.FAQ;
-import com.studium.mypage.model.vo.LeaderAdd;
+import com.studium.story.model.vo.Story;
 
 public class AdminBoardDao {
 
@@ -186,6 +186,133 @@ public class AdminBoardDao {
 			close(rs);
 			close(pstmt);
 		}return list;
+	}
+	
+	public int selectCountStory(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountStory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Story> selectStoryList(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Story> list=new ArrayList();
+		String sql=prop.getProperty("selectStoryList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s = new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				s.setStoryStar(rs.getInt("STORY_STAR"));
+
+				list.add(s);		
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectCountStorySearch(Connection conn, String pName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountStorySearch");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pName);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Story> selectStorySearchList(Connection conn, int cPage, int numPerPage, String pName){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Story> list=new ArrayList();
+		String sql=prop.getProperty("selectStorySearchList");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pName);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Story s = new Story();
+				s.setStoryNo(rs.getInt("STORY_NO"));
+				s.setStoryStudentpicture(rs.getString("STORY_STUDENT_PICTURE"));
+				s.setStoryWrite(rs.getString("STORY_WRITE"));
+				s.setStoryContent(rs.getString("STORY_CONTENT"));
+				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
+				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
+				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
+				s.setStoryStar(rs.getInt("STORY_STAR"));
+
+				list.add(s);		
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int deleteStory(Connection conn, String storyNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteStory");
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, storyNo);
+
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }
