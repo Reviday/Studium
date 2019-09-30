@@ -57,6 +57,27 @@ public class StudyMadangDao {
 		} return result;
 	}
 	
+	public int selectCountList(Connection conn,String choiceSub) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountListC");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, choiceSub);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return result;
+	}
+	
 	public List<StudyMadang> selectMadangList(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -66,6 +87,48 @@ public class StudyMadangDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				StudyMadang sm=new StudyMadang();
+				sm.setMadangNo(rs.getInt("madang_no"));
+				sm.setMadangWriterUid(rs.getInt("madang_writer_uid"));
+				sm.setMadangWriterEmail(rs.getString("madang_writer_email"));
+				sm.setMadangWriterName(rs.getString("madang_writer_name"));
+				sm.setMadangTitle(rs.getString("madang_title"));
+				sm.setMadangLevel(rs.getInt("madang_level"));
+				sm.setMadangContent(rs.getString("madang_content"));
+				sm.setMadangMainCategory(rs.getString("madang_main_category"));
+				sm.setMadangCategory(rs.getString("madang_category"));
+				sm.setMadangSubCategory(rs.getString("madang_sub_category"));
+				sm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
+				sm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				sm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
+				sm.setMadangUpdatedIp(rs.getString("madang_updated_ip"));
+				sm.setMadangRecCount(rs.getInt("madang_rec_count"));
+				sm.setMadangRepCount(rs.getInt("madang_rep_count"));
+				sm.setMadangReadCount(rs.getInt("madang_read_count"));
+				sm.setMadangForkCount(rs.getInt("madang_fork_count"));
+				sm.setMadangAnswerCount(rs.getInt("madang_answer_count"));
+				list.add(sm);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return list;
+	}
+	
+	public List<StudyMadang> selectMadangList(Connection conn, String mCategory, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<StudyMadang> list=new ArrayList<StudyMadang>();
+		String sql=prop.getProperty("selectMadangListC");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mCategory);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				StudyMadang sm=new StudyMadang();

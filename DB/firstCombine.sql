@@ -406,30 +406,30 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자유�
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공유마당', '/madang/shareMadangList', 'fab fa-pagelines fa-lg', 'Y', 4, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자랑마당', '/madang/boastMadangList', 'fas fa-user-tie fa-lg', 'Y', 5, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','질문마당', '/madang/questionMadang', 'fa fa-users fa-lg', 'Y', 6, default);
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/studyMadangList?mCategory=외국어', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/studyMadangList?mCategory=프로그래밍', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/studyMadangList?mCategory=공무원', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/studyMadangList?mCategory=자격증', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/studyMadangList?mCategory=취업준비', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/studyMadangList?mCategory=일반', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/shareMadangList?mCategory=외국어', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/shareMadangList?mCategory=프로그래밍', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/shareMadangList?mCategory=공무원', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/shareMadangList?mCategory=자격증', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/shareMadangList?mCategory=취업준비', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/shareMadangList?mCategory=일반', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/boastMadangList?mCategory=외국어', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/boastMadangList?mCategory=프로그래밍', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/boastMadangList?mCategory=공무원', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/boastMadangList?mCategory=자격증', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/boastMadangList?mCategory=취업준비', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/boastMadangList?mCategory=일반', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/questionMadang?mCategory=외국어', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/questionMadang?mCategory=프로그래밍', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/questionMadang?mCategory=공무원', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/questionMadang?mCategory=자격증', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/questionMadang?mCategory=취업준비', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
-insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/questionMadang?mCategory=일반', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/studyMadangList', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/studyMadangList', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/studyMadangList', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/studyMadangList', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/studyMadangList', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/studyMadangList', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공부마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/shareMadangList', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/shareMadangList', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/shareMadangList', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/shareMadangList', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/shareMadangList', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/shareMadangList', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='공유마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/boastMadangList', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/boastMadangList', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/boastMadangList', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/boastMadangList', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/boastMadangList', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/boastMadangList', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='자랑마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','외국어', '/madang/questionMadang', default, default, 1, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','프로그래밍', '/madang/questionMadang', default, default, 2, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','공무원', '/madang/questionMadang', default, default, 3, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','자격증', '/madang/questionMadang', default, default, 4, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','취업준비', '/madang/questionMadang', default, default, 5, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang','일반', '/madang/questionMadang', default, default, 6, (SELECT MENU_ID FROM TA_SIDEMENU_ELEMENTS WHERE MENU_CATEGORY='madang' AND MENU_NAME='질문마당'));
 
 --어드민 메뉴 
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','인쿼리', '/AdminInqueryList', default, default, 1, default);
@@ -505,9 +505,9 @@ create table my_calendar(
 );
 --fsutdy
 create sequence seq_fstudy
-start with 1
+start with 10100
 increment by 1
-maxvalue 999;
+maxvalue 99999;
 
 create table f_study(
     f_no number constraint fstudy_pk primary key, --스터디 번호
@@ -537,9 +537,9 @@ create table f_study(
 
 --강사스터디
 create sequence seq_pstudy
-start with 1
+start with 200
 increment by 1
-maxvalue 999;
+maxvalue 10000;
 
 create table p_study(
     p_no number primary key, --스터디 번호
@@ -565,6 +565,28 @@ create table p_study(
     p_status varchar(20) default 'Y', --보이는 용도 delete 안씀 
     p_studyMember number default 0,--스터디 구매 확정 멤버 넘버 
     p_teacherno number --스터디 강사 넘버
+);
+
+--강사/리더 신청 시퀀스 
+create SEQUENCE  seq_leaderAdd
+start with 1
+increment by 1 
+maxvalue 1000 ;
+
+--강사/리더 신청 테이블
+create table leaderAdd (
+l_no number primary key, --리더 신청 번호
+l_name varchar(30), --리더 이름
+l_gender varchar(5), --리더 성별
+l_email varchar(30), --리더 이메일
+l_phone varchar(30), --리더 폰
+l_type varchar(20), --리더 타입
+l_category1 varchar2(30), -- 리더 선호 카테고리(최대 3개)
+l_category2 varchar2(30), 
+l_category3 varchar2(30),
+l_message varchar2(2000), --리더 메세지
+l_enrolldate Date,
+l_status char(1) default 'N' constraint l_status_cert_ck check (l_status in ('Y','N'))
 );
 
 

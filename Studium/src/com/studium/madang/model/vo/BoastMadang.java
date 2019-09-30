@@ -12,6 +12,9 @@ public class BoastMadang extends Madang{
 	private String madangWriterName; // 글쓴이 이름
 	private String madangTitle; // 글 제목
 	private String madangContent; // 글 내용
+	private String madangMainCategory; // 대분류(관리자 고정)
+	private String madangCategory; // 중분류(관리자 고정)
+	private String madangSubCategory; // 소분류(사용자 지정)
 	private Timestamp madangRegisterDatetime; // 글 작성 일시
 	private String madangRegisterIp; // 글 작성 ip 주소
 	private Timestamp madangUpdatedDatetime; // 글 수정 일시
@@ -29,9 +32,10 @@ public class BoastMadang extends Madang{
 	}
 
 	public BoastMadang(int madangNo, int madangParent, int madangOrder, int madangWriterUid, String madangWriterEmail,
-			String madangWriterName, String madangTitle, String madangContent, Timestamp madangRegisterDatetime,
-			String madangRegisterIp, Timestamp madangUpdatedDatetime, String madangUpdatedIp, int madangRecCount,
-			int madangRepCount, int madangReadCount, char madangFilePresence, char madangImgPresence, char madangStatus,
+			String madangWriterName, String madangTitle, String madangContent, String madangMainCategory,
+			String madangCategory, String madangSubCategory, Timestamp madangRegisterDatetime, String madangRegisterIp,
+			Timestamp madangUpdatedDatetime, String madangUpdatedIp, int madangRecCount, int madangRepCount,
+			int madangReadCount, char madangFilePresence, char madangImgPresence, char madangStatus,
 			String profilePath) {
 		super();
 		this.madangNo = madangNo;
@@ -42,6 +46,9 @@ public class BoastMadang extends Madang{
 		this.madangWriterName = madangWriterName;
 		this.madangTitle = madangTitle;
 		this.madangContent = madangContent;
+		this.madangMainCategory = madangMainCategory;
+		this.madangCategory = madangCategory;
+		this.madangSubCategory = madangSubCategory;
 		this.madangRegisterDatetime = madangRegisterDatetime;
 		this.madangRegisterIp = madangRegisterIp;
 		this.madangUpdatedDatetime = madangUpdatedDatetime;
@@ -117,6 +124,30 @@ public class BoastMadang extends Madang{
 
 	public void setMadangContent(String madangContent) {
 		this.madangContent = madangContent;
+	}
+
+	public String getMadangMainCategory() {
+		return madangMainCategory;
+	}
+
+	public void setMadangMainCategory(String madangMainCategory) {
+		this.madangMainCategory = madangMainCategory;
+	}
+
+	public String getMadangCategory() {
+		return madangCategory;
+	}
+
+	public void setMadangCategory(String madangCategory) {
+		this.madangCategory = madangCategory;
+	}
+
+	public String getMadangSubCategory() {
+		return madangSubCategory;
+	}
+
+	public void setMadangSubCategory(String madangSubCategory) {
+		this.madangSubCategory = madangSubCategory;
 	}
 
 	public Timestamp getMadangRegisterDatetime() {
@@ -212,12 +243,13 @@ public class BoastMadang extends Madang{
 		return "BoastMadang [madangNo=" + madangNo + ", madangParent=" + madangParent + ", madangOrder=" + madangOrder
 				+ ", madangWriterUid=" + madangWriterUid + ", madangWriterEmail=" + madangWriterEmail
 				+ ", madangWriterName=" + madangWriterName + ", madangTitle=" + madangTitle + ", madangContent="
-				+ madangContent + ", madangRegisterDatetime=" + madangRegisterDatetime + ", madangRegisterIp="
-				+ madangRegisterIp + ", madangUpdatedDatetime=" + madangUpdatedDatetime + ", madangUpdatedIp="
-				+ madangUpdatedIp + ", madangRecCount=" + madangRecCount + ", madangRepCount=" + madangRepCount
-				+ ", madangReadCount=" + madangReadCount + ", madangFilePresence=" + madangFilePresence
+				+ madangContent + ", madangMainCategory=" + madangMainCategory + ", madangCategory=" + madangCategory
+				+ ", madangSubCategory=" + madangSubCategory + ", madangRegisterDatetime=" + madangRegisterDatetime
+				+ ", madangRegisterIp=" + madangRegisterIp + ", madangUpdatedDatetime=" + madangUpdatedDatetime
+				+ ", madangUpdatedIp=" + madangUpdatedIp + ", madangRecCount=" + madangRecCount + ", madangRepCount="
+				+ madangRepCount + ", madangReadCount=" + madangReadCount + ", madangFilePresence=" + madangFilePresence
 				+ ", madangImgPresence=" + madangImgPresence + ", madangStatus=" + madangStatus + ", profilePath="
 				+ profilePath + "]";
 	}
-	
+
 }

@@ -55,6 +55,27 @@ public class ShareMadangDao {
 		} return result;
 	}
 	
+	public int selectCountList(Connection conn,String choiceSub) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("selectCountListC");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, choiceSub);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return result;
+	}
+	
 	public List<ShareMadang> selectMadangList(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -75,6 +96,53 @@ public class ShareMadangDao {
 				sm.setMadangWriterName(rs.getString("madang_writer_name"));
 				sm.setMadangTitle(rs.getString("madang_title"));
 				sm.setMadangContent(rs.getString("madang_content"));
+				sm.setMadangMainCategory(rs.getString("madang_main_category"));
+				sm.setMadangCategory(rs.getString("madang_category"));
+				sm.setMadangSubCategory(rs.getString("madang_sub_category"));
+				sm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
+				sm.setMadangRegisterIp(rs.getString("madang_register_ip"));
+				sm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
+				sm.setMadangUpdatedIp(rs.getString("madang_updated_ip"));
+				sm.setMadangRecCount(rs.getInt("madang_rec_count"));
+				sm.setMadangRepCount(rs.getInt("madang_rep_count"));
+				sm.setMadangReadCount(rs.getInt("madang_read_count"));
+				sm.setMadangForkCount(rs.getInt("madang_fork_count"));
+				sm.setMadangFilePresence(rs.getString("madang_file_presence").charAt(0));
+				sm.setMadangImgPresence(rs.getString("madang_img_presence").charAt(0));
+				list.add(sm);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return list;
+	}
+	
+	public List<ShareMadang> selectMadangList(Connection conn, String mCategory, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ShareMadang> list=new ArrayList<ShareMadang>();
+		String sql=prop.getProperty("selectMadangListC");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mCategory);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ShareMadang sm=new ShareMadang();
+				sm.setMadangNo(rs.getInt("madang_no"));
+				sm.setMadangParent(rs.getInt("madang_parent"));
+				sm.setMadangOrder(rs.getInt("madang_order"));
+				sm.setMadangWriterUid(rs.getInt("madang_writer_uid"));
+				sm.setMadangWriterEmail(rs.getString("madang_writer_email"));
+				sm.setMadangWriterName(rs.getString("madang_writer_name"));
+				sm.setMadangTitle(rs.getString("madang_title"));
+				sm.setMadangContent(rs.getString("madang_content"));
+				sm.setMadangMainCategory(rs.getString("madang_main_category"));
+				sm.setMadangCategory(rs.getString("madang_category"));
+				sm.setMadangSubCategory(rs.getString("madang_sub_category"));
 				sm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				sm.setMadangRegisterIp(rs.getString("madang_register_ip"));
 				sm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));

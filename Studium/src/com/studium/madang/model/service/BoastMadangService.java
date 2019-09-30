@@ -23,9 +23,23 @@ public class BoastMadangService {
 		return result;
 	}
 	
+	public int selectCountList(String choiceSub) {
+		Connection conn=getConnection();
+		int result=dao.selectCountList(conn, choiceSub);
+		close(conn);
+		return result;
+	}
+	
 	public List<BoastMadang> selectMadangList(int cPage, int numPerPage) {
 		Connection conn=getConnection();
 		List<BoastMadang> list=dao.selectMadangList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<BoastMadang> selectMadangList(String choiceSub, int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<BoastMadang> list=dao.selectMadangList(conn, choiceSub, cPage, numPerPage);
 		close(conn);
 		return list;
 	}

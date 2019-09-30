@@ -324,6 +324,18 @@ insert into p_study values(114,'떠먹여주는 알고리즘','알고리즘 스터디','잠실','�
 insert into p_study values(115,'떠먹여주는 알고리즘','알고리즘 스터디','분당','주말',8,800000,'알고리즘','최근 IT 개발자에 대한 수요가 계속해서 증가하고 있고, 그에 따라 IT 회사로의 취업을 고려하고 있는 학생, 이직을 준비하는 비전공자 분들도 계속해서 늘어나고 있습니다. 회사의 채용 프로세스를 진행하며 코딩 테스트, 코딩 면접은 피할 수 없는 관문이고, 이를 위해 혼자서 어디서부터 어떻게 알고리즘을 공부해야 될지 막막하신 분들도 많았을 것입니다. 특히 컴퓨터 관련 전공자가 아니라면 더더욱, 이런 부분은 어렵기만 합니다.',
 '이런 분들을 위해 알고리즘 스터디가 기획되었고, 스터디를 통해 알고리즘에 필요한 개념들과 문제에 적용할 수 있는 여러 스킬들을 스터디원들과 함께 학습하며 모두 자신의 것으로 만들 수 있길 기대하고 있습니다. 언어는 Java를 위주로 진행합니다. 국내 IT 대기업 S사 사내 알고리즘 강사로 활동하고 계신 리더님에게 오만가지 도움을 다 받아가세요!'
 ,'t_10.jpg','p_11.jpg','p_9.jpg','p_10.jpg','01:00','07:00','2019/11/15','2020/01/22',4,'박진영','Y', 0,20010 );
+insert into p_study values(116,'Benedict 와 진지한 영어','진지한 영국영어','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','a2.jpg','a1.jpg','a3.jpg','a4.jpg','01:00','07:00','19/09/20','20/01/22',4,'Benedict','Y', 0,20005 );
+insert into p_study values(117,'송강 쌤과 영어','즐거운 영어스터디','역삼','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','s1.jpg','s4.jpg','s3.jpg','s2.jpg','01:00','07:00','19/08/12','19/09/20',4,'송강','Y', 0,20006 );
+insert into p_study values(118,'면접스터디 ','실제 인사담당 혜교쌤','강남','주말',8,210000,'면접','실제 면접관이 보는 면접에 대해',
+'면접 준비, 제대로 해봐요','a2.jpg','a1.jpg','a3.jpg','a4.jpg','01:00','07:00','19/10/14','20/01/22',5,'혜교','Y', 1,20007 );
+insert into p_study values(119,'은우쌤과 함께 공부','잘생쁨주의','이태원','평일',8,120000,'영어','Hi guys,I specialize in Beginner, Intermediate, and Conversational English for children and adults.',
+' I have a TESOL certification and more than five years of teaching experience.','l3.jpg','l1.jpg','l2.jpg','l4.jpg','01:00','07:00','19/12/12','20/01/22',4,'은우','Y', 0,20008 );
+insert into p_study values(120,'정보처리기사 공부','합격합시다.','역삼','평일',8,120000,'국가기술','15년간 컴퓨터 강의 및 현장 실무를 모두 수행해온 강사가 정보처리기사 합격을 도와 드립니다.',
+'문제풀이 위주로 진행할 예정입니다.','i1.jpg','i3.jpg','i4.jpg','i4.jpg','01:00','07:00','2019/10/06','2020/01/22',5,'우식','Y', 8,20009 );
+insert into p_study values(121,'영어 스터디 공부','재밌게 놉시답.','강남','주말',8,12000,'영어','15년간 영어 강의 및 현장 실무를 모두 수행해온 강사가 정보처리기사 합격을 도와 드립니다.',
+'문제풀이 위주로 진행할 예정입니다.','s1.jpg','s4.jpg','s2.jpg','s3.jpg','02:00','07:00','2019/10/07','2020/01/22',5,'우식','Y', 8,20009 );
 
 
 --찜테이블 더미데이터

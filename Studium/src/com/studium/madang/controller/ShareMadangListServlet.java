@@ -1,6 +1,7 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.service.ShareMadangService;
 import com.studium.madang.model.vo.FreeMadang;
 import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.vo.StudyMadang;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -38,18 +40,28 @@ public class ShareMadangListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		// 검색조건 판별
+		String choiceSub = request.getParameter("choiceSub");
+				
 		//Pagination 
 		ShareMadangService service=new ShareMadangService();
-		int totalData=service.selectCountList(); // 총 데이터 개수
+		int totalData=0;
+		if(choiceSub==null) totalData=service.selectCountList(); // 총 데이터 개수
+		else totalData=service.selectCountList(choiceSub);
 		String URLmapping="/madang/boastMadangList"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		
-		List<ShareMadang> list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
+		List<ShareMadang> list=new ArrayList<ShareMadang>();
+		if(choiceSub==null) {
+			// 카테고리 분기 없이 전체 리스트
+			list=service.selectMadangList(pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
+		} else {
+			// 카테고리를 포함하여 리스트를 받아온다.
+			list=service.selectMadangList(choiceSub, pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
+		}
 		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
-		String choiceSub = request.getParameter("choiceSub");
 		
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());

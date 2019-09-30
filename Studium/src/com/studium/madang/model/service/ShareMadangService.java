@@ -22,10 +22,24 @@ public class ShareMadangService {
 		close(conn);
 		return result;
 	}
+	
+	public int selectCountList(String choiceSub) {
+		Connection conn = getConnection();
+		int result = dao.selectCountList(conn, choiceSub);
+		close(conn);
+		return result;
+	}
 
 	public List<ShareMadang> selectMadangList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<ShareMadang> list = dao.selectMadangList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public List<ShareMadang> selectMadangList(String mCategory, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<ShareMadang> list = dao.selectMadangList(conn, mCategory, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
