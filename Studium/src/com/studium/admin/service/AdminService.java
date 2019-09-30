@@ -48,6 +48,13 @@ public class AdminService {
 		return result;
 	}
 	
+	public int selectCountLoginLog() {
+		Connection conn=getConnection();
+		int result=dao.selectCountLoginLog(conn);
+		close(conn);
+		return result;
+	}
+	
 	public int selectCountMemberName(String memberName) {
 		Connection conn=getConnection();
 		int result=dao.selectCountMemberName(conn, memberName);

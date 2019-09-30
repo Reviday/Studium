@@ -390,6 +390,7 @@ insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 �
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','스터디 관리', '/AdminStudyManage', default, default, 6, default);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','강사 스터디', '/AdminStudyManage', default, default, 1, 48);
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','일반 스터디', '/AdminStudyFreeManage', default, default, 2, 48);
+insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin', '로그인 로그', '/AdminLoginLog', default, default, 7, default);
 
 
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'admin','결제 내역', '/AdminPayManageList', default, default, 1, 41);
