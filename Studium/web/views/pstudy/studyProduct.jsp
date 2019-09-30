@@ -219,7 +219,7 @@
                     
                     <input type="button" value="참여 신청하기" 
                     <%
-                    	if(loginMember!=null) {
+                    	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
                     <% 		
