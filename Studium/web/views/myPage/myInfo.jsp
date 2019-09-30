@@ -96,7 +96,7 @@
 						</div>
 						<div class="col-7">
 							<form action="<%=request.getContextPath()%>/myPage/modifyMember"
-								id="changePhoto" method="post">
+								id="changePhoto" method="post" onsubmit="return modifyMember_validate();">
 								<div class="inputForm">
 									<input type="text" name="name" id="name" class="myI-1-f"
 										autocomplete=off value="<%=m.getMemName()%>" readonly>
@@ -190,7 +190,7 @@
 									<%
 										}
 									%>
-									<input type="submit" onclick="modifyMember_validate()"
+									<input type="submit" 
 										class="btn-sm btn-changeInfo" value="수정하기"> <input
 										type="hidden" name="phone" value=null> <input
 										type="hidden" name="birth" value=null> <input
@@ -326,13 +326,10 @@
 			}
 		});
 
-		//전화번호 정규표현식
-		var regPhone = /^\d{3}\d{3,4}\d{4}$/;
-		// 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
-		var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-
-		//회원정보수정 유효성 검사
-		function modifyMember_validate() {
+		
+		
+		//비밀번호 기존값과 중복비교{
+		function checkOriginPw(){
 			var pwd = $('#modipwd');
     		$.ajax({
         		url: "<%=request.getContextPath()%>/myPage/checkOriginPw?no=<%=m.getMemNo()%>",
@@ -351,6 +348,17 @@
         		}
         	});
     		alert("ajax통과");
+		}
+		
+		//회원정보수정 유효성 검사
+		function modifyMember_validate() {
+			//전화번호 정규표현식
+			var regPhone = /^\d{3}\d{3,4}\d{4}$/;
+			// 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+			var regPwd = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			
+			var pwd = $('#modipwd');
+			var pwdck = $('#modipwdck');
 			//비밀번호 검사
 			if (!pwd.val()) {
 				alert("비밀번호를 입력해주세요.");
@@ -369,16 +377,31 @@
 
 			}
 			//기존 비밀번호랑 확인 
-
+			$.ajax({
+        		url: "<%=request.getContextPath()%>/myPage/checkOriginPw?no=<%=m.getMemNo()%>",
+        		type: "POST",
+        		dataType: "json",
+        		data: {"password" : pwd.val()},
+        		success: function(data){
+        			console.log("ajax성공");
+        			if(!data){
+						alert("기존 비밀번호와 동일할 수 없습니다.");
+        				return false;
+        			}
+        		},
+        		error:function (data){
+        			console.log(data);
+        		}
+        	});
+    		alert("ajax통과");
 			// 비밀번호 일치 확인
-			var pwd = $('#modipwd').val();
-			var pwdck = $('#modipwdck').val();
 			alert(pwd + pwdck);
-			if (pwd != pwdck) {
+			if (pwd.val() != pwdck.val()) {
 				alert("비밀번호가 일치하지 않습니다.");
 				pwdck.focus();
 				return false;
 			}
+
 
 	  		//추가정보 입력했을 때 필요한 정규표현식
 		<%if(m.getMemBirth()!=null&&m.getMemPhone()!=null&&m.getMemZipCode()!=null&&m.getMemCategory1()!=null){ %>
@@ -417,9 +440,9 @@
 			            
 			 
 		<%}%>
-			
+		alert("끝");
 			//모든사항 통과 
-			return true;
+			//return true;
 
 		}
 	</script>

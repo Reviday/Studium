@@ -12,6 +12,7 @@
 %>
 
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
  
 <style>
 .header-background-cover {
@@ -56,7 +57,7 @@
                                 <div class="inputForm">
                                 <input type="hidden" name="loginMember" value="<%=loginMember.getMemUserEmail()%>">
                                     <input class="js-datepicker myI-1" type="text" placeholder="Birthdate" id="birthday" name="birthday" readonly>
-                                    <i class="fa fa-calendar input-icon js-btn-calendar " style="color:rgb(110, 110, 110)"></i>
+                                     <i class="fa fa-calendar input-icon js-btn-calendar " style="color:#515151;" ></i>
                                 </div>
                                 <div class="inputForm ">
                                     <div>

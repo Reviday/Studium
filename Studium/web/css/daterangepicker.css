@@ -1,3 +1,53 @@
+td.active {
+  background-color: #2c6ed5;
+}
+
+input[type="date" i] {
+  padding: 14px;
+}
+
+.table-condensed td, .table-condensed th {
+  font-size: 14px;
+  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+}
+
+.daterangepicker td {
+  width: 40px;
+  height: 30px;
+}
+
+.daterangepicker {
+  border: none;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  display: none;
+  border: 1px solid #e0e0e0;
+  margin-top: 5px;
+}
+
+.daterangepicker::after, .daterangepicker::before {
+  display: none;
+}
+
+.daterangepicker thead tr th {
+  padding: 10px 0;
+}
+
+.daterangepicker .table-condensed th select {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 5px;
+  outline: none;
+}
+
+
+
+
 .daterangepicker {
   position: absolute;
   color: inherit;
@@ -89,21 +139,25 @@
     border: 1px solid transparent;
     white-space: nowrap;
     cursor: pointer; }
+    .available{
+    color:black;
+    font-weight:1.2em;
+    }
     .daterangepicker td.available:hover, .daterangepicker th.available:hover {
-      background-color: #eee;
+      background-color: #ffb990;
       border-color: transparent;
-      color: inherit; }
+      color: black; }
     .daterangepicker td.week, .daterangepicker th.week {
       font-size: 80%;
       color: #ccc; }
   .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
     background-color: #fff;
     border-color: transparent;
-    color: #999; }
+    color: #999; !important }
   .daterangepicker td.in-range {
     background-color: #ebf4f8;
     border-color: transparent;
-    color: #000;
+    color: #000 !important;
     border-radius: 0; }
   .daterangepicker td.start-date {
     border-radius: 4px 0 0 4px; }
@@ -115,8 +169,13 @@
     background-color: #357ebd;
     border-color: transparent;
     color: #fff; }
+     
+  .daterangepicker th{
+  color:black;
+  }
   .daterangepicker th.month {
-    width: auto; }
+    width: auto; 
+    }
   .daterangepicker td.disabled, .daterangepicker option.disabled {
     color: #999;
     cursor: not-allowed;

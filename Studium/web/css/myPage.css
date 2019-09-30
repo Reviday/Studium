@@ -127,7 +127,9 @@
     -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
     box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
 }
-
+.inputAddress{
+	width:320px
+}
 .input-icon {
     position: relative;
     font-size: 18px !important;
