@@ -112,6 +112,7 @@ a {
     border: none;
     background-color: rgba(239, 108, 0, 0.00);
     outline-style: none;
+    font-size: 13px !important;
 }
 
 #plusQnACancle {
