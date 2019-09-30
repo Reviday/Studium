@@ -194,6 +194,14 @@
 							</tbody>
 						</table>
 					</div>
+					<!-- 버튼 -->
+					<div class="fr">
+						<div class="post_btns font-family-type1">
+							<a href="#" id="writeFormBtn"
+								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','free','<%=fm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>'); return false;"
+								class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
+						</div>
+					</div>
 				</div>
 
 				<div class="h10"></div>

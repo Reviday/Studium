@@ -41,7 +41,7 @@
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/madang.js"></script>
 <script src="<%=request.getContextPath()%>/js/markdown.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery.markdown-0.2.js"></script>
+
 <script src="<%=request.getContextPath()%>/js/simplemde.min.js"></script>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -231,6 +231,15 @@
 							</tbody>
 						</table>
 					</div>
+					<!-- 버튼 -->
+					<div class="fr">
+						<div class="post_btns font-family-type1">
+							<a href="#" id="writeFormBtn"
+								onclick="fn_madangWrite('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','study','<%=choice%>','<%=choiceSub%>'); return false;"
+								class="btn_type1 post_write _rosRestrict" style="color:#000">수정하기</a>
+						</div>
+					</div>
+					
 				</div>
 
 				<div class="h10"></div>
@@ -440,7 +449,7 @@
 							<a href="<%=request.getContextPath()%>/madang/studyMadangView?madangNo=<%=sm.getMadangNo()%>&cPage=<%=cPage%>&show=true&choiceSub=<%=choiceSub%>" 
 								class="btn btn-block btn-outline btn-lg" id="showAnswerBtn" style="margin-bottom:20px;">
 			                    <i class="glyphicon glyphicon-menu-down"></i>
-			                    <span class="help">풀이 보기 (<%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다)</span>
+			                    <span class="help font-family-type1">풀이 보기 (<%=sm.getMadangAnswerCount()%>개의 풀이가 있습니다)</span>
 			                </a>
 						<%
 				
@@ -597,7 +606,7 @@
 				
 				<!-- 풀이영역 -->
 				<div class="answer-write-area" >
-			        <p class="lead" style="margin:10px 0;"><strong style="color:#000">풀이를 작성해 주세요!</strong></p>
+			        <p class="lead font-family-type1" style="margin:10px 0;"><strong style="color:#000">풀이를 작성해 주세요!</strong></p>
 			
 			        <div class="well" style="padding:10px 20px; background-color: rgba(239, 108, 0, 0.03);">
 			            <strong>※ 이렇게 해주세요!</strong>
@@ -611,13 +620,16 @@
 			                </ul>
 			            </small>
 			        </div>
-			        <form role="form" method="post" action="<%=request.getContextPath()%>/madang/insertQuestion"
-			        		onsubmit="return fn_qValidate();">
+			        <form role="form" method="post" onsubmit="return fn_qValidate();">
+			        <!-- action="<%=request.getContextPath()%>/madang/insertQuestion" -->
+			        		
 			        		<script>
 			        			function fn_qValidate() {
 			        				if(<%=loginMember==null%>) {
 			        					fn_needLogin();
 			        					return false;
+			        				} else {
+			        					return true;
 			        				}
 			        			}
 			        		</script>
@@ -625,7 +637,7 @@
 			                
 			                    <div class="toolbar clearfix" style="margin-bottom: 5px;">
 			                        <a href="http://daringfireball.net/projects/markdown/basics" target="_new" class="label label-default pull-right" style="margin-top:5px;margin-left:5px;">마크다운이란?</a>
-			                        <a href="javascript:insert_code();" id="preview_name" class="label label-primary pull-right" style="margin-top:5px;margin-left:5px;">코드삽입</a>
+			                        <a href="javascript:insert_code();" id="preview_name" class="label answers pull-right" style="margin-top:5px;margin-left:5px;">코드삽입</a>
 			                    </div>
 			                
 			                <textarea class="form-control" rows="15" id="id_content" name="content"></textarea>
@@ -651,7 +663,6 @@
 							<input type="hidden" name="mCategory" value="<%=sm.getMadangMainCategory()%>">
 							<input type="hidden" name="category" value="<%=sm.getMadangCategory()%>">
 							<input type="hidden" name="sCategory" value="<%=sm.getMadangSubCategory()%>">
-							
 							<%
 								if(loginMember!=null) {
 									%>

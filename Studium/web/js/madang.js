@@ -88,9 +88,21 @@ function fn_madangWrite(memCheck, path, locate, choice, choiceSub) {
 	if (memCheck == "null") {
 		fn_needLogin();
 	} else {
-		location.href = path + "/madang/madangWrite?locate=" + locate + "&choice=" + choice + "&choiceSub=" + choiceSub;
+		location.href = path + "/madang/madangWrite?locate=" + locate + 
+			"&choice=" + choice + "&choiceSub=" + choiceSub;
 	}
 }
+
+// madangView
+function fn_madangWrite(memCheck, path, locate, madangNo, choice, choiceSub) {
+	if (memCheck == "null") {
+		fn_needLogin();
+	} else {
+		location.href = path + "/madang/madangUpdate?locate=" + locate +
+			"&madangNo=" + madangNo + "&choice=" + choice + "&choiceSub=" + choiceSub;
+	}
+}
+
 
 // madang Write
 

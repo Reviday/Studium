@@ -2,7 +2,7 @@ package com.studium.madang.model.vo;
 
 import java.sql.Timestamp;
 
-public class BoastMadang {
+public class BoastMadang extends Madang{
 
 	private int madangNo; // 글번호
 	private int madangParent; // 답글을 달았을 시, 원글의 글번호를 저장

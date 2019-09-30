@@ -2,7 +2,7 @@ package com.studium.madang.model.vo;
 
 import java.sql.Timestamp;
 
-public class StudyMadang {
+public class StudyMadang extends Madang {
 	
 	private int madangNo; // 글번호
 	private int madangWriterUid; // 글쓴이 uid

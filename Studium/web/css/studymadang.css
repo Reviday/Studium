@@ -633,3 +633,7 @@ section.madang-content .pull-right {
 ::-webkit-scrollbar {
 	display:none;
 }
+
+.madang-view a:hover {
+	color:#ccc;
+}

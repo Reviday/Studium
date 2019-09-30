@@ -19,6 +19,7 @@
 // 0.1: Incorporated Markdown-1.01b2.js. Initial release.
 
 (function($){
+	console.log("마크다운 함수 실행");
 	$.markdown = function(makeMeHtmlPlease) {
 		md_empty_element_suffix = " />";
 		md_tab_width = 4;

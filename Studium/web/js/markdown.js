@@ -63,7 +63,6 @@ $(document).ready(function () {
 
 
 function insert_code() {
-    console.log($('#insertCode').html());
     $('#insertCode').modal('show');
 }
 
