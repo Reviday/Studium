@@ -79,34 +79,34 @@
   border-right: 15px solid transparent;
   border-bottom: 20px solid #999e;
 }
-ul, li, li a {
+#menu ul, #menu li, #menu li a {
   list-style: none;
   display: block;
   margin: 0;
   padding: 0;
 }
-li a {
+#menu li a {
   padding: 5px;
   color: #fff;
   text-decoration: none;
   transition: all .2s;
 }
-li a:hover,
-li a:focus {
+#menu li a:hover,
+#menu li a:focus {
   background: #ef6c00;
   color: #fff;
 }
-li a i{
+#menu li a i{
 	margin-right:10px;
 }
-.myPageMenu{
+#menu .myPageMenu{
     position:fixed;
     top:90%;
     left:80%;
     z-index: 1000000;
 }
 
-.myPageMenu{
+#menu .myPageMenu{
     position:fixed;
     top:90%;
     left:80%;

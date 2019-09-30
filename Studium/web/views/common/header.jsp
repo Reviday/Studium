@@ -56,8 +56,7 @@
 <!--마이페이지 메뉴-->
 		<%if(loginMember!=null) { %>
  <div class="myPageMenu">
-        <a href="#menu" id="toggle"><span></span></a>
-
+     <a href="#menu" id="toggle"><span></span></a>
         <div id="menu">
           <ul> 
             <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-user"></i>내 정보</a></li>

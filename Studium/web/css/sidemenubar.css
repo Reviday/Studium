@@ -191,3 +191,7 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+nav-side-menu a:hover {
+	background-color:transparent !important;
+}
