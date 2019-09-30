@@ -10,7 +10,7 @@
 				
 				  <div class="col-md-6">
           <div class="sched d-block d-lg-flex">
-            <div class="bg-image order-2" style="background-image: url('<%=request.getContextPath()%>/upload/story/<%=slist.get(0).getStoryTeacherpicture()%>');"></div>
+            <div class="bg-image order-2" style="background-image: url('<%=request.getContextPath()%>/upload/myPage/<%=slist.get(0).getStoryTeacherpicture()%>');"></div>
             <div class="text order-1">
           
               <p><%=slist.get(0).getStoryContent() %></p>
@@ -20,7 +20,7 @@
           </div>
 
           <div class="sched d-block d-lg-flex">
-            <div class="bg-image" style="background-image: url('<%=request.getContextPath()%>/upload/story/<%=slist.get(1).getStoryTeacherpicture()%>');"></div>
+            <div class="bg-image" style="background-image: url('<%=request.getContextPath()%>/upload/myPage/<%=slist.get(1).getStoryTeacherpicture()%>');"></div>
             <div class="text">
             
               <p><%=slist.get(1).getStoryContent() %></p>
@@ -34,7 +34,7 @@
 
         <div class="col-md-6">
           <div class="sched d-block d-lg-flex">
-            <div class="bg-image order-2" style="background-image: url('<%=request.getContextPath()%>/upload/story/<%=slist.get(2).getStoryTeacherpicture()%>');"></div>
+            <div class="bg-image order-2" style="background-image: url('<%=request.getContextPath()%>/upload/myPage/<%=slist.get(2).getStoryTeacherpicture()%>');"></div>
             <div class="text order-1">
               
               <p><%=slist.get(2).getStoryContent() %></p>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="sched d-block d-lg-flex">
-            <div class="bg-image" style="background-image: url('<%=request.getContextPath()%>/upload/story/<%=slist.get(3).getStoryTeacherpicture()%>');"></div>
+            <div class="bg-image" style="background-image: url('<%=request.getContextPath()%>/upload/myPage/<%=slist.get(3).getStoryTeacherpicture()%>');"></div>
             <div class="text">
            
               <p><%=slist.get(3).getStoryContent() %></p>

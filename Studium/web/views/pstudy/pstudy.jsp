@@ -38,8 +38,7 @@ body{
     </div>
   <!-- END header -->
  
-  
-  <div class="main_study"><img src="<%=request.getContextPath()%>/img/study.jpg"></div>
+
   <div class="container studycon">
     <section >
     <div style=" padding-top: 50px; margin-left:150px;">
