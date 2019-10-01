@@ -131,6 +131,7 @@ private Properties prop=new Properties();
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
 				p.setfStudyMember(rs.getInt("f_studyMember"));
+				p.setfTeacherno(rs.getInt("f_teacherno"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -175,6 +176,8 @@ private Properties prop=new Properties();
 					p.setfLike(rs.getInt("f_like"));
 					p.setfReadername(rs.getString("f_readername"));
 					p.setfStudyMember(rs.getInt("f_studyMember"));
+					p.setfTeacherno(rs.getInt("f_teacherno"));
+					
 					list.add(p);
 				}
 			 }
@@ -206,6 +209,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -238,6 +242,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -269,6 +274,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -301,6 +307,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -332,6 +339,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -364,6 +372,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 					}
 				 }
@@ -397,6 +406,7 @@ private Properties prop=new Properties();
 						p.setfLike(rs.getInt("f_like"));
 						p.setfReadername(rs.getString("f_readername"));
 						p.setfStudyMember(rs.getInt("f_studyMember"));
+						p.setfTeacherno(rs.getInt("f_teacherno"));
 						list.add(p);
 			}
 		}
@@ -488,6 +498,7 @@ private Properties prop=new Properties();
 				p.setfLike(rs.getInt("f_like"));
 				p.setfReadername(rs.getString("f_readername"));
 				p.setfStudyMember(rs.getInt("f_studyMember"));
+				p.setfTeacherno(rs.getInt("f_teacherno"));
 			
 			}
 			

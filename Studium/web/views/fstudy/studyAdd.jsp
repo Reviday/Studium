@@ -116,7 +116,7 @@
                                 </tr>
                                 <tr>
                                     <FORM NAME="pstudyfrm1" ACTION="<%=request.getContextPath()%>/fstudy/studyAdd"
-                                        METHOD="post" enctype="multipart/form-data">
+                                        METHOD="post" enctype="multipart/form-data" >
                                         <td align="center">
                                             <table width="100%" border="0" cellspacing="1" cellpadding="7"
                                                 bgcolor="#D7D7D7">
@@ -134,7 +134,7 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디지역</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <select class=input1 name=p_area
+                                                        <select class=input1 name=p_area required
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>지역 선택</option>
                                                             <option value='강남'>강남</option>
@@ -150,7 +150,7 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 요일</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <select class=input1 name=p_day
+                                                        <select class=input1 name=p_day required
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>요일 선택</option>
                                                             <option value='평일'>평일</option>
@@ -161,13 +161,13 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">인원</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="number" SIZE="10" min="1" max="15"
+                                                        <INPUT TYPE="number" SIZE="10" min="1" max="15" required
                                                             NAME="p_stupyperson" onKeyDown="KeyNumber()" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">분류</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <select class=input1 name=p_category
+                                                        <select class=input1 name=p_category required
                                                             style="width: 120px; height: 30px;">
                                                             <option value=''>분류 선택</option>
                                          <% if(!listM.isEmpty()){ %>
@@ -184,7 +184,7 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개1</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro1" id="p_intro1" cols="30" class="memo"
+                                                        <textarea name="p_intro1" id="p_intro1" cols="30" class="memo" required
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
@@ -193,14 +193,14 @@
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 소개2</td>
 
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <textarea name="p_intro2" id="p_intro2" cols="30" class="memo"
+                                                        <textarea name="p_intro2" id="p_intro2" cols="30" class="memo" required
                                                             rows="10"></textarea>
                                                     </td>
                                                 </tr>
                                                <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50 />
+                                                        <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50 required />
                                                          <div id="preview"> </div>
                                                     </td>
 
@@ -208,14 +208,14 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50 />
+                                                        <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50 required />
                                                          <div id="preview1"> </div>
                                                          </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50 />
+                                                        <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50 required />
                                                          <div id="preview2"> </div>
                                                         </td>
                                                         
@@ -223,7 +223,7 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%"  align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=30 />
+                                                        <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=30 required />
                                                         <div id="preview3"> </div>
                                                        
                                                         </td>
@@ -231,9 +231,9 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <input type="text" name="p_timestart" placeholder="시간선택"
+                                                        <input type="text" name="p_timestart" placeholder="시간선택" required
                                                             id="time1" class="time1" required size="8" maxlength="5">~
-                                                        <input type="text" name="p_timeend" placeholder="시간선택"
+                                                        <input type="text" name="p_timeend" placeholder="시간선택" required
                                                             class="time1" required size="8" maxlength="5">
                                                         <link rel="stylesheet" type="text/css"
                                                             href="../css/jquery.timepicker.css">
@@ -246,16 +246,16 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                         오늘 날짜 : <span id="today"></span><br>
                                                         <label for="fromDate">시작일</label>
-                                                        <input type="text" name="p_datestart" id="fromDate">
+                                                        <input type="text" name="p_datestart" id="fromDate" required>
                                                         ~
                                                         <label for="toDate">종료일</label>
-                                                        <input type="text" name="p_dateend" id="toDate">
+                                                        <input type="text" name="p_dateend" id="toDate" required>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">강사이름</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                        <INPUT TYPE="text" NAME="p_teachername" size=50 /></td>
+                                                        <INPUT TYPE="text" NAME="p_teachername" size=50  value="<%=loginMember.getMemName() %>" readonly="readonly"/></td>
                                                          <input type="hidden" id="f_teacherno" name="f_teacherno" value="<%=loginMember.getMemNo()%>"/>
                                                           <input type="hidden" name="star-input" value="0" id="p1"/>
                                                 </tr> 
@@ -338,8 +338,8 @@
 				
 			});
 		});
-		
 
+	        
     </script>
  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

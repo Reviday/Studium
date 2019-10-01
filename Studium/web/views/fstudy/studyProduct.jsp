@@ -135,10 +135,11 @@
                     </div>
                 </div>
                 <div>
-                <% if(loginMember!=null&&(loginMember.getMemCode()=='M'||loginMember.getMemNo()==p.getfTeacherno())){ %>
+                <% if(loginMember!=null&&loginMember.getMemCode()=='T'&&loginMember.getMemNo()==(p.getfTeacherno())){ %>
                  	<input type="image" src="<%=request.getContextPath()%>/img/delete.png" onclick="fn_delete();"/>
                  	<input type="image" src="<%=request.getContextPath()%>/img/update.png" onclick="fn_update();"/>
                  	<%}else{ %>
+                
                  	<%} %>
                 </div>
                 <div class="line-information-bottom"></div> <!-- 파트를 구분하는 선 div -->
