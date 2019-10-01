@@ -99,6 +99,12 @@ public class StoryService {
 		close(conn);
 		return result;
 	}
+	public List<Story> selectPstudyStory(int no){
+		Connection conn=getConnection();
+		List<Story> list=dao.selectPstudyStory(conn,no);
+		close(conn);
+		return list;
+	}
 	
 
 }

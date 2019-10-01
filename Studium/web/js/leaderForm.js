@@ -54,6 +54,19 @@
             }
         }
     }
+     
+     function validate (input) {
+         if($(input).attr('type') == 'text' || $(input).attr('name') == 'phone') {
+             if($(input).val().trim() == null) {
+                 return false;
+             }
+         }
+         else {
+             if($(input).val().trim() == ''){
+                 return false;
+             }
+         }
+     }
 
     function showValidate(input) {
         var thisAlert = $(input).parent();
