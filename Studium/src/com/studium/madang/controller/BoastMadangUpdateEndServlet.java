@@ -26,7 +26,7 @@ import common.template.LoginCheck;
 /**
  * Servlet implementation class BoastMadangUpdateEndServlet
  */
-@WebServlet("/madang/free/updateEnd")
+@WebServlet("/madang/boast/updateEnd")
 public class BoastMadangUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
