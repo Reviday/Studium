@@ -26,8 +26,10 @@
 					<td><%=s.getStorySubject()%></td>
 					<td class="storyclick" id="<%=s.getStoryNo()%>"><%=s.getpNo()%></td>
 					<td><%=s.getStoryTime()%></td>
-					<td><input type="button" value="삭제" class="pointConfirm"
-						onclick="deleteStory();" id="<%=s.getStoryNo()%>"></td>
+					<td>
+						<input type="button" value="삭제" class="pointConfirm"
+						onclick="deleteStory();" id="<%=s.getStoryNo()%>">
+					</td>
 				</tr>
 
 				<%
@@ -69,11 +71,11 @@ function storyList(cPage){
 }
 
 function deleteStory(cPage){
-	
+
 	$.ajax({
 		url:"<%=request.getContextPath()%>/admindeleteStory",
 		type:"post",
-		data:{"no":$(this).attr('id'),
+		data:{"no":$(event.target).attr('id'),
 			  "cPage" : cPage,
 			  "method" : "storyList",
 			},

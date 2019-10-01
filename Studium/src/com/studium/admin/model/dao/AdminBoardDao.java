@@ -266,8 +266,8 @@ public class AdminBoardDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Story> list=new ArrayList();
-		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_STORY WHERE STORY_TEACHER_NAME LIKE '% " + pName + 
-				   "%' ORDER BY STORY_NO)A) WHERE RNUM BETWEEN " + ((cPage-1)*numPerPage+1) + " AND " + (cPage*numPerPage);
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_STORY WHERE STORY_TEACHER_NAME LIKE '%" + pName + 
+				   "%' ORDER BY STORY_NO DESC)A) WHERE RNUM BETWEEN " + ((cPage-1)*numPerPage+1) + " AND " + (cPage*numPerPage);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();

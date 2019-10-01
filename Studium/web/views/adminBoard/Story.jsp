@@ -73,7 +73,7 @@
 				<div class="pointPage-header">
 					<div>후기 내용</div>
 				</div>
-				<textarea class="PointTable"></textarea>
+				<textarea class="PointTable" disabled></textarea>
 			</div>
 
 		</div>
@@ -166,7 +166,7 @@
 	}
 </script>
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
+
 
 <%@ include file="/views/common/footer.jsp"%>
 
