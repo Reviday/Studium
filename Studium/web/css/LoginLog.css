@@ -21,7 +21,7 @@ a {
 }
 
 .inquerySection {
-    /* display: flex; */ 
+    min-height: 700px;
 }
 
 .leftmenu {

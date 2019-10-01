@@ -28,30 +28,32 @@
 					<td><span class="momoClick" id="<%=m.getMemNo() %>"><%=m.getMemUserEmail() %></span></td>
 					<td><%=m.getMemEnrollDatetime() %></td>
 					<form class="statusUpdate">
-						<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo"
-							class="memUpdateNo">
-					<td><select name="memberGradeList" class="memberGradeList">
+						<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo" class="memUpdateNo">
+					<td>
+						<select name="memberGradeList" class="memberGradeList">
 							<option value="M" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
 							<option value="T" <%='T' == m.getMemCode() ? "selected" : "" %>>강사</option>
 							<option value="R" <%='R' == m.getMemCode() ? "selected" : "" %>>정회원</option>
 							<option value="A" <%='A' == m.getMemCode() ? "selected" : "" %>>준회원</option>
-					</select></td>
-					<td><select name="memberStatusList" class="memberStatusList">
+						</select>
+					</td>
+					<td>
+						<select name="memberStatusList" class="memberStatusList">
 							<option value="N" <%='N' == m.getMemDenied() ? "selected" : "" %>>정상</option>
 							<option value="Y" <%='Y' == m.getMemDenied() ? "selected" : "" %>>일시정지</option>
 							<option value="P" <%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
-					</select></td>
+						</select>
+					</td>
 					<input type="hidden" value="inqueryList2" name="method">
 					</form>
-					<td><input type="submit" value="수정" class="memberUpdate"
-						onclick="statusUpdate();"></td>
+					<td>
+						<input type="submit" value="수정" class="memberUpdate" onclick="statusUpdate();"></td>
 					<td>
 						<form class="deleteMember">
-							<input type="hidden" value="<%=m.getMemNo() %>" name="memNo"
-								class="memNo"> <input type="hidden" value="inqueryList2"
-								name="method">
-						</form> <input type="button" value="탈퇴" class="deleteSubmit"
-						onclick="deleteMember();">
+							<input type="hidden" value="<%=m.getMemNo() %>" name="memNo" class="memNo"> 
+							<input type="hidden" value="inqueryList2" name="method">
+						</form> 
+						<input type="button" value="탈퇴" class="deleteSubmit" onclick="deleteMember();">
 					</td>
 				</tr>
 				<%} %>
@@ -125,7 +127,6 @@
         		
         		var params = jQuery(".searchMember").serialize();
         		params+='&cPage='+cPage;
-        		console.log(cPage);
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminInquerySearch",
         			type: "POST",
@@ -159,11 +160,11 @@
         		}
         	}
         	
-        	function statusUpdate(cPage) {
+        	function statusUpdate() {
         		var result = confirm("정말 수정하시겠습니까?");
         		if(result){
         		var params = jQuery(".statusUpdate").serialize();
-        		params+='&cPage='+cPage;
+        		console.log(params);
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminUpdateMember",
         			type: "POST",
@@ -172,6 +173,7 @@
         			success: function(data){
         				$("#ajaxTable").html("");
         				$("#ajaxTable").html(data);
+        				console.log(params+"성공");
         			}
         		})
         			return true;
@@ -180,7 +182,7 @@
         		} 
         	}
          
-        	$(function() {
+
                 $('.momoClick').click(function(e) {
                 	var memNo = $(this).attr('id');
                 	console.log(memNo);
@@ -192,12 +194,13 @@
                 		data: {"memNo" : memNo},
                 		success: function(data){
                 			$(".memo").text(data);
+                			$(".memo").val(data);
 		                	$("#pointPage").css("display","block");
                 		}
                 	})
                 });
 
-            })
+       
             
             function updateMemo(){
         		var params = jQuery("#memoform").serialize();

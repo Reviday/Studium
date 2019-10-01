@@ -52,8 +52,7 @@ public class AdminInqueryMemberFinderServlet extends HttpServlet {
 		if(loginMember != null && loginMember.getMemCode() == 'M') {
 		
 		String memberName = request.getParameter("memberName");
-//		String method = request.getParameter("method");
-		String method =	"inqueryList2";
+		String method = request.getParameter("method");
 		int cPage;
 		try {
 			cPage= Integer.parseInt(request.getParameter("cPage"));

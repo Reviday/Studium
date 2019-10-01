@@ -38,37 +38,29 @@
 			</div>
 			<div>
 				<!--오른쪽 상단에 위치하는 검색기능-->
-				<form action="<%=request.getContextPath()%>/adminInquerySearch"
-					class="searchMember">
+				<form class="searchMember">
 					<select name="gradeList" class="gradeList">
-						<option value="allGrade"
-							<%="allGrade".equals(grade) ? "selected" : "" %>>전체</option>
+						<option value="allGrade" <%="allGrade".equals(grade) ? "selected" : "" %>>전체</option>
 						<option value="M" <%="M".equals(grade) ? "selected" : "" %>>관리자</option>
 						<option value="T" <%="T".equals(grade) ? "selected" : "" %>>강사</option>
 						<option value="R" <%="R".equals(grade) ? "selected" : "" %>>정회원</option>
 						<option value="A" <%="A".equals(grade) ? "selected" : "" %>>준회원</option>
 					</select> <select name="statusList" class="statusList">
-						<option value="allStatus"
-							<%="allStatus".equals(status) ? "selected" : "" %>>전체</option>
+						<option value="allStatus" <%="allStatus".equals(status) ? "selected" : "" %>>전체</option>
 						<option value="N" <%="N".equals(status) ? "selected" : "" %>>정상</option>
 						<option value="Y" <%="Y".equals(status) ? "selected" : "" %>>일시정지</option>
-						<option value="P"
-							<%="P".equals(status
-                            		) ? "selected" : "" %>>영구정지</option>
-					</select> <input type="hidden" value="searchMember" name="method">
-
+						<option value="P" <%="P".equals(status) ? "selected" : "" %>>영구정지</option>
+					</select> 
+					<input type="hidden" value="searchMember" name="method">
 				</form>
-				<input type="submit" value="조회" class="submitSearch"
-					onclick="searchMember('<%=cPage%>');">
+				<input type="submit" value="조회" class="submitSearch" onclick="searchMember('<%=cPage%>');">
 
 
-				<form action="<%=request.getContextPath() %>/admin/memberFinder"
-					class="nameFinder">
+				<form class="nameFinder">
 					<input type="text" placeholder="검색" name="memberName" id="findName">
 					<input type="hidden" value="nameFinder" name="method">
 				</form>
-				<input type="submit" value="" class="submitPicture"
-					onclick="nameFinder();">
+				<input type="submit" value="" class="submitPicture" onclick="nameFinder();">
 			</div>
 		</div>
 		<div id="ajaxTable">
@@ -92,21 +84,25 @@
 					<form class="statusUpdate">
 						<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo"
 							class="memUpdateNo">
-					<td><select name="memberGradeList" class="memberGradeList">
+					<td>
+						<select name="memberGradeList" class="memberGradeList">
 							<option value="M" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
 							<option value="T" <%='T' == m.getMemCode() ? "selected" : "" %>>강사</option>
 							<option value="R" <%='R' == m.getMemCode() ? "selected" : "" %>>정회원</option>
 							<option value="A" <%='A' == m.getMemCode() ? "selected" : "" %>>준회원</option>
-					</select></td>
-					<td><select name="memberStatusList" class="memberStatusList">
+						</select>
+					</td>
+					<td>
+						<select name="memberStatusList" class="memberStatusList">
 							<option value="N" <%='N' == m.getMemDenied() ? "selected" : "" %>>정상</option>
 							<option value="Y" <%='Y' == m.getMemDenied() ? "selected" : "" %>>일시정지</option>
 							<option value="P" <%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
-					</select></td>
+						</select>
+					</td>
 					<input type="hidden" value="inqueryList2" name="method">
 					</form>
-					<td><input type="submit" value="수정" class="memberUpdate"
-						onclick="statusUpdate();"></td>
+					<td>
+						<input type="submit" value="수정" class="memberUpdate" onclick="statusUpdate();"></td>
 					<td>
 						<form class="deleteMember">
 							<input type="hidden" value="<%=m.getMemNo() %>" name="memNo"
@@ -185,7 +181,6 @@
         		
         		var params = jQuery(".searchMember").serialize();
         		params+='&cPage='+cPage;
-        		console.log(cPage);
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminInquerySearch",
         			type: "POST",
@@ -193,8 +188,7 @@
         			data: params,
         			success: function(data){
         				$("#ajaxTable").html("");
-        				$("#ajaxTable").html(data);
-        				
+        				$("#ajaxTable").html(data);			
         			}
         		});
         		
@@ -219,11 +213,11 @@
         		}
         	}
         	
-        	function statusUpdate(cPage) {
+        	function statusUpdate() {
         		var result = confirm("정말 수정하시겠습니까?");
         		if(result){
         		var params = jQuery(".statusUpdate").serialize();
-        		params+='&cPage='+cPage;
+        		console.log(params);
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminUpdateMember",
         			type: "POST",
@@ -232,6 +226,7 @@
         			success: function(data){
         				$("#ajaxTable").html("");
         				$("#ajaxTable").html(data);
+        				console.log(params+"성공");
         			}
         		})
         			return true;
@@ -240,7 +235,7 @@
         		} 
         	}
          
-        	$(function() {
+  
                 $('.momoClick').click(function(e) {
                 	var memNo = $(this).attr('id');
                 	console.log(memNo);
@@ -258,7 +253,7 @@
                 	})
                 });
 
-            })
+   
             
             function updateMemo(){
         		var params = jQuery("#memoform").serialize();

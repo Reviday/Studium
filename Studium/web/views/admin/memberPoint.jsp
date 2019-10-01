@@ -32,12 +32,12 @@
 				</form>
 					<input type="submit" value="" class="submitPicture" onclick="nameSearch();">
 				<form id="pointUp" style="display: inline-block;">
-					<input type="hidden" value="pointUp" name="method">
+					<input type="hidden" value="inqueryList3" name="method">
 					<input type="text" placeholder="금액 입력" name="pointUp" class="pointInput" onkeydown='return onlyNumber(event)'onkeyup='removeChar(event)'> 
 				</form>
 					<input type="submit" value="포인트 지급" class="pointSubmit" onclick="pointUp();">
 				<form id="pointDown" style="display: inline-block;">
-					<input type="hidden" value="pointDown" name="method">
+					<input type="hidden" value="inqueryList3" name="method">
 					<input type="text" placeholder="금액 입력" name="pointDown" class="pointInput1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> 
 				</form>
 					<input type="submit" value="포인트 차감" class="pointSubmit" onclick="pointDown();">

@@ -842,8 +842,6 @@ public class AdminDao {
 				l.setlType(rs.getString("l_type"));
 				l.setlArea(rs.getString("l_area"));
 				l.setlCategory1(rs.getString("l_category1"));
-				l.setlCategory2(rs.getString("l_category2"));
-				l.setlCategory3(rs.getString("l_category3"));
 				l.setlMessage(rs.getString("l_message"));
 				l.setlEnrolldate(rs.getDate("l_enrolldate"));
 				l.setlStatus(rs.getString("l_status"));
@@ -1507,6 +1505,7 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<MemberLoginLog> list=new ArrayList();
+
 		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER_LOGIN_LOG WHERE MLL_USER_EMAIL LIKE '%"
 				+ memberName + "%' ORDER BY MLL_DATETIME DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
 		try {
@@ -1525,6 +1524,7 @@ public class AdminDao {
 				m.setMllUseragent(rs.getString("mll_useragent"));
 				m.setMllUrl(rs.getString("mll_url"));
 				m.setMllReferer(rs.getString("mll_referer"));
+
 				list.add(m);
 			}
 
@@ -1533,7 +1533,9 @@ public class AdminDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return list;
+		}
+
+		return list;
 	}
 
 	public List<Member> selectMemberEmailList(Connection conn,int cPage, int numPerPage, String memberName){
