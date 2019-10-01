@@ -135,6 +135,7 @@
                          <img src="<%=request.getContextPath()%>/upload/myPage/<%=s.getStoryStudentpicture()%>"/>
                         
                         <!-- 후기올린 사람 사진 -->
+                        <a class="titleName"><%=s.getpTitle()%></a>
                         <div class="reviewName">
                             <!-- 이름 -->
                           <%=s.getStoryWrite()%>

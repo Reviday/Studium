@@ -2,7 +2,7 @@ body {
     font-family: "Do Hyeon", Arial, sans-serif;
     font-weight: 400;
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 3;
     color: #868e96;
 }
 
@@ -16,6 +16,7 @@ section.allhugi {
     background-color: #EBEBEB;
     box-sizing: border-box;
     padding-top: 30px;
+    padding-right:300px;
 }
 
 section.allhugi article {
@@ -42,6 +43,7 @@ section.allhugi article {
 
 .hugiIntro > div img:nth-of-type(1) {
     margin: 50px 0 10px 40px;
+     margin-top: 20px;
    
 }
 
@@ -49,11 +51,13 @@ section.allhugi article {
     margin-left: 40px;
     letter-spacing: 1px;
     font-size: 15px;
+     margin-top: -20px;
 }
 
 .hugiIntro > div div:nth-of-type(2) {
     color: black;
     font-size: 50px;
+    margin-top: -40px;
     margin-left: 40px;
 }
 
@@ -62,13 +66,14 @@ section.allhugi article {
     background-color: #EBEBEB;
     height: 2px;
     margin-left: 40px;
+    margin-top:-30px;
 }
 
 .hugiIntro > div div:nth-of-type(4) {
     color: black;
     font-size: 17px;
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .hugiIntro > div img:nth-of-type(2) {
@@ -89,6 +94,7 @@ section.allhugi article {
     margin: 0 0 20px 40px;
     color: black;
     font-size: 30px;
+    
 }
 
 .rine {
@@ -112,15 +118,15 @@ section.allhugi article {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    top: 40px;
-    left: 40px;
+    top: 70px;
+    left: 25px;
 }
 
 .reviewName {
     position: relative;
     font-size: 20px;
-    color: black;
-    top: 0px;
+    color: gray;
+    top: -20px;
     left: 140px;
 }
 
@@ -128,7 +134,7 @@ section.allhugi article {
 
 .reviewContent {
     position: relative;
-    top: 30px;
+    top: -50px;
     box-sizing: border-box;
     left: 140px;
     color: #505050; 
@@ -141,6 +147,7 @@ section.allhugi article {
     font-size: 18px;
     line-height: 1.4;
     width:500px;
+    
 }
 
 .reviewText span {
@@ -165,7 +172,7 @@ section.allhugi article {
     position: relative;
     font-size: 19px;
     right: -350px;
-    top: 0;
+    top: -20px;
     display: flex;
     box-sizing: border-box;
 }
@@ -188,8 +195,8 @@ section.allhugi article {
     display: inline-block;
     width: 100px;
     height: 15px;
-    left:60px;
-    top:0px;
+    left:57px;
+    top:-25px;
     margin-left: 10px;
    
     background-color: #ef6c00;
@@ -200,8 +207,8 @@ section.allhugi article {
 	 display: inline-block;
 	width: 100px;
    font-size:17px;
-    left:175px;
-    top:-34px;
+    left:170px;
+    top:-73px;
 }
  /* 사이드바 스타일 */
        #review-level{
@@ -210,7 +217,9 @@ section.allhugi article {
         	box-sizing:border-box;
         	width:15pc;
         	background:#fff;
+        	z-index: 9999; 
         	border:1px solid #dcdcdc;
+        	margin-right:115px;
         	box-shadow:0 2px 6px 0 rgba(0,0,0,.1)
         	}
         .review-title{
@@ -219,10 +228,13 @@ section.allhugi article {
     		font-size: 18pt;
     		padding: 36px 0 9pt;
     		border-bottom: 2px solid #f2f2f2;
+        	
+        
         }
         .level-list{
          	margin: 0;
     		padding: 0;
+    		
         }
         
         .level-select{
@@ -245,11 +257,11 @@ section.allhugi article {
 		}
 		.titleName{
 		 position: relative;
-    	font-size: 20px;
+    	font-size: 25px;
     	color: gray;
-    	top: -30px;
+    	top:  0px;
     	left: 120px;
 			
 			
 		}
-		}
+		

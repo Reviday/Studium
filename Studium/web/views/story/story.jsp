@@ -12,11 +12,12 @@ int Certificatetotaldata = (int)request.getAttribute("Certificatetotaldata");
 int Employmenttotaldata = (int)request.getAttribute("Employmenttotaldata"); 
 %>
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css">
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/story.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap">
-   
+  
     
     <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
@@ -25,7 +26,7 @@ int Employmenttotaldata = (int)request.getAttribute("Employmenttotaldata");
 	<section class="allhugi">
         <!-- 전체후기페이지 -->
       <aside id="review-level">
-            	<div class="review-title" href="<%=request.getContextPath()%>/score">종류별</div>
+            	<div class="review-title"  href="<%=request.getContextPath()%>/score">종류별</div>
             	<ul class="level-list">
             	<li class="level-select-wrap">
             			<a class="level-select" href="<%=request.getContextPath()%>/story">전체(<%=totaldata%>)</a>
