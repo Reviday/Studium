@@ -83,9 +83,41 @@ public class FstudyUpdateServlet extends HttpServlet {
 		 String intro1=mr.getParameter("p_intro1");
 		 String intro2=mr.getParameter("p_intro2");
 		 String imgtitle=mr.getFilesystemName("p_imgtitle");
-		 String img1=mr.getFilesystemName("p_img1");
-		 String img2=mr.getFilesystemName("p_img2");
-		 String img3=mr.getFilesystemName("p_img3");
+		 String ori_file=mr.getParameter("ori_file");//파일 삭제용
+			String ori_file1=mr.getParameter("ori_file1");//파일 삭제용
+			String ori_file2=mr.getParameter("ori_file2");//파일 삭제용
+			String ori_file3=mr.getParameter("ori_file3");//파일 삭제용
+				File f=mr.getFile("p_imgtitle");//새로들어온 파일 
+				if(f!=null&&f.length()>0) {
+					File deleteFile=new File(saveDir+"\\"+ori_file);
+					boolean result=deleteFile.delete();
+				}else {
+					imgtitle=ori_file;
+				}
+				 String img1=mr.getFilesystemName("p_img1");
+				 String img2=mr.getFilesystemName("p_img2");
+				 String img3=mr.getFilesystemName("p_img3");
+				File f1=mr.getFile("p_img1");//새로들어온 파일 
+				if(f1!=null&&f1.length()>0) {
+					File deleteFile=new File(saveDir+"\\"+ori_file);
+					boolean result=deleteFile.delete();
+				}else {
+					img1=ori_file1;
+				}
+				File f2=mr.getFile("p_img2");//새로들어온 파일 
+				if(f2!=null&&f2.length()>0) {
+					File deleteFile=new File(saveDir+"\\"+ori_file);
+					boolean result=deleteFile.delete();
+				}else {
+					img2=ori_file2;
+				}
+				File f3=mr.getFile("p_img3");//새로들어온 파일 
+				if(f3!=null&&f3.length()>0) {
+					File deleteFile=new File(saveDir+"\\"+ori_file);
+					boolean result=deleteFile.delete();
+				}else {
+					img3=ori_file3;
+				}
 		 System.out.println("text: " + mr.getParameter("p_timeend"));
 		 String timestart=mr.getParameter("p_timestart");
 		 String timeend=mr.getParameter("p_timeend");

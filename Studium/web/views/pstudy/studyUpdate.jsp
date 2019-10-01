@@ -273,8 +273,7 @@
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
                                                     <%if(p.getpImgtitle()!=null){ %>
                                                     <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/>
-                                                    <INPUT TYPE="hidden" NAME="ori_p_imgtitle" value="<%=p.getpImgtitle() %>" size=50/>
-                                                    <span class="pimg"><%=p.getpImgtitle() %></span>
+                                                    <INPUT TYPE="hidden" NAME="ori_file" value="<%=p.getpImgtitle() %>" size=50/>
                                                     <%}else{ %>
                                                     <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/>
                                                     <%} %>
@@ -285,22 +284,37 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                     <%if(p.getpImg1()!=null){ %>
                                                     <INPUT TYPE="file"NAME="p_img1" id="p_img1"  size=50/>
+                                                     <INPUT TYPE="hidden" NAME="ori_file1" value="<%=p.getpImg1() %>" size=50/>
                                                       <div id="preview1"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg1()%>" width="100px" height="100px"> </div>
+                                                      <%}else{ %>
+                                                       <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50/>
+                                                      <%} %>
                                                       </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
-                                                      <div id="preview2"><img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg2()%>" width="100px" height="100px"> </div>
+                                                    <%if(p.getpImg2()!=null){ %>
+                                                    <INPUT TYPE="file"NAME="p_img2" id="p_img2"  size=50/>
+                                                     <INPUT TYPE="hidden" NAME="ori_file2" value="<%=p.getpImg2() %>" size=50/>
+                                                      <div id="preview2"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg2()%>" width="100px" height="100px"> </div>
+                                                      <%}else{ %>
+                                                       <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
+                                                      <%} %>
                                                       </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file" NAME="p_img3"  id="p_img3"size=50/>
-                                                      <div id="preview3"><img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg3()%>" width="100px" height="100px"></div>
+                                                   <%if(p.getpImg1()!=null){ %>
+                                                    <INPUT TYPE="file"NAME="p_img3" id="p_img3"  size=50/>
+                                                     <INPUT TYPE="hidden" NAME="ori_file3" value="<%=p.getpImg3() %>" size=50/>
+                                                      <div id="preview3"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getpImg3()%>" width="100px" height="100px"> </div>
+                                                      <%}else{ %>
+                                                       <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=50/>
+                                                      <%} %>
                                                       </td>
                                                 </tr>
                                                 <tr>

@@ -134,7 +134,7 @@ body{
 							if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
 						%>
 							<div class="drawing-near">마감 임박</div>
-							<%}else if(p.getpStudypserson()-p.getpStudyMember()==0){%>
+							<%}else if(p.getpStudypserson()==p.getpStudyMember()){%>
 							<div class="full-cover">마감</div>
 							<% }else{ %>
 							<div class="recruiting-status new">신규모집</div>
@@ -227,15 +227,15 @@ body{
 						diffDays = diff / (24 * 60 * 60 * 1000);
 						
 						
-							if((diffDays<=10&&diffDays>=1)){ %>
+							if((diffDays<=10&&diffDays>=1&&p.getpStudypserson()!=p.getpStudyMember())){ %>
 						
 						<div class="drawing-near">마감 임박</div>
 
 					<%}else if(diffDays>10){ 
-						if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()-p.getpStudyMember()>0){
+						if(p.getpStudypserson()-p.getpStudyMember()<3&&p.getpStudypserson()!=p.getpStudyMember()){
 					%>
 						<div class="drawing-near">마감 임박</div>
-						<%}else if(p.getpStudypserson()-p.getpStudyMember()==0){%>
+						<%}else if(p.getpStudypserson()==p.getpStudyMember()){%>
 						<div class="full-cover">마감</div>
 						<% }else{ %>
 						<div class="recruiting-status new">신규모집</div>
