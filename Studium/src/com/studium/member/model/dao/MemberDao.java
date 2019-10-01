@@ -622,7 +622,6 @@ public class MemberDao {
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 				list.add(s);
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

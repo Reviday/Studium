@@ -77,10 +77,16 @@ public class ReviewUpdateServlet extends HttpServlet {
 		int totalstar=0;
 		List<Story> slist=service.starReview(pNo);
 		for(int i=1; i<slist.size()+1; i++) {
-			sum+=slist.get(i).getStoryStar();
-			
+			sum+=slist.get(i-1).getStoryStar();
+			if(slist.size()==0) {
+				totalstar=sum;
+				int results=pService.updatePstudyStar(pNo,totalstar);
+			}else {
+				totalstar=sum/slist.size();
+				int results=pService.updatePstudyStar(pNo,totalstar);
+			}
 		}
-		int results=pService.updatePstudyStar(pNo,totalstar);
+		
 		
 		String memo="넘기는값";
 		response.setContentType("application/json;charset=UTF-8");
