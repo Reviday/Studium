@@ -424,6 +424,28 @@ start with 1
 increment by 1
 maxvalue 999999;
 
+-- 공유마당 파일
+create table boast_madang_file (
+    bmf_no number primary key,-- 파일 번호 
+    madang_no number references ta_boast_madang(madang_no), -- 마당글 번호
+    member_no number references ta_member(mem_no), -- 회원 번호
+    bmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
+    bmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
+    bmf_download_count number, -- 다운로드 회수
+    bmf_filesize number, -- 파일 크기
+--  bmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
+--  bmf_width number default null, -- 이미지일 경우 이미지 가로값
+--  bmf_height number default null, -- 이미지일 경우 이미지 세로값
+    bmf_type varchar2(20), -- 파일 확장자
+    bmf_datetime date, -- 등록일자
+    bmf_ip varchar2(20) -- 등록 ip
+);
+
+create sequence bm_file_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 
 -- 사이드 메뉴 바 요소를 위한 테이블
 create table ta_sidemenu_elements (
