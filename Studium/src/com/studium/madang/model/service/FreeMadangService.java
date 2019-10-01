@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.studium.madang.model.dao.FreeMadangDao;
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.madang.model.vo.FreeMadangFile;
 
 public class FreeMadangService {
 
@@ -88,6 +89,15 @@ public class FreeMadangService {
 				commit(conn);
 			} rollback(conn);
 		} 
+		close(conn);
+		return result;
+	}
+	
+	public int insertFile(FreeMadangFile fmf) {
+		Connection conn=getConnection();
+		int result=dao.insertFile(conn, fmf);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

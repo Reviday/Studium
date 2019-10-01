@@ -61,7 +61,7 @@
         </div>
         <hr />
         <div class="write_form">
-            <form action="<%=request.getContextPath()%>/madang/<%=locate%>/writeEnd" method="post" id="frm">
+            <form action="<%=request.getContextPath()%>/madang/<%=locate%>/writeEnd" method="post" id="frm" enctype="Multipart/form-data">
                 <div class="subject_cover">
                     <ul class="subject">
                         <li class="post_subject">
@@ -180,9 +180,9 @@
                         <li class="post_subCategory">
                             <label class="item" for="subCategory">상세<br/>카테고리</label>
                             <div class="inputInteresting" style="margin-left:68px; margin-top:10px;">
-                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
-                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
-                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
+                            	<input type="text" name="subCategory1" class="subCategory" id="subCategory1" placeholder="상세 카테고리를 입력해주세요.">
+                            	<input type="text" name="subCategory2" class="subCategory" id="subCategory2" placeholder="상세 카테고리를 입력해주세요.">
+                            	<input type="text" name="subCategory3" class="subCategory" id="subCategory3" placeholder="상세 카테고리를 입력해주세요.">
                             	<div class="subscript">
                             		<small>상세 카테고리는 최소 0개, 최대 3개까지 입력 가능하고<br/>첫 번째 카테고리의 내용이 제목에 출력됩니다.</small>
                             	</div>

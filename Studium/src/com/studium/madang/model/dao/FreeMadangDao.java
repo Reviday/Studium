@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.madang.model.vo.FreeMadangFile;
 import com.studium.member.model.service.MemberService;
 
 public class FreeMadangDao {
@@ -271,4 +272,26 @@ public class FreeMadangDao {
 			close(pstmt);
 		} return result;
 	}
-}
+	
+	public int insertFile(Connection conn, FreeMadangFile fmf) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertFile");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fmf.getMadangNo());
+			pstmt.setInt(2, fmf.getMemberNo());
+			pstmt.setString(3, fmf.getFmfOriginalFilename());
+			pstmt.setString(4, fmf.getFmfRenameFilename());
+			pstmt.setLong(5, fmf.getFmfFilesize());
+			pstmt.setString(6, fmf.getFmfType());
+			pstmt.setString(7, fmf.getFmfIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+ }

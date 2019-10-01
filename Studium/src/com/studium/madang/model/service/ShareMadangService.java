@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.studium.madang.model.dao.ShareMadangDao;
 import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.vo.ShareMadangFile;
 
 public class ShareMadangService {
 
@@ -76,5 +77,14 @@ public class ShareMadangService {
 			rollback(conn);
 		close(conn);
 		return madangNo;
+	}
+	
+	public int insertFile(ShareMadangFile smf) {
+		Connection conn=getConnection();
+		int result=dao.insertFile(conn, smf);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }
