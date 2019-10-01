@@ -365,7 +365,7 @@
                 <div class="pay-line"></div> <!-- 구분 선 -->
                 <div class="hugi">
                     <!-- 후기 버튼 -->
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>//story">
                         <stong>100% 리얼 후기</stong> (<%=totaldata %>)
                     </a>
                 </div>
