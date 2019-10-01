@@ -1,278 +1,299 @@
-        #madang_writer {
-        	margin: 0;
-        	padding: 0;
-        }
+#madang_writer {
+	margin: 0;
+	padding: 0;
+}
 
-        ul,
-        li,
-        ol,
-        dl {
-        	list-style: none;
-        }
+ul, li, ol, dl {
+	list-style: none;
+}
 
-        #madang_writer ul.none_style {
-        	list-style: none;
-        }
+#madang_writer ul.none_style {
+	list-style: none;
+}
 
-        #madang_writer ul,
-        #madang_writer td,
-        #madang_writer input,
-        #madang_writer textarea {
-        	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
-        }
+#madang_writer ul, #madang_writer td, #madang_writer input,
+	#madang_writer textarea {
+	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+		sans-serif;
+}
 
-        #madang_writer div,
-        #madang_writer ul,
-        #madang_writer td,
-        #madang_writer input,
-        #madang_writer textarea {
-        	font-size: 12px;
-        	color: #333333;
-        }
+#madang_writer div, #madang_writer ul, #madang_writer td, #madang_writer input,
+	#madang_writer textarea {
+	font-size: 12px;
+	color: #333333;
+}
 
-        #madang_writer .write_form {
-        	background-color: rgba(239, 108, 0, 0.05);
-        	border-radius: 5px;
-        	border-style: solid;
-        	border-width: 1px;
-        	border-right: none;
-        	border-left: none;
-        	border-top-color: rgba(239, 108, 0, 0.4);
-        	border-bottom-color: rgba(239, 108, 0, 0.4);
-        	padding: 10px 0;
-        	clear: both;
-        	margin-bottom: 200px !important;
-        }
+#madang_writer .write_form {
+	background-color: rgba(239, 108, 0, 0.05);
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-right: none;
+	border-left: none;
+	border-top-color: rgba(239, 108, 0, 0.4);
+	border-bottom-color: rgba(239, 108, 0, 0.4);
+	padding: 10px 0;
+	clear: both;
+	margin-bottom: 200px !important;
+}
 
-        #madang_writer .smdarteditor_area {
-        	margin-inline-start: 5%;
-        	position: relative;
-        }
+#madang_writer .smdarteditor_area {
+	margin-inline-start: 5%;
+	position: relative;
+}
 
-        #madang_writer .write_form textarea {
-			margin-inline-start: 5%;
-			width: 94%;
-			height: 466px;
-			min-width: 612px;
-        }
+#madang_writer .write_form textarea {
+	margin-inline-start: 5%;
+	width: 94%;
+	height: 466px;
+	min-width: 612px;
+}
 
-        #madang_writer .write_form .subject_cover {
-        	padding-inline-start: 5%;
-        }
+#madang_writer .write_form .subject_cover {
+	padding-inline-start: 5%;
+}
 
-        #madang_writer .write_form ul.subject {
-        	overflow: hidden;
-			width: 94%;
-			min-width: 612px;
-        	background-color: rgba(239, 108, 0, 0.01);
-        	border: 1px solid rgba(239, 108, 0, 0.3);
-        	border-radius: 10px;
-        	padding: 10px 20px;
-        	margin-top: 20px;
-        	margin-bottom: 50px;
-        }
+#madang_writer .write_form ul.subject {
+	overflow: hidden;
+	width: 94%;
+	min-width: 612px;
+	background-color: rgba(239, 108, 0, 0.01);
+	border: 1px solid rgba(239, 108, 0, 0.3);
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
 
-        #madang_writer .write_form ul.subject li {
-        	position: relative;
-        	margin: 0 0 9px 0;
-        }
+#madang_writer .write_form ul.subject li {
+	position: relative;
+	margin: 0 0 9px 0;
+}
 
-        #madang_writer .write_form .post_subject {
-        	z-index: 2;
-        }
+#madang_writer .write_form .post_subject {
+	z-index: 2;
+}
 
-        #madang_writer .write_form ul.subject .item {
-        	position: absolute;
-        	left: 0;
-        	top: 5px;
-        	width: 68px;
-        	font-weight: bold;
-        	color: #444444;
-        	font-size: 12px;
-        }
+#madang_writer .write_form ul.subject .item {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	width: 68px;
+	font-weight: bold;
+	color: #444444;
+	font-size: 12px;
+}
 
-        #madang_writer .write_form ul.subject .box_input {
-        	width: 478px;
-        	height: 21px;
-        	padding: 3px 0 3px 3px;
-        	margin-top: 6px;
-        	color: #8C8C8C;
-        	font-size: 12px;
-        	border: 1px solid #A7A7A7;
-        	border-bottom: 1px solid #D8D8D8;
-        	border-right: 1px solid #D8D8D8;
-        	background-color: #FBFBFB;
-        	-webkit-box-sizing: border-box;
-        	box-sizing: border-box;
-        }
+#madang_writer .write_form ul.subject .box_input {
+	width: 478px;
+	height: 21px;
+	padding: 3px 0 3px 3px;
+	margin-top: 6px;
+	color: #8C8C8C;
+	font-size: 12px;
+	border: 1px solid #A7A7A7;
+	border-bottom: 1px solid #D8D8D8;
+	border-right: 1px solid #D8D8D8;
+	background-color: #FBFBFB;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
-        #madang_writer .write_form ul.subject .item {
-        	top: 3px;
-        }
+#madang_writer .write_form ul.subject .item {
+	top: 3px;
+}
 
-        #madang_writer .write_form ul.subject .item {
-        	position: absolute;
-        	left: 0;
-        	top: 5px;
-        	width: 68px;
-        	font-weight: bold;
-        	color: #444444;
-        	font-size: 12px;
-        }
+#madang_writer .write_form ul.subject .item {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	width: 68px;
+	font-weight: bold;
+	color: #444444;
+	font-size: 12px;
+}
 
-        #madang_writer .write_form ul.subject div.label {
-        	padding: 0 0 0 68px;
-        }
+#madang_writer .write_form ul.subject div.label {
+	padding: 0 0 0 68px;
+}
 
-        #madang_writer .write_form .file_attach_menu ul {
-        	float: left;
-        	width: 670px;
-        	height: 20px;
-        	_height: 25px;
-        }
+#madang_writer .write_form .file_attach_menu ul {
+	float: left;
+	width: 670px;
+	height: 20px;
+	_height: 25px;
+}
 
-        #madang_writer .write_form .file_attach_menu li {
-        	float: left;
-        	width: auto !important;
-        	padding: 0 3px 0 4px;
-        	background: url(https://cafe.pstatic.net/editor/icon/line_v_bar.gif) 0 6px no-repeat;
-        	color: #D1D1D1;
-        	font-size: 11px;
-        }
+#madang_writer .write_form .file_attach_menu li {
+	float: left;
+	width: auto !important;
+	padding: 0 3px 0 4px;
+	background: url(https://cafe.pstatic.net/editor/icon/line_v_bar.gif) 0
+		6px no-repeat;
+	color: #D1D1D1;
+	font-size: 11px;
+}
 
-        #madang_writer .write_form .file_attach_menu li a {
-        	padding: 5px 0 2px 17px;
-        	padding: 5px 0 0 17px;
-        	margin: 0 6px 0 7px;
-        	color: #222;
-        	display: inline-block;
-        	height: 20px;
-        }
+#madang_writer .write_form .file_attach_menu li a {
+	padding: 5px 0 2px 17px;
+	padding: 5px 0 0 17px;
+	margin: 0 6px 0 7px;
+	color: #222;
+	display: inline-block;
+	height: 20px;
+}
 
-        #madang_writer .write_form .file_attach_menu .ico_file {
-        	color: #222;
-        	padding-left: 15px;
-        	background: url(https://cafe.pstatic.net/editor/icon/ico_file2.gif) 0 3px no-repeat;
-		}
-		
-		.main-area {
-			width: 100%;
-			max-width: 850px;
-			min-width: 680px;
-		}
+#madang_writer .write_form .file_attach_menu .ico_file {
+	color: #222;
+	padding-left: 15px;
+	background: url(https://cafe.pstatic.net/editor/icon/ico_file2.gif) 0
+		3px no-repeat;
+}
 
-		.write_form {
-			width: 100%;
-			max-width: 920px;
-			min-width: 680px;
-		}
+.main-area {
+	width: 100%;
+	max-width: 850px;
+	min-width: 680px;
+}
 
-        .write_form #fileDB:after {
-        	content: "";
-        	display: inline;
-        	clear: both;
-        }
+.write_form {
+	width: 100%;
+	max-width: 920px;
+	min-width: 680px;
+}
 
-        .write_form .write_tag {
-        	position: absolute;
-        	top: -32px;
-        	z-index: -1;
-        }
+.write_form #fileDB:after {
+	content: "";
+	display: inline;
+	clear: both;
+}
 
-        .write_form .write_tag label {
-        	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
-        	font-weight: bold;
-        	color: #444444;
-        	font-size: 12px;
-        	border: 1px solid #ccc;
-        	background-color: #fff;
-        	border-radius: 10px;
-        	font-size: 12px;
-        	padding: 0.7em 1.7em;
-        	margin-bottom: -10px;
-        }
+.write_form .write_tag {
+	position: absolute;
+	top: -32px;
+	z-index: -1;
+}
 
-        .write_form .post_btns {
-			width: 94%;
-        	min-width: 544px;
-        	margin-top: 9px;
-        	text-align: right;
-        }
+.write_form .write_tag label {
+	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+		sans-serif;
+	font-weight: bold;
+	color: #444444;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 10px;
+	font-size: 12px;
+	padding: 0.7em 1.7em;
+	margin-bottom: -10px;
+}
 
-        .write_form .btn_type1 {
-        	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
-        	font-weight: bold;
-        	color: #444444;
-        	font-size: 12px;
-        	display: inline-block;
-        	min-width: 56px;
-        	height: 36px;
-        	padding: 6px 20px;
-        	-webkit-box-sizing: border-box;
-        	box-sizing: border-box;
-        	border: 1px solid rgba(239, 108, 0, 0.3);
-        	background-color: rgba(239, 108, 0, 0.08);
-        	text-align: center;
-        	vertical-align: top;
-        	margin-right: 10px;
-        	border-radius: 10px;
-        }
+.write_form .post_btns {
+	width: 94%;
+	min-width: 544px;
+	margin-top: 9px;
+	text-align: right;
+}
 
+.write_form .btn_type1 {
+	font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+		sans-serif;
+	font-weight: bold;
+	color: #444444;
+	font-size: 12px;
+	display: inline-block;
+	min-width: 56px;
+	height: 36px;
+	padding: 6px 20px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid rgba(239, 108, 0, 0.3);
+	background-color: rgba(239, 108, 0, 0.08);
+	text-align: center;
+	vertical-align: top;
+	margin-right: 10px;
+	border-radius: 10px;
+}
 
-        #file_attach_menu input[type="file"] {
-        	position: absolute;
-        	width: 1px;
-        	height: 1px;
-        	padding: 0;
-        	margin: -1px;
-        	overflow: hidden;
-        	clip: rect(0, 0, 0, 0);
-        	border: 0;
-        }
+#file_attach_menu input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
 
-        /* named upload */
-        .write_form .filebox .upload-name {
-        	display: inline-block;
-        	width: 250px;
-        	padding: .5em .75em;
-        	/* label의 패딩값과 일치 */
-        	font-size: inherit;
-        	font-family: inherit;
-        	line-height: normal;
-        	vertical-align: baseline;
-        	background-color: #f5f5f5;
-        	border: 1px solid #ebebeb;
-        	border-bottom-color: #e2e2e2;
-        	border-radius: .25em;
-        	-webkit-appearance: none;
-        	/* 네이티브 외형 감추기 */
-        	-moz-appearance: none;
-        	appearance: none;
-        	margin-left: 68px;
-        }
+/* named upload */
+.write_form .filebox .upload-name {
+	display: inline-block;
+	width: 250px;
+	padding: .5em .75em;
+	/* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: baseline;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none;
+	/* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+	margin-left: 68px;
+}
 
-        /* file upload API */
-        #progress_bar {
-        	margin: 10px 0;
-        	padding: 3px;
-        	width: 80%;
-        	border: 1px solid rgba(239, 108, 0, 0.3);
-        	border-radius: 10px;
-        	font-size: 14px;
-        	clear: both;
-        	display: none;
-        	-moz-transition: opacity 1s linear;
-        	-o-transition: opacity 1s linear;
-        	-webkit-transition: opacity 1s linear;
-        }
+/* file upload API */
+#progress_bar {
+	margin: 10px 0;
+	padding: 3px;
+	width: 80%;
+	border: 1px solid rgba(239, 108, 0, 0.3);
+	border-radius: 10px;
+	font-size: 14px;
+	clear: both;
+	display: none;
+	-moz-transition: opacity 1s linear;
+	-o-transition: opacity 1s linear;
+	-webkit-transition: opacity 1s linear;
+}
 
-        #progress_bar.loading {
-        	display: block;
-        }
+#progress_bar.loading {
+	display: block;
+}
 
-        #progress_bar .percent {
-        	background-color: #ef6c00;
-        	border-radius: 10px;
-        	height: auto;
-        	width: 0;
-        }
+#progress_bar .percent {
+	background-color: #ef6c00;
+	border-radius: 10px;
+	height: auto;
+	width: 0;
+}
+
+.post_subCategory input {
+	width: 100%;
+	margin-bottom: 5px;
+    height: 21px;
+    padding: 3px 0 3px 3px;
+    margin-top: 6px;
+    color: #8C8C8C;
+    font-size: 12px;
+    border: 1px solid #A7A7A7;
+    border-bottom: 1px solid #D8D8D8;
+    border-right: 1px solid #D8D8D8;
+    background-color: #FBFBFB;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.post_subCategory .subscript {
+	line-height: 1em;
+}
+
+.post_subCategory .subscript small{
+	font-weight: bold;
+	color: #ccc;
+}

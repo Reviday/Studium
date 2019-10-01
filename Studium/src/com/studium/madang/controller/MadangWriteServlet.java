@@ -8,9 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.studium.member.model.vo.Member;
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -56,6 +56,12 @@ public class MadangWriteServlet extends HttpServlet {
 		// SideMenuElement
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
 		
+        
+		List<Category> mCategoryList=new CategoryService().selectTitleB();//대분류
+        List<Category> categoryList=new CategoryService().selectTitleM();//중분류
+        
+        request.setAttribute("mCategoryList", mCategoryList);
+        request.setAttribute("categoryList", categoryList);
 	
 		request.setAttribute("locate", locate);
 		request.setAttribute("elements", elements);

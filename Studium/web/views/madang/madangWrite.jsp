@@ -1,7 +1,10 @@
+<%@page import="com.studium.category.model.vo.Category"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
  <%
  	String locate=(String)request.getAttribute("locate");
+ 	List<Category> mCategoryList=(List)request.getAttribute("mCategoryList");
+ 	List<Category> categoryList=(List)request.getAttribute("categoryList");
  
  	//게시판 마다 띄워줄 제목과 문구 처리.
  	//추후, DB에 넣어서 가져오는 방법으로 처리할 예정.
@@ -26,6 +29,7 @@
 <script type="text/javascript"
    src="<%=request.getContextPath()%>/SE2/js/HuskyEZCreator.js"
    charset="utf-8"></script>
+ </style>
 <div class="header-background"
 	style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 	<div class="header-background-cover"></div>
@@ -40,7 +44,17 @@
         <div class="madang-list mldiv">
             <div class="sub-tit row mldiv">
                 <div class="title-area mldiv">
-                    <h3 class="list-title"><%=mTit%></h3>
+                	<%
+                		if(locate.equals("free")) {
+                			%>
+                				<h3 class="list-title"><%=mTit%></h3>
+                			<%
+                		} else {
+                			%>
+                				<h3 class="list-title"><%=mTit%><%=choiceSub!=null?" - " +choiceSub:""%></h3>
+                			<%
+                		}
+                	%>
                     <p class="list-sub"><%=mSub%></p>
                 </div>
             </div>
@@ -134,6 +148,50 @@
                                 </script>
                             </div>
                         </li>
+                        <%
+                        	if(!locate.equals("free")) {
+                        %>
+                        <li class="post_mCategory">
+                            <label class="item" for="mCategory">카테고리</label>
+                            <div class="inputInteresting" style="margin-left:68px;">
+								<% if(!categoryList.isEmpty()&&!mCategoryList.isEmpty()){
+									//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
+									
+									for(int i=0;i<mCategoryList.size();i++){
+										
+										if(mCategoryList.get(i).getTitleB().equals(choiceSub)) {
+									%>
+									<div><p><%=mCategoryList.get(i).getTitleB()%></p></div>
+									
+										<% for(int j=0;j<categoryList.size();j++){
+											if(mCategoryList.get(i).getCategoryBId().equals(categoryList.get(j).getCategoryBId())){%>
+												<label class="check-label">
+			                                        <input type="radio" class="option-input checkbox"  name="inter" required
+			                                        	id="<%=categoryList.get(j).getCategoryMId()%>" value="<%=categoryList.get(j).getTitleM() %>">
+			                                        <%=categoryList.get(j).getTitleM() %>
+			                                     </label>
+											<%}
+									}	
+									}
+								}
+								}%>
+                             </div>
+                        </li>
+                        <li class="post_subCategory">
+                            <label class="item" for="subCategory">상세<br/>카테고리</label>
+                            <div class="inputInteresting" style="margin-left:68px; margin-top:10px;">
+                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
+                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
+                            	<input type="text" class="subCategory" id="subCategory" placeholder="상세 카테고리를 입력해주세요.">
+                            	<div class="subscript">
+                            		<small>상세 카테고리는 최소 0개, 최대 3개까지 입력 가능하고<br/>첫 번째 카테고리의 내용이 제목에 출력됩니다.</small>
+                            	</div>
+                            </div>
+                        </li>
+                        <%
+								}
+                        %>
+                        
                     </ul>
                 </div>
 				<div class="smdarteditor_area">

@@ -43,7 +43,7 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">자랑마당</h3>
+					<h3 class="list-title">자랑마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
 					<p class="list-sub">자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!</p>
 				</div>
 			</div>
