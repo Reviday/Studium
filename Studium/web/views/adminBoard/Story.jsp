@@ -114,7 +114,7 @@
     }
     
     function deleteStory(cPage){
-    	
+ 
     	$.ajax({
 			url:"<%=request.getContextPath()%>/admindeleteStory",
 			type:"post",
