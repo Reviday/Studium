@@ -164,8 +164,7 @@
         		var params = jQuery("#search").serialize();
         		params+='&cPage='+cPage;
         		$.ajax({
-        			url: "<%=request.getContextPath()%>
-	/AdminStorySearch",
+        			url: "<%=request.getContextPath()%>/AdminStorySearch",
 				type : "POST",
 				dataType : "html",
 				data : params,
@@ -178,7 +177,7 @@
 	}
 </script>
 
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
 
 <%@ include file="/views/common/footer.jsp"%>
 

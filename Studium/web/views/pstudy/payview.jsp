@@ -133,9 +133,39 @@
         });
    
     </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script>
-    function fn_payment(){
+  <%--   function fn_payment(){
  	   location.href="<%=request.getContextPath()%>/pstudy/pstudyFinally?pNo=<%=p.getpNo()%>&mNo=<%=m.getMemNo()%>";
-    }
+    }  --%>
     
+    function fn_payment(){
+    	var IMP = window.IMP;
+    	IMP.init('iamport');
+    	IMP.request_pay({
+    	    pg : 'html5_inicis',
+    	    pay_method : 'vbank',
+    	    merchant_uid : 'merchant_' + new Date().getTime(),
+    	    name : '<%=p.getpTitle() %>',
+    	    amount : <%=p.getpPrice() %>,
+    	    buyer_email : '<%=m.getMemUserEmail() %>',
+    	    buyer_name : '<%=m.getMemName() %>',
+    	    buyer_tel : '<%=m.getMemPhone() %>',
+    	    buyer_addr : '<%=m.getMemAddress1()%>',
+    	    buyer_postcode : '<%=m.getMemZipCode()%>'
+    	}, function(rsp) {
+    	    if ( rsp.success ) {
+    	        var msg = '결제가 완료되었습니다.';
+    	    	location.href="<%=request.getContextPath()%>/pstudy/pstudyFinally?pNo=<%=p.getpNo()%>&mNo=<%=m.getMemNo()%>";
+
+    	    } else {
+    	        var msg = '결제에 실패하였습니다.';
+    	        msg += '에러내용 : ' + rsp.error_msg;
+    	    }
+
+    	    alert(msg);
+    	});
+     } 
     </script>
+   
