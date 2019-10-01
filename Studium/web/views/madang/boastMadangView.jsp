@@ -207,7 +207,7 @@
 									</div>
 									<div class="post_btns font-family-type1" style="display: inline;">
 										<a href="#" id="writeFormBtn"
-											onclick="fn_madangDelete('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','boast,'<%=bm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
+											onclick="fn_madangDelete('<%=loginMember!=null?loginMember.getMemNo():null%>','<%=request.getContextPath()%>','boast','<%=bm.getMadangNo() %>','<%=choice%>','<%=choiceSub%>','<%=cPage%>'); return false;"
 											class="btn_type1 post_write _rosRestrict" style="color:#000">삭제하기</a>
 									</div>
 								<%

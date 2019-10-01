@@ -99,7 +99,8 @@ function fn_madangUpdate(memCheck, path, locate, madangNo, choice, choiceSub, cP
 		fn_needLogin();
 	} else {
 		location.href = path + "/madang/madangUpdate?locate=" + locate +
-			"&madangNo=" + madangNo + "&choice=" + choice + "&choiceSub=" + choiceSub + "&cPage=" + cPage;
+			"&madangNo=" + madangNo + "&choice=" + choice + "&choiceSub=" + 
+			choiceSub + "&cPage=" + cPage;
 	}
 }
 
@@ -109,7 +110,8 @@ function fn_madangDelete(memCheck, path, locate, madangNo, choice, choiceSub, cP
 	} else {
 		if(confirm("정말로 삭제하시겠습니까?")) {
 			location.href = path + "/madang/" + locate + "MadangDelete" +
-			"?madangNo=" + madangNo + "&memNo=" + memCheck + "&choice=" + choice + "&choiceSub=" + choiceSub + "&cPage=" + cPage;	
+			"?madangNo=" + madangNo + "&memNo=" + memCheck + "&choice=" + 
+			choice + "&choiceSub=" + choiceSub + "&cPage=" + cPage;	
 		}
 	}
 }
