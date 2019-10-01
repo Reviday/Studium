@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.studium.fstudy.model.vo.Fstudy;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyPurchase;
 import com.studium.pstudy.model.dao.PstudyDao;
 import com.studium.pstudy.model.vo.Pstudy;
 
@@ -153,6 +154,12 @@ public class PstudyService {
 		else {rollback(conn);}
 		close(conn);
 		return result;
+	}
+	public List<MyPurchase> selectPurchase(){
+		Connection conn=getConnection();
+		List<MyPurchase> list=dao.selectPurchase(conn);
+		close(conn);
+		return list;
 	}
 
 

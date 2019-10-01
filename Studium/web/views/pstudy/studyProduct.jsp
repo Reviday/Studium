@@ -1,3 +1,4 @@
+<%@page import="com.studium.member.model.vo.MyPurchase"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,com.studium.pstudy.model.vo.Pstudy,com.studium.mypage.model.vo.MyDibs,com.studium.story.model.vo.Story" %>
@@ -6,6 +7,7 @@
      MyDibs md=(MyDibs)request.getAttribute("md"); 
      int totaldata =(Integer)request.getAttribute("totaldata");
      List<Story> slist=(List)request.getAttribute("slist");
+    List<MyPurchase> mlist=(List)request.getAttribute("mlist");
  %>
 <!DOCTYPE html>
 <html>
@@ -299,9 +301,13 @@
                 </div>
                 <div class="sinchung">
                     <!-- 신청 버튼 -->
-                    
-                    <input type="button" value="참여 신청하기" 
-                    <%
+                  
+                    <input type="button" value="참여 신청하기"
+						<%if(mlist.size()!=0){ 
+						for(MyPurchase m : mlist){  %>
+						<%if(m.getMemNo()==loginMember.getMemNo()) {%>
+							onclick="fn_ifAlert();"
+                    <%}}}
                     	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
@@ -318,6 +324,9 @@
                  	<%
                     	}
                     %>
+                    		
+                   
+                   
                     />
                     
                 </div>
@@ -480,7 +489,9 @@
       		   alert("추가 정보를 입력하세요");
       			location.href="<%=request.getContextPath()%>/myPage/addMyInfo";
         }    
-      	
+      	function fn_ifAlert(){
+      		return alert("이미 구매하신 스터디입니다");
+      	}
 		//1. 추가한 input a값 기준으로 파라미터로 보내
 		//2. 컨트롤러 에서 a 값에 따라 찜하기, 찜하기 풀기(?) 상태 변경
 		//3. 각각 경우에 따라 return값 다르게

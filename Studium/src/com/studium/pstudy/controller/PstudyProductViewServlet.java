@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.member.model.vo.MyPurchase;
 import com.studium.mypage.model.service.MyDibsService;
 import com.studium.mypage.model.vo.MyDibs;
 import com.studium.pstudy.model.service.PstudyService;
@@ -41,18 +42,21 @@ public class PstudyProductViewServlet extends HttpServlet {
 		int totalData=new StoryService().selectTotalnumberList(); 
 		List<Story> slist=new StoryService().selectPstudyStory(no);
 		Pstudy p=new PstudyService().selectpStudyVIew(no);
+		List<MyPurchase>mlist=new PstudyService().selectPurchase();
 		if(mNo!=0) {
 				if(slist.size()!=0) {
 			 MyDibs md=new MyDibsService().selectDibs(mNo,no); 
 				request.setAttribute("pstudy", p);
 				request.setAttribute("slist", slist);
 				request.setAttribute("md", md); 
+				request.setAttribute("mlist", mlist);
 				request.setAttribute("totaldata",totalData);
 				request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 			}else {
 				 MyDibs md=new MyDibsService().selectDibs(mNo,no); 
 					request.setAttribute("pstudy", p);
 					request.setAttribute("md", md); 
+					request.setAttribute("mlist", mlist);
 					request.setAttribute("totaldata",totalData);
 					request.setAttribute("slist", slist);
 					request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
@@ -61,12 +65,13 @@ public class PstudyProductViewServlet extends HttpServlet {
 			if(slist.size()!=0) {
 			request.setAttribute("pstudy", p);
 			request.setAttribute("slist", slist);
-			
+			request.setAttribute("mlist", mlist);
 			request.setAttribute("totaldata",totalData);
 			request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 			}else {
 				request.setAttribute("pstudy", p);
 				request.setAttribute("slist", slist);
+				request.setAttribute("mlist", mlist);
 				request.setAttribute("totaldata",totalData);
 				request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);	
 			}

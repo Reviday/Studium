@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.studium.member.model.dao.MemberDao;
 import com.studium.member.model.vo.Member;
+import com.studium.member.model.vo.MyPurchase;
 import com.studium.pstudy.model.vo.Pstudy;
 
 
@@ -781,6 +782,40 @@ public class PstudyDao {
 			close(pstmt);
 		}return result;
 		
+	}
+	public List<MyPurchase> selectPurchase(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectPurchase");
+		List<MyPurchase> list = new ArrayList<MyPurchase>();
+		MyPurchase mp = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// 테이블 변경을 고려하여 인수를 열 이름으로 사용
+				mp = new MyPurchase();
+				mp.setPurId(rs.getInt("pur_id"));
+				mp.setMemNo(rs.getInt("mem_no"));
+				mp.setpNo(rs.getInt("p_no"));
+				mp.setpTitle(rs.getString("p_title"));
+				mp.setPurchaseDate(rs.getDate("purchase_date"));
+				mp.setPurchaseCancelStatus(rs.getString("purchase_status").charAt(0));
+				mp.setCancelDate(rs.getDate("cancel_date"));
+				mp.setPurchaseStatus(rs.getString("purchase_status").charAt(0));
+				mp.setSubmitFile(rs.getString("submit_file").charAt(0));
+
+				list.add(mp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 }

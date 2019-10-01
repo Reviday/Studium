@@ -1,10 +1,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy,com.studium.mypage.model.vo.MyDibs" %>
+ <%@ page import="java.util.*,com.studium.fstudy.model.vo.Fstudy,com.studium.mypage.model.vo.MyDibs,com.studium.member.model.vo.*" %>
  <%
  	Fstudy p=(Fstudy)request.getAttribute("fstudy");
      MyDibs md=(MyDibs)request.getAttribute("md"); 
+     List<MyPurchase> mlist=(List)request.getAttribute("mlist");
  %>
 <!DOCTYPE html>
 <html>
@@ -178,12 +179,23 @@
                     <!-- 신청 버튼 -->
                     
                     <input type="button" value="참여 신청하기" 
+                    <%if(mlist.size()!=0){ 
+						for(MyPurchase m : mlist){  %>
+						<%if(m.getMemNo()==loginMember.getMemNo()) {%>
+							onclick="fn_ifAlert();"
+                    <%}}}%>
                     <%
                     	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/fstudy/fstudyPay?pNo=<%=p.getfNo()%>';"
-                    <% 		
-                    	} else {
+                   <% 		
+                    	} else if(loginMember!=null&&loginMember.getMemCode()=='A'){
+                    %>		
+                    
+                    	onclick="fn_addAlert();"
+                    <% 
+                    	}else {
+                    	
                     %>		
                  		onclick="fn_loginAlert();"
                  	<%
@@ -337,10 +349,13 @@
         function fn_loginAlert(){
         	return alert("로그인후 이용하세요 ");
         }
-        
-      	function fn_pay(){
-      		   
-        }    
+    	function fn_ifAlert(){
+      		return alert("이미 신청하신 스터디입니다");
+      	}
+    	function fn_addAlert(){
+   		   alert("추가 정보를 입력하세요");
+   			location.href="<%=request.getContextPath()%>/myPage/addMyInfo";
+    	 }     
       	
 		//1. 추가한 input a값 기준으로 파라미터로 보내
 		//2. 컨트롤러 에서 a 값에 따라 찜하기, 찜하기 풀기(?) 상태 변경
