@@ -1,8 +1,6 @@
 package com.studium.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,22 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studium.member.model.service.MemberService;
-import com.studium.member.model.vo.Member;
-import com.studium.member.model.vo.MyMemo;
-
-import common.template.LoginCheck;
 
 /**
- * Servlet implementation class settingEndServlet
+ * Servlet implementation class MyMemoDeleteServlet
  */
-@WebServlet("/myPage/myMemoEnd")
-public class MyMemoEndServlet extends HttpServlet {
+@WebServlet("/studium/MyMemoDelete")
+public class MyMemoDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyMemoEndServlet() {
+    public MyMemoDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +28,17 @@ public class MyMemoEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		if(!new LoginCheck().doLoginCheck(request, response, 1000)) return;
-		
-		int memberNo=Integer.parseInt(request.getParameter("no"));
-		int primary=Integer.parseInt(request.getParameter("primary"));
-		int frontId=Integer.parseInt(request.getParameter("id"));
-		int left=Integer.parseInt(request.getParameter("left"));
-		int top=Integer.parseInt(request.getParameter("top"));
-		String text=request.getParameter("val");
-		
-		
-		MemberService ms= new MemberService();
-		
-		MyMemo memo=new MyMemo();
-		memo.setMemNo(memberNo);
-		memo.setMemoFrontId(frontId);
-		memo.setMemoLeft(left);
-		memo.setMemoTop(top);
-		memo.setMemoContents(text);
-		
-		ms.updateMyMemo(memo, primary);
-
+		//status넘어오면 delete실행 
+		if(request.getParameter("primary")==null||request.getParameter("primary").equals("")) {
+			return;
 		}
+		int primary=Integer.parseInt(request.getParameter("primary"));
+
+		MemberService ms= new MemberService();
+		ms.deleteMyMemo(primary);
+		System.out.println("delte들어감");
+				
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

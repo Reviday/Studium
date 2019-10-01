@@ -304,8 +304,6 @@ $(function() {
     $('.btn-gotochat').click(function(e) {
     	var pNo = $(this).attr('id');
     	var memNo=<%=m.getMemNo()%>;
-    	console.log(pNo);
-    	console.log(memNo);
     	//히든값에 pNo 붙여줌
     	$(".hidden_no").val(pNo);
     	
@@ -324,7 +322,6 @@ $(function() {
                 	$(".review-wrapper").css("display","block");
         			$(".star-input").css("display","none");
     			}
-            	console.log("들어옴");
     		},
     		error:function (data){
     			console.log(data);
@@ -350,14 +347,13 @@ $('.review-btn').click(function(e) {
 	
  		var params = $("#memoform").serialize();
 
-		console.log('리뷰제출함수3');
+ 		
  		$.ajax({
  			url: "<%=request.getContextPath()%>/myPage/reviewUpdate",
  			type: "POST",
  			dataType: "json",
  			data: params,
  			success: function(data){
- 				console.log('제출성공');
  				$(".memo").text(data);	
  	        	$(".review-wrapper").css("display","none");
  				
