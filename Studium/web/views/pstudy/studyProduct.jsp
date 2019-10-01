@@ -162,7 +162,7 @@
 			<%}else if(p.getpLike()==5){ %>
 			<img src="<%=request.getContextPath()%>/img/star5.png" width=100px; class="star1">
 			<%} else{%>
-			
+			<p>아직 별점이 작성되지 않았습니다</p>
 			<%} %>
                    
 		<b><%=p.getpLike() %></b>점

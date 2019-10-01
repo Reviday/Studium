@@ -143,52 +143,14 @@
                 </div>
                 <div class="line-information-bottom"></div> <!-- 파트를 구분하는 선 div -->
                 <div class="review">
-                    <!-- 스터디 후기 -->
-                    <div class="review-1">
-                        <h2>리더에 대한 후기</h2>
-                        
-                    </div>
-                    <div class="star1">
-		         <%if(p.getfLike()==1){ %>
-				<img src="<%=request.getContextPath()%>/img/star1.png" width=100px; class="star1">
-			<%}else if(p.getfLike()==2) {%>
-			<img src="<%=request.getContextPath()%>/img/star2.png" width=100px; class="star1">
-			<%}else if(p.getfLike()==3){ %>
-			<img src="<%=request.getContextPath()%>/img/star3.png" width=100px; class="star1">
-			<%}else if(p.getfLike()==4){ %>
-			<img src="<%=request.getContextPath()%>/img/star4.png" width=100px; class="star1">
-			<%}else if(p.getfLike()==5){ %>
-			<img src="<%=request.getContextPath()%>/img/star5.png" width=100px; class="star1">
-			<%} else{%>
-			
-			<%} %>
-                   
-		<b><%=p.getfLike() %></b>점
-		</div>
+
                    
 		<div>
 		
 		</div>
 	
                     <div>
-                        <div class="review-2">
-                            <img src="https://cdn.studysearch.co.kr/images/users/201907/profile/1561957236" alt=""
-                                style="width:76px; height: 76px;">
-                            <div class="review-content">
-  
-
-                                <h2>김민주</h2>
-                                <textarea name="" id="" cols="60" rows="6" readonly>
-실제로 유용하게 쓰이는 문장들을 자주 읽고 반복하여 쉽고 재미있게 접근할수 있었습니다. 평소 영어로 말하기에 어려움을 겪고있던터라, 말하기 연습은 저에게 정말 유용했습니다. 영어에 어떻게 접근해야할지, 저에게 필요한 영어공부법은 무엇인지 깨닫게 해주는 소중한 경험이었습니다. 제이슨 감사합니당>__< bb
-                            </textarea>
-                                <div>
-                                    노하우 가득한 리더, Jason의 꿀잼 스터디로 회화두려움 극복
-                                </div>
-                                <div>
-                                    2019년 8월
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -272,10 +234,7 @@
                 </div>
                 <div class="pay-line"></div> <!-- 구분 선 -->
                 <div class="hugi">
-                    <!-- 후기 버튼 -->
-                    <a href="">
-                        <stong>100% 리얼 후기</stong> (5735)
-                    </a>
+  
                 </div>
                 <div class="pay-line"></div> <!-- 구분 선 -->
             </div>
