@@ -14,6 +14,7 @@
 
 
     <section id="paypay" >
+ 			
         <div class="pay-header">결제하기<span>.</span></div> 
         <article id="payview"> <!-- 수강신청 정보 섹션 -->
             <div>수강신청 정보</div>
@@ -48,8 +49,7 @@
                 <div><%=m.getMemPoint() %> </div> <!--수강인원포인트-->
             </div>
             <div class="pointSelect">
-                <input type="text" name="" id="">
-                <button>포인트 사용</button>
+  
             </div>
         </article>
         <article id="paymethod">
@@ -57,13 +57,13 @@
             <div class="rine1"></div> <!--경계선-->
             <div class="paymethod-select">
                 <label for="" class="check-label">
-                    <input class="option-input checkbox" type="checkbox"><span>신용카드결제</span>
+                    <input class="option-input checkbox" name="paymethodd" type="radio"><span>신용카드결제</span>
                 </label>
                 <label for="" class="check-label">
-                    <input class="option-input checkbox" type="checkbox"><span>실시간 계좌이체</span>
+                    <input class="option-input checkbox" name="paymethodd" type="radio"><span>실시간 계좌이체</span>
                 </label>
                 <label for="" class="check-label">
-                    <input class="option-input checkbox" type="checkbox"><span>무통장입금(가상계좌)</span>
+                    <input class="option-input checkbox" name="paymethodd" type="radio"><span>무통장입금(가상계좌)</span>
                 </label>
             </div>
             <div class="rine3"></div> <!-- 경계선-->
@@ -83,14 +83,14 @@
                     <div class="paypopup-answer1"><%=p.getpPrice() %>원</div>
                 </div>
                 <div>
-                    <img src="minus.png" alt="" class="img-payview">
+                    <img src="<%=request.getContextPath() %>/img/minus.png" alt="" class="img-payview">
                 </div> <!--마이너스 이미지-->
                 <div class="paypopup-answer"> <!--포인트할인-->
                     <div class="paypopup-subject">포인트 할인</div>
                     <div class="paypopup-answer1"><%=m.getMemPoint() %>원</div>
                 </div>
                 <div>
-                    <img src="equal.png" alt="" class="img-payview">
+                    <img src="<%=request.getContextPath() %>/img/equal.png" alt="" class="img-payview">
                 </div> <!-- = 이미지 -->
                 <div class="paypopup-answer"> <!--최종결제금액-->
                     <div class="paypopup-subject1">결제 금액</div>
@@ -108,14 +108,15 @@
             </div>
             <div class="payagree"> <!-- 결제동의, 버튼-->
                 <div>
-                    <label for="" class="check-label"><input type="checkbox" name="" id="" class="option-input checkbox">
-                        <span class="payagreespan">강의 및 결제 정보를 확인하였으며, 이에 동의합니다. (필수)</span>
+                    <label for="inter" class="check-label"><input type="checkbox" name="" id="inter" class="option-input checkbox">
+                        <span class="payagreespan" id="inter2">강의 및 결제 정보를 확인하였으며, 이에 동의합니다. (필수)</span>
                     </label>
                 </div>
    
                 <button onclick="fn_payment();">결제하기</button>
             </div>
         </div>
+    
     </section>
     <script>
         $(function () {
@@ -141,6 +142,15 @@
     }  --%>
     
     function fn_payment(){
+    	if (!$('input:radio[name="paymethodd"]').is(":checked")) {
+  		  alert('결제 수단에 체크해주세요');
+            return false;
+        }
+    	  if (!$('input:checkbox[name="inter"]').is(":checked")) {
+    		  alert('강의 및 결제 정보를 확인하였으며, 이에 동의해주세요');
+              return false;
+          }
+    	
     	var IMP = window.IMP;
     	IMP.init('iamport');
     	IMP.request_pay({
@@ -148,7 +158,7 @@
     	    pay_method : 'vbank',
     	    merchant_uid : 'merchant_' + new Date().getTime(),
     	    name : '<%=p.getpTitle() %>',
-    	    amount : <%=p.getpPrice() %>,
+    	    amount : <%=resultPay %>,
     	    buyer_email : '<%=m.getMemUserEmail() %>',
     	    buyer_name : '<%=m.getMemName() %>',
     	    buyer_tel : '<%=m.getMemPhone() %>',

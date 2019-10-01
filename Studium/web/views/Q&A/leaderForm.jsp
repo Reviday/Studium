@@ -89,7 +89,7 @@
 
 				<div class="wrap-input100 bg1 rs1-wrap-input100">
 					<span class="label-input100">핸드폰</span>
-					<input class="input100" type="text" name="phone" placeholder="Enter Number Phone">
+					<input class="input100" type="text" name="phone" id="phone" placeholder="Enter Number Phone">
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">

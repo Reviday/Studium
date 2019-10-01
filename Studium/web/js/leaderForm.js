@@ -15,7 +15,19 @@
             }
         })    
     })
-  
+         var regPhone = /^\d{3}\d{3,4}\d{4}$/;
+   var phone = $('#phone');
+            if (!phone.val()) {
+                alert('전화번호를 입력해주세요.');
+                phone.focus();
+                return false;
+            } else {
+                if (!regPhone.test(phone.val().trim())) {
+                    alert('전화번호 형식이 유효하지 않습니다.');
+                    phone.focus();
+                    return false;
+                }
+            }
   
     /*==================================================================
     [ Validate ]*/
@@ -30,7 +42,6 @@
                 check=false;
             }
         }
-
         return check;
     });
 

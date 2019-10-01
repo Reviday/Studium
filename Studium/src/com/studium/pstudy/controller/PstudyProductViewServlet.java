@@ -61,6 +61,7 @@ public class PstudyProductViewServlet extends HttpServlet {
 			if(slist.size()!=0) {
 			request.setAttribute("pstudy", p);
 			request.setAttribute("slist", slist);
+			
 			request.setAttribute("totaldata",totalData);
 			request.getRequestDispatcher("/views/pstudy/studyProduct.jsp").forward(request, response);
 			}else {
