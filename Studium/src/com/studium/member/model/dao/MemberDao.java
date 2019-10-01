@@ -254,16 +254,17 @@ public class MemberDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setDate(1, m.getMemBirth());
-			pstmt.setString(2, String.valueOf(m.getMemGender()));
-			pstmt.setString(3, m.getMemPhone());
-			pstmt.setString(4, m.getMemZipCode());
-			pstmt.setString(5, m.getMemAddress1());
-			pstmt.setString(6, m.getMemAddress2());
-			pstmt.setString(7, m.getMemCategory1());
-			pstmt.setString(8, m.getMemCategory2());
-			pstmt.setString(9, m.getMemCategory3());
-			pstmt.setInt(10, no);
+			pstmt.setString(1, "R");
+			pstmt.setDate(2, m.getMemBirth());
+			pstmt.setString(3, String.valueOf(m.getMemGender()));
+			pstmt.setString(4, m.getMemPhone());
+			pstmt.setString(5, m.getMemZipCode());
+			pstmt.setString(6, m.getMemAddress1());
+			pstmt.setString(7, m.getMemAddress2());
+			pstmt.setString(8, m.getMemCategory1());
+			pstmt.setString(9, m.getMemCategory2());
+			pstmt.setString(10, m.getMemCategory3());
+			pstmt.setInt(11, no);
 
 			result = pstmt.executeUpdate();
 
