@@ -337,12 +337,17 @@ $(function() {
 
 //리뷰제출버튼 눌렀을 때 
 $('.review-btn').click(function(e) {
+	//별점입력하는 창이 활성화 되어있을 때 
+	var visible_element = $('.star-input display:block');
+	//이 창이 있으면 별점 1개 이상 입력하게 조건걸어줌
+	if(visible_element.val()){
+		if (!$('input[name=star]:checked').val()) {
+	        $(this).prop('checked', false);
+	        alert("별점은 하나 이상 입력해야합니다.");
+	        return false;
+	    }
+	}
 	
-	if (!$('input[name=star]:checked').val()) {
-        $(this).prop('checked', false);
-        alert("별점은 하나 이상 입력해야합니다.");
-        return false;
-    }
  		var params = $("#memoform").serialize();
 
 		console.log('리뷰제출함수3');
