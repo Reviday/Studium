@@ -15,19 +15,7 @@
             }
         })    
     })
-         var regPhone = /^\d{3}\d{3,4}\d{4}$/;
-   var phone = $('#phone');
-            if (!phone.val()) {
-                alert('전화번호를 입력해주세요.');
-                phone.focus();
-                return false;
-            } else {
-                if (!regPhone.test(phone.val().trim())) {
-                    alert('전화번호 형식이 유효하지 않습니다.');
-                    phone.focus();
-                    return false;
-                }
-            }
+       
   
     /*==================================================================
     [ Validate ]*/
@@ -35,7 +23,19 @@
 
     $('.validate-form').on('submit',function(){
         var check = true;
-
+        var regPhone = /^\d{3}\d{3,4}\d{4}$/;
+        var phone = $('#phone');
+                 if (!phone.val()) {
+                     alert('전화번호를 입력해주세요.');
+                     phone.focus();
+                     return false;
+                 } else {
+                     if (!regPhone.test(phone.val().trim())) {
+                         alert('전화번호 형식이 유효하지 않습니다.');
+                         phone.focus();
+                         return false;
+                     }
+                 }
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
@@ -43,6 +43,7 @@
             }
         }
         return check;
+       
     });
 
 
