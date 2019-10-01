@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.studium.madang.model.vo.BoastMadang;
-import com.studium.madang.model.vo.FreeMadang;
+import com.studium.madang.model.vo.BoastMadangFile;
 import com.studium.member.model.service.MemberService;
 
 public class BoastMadangDao {
@@ -261,7 +261,7 @@ public class BoastMadangDao {
 			pstmt.setString(6, bm.getMadangMainCategory());
 			pstmt.setString(7, bm.getMadangCategory());
 			pstmt.setString(8, bm.getMadangSubCategory());
-			pstmt.setString(6, bm.getMadangRegisterIp());
+			pstmt.setString(9, bm.getMadangRegisterIp());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -342,4 +342,28 @@ public class BoastMadangDao {
 			close(pstmt);
 		} return result;
 	}
+	
+	public int insertFile(Connection conn, BoastMadangFile bmf) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertFile");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bmf.getMadangNo());
+			pstmt.setInt(2, bmf.getMemberNo());
+			pstmt.setString(3, bmf.getBmfOriginalFilename());
+			pstmt.setString(4, bmf.getBmfRenameFilename());
+			pstmt.setLong(5, bmf.getBmfFilesize());
+			pstmt.setString(6, bmf.getBmfType());
+			pstmt.setString(7, bmf.getBmfIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	
 }

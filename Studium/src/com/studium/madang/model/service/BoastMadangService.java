@@ -11,7 +11,7 @@ import java.util.Map;
 
 import com.studium.madang.model.dao.BoastMadangDao;
 import com.studium.madang.model.vo.BoastMadang;
-import com.studium.madang.model.vo.FreeMadang;
+import com.studium.madang.model.vo.BoastMadangFile;
 
 public class BoastMadangService {
 
@@ -103,6 +103,15 @@ public class BoastMadangService {
 				commit(conn);
 			} rollback(conn);
 		} 
+		close(conn);
+		return result;
+	}
+	
+	public int insertFile(BoastMadangFile bmf) {
+		Connection conn=getConnection();
+		int result=dao.insertFile(conn, bmf);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

@@ -52,21 +52,40 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		System.out.println(request.getHeader("referer"));
+
+		//파일 업로드
+		String root=getServletContext().getRealPath("/");
+		String saveDir=root+"upload\\madang\\share"; 
+		int maxSize=1024*1024*1024; //1GB
+		File isDir = new File(saveDir);
+		  if(!isDir.isDirectory()){
+
+			  isDir.mkdir();
+
+		  }
+
+		MultipartRequest mr =new MultipartRequest(
+				request,
+				saveDir,
+				maxSize,
+				"UTF-8",
+				new StudiumFileRenamePolicy() 
+		);
+		
 		ShareMadang sm=new ShareMadang();
-		sm.setMadangTitle(request.getParameter("subject"));
-		sm.setMadangWriterUid(Integer.parseInt(request.getParameter("userUid")));
-		sm.setMadangWriterEmail(request.getParameter("userEmail"));
-		sm.setMadangWriterName(request.getParameter("userName"));
-		sm.setMadangRegisterIp(request.getParameter("REMOTE_ADDR"));
-		sm.setMadangContent(request.getParameter("smarteditor"));
+		sm.setMadangTitle(mr.getParameter("subject"));
+		sm.setMadangWriterUid(Integer.parseInt(mr.getParameter("userUid")));
+		sm.setMadangWriterEmail(mr.getParameter("userEmail"));
+		sm.setMadangWriterName(mr.getParameter("userName"));
+		sm.setMadangRegisterIp(mr.getParameter("REMOTE_ADDR"));
+		sm.setMadangContent(mr.getParameter("smarteditor"));
 		
 		//카테고리 받기
-		sm.setMadangMainCategory(request.getParameter("choiceSub"));
-		sm.setMadangCategory(request.getParameter("inter"));
+		sm.setMadangMainCategory(mr.getParameter("choiceSub"));
+		sm.setMadangCategory(mr.getParameter("inter"));
 		String[] subArray=new String[3];
 		for(int i=0; i<subArray.length; i++) {
-			subArray[i]=request.getParameter("subCategory"+(i+1));
+			subArray[i]=mr.getParameter("subCategory"+(i+1));
 		}
 		
 		String subCategory="";
@@ -84,25 +103,6 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
 		//정상적으로 insert되면 해당 madangNo가 반환된다.
 		int madangNo=new ShareMadangService().insertMadang(sm);
-
-		//파일 업로드
-		String root=getServletContext().getRealPath("/");
-		String saveDir=root+"\\upload\\madang\\share"; 
-		int maxSize=1024*1024*1024; //1GB
-		File isDir = new File(saveDir);
-		  if(!isDir.isDirectory()){
-
-			  isDir.mkdir();
-
-		  }
-
-		MultipartRequest mr =new MultipartRequest(
-				request,
-				saveDir,
-				maxSize,
-				"UTF-8",
-				new StudiumFileRenamePolicy() 
-		);
 		
 		Enumeration<String> e= mr.getFileNames();
 	    if(e.hasMoreElements()) {
@@ -110,38 +110,39 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 	        //name파라미터에는 file의 이름이 들어있따.
 	        //그 이름을 주면 실제 값이 (업로드 할 file)을 가져온다.
 	        String originFile=mr.getOriginalFileName(name);
-	        
-	        //만약 업로드 폴더에 똑같은 파일이 잇으면 현재 올리는 파일 이름은 바뀐다.
-	        //그래서 시스템에 있는 이름을 알려준다.
-	        String systemFile=mr.getFilesystemName(name);
-	        
-	        //전송된 파일의 타입 - MIME 타입
-	        String fileType=mr.getContentType(name);
-	        
-	        //문자열 "파일 이름"이 name에 들어온 상태
-	        //문자열 파일 이름을통해 실제 파일 객체를 가져온다.
-	        
-	        File file=mr.getFile(name); //java.io
-	        
-	        long size=0;
-	        if(file!=null) {
-	        	size=file.length();
-	        }
-	        
-	        ShareMadangFile sff=new ShareMadangFile();
-	        sff.setMadangNo(madangNo);
-	        sff.setMemberNo(sm.getMadangWriterUid());
-	        sff.setSmfOriginalFilename(originFile);
-	        sff.setSmfRenameFilename(systemFile);
-	        sff.setSmfFilesize(size);
-	        sff.setSmfType(fileType);
-	        sff.setSmfIp(sm.getMadangRegisterIp());
-	        int result=new ShareMadangService().insertFile(sff);
-	        if(result==0) {
-	        	request.setAttribute("msg", "파일 저장에 실패하였습니다.");
-				request.setAttribute("loc", "/madang/shareMadangList");
-				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-				return;
+	        if(originFile!=null) {
+	        	//만약 업로드 폴더에 똑같은 파일이 잇으면 현재 올리는 파일 이름은 바뀐다.
+		        //그래서 시스템에 있는 이름을 알려준다.
+		        String systemFile=mr.getFilesystemName(name);
+		        
+		        //전송된 파일의 타입 - MIME 타입
+		        String fileType=mr.getContentType(name);
+		        
+		        //문자열 "파일 이름"이 name에 들어온 상태
+		        //문자열 파일 이름을통해 실제 파일 객체를 가져온다.
+		        
+		        File file=mr.getFile(name); //java.io
+		        
+		        long size=0;
+		        if(file!=null) {
+		        	size=file.length();
+		        }
+		        
+		        ShareMadangFile sff=new ShareMadangFile();
+		        sff.setMadangNo(madangNo);
+		        sff.setMemberNo(sm.getMadangWriterUid());
+		        sff.setSmfOriginalFilename(originFile);
+		        sff.setSmfRenameFilename(systemFile);
+		        sff.setSmfFilesize(size);
+		        sff.setSmfType(fileType);
+		        sff.setSmfIp(sm.getMadangRegisterIp());
+		        int result=new ShareMadangService().insertFile(sff);
+		        if(result==0) {
+		        	request.setAttribute("msg", "파일 저장에 실패하였습니다.");
+					request.setAttribute("loc", "/madang/shareMadangList");
+					request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+					return;
+		        }
 	        }
 	    }
 	      

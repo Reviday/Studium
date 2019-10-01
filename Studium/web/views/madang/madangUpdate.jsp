@@ -37,13 +37,6 @@
 	<div class="header-background-cover"></div>
 </div>
 <section id="madang_writer" class="row">
-<script>
-$(document).ready(function() {
-	window.onbeforeunload = function() { 
-  	    // blank function do nothing 
-  	 } 
-}
-</script>
 	<div class="col-xs-4 col-sm-3 col-md-3 col-lg-2" style="padding-left: 0">
 		<!-- 사이드 메뉴가 들어갈 곳 -->
 		<%@ include file="/views/common/sideMenuBar.jsp"%>
@@ -199,9 +192,8 @@ $(document).ready(function() {
 							}
 						%>
 					</textarea>	
-	
-	                
-	                <!-- 버튼 -->
+                </div>
+                <!-- 버튼 -->
 					<div class="post_btns">
 						<div class="fr">
 							<input type="reset" class="btn_type1" value="취소" 
@@ -209,7 +201,6 @@ $(document).ready(function() {
 							<input type="submit" id="savebutton" class="btn_type1" value="확인">
 						</div>
 					</div>
-                </div>
                 <div style="display:none">
                 	<!-- 함께 전달해야 할 데이터 -->
                 	<input type="hidden" name="userUid" value="<%=loginMember.getMemNo()%>">
@@ -272,7 +263,7 @@ $(document).ready(function() {
       
 
       
-		oEditors.getById["smarteditor"].exec("LOAD_CONTENTS_FIELD");
+		//oEditors.getById["smarteditor"].exec("LOAD_CONTENTS_FIELD");
       //oEditors.getById["smarteditor"].exec("SET_IR", [""]); //내용초기화
    
       // 전송버튼 클릭이벤트 
