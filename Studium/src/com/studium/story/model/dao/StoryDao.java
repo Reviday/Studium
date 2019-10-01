@@ -48,6 +48,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 
@@ -83,6 +84,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 				list.add(s);
 				
@@ -132,6 +134,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 
@@ -167,6 +170,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 
@@ -201,6 +205,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 
@@ -236,6 +241,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 
@@ -270,6 +276,7 @@ public class StoryDao {
 				s.setStoryTime(rs.getTimestamp("STORY_TIME"));
 				s.setStoryTeachername(rs.getString("STORY_TEACHER_NAME"));
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
+				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
 
 				list.add(s);
