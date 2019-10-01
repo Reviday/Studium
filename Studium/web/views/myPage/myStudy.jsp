@@ -29,13 +29,13 @@
 .star-input{
 	display:inline-block; 
 	white-space:nowrap;
-	width:225px;
+	width:100px;
 	height:40px;
 	line-height:30px;
 }
 .star-input>.input{
 	display:inline-block;
-	width:150px;
+	width:100px;
 	background-size:100px;
 	height:18px;
 	white-space:nowrap;
@@ -93,7 +93,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 										<label for="p4"></label>
 										<input type="radio" name="star" value="5" id="p5">
 										<label for="p5"></label>
-									  </span>						
+										
+									  </span>	
+									  <span style="margin-top:2px">별점은 수정이 불가능합니다. 신중하게 입력해주세요!</span>					
 								</span>
 						<textarea name="my-review" class="memo" placeholder="생생한 후기를 남겨주세요:)"></textarea>
 						<input type="hidden" class="hidden_no" name="no" value="">
@@ -182,13 +184,16 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 						
 						 if((diffDays1<1&&diffDays2>1)){ %>
                                 <span>진행중</span></p>
+                                <p><%=p.getpTeachername()%></p>
                         <%}else if(diffDays1<1&&diffDays2<1){ %> 
                                 <span>완료</span></p>
-						<% }else{%> 
-                                <span>곧 시작합니다!</span></p>
-						<% }%>
+                                
                                 <p><%=p.getpTeachername()%></p>
                                 <button class="btn btn-gotochat" id="<%=p.getpNo()%>">후기 작성</button>
+						<% }else{%> 
+                                <span>곧 시작합니다!</span></p>
+                                <p><%=p.getpTeachername()%></p>
+						<% }%>
                                 	
                             </div>
                             
@@ -310,8 +315,15 @@ $(function() {
     		dataType: "json",
     		data: {"memNo" : memNo, "pNo":pNo},
     		success: function(data){
-    			$(".memo").text(data);
-            	$(".review-wrapper").css("display","block");
+    			var result = $.trim(data);
+    	    	if(result==="none"){//값이 없는 경우 text 비워줌
+        			$(".memo").text('');
+                	$(".review-wrapper").css("display","block");
+    			}else{
+        			$(".memo").text(data);//값이 있는 경우 넣어주고 별점 수정 못하게 
+                	$(".review-wrapper").css("display","block");
+        			$(".star-input").css("display","none");
+    			}
             	console.log("들어옴");
     		},
     		error:function (data){
@@ -325,7 +337,12 @@ $(function() {
 
 //리뷰제출버튼 눌렀을 때 
 $('.review-btn').click(function(e) {
-		console.log('리뷰제출함수');
+	
+	if (!$('input[name=star]:checked').val()) {
+        $(this).prop('checked', false);
+        alert("별점은 하나 이상 입력해야합니다.");
+        return false;
+    }
  		var params = $("#memoform").serialize();
 
 		console.log('리뷰제출함수3');

@@ -46,7 +46,7 @@ public class ReviewSelectServlet extends HttpServlet {
 			memo=story.getStoryContent();
 		}
 		else {
-			memo="";
+			memo="none";
 		}
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(memo,response.getWriter());

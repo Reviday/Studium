@@ -41,7 +41,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 		String review = request.getParameter("my-review");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int pNo = Integer.parseInt(request.getParameter("no"));
-		int star = Integer.parseInt(request.getParameter("star"));
 		
 		MemberService service = new MemberService();
 		Member memM=service.selectNo(memNo);//학생정보 가져옴
@@ -53,7 +52,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 		s.setMemNo(memNo);
 		s.setpNo(pNo);
 		s.setStoryContent(review);
-		s.setStoryStar(star);
 		
 		//리뷰select해서 primary값 가져옴 
 		Story selects = service.reviewSelect(memNo, pNo);
@@ -63,6 +61,9 @@ public class ReviewUpdateServlet extends HttpServlet {
 			result= service.reviewUpdate(s, selects.getStoryNo());
 		}
 		else {//업데이트 되는 값 없으면 insert해줌
+
+			int star = Integer.parseInt(request.getParameter("star"));
+			s.setStoryStar(star);
 			s.setpTitle(p.getpTitle());
 			s.setStoryStudentpicture(memM.getMemPhoto());
 			s.setStoryWrite(memM.getMemName());
