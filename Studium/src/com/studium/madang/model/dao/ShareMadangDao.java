@@ -372,4 +372,21 @@ public class ShareMadangDao {
 			close(pstmt);
 		} return result;
 	}
+	
+	public int updateMadangRepCount(Connection conn, int madangNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMadangRepCount");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, madangNo);
+			pstmt.setInt(2, madangNo);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
 }

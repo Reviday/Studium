@@ -172,7 +172,6 @@ public class BoastMadangCmtDao {
 			// 대댓글을 INSERT 하기 전에, 기존에 존재하는 대댓글의 SORT값을 증가시킨다
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, cmt.getCmtParent());
-			
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace(); 

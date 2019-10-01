@@ -32,7 +32,10 @@ public class FreeMadangCmtService {
 	public int insertComment(FreeMadangCmt cmt) {
 		Connection conn=getConnection();
 		int result=dao.insertComment(conn, cmt);
-		if(result>0) commit(conn);
+		if(result>0) {
+			commit(conn);
+			new FreeMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+		}
 		else rollback(conn);
 		close(conn);
 		return result;
@@ -49,7 +52,10 @@ public class FreeMadangCmtService {
 			insertResult=dao.insertReply(conn, cmt);
 			if(insertResult>0) {
 				updateCmtReply=dao.updateCmtReply(conn, cmt);
-				if(updateCmtReply>=0) commit(conn);
+				if(updateCmtReply>=0) {
+					commit(conn);
+					new FreeMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+				}
 				else rollback(conn);
 			} else {
 				rollback(conn);

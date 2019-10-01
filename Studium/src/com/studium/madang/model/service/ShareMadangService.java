@@ -118,4 +118,13 @@ public class ShareMadangService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateMadangRepCount(int madangNo) {
+		Connection conn=getConnection();
+		int result=dao.updateMadangRepCount(conn, madangNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
