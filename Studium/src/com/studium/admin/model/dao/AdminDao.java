@@ -512,7 +512,7 @@ public class AdminDao {
 
 		if(!grade.equals("allGrade") && !status.equals("allStatus")) {
 			String sql=prop.getProperty("selectCountGradeMember") + " '" + grade + "'"
-					+ " MEM_DENIED =" + " '" + status + "'";
+					+ "AND MEM_DENIED =" + " '" + status + "'";
 			try {
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
