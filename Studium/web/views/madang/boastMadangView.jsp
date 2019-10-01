@@ -44,7 +44,7 @@
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
 					<%
-                		if(choiceSub.equals("null")) {
+                		if(choiceSub!=null&&choiceSub.equals("null")) {
                 			%>
                 				<h3 class="list-title">자랑마당</h3>
                 			<%

@@ -25,7 +25,17 @@
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">
-						<h3 class="list-title">자랑마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+						<%
+	                		if(choiceSub!=null&&choiceSub.equals("null")) {
+	                			%>
+	                				<h3 class="list-title">자랑마당</h3>
+	                			<%
+	                		} else {
+	                			%>
+	                				<h3 class="list-title">자랑마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+	                			<%
+	                		}
+                		%>
 						<p class="list-sub">자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!</p>
 					</div>
 					<div class="sort_area mldiv">
@@ -78,6 +88,13 @@
 										<div class="inner_list">
 											<a class="article" href="<%=request.getContextPath()%>/madang/boastMadangView?madangNo=<%=bm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
 												<%=bm.getMadangTitle()%>
+												<%
+													if(bm.getMadangRepCount()>0) {
+														%>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=bm.getMadangRepCount()%>]</span>
+														<%
+													}
+												%>
 											</a>
 										</div>
 									</div>

@@ -62,7 +62,7 @@
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
 					<%
-                		if(choiceSub.equals("null")) {
+                		if(choiceSub!=null&&choiceSub.equals("null")) {
                 			%>
                 				<h3 class="list-title font-family-type1">공부마당</h3>
                 			<%

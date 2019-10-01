@@ -48,7 +48,7 @@ public class ShareMadangListServlet extends HttpServlet {
 		int totalData=0;
 		if(choiceSub==null) totalData=service.selectCountList(); // 총 데이터 개수
 		else totalData=service.selectCountList(choiceSub);
-		String URLmapping="/madang/boastMadangList"; // 패턴을 넘겨주기 위한 변수
+		String URLmapping="/madang/shareMadangList"; // 패턴을 넘겨주기 위한 변수
 		PaginationTemplate pt=new PaginationTemplate(request, totalData, URLmapping); // 페이징 처리 
 		
 		List<ShareMadang> list=new ArrayList<ShareMadang>();

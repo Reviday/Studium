@@ -14,11 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.vo.BoastMadang;
-import com.studium.madang.model.vo.BoastMadang;
-import com.studium.madang.model.vo.BoastMadangFile;
+import com.studium.madang.model.service.ShareMadangService;
+import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.vo.ShareMadangFile;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -26,16 +24,16 @@ import common.policy.StudiumFileRenamePolicy;
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class BoastMadangWriterEndServlet
+ * Servlet implementation class ShareMadangUpdateEndServlet
  */
-@WebServlet("/madang/boast/writeEnd")
-public class BoastMadangWriterEndServlet extends HttpServlet {
+@WebServlet("/madang/share/updateEnd")
+public class ShareMadangUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoastMadangWriterEndServlet() {
+    public ShareMadangUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,25 +44,23 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 2차 로그인 체크. 
-		if(!new LoginCheck().doLoginCheck(request, response, 1004)) return;
+		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		
 		//파일 받기 및 넣기
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "잘못된 접근입니다. 관리자에게 문의하십시오.");
-			request.setAttribute("loc", "/madang/boastMadangList");
+			request.setAttribute("loc", "/madang/shareMadangList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-
+		
 		//파일 업로드
 		String root=getServletContext().getRealPath("/");
-		String saveDir=root+"upload\\madang\\boast"; 
+		String saveDir=root+"upload\\madang\\share"; 
 		int maxSize=1024*1024*1024; //1GB
 		File isDir = new File(saveDir);
 		  if(!isDir.isDirectory()){
-
 			  isDir.mkdir();
-
 		  }
 
 		MultipartRequest mr =new MultipartRequest(
@@ -75,17 +71,19 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 				new StudiumFileRenamePolicy() 
 		);
 		
-		BoastMadang bm=new BoastMadang();
-		bm.setMadangTitle(mr.getParameter("subject"));
-		bm.setMadangWriterUid(Integer.parseInt(mr.getParameter("userUid")));
-		bm.setMadangWriterEmail(mr.getParameter("userEmail"));
-		bm.setMadangWriterName(mr.getParameter("userName"));
-		bm.setMadangRegisterIp(mr.getParameter("REMOTE_ADDR"));
-		bm.setMadangContent(mr.getParameter("smarteditor"));
+		ShareMadang sm=new ShareMadang();
+		sm.setMadangNo(Integer.parseInt(mr.getParameter("madangNo")));
+		sm.setMadangTitle(mr.getParameter("subject"));
+		sm.setMadangWriterUid(Integer.parseInt(mr.getParameter("userUid")));
+		sm.setMadangWriterEmail(mr.getParameter("userEmail"));
+		sm.setMadangWriterName(mr.getParameter("userName"));
+		sm.setMadangRegisterIp(mr.getParameter("REMOTE_ADDR"));
+		sm.setMadangContent(mr.getParameter("smarteditor"));
+		int cPage=Integer.parseInt(mr.getParameter("cPage"));
 		
 		//카테고리 받기
-		bm.setMadangMainCategory(mr.getParameter("choiceSub"));
-		bm.setMadangCategory(mr.getParameter("inter"));
+		sm.setMadangMainCategory(mr.getParameter("choiceSub"));
+		sm.setMadangCategory(mr.getParameter("inter"));
 		String[] subArray=new String[3];
 		for(int i=0; i<subArray.length; i++) {
 			subArray[i]=mr.getParameter("subCategory"+(i+1));
@@ -100,12 +98,10 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 			}
 		}
 		if(subCategory.length()>0) {
-			bm.setMadangSubCategory(subCategory);
+			sm.setMadangSubCategory(subCategory);
 		}
 		
-		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int madangNo=new BoastMadangService().insertMadang(bm);
-		
+		//파일 받기 및 넣기
 		Enumeration<String> e= mr.getFileNames();
 	    if(e.hasMoreElements()) {
 	        String name=(String)e.nextElement();
@@ -122,7 +118,6 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		        
 		        //문자열 "파일 이름"이 name에 들어온 상태
 		        //문자열 파일 이름을통해 실제 파일 객체를 가져온다.
-		        
 		        File file=mr.getFile(name); //java.io
 		        
 		        long size=0;
@@ -130,39 +125,53 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		        	size=file.length();
 		        }
 		        
-		        BoastMadangFile bmf=new BoastMadangFile();
-		        bmf.setMadangNo(madangNo);
-		        bmf.setMemberNo(bm.getMadangWriterUid());
-		        bmf.setBmfOriginalFilename(originFile);
-		        bmf.setBmfRenameFilename(systemFile);
-		        bmf.setBmfFilesize(size);
-		        bmf.setBmfType(fileType);
-		        bmf.setBmfIp(bm.getMadangRegisterIp());
-		        int result=new BoastMadangService().insertFile(bmf);
+		        ShareMadangFile smf=new ShareMadangFile();
+		        smf.setMadangNo(sm.getMadangNo());
+		        smf.setMemberNo(sm.getMadangWriterUid());
+		        smf.setSmfOriginalFilename(originFile);
+		        smf.setSmfRenameFilename(systemFile);
+		        smf.setSmfFilesize(size);
+		        smf.setSmfType(fileType);
+		        smf.setSmfIp(sm.getMadangRegisterIp());
+		        int result=new ShareMadangService().insertFile(smf);
 		        if(result==0) {
 		        	request.setAttribute("msg", "파일 저장에 실패하였습니다.");
-					request.setAttribute("loc", "/madang/boastMadangList");
+					request.setAttribute("loc", "/madang/shareMadangList");
 					request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 					return;
 		        }
 	        }
 	    }
-	      
+		//파일 유/무 처리 해줘야함.
+	    //파일/이미지 체크는 시간상 제외.
+		//fm.setMadangFilePresence('Y');
+		sm.setMadangFilePresence('N');
+		
 		//이미지 받기 및 넣기
-		//태그로 저장되기때문에 필요없을지도.
-	    
-	    
-	    // SideMenuElement
- 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
+		sm.setMadangImgPresence('N');
+		
+		
+		// SideMenuElement
+		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
+		
+		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
+		//정상적으로 insert되면 해당 madangNo가 반환된다.
+		int result=new ShareMadangService().updateMadang(sm);
 		
 		String view="/";
-		if(madangNo>0) {
-			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage=1"+
+		if(result>0) {
+			view="/madang/shareMadangView?madangNo="+sm.getMadangNo()+"&cPage="+cPage+
 					"&choice="+mr.getParameter("choice")+"&choiceSub="+mr.getParameter("choiceSub");
-		} else {
-			String msg="게시글 작성에 실패하였습니다.";
-			String loc="/madang/boastMadangList";
+		} else if(result<0) {
+			String msg="권한이 없습니다.";
+			String loc="/madang/shareMadangList";
 			view="/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+		} else {
+			String msg="게시글 수정에 실패하였습니다.";
+			String loc="/madang/shareMadangList";
+			view="/views/common/msg.jsp";	
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}

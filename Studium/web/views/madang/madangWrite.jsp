@@ -45,7 +45,7 @@
             <div class="sub-tit row mldiv">
                 <div class="title-area mldiv">
                 	<%
-                		if(locate.equals("free") || choiceSub.equals("null")) {
+                		if(locate.equals("free") || (choiceSub!=null&&choiceSub.equals("null"))) {
                 			%>
                 				<h3 class="list-title"><%=mTit%></h3>
                 			<%

@@ -25,7 +25,17 @@
 			<div class="madang-list mldiv">
 				<div class="sub-tit row mldiv">
 					<div class="title-area mldiv">
-						<h3 class="list-title">공유마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+						<%
+	                		if(choiceSub!=null&&choiceSub.equals("null")) {
+	                			%>
+	                				<h3 class="list-title">공유마당</h3>
+	                			<%
+	                		} else {
+	                			%>
+	                				<h3 class="list-title">공유마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+	                			<%
+	                		}
+	                	%>
 						<p class="list-sub">자유롭게 정보와 자료를 공유하는 공간입니다.<br>(저작권엔 유의하여 주시기 바랍니다 ^ - ^)</p>
 					</div>
 					<div class="sort_area mldiv">
@@ -80,7 +90,7 @@
 											<%
 												if(loginMember!=null) {
 											%>
-											href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
+												href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
 											<%
 												} else {
 											%>
@@ -89,6 +99,13 @@
 												}
 											%>
 												 ><%=sm.getMadangTitle()%>
+												 <%
+													if(sm.getMadangRepCount()>0) {
+														%>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=sm.getMadangRepCount()%>]</span>
+														<%
+													}
+												%>
 											</a>
 										</div>
 									</div>

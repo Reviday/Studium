@@ -78,6 +78,13 @@
 										<div class="inner_list">
 											<a class="article" href="<%=request.getContextPath()%>/madang/freeMadangView?madangNo=<%=fm.getMadangNo() %>&cPage=<%=cPage%>">
 												 <%=fm.getMadangTitle()%>
+												 <%
+													if(fm.getMadangRepCount()>0) {
+														%>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=fm.getMadangRepCount()%>]</span>
+														<%
+													}
+												%>
 											</a>
 										</div>
 									</div>

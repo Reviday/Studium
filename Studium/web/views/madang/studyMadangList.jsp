@@ -28,7 +28,17 @@
 		<div class="madang-list mldiv">
 			<div class="sub-tit row mldiv">
 				<div class="title-area mldiv">
-					<h3 class="list-title">공부마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+					<%
+                		if(choiceSub!=null&&choiceSub.equals("null")) {
+                			%>
+                				<h3 class="list-title font-family-type1">공부마당</h3>
+                			<%
+                		} else {
+                			%>
+                				<h3 class="list-title font-family-type1">공부마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+                			<%
+                		}
+                	%>
 					<p class="list-sub">서로가 문제를 출제하고 문제를 풀어보는 공간입니다.</p>
 				</div>
 			</div>
@@ -93,7 +103,8 @@
 												<%
 													}
 												%>
-												><%=s.getMadangTitle() %></a>
+												><%=s.getMadangTitle() %>
+												</a>
 												<div class="question-summary">
 													<div class="d-textarea">
 														<%=s.getMadangContent() %>

@@ -160,7 +160,8 @@ public class BoastMadangUpdateEndServlet extends HttpServlet {
 		
 		String view="/";
 		if(result>0) {
-			view="/madang/boastMadangView?madangNo="+bm.getMadangNo()+"&cPage="+cPage;
+			view="/madang/boastMadangView?madangNo="+bm.getMadangNo()+"&cPage="+cPage+
+					"&choice="+mr.getParameter("choice")+"&choiceSub="+mr.getParameter("choiceSub");
 		} else if(result<0) {
 			String msg="권한이 없습니다.";
 			String loc="/madang/boastMadangList";
@@ -175,8 +176,6 @@ public class BoastMadangUpdateEndServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 		}
 		request.setAttribute("elements", elements);
-		request.setAttribute("choice", request.getParameter("choice"));
-		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
