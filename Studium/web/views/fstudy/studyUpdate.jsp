@@ -182,27 +182,52 @@
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지타이틀</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                     <%if(p.getfImgtitle()!=null){ %>
                                                     <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/>
-                                                    <div id="preview"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImgtitle()%>" width="100px" height="100px"> </div></td>
+                                                    <INPUT TYPE="hidden" NAME="ori_file" value="<%=p.getfImgtitle() %>" size=50/>
+                                                    <%}else{ %>
+                                                    <INPUT TYPE="file" NAME="p_imgtitle" id="p_imgtitle" size=50/>
+                                                    <%} %>
+                                                 
+                                                    <div id="preview"> 
+                                                    <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImgtitle()%>" width="100px" height="100px"> 
+                                                    
+                                                    </div>
+                                                    </td>
                                                     
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지1</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
-                                                    <INPUT TYPE="file"NAME="p_img1" size=50  id="p_img1" />
-                                                    <div id="preview1"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg1()%>" width="100px" height="100px"> </div></td>
+                                                    <%if(p.getfImg1()!=null){ %>
+                                                    <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50/>
+                                                    <INPUT TYPE="hidden" NAME="ori_file1" value="<%=p.getfImg1() %>" size=50/>
+                                                    <%}else{ %>
+                                                    <INPUT TYPE="file" NAME="p_img1" id="p_img1" size=50/>
+                                                    <%} %>
+                                                    <div id="preview1"> <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg1()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지2</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                  <%if(p.getfImg2()!=null){ %>
                                                     <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
-                                                    <div id="preview2"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg2()%>" width="100px" height="100px"> </div></td>
+                                                    <INPUT TYPE="hidden" NAME="ori_file1" value="<%=p.getfImg2() %>" size=50/>
+                                                    <%}else{ %>
+                                                    <INPUT TYPE="file" NAME="p_img2" id="p_img2" size=50/>
+                                                    <%} %>
+                                                    <div id="preview2"> <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg2()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">이미지3</td>
                                                     <td width="76%" align="left" bgcolor="#FFFFFF">
+                                                    <%if(p.getfImg3()!=null){ %>
                                                     <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=50/>
-                                                    <div id="preview3"> <img src="<%=request.getContextPath()%>/upload/pstudy/<%=p.getfImg3()%>" width="100px" height="100px"> </div></td>
+                                                    <INPUT TYPE="hidden" NAME="ori_file3" value="<%=p.getfImg3() %>" size=50/>
+                                                    <%}else{ %>
+                                                    <INPUT TYPE="file" NAME="p_img3" id="p_img3" size=50/>
+                                                    <%} %>
+                                                    <div id="preview3"> <img src="<%=request.getContextPath()%>/upload/fstudy/<%=p.getfImg3()%>" width="100px" height="100px"> </div></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="24%" align="left" bgcolor="#EEEEEE">스터디 시간</td>
