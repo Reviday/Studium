@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.studium.madang.model.vo.FreeMadangFile;
 import com.studium.madang.model.vo.ShareMadang;
+import com.studium.madang.model.vo.ShareMadangFile;
 import com.studium.member.model.service.MemberService;
 
 public class ShareMadangDao {
@@ -260,7 +262,10 @@ public class ShareMadangDao {
 			pstmt.setString(3, sm.getMadangWriterName());
 			pstmt.setString(4, sm.getMadangTitle());
 			pstmt.setString(5, sm.getMadangContent());
-			pstmt.setString(6, sm.getMadangRegisterIp());
+			pstmt.setString(6, sm.getMadangMainCategory());
+			pstmt.setString(7, sm.getMadangCategory());
+			pstmt.setString(8, sm.getMadangSubCategory());
+			pstmt.setString(9, sm.getMadangRegisterIp());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -281,6 +286,28 @@ public class ShareMadangDao {
 			if(rs.next()) {
 				result=rs.getInt(1);
 			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int insertFile(Connection conn, ShareMadangFile smf) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertFile");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, smf.getMadangNo());
+			pstmt.setInt(2, smf.getMemberNo());
+			pstmt.setString(3, smf.getSmfOriginalFilename());
+			pstmt.setString(4, smf.getSmfRenameFilename());
+			pstmt.setLong(5, smf.getSmfFilesize());
+			pstmt.setString(6, smf.getSmfType());
+			pstmt.setString(7, smf.getSmfIp());
+			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -380,6 +380,50 @@ increment by 1
 maxvalue 9999999;
 
 
+-- 자유마당 파일
+create table free_madang_file (
+    fmf_no number primary key,-- 파일 번호 
+    madang_no number references ta_free_madang(madang_no), -- 마당글 번호
+    member_no number references ta_member(mem_no), -- 회원 번호
+    fmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
+    fmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
+    fmf_download_count number, -- 다운로드 회수
+    fmf_filesize number, -- 파일 크기
+--  fmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
+--  fmf_width number default null, -- 이미지일 경우 이미지 가로값
+--  fmf_height number default null, -- 이미지일 경우 이미지 세로값
+    fmf_type varchar2(20), -- 파일 확장자
+    fmf_datetime date, -- 등록일자
+    fmf_ip varchar2(20) -- 등록 ip
+);
+
+create sequence fm_file_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 공유마당 파일
+create table share_madang_file (
+    smf_no number primary key,-- 파일 번호 
+    madang_no number references ta_share_madang(madang_no), -- 마당글 번호
+    member_no number references ta_member(mem_no), -- 회원 번호
+    smf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
+    smf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
+    smf_download_count number, -- 다운로드 회수
+    smf_filesize number, -- 파일 크기
+--  fmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
+--  fmf_width number default null, -- 이미지일 경우 이미지 가로값
+--  fmf_height number default null, -- 이미지일 경우 이미지 세로값
+    smf_type varchar2(20), -- 파일 확장자
+    smf_datetime date, -- 등록일자
+    smf_ip varchar2(20) -- 등록 ip
+);
+
+create sequence sm_file_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 
 -- 사이드 메뉴 바 요소를 위한 테이블
 create table ta_sidemenu_elements (
@@ -398,6 +442,7 @@ create sequence ta_sidemenu_seq
 start with 1
 increment by 1
 maxvalue 9999;
+
 
 -- 사이드 메뉴 요소 필수 데이터(마당)
 insert into ta_sidemenu_elements values(ta_sidemenu_seq.nextval, 'madang', '마당소개', '/madang/introMadang', 'fas fa-tachometer-alt fa-lg', default, 1, default);
@@ -483,6 +528,8 @@ create sequence stm_like_seq
 start with 1
 increment by 1
 maxvalue 999999999;
+
+
 
 --강병민 디비 -------------------------------------------------
 

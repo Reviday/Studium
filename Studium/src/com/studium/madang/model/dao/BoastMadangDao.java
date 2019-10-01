@@ -258,6 +258,9 @@ public class BoastMadangDao {
 			pstmt.setString(3, bm.getMadangWriterName());
 			pstmt.setString(4, bm.getMadangTitle());
 			pstmt.setString(5, bm.getMadangContent());
+			pstmt.setString(6, bm.getMadangMainCategory());
+			pstmt.setString(7, bm.getMadangCategory());
+			pstmt.setString(8, bm.getMadangSubCategory());
 			pstmt.setString(6, bm.getMadangRegisterIp());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
