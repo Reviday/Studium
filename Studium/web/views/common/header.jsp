@@ -61,25 +61,6 @@
 </style>
 
 <body>
-<!--마이페이지 메뉴-->   
-		<%if(loginMember!=null) { %>
- <div class="myPageMenu">
-        <a href="#menu" id="toggle"><span></span></a>
-
-        <div id="menu">
-          <ul> 
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-user"></i>내 정보</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/mySchedule?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-calendar"></i>일정관리</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-book"></i>내 스터디</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/dibs?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-heart"></i>찜</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myMemo?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-sticky-note"></i>메모</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-credit-card"></i>결제</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/myFork?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-share-alt"></i>내 포크</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/myPage/setting?memberNo=<%=loginMember.getMemNo()%>"><i class="fa fa-cog"></i>환경설정</a></li>
-          </ul>
-        </div>
-    </div>
-    <%}%> 
 	<!-- 로그인 폼 -->
 	<div class="login-sec" id="log-dialog-background"></div>
 	<form action="<%=request.getContextPath() %>/login?REMOTE_ADDR=<%=REMOTE_ADDR%>" 
@@ -245,59 +226,19 @@
 				</div>
 			</div>
 		</nav>
-		<div class="center menu">
-                <div id="myMenu"></div>
-            </div>
+		
+		
+<!--마이페이지 메뉴-->   
+		<%if(loginMember!=null) { %>
+    
+   		 <div class="center menu">
+              <div id="myMenu"></div>
+         </div>
+  		<%}%> 
+		
 		
        	
 	</header>
-		
-<script>
-
-	 var theToggle = document.getElementById('toggle');
-
-     // 좌측하단 메뉴바 
-     // hasClass
-     function hasClass(elem, className) {
-     	return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-     }
-     // addClass
-     function addClass(elem, className) {
-         if (!hasClass(elem, className)) {
-         	elem.className += ' ' + className;
-         }
-     }
-     // removeClass
-     function removeClass(elem, className) {
-     	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
-     	if (hasClass(elem, className)) {
-             while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-                 newClass = newClass.replace(' ' + className + ' ', ' ');
-             }
-             elem.className = newClass.replace(/^\s+|\s+$/g, '');
-         }
-     }
-     // toggleClass
-     function toggleClass(elem, className) {
-     	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
-         if (hasClass(elem, className)) {
-             while (newClass.indexOf(" " + className + " ") >= 0 ) {
-                 newClass = newClass.replace( " " + className + " " , " " );
-             }
-             elem.className = newClass.replace(/^\s+|\s+$/g, '');
-         } else {
-             elem.className += ' ' + className;
-         }
-     }
-
-     theToggle.onclick = function() {
-        toggleClass(this, 'on');
-        return false;
-     }
-    	</script>
-
-
-
 <script>
 
 var timeOut;
@@ -444,18 +385,53 @@ var menu = new Menu("#myMenu");
 var item1 = new Item("list");
 var item2 = new Item("torso", "#5CD1FF");
 var item3 = new Item("bookmark", "#ff7f00");
-var item3 = new Item("heart", "#FF5C5C");
-var item4 = new Item("credit-card", "#FFF15C");
-var item5 = new Item("widget", "#64F592");
+var item4 = new Item("heart", "#FF5C5C");
+var item5 = new Item("credit-card", "#FFF15C");
+var item6 = new Item("clipboard-pencil", "#D358F7");
+var item7 = new Item("widget", "#64F592");
+
+
 menu.add(item1);
 menu.add(item2);
 menu.add(item3);
 menu.add(item4);
 menu.add(item5);
+menu.add(item6);
+menu.add(item7);
+
+<%if(loginMember!=null) { %>
+$('.fi-torso').click(function(){//마이페이지
+	window.location.href='<%=request.getContextPath()%>/myPage/myInfoCheckPw?memberNo=<%=loginMember.getMemNo()%>';
+});
+$('.fi-bookmark').click(function(){//내스터디
+	window.location.href='<%=request.getContextPath()%>/myPage/myStudy?memberNo=<%=loginMember.getMemNo()%>';
+});
+
+$('.fi-heart').click(function(){//찜
+	window.location.href='<%=request.getContextPath()%>/myPage/divs?memberNo=<%=loginMember.getMemNo()%>';
+});
+
+$('.fi-credit-card').click(function(){//결제
+	window.location.href='<%=request.getContextPath()%>/myPage/payment?memberNo=<%=loginMember.getMemNo()%>';
+});
+
+$('.fi-widget').click(function(){//마이페이지
+	window.location.href='<%=request.getContextPath()%>/myPage/setting?memberNo=<%=loginMember.getMemNo()%>';
+});
+
+$('.fi-clipboard-pencil').click(function(){//메모
+	window.location.href='<%=request.getContextPath()%>/myPage/myMemo?memberNo=<%=loginMember.getMemNo()%>';
+});
+
+
+
+
+
+<%}%>
 $(document).delay(50).queue(function (next) {
  menu.open();
  next();
- $(document).delay(1000).queue(function (next) {
+ $(document).delay(500).queue(function (next) {
      menu.close();
      next();
  });
