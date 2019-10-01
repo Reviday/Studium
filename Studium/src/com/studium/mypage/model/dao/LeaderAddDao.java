@@ -49,9 +49,7 @@ public class LeaderAddDao {
 			pstmt.setString(5, l.getlType());
 			pstmt.setString(6, l.getlArea());
 			pstmt.setString(7, l.getlCategory1());
-			pstmt.setString(8, l.getlCategory2());
-			pstmt.setString(9, l.getlCategory3());
-			pstmt.setString(10, l.getlMessage());
+			pstmt.setString(8, l.getlMessage());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
