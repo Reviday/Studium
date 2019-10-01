@@ -214,10 +214,10 @@
         	}
         	
         	function statusUpdate() {
+        		var targetFrm=$(event.target).parent().prevAll(".statusUpdate");
         		var result = confirm("정말 수정하시겠습니까?");
         		if(result){
-        		var params = jQuery(".statusUpdate").serialize();
-        		console.log(params);
+        		var params=targetFrm.serialize();;    		
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminUpdateMember",
         			type: "POST",
@@ -226,7 +226,6 @@
         			success: function(data){
         				$("#ajaxTable").html("");
         				$("#ajaxTable").html(data);
-        				console.log(params+"성공");
         			}
         		})
         			return true;

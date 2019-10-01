@@ -108,4 +108,11 @@ public class AdminBoardService {
 		return result;
 	}
 	
+	public String storyMemo(String storyNo) {
+		Connection conn = getConnection();
+		String storyMemo=dao.storyMemo(conn, storyNo);
+		close(conn);
+		return storyMemo;
+	}
+	
 }

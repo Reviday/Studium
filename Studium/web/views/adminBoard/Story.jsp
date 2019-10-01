@@ -73,7 +73,7 @@
 				<div class="pointPage-header">
 					<div>후기 내용</div>
 				</div>
-				<div class="PointTable"></div>
+				<textarea class="PointTable"></textarea>
 			</div>
 
 		</div>
@@ -134,7 +134,7 @@
     	$.ajax({
 			url:"<%=request.getContextPath()%>/adminMemoStory",
 			type:"post",
-			data:{"no":$(this).attr('id')},
+			data:{no:$(this).attr('id')},
 			dataType:"json",
 			success:function(data){
 				$(".PointTable").text(data);
@@ -143,18 +143,7 @@
 		});
     })
     
-    	$(".pointConfirm").click(function(){
-    		$.ajax({
-    			url:"<%=request.getContextPath()%>/admindeleteStory",
-    			type:"post",
-    			data:{"no":$(this).attr('id')},
-    			dataType:"html",
-    			success:function(data){
-    				$("#ajaxTable").html("");
-    				$("#ajaxTable").html(data);
-    			}
-    		});
-    	})
+    	
     
     	function nameSearch(cPage) {
     			

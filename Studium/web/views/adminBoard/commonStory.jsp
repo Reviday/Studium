@@ -7,30 +7,33 @@
 	int cPage = (int) request.getAttribute("cPage");
 %>
 		<table class="memberTable">
-			<tr>
-				<th>번호</th>
-				<th>회원</th>
-				<th>강사</th>
-				<th>카테고리</th>
-				<th>스터디번호</th>
-				<th>시간</th>
-				<th>삭제</th>
-			</tr>
-			<%for(Story s : list){ %>
-			<tr>
-				<td><%=s.getStoryNo() %></td>
-				<td><%=s.getStoryWrite() %>(<%=s.getMemNo() %>)</td>
-				<td><%=s.getStoryTeachername() %></td>
-				<td><%=s.getStorySubject() %></td>
-				<td><%=s.getpNo() %></td>
-				<td><%=s.getStoryTime() %></td>
-				<td>
-					<input type="button" value="삭제" class="pointConfirm" id="<%=s.getStoryNo() %>"> 
-				</td>
-			</tr>
+				<tr>
+					<th>번호</th>
+					<th>회원</th>
+					<th>강사</th>
+					<th>카테고리</th>
+					<th>스터디번호</th>
+					<th>시간</th>
+					<th>삭제</th>
+				</tr>
+				<%
+					for (Story s : list) {
+				%>
+				<tr>
+					<td><%=s.getStoryNo()%></td>
+					<td><%=s.getStoryWrite()%>(<%=s.getMemNo()%>)</td>
+					<td><%=s.getStoryTeachername()%></td>
+					<td><%=s.getStorySubject()%></td>
+					<td class="storyclick" id="<%=s.getStoryNo()%>"><%=s.getpNo()%></td>
+					<td><%=s.getStoryTime()%></td>
+					<td><input type="button" value="삭제" class="pointConfirm"
+						onclick="deleteStory();" id="<%=s.getStoryNo()%>"></td>
+				</tr>
 
-			<%} %>
-		</table>
+				<%
+					}
+				%>
+			</table>
 		<link href="/Studium/css/pagination.css" rel="stylesheet">
 		<%@ include file="/views/common/pagination.jsp"%>
 		
@@ -82,19 +85,20 @@ function deleteStory(cPage){
 	});
 }
 
+$(".storyclick").click(function(){
+	$.ajax({
+		url:"<%=request.getContextPath()%>/adminMemoStory",
+		type:"post",
+		data:{no:$(this).attr('id')},
+		dataType:"json",
+		success:function(data){
+			$(".PointTable").text(data);
+        	$("#pointPage").css("display","block");
+		}
+	});
+})
 
-	$(".pointConfirm").click(function(){
-		$.ajax({
-			url:"<%=request.getContextPath()%>/admindeleteStory",
-			type:"post",
-			data:{"no":$(this).attr('id')},
-			dataType:"html",
-			success:function(data){
-				$("#ajaxTable").html("");
-				$("#ajaxTable").html(data);
-			}
-		});
-	})
+	
 
 	function nameSearch(cPage) {
 			
@@ -104,30 +108,16 @@ function deleteStory(cPage){
     		var params = jQuery("#search").serialize();
     		params+='&cPage='+cPage;
     		$.ajax({
-    			url: "<%=request.getContextPath() %>/AdminStorySearch",
-    			type: "POST",
-    			dataType: "html",
-    			data: params,
-    			success: function(data){
-    				$("#ajaxTable").html("");
-    				$("#ajaxTable").html(data);
-    			}
-    		})
-    		}
-    	}
-	
-	 $(".storyclick").click(function(){
-	    	$.ajax({
-				url:"<%=request.getContextPath()%>/adminMemoStory",
-				type:"post",
-				data:{"no":$(this).attr('id')},
-				dataType:"json",
-				success:function(data){
-					$(".PointTable").text(data);
-	            	$("#pointPage").css("display","block");
-				}
-			});
-	    })
-	
+    			url: "<%=request.getContextPath()%>/AdminStorySearch",
+			type : "POST",
+			dataType : "html",
+			data : params,
+			success : function(data) {
+				$("#ajaxTable").html("");
+				$("#ajaxTable").html(data);
+			}
+		})
+	}
+}
 	
 </script>

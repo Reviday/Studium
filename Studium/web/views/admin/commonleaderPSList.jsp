@@ -48,7 +48,7 @@
 				<td>
 					<%=l.getlGender() %>
 				</td>
-				<td class="pointConfirm"><%=l.getlEmail() %></td>
+				<td class="pointConfirm" id="<%=l.getlNo()%>"><%=l.getlEmail() %></td>
 				<td><%=l.getlPhone() %></td>
 				<td><%=l.getlType() %></td>
 				<td><%=l.getlArea() %></td>
@@ -91,6 +91,25 @@
             }
         }
     })
+    
+     $('.pointConfirm').click(function(e) {
+        	var memNo = $(this).attr('id');
+        	console.log(memNo);
+        	$.ajax({
+        		url: "<%=request.getContextPath()%>/adminPSMemo",
+        		type: "POST",
+        		dataType: "json",
+        		data: {"memNo" : memNo},
+        		success: function(data){
+        			$("#pointPageName").text(data);
+        			$("#pointPageName").val(data);
+                	$("#pointPage").css("display","block");
+        		}
+        	})
+        });
+
+    
+    
 	  
     function deleteLeaderPS(cPage){
     	if($('input:checkbox[name="checkMember"]').is(":checked") == false){
@@ -111,7 +130,6 @@
 			dataType: "html",
 			data: params,
 			success: function(data){
-				console.log("성공이니?");
 				$("#ajaxTable").html("");
 				$("#ajaxTable").html(data);
 			}

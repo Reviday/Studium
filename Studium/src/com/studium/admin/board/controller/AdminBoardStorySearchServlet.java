@@ -55,7 +55,6 @@ public class AdminBoardStorySearchServlet extends HttpServlet {
 		AdminPaginationTemplate pt=new AdminPaginationTemplate(request, totalData, URLmapping, method); // 페이징 처리 
 		List<Story> list=service.selectStorySearchList(cPage,pt.getNumPerPage(), pName);
 		
-		
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("adminboard");
 		request.setAttribute("elements", elements);
 		

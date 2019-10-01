@@ -27,8 +27,7 @@
 					<td><%=m.getMemName() %></td>
 					<td><span class="momoClick" id="<%=m.getMemNo() %>"><%=m.getMemUserEmail() %></span></td>
 					<td><%=m.getMemEnrollDatetime() %></td>
-					<form class="statusUpdate">
-						<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo" class="memUpdateNo">
+
 					<td>
 						<select name="memberGradeList" class="memberGradeList">
 							<option value="M" <%='M' == m.getMemCode() ? "selected" : "" %>>관리자</option>
@@ -44,10 +43,13 @@
 							<option value="P" <%='P' == m.getMemDenied() ? "selected" : "" %>>영구정지</option>
 						</select>
 					</td>
-					<input type="hidden" value="inqueryList2" name="method">
-					</form>
 					<td>
-						<input type="submit" value="수정" class="memberUpdate" onclick="statusUpdate();"></td>
+						<input type="submit" value="수정" class="memberUpdate" onclick="statusUpdate();">
+						<form class="statusUpdate">
+							<input type="hidden" value="<%=m.getMemNo() %>" name="memUpdateNo" class="memUpdateNo">
+							<input type="hidden" value="inqueryList2" name="method">
+						</form>
+					</td>
 					<td>
 						<form class="deleteMember">
 							<input type="hidden" value="<%=m.getMemNo() %>" name="memNo" class="memNo"> 
@@ -161,10 +163,13 @@
         	}
         	
         	function statusUpdate() {
+        		var status=$(event.target).parent().parent().find('.memberStatusList').val();
+        		var grade=$(event.target).parent().parent().find('.memberGradeList').val();
+        		var targetFrm=$(event.target).next();
         		var result = confirm("정말 수정하시겠습니까?");
         		if(result){
-        		var params = jQuery(".statusUpdate").serialize();
-        		console.log(params);
+        		var params=targetFrm.serialize();
+        		params+='&memberStatusList='+status+'&memberGradeList='+grade;
         		$.ajax({
         			url: "<%=request.getContextPath()%>/adminUpdateMember",
         			type: "POST",
@@ -173,7 +178,7 @@
         			success: function(data){
         				$("#ajaxTable").html("");
         				$("#ajaxTable").html(data);
-        				console.log(params+"성공");
+
         			}
         		})
         			return true;

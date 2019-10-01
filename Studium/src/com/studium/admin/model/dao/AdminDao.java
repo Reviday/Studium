@@ -1507,7 +1507,7 @@ public class AdminDao {
 		List<MemberLoginLog> list=new ArrayList();
 
 		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_MEMBER_LOGIN_LOG WHERE MLL_USER_EMAIL LIKE '%"
-				+ memberName + "%' ORDER BY MLL_DATETIME DESC)A) WHERE RNUM BETWEEN " + (cPage-1)*numPerPage+1 + " AND " + cPage*numPerPage;
+				+ memberName + "%' ORDER BY MLL_DATETIME DESC)A) WHERE RNUM BETWEEN " + ((cPage-1)*numPerPage+1) + " AND " + (cPage*numPerPage);
 		try {
 			pstmt=conn.prepareStatement(sql);
 

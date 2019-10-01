@@ -229,7 +229,8 @@ public class AdminBoardDao {
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
 				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
-
+				s.setMemNo(rs.getInt("mem_no"));
+				s.setpNo(rs.getInt("p_no"));
 				list.add(s);		
 			}
 
@@ -245,10 +246,9 @@ public class AdminBoardDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
-		String sql=prop.getProperty("selectCountStorySearch");
+		String sql=prop.getProperty("selectCountStorySearch") + pName + "%'";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pName);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				result=rs.getInt(1);
@@ -266,12 +266,10 @@ public class AdminBoardDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Story> list=new ArrayList();
-		String sql=prop.getProperty("selectStorySearchList");
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM TA_STORY WHERE STORY_TEACHER_NAME LIKE '% " + pName + 
+				   "%' ORDER BY STORY_NO)A) WHERE RNUM BETWEEN " + ((cPage-1)*numPerPage+1) + " AND " + (cPage*numPerPage);
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pName);
-			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-			pstmt.setInt(3, cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Story s = new Story();
@@ -284,10 +282,10 @@ public class AdminBoardDao {
 				s.setStoryTeacherpicture(rs.getString("STORY_TEACHER_PICTUER"));
 				s.setStorySubject(rs.getString("STORY_SUBJECT"));
 				s.setStoryStar(rs.getInt("STORY_STAR"));
-
+				s.setMemNo(rs.getInt("mem_no"));
+				s.setpNo(rs.getInt("p_no"));
 				list.add(s);		
 			}
-
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -313,6 +311,27 @@ public class AdminBoardDao {
 		}
 
 		return result;
+	}
+	
+	public String storyMemo(Connection conn, String storyNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String storyMemo = "";
+		String sql=prop.getProperty("storyMemo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, storyNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				storyMemo=rs.getString(1);
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return storyMemo;
 	}
 
 }

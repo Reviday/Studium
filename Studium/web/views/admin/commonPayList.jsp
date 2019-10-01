@@ -27,7 +27,7 @@
 		<td>
 			<form class="deletePayMember">
 				<input type="hidden" name="memNo" value="<%=p.getMemNo() %>">
-				<input type="hidden" value="findPayMember" name="method">
+				<input type="hidden" value="nameFinder" name="method">
 			</form>
 			<button class="deleteSubmit" onclick="deletePayMember();">결제
 				취소</button>

@@ -37,7 +37,7 @@
 				<form action="<%=request.getContextPath() %>/admin/paymemberFinder"
 					class="nameFinder">
 					<input type="text" placeholder="검색" name="memberName" id="findName">
-					<input type="hidden" value="findPayMember" name="method">
+					<input type="hidden" value="nameFinder" name="method">
 				</form>
 				<input type="submit" value="" class="submitPicture"
 					onclick="nameFinder();">

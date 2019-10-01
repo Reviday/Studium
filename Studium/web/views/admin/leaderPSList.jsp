@@ -157,7 +157,6 @@
 			dataType: "html",
 			data: params,
 			success: function(data){
-				console.log("성공이니?");
 				$("#ajaxTable").html("");
 				$("#ajaxTable").html(data);
 			}
@@ -182,7 +181,7 @@
     	})
     }
     
-    $(function() {
+ 
         $('.pointConfirm').click(function(e) {
         	var memNo = $(this).attr('id');
         	$.ajax({
@@ -198,7 +197,7 @@
         	})
         });
 
-    })
+
     
   
 </script> 

@@ -169,12 +169,14 @@ input[type="checkbox"] {
 	margin: 200px 0 0 350px;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 500px;
+	width: 450px;
 	height: 400px;
 	position: relative;
-	overflow: scroll;
+	overflow: auto;
 	scroll-behavior: smooth;
 	overflow-x:hidden;
+	font-size: 14px;
+	background: floralwhite;
 }
 
 .closePointPage {
@@ -212,10 +214,14 @@ input[type="checkbox"] {
 }
 
 .PointTable {
+	resize: none;
 	width: 100%;
-	margin-top: 15px;
-	box-sizing: border-box;
-	text-align: center;
+    border: none; 
+    height: 300px;
+    overflow: auto;
+    overflow-x: hidden;
+    background: floralwhite;
+    resize: none;
 }
 
 .PointTable table {
@@ -234,4 +240,8 @@ input[type="checkbox"] {
 	border-bottom: 1px solid #d6d3d3;
 	padding: 3px;
 	padding-bottom: 5px;
+}
+
+.storyclick {
+	cursor: pointer;
 }
