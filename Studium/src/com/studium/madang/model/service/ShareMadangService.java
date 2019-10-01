@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studium.madang.model.dao.ShareMadangDao;
+import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.ShareMadang;
 import com.studium.madang.model.vo.ShareMadangFile;
 
@@ -84,6 +85,36 @@ public class ShareMadangService {
 		int result=dao.insertFile(conn, smf);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateMadang(ShareMadang sm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, sm);
+		if(sm.getMadangWriterUid()==10000) check=1; //관리자 예외
+		int result=-1;
+		if(check>0) {
+			result=dao.updateMadang(conn, sm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
+		close(conn);
+		return result;
+	}
+	
+	public int deleteMadang(ShareMadang sm) {
+		Connection conn=getConnection();
+		int check=dao.checkWriter(conn, sm);
+		if(sm.getMadangWriterUid()==10000) check=1; //관리자 예외
+		int result=-1;
+		if(check>0) {
+			result=dao.deleteMadang(conn, sm);
+			if(result>0) {
+				commit(conn);
+			} rollback(conn);
+		} 
 		close(conn);
 		return result;
 	}

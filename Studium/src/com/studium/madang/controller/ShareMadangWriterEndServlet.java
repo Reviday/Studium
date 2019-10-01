@@ -151,9 +151,8 @@ public class ShareMadangWriterEndServlet extends HttpServlet {
 		
 		String view="/";
 		if(madangNo>0) {
-			view="/madang/shareMadangView?madangNo="+madangNo+"&cPage=1";
-			request.setAttribute("choice", request.getParameter("chocie"));
-			request.setAttribute("choiceSub", sm.getMadangCategory());
+			view="/madang/shareMadangView?madangNo="+madangNo+"&cPage=1&choice=" 
+					+request.getParameter("chocie")+"&choiceSub="+sm.getMadangMainCategory();
 		} else {
 			String msg="게시글 작성에 실패하였습니다.";
 			String loc="/madang/shareMadangList";

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.FreeMadangFile;
 import com.studium.madang.model.vo.ShareMadang;
 import com.studium.madang.model.vo.ShareMadangFile;
@@ -186,6 +187,9 @@ public class ShareMadangDao {
 				sm.setMadangWriterName(rs.getString("madang_writer_name"));
 				sm.setMadangTitle(rs.getString("madang_title"));
 				sm.setMadangContent(rs.getString("madang_content"));
+				sm.setMadangMainCategory(rs.getString("madang_main_category"));
+				sm.setMadangCategory(rs.getString("madang_category"));
+				sm.setMadangSubCategory(rs.getString("madang_sub_category"));
 				sm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				sm.setMadangRegisterIp(rs.getString("madang_register_ip"));
 				sm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));
@@ -307,6 +311,60 @@ public class ShareMadangDao {
 			pstmt.setLong(5, smf.getSmfFilesize());
 			pstmt.setString(6, smf.getSmfType());
 			pstmt.setString(7, smf.getSmfIp());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int checkWriter(Connection conn, ShareMadang sm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("checkWriter");
+			
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, sm.getMadangNo());
+			pstmt.setInt(2, sm.getMadangWriterUid());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateMadang(Connection conn, ShareMadang sm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, sm.getMadangTitle());
+			pstmt.setString(2, sm.getMadangContent());
+			pstmt.setString(3, sm.getMadangUpdatedIp());
+			pstmt.setString(4, String.valueOf(sm.getMadangFilePresence()));
+			pstmt.setString(5, String.valueOf(sm.getMadangImgPresence()));
+			pstmt.setInt(6, sm.getMadangNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int deleteMadang(Connection conn, ShareMadang sm) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteMadang");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, sm.getMadangNo());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

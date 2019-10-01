@@ -15,8 +15,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.BoastMadangFile;
 import com.studium.util.model.service.SideMenuElementService;
@@ -26,16 +24,16 @@ import common.policy.StudiumFileRenamePolicy;
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class BoastMadangWriterEndServlet
+ * Servlet implementation class BoastMadangUpdateEndServlet
  */
-@WebServlet("/madang/boast/writeEnd")
-public class BoastMadangWriterEndServlet extends HttpServlet {
+@WebServlet("/madang/free/updateEnd")
+public class BoastMadangUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoastMadangWriterEndServlet() {
+    public BoastMadangUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,7 +44,7 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 2차 로그인 체크. 
-		if(!new LoginCheck().doLoginCheck(request, response, 1004)) return;
+		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		
 		//파일 받기 및 넣기
 		if(!ServletFileUpload.isMultipartContent(request)) {
@@ -55,16 +53,14 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-
+		
 		//파일 업로드
 		String root=getServletContext().getRealPath("/");
 		String saveDir=root+"upload\\madang\\boast"; 
 		int maxSize=1024*1024*1024; //1GB
 		File isDir = new File(saveDir);
 		  if(!isDir.isDirectory()){
-
 			  isDir.mkdir();
-
 		  }
 
 		MultipartRequest mr =new MultipartRequest(
@@ -76,12 +72,14 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		);
 		
 		BoastMadang bm=new BoastMadang();
+		bm.setMadangNo(Integer.parseInt(mr.getParameter("madangNo")));
 		bm.setMadangTitle(mr.getParameter("subject"));
 		bm.setMadangWriterUid(Integer.parseInt(mr.getParameter("userUid")));
 		bm.setMadangWriterEmail(mr.getParameter("userEmail"));
 		bm.setMadangWriterName(mr.getParameter("userName"));
 		bm.setMadangRegisterIp(mr.getParameter("REMOTE_ADDR"));
 		bm.setMadangContent(mr.getParameter("smarteditor"));
+		int cPage=Integer.parseInt(mr.getParameter("cPage"));
 		
 		//카테고리 받기
 		bm.setMadangMainCategory(mr.getParameter("choiceSub"));
@@ -103,9 +101,7 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 			bm.setMadangSubCategory(subCategory);
 		}
 		
-		//정상적으로 insert되면 해당 madangNo가 반환된다.
-		int madangNo=new BoastMadangService().insertMadang(bm);
-		
+		//파일 받기 및 넣기
 		Enumeration<String> e= mr.getFileNames();
 	    if(e.hasMoreElements()) {
 	        String name=(String)e.nextElement();
@@ -122,7 +118,6 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		        
 		        //문자열 "파일 이름"이 name에 들어온 상태
 		        //문자열 파일 이름을통해 실제 파일 객체를 가져온다.
-		        
 		        File file=mr.getFile(name); //java.io
 		        
 		        long size=0;
@@ -131,7 +126,7 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		        }
 		        
 		        BoastMadangFile bmf=new BoastMadangFile();
-		        bmf.setMadangNo(madangNo);
+		        bmf.setMadangNo(bm.getMadangNo());
 		        bmf.setMemberNo(bm.getMadangWriterUid());
 		        bmf.setBmfOriginalFilename(originFile);
 		        bmf.setBmfRenameFilename(systemFile);
@@ -147,27 +142,41 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		        }
 	        }
 	    }
-	      
+		//파일 유/무 처리 해줘야함.
+	    //파일/이미지 체크는 시간상 제외.
+		//fm.setMadangFilePresence('Y');
+		bm.setMadangFilePresence('N');
+		
 		//이미지 받기 및 넣기
-		//태그로 저장되기때문에 필요없을지도.
-	    
-	    
-	    // SideMenuElement
- 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
+		bm.setMadangImgPresence('N');
+		
+		
+		// SideMenuElement
+		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
+		
+		//일단 작성 가능상태를 보기위해, 파일/이미지 기능은 제외처리하고 구동시킨다.
+		//정상적으로 insert되면 해당 madangNo가 반환된다.
+		int result=new BoastMadangService().updateMadang(bm);
 		
 		String view="/";
-		if(madangNo>0) {
-			view="/madang/boastMadangView?madangNo="+madangNo+"&cPage=1";
-			request.setAttribute("choice", request.getParameter("chocie"));
-			request.setAttribute("choiceSub", bm.getMadangCategory());
+		if(result>0) {
+			view="/madang/boastMadangView?madangNo="+bm.getMadangNo()+"&cPage="+cPage;
+		} else if(result<0) {
+			String msg="권한이 없습니다.";
+			String loc="/madang/boastMadangList";
+			view="/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
 		} else {
-			String msg="게시글 작성에 실패하였습니다.";
+			String msg="게시글 수정에 실패하였습니다.";
 			String loc="/madang/boastMadangList";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		}
 		request.setAttribute("elements", elements);
+		request.setAttribute("choice", request.getParameter("choice"));
+		request.setAttribute("choiceSub", request.getParameter("choiceSub"));
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

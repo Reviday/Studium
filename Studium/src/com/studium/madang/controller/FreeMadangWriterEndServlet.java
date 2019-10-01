@@ -57,9 +57,7 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		int maxSize=1024*1024*1024; //1GB
 		File isDir = new File(saveDir);
 		  if(!isDir.isDirectory()){
-
 			  isDir.mkdir();
-
 		  }
 
 		MultipartRequest mr =new MultipartRequest(
@@ -82,6 +80,7 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		//정상적으로 insert되면 해당 madangNo가 반환된다.
 		int madangNo=new FreeMadangService().insertMadang(fm);
 		
+		int filecount=0;
 		Enumeration<String> e= mr.getFileNames();
 	    if(e.hasMoreElements()) {
 	        String name=(String)e.nextElement();
@@ -98,7 +97,6 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		        
 		        //문자열 "파일 이름"이 name에 들어온 상태
 		        //문자열 파일 이름을통해 실제 파일 객체를 가져온다.
-		        
 		        File file=mr.getFile(name); //java.io
 		        
 		        long size=0;
@@ -115,6 +113,7 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		        fmf.setFmfType(fileType);
 		        fmf.setFmfIp(fm.getMadangRegisterIp());
 		        int result=new FreeMadangService().insertFile(fmf);
+		        filecount+=result;
 		        if(result==0) {
 		        	request.setAttribute("msg", "파일 저장에 실패하였습니다.");
 					request.setAttribute("loc", "/madang/freeMadangList");
@@ -123,6 +122,7 @@ public class FreeMadangWriterEndServlet extends HttpServlet {
 		        }
 	        }
 	    }
+	    //파일/이미지 체크는 시간상 제외.
 	      
 		//이미지 받기 및 넣기
 		//태그로 저장되기때문에 필요없을지도.

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studium.category.model.service.CategoryService;
+import com.studium.category.model.vo.Category;
 import com.studium.madang.model.service.BoastMadangService;
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.service.ShareMadangService;
@@ -74,6 +76,12 @@ public class MadangUpdateServlet extends HttpServlet {
 			break;
 		case "question" : code=1006; break;
 		}
+		
+		List<Category> mCategoryList=new CategoryService().selectTitleB();//대분류
+        List<Category> categoryList=new CategoryService().selectTitleM();//중분류
+        
+        request.setAttribute("mCategoryList", mCategoryList);
+        request.setAttribute("categoryList", categoryList);
 		
 		request.setAttribute("locate", locate);
 		request.setAttribute("elements", elements);

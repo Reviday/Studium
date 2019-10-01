@@ -149,8 +149,12 @@
                             </div>
                         </li>
                         <%
-                        	if(locate.equals("free") || choiceSub.equals("null")) {
+                        	if(locate.equals("free") ) {
                         %>
+		                        <!-- 출력해 줄 것이 없다.. -->
+		                <%
+                       		} else if(choiceSub.equals("null")) {		                
+		                %>        
 		                        <li class="post_mCategory">
 		                            <label class="item" for="mCategory">카테고리</label>
 		                            <div class="inputInteresting" style="margin-left:68px;">
@@ -184,6 +188,7 @@
 		                            	</div>
 		                            </div>
 		                        </li>
+		                        
                         <%
 								} else {
                         %>

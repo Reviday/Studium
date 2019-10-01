@@ -183,6 +183,9 @@ public class BoastMadangDao {
 				bm.setMadangWriterName(rs.getString("madang_writer_name"));
 				bm.setMadangTitle(rs.getString("madang_title"));
 				bm.setMadangContent(rs.getString("madang_content"));
+				bm.setMadangMainCategory(rs.getString("madang_main_category"));
+				bm.setMadangCategory(rs.getString("madang_category"));
+				bm.setMadangSubCategory(rs.getString("madang_sub_category"));
 				bm.setMadangRegisterDatetime(rs.getTimestamp("madang_register_datetime"));
 				bm.setMadangRegisterIp(rs.getString("madang_register_ip"));
 				bm.setMadangUpdatedDatetime(rs.getTimestamp("madang_updated_datetime"));

@@ -9,24 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.studium.madang.model.service.BoastMadangService;
-import com.studium.madang.model.vo.BoastMadang;
+import com.studium.madang.model.service.ShareMadangService;
+import com.studium.madang.model.vo.ShareMadang;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
 import common.template.LoginCheck;
 
 /**
- * Servlet implementation class BoastMadangDeleteServlet
+ * Servlet implementation class ShareMadangDeleteServlet
  */
-@WebServlet("/madang/boastMadangDelete")
-public class BoastMadangDeleteServlet extends HttpServlet {
+@WebServlet("/madang/shareMadangDelete")
+public class ShareMadangDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoastMadangDeleteServlet() {
+    public ShareMadangDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +38,14 @@ public class BoastMadangDeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
 		
-		BoastMadang bm=new BoastMadang();
+		ShareMadang sm=new ShareMadang();
 		System.out.println(request.getParameter("madangNo"));
-		bm.setMadangNo(Integer.parseInt(request.getParameter("madangNo")));
-		bm.setMadangWriterUid(Integer.parseInt(request.getParameter("memNo")));
+		sm.setMadangNo(Integer.parseInt(request.getParameter("madangNo")));
+		sm.setMadangWriterUid(Integer.parseInt(request.getParameter("memNo")));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 		
 		// 
-		int result=new BoastMadangService().deleteMadang(bm);
+		int result=new ShareMadangService().deleteMadang(sm);
 		
 		// SideMenuElement
 		List<SideMenuElement> elements = new SideMenuElementService().selectElements("madang");
@@ -54,16 +54,16 @@ public class BoastMadangDeleteServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);
 		String view="/";
 		if(result>0) {
-			view="/madang/boastMadangList?cPage="+cPage;
+			view="/madang/shareMadangList?cPage="+cPage;
 		} else if(result<0) {
 			String msg="권한이 없습니다.";
-			String loc="/madang/boastMadangList";
+			String loc="/madang/shareMadangList";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 		} else {
 			String msg="게시글 삭제에 실패하였습니다.";
-			String loc="/madang/boastMadangList";
+			String loc="/madang/shareMadangList";
 			view="/views/common/msg.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

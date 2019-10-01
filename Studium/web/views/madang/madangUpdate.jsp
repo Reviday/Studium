@@ -1,3 +1,4 @@
+<%@page import="com.studium.category.model.vo.Category"%>
 <%@page import="com.studium.madang.model.vo.BoastMadang"%>
 <%@page import="com.studium.madang.model.vo.ShareMadang"%>
 <%@page import="com.studium.madang.model.vo.FreeMadang"%>
@@ -8,6 +9,26 @@
  	String locate=(String)request.getAttribute("locate");
  	Madang madang=(Madang)request.getAttribute("madang");
  	int cPage=(int)request.getAttribute("cPage");
+ 	List<Category> mCategoryList=(List)request.getAttribute("mCategoryList");
+ 	List<Category> categoryList=(List)request.getAttribute("categoryList");
+ 	
+ 	//카테고리 처리하기 위한 부분
+ 	String category=""; // 중분류
+ 	String subCategories=""; // 소분류
+ 	String[] scArray=new String[3];
+ 	// 마당의 타입을 확인해야한다. 
+	if(madang!=null) {
+		if (madang instanceof ShareMadang) {
+			ShareMadang sm=(ShareMadang)madang;
+			subCategories=sm.getMadangSubCategory()!=null?sm.getMadangSubCategory():"";
+			category=sm.getMadangCategory()!=null?sm.getMadangCategory():"";
+		} else if (madang instanceof BoastMadang) {
+			BoastMadang bm=(BoastMadang)madang;
+			subCategories=bm.getMadangSubCategory()!=null?bm.getMadangSubCategory():"";
+			category=bm.getMadangCategory()!=null?bm.getMadangCategory():"";
+		}
+	}
+	scArray=subCategories.split(", ");
  	
  	//게시판 마다 띄워줄 제목과 문구 처리.
  	//추후, DB에 넣어서 가져오는 방법으로 처리할 예정.
@@ -46,14 +67,24 @@
         <div class="madang-list mldiv">
             <div class="sub-tit row mldiv">
                 <div class="title-area mldiv">
-                    <h3 class="list-title"><%=mTit%></h3>
+                    <%
+                		if(locate.equals("free") || choiceSub.equals("null")) {
+                			%>
+                				<h3 class="list-title"><%=mTit%></h3>
+                			<%
+                		} else {
+                			%>
+                				<h3 class="list-title"><%=mTit%><%=choiceSub!=null?" - " +choiceSub:""%></h3>
+                			<%
+                		}
+                	%>
                     <p class="list-sub"><%=mSub%></p>
                 </div>
             </div>
         </div>
         <hr />
         <div class="write_form">
-            <form action="<%=request.getContextPath()%>/madang/<%=locate%>/updateEnd" method="post" id="frm">
+            <form action="<%=request.getContextPath()%>/madang/<%=locate%>/updateEnd" method="post" id="frm" enctype="Multipart/form-data">
                 <div class="subject_cover">
                     <ul class="subject">
                         <li class="post_subject">
@@ -162,6 +193,93 @@
                                 </script>
                             </div>
                         </li>
+                         <%
+                        	if(locate.equals("free") ) {
+                        %>
+		                        <!-- 출력해 줄 것이 없다.. -->
+		                <%
+                       		} else if(choiceSub.equals("null")) {		                
+		                %>        
+		                        <li class="post_mCategory">
+		                            <label class="item" for="mCategory">카테고리</label>
+		                            <div class="inputInteresting" style="margin-left:68px;">
+										<% if(!categoryList.isEmpty()&&!mCategoryList.isEmpty()){
+											//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
+											for(int i=0;i<mCategoryList.size();i++){
+											%>
+											<div><p><%=mCategoryList.get(i).getTitleB()%></p></div>
+											
+												<% for(int j=0;j<categoryList.size();j++){
+													if(mCategoryList.get(i).getCategoryBId().equals(categoryList.get(j).getCategoryBId())){%>
+														<label class="check-label">
+					                                        <input type="radio" class="option-input checkbox"  name="inter" required 
+					                                        	<%=categoryList.get(j).getTitleM()!=null&&categoryList.get(j).getTitleM().equals(category)?"checked":""%>
+					                                        	id="<%=categoryList.get(j).getCategoryMId()%>" value="<%=categoryList.get(j).getTitleM() %>">
+					                                        <%=categoryList.get(j).getTitleM() %>
+					                                     </label>
+													<%}
+											}
+										}
+										}%>
+		                             </div>
+		                        </li>
+		                        <li class="post_subCategory">
+		                            <label class="item" for="subCategory">상세<br/>카테고리</label>
+		                            <div class="inputInteresting" style="margin-left:68px; margin-top:10px;">
+		                            	<input type="text" name="subCategory1" class="subCategory" id="subCategory1" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>0&&scArray[0]!=null?scArray[0]:""%>">
+		                            	<input type="text" name="subCategory2" class="subCategory" id="subCategory2" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>1&&scArray[1]!=null?scArray[1]:""%>">
+		                            	<input type="text" name="subCategory3" class="subCategory" id="subCategory3" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>2&&scArray[2]!=null?scArray[2]:""%>">
+		                            	<div class="subscript">
+		                            		<small>상세 카테고리는 최소 0개, 최대 3개까지 입력 가능하고<br/>첫 번째 카테고리의 내용이 제목에 출력됩니다.</small>
+		                            	</div>
+		                            </div>
+		                        </li>
+		                        
+                        <%
+								} else {
+                        %>
+		                       <li class="post_mCategory">
+		                            <label class="item" for="mCategory">카테고리</label>
+		                            <div class="inputInteresting" style="margin-left:68px;">
+										<% if(!categoryList.isEmpty()&&!mCategoryList.isEmpty()){
+											//m이랑 b랑 비교해서 같은 값 있으면 뿌려주고
+											
+											for(int i=0;i<mCategoryList.size();i++){
+												
+												if(mCategoryList.get(i).getTitleB().equals(choiceSub)) {
+											%>
+											<div><p><%=mCategoryList.get(i).getTitleB()%></p></div>
+											
+												<% for(int j=0;j<categoryList.size();j++){
+													if(mCategoryList.get(i).getCategoryBId().equals(categoryList.get(j).getCategoryBId())){%>
+														<label class="check-label">
+					                                        <input type="radio" class="option-input checkbox"  name="inter" required 
+					                                        	<%=categoryList.get(j).getTitleM()!=null&&categoryList.get(j).getTitleM().equals(category)?"checked":""%>
+					                                        	id="<%=categoryList.get(j).getCategoryMId()%>" value="<%=categoryList.get(j).getTitleM() %>">
+					                                        <%=categoryList.get(j).getTitleM() %>
+					                                     </label>
+													<%}
+											}	
+											}
+										}
+										}%>
+		                             </div>
+		                        </li>
+		                        <li class="post_subCategory">
+		                            <label class="item" for="subCategory">상세<br/>카테고리</label>
+		                            <div class="inputInteresting" style="margin-left:68px; margin-top:10px;">
+		                            	<input type="text" name="subCategory1" class="subCategory" id="subCategory1" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>0&&scArray[0]!=null?scArray[0]:""%>">
+		                            	<input type="text" name="subCategory2" class="subCategory" id="subCategory2" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>1&&scArray[1]!=null?scArray[1]:""%>">
+		                            	<input type="text" name="subCategory3" class="subCategory" id="subCategory3" placeholder="상세 카테고리를 입력해주세요." value="<%=scArray.length>2&&scArray[2]!=null?scArray[2]:""%>">
+		                            	<div class="subscript">
+		                            		<small>상세 카테고리는 최소 0개, 최대 3개까지 입력 가능하고<br/>첫 번째 카테고리의 내용이 제목에 출력됩니다.</small>
+		                            	</div>
+		                            </div>
+		                        </li>
+                        
+                        <%
+								}
+                        %>
                     </ul>
                 </div>
 				<div class="smdarteditor_area">

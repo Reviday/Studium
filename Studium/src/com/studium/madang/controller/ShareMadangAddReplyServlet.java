@@ -44,9 +44,7 @@ public class ShareMadangAddReplyServlet extends HttpServlet {
 		cmt.setCmtContent(request.getParameter("content"));
 		cmt.setCmtRegisterIp(request.getParameter("REMOTE_ADDR"));
 		cmt.setCmtParent(Integer.parseInt(request.getParameter("cmtNo")));
-		System.out.println("request.getParameter(\"cmtNo\"):" + request.getParameter("cmtNo"));
 		int result=new ShareMadangCmtService().insertReply(cmt);
-		System.out.println("cmt.getCmtParent():"+cmt.getCmtParent());
 		String view="";
 		if(result>0) {
 			view="/madang/shareMadangView?madangNo="+madangNo+"&cPage="+cPage;
