@@ -12,7 +12,7 @@
  <div style="display:none;">  <%@ include file="/views/common/header.jsp" %></div>
  
  		<%
-				if(loginMember!=null&&loginMember.getMemCategory1()!=null&&categoryCount!=0)	{
+				if(loginMember!=null&&loginMember.getMemCategory1()!=null&&categoryCount>4)	{
 					for(Pstudy p :categoryList){ 
  		%>		
 		<%if(loginMember!=null) { %>			
