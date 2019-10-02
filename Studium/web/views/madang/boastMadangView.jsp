@@ -290,17 +290,67 @@
 						                                        <span class="timeago dt-published ie-dotum" title="">
 						                                            <%=format.format(cmt.getCmtRegisterDatetime())%>
 						                                        </span>
-						                                        <a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
-						                                            onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+			 			                                        <span class="m-tcol-c" style="opacity: 0.3">|</span>
+			 			                                        <% 
+                                                                   	if(loginMember!=null && (loginMember.getMemNo()==cmt.getCmtWriterUid() || loginMember.getMemCode()=='M')) {
+                                                                %>
+			 			                                        <span class="timeago dt-published ie-dotum" title="">
+			 			                                        	<a href="#" class="m-tcol-c ablock" id="edit_cmt_<%=cmt.getCmtNo()%>"
+			 			                                        		onclick="fn_editComment(<%=cmt.getCmtNo()%>); return false;">수정</a>
+			 			                                        </span>
+			 			                                        <span class="m-tcol-c" style="opacity: 0.3">|</span>
+			 			                                        <span class="timeago dt-published ie-dotum" title="">
+			 			                                        	<a href="#" class="m-tcol-c ablock" id="edit_cmt_<%=cmt.getCmtNo()%>"
+			 			                                        		onclick="fn_deleteComment('<%=cmt.getCmtNo()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
+			 			                                        		삭제</a>
+			 			                                        </span>
+			 			                                        <span class="m-tcol-c" style="opacity: 0.3">|</span>
+			 			                                        <%
+                                                                   	} else {
+			 			                                        %>
+						                                        <span class="timeago dt-published ie-dotum">
+						                                        	<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
+						                                            	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+						                                        </span>
+						                                        <%
+                                                                   	}
+						                                        %>
 						                                    </div>
 						                                    <div class="cng-content">
-						                                        <div class="speech">
+						                                        <div class="speech" id="speech_<%=cmt.getCmtNo()%>">
 						                                            <div class="comm_body">
-						                                                <span>
+						                                                <span id="cmt_target_<%=cmt.getCmtNo()%>">
 						                                                    <%=cmt.getCmtContent()%>
 						                                                </span>
 						                                            </div>
 						                                        </div>
+						                                        <div class="edit-content" id="edit_textarea_<%=cmt.getCmtNo()%>" style="display:none">
+							                                        <table cellspacing="0" class="cminput">
+																		<tbody>
+																			<tr>
+																				<td class="i2">
+																					<div class="comm_write_wrap border-sub skin-bgcolor">
+																						<textarea id="comment_edit_<%=cmt.getCmtNo()%>" cols="50" rows="2"
+																							class="textarea m-tcol-c" maxlength="6000"
+																							style="overflow: hidden; line-height: 14px; height: 39px;"
+																							title="댓글입력"><%=cmt.getCmtContent()%></textarea>
+																					</div>
+																				</td>
+																				<td class="i3">
+											
+																					<div class="u_cbox_btn_upload _submitBtn">
+																						<a href="#" class="u_cbox_txt_upload _submitCmt"
+																						onclick="fn_updateComment('<%=cmt.getCmtNo()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
+																						수정</a>													
+																					</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td colspan="3"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
 						                                    </div>
 						                                    <a href="#" onclick="deleteComment(<%=cmt.getCmtNo()%>);return false"
 						                                        class="modify" title="수정/삭제"><i
@@ -357,19 +407,69 @@
                                                                         onclick="return openLinkInNewWindow(this)"><%=cmt.getCmtWriterName() %>
                                                                         </a>
                                                                     </span> 
-                                                                    <span class="timeago dt-published ie-dotum" title=""><%=format.format(cmt.getCmtRegisterDatetime())%> 
-                                                                        <a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743723"
-                                                                        onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+                                                                    <span class="timeago dt-published ie-dotum" title="">
+                                                                    	<%=format.format(cmt.getCmtRegisterDatetime())%> 
                                                                     </span>
+                                                                    <span class="m-tcol-c" style="opacity: 0.3">|</span>
+                                                                    <% 
+                                                                    	if(loginMember!=null && (loginMember.getMemNo()==bm.getMadangWriterUid() || loginMember.getMemCode()=='M')) {
+                                                                    %>
+				 			                                        <span class="timeago dt-published ie-dotum" title="">
+			 			                                        	<a href="#" class="m-tcol-c ablock" id="edit_cmt_<%=cmt.getCmtNo()%>"
+			 			                                        		onclick="fn_editComment(<%=cmt.getCmtNo()%>); return false;">수정</a>
+				 			                                        </span>
+				 			                                        <span class="m-tcol-c" style="opacity: 0.3">|</span>
+				 			                                        <span class="timeago dt-published ie-dotum" title="">
+				 			                                        	<a href="#" class="m-tcol-c ablock" id="edit_cmt_<%=cmt.getCmtNo()%>"
+				 			                                        		onclick="fn_deleteReply('<%=cmt.getCmtNo()%>','<%=cmt.getCmtParent() %>','<%=cmt.getCmtSort()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
+				 			                                        		삭제</a>
+				 			                                        </span>
+				 			                                        <%
+                                                                    	} else {
+				 			                                        %>
+							                                        <span class="timeago dt-published ie-dotum">
+							                                        	<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
+							                                            	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+							                                        </span>
+							                                        <%
+                                                                    	}
+							                                        %>
                                                                 </div>
                                                                 <div class="cng-content">
-                                                                    <div class="speech">
+                                                                    <div class="speech" id="speech_<%=cmt.getCmtNo()%>">
                                                                         <div class="comm_body">
-                                                                            <span> 
+                                                                            <span id="cmt_target_<%=cmt.getCmtNo()%>">
                                                                                 <%=cmt.getCmtContent() %>
                                                                             </span>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="edit-content" id="edit_textarea_<%=cmt.getCmtNo()%>" style="display:none">
+							                                        <table cellspacing="0" class="cminput">
+																		<tbody>
+																			<tr>
+																				<td class="i2">
+																					<div class="comm_write_wrap border-sub skin-bgcolor">
+																						<textarea id="comment_edit_<%=cmt.getCmtNo()%>" cols="50" rows="2"
+																							class="textarea m-tcol-c" maxlength="6000"
+																							style="overflow: hidden; line-height: 14px; height: 39px;"
+																							title="댓글입력"><%=cmt.getCmtContent()%></textarea>
+																					</div>
+																				</td>
+																				<td class="i3">
+											
+																					<div class="u_cbox_btn_upload _submitBtn">
+																						<a href="#" class="u_cbox_txt_upload _submitCmt"
+																						onclick="fn_updateReply('<%=cmt.getCmtNo()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=bm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
+																						수정</a>													
+																					</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td colspan="3"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
                                                                 </div>
                                                                 <a href="#"
                                                                     onclick="deleteComment(<%=cmt.getCmtNo()%>); return false;"
