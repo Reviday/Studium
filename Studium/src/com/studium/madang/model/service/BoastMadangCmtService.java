@@ -66,4 +66,49 @@ public class BoastMadangCmtService {
 		close(conn);
 		return insertResult;
 	}	
+	
+	public int updateComment(BoastMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.updateComment(conn, cmt);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteComment(BoastMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, cmt);
+		if(result>0) {
+			dao.autoDeleteReply(conn, cmt);
+			commit(conn);
+			new BoastMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+		}
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateReply(BoastMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.updateReply(conn, cmt);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteReply(BoastMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, cmt);
+		if(result>0) {
+			dao.updateReplySortOnDelete(conn, cmt);
+			dao.checkForReply(conn, cmt);
+			commit(conn);
+			new BoastMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+		}
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
