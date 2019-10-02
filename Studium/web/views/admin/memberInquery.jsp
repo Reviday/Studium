@@ -225,7 +225,7 @@
         			data: params,
         			success: function(data){
         				$("#ajaxTable").html("");
-        				$("#ajaxTable").html(data);
+        				$("#ajaxTable").html(data)
         			}
         		})
         			return true;
@@ -237,7 +237,6 @@
   
                 $('.momoClick').click(function(e) {
                 	var memNo = $(this).attr('id');
-                	console.log(memNo);
                 	$(".hiddenNo").val(memNo);
                 	$.ajax({
                 		url: "<%=request.getContextPath()%>/adminMemo",
