@@ -106,9 +106,9 @@
 								<div class="inputForm">
 									<input type="email" name="email" id="email" class="myI-1-f"
 										autocomplete=off value="<%=m.getMemUserEmail()%>" readonly>
-									<div class="emailcert">
+									<!--  <div class="emailcert">
 										<p>이메일 인증하기</p>
-									</div>
+									</div>-->
 								</div>
 
 								<div class="inputForm">

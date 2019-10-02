@@ -53,7 +53,6 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		String address1=request.getParameter("address1");
 		String address2=request.getParameter("address2");
 		String [] inter =request.getParameterValues("inter");
-		System.out.println("배열의 길이"+inter.length);
 		
 		// 수정한 내용
 		Member m=new Member();
@@ -64,7 +63,6 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		m.setMemAddress1(address1);
 		m.setMemAddress2(address2);
 		if(inter.length<2) {
-			System.out.println("여기들어감1");
 			m.setMemCategory1(inter[0]);
 			m.setMemCategory2(null);
 			m.setMemCategory3(null);
@@ -92,7 +90,6 @@ public class AddmyInfoEnteredServlet extends HttpServlet {
 		if(result>0) {
 			//회원정보수정성공
 			m=ms.selectNo(no);
-			System.out.println("회원수정성공");
 			
 			List<Category> listM=new CategoryService().selectTitleM();
 			//대분류

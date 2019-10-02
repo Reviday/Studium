@@ -31,7 +31,7 @@ public class CheckOriginPwServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("비번변경 서블릿들어옴");
+
 		int no=Integer.parseInt(request.getParameter("no"));
 		String pwd= request.getParameter("password");
 		System.out.println(no+pwd);
