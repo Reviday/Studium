@@ -266,6 +266,37 @@ start with 1
 increment by 1
 maxvalue 999999;
 
+-- 질문마당
+create table ta_question_madang(
+    madang_no number constraint qmadang_no_pk primary key, -- 글번호
+    madang_parent number default null, -- 답글을 달았을 시, 원글의 글번호를 저장
+    madang_order number default 0, -- 답글이 달렸을 시, 해당 게시글의 순서를 정해주기 위한 순서번호
+    madang_writer_uid number, -- 글쓴이 uid
+    madang_writer_email varchar2(20), -- 글쓴이 이메일
+    madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
+    madang_title varchar2(100) constraint bmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint bmadang_content_nn not null, -- 글 내용
+    madang_main_category varchar2(100), -- 대분류(관리자 고정)
+    madang_category varchar2(100), -- 중분류(관리자 고정)
+    madang_sub_category varchar2(100), -- 소분류(사용자 지정)
+    madang_register_datetime date, -- 글 작성 일시
+    madang_register_ip varchar2(20), -- 글 작성 ip 주소
+    madang_updated_datetime date default null, -- 글 수정 일시
+    madang_updated_ip varchar2(20), -- 글 수정 ip 주소
+    madang_rec_count number default 0, -- 글 추천 수(recommand)
+    madang_rep_count number default 0, -- 글 댓글 수
+    madang_read_count number default 0, -- 조회수
+    madang_file_presence char(1) default 'N' constraint qmadang_file_presence_ck check(madang_file_presence in ('Y','N')), -- 파일이 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_img_presence char(1) default 'N' constraint qmadang_img_presence_ck check(madang_img_presence in ('Y','N')), -- 이미지가 있는지 없는지(List화면에서 표시용으로 사용)
+    madang_status char(1) default 'Y' constraint qmadang_status_ck check(madang_status in ('Y','N')) -- 삭제 여부
+);
+
+-- 질문마당
+create sequence qmadang_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
 -- 댓글 테이블 => 각 게시판당 한 개의 테이블 생성 => 댓글 테이블은 계층형으로 도전!
 -- 자유마당 댓글 테이블
 create table ta_fmadang_cmt (
