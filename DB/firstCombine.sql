@@ -274,8 +274,8 @@ create table ta_question_madang(
     madang_writer_uid number, -- 글쓴이 uid
     madang_writer_email varchar2(20), -- 글쓴이 이메일
     madang_writer_name varchar2(20), -- 글쓴이 이름(이름으로 표기)
-    madang_title varchar2(100) constraint bmadang_title_nn not null, -- 글 제목
-    madang_content clob constraint bmadang_content_nn not null, -- 글 내용
+    madang_title varchar2(100) constraint qmadang_title_nn not null, -- 글 제목
+    madang_content clob constraint qmadang_content_nn not null, -- 글 내용
     madang_main_category varchar2(100), -- 대분류(관리자 고정)
     madang_category varchar2(100), -- 중분류(관리자 고정)
     madang_sub_category varchar2(100), -- 소분류(사용자 지정)
@@ -410,6 +410,33 @@ start with 1
 increment by 1
 maxvalue 9999999;
 
+-- 질문마당 댓글 테이블 
+create table ta_qmadang_cmt (
+    cmt_no number primary key, -- 댓글 시퀀스 넘버
+    cmt_parent number, -- 부모 댓글의 번호를 가짐. 부모는 null
+    cmt_sort number default 0, -- 댓글 정렬 (기본값 0으로, 대댓글 순서대로 1씩 증가)
+    cmt_madang_no number references ta_question_madang(madang_no), -- 게시글 번호(왜래키)
+    cmt_content clob, -- 댓글 내용
+    cmt_reply char(1) default 'N' check (cmt_reply in ('Y','N')), -- 대댓글 존재 여부
+--  cmt_secret char(1) default 'N' check (cmt_secret in ('Y','N')), -- 비밀 댓글 여부 // 일단 현재 사용하지 않을 예정
+    cmt_writer_uid number not null references ta_member(mem_no), -- 댓글 작성자 uid(고유넘버)
+    cmt_writer varchar2(30) not null, -- 댓글 작성자 이메일 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_writer_name varchar2(30) not null, -- 댓글 작성자 이름 (기본적으로 댓글에 정보를 띄워주기 위함)
+    cmt_register_datetime date, -- 댓글 작성 일시
+    cmt_updated_datetime date, -- 댓글 최근 수정 일시
+    cmt_register_ip varchar2(20), -- 댓글 작성 ip 주소
+    cmt_updated_ip varchar2(20), -- 댓글 최근 수정 ip 주소
+    cmt_status char(1) default 'Y' check (cmt_status in ('Y','N')), -- 댓글 삭제 여부(부모 댓글이 삭제 처리될 시, 대댓글도 모두 N으로 처리)
+    cmt_blame number default 0, -- 신고 횟수
+    cmt_blame_admin char(1) default 'N' check (cmt_blame_admin in ('Y','N')) -- 신고 접수로인해 관리자 판단 하에 삭제조치된 경우. ("관리자에의 의해 삭제처리된 댓글입니다." 표기//일단 그냥 삭제처리와 동일하게)
+);
+
+-- 자랑마당 댓글 시퀀스
+create sequence qmadang_cmt_seq 
+start with 1
+increment by 1
+maxvalue 9999999;
+
 
 -- 자유마당 파일
 create table free_madang_file (
@@ -473,6 +500,28 @@ create table boast_madang_file (
 );
 
 create sequence bm_file_seq 
+start with 1
+increment by 1
+maxvalue 999999;
+
+-- 질문마당 파일
+create table question_madang_file (
+    bmf_no number primary key,-- 파일 번호 
+    madang_no number references ta_question_madang(madang_no), -- 마당글 번호
+    member_no number references ta_member(mem_no), -- 회원 번호
+    bmf_original_filename varchar2(100), -- 파일 업로드시 원래 파일명
+    bmf_rename_filename varchar2(100), -- 파일 업로드시 서버에 저장된 파일명
+    bmf_download_count number, -- 다운로드 회수
+    bmf_filesize number, -- 파일 크기
+--  bmf_is_image char(1) default 'N' constraint fmf_is_image_ck check(fmf_is_image in ('Y','N')), -- 이미지인지 여부
+--  bmf_width number default null, -- 이미지일 경우 이미지 가로값
+--  bmf_height number default null, -- 이미지일 경우 이미지 세로값
+    bmf_type varchar2(20), -- 파일 확장자
+    bmf_datetime date, -- 등록일자
+    bmf_ip varchar2(20) -- 등록 ip
+);
+
+create sequence qm_file_seq 
 start with 1
 increment by 1
 maxvalue 999999;
