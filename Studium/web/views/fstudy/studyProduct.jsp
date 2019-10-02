@@ -183,9 +183,10 @@
 						for(MyPurchase m : mlist){  %>
 						<%if(loginMember!=null&&m.getMemNo()==loginMember.getMemNo()) {%>
 							onclick="fn_ifAlert();"
-                    <%}}}else{ %>
+                    <%}
+                    else{ %>
                     	
-                   <%  }%>
+                   <%  %>
                     <%
                     	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
@@ -201,7 +202,7 @@
                     %>		
                  		onclick="fn_loginAlert();"
                  	<%
-                    	}
+                    	} } } }
                     %>
                     />
                     

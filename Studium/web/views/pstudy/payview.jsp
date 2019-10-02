@@ -108,7 +108,7 @@
             </div>
             <div class="payagree"> <!-- 결제동의, 버튼-->
                 <div>
-                    <label for="inter" class="check-label"><input type="checkbox" name="" id="inter" class="option-input checkbox">
+                    <label for="inter" class="check-label"><input type="checkbox" name="inter" id="inter" class="option-input checkbox">
                         <span class="payagreespan" id="inter2">강의 및 결제 정보를 확인하였으며, 이에 동의합니다. (필수)</span>
                     </label>
                 </div>

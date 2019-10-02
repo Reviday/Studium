@@ -307,9 +307,11 @@
 						for(MyPurchase m : mlist){  %>
 						<%if(loginMember!=null&&m.getMemNo()==loginMember.getMemNo()) {%>
 							onclick="fn_ifAlert();"
-                    <%}}}else{ %>
+                    <%} 
+						
+						else{ %>
                     
-                    <% }
+                    <% 
                     	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
@@ -324,7 +326,7 @@
                     %>		
                  		onclick="fn_loginAlert();"
                  	<%
-                    	}
+                    	} } } }
                     %>
                     		
                    
