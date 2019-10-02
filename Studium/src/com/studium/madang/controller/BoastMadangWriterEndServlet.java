@@ -83,6 +83,8 @@ public class BoastMadangWriterEndServlet extends HttpServlet {
 		bm.setMadangRegisterIp(mr.getParameter("REMOTE_ADDR"));
 		bm.setMadangContent(mr.getParameter("smarteditor"));
 		
+		
+		
 		//카테고리 받기
 		bm.setMadangMainCategory(mr.getParameter("choiceSub"));
 		bm.setMadangCategory(mr.getParameter("inter"));

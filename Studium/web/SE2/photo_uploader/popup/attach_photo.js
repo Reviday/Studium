@@ -587,7 +587,7 @@
 			for (var i=0; i<oFileInfo.length; i++){
 				console.log("진행"+i);
 				opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML',
-						["<img style=\"max-width:600px; \" src='../upload/madang/"+oFileInfo[i].sFileURL+"'>"]);
+						["<img style=\"max-width:600px; \" src='../"+(oFileInfo[i].sFileURL).replace("/upload","/upload/madang")+"'>"]);
 			}
 			//본문에 바로 tag를 넣는 방법 (oFileInfo는 String으로 <img src=....> )
 			//opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML', [oFileInfo]);
