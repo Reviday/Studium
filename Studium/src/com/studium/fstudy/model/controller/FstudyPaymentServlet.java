@@ -46,7 +46,7 @@ public class FstudyPaymentServlet extends HttpServlet {
 		
 
 		
-		String msg=result>0?" 결제성공!":"결제실패!";
+		String msg=result>0?" 신청성공!":"신청실패!";
 	      String loc="";
 	      if(result>0) {
 	    	  loc="/";
