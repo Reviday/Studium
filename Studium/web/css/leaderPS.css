@@ -167,3 +167,7 @@ input[type="checkbox"] {
 .pointConfirm {
 	cursor: pointer;
 }
+
+.pointConfirm:hover {
+	color: blue;
+}

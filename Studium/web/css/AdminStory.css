@@ -246,3 +246,7 @@ input[type="checkbox"] {
 .storyclick {
 	cursor: pointer;
 }
+
+.storyclick:hover {
+	color: blue;
+}
