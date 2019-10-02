@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	List<QuestionMadang> qmlist = (List) request.getAttribute("questionMadangList");
+	List<Member> memList = (List) request.getAttribute("memList");
 	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
 %>
@@ -71,7 +72,7 @@
 						<tbody>
 							<%
 								if (!qmlist.isEmpty()) {
-									for (QuestionMadang qm : qmlist) {
+									for(int i=0; i<qmlist.size(); i++) {
 							%>
 							<tr class="_noticeArticle board-notice type_main">
 								<td class="td_article">
@@ -80,18 +81,18 @@
 										<!-- <strong class="board-tag-txt">
 		                                <span class="inner">공지</span>
 		                            </strong>  공지는 이거로-->
-										<span class="inner" style="text-align: center"><%=qm.getMadangNo()%></span>
+										<span class="inner" style="text-align: center"><%=qmlist.get(i).getMadangNo()%></span>
 									</div>
 								</td>
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/questionMadangView?madangNo=<%=qm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
-												<%=qm.getMadangTitle()%>
+											<a class="article" href="<%=request.getContextPath()%>/madang/questionMadangView?madangNo=<%=qmlist.get(i).getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
+												<%=qmlist.get(i).getMadangTitle()%>
 												<%
-													if(qm.getMadangRepCount()>0) {
+													if(qmlist.get(i).getMadangRepCount()>0) {
 														%>
-															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=qm.getMadangRepCount()%>]</span>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=qmlist.get(i).getMadangRepCount()%>]</span>
 														<%
 													}
 												%>
@@ -105,18 +106,32 @@
 											<tbody>
 												<tr>
 													<td class="p-nick" style="padding: 0"><a href="#"
-														class="" onclick=""> <%=qm.getMadangWriterName()%></a> <span
-														class="mem-level"><img
-															src="https://cafe.pstatic.net/levelicon/1/1_888.gif"
-															width="11" height="11"></span></td>
+														class="" onclick=""> <%=qmlist.get(i).getMadangWriterName()%></a> <span
+														class="mem-level">
+														<%
+															String src="";
+															if(memList.get(i).getMemCode()=='M') {
+																src="manager";
+															} else if(memList.get(i).getMemCode()=='T') {
+																src="teacher";
+															} else if(memList.get(i).getMemCode()=='R') {
+																src="regular";
+															} else if(memList.get(i).getMemCode()=='A') {
+																src="Associate";
+															}
+														%>
+														 <img class="levelico"
+															src="<%=request.getContextPath()%>/img/<%=src%>_icon.png"
+															width="11" height="11" border="0"></span>
+													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</td>
-								<td class="td_date"><%=format.format(qm.getMadangRegisterDatetime())%></td>
-								<td class="td_view"><%=qm.getMadangReadCount()%></td>
-								<td class="td_like"><%=qm.getMadangRecCount()%></td>
+								<td class="td_date"><%=format.format(qmlist.get(i).getMadangRegisterDatetime())%></td>
+								<td class="td_view"><%=qmlist.get(i).getMadangReadCount()%></td>
+								<td class="td_like"><%=qmlist.get(i).getMadangRecCount()%></td>
 							</tr>
 							<%
 								}

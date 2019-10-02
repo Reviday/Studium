@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	List<BoastMadang> bmlist = (List) request.getAttribute("boastMadangList");
+	List<Member> memList = (List) request.getAttribute("memList");
 	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
 %>
@@ -71,7 +72,7 @@
 						<tbody>
 							<%
 								if (!bmlist.isEmpty()) {
-									for (BoastMadang bm : bmlist) {
+									for(int i=0; i<bmlist.size(); i++) {
 							%>
 							<tr class="_noticeArticle board-notice type_main">
 								<td class="td_article">
@@ -80,18 +81,18 @@
 										<!-- <strong class="board-tag-txt">
 		                                <span class="inner">공지</span>
 		                            </strong>  공지는 이거로-->
-										<span class="inner" style="text-align: center"><%=bm.getMadangNo()%></span>
+										<span class="inner" style="text-align: center"><%=bmlist.get(i).getMadangNo()%></span>
 									</div>
 								</td>
 								<td class="td_article">
 									<div class="board-list">
 										<div class="inner_list">
-											<a class="article" href="<%=request.getContextPath()%>/madang/boastMadangView?madangNo=<%=bm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
-												<%=bm.getMadangTitle()%>
+											<a class="article" href="<%=request.getContextPath()%>/madang/boastMadangView?madangNo=<%=bmlist.get(i).getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>">
+												<%=bmlist.get(i).getMadangTitle()%>
 												<%
-													if(bm.getMadangRepCount()>0) {
+													if(bmlist.get(i).getMadangRepCount()>0) {
 														%>
-															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=bm.getMadangRepCount()%>]</span>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=bmlist.get(i).getMadangRepCount()%>]</span>
 														<%
 													}
 												%>
@@ -105,18 +106,32 @@
 											<tbody>
 												<tr>
 													<td class="p-nick" style="padding: 0"><a href="#"
-														class="" onclick=""> <%=bm.getMadangWriterName()%></a> <span
-														class="mem-level"><img
-															src="https://cafe.pstatic.net/levelicon/1/1_888.gif"
-															width="11" height="11"></span></td>
+														class="" onclick=""> <%=bmlist.get(i).getMadangWriterName()%></a> <span
+														class="mem-level">
+														<%
+															String src="";
+															if(memList.get(i).getMemCode()=='M') {
+																src="manager";
+															} else if(memList.get(i).getMemCode()=='T') {
+																src="teacher";
+															} else if(memList.get(i).getMemCode()=='R') {
+																src="regular";
+															} else if(memList.get(i).getMemCode()=='A') {
+																src="Associate";
+															}
+														%>
+														 <img class="levelico"
+															src="<%=request.getContextPath()%>/img/<%=src%>_icon.png"
+															width="11" height="11" border="0"></span>
+													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</td>
-								<td class="td_date"><%=format.format(bm.getMadangRegisterDatetime())%></td>
-								<td class="td_view"><%=bm.getMadangReadCount()%></td>
-								<td class="td_like"><%=bm.getMadangRecCount()%></td>
+								<td class="td_date"><%=format.format(bmlist.get(i).getMadangRegisterDatetime())%></td>
+								<td class="td_view"><%=bmlist.get(i).getMadangReadCount()%></td>
+								<td class="td_like"><%=bmlist.get(i).getMadangRecCount()%></td>
 							</tr>
 							<%
 								}

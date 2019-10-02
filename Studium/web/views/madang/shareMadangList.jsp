@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	List<ShareMadang> smlist = (List) request.getAttribute("shareMadangList");
+	List<Member> memList = (List) request.getAttribute("memList");
 	int cPage = (int) request.getAttribute("cPage");
 	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.");
 %>
@@ -71,7 +72,7 @@
 						<tbody>
 							<%
 								if (!smlist.isEmpty()) {
-									for (ShareMadang sm : smlist) {
+									for(int i=0; i<smlist.size(); i++) {
 							%>
 							<tr class="_noticeArticle board-notice type_main">
 								<td class="td_article">
@@ -80,7 +81,7 @@
 										<!-- <strong class="board-tag-txt">
 		                                <span class="inner">공지</span>
 		                            </strong>  공지는 이거로-->
-										<span class="inner" style="text-align: center"><%=sm.getMadangNo()%></span>
+										<span class="inner" style="text-align: center"><%=smlist.get(i).getMadangNo()%></span>
 									</div>
 								</td>
 								<td class="td_article">
@@ -90,7 +91,7 @@
 											<%
 												if(loginMember!=null) {
 											%>
-												href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=sm.getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
+												href="<%=request.getContextPath()%>/madang/shareMadangView?madangNo=<%=smlist.get(i).getMadangNo() %>&cPage=<%=cPage%>&choiceSub=<%=request.getParameter("choiceSub")%>"
 											<%
 												} else {
 											%>
@@ -98,11 +99,11 @@
 											<%
 												}
 											%>
-												 ><%=sm.getMadangTitle()%>
+												 ><%=smlist.get(i).getMadangTitle()%>
 												 <%
-													if(sm.getMadangRepCount()>0) {
+													if(smlist.get(i).getMadangRepCount()>0) {
 														%>
-															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=sm.getMadangRepCount()%>]</span>
+															<span style="color:rgb(239, 108, 0); display: inline;">　[<%=smlist.get(i).getMadangRepCount()%>]</span>
 														<%
 													}
 												%>
@@ -116,18 +117,32 @@
 											<tbody>
 												<tr>
 													<td class="p-nick" style="padding: 0"><a href="#"
-														class="" onclick=""> <%=sm.getMadangWriterName()%></a> <span
-														class="mem-level"><img
-															src="https://cafe.pstatic.net/levelicon/1/1_888.gif"
-															width="11" height="11"></span></td>
+														class="" onclick=""> <%=smlist.get(i).getMadangWriterName()%></a> <span
+														class="mem-level">
+														<%
+															String src="";
+															if(memList.get(i).getMemCode()=='M') {
+																src="manager";
+															} else if(memList.get(i).getMemCode()=='T') {
+																src="teacher";
+															} else if(memList.get(i).getMemCode()=='R') {
+																src="regular";
+															} else if(memList.get(i).getMemCode()=='A') {
+																src="Associate";
+															}
+														%>
+														 <img class="levelico"
+															src="<%=request.getContextPath()%>/img/<%=src%>_icon.png"
+															width="11" height="11" border="0"></span>
+													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</td>
-								<td class="td_date"><%=format.format(sm.getMadangRegisterDatetime())%></td>
-								<td class="td_view"><%=sm.getMadangReadCount()%></td>
-								<td class="td_like"><%=sm.getMadangRecCount()%></td>
+								<td class="td_date"><%=format.format(smlist.get(i).getMadangRegisterDatetime())%></td>
+								<td class="td_view"><%=smlist.get(i).getMadangReadCount()%></td>
+								<td class="td_like"><%=smlist.get(i).getMadangRecCount()%></td>
 							</tr>
 							<%
 								}

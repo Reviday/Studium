@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.service.ShareMadangService;
+import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.FreeMadang;
 import com.studium.madang.model.vo.ShareMadang;
 import com.studium.madang.model.vo.StudyMadang;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -60,6 +63,21 @@ public class ShareMadangListServlet extends HttpServlet {
 			list=service.selectMadangList(choiceSub, pt.getcPage(), pt.getNumPerPage()); // 리스트 받기
 		}
 		
+		// 해당 리스트에 맞는 회원 정보를 가져온다. 
+		List<Member> memList=new ArrayList<Member>();
+		for(ShareMadang sm : list) {
+			sm.getMadangWriterUid();
+			
+			// 해당 글의 유저 정보를 가져온다.
+			Member writer=null;
+			if(sm!=null) {
+				writer = new MemberService().selectNo(sm.getMadangWriterUid());
+			}
+			
+			//리스트에 추가
+			memList.add(writer);
+		}
+		
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
 		
@@ -67,6 +85,7 @@ public class ShareMadangListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("shareMadangList", list);
+		request.setAttribute("memList", memList);
 		request.setAttribute("elements", elements);
 		request.setAttribute("choice", "공유마당");
 		request.setAttribute("choiceSub", choiceSub);

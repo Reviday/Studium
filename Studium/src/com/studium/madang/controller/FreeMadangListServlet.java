@@ -1,6 +1,7 @@
 package com.studium.madang.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studium.madang.model.service.FreeMadangService;
+import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.FreeMadang;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -49,10 +53,26 @@ public class FreeMadangListServlet extends HttpServlet {
 		//SideMenuElement
 		List<SideMenuElement> elements=new SideMenuElementService().selectElements("madang");
 		
+		// 해당 리스트에 맞는 회원 정보를 가져온다. 
+		List<Member> memList=new ArrayList<Member>();
+		for(FreeMadang fm : list) {
+			fm.getMadangWriterUid();
+			
+			// 해당 글의 유저 정보를 가져온다.
+			Member writer=null;
+			if(fm!=null) {
+				writer = new MemberService().selectNo(fm.getMadangWriterUid());
+			}
+			
+			//리스트에 추가
+			memList.add(writer);
+		}
+		
 		request.setAttribute("cPage", pt.getcPage());
 		request.setAttribute("pageBar", pt.getPageBar());
 		request.setAttribute("numPerPage", pt.getNumPerPage());
 		request.setAttribute("freeMadangList", list);
+		request.setAttribute("memList", memList);
 		request.setAttribute("elements", elements);
 		request.setAttribute("choice", "자유마당");
 
