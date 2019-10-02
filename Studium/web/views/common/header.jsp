@@ -52,7 +52,7 @@
 
 <body>
 <!--마이페이지 메뉴-->
-		<%if(loginMember!=null) { %>
+		<%if(loginMember!=null&& loginMember.getMemCode()!='M') { %>
  <div class="myPageMenu">
         <a href="#menu" id="toggle"><span></span></a>
 
@@ -205,9 +205,6 @@
 							//강사 로그인
 							} else if(loginMember!=null && loginMember.getMemCode()=='T') {
 						%>
-							<li class="nav-item cta-btn">
-							<a class="btn btn-white btn-outline-white" id="myM" style="border: 1px solid">마이페이지</a>
-							</li>
 							<li class="nav-item cta-btn"><a
 								class="btn btn-white btn-outline-white" style="border: 1px solid"
 								onclick="location.href='<%=request.getContextPath()%>/logout'">로그아웃</a></li>
@@ -215,10 +212,6 @@
 							//회원 로그인
 							} else if(loginMember!=null) {
 						%>
-							<li class="nav-item cta-btn">
-							<a class="btn btn-white btn-outline-white" style="border: 1px solid" id="myM"
-							>마이페이지</a>
-							</li>
 							<li class="nav-item cta-btn"><a
 								class="btn btn-white btn-outline-white" style="border: 1px solid"
 								onclick="location.href='<%=request.getContextPath()%>/logout'">로그아웃</a></li>

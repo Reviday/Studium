@@ -888,7 +888,6 @@ div .img-category {
     padding: 0px 10px 10px 10px;
     overflow: hidden;
     opacity: .8;
-    z-index:99999999;
 }
 .newMemo .memo_top{
     height: 20px;
@@ -915,13 +914,42 @@ div .img-category {
     border: none;
     resize: none;
     
+    outline-style: none;
+    
 }
 .memo_close{
 	font-size: 25px; 
-	transform:rotate(45deg)
+	transform:rotate(45deg);
+	
+    outline-style: none;
 	
 }
 #memo_area{
-	height:600px;
+	height:800px;
 }
-
+.buttonarea{
+	padding-top:30px;
+}
+.make_newMemo{
+	left:50%;
+	transform:translateX(-50%);
+	border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight:0px;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 10px 25px;
+  position: relative;
+  top:-5px;
+  transition: all 0.3s;
+  vertical-align: middle;	
+  background-color: #ef6c00;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.make_newMemo:hover{
+	background-color: orangered;
+}

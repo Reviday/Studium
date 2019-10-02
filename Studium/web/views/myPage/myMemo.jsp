@@ -17,18 +17,18 @@
  <!-- 메모적용 -->    
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.theme.min.css">
   <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
-<section>
+<section >
 	<div class="header-background" style="background-image: url('<%=request.getContextPath()%>/img/1.jpg');">
 		<div class="header-background-cover">
       </div>
     </div>
 
-        <div class="section-content">
+        <div class="section-content"style="background-color: rgb(240, 240, 240)">
                 <div class="row">
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-8 navbar-myMenu" id="memo_area" style=" margin-top:20px">
-                        <div style="margin:0px auto;"><button id="click" class="changePhoto" >새로운 메모</button></div>
+                        <div class="buttonarea"><button id="click" class="make_newMemo" >새로운 메모</button></div>
                 <% if(!listM.isEmpty()){
 						for(MyMemo mm : listM){
 						%>
@@ -45,13 +45,13 @@
                     				if(mm.getMemoContents()!=null){
                     					contents=mm.getMemoContents();
                     				} %>
-                   					<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"><%=contents%></textarea>
+                   					<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요" style="opacity: 5"><%=contents%></textarea>
                					 </div>
                 			</div>
                 			<%
 						}
                 	}else{%>
-                	<div>
+                	<div class="elseMemo">
                 	<h5>새로운 메모를 만들어보세요!</h5>
                 	</div>
                 	<%} %>
@@ -79,7 +79,8 @@
 
 	//버튼 눌러서 새로운 메모 생성
 	$("#click").on("click", function () {
-		
+
+ 	   $(".elseMemo").html("");
 	   //클릭할 때마다 아이디에 넣을 값 증가하게
 	   numberId += 1;
 	   //div만들기
@@ -101,7 +102,7 @@
 			   divE+='<div class="memo_top">';
 			   divE+='<button class="memo_close" title="닫기">+</button>';
 			   divE+='</div>';
-			   divE+='<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요(ㅎㅅㅎ)" style="opacity: 5"></textarea>';
+			   divE+='<textarea class="memo_write" name="txt" placeholder="메모를 입력하세요" style="opacity: 5"></textarea>';
 			   divE+='</div>';
 			   
 			 $newdiv.append(divE);
@@ -139,7 +140,9 @@
 	    	   $newdiv.find("#primary").val(data);
 	       }
 	   });
-		
+	   $(".memo_close").on('click', function () {
+	       $(this).parents('.newMemo').remove();
+	   });
 	});
 	
 	
