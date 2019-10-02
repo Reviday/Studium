@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.studium.madang.model.vo.BoastMadangCmt;
 import com.studium.madang.model.vo.FreeMadangCmt;
 import com.studium.member.model.service.MemberService;
 
@@ -173,6 +174,127 @@ public class FreeMadangCmtDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, cmt.getCmtParent());
 			
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateComment(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateComment");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cmt.getCmtContent());
+			pstmt.setString(2, cmt.getCmtRegisterIp());
+			pstmt.setInt(3, cmt.getCmtNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int deleteComment(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteComment");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int autoDeleteReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("autoDeleteReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cmt.getCmtContent());
+			pstmt.setString(2, cmt.getCmtRegisterIp());
+			pstmt.setInt(3, cmt.getCmtNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int deleteReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtNo());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int updateReplySortOnDelete(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		// 대댓글 추가시, 기존의 댓글들의 SORT 값을 증가시키기 위한 UPDATE 문
+		String sql=prop.getProperty("updateReplySortOnDelete");
+		
+		try {
+			// 대댓글을 INSERT 하기 전에, 기존에 존재하는 대댓글의 SORT값을 증가시킨다
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmt.getCmtParent());
+			pstmt.setInt(2, cmt.getCmtSort());
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int checkForReply(Connection conn, FreeMadangCmt cmt) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("checkForReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			System.out.println(cmt.getCmtParent());
+			pstmt.setInt(1, cmt.getCmtParent());
+			pstmt.setInt(2, cmt.getCmtParent());
 			result=pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace(); 

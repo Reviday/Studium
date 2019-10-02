@@ -342,3 +342,7 @@
 .font-family-type1 {
 	font-family: "Do Hyeon", Arial, sans-serif !important;
 }
+
+.speech {
+	display:inline-block;
+}

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.studium.madang.model.dao.FreeMadangCmtDao;
+import com.studium.madang.model.vo.BoastMadangCmt;
 import com.studium.madang.model.vo.FreeMadangCmt;
 
 public class FreeMadangCmtService {
@@ -65,5 +66,50 @@ public class FreeMadangCmtService {
 		}
 		close(conn);
 		return insertResult;
+	}
+	
+	public int updateComment(FreeMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.updateComment(conn, cmt);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteComment(FreeMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, cmt);
+		if(result>0) {
+			dao.autoDeleteReply(conn, cmt);
+			commit(conn);
+			new FreeMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+		}
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateReply(FreeMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.updateReply(conn, cmt);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteReply(FreeMadangCmt cmt) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, cmt);
+		if(result>0) {
+			dao.updateReplySortOnDelete(conn, cmt);
+			dao.checkForReply(conn, cmt);
+			commit(conn);
+			new FreeMadangService().updateMadangRepCount(cmt.getCmtMadangNo());
+		}
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

@@ -310,7 +310,7 @@
 			 			                                        %>
 						                                        <span class="timeago dt-published ie-dotum">
 						                                        	<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
-						                                            	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+						                                            	onclick="return false;">신고</a>
 						                                        </span>
 						                                        <%
                                                                    	}
@@ -429,7 +429,7 @@
 				 			                                        %>
 							                                        <span class="timeago dt-published ie-dotum">
 							                                        	<a href="/toolbar/popup/abuseReport/?entryId=361&amp;commentId=9743709"
-							                                            	onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;">신고</a>
+							                                            	onclick="return false;">신고</a>
 							                                        </span>
 							                                        <%
                                                                     	}
