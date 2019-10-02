@@ -508,7 +508,7 @@
 				cache: false,
 				dataType: "json",
 				// data 이렇게 했을때 파라티머 받는지 확인 
-				// 보내는 방법 ex) 컨트롤러파라미터변수이름 : 니가보낼데이터   {mno : mno}
+				// 보내는 방법 ex) 컨트롤러파라미터변수이름 : 보낼데이터   {mno : mno}
 				//data: {"mno":mno, "pno" : pno, "A" : A }, 
 				data: params , 
 				//아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌

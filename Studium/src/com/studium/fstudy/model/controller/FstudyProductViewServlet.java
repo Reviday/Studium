@@ -51,9 +51,7 @@ public class FstudyProductViewServlet extends HttpServlet {
 			request.setAttribute("mlist", mlist);
 			request.getRequestDispatcher("/views/fstudy/studyProduct.jsp").forward(request, response);
 		}
-		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
