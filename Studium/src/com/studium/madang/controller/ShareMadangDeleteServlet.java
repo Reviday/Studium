@@ -36,7 +36,7 @@ public class ShareMadangDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(!new LoginCheck().doLoginCheck(request, response, 1003)) return;
+		if(!new LoginCheck().doLoginCheck(request, response, 1004)) return;
 		
 		ShareMadang sm=new ShareMadang();
 		System.out.println(request.getParameter("madangNo"));

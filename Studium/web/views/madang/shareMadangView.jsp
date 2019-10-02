@@ -459,7 +459,7 @@
 											
 																					<div class="u_cbox_btn_upload _submitBtn">
 																						<a href="#" class="u_cbox_txt_upload _submitCmt"
-																						onclick="fn_updateComment('<%=cmt.getCmtNo()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'boast', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
+																						onclick="fn_updateComment('<%=cmt.getCmtNo()%>','<%=loginMember!=null?loginMember.getMemNo():null%>', 'share', '<%=request.getContextPath() %>','<%=REMOTE_ADDR%>','<%=sm.getMadangNo()%>','<%=loginMember!=null?loginMember.getMemNo():""%>','<%=loginMember!=null?loginMember.getMemUserEmail():""%>','<%=loginMember!=null?loginMember.getMemName():""%>','<%=cPage%>', '<%=choice%>', '<%=choiceSub%>'); return false;">
 																						수정</a>													
 																					</div>
 																				</td>
