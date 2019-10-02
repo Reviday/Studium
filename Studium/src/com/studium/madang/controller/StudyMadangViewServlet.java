@@ -16,6 +16,8 @@ import com.studium.madang.model.service.StudyMadangService;
 import com.studium.madang.model.vo.StudyMadang;
 import com.studium.madang.model.vo.StudyMadangCmt;
 import com.studium.madang.model.vo.StudyMadangQuestion;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -79,6 +81,12 @@ public class StudyMadangViewServlet extends HttpServlet {
 		StudyMadangService service=new StudyMadangService();
 		StudyMadang sm =service.selectMadang(no, hasRead);
 		
+		// 해당 글의 유저 정보를 가져온다.
+		Member writer=null;
+		if(sm!=null) {
+			writer = new MemberService().selectNo(sm.getMadangWriterUid());
+		}
+		
 		// 해당 글에 달려있는 풀이들을 페이지네이션 처리하여 가져온다.
 		int totalData=service.selectCountList(); // 총 데이터 개수
 		String URLmapping="/madang/studyMadangView"; // 패턴을 넘겨주기 위한 변수
@@ -114,6 +122,7 @@ public class StudyMadangViewServlet extends HttpServlet {
 			request.setAttribute("cmtPageBar", cpt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
 			request.setAttribute("qList", qList);
+			request.setAttribute("writer", writer);
 			request.setAttribute("show", show!=null?show:"false");
 		} else {
 			msg = "게시글이 존재하지 않습니다.";

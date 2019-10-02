@@ -8,6 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	StudyMadang sm = (StudyMadang) request.getAttribute("sm");
+	Member writer = (Member)request.getAttribute("writer");
 	int cPage = (int)request.getAttribute("cPage");
 	List<StudyMadangCmt> list = (List<StudyMadangCmt>)request.getAttribute("cmtList");
 	List<StudyMadangQuestion> qList = (List<StudyMadangQuestion>)request.getAttribute("qList");

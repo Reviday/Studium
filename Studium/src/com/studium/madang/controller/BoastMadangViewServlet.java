@@ -15,6 +15,8 @@ import com.studium.madang.model.service.BoastMadangCmtService;
 import com.studium.madang.model.service.BoastMadangService;
 import com.studium.madang.model.vo.BoastMadang;
 import com.studium.madang.model.vo.BoastMadangCmt;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -75,6 +77,12 @@ public class BoastMadangViewServlet extends HttpServlet {
 		BoastMadang bm = new BoastMadangService().selectMadang(no, hasRead);
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, BoastMadang> preNext = new BoastMadangService().selectPreNext(no);
+		
+		// 해당 글의 유저 정보를 가져온다.
+		Member writer=null;
+		if(bm!=null) {
+			writer = new MemberService().selectNo(bm.getMadangWriterUid());
+		}
 
 		// Pagination
 		BoastMadangCmtService service = new BoastMadangCmtService();
@@ -98,6 +106,7 @@ public class BoastMadangViewServlet extends HttpServlet {
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
+			request.setAttribute("writer", writer);
 		} else {
 			msg = "게시글이 존재하지 않습니다.";
 			loc = "/madang/boastMadangList";

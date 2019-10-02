@@ -7,6 +7,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	QuestionMadang qm = (QuestionMadang) request.getAttribute("qm");
+	Member writer = (Member)request.getAttribute("writer");
 	int cPage = (int)request.getAttribute("cPage");
 	List<QuestionMadangCmt> list = (List<QuestionMadangCmt>)request.getAttribute("cmtList");
 	int totalDate = (int)request.getAttribute("totalData");
@@ -128,19 +129,43 @@
 										</table>
 									</td>
 									<td class="m-tcol-c step"><span class="filter-50">
-											매니저 <%
-										
+									<%
+										String src="";
+										if(writer.getMemCode()=='M') {
+											%>
+												매니저
+											<%
+											src="manager";
+										} else if(writer.getMemCode()=='T') {
+											%>
+												강사
+											<%
+											src="teacher";
+										} else if(writer.getMemCode()=='R') {
+											%>
+												정회원
+											<%
+											src="regular";
+										} else if(writer.getMemCode()=='A') {
+											%>
+												준회원
+											<%
+											src="Associate";
+										}
 									%>
-									</span> <img class="levelico"
-										src="<%=request.getContextPath()%>/img/manager_icon.png"
-										width="11" height="11" border="0"></td>
+										</span> <img class="levelico"
+											src="<%=request.getContextPath()%>/img/<%=src%>_icon.png"
+											width="11" height="11" border="0">
+									</td>
 
-									<td class="m-tcol-c chat"><span> <a href="#"
-											onclick=""> <img
-												src="<%=request.getContextPath()%>/img/chatting_icon.png"
+									<td class="m-tcol-c chat">
+										<span> 
+											<a href="#"	onclick=""> 
+											<img src="<%=request.getContextPath()%>/img/chatting_icon.png"
 												width="20" height="20" alt="1:1대화" class="ico" title="1:1대화">
-										</a>
-									</span></td>
+											</a>
+										</span>
+									</td>
 
 								</tr>
 							</tbody>
@@ -171,25 +196,17 @@
 									<!-- 댓글 수 -->
 									<td class="reply"><a href="javascript:"
 										class="reply_btn b m-tcol-c m-tcol-p _totalCnt" id="comment">댓글
-											1 <img class="new_icon"
+											<%=qm.getMadangRepCount() %>
+											<!-- 
+											<img class="new_icon"
 											src="<%=request.getContextPath()%>/img/new_icon.png"
-											width="20" height="20" padding_bottom="2" alt="new">
+											width="20" height="20" padding_bottom="2" alt="new"> -->
 
 									</a></td>
 									<!-- 조회 수 -->
 									<td class="m-tcol-c filter-30">|</td>
 									<td><span class="b m-tcol-c reply ">조회수 </span> <span
-										class="b m-tcol-c reply">3</span></td>
-									<!-- 포크 -->
-									<td class="m-tcol-c filter-30">|</td>
-									<td><a href="#" class="b fork_btn">포크</a>
-										<div class="btn_module">
-											<a href="#" class="btn_cnt" aria-pressed="false"> <img
-												class="fork_icon"
-												src="<%=request.getContextPath()%>/img/fork_icon.png" alt="">
-												<em class="fork_count">10</em>
-											</a>
-										</div></td>
+										class="b m-tcol-c reply"><%=qm.getMadangReadCount() %></span></td>
 									<!-- 좋아요 -->
 									<td class="m-tcol-c filter-30">|</td>
 									<td><a href="#" class="b like_btn">좋아요</a>
@@ -197,7 +214,7 @@
 											<a href="#" class="btn_cnt" aria-pressed="false"> <img
 												class="dibs_icon"
 												src="<%=request.getContextPath()%>/img/like_icon_click.png"
-												alt=""> <em class="like_count">100</em>
+												alt=""> <em class="like_count"><%=qm.getMadangRecCount() %></em>
 											</a>
 										</div></td>
 								</tr>

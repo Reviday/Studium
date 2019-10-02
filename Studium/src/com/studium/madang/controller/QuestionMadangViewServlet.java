@@ -15,6 +15,8 @@ import com.studium.madang.model.service.QuestionMadangCmtService;
 import com.studium.madang.model.service.QuestionMadangService;
 import com.studium.madang.model.vo.QuestionMadang;
 import com.studium.madang.model.vo.QuestionMadangCmt;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -76,6 +78,12 @@ public class QuestionMadangViewServlet extends HttpServlet {
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, QuestionMadang> preNext = new QuestionMadangService().selectPreNext(no);
 
+		// 해당 글의 유저 정보를 가져온다.
+		Member writer=null;
+		if(qm!=null) {
+			writer = new MemberService().selectNo(qm.getMadangWriterUid());
+		}
+		
 		// Pagination
 		QuestionMadangCmtService service = new QuestionMadangCmtService();
 		int totalData = service.selectCountList(no); // 총 데이터 개수
@@ -98,6 +106,7 @@ public class QuestionMadangViewServlet extends HttpServlet {
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
+			request.setAttribute("writer", writer);
 		} else {
 			msg = "게시글이 존재하지 않습니다.";
 			loc = "/madang/questionMadangList";

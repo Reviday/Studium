@@ -15,6 +15,8 @@ import com.studium.madang.model.service.FreeMadangCmtService;
 import com.studium.madang.model.service.FreeMadangService;
 import com.studium.madang.model.vo.FreeMadang;
 import com.studium.madang.model.vo.FreeMadangCmt;
+import com.studium.member.model.service.MemberService;
+import com.studium.member.model.vo.Member;
 import com.studium.util.model.service.SideMenuElementService;
 import com.studium.util.model.vo.SideMenuElement;
 
@@ -80,6 +82,12 @@ public class FreeMadangViewServlet extends HttpServlet {
 		// 이전글/다음글의 no와 title을 가져온다.
 		Map<String, FreeMadang> preNext=new FreeMadangService().selectPreNext(no);
 		
+		// 해당 글의 유저 정보를 가져온다.
+		Member writer=null;
+		if(fm!=null) {
+			writer = new MemberService().selectNo(fm.getMadangWriterUid());
+		}
+		
 		//Pagination 
 		FreeMadangCmtService service=new FreeMadangCmtService();
 		int totalData=service.selectCountList(no); // 총 데이터 개수
@@ -98,6 +106,7 @@ public class FreeMadangViewServlet extends HttpServlet {
 			request.setAttribute("totalData", totalData);
 			request.setAttribute("cmtPageBar", pt.getPageBar());
 			request.setAttribute("cmtList", cmtList);
+			request.setAttribute("writer", writer);
 		}
 		else
 		{
