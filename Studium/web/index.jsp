@@ -16,7 +16,7 @@
           <div class="col-md-8 text-center col-sm-12 element-animate">
             <h1>STUDIUM</h1>
             <p class="mb-5">자기주도적 학습관리 STUDIUM</p>
-            <p><a href="http://localhost:9090/Studium/pstudyListView" class="btn btn-white btn-outline-white">신청하기</a></p>
+            <p><a href="http://rclass.iptime.org:9999/Studium/pstudyListView" class="btn btn-white btn-outline-white">신청하기</a></p>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
           <div class="col-md-8 text-center col-sm-12 element-animate">
             <h1>STUDIUM</h1>
             <p class="mb-5">각양각색의 강사들과 함께하는 STUDIUM</p>
-            <p><a href="http://localhost:9090/Studium/pstudyListView" class="btn btn-white btn-outline-white">함께 공부하기</a></p>
+            <p><a href="http://rclass.iptime.org:9999/Studium/pstudyListView" class="btn btn-white btn-outline-white">함께 공부하기</a></p>
           </div>
         </div>
       </div>
