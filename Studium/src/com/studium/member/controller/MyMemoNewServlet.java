@@ -45,10 +45,8 @@ public class MyMemoNewServlet extends HttpServlet {
 		memo.setMemoFrontId(frontId);
 		memo.setMemoLeft(left);
 		memo.setMemoTop(top);
-		System.out.println(memo);
 		//메모 만들기 
 		int result=ms.insertMyMemo(memo);
-		System.out.println("변환값"+result);
 
 		//방금 만든 메모의 primary값 조회해옴 
 		int primary=ms.selectPrimaryKey(memberNo, frontId, left, top);
