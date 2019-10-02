@@ -82,7 +82,6 @@
             </div>
         </article>
     </section>
-
     <script>
         
          $(function() {
