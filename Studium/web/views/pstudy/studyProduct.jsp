@@ -305,9 +305,11 @@
                     <input type="button" value="참여 신청하기"
 						<%if(mlist.size()!=0){ 
 						for(MyPurchase m : mlist){  %>
-						<%if(m.getMemNo()==loginMember.getMemNo()) {%>
+						<%if(loginMember!=null&&m.getMemNo()==loginMember.getMemNo()) {%>
 							onclick="fn_ifAlert();"
-                    <%}}}
+                    <%}}}else{ %>
+                    
+                    <% }
                     	if(loginMember!=null&&loginMember.getMemCode()!='A') {
                     %>
                     	onclick="location.href='<%=request.getContextPath()%>/pstudy/pstudyPay?pNo=<%=p.getpNo()%>&mPoint=<%=loginMember.getMemPoint()%>';"
