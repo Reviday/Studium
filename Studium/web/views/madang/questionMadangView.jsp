@@ -46,15 +46,15 @@
 					<%
                 		if(choiceSub!=null&&choiceSub.equals("null")) {
                 			%>
-                				<h3 class="list-title">자랑마당</h3>
+                				<h3 class="list-title">질문마당</h3>
                 			<%
                 		} else {
                 			%>
-                				<h3 class="list-title">자랑마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
+                				<h3 class="list-title">질문마당<%=choiceSub!=null?" - " +choiceSub:""%></h3>
                 			<%
                 		}
                 	%>
-					<p class="list-sub">자랑하고 싶은 부분을 마음껏 자랑하는 공간입니다!</p>
+					<p class="list-sub">물어보고 싶은 것들을 마음껏 질문해주세요!</p>
 				</div>
 			</div>
 		</div>
