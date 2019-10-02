@@ -41,9 +41,10 @@ public class MyMemoServlet extends HttpServlet {
 		Member m=ms.selectNo(memberNo);
 		//마이메모 조회해오기 
 		List<MyMemo> listMemo= ms.selectMyMemo(memberNo);
+		if(listMemo.size()<=0) {
+		}
 		request.setAttribute("member", m);
 		request.setAttribute("memoList", listMemo);
-		System.out.println(listMemo);
 		request.getRequestDispatcher("/views/myPage/myMemo.jsp")
 		.forward(request,response);	
 		

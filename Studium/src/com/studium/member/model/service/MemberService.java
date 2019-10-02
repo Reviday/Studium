@@ -124,6 +124,15 @@ public class MemberService {
 		return result;
 		
 	}
+	public int selectPrimaryKey(int memberNo, int frontId, int left, int top) {
+		Connection conn=getConnection();
+		int result=dao.selectPrimaryKey(conn, memberNo, frontId, left, top);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	public int updateSetting(String settingName, String type, int no) {
 		Connection conn=getConnection();
 		int result=dao.updateSetting(conn, settingName,type, no);

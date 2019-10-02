@@ -465,6 +465,31 @@ public class MemberDao {
 		return result;
 		
 	}
+	public int selectPrimaryKey(Connection conn, int memberNo, int frontId, int left, int top) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectPrimaryKey");
+		int primaryKey=-1;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, frontId);
+			pstmt.setInt(3, left);
+			pstmt.setInt(4, top);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				primaryKey=rs.getInt("memo_id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return primaryKey;
+	}
 	
 	
 	public int updateSetting(Connection conn, String settingName, String type, int no) {
