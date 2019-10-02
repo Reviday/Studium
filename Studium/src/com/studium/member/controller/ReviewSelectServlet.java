@@ -35,8 +35,6 @@ public class ReviewSelectServlet extends HttpServlet {
 		//유료스터디만 후기 받음 
 		int pNo = Integer.parseInt(request.getParameter("pNo"));//스터디넘버
 		
-		System.out.println(memNo);
-		System.out.println(pNo);
 		MemberService service = new MemberService();
 		Story story = service.reviewSelect(memNo, pNo);
 		

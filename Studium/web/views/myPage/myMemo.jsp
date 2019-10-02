@@ -64,8 +64,6 @@
 	//기존에 있는 하나 움직일 수 있게 해줌 
 	$(".newMemo").draggable();
 	
-	
-
 	//창이 있는지 확인하는 요소
 	var visible_element = $('.newMemo display:block');
 	//이 창이 없으면 div 새롭게 만들어줌 

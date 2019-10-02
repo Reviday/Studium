@@ -36,7 +36,6 @@ public class MyMemoDeleteServlet extends HttpServlet {
 
 		MemberService ms= new MemberService();
 		ms.deleteMyMemo(primary);
-		System.out.println("delte들어감");
 				
 	}
 
