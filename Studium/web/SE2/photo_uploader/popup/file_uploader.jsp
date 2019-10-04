@@ -46,7 +46,7 @@
 					String defaultPath = request.getServletContext().getRealPath("/");
 
 					// 파일 기본경로 _ 상세경로 
-					String path = defaultPath + "upload\\madang" + File.separator;
+					String path = defaultPath + "upload/madang" + File.separator;
 					File file = new File(path);
 
 					// 디렉토리 존재하지 않을경우 디렉토리 생성 
