@@ -269,7 +269,7 @@
    <script type="text/javascript">
       
    $(document).ready(function() { var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
-   
+   	
       // Editor Setting
       nhn.husky.EZCreator.createInIFrame({ 
          oAppRef : oEditors, // 전역변수 명과 동일해야 함. 
@@ -298,6 +298,7 @@
             } 
          //} 
       }) 
+      console.log(returnPath());
    }); 
    
    // 필수값 Check 
@@ -311,6 +312,15 @@
       return true; 
    }
    
+   function returnPath() {
+	   return "<%=request.getContextPath()%>/upload/madang/";
+   }
+   
+// textArea에 이미지 첨부
+   function pasteHTML(filepath){
+       var sHTML = '<img src="<%=request.getContextPath()%>/upload/madang/'+filepath+'">';
+       oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
+   }
    </script>
    <script>
     $(document).ready(function () {
